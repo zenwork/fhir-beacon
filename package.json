@@ -4,7 +4,20 @@
   "description": "FHIR web components",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.3.3",
+    "@storybook/addon-essentials": "^8.0.9",
+    "@storybook/addon-links": "^8.0.9",
+    "@storybook/blocks": "^8.0.9",
+    "@storybook/test": "^8.0.9",
+    "@storybook/web-components": "^8.0.9",
+    "@storybook/web-components-vite": "^8.0.9",
+    "lit": "^3.1.3",
+    "storybook": "^8.0.9"
+  }
 }
