@@ -183,7 +183,7 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-#.cache
+
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -211,3 +211,8 @@ dist
 .pnp.*
 
 storybook-static
+/scratch/capabilities.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
