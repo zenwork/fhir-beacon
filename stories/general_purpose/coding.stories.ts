@@ -1,11 +1,13 @@
 import {Meta, StoryObj}     from '@storybook/web-components'
-import '../src/Coding'
-import '../src/Debug'
-import {Coding} from '../src/Coding'
+import '../../src/Coding'
+import '../../src/Debug'
+import {Coding} from '../../src/Coding'
 
 
 const meta = {
+  title: 'Datatypes/General-Purpose/Coding',
   component: 'bkn-coding',
+
 } satisfies Meta<typeof Coding>
 
 export default meta

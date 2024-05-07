@@ -17,4 +17,9 @@ export class Coding extends BaseElement {
       () => html`${this.data?.display ? this.data.display : 'n/a'}${super.renderDebug()}`
     )
   }
+
+  // protected render(): unknown {
+  //   return html``
+  // }
+
 }

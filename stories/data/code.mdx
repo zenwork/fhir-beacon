@@ -1,0 +1,20 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as Stories from './code.stories';
+
+<Meta of={Stories} />
+
+# Code Value
+
+Indicates that the value is taken from a set of controlled strings defined elsewhere.
+
+reference: [R5](https://hl7.org/fhir/R5/datatypes.html#code)
+
+## valid
+<Canvas of={Stories.Valid} />
+
+## invalid
+<Canvas of={Stories.Invalid} />
+
+## invalid with errors
+<Canvas of={Stories.InvalidWithError} />
