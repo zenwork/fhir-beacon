@@ -2,15 +2,23 @@ import {css, html, LitElement, nothing, PropertyValues} from 'lit'
 import {customElement, property, state}                 from 'lit/decorators.js'
 import {choose}                                         from 'lit/directives/choose.js'
 import {when}                                           from 'lit/directives/when.js'
-import {PrimitiveType, toCode, toUrl, validOrError}     from './Primitives'
+import {PrimitiveType, toCode, toUrl, valueOrError}     from './Primitives'
 
+/**
+ * Represents a custom element for displaying and parsing primitive values.
+ *
+ * @customElement
+ */
 @customElement('bkn-primitive')
 export class Primitive extends LitElement {
 
   @property()
+  declare label: string
+
+  @property()
   public value: string = ''
 
-  @property({type: PrimitiveType, converter: converter})
+  @property({type: PrimitiveType, converter: convertToPrimitiveType})
   public type: PrimitiveType = PrimitiveType.none
 
   @property({type: Boolean})
@@ -20,7 +28,7 @@ export class Primitive extends LitElement {
   private error: boolean = false
 
   @state()
-  private parsedValue: string = ''
+  private parsedValue: unknown = ''
 
   static styles = css`
 
@@ -56,13 +64,17 @@ export class Primitive extends LitElement {
     return when(this.error,
       () => html`
           <div class="base">
+              ${this.label ? html`
+          <div>${this.label}:</div>` : nothing}
               <div class="error value">${this.value}</div>
-              ${when(this.showError, 
-                      () => html`<div class="error message">(${this.parsedValue})</div>`, 
+              ${when(this.showError,
+        () => html`
+                          <div class="error message">(${this.parsedValue})</div>`,
                       () => nothing)}
           </div>`,
       () => html`
           <div class="base">
+              ${this.label ? html`<div>${this.label}:</div>` : nothing}
               <div class="value">${this.parsedValue}</div>
           </div>`
     )
@@ -78,8 +90,9 @@ export class Primitive extends LitElement {
     }
   }
 
-  private validOrError = (fn: (code: string) => any, v: string) => {
-    let parsedValue = validOrError(fn, v)
+
+  private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
+    let parsedValue = valueOrError(fn, original)
 
     if (parsedValue.val) {
       this.parsedValue = parsedValue.val
@@ -93,6 +106,16 @@ export class Primitive extends LitElement {
   }
 }
 
-function converter(value: string | null): PrimitiveType {
-  return value ? <PrimitiveType>value : PrimitiveType.none
+/**
+ * Converts the given value to its primitive type.
+ *
+ * @param {string | null} value - The value to be converted.
+ * @return {PrimitiveType} - The converted value as a primitive type.
+ */
+function convertToPrimitiveType(value: string | null): PrimitiveType {
+  if (!value || !Object.values(PrimitiveType).includes(value as PrimitiveType)) {
+    return PrimitiveType.none
+  }
+
+  return value as PrimitiveType
 }

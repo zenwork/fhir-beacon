@@ -1,19 +1,25 @@
-import {Meta, StoryObj}     from '@storybook/web-components'
+import {StoryObj} from '@storybook/web-components'
 import '../../src/Coding'
 import '../../src/Debug'
-import {Coding} from '../../src/Coding'
+import '../../src/data/Primitve'
 
 
 const meta = {
   title: 'Datatypes/General-Purpose/Coding',
   component: 'bkn-coding',
+  argTypes: {
+    mode: {
+      options: ['display', 'structure', 'combined'],
+      control: {type: 'radio'},
+    },
+  },
 
-} satisfies Meta<typeof Coding>
+}
 
 export default meta
 type Story = StoryObj;
 
-export const Simple: Story = {
+export const DisplayableValue: Story = {
   args:{
     data:{
       system: 'http://hl7.org/fhir/sid/icd-10',
@@ -23,7 +29,7 @@ export const Simple: Story = {
   }
   }
 
-export const NothingToDisplay: Story = {
+export const NoDisplayableValue: Story = {
   args:{
     data:{
       system: 'http://hl7.org/fhir/sid/icd-10',
@@ -32,7 +38,7 @@ export const NothingToDisplay: Story = {
   }
 }
 
-export const ShowDebug: Story = {
+export const ShowStructure: Story = {
   args:{
     data:{
       id: '123-456',
@@ -42,6 +48,23 @@ export const ShowDebug: Story = {
       code: 'G44.1',
       display: 'Vascular headache, not elsewhere classified'
     },
-    debug:true
+    mode: 'structure',
+    showError: true
+  }
+
+}
+
+export const ShowStructureWithErrors: Story = {
+  args: {
+    data: {
+      id: '123-456',
+      extension: [],
+      version: '1.0',
+      system: 'hl7.org/fhir/sid/icd-10',
+      code: 'not a valid code',
+      display: 'Vascular headache, not elsewhere classified'
+    },
+    mode: 'combined',
+    showError: true
   }
 }

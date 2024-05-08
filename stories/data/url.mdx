@@ -1,6 +1,6 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import {Canvas, Meta} from '@storybook/blocks'
 
-import * as Stories from './url.stories';
+import * as Stories from './url.stories'
 
 <Meta of={Stories} />
 
@@ -18,3 +18,6 @@ reference: [R5](http://hl7.org/fhir/R5/datatypes.html#url)
 
 ## invalid with errors
 <Canvas of={Stories.InvalidWithError} />
+
+## invalid relative URL with errors
+<Canvas of={Stories.InvalidRelativeUrlWithError}/>

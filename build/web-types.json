@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+  "name": "fhir-beacon",
+  "version": "0.0.1",
+  "description-markup": "markdown",
+  "contributions": {
+    "html": {
+      "elements": [
+        {
+          "name": "bkn-coding",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "Mode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseElementData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "Mode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseElementData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-debug",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "data", "value": { "type": "{}", "default": "{}" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [{ "name": "data", "value": { "type": "{}" } }],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-primitive",
+          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string" } },
+            { "name": "value", "value": { "type": "string", "default": "''" } },
+            { "name": "type", "value": { "type": "PrimitiveType" } },
+            {
+              "name": "showError",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "value", "value": { "type": "string" } },
+              { "name": "type", "value": { "type": "PrimitiveType" } },
+              { "name": "showError", "value": { "type": "boolean" } }
+            ],
+            "events": []
+          }
+        }
+      ]
+    },
+    "css": {
+      "properties": [],
+      "pseudo-elements": []
+    }
+  }
+}
