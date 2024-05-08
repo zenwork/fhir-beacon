@@ -3,7 +3,7 @@ import {property}                         from 'lit/decorators.js'
 import {choose}                           from 'lit/directives/choose.js'
 import {join}                             from 'lit/directives/join.js'
 import {BaseElementData}                  from './data/Structures'
-import './Debug'
+import './util/Debug'
 
 export enum Mode {
   display = 'display',

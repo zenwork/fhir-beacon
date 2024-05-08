@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from './BaseElement'
+import {BaseElement}          from '../BaseElement'
 
 type Id = string | null
 export type CodingData = {
