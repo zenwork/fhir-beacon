@@ -1,5 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../src/data/general_purpose/Coding'
+import '../../src/data/types/Coding'
 import '../../src/util/Debug'
 import '../../src/data/Primitve'
 

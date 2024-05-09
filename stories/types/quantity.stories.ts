@@ -1,5 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../src/data/general_purpose/Quantity'
+import '../../src/data/types/Quantity'
 import '../../src/util/Debug'
 import '../../src/data/Primitve'
 
@@ -32,19 +32,6 @@ export const DisplayableTime: Story = {
   }
 }
 
-export const ShowStructWithErrors: Story = {
-  args: {
-    data: {
-      value: 'abc',
-      unit: 'sec',
-      system: 'http://unitsofmeasure.org',
-      code: 's'
-    },
-    mode: 'structure',
-    showError: true
-  },
-}
-
 export const AmountOfPrescribedMedicine: Story = {
   args: {
     data: {
@@ -58,4 +45,31 @@ export const AmountOfPrescribedMedicine: Story = {
     showError: false
   },
 
+}
+
+export const MoneyQuantity: Story = {
+  args: {
+    data: {
+      value: '100',
+      unit: 'US$',
+      system: 'urn:iso:std:iso:4217',
+      code: 'USD'
+    },
+    mode: 'display',
+    showError: false
+  },
+
+}
+
+export const ShowStructWithErrors: Story = {
+  args: {
+    data: {
+      value: 'abc',
+      unit: 'sec',
+      system: 'http://unitsofmeasure.org',
+      code: 's'
+    },
+    mode: 'structure',
+    showError: true
+  },
 }

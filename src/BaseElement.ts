@@ -3,7 +3,8 @@ import {property}                         from 'lit/decorators.js'
 import {choose}                           from 'lit/directives/choose.js'
 import {join}                             from 'lit/directives/join.js'
 import './util/Debug'
-import {BaseData}                         from './data/structures'
+
+import {BaseData} from './resources/structures'
 
 export enum Mode {
   display = 'display',

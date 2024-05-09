@@ -1,11 +1,14 @@
+import {BaseData}           from '../../resources/structures'
 import {Code, Decimal, URI} from '../converters'
 
-export type Id = string | null
 
-export type BaseData = {
-  id?: Id,
-  extension?: [],
-}
+export type Id = string
+export type Instant = string
+export type Canonical = URI
+export type Language = string
+
+export type XHTML = string
+
 
 export type CodingData = BaseData & {
   version?: string,

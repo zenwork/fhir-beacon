@@ -31,31 +31,6 @@
           }
         },
         {
-          "name": "bkn-coding",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            { "name": "mode", "value": { "type": "Mode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseElementData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "mode", "value": { "type": "Mode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseElementData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "bkn-debug",
           "description": "\n---\n",
           "doc-url": "",
@@ -65,6 +40,56 @@
           "events": [],
           "js": {
             "properties": [{ "name": "data", "value": { "type": "{}" } }],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-coding",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "Mode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "Mode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-quantity",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "Mode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "Mode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
             "events": []
           }
         }
