@@ -1,16 +1,7 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from './BaseElement'
-
-type Id = string | null
-export type CodingData = {
-  id: Id,
-  extension: [],
-  version: string,
-  system: string,
-  code: string,
-  display: string
-}
+import {BaseElement}          from '../../BaseElement'
+import {CodingData}           from '../structures'
 
 @customElement('bkn-coding')
 export class Coding extends BaseElement<CodingData> {
