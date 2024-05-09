@@ -1,26 +1,27 @@
 {
-  "compilerOptions": {
-    "target": "es2021",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "lib": ["es2017", "dom"],
-    "strict": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "inlineSources": true,
-    "rootDir": "./",
-    "declaration": true,
-    "incremental": true
-  },
-  "include": ["**/*.ts"],
-  "plugins": [
-    {
-      "name": "ts-lit-plugin"
-    }
-  ]
+    "compilerOptions": {
+        "target": "es2021",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "lib": ["es2017", "dom"],
+        "strict": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "inlineSources": true,
+        "rootDir": "./",
+        "declaration": true,
+        "incremental": true,
+        "resolveJsonModule": true
+    },
+    "include": ["**/*.ts"],
+    "plugins": [
+        {
+            "name": "ts-lit-plugin"
+        }
+    ]
 }

@@ -2,7 +2,12 @@ import {css, html, LitElement, nothing, PropertyValues} from 'lit'
 import {customElement, property, state}                 from 'lit/decorators.js'
 import {choose}                                         from 'lit/directives/choose.js'
 import {when}                                           from 'lit/directives/when.js'
-import {PrimitiveType, toCode, toUrl, valueOrError}     from './Primitives'
+
+import {PrimitiveType, valueOrError} from './converters'
+import {toCode}                      from './converters/ToCode'
+import {toDecimal}                   from './converters/ToDecimal'
+import {toUri}                       from './converters/ToUri'
+import {toUrl}                       from './converters/ToUrl'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -64,18 +69,16 @@ export class Primitive extends LitElement {
     return when(this.error,
       () => html`
           <div class="base">
-              ${this.label ? html`
-          <div>${this.label}:</div>` : nothing}
-              <div class="error value">${this.value}</div>
+              ${this.label ? html`<div>${this.label}:</div>` : nothing}
+              <div class="error value"><slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot></div>
               ${when(this.showError,
-        () => html`
-                          <div class="error message">(${this.parsedValue})</div>`,
-                      () => nothing)}
+        () => html`<div class="error message">(${this.parsedValue})</div>`,
+        () => nothing)}
           </div>`,
       () => html`
           <div class="base">
               ${this.label ? html`<div>${this.label}:</div>` : nothing}
-              <div class="value">${this.parsedValue}</div>
+              <div class="value"><slot name="before"></slot>&nbsp;${this.parsedValue}&nbsp;<slot name="after"></slot></div> 
           </div>`
     )
   }
@@ -86,6 +89,8 @@ export class Primitive extends LitElement {
         [PrimitiveType.none, () => (this.parsedValue = this.value) && (this.error = false)],
         [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
         [PrimitiveType.url, () => this.validOrError(toUrl, this.value)],
+        [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
+        [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
       ])
     }
   }

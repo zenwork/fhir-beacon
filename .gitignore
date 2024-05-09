@@ -218,3 +218,6 @@ storybook-static
 /playwright/.cache/
 /build/custom-elements.json
 /package-lock.json
+
+# reference document directory
+refs
