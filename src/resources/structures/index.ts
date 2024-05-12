@@ -1,11 +1,9 @@
-import {Code, URI}                                           from '../../data/converters'
-import {Canonical, CodingData, Id, Instant, Language, XHTML} from '../../data/structures'
+import {BaseData}                                                                                     from '../../BaseData'
+import {Canonical, Code, DateTime, Id, Instant, Language, URI, XHTML}                                 from '../../data/structures'
+import {CodeableConceptData, CodingData, Identifier, QuantityData, ReferenceData, SimpleQuantityData} from '../../data/structures/complex'
+import {Ingredient}                                                                                   from './backbone'
 
-export type BaseData = {
-  id?: string | null,
-  extension?: [],
-}
-export type Meta = {
+export type MetaData = {
   versionId?: Id
   lastUpdated?: Instant
   source?: URI
@@ -14,28 +12,53 @@ export type Meta = {
   tag?: CodingData
 
 }
+
 export type ResourceData = BaseData & {
   id?: Id,
-  meta?: Meta,
+  meta?: MetaData,
   implicitRules?: URI
   language?: Language
 }
 
-export type Narrative = {
+export type NarrativeData = {
   status: Code
   div: XHTML
 }
 
 export type Extension = BaseData & {
   url: URI
-  value: any //should be a piped list of all allowed types. see: http://hl7.org/fhir/R5/extensibility.html#Extension and
+  value: any //should be like what I did in Ingredient. see: http://hl7.org/fhir/R5/extensibility.html#Extension and
              // http://hl7.org/fhir/R5/datatypes.html#open
 }
 
 export type DomainResourceData = ResourceData & {
-  text?: Narrative
+  text?: NarrativeData
   contained: ResourceData[]
   extension: Extension[]
   modifierExtension: Extension[]
 }
-export type Medication = DomainResourceData & {}
+
+
+export type CodeableReferenceData = BaseData & {
+  concept?: CodeableConceptData
+  reference?: ReferenceData
+}
+
+export type Ratiodata = BaseData & {
+  numerator?: QuantityData
+  denominator?: SimpleQuantityData
+}
+
+export type MedicationData = DomainResourceData & {
+  identifier: Identifier[]
+  code?: CodeableConceptData
+  status?: Code
+  marketingAuthorisationHolder?: ReferenceData
+  doseForm?: CodeableConceptData
+  totalVolume?: QuantityData
+  ingredient?: Ingredient[]
+  batch?: {
+    lotNumber?: string
+    expirationDate?: DateTime
+  }
+}

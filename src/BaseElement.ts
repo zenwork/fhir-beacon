@@ -3,8 +3,7 @@ import {property}                         from 'lit/decorators.js'
 import {choose}                           from 'lit/directives/choose.js'
 import {join}                             from 'lit/directives/join.js'
 import './util/Debug'
-
-import {BaseData} from './resources/structures'
+import {BaseData}                         from './BaseData'
 
 export enum Mode {
   display = 'display',
@@ -12,7 +11,7 @@ export enum Mode {
   combined = 'combined'
 }
 
-export class BaseElement<T> extends LitElement {
+export class BaseElement<T extends BaseData> extends LitElement {
 
   @property({type: Mode, converter})
   public mode: Mode = Mode.display

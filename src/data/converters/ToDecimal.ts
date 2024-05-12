@@ -1,4 +1,5 @@
-import {Decimal, toPrimitive} from './index'
+import {Decimal}     from '../structures'
+import {toPrimitive} from './index'
 
 const decimalRegex = /^-?(0|[1-9][0-9]{0,17})(\.[0-9]{1,17})?([eE][+-]?[0-9]{1,9}})?$/
 /**

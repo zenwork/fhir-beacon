@@ -1,4 +1,5 @@
-import {Code, toPrimitive} from './index'
+import {Code}        from '../structures'
+import {toPrimitive} from './index'
 
 /**
  * Regular expression pattern for matching a FHIR code.

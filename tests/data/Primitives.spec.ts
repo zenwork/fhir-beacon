@@ -1,7 +1,7 @@
 import {expect, test} from '@playwright/test'
-import {Code}         from '../../src/data/converters'
 import {toCode}       from '../../src/data/converters/ToCode'
 import {toUrl}        from '../../src/data/converters/ToUrl'
+import {Code}         from '../../src/data/structures'
 
 
 test.describe('Primitives', () => {
