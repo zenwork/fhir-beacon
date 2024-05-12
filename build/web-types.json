@@ -7,25 +7,26 @@
     "html": {
       "elements": [
         {
-          "name": "bkn-primitive",
-          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+            "name": "fhir-medication",
+            "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
-            { "name": "label", "value": { "type": "string" } },
-            { "name": "value", "value": { "type": "string", "default": "''" } },
-            { "name": "type", "value": { "type": "PrimitiveType" } },
+              {"name": "mode", "value": {"type": "Mode"}},
+              {"name": "showError", "value": {"type": "boolean"}},
             {
-              "name": "showError",
-              "value": { "type": "boolean", "default": "false" }
+                "name": "data",
+                "value": {"type": "BaseData & { [key: string]: any }"}
             }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "value", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "PrimitiveType" } },
-              { "name": "showError", "value": { "type": "boolean" } }
+                {"name": "mode", "value": {"type": "Mode"}},
+                {"name": "showError", "value": {"type": "boolean"}},
+                {
+                    "name": "data",
+                    "value": {"type": "BaseData & { [key: string]: any }"}
+                }
             ],
             "events": []
           }
@@ -90,6 +91,30 @@
                 "value": { "type": "BaseData & { [key: string]: any }" }
               }
             ],
+              "events": []
+          }
+        },
+          {
+              "name": "bkn-primitive",
+              "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "label", "value": {"type": "string"}},
+                  {"name": "value", "value": {"type": "string", "default": "''"}},
+                  {"name": "type", "value": {"type": "PrimitiveType"}},
+                  {
+                      "name": "showError",
+                      "value": {"type": "boolean", "default": "false"}
+                  }
+              ],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "label", "value": {"type": "string"}},
+                      {"name": "value", "value": {"type": "string"}},
+                      {"name": "type", "value": {"type": "PrimitiveType"}},
+                      {"name": "showError", "value": {"type": "boolean"}}
+                  ],
             "events": []
           }
         }
