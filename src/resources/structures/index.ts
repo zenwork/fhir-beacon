@@ -1,7 +1,9 @@
-import {BaseData}                                                                                     from '../../BaseData'
-import {Canonical, Code, DateTime, Id, Instant, Language, URI, XHTML}                                 from '../../data/structures'
-import {CodeableConceptData, CodingData, Identifier, QuantityData, ReferenceData, SimpleQuantityData} from '../../data/structures/complex'
-import {Ingredient}                                                                                   from './backbone'
+import {BaseData}                                                     from '../../BaseData'
+import {
+  CodeableConceptData, CodingData, Identifier, QuantityData, ReferenceData, SimpleQuantityData
+}                                                                     from '../../data/complex/strucutures/complex'
+import {Canonical, Code, DateTime, Id, Instant, Language, URI, XHTML} from '../../data/primitive/structures'
+import {Ingredient}                                                   from './backbone'
 
 export type MetaData = {
   versionId?: Id

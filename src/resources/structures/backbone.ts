@@ -1,5 +1,5 @@
 import {BaseData}                                    from '../../BaseData'
-import {CodeableConceptData, QuantityData}           from '../../data/structures/complex'
+import {CodeableConceptData, QuantityData}           from '../../data/complex/strucutures/complex'
 import {CodeableReferenceData, Extension, Ratiodata} from './index'
 
 export type BackboneElement = BaseData & {

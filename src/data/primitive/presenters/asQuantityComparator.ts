@@ -1,4 +1,4 @@
-import {ComparatorCodeSystem} from '../codesystems'
+import {ComparatorCodeSystem} from '../../codesystems'
 import {toPrimitive}          from '../converters'
 
 export type Comparator = { code: string, display: string, definition: string }

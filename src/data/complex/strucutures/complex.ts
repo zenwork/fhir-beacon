@@ -1,5 +1,5 @@
-import {BaseData}                     from '../../BaseData'
-import {Code, DateTime, Decimal, URI} from './index'
+import {BaseData}                     from '../../../BaseData'
+import {Code, DateTime, Decimal, URI} from '../../primitive/structures'
 
 export type CodingData = BaseData & {
   version?: string,

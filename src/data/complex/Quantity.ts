@@ -2,9 +2,9 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {BaseData}                      from '../../BaseData'
 import {BaseElement}                   from '../../BaseElement'
-import {asQuantityComparator}          from '../presenters/asQuantityComparator'
+import {asQuantityComparator}          from '../primitive/presenters/asQuantityComparator'
 
-import {QuantityData} from '../structures/complex'
+import {QuantityData} from './strucutures/complex'
 
 @customElement('bkn-quantity')
 export class Quantity extends BaseElement<QuantityData> {

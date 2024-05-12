@@ -2,7 +2,7 @@ import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
 import {BaseElement}          from '../../BaseElement'
 
-import {CodingData} from '../structures/complex'
+import {CodingData} from './strucutures/complex'
 
 @customElement('bkn-coding')
 export class Coding extends BaseElement<CodingData> {
