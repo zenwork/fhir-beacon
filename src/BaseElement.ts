@@ -11,7 +11,7 @@ export enum Mode {
   combined = 'combined'
 }
 
-export class BaseElement<T extends BaseData> extends LitElement {
+export abstract class BaseElement<T extends BaseData> extends LitElement {
 
   @property({type: Mode, converter})
   public mode: Mode = Mode.display

@@ -1,7 +1,7 @@
 import {StoryObj} from '@storybook/web-components'
 
 const meta = {
-  title: 'Datatypes/General-Purpose/Quantity',
+  title: 'Resources/Medications/Medication',
   component: 'fhir-medication',
   argTypes: {
     mode: {

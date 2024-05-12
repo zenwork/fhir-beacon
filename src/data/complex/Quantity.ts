@@ -6,6 +6,7 @@ import {asQuantityComparator}          from '../primitive/presenters/asQuantityC
 
 import {QuantityData} from './strucutures/complex'
 
+//TODO: rename to fhir-quanity
 @customElement('bkn-quantity')
 export class Quantity extends BaseElement<QuantityData> {
 

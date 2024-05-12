@@ -4,6 +4,7 @@ import {BaseElement}          from '../../BaseElement'
 
 import {CodingData} from './strucutures/complex'
 
+//TODO: rename to fhir-coding
 @customElement('bkn-coding')
 export class Coding extends BaseElement<CodingData> {
 

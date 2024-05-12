@@ -5,7 +5,7 @@ import '../../src/data/primitive/Primitve'
 
 
 const meta = {
-  title: 'Datatypes/General-Purpose/Quantity',
+  title: 'Datatypes/Complex/Quantity',
   component: 'bkn-quantity',
   argTypes: {
     mode: {

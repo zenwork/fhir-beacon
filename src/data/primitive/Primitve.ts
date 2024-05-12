@@ -14,6 +14,7 @@ import {toUrl}                       from './converters/ToUrl'
  *
  * @customElement
  */
+//TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible primitive.
 @customElement('bkn-primitive')
 export class Primitive extends LitElement {
 
