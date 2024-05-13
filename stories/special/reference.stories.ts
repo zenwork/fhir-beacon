@@ -20,7 +20,7 @@ type Story = StoryObj;
 export const ResourceReference: Story = {
   args: {
     data: {
-      type:"Patient"
+      type: 'Patient'
     },
     mode: 'display',
     showError: false,
@@ -29,8 +29,7 @@ export const ResourceReference: Story = {
 
 export const CanonicalReference: Story = {
   args: {
-    data: {
-      },
+    data: {},
     mode: 'display',
     showError: false,
   }
@@ -38,8 +37,7 @@ export const CanonicalReference: Story = {
 
 export const ContainedReference: Story = {
   args: {
-    data: {
-    },
+    data: {},
     mode: 'display',
     showError: false,
   }

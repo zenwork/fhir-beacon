@@ -3,7 +3,7 @@ import {customElement, property}                   from 'lit/decorators.js'
 import {unsafeHTML}                                from 'lit/directives/unsafe-html.js'
 import {BaseElement}                               from '../BaseElement'
 
-import {NarrativeData}                             from './structures'
+import {NarrativeData} from './structures'
 
 @customElement('fhir-narrative')
 export class Narrative extends BaseElement<NarrativeData> {

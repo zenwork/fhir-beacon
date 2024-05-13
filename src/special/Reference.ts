@@ -1,4 +1,3 @@
-import {DataType}             from 'csstype'
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
 import {BaseElement}          from '../BaseElement'
@@ -13,9 +12,10 @@ export class Reference extends BaseElement<ReferenceData> {
   // assigned to rather than defining the `type` property
 
   protected renderDisplay(data: ReferenceData): TemplateResult | TemplateResult[] {
-  return [
-    html`<fhir-primitive label="type" type=${PrimitiveType.type} .value=${data.type} ></fhir-primitive>`
-  ]
+    return [
+      html`
+          <fhir-primitive label="type" type=${PrimitiveType.type} .value=${data.type}></fhir-primitive>`
+    ]
   }
 
 

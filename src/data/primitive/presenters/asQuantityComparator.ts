@@ -1,5 +1,5 @@
 import {Comparators} from '../../codesystems'
-import {toPrimitive}          from '../converters'
+import {toPrimitive} from '../converters'
 
 export type Comparator = { code: string, display: string, definition: string }
 export const asQuantityComparator: toPrimitive<string, Comparator> = (code: string): Comparator => {

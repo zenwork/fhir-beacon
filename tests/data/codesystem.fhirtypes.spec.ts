@@ -2,7 +2,6 @@ import {expect, test} from '@playwright/test'
 import {FhirTypes}    from '../../src/data/codesystems'
 
 
-
 test.describe('Code Systems', () => {
   test('should be 231 types', async () => {
     expect(FhirTypes.length).toBe(231)
