@@ -5,16 +5,17 @@ import {join}                             from 'lit/directives/join.js'
 import './util/Debug'
 import {BaseData}                         from './BaseData'
 
-export enum Mode {
+export enum BaseElementMode {
   display = 'display',
   structure = 'structure',
-  combined = 'combined'
+  combined = 'combined',
+  'narrative' = 'narrative'
 }
 
 export abstract class BaseElement<T extends BaseData> extends LitElement {
 
-  @property({type: Mode, converter})
-  public mode: Mode = Mode.display
+  @property({type: BaseElementMode, converter})
+  public mode: BaseElementMode = BaseElementMode.display
 
   @property({type: Boolean})
   declare showError: boolean
@@ -25,10 +26,11 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   protected render(): TemplateResult {
     let data = this.convertData(this.data)
     return html`${choose(this.mode, [
-      [Mode.display, () => this.renderDisplay(data)],
-      [Mode.structure, () => this.renderStructure(data)],
-      [Mode.combined, () => this.renderCombined(data)],
-    ])}`
+      [BaseElementMode.display, () => this.renderDisplay(data)],
+      [BaseElementMode.structure, () => html`<fhir-wrapper>${this.renderStructure(data)}</fhir-wrapper>`],
+      [BaseElementMode.combined, () => this.renderCombined(data)],
+      ],
+      () => html`<h1>Error</h1>`)}`
   }
 
   /**
@@ -37,11 +39,11 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
    * @protected
    * @returns {TemplateResult} The rendered template result.
    */
-  protected renderDisplay(data: T): TemplateResult {
+  protected renderDisplay(data: T): TemplateResult | TemplateResult[]{
     return html`n/a`
   }
 
-  protected renderStructure(data: T): TemplateResult {
+  protected renderStructure(data: T): TemplateResult | TemplateResult[]{
     return html`
         <bkn-debug .data=${data}></bkn-debug>`
   }
@@ -56,6 +58,6 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
 
 }
 
-function converter(value: string | null): Mode {
-  return value ? <Mode>value : Mode.display
+function converter(value: string | null): BaseElementMode {
+  return value ? <BaseElementMode>value : BaseElementMode.display
 }

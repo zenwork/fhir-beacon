@@ -15,20 +15,20 @@ validation, formatting, lookup in code-ssytems, etc. is done.
 #### fragments of FHIR data statically generated sites
 ##### markup
 ```html
-<bkn-primitive type="code" label="name" value="G.44"></bkn-primitive>
+<fhir-primitive type="code" label="name" value="G.44"></fhir-primitive>
 ```
 ##### output
 <div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
-    <bkn-primitive type="code" label="name" value="G.44"></bkn-primitive>
+    <fhir-primitive type="code" label="name" value="G.44"></fhir-primitive>
 </div>
 
 ##### markup
 ```html
-<bkn-primitive type="url" label="name" value="://fhir.acme.com" showError></bkn-primitive>
+<fhir-primitive type="url" label="name" value="://fhir.acme.com" showError></fhir-primitive>
 ```
 ##### output
 <div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
-    <bkn-primitive type="url" label="name" value="://fhir.acme.com" showError></bkn-primitive>
+    <fhir-primitive type="url" label="name" value="://fhir.acme.com" showError></fhir-primitive>
 </div>
 
 ----
@@ -82,7 +82,7 @@ simple strings.
 return html`
     <fhir-primitive label="name" .value=${data.code.coding[0].display} >
         <fhir-primitive slot="after" .value=${data.code.coding[0].code} type="code" before="(" after=")">
-    </bkn-primitive>
+    </fhir-primitive>
     <fhir-primitive label="dose type" .value=${data.doseForm.coding[0].display}></fhir-primitive>`
 ```
 

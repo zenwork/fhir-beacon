@@ -5,7 +5,7 @@ import {Primitive}      from '../../src/data/primitive/Primitve'
 
 const meta = {
   title: 'Datatypes/Primitives/Code',
-  component: 'bkn-primitive',
+  component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>
 
 export default meta
@@ -13,15 +13,15 @@ type Story = StoryObj;
 
 export const Valid: Story = {
   render: () => html`
-      <bkn-primitive type="code" value="G.44"></bkn-primitive>`,
+      <fhir-primitive type="code" value="G.44"></fhir-primitive>`,
 }
 
 export const Invalid: Story = {
   render: () => html`
-      <bkn-primitive type="code" value="G.44 d d"></bkn-primitive>`,
+      <fhir-primitive type="code" value="G.44 d d"></fhir-primitive>`,
 }
 
 export const InvalidWithError: Story = {
   render: () => html`
-      <bkn-primitive showError="true" type="code" value="G.44 d d"></bkn-primitive>`,
+      <fhir-primitive showError="true" type="code" value="G.44 d d"></fhir-primitive>`,
 }

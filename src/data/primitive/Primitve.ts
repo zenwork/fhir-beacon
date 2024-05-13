@@ -5,9 +5,11 @@ import {when}                                           from 'lit/directives/whe
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
+import {toDatetime} from './converters/ToDatetime'
 import {toDecimal}                   from './converters/ToDecimal'
 import {toUri}                       from './converters/ToUri'
 import {toUrl}                       from './converters/ToUrl'
+import {DateTime}   from './structures'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -15,7 +17,7 @@ import {toUrl}                       from './converters/ToUrl'
  * @customElement
  */
 //TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible primitive.
-@customElement('bkn-primitive')
+@customElement('fhir-primitive')
 export class Primitive extends LitElement {
 
   @property()
@@ -92,6 +94,7 @@ export class Primitive extends LitElement {
         [PrimitiveType.url, () => this.validOrError(toUrl, this.value)],
         [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
         [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
+        [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
       ])
     }
   }
@@ -101,7 +104,7 @@ export class Primitive extends LitElement {
     let parsedValue = valueOrError(fn, original)
 
     if (parsedValue.val) {
-      this.parsedValue = parsedValue.val
+      this.parsedValue = this.present(parsedValue.val)
       this.error = false
     }
 
@@ -109,6 +112,21 @@ export class Primitive extends LitElement {
       this.parsedValue = parsedValue.err
       this.error = true
     }
+  }
+
+  private present(val: unknown): unknown {
+
+    choose(this.type, [
+      [
+        PrimitiveType.datetime, () => {
+        (val as DateTime) = (val as string)
+          .replace(/T/g, ' ')
+          .replace(/[+]/g, ' tz:') as string
+      }
+      ],
+    ])
+
+    return val
   }
 }
 

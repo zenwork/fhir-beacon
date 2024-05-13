@@ -1,6 +1,6 @@
 import {BaseData}                                                     from '../../BaseData'
 import {
-  CodeableConceptData, CodingData, Identifier, QuantityData, ReferenceData, SimpleQuantityData
+  CodeableConceptData, CodingData, IdentifierData, QuantityData, ReferenceData, SimpleQuantityData
 }                                                                     from '../../data/complex/strucutures/complex'
 import {Canonical, Code, DateTime, Id, Instant, Language, URI, XHTML} from '../../data/primitive/structures'
 import {Ingredient}                                                   from './backbone'
@@ -22,7 +22,7 @@ export type ResourceData = BaseData & {
   language?: Language
 }
 
-export type NarrativeData = {
+export type NarrativeData = BaseData &{
   status: Code
   div: XHTML
 }
@@ -52,7 +52,7 @@ export type Ratiodata = BaseData & {
 }
 
 export type MedicationData = DomainResourceData & {
-  identifier: Identifier[]
+  identifier: IdentifierData[]
   code?: CodeableConceptData
   status?: Code
   marketingAuthorisationHolder?: ReferenceData

@@ -7,26 +7,53 @@
     "html": {
       "elements": [
         {
-            "name": "fhir-medication",
-            "description": "\n---\n\n\n### **Methods:**\n ",
+          "name": "fhir-narrative",
+          "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
-              {"name": "mode", "value": {"type": "Mode"}},
-              {"name": "showError", "value": {"type": "boolean"}},
+            { "name": "status", "value": { "type": "string" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
             {
-                "name": "data",
-                "value": {"type": "BaseData & { [key: string]: any }"}
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
             }
           ],
           "events": [],
           "js": {
             "properties": [
-                {"name": "mode", "value": {"type": "Mode"}},
-                {"name": "showError", "value": {"type": "boolean"}},
-                {
-                    "name": "data",
-                    "value": {"type": "BaseData & { [key: string]: any }"}
-                }
+              { "name": "status", "value": { "type": "string" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
             ],
             "events": []
           }
@@ -45,11 +72,44 @@
           }
         },
         {
-          "name": "bkn-coding",
+          "name": "fhir-wrapper",
+          "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
+          "doc-url": "",
+          "attributes": [],
+          "slots": [{ "name": "wrapper" }],
+          "events": [],
+          "js": { "properties": [], "events": [] }
+        },
+        {
+          "name": "fhir-primitive",
+          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string" } },
+            { "name": "value", "value": { "type": "string", "default": "''" } },
+            { "name": "type", "value": { "type": "PrimitiveType" } },
+            {
+              "name": "showError",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "value", "value": { "type": "string" } },
+              { "name": "type", "value": { "type": "PrimitiveType" } },
+              { "name": "showError", "value": { "type": "boolean" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-codeable-concept",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
-            { "name": "mode", "value": { "type": "Mode" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
             {
               "name": "data",
@@ -59,7 +119,82 @@
           "events": [],
           "js": {
             "properties": [
-              { "name": "mode", "value": { "type": "Mode" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-coding",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-identifier",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-period",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "showError", "value": { "type": "boolean" } },
               {
                 "name": "data",
@@ -74,7 +209,7 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
-            { "name": "mode", "value": { "type": "Mode" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
             {
               "name": "data",
@@ -84,37 +219,13 @@
           "events": [],
           "js": {
             "properties": [
-              { "name": "mode", "value": { "type": "Mode" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "showError", "value": { "type": "boolean" } },
               {
                 "name": "data",
                 "value": { "type": "BaseData & { [key: string]: any }" }
               }
             ],
-              "events": []
-          }
-        },
-          {
-              "name": "bkn-primitive",
-              "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
-              "doc-url": "",
-              "attributes": [
-                  {"name": "label", "value": {"type": "string"}},
-                  {"name": "value", "value": {"type": "string", "default": "''"}},
-                  {"name": "type", "value": {"type": "PrimitiveType"}},
-                  {
-                      "name": "showError",
-                      "value": {"type": "boolean", "default": "false"}
-                  }
-              ],
-              "events": [],
-              "js": {
-                  "properties": [
-                      {"name": "label", "value": {"type": "string"}},
-                      {"name": "value", "value": {"type": "string"}},
-                      {"name": "type", "value": {"type": "PrimitiveType"}},
-                      {"name": "showError", "value": {"type": "boolean"}}
-                  ],
             "events": []
           }
         }

@@ -5,7 +5,7 @@ import {Primitive}      from '../../src/data/primitive/Primitve'
 
 const meta = {
   title: 'Datatypes/Primitives/Url',
-  component: 'bkn-primitive',
+  component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>
 
 export default meta
@@ -13,20 +13,20 @@ type Story = StoryObj;
 
 export const Valid: Story = {
   render: () => html`
-      <bkn-primitive type="url" value="http://hl7.org/fhir/sid/icd-10"></bkn-primitive>`,
+      <fhir-primitive type="url" value="http://hl7.org/fhir/sid/icd-10"></fhir-primitive>`,
 }
 
 export const Invalid: Story = {
   render: () => html`
-      <bkn-primitive type="url" value="hl7.org/fhir/sid/icd-10"></bkn-primitive>`,
+      <fhir-primitive type="url" value="hl7.org/fhir/sid/icd-10"></fhir-primitive>`,
 }
 
 export const InvalidWithError: Story = {
   render: () => html`
-      <bkn-primitive showError="true" type="url" value="//not a url"></bkn-primitive>`,
+      <fhir-primitive showError="true" type="url" value="//not a url"></fhir-primitive>`,
 }
 
 export const InvalidRelativeUrlWithError: Story = {
   render: () => html`
-      <bkn-primitive showError="true" type="url" value="a/b/c"></bkn-primitive>`,
+      <fhir-primitive showError="true" type="url" value="a/b/c"></fhir-primitive>`,
 }

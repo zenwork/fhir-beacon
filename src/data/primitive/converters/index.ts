@@ -20,5 +20,6 @@ export enum PrimitiveType {
   code = 'code',
   url = 'url',
   uri = 'uri',
-  decimal = 'decimal'
+  decimal = 'decimal',
+  datetime = 'datetime'
 }

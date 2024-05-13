@@ -1,0 +1,21 @@
+
+
+#formatted {
+    font-size: 1rem;
+    font-family: sans-serif;
+}
+
+#formatted div p b {
+    font-size: 1rem;
+    color: lightseagreen;
+}
+
+#formatted blockquote p b {
+    font-size: 1.5rem;
+    color: lightseagreen;
+}
+
+#formatted h3 {
+    font-size: 2rem;
+    color: lightseagreen;
+}

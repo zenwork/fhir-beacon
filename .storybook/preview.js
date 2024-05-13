@@ -4,7 +4,7 @@ const preview = {
         parameters:{
             options:{
                 storySort:{
-                    order:['Datatypes', ['Primitives', 'Complex'], 'Resources']
+                    order:['Datatypes', ['Primitives', 'Complex'], 'Resources', 'Special']
                 }
             }
         },

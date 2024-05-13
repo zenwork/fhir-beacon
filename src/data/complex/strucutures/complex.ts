@@ -30,11 +30,11 @@ export type PeriodData = BaseData & {
 export type ReferenceData = BaseData & {
   reference?: string
   type?: URI
-  identifier?: Identifier
+  identifier?: IdentifierData
   display?: string
 }
 
-export type Identifier = BaseData & {
+export type IdentifierData = BaseData & {
   use?: Code
   type?: CodeableConceptData
   system?: URI

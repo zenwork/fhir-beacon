@@ -1,11 +1,12 @@
 import {StoryObj} from '@storybook/web-components'
+import '../../src/resources/Medication'
 
 const meta = {
   title: 'Resources/Medications/Medication',
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined'],
+      options: ['display', 'structure', 'combined','narrative'],
       control: {type: 'radio'},
     },
   },
@@ -15,7 +16,7 @@ const meta = {
 export default meta
 type Story = StoryObj;
 
-export const Med0310: Story = {
+export const Med0310Narrative: Story = {
   args: {
     data: {
       resourceType: 'Medication',
@@ -82,7 +83,6 @@ export const Med0310: Story = {
         }
       ]
     },
-    mode: 'display',
-    showError: false
+    mode: 'narrative'
   }
 }

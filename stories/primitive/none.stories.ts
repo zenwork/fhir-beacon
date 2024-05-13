@@ -6,7 +6,7 @@ import {Primitive}      from '../../src/data/primitive/Primitve'
 const meta = {
   title: 'Datatypes/Primitives/None',
   tags: ['autodocs'],
-  component: 'bkn-primitive',
+  component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>
 
 export default meta
@@ -14,10 +14,10 @@ type Story = StoryObj;
 
 export const Implied: Story = {
   render: () => html`
-      <bkn-primitive  value="some simple value"></bkn-primitive>`,
+      <fhir-primitive value="some simple value"></fhir-primitive>`,
 }
 
 export const WithType: Story = {
   render: () => html`
-      <bkn-primitive type="none" value="some value with a type attribute"></bkn-primitive>`,
+      <fhir-primitive type="none" value="some value with a type attribute"></fhir-primitive>`,
 }
