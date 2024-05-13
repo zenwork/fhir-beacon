@@ -6,7 +6,7 @@ const meta = {
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined','narrative'],
+      options: ['display', 'structure', 'combined', 'narrative'],
       control: {type: 'radio'},
     },
   },

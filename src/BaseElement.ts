@@ -26,9 +26,13 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   protected render(): TemplateResult {
     let data = this.convertData(this.data)
     return html`${choose(this.mode, [
-      [BaseElementMode.display, () => this.renderDisplay(data)],
-      [BaseElementMode.structure, () => html`<fhir-wrapper>${this.renderStructure(data)}</fhir-wrapper>`],
-      [BaseElementMode.combined, () => this.renderCombined(data)],
+        [BaseElementMode.display, () => this.renderDisplay(data)],
+        [
+          BaseElementMode.structure,
+          () => html`
+              <fhir-wrapper>${this.renderStructure(data)}</fhir-wrapper>`
+        ],
+        [BaseElementMode.combined, () => this.renderCombined(data)],
       ],
       () => html`<h1>Error</h1>`)}`
   }
@@ -39,11 +43,11 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
    * @protected
    * @returns {TemplateResult} The rendered template result.
    */
-  protected renderDisplay(data: T): TemplateResult | TemplateResult[]{
+  protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
     return html`n/a`
   }
 
-  protected renderStructure(data: T): TemplateResult | TemplateResult[]{
+  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
     return html`
         <bkn-debug .data=${data}></bkn-debug>`
   }

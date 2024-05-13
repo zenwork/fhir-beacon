@@ -23,10 +23,10 @@ export const Invalid: Story = {
 
 export const InvalidWithError: Story = {
   render: () => html`
-      <fhir-primitive showError="true" type="url" value="//not a url"></fhir-primitive>`,
+      <fhir-primitive .showError=${true} type="url" value="//not a url"></fhir-primitive>`,
 }
 
 export const InvalidRelativeUrlWithError: Story = {
   render: () => html`
-      <fhir-primitive showError="true" type="url" value="a/b/c"></fhir-primitive>`,
+      <fhir-primitive .showError=${true} type="url" value="a/b/c"></fhir-primitive>`,
 }

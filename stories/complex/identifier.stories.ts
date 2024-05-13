@@ -2,7 +2,6 @@ import {StoryObj} from '@storybook/web-components'
 import '../../src/data/complex/Identifier'
 
 
-
 const meta = {
   title: 'Datatypes/Complex/Identifier',
   component: 'fhir-identifier',

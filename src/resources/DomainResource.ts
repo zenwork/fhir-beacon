@@ -1,8 +1,7 @@
-import {html, nothing, TemplateResult} from 'lit'
-import {choose}                        from 'lit/directives/choose.js'
-import {unsafeHTML}           from 'lit/directives/unsafe-html.js'
-import {BaseElement, BaseElementMode}    from '../BaseElement'
-import {DomainResourceData}   from './structures'
+import {html, TemplateResult}         from 'lit'
+import {choose}                       from 'lit/directives/choose.js'
+import {BaseElement, BaseElementMode} from '../BaseElement'
+import {DomainResourceData}           from './structures'
 
 export class DomainResource<T extends DomainResourceData> extends BaseElement<T> {
 

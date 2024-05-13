@@ -23,5 +23,5 @@ export const Invalid: Story = {
 
 export const InvalidWithError: Story = {
   render: () => html`
-      <fhir-primitive showError="true" type="code" value="G.44 d d"></fhir-primitive>`,
+      <fhir-primitive .showError=${true} type="code" value="G.44 d d"></fhir-primitive>`,
 }

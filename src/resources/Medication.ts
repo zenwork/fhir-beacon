@@ -1,4 +1,3 @@
-import {TemplateResult} from 'lit'
 import {customElement}  from 'lit/decorators.js'
 import {DomainResource} from './DomainResource'
 import {MedicationData} from './structures'

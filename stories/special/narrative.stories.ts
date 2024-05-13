@@ -1,5 +1,5 @@
-import { StoryObj} from '@storybook/web-components'
-import  '../../src/special/Narrative'
+import {StoryObj} from '@storybook/web-components'
+import '../../src/special/Narrative'
 
 
 const meta = {
@@ -36,7 +36,7 @@ export const NarrativeUsingCssPartsFormatting: Story = {
     },
     mode: 'display',
     showError: false,
-    id:'formatted'
+    id: 'formatted'
   }
 
 }

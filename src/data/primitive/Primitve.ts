@@ -5,11 +5,11 @@ import {when}                                           from 'lit/directives/whe
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
-import {toDatetime} from './converters/ToDatetime'
+import {toDatetime}                  from './converters/ToDatetime'
 import {toDecimal}                   from './converters/ToDecimal'
 import {toUri}                       from './converters/ToUri'
 import {toUrl}                       from './converters/ToUrl'
-import {DateTime}   from './structures'
+import {DateTime}                    from './structures'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.

@@ -1,10 +1,9 @@
 import {expect, test} from '@playwright/test'
-import {toCode}       from '../../src/data/primitive/converters/ToCode'
 import {toDatetime}   from '../../src/data/primitive/converters/ToDatetime'
 
 
 test.describe('Primitives', () => {
-  test('should parse a DateTime string', async ({page}) => {
+  test('should parse a DateTime string', async () => {
     toDatetime('1971')
     toDatetime('1971-12')
     toDatetime('1971-12-31')
@@ -13,7 +12,7 @@ test.describe('Primitives', () => {
     toDatetime('1971-12-31T23:59:59.999+11:00')
 
   })
-  test('should fail to parse datetime string', async ({page}) => {
+  test('should fail to parse datetime string', async () => {
     expect(() => {
       toDatetime('abc')
     }).toThrowError()
