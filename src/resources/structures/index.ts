@@ -1,11 +1,8 @@
-import {BaseData}   from '../../BaseData'
-import {
-  CodeableConceptData, CodingData, IdentifierData, QuantityData, ReferenceData, SimpleQuantityData
-}                   from '../../data/complex/strucutures/complex'
-import {
-  Canonical, Code, DateTime, Id, Instant, Language, URI, XHTML
-}                   from '../../data/primitive/structures'
-import {Ingredient} from './backbone'
+import {BaseData}                                                                          from '../../BaseData'
+import {CodeableConceptData, CodingData, IdentifierData, QuantityData, SimpleQuantityData} from '../../data/complex/strucutures/complex'
+import {Canonical, Code, DateTime, Id, Instant, Language, URI} from '../../data/primitive/structures'
+import {NarrativeData, ReferenceData}                          from '../../special/structures'
+import {Ingredient}                                            from './backbone'
 
 export type MetaData = {
   versionId?: Id
@@ -22,11 +19,6 @@ export type ResourceData = BaseData & {
   meta?: MetaData,
   implicitRules?: URI
   language?: Language
-}
-
-export type NarrativeData = BaseData & {
-  status: Code
-  div: XHTML
 }
 
 export type Extension = BaseData & {

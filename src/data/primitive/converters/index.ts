@@ -21,5 +21,6 @@ export enum PrimitiveType {
   url = 'url',
   uri = 'uri',
   decimal = 'decimal',
-  datetime = 'datetime'
+  datetime = 'datetime',
+  uri_type = 'uri_type' //TODO: not 100% this belongs here
 }

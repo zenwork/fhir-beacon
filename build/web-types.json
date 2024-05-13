@@ -34,6 +34,31 @@
           }
         },
         {
+          "name": "fhir-reference",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-medication",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
@@ -79,30 +104,6 @@
           "slots": [{ "name": "wrapper" }],
           "events": [],
           "js": { "properties": [], "events": [] }
-        },
-        {
-          "name": "fhir-primitive",
-          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string" } },
-            { "name": "value", "value": { "type": "string", "default": "''" } },
-            { "name": "type", "value": { "type": "PrimitiveType" } },
-            {
-              "name": "showError",
-              "value": { "type": "boolean", "default": "false" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "value", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "PrimitiveType" } },
-              { "name": "showError", "value": { "type": "boolean" } }
-            ],
-            "events": []
-          }
         },
         {
           "name": "fhir-codeable-concept",
@@ -225,6 +226,30 @@
                 "name": "data",
                 "value": { "type": "BaseData & { [key: string]: any }" }
               }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-primitive",
+          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string" } },
+            { "name": "value", "value": { "type": "string", "default": "''" } },
+            { "name": "type", "value": { "type": "PrimitiveType" } },
+            {
+              "name": "showError",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "value", "value": { "type": "string" } },
+              { "name": "type", "value": { "type": "PrimitiveType" } },
+              { "name": "showError", "value": { "type": "boolean" } }
             ],
             "events": []
           }

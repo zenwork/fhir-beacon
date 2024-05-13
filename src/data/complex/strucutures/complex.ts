@@ -1,4 +1,5 @@
 import {BaseData}                     from '../../../BaseData'
+import {ReferenceData}                from '../../../special/structures'
 import {Code, DateTime, Decimal, URI} from '../../primitive/structures'
 
 export type CodingData = BaseData & {
@@ -25,13 +26,6 @@ export type CodeableConceptData = BaseData & {
 export type PeriodData = BaseData & {
   start?: DateTime
   end?: DateTime
-}
-
-export type ReferenceData = BaseData & {
-  reference?: string
-  type?: URI
-  identifier?: IdentifierData
-  display?: string
 }
 
 export type IdentifierData = BaseData & {

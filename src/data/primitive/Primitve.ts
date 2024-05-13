@@ -7,8 +7,10 @@ import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
 import {toDatetime}                  from './converters/ToDatetime'
 import {toDecimal}                   from './converters/ToDecimal'
+import {toType}                      from './converters/ToType'
 import {toUri}                       from './converters/ToUri'
 import {toUrl}                       from './converters/ToUrl'
+import {asDateTime}                  from './presenters/asDateTime'
 import {DateTime}                    from './structures'
 
 /**
@@ -95,6 +97,7 @@ export class Primitive extends LitElement {
         [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
         [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
+        [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
       ])
     }
   }
@@ -118,11 +121,7 @@ export class Primitive extends LitElement {
 
     choose(this.type, [
       [
-        PrimitiveType.datetime, () => {
-        (val as DateTime) = (val as string)
-          .replace(/T/g, ' ')
-          .replace(/[+]/g, ' tz:') as string
-      }
+        PrimitiveType.datetime, () => val = asDateTime(val as DateTime)
       ],
     ])
 

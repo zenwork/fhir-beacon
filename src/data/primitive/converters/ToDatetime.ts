@@ -12,7 +12,6 @@ const regex = /^([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-
  */
 export const toDatetime: toPrimitive<string, DateTime> = (value: string) => {
 
-  console.log(value)
   if (!regex.test(value)) {
     throw new TypeError(`is not a valid date time`)
   }
