@@ -14,25 +14,27 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
       }
   `
 
+  constructor() {
+    super('Codeable Concept')
+  }
+
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
-    let cnt = 0
     return html`
-        <fhir-primitive label="text" .value=${data.text}></fhir-primitive>
-        <header>Codings</header>
-        ${repeat(data.coding, (c) => html`
-            <header>coding ${++cnt}:</header>
-            <bkn-coding .data=${c} .mode=${BaseElementMode.display}></bkn-coding>
-        `)}
+        <fhir-wrapper .label=${this.label}>
+          <fhir-primitive label="text" .value=${data.text}></fhir-primitive>
+          ${repeat(data.coding, (c) => html`
+        <bkn-coding .data=${c} .mode=${BaseElementMode.display}></bkn-coding>
+    `)}
+        </fhir-wrapper>
     `
   }
 
   protected renderStructure(data: CodeableConceptData): TemplateResult {
-    let cnt = 0
+    console.log('codeable concept', 'render structure')
     return html`
         <fhir-primitive label="text" .value=${data.text}></fhir-primitive>
         <header>Codings</header>
         ${repeat(data.coding, (c) => html`
-            <header>coding ${++cnt}:</header>
             <bkn-coding .data=${c} .mode=${BaseElementMode.structure}></bkn-coding>
         `)}
     `

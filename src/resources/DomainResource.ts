@@ -2,6 +2,8 @@ import {html, TemplateResult}         from 'lit'
 import {choose}                       from 'lit/directives/choose.js'
 import {BaseElement, BaseElementMode} from '../BaseElement'
 import {DomainResourceData}           from './structures'
+import '../util/Wrapper'
+import '../special/Narrative'
 
 export class DomainResource<T extends DomainResourceData> extends BaseElement<T> {
 
@@ -20,7 +22,9 @@ export class DomainResource<T extends DomainResourceData> extends BaseElement<T>
   protected renderNarrative(data: T): TemplateResult {
     if (data.text) {
       return html`
-          <fhir-narrative .data=${data.text}></fhir-narrative>`
+          <fhir-wrapper .label=${this.label}>
+              <fhir-narrative .data=${data.text}></fhir-narrative>
+          </fhir-wrapper>`
     }
     return html``
 

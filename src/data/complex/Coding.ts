@@ -8,13 +8,20 @@ import {CodingData} from './strucutures/complex'
 @customElement('bkn-coding')
 export class Coding extends BaseElement<CodingData> {
 
+  constructor() {
+    super('Coding')
+  }
   override renderDisplay(data: CodingData): TemplateResult {
     return html`
-        <fhir-primitive label="display" .value=${data.display ? data.display : 'n/a'} ?showError=${this.showError}></fhir-primitive>`
+        <fhir-wrapper .label=${this.label}>
+            <fhir-primitive label="display" .value=${data.display ? data.display : 'n/a'} ?showError=${this.showError}></fhir-primitive>
+        </fhir-wrapper>
+    `
   }
 
   protected renderStructure(data: CodingData): TemplateResult[] {
     return [
+
       data.id ? html`
           <fhir-primitive label="id" .value=${data.id} ?showError=${this.showError}></fhir-primitive>` : html``,
       data.extension ? html`

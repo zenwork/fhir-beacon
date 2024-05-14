@@ -22,5 +22,6 @@ export enum PrimitiveType {
   uri = 'uri',
   decimal = 'decimal',
   datetime = 'datetime',
-  uri_type = 'uri_type' //TODO: not 100% this belongs here
+  uri_type = 'uri_type', //TODO: not 100% this belongs here
+  string_reference = 'string_reference'
 }

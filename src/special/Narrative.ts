@@ -12,6 +12,8 @@ export class Narrative extends BaseElement<NarrativeData> {
 
   `
 
+  constructor() {super('Narrative')}
+
   @property({reflect: true})
   declare status: string
 
@@ -19,14 +21,18 @@ export class Narrative extends BaseElement<NarrativeData> {
     return this
   }
 
-  protected willUpdate(_changedProperties: PropertyValues) {
+  protected updated(_changedProperties: PropertyValues) {
     if (_changedProperties.has('data')) {
       this.status = this.data.status
     }
   }
 
   protected renderDisplay(data: NarrativeData): TemplateResult {
+    console.log(data.div)
     return html`
-        <div part="narrative">${unsafeHTML(data.div)}</div>`
+        <fhir-wrapper .label=${this.label}>
+            <div part="narrative">${unsafeHTML(data.div)}</div>
+        </fhir-wrapper>
+    `
   }
 }

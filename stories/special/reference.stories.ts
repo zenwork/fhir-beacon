@@ -17,27 +17,37 @@ const meta = {
 export default meta
 type Story = StoryObj;
 
-export const ResourceReference: Story = {
+export const ValueAndReference: Story = {
   args: {
     data: {
-      type: 'Patient'
+      reference: 'http://someserver/some-path',
+      type: 'Patient',
+      display: 'Jack Smith'
     },
     mode: 'display',
     showError: false,
   }
 }
 
-export const CanonicalReference: Story = {
+export const Reference: Story = {
   args: {
-    data: {},
+    data: {
+      reference: 'http://fhir.hl7.org/svc/StructureDefinition/c8973a22-2b5b-4e76-9c66-00639c99e61b'
+    },
     mode: 'display',
     showError: false,
   }
 }
 
-export const ContainedReference: Story = {
+export const Identifier: Story = {
   args: {
-    data: {},
+    data: {
+      identifier:
+        {
+          system: 'http://hl7.org/fhir/sid/us-ssn',
+          value: '000111111'
+        }
+    },
     mode: 'display',
     showError: false,
   }

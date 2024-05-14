@@ -1,7 +1,7 @@
-import {css, html, LitElement, nothing, PropertyValues} from 'lit'
-import {customElement, property, state}                 from 'lit/decorators.js'
-import {choose}                                         from 'lit/directives/choose.js'
-import {when}                                           from 'lit/directives/when.js'
+import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                                 from 'lit/decorators.js'
+import {choose}                                                         from 'lit/directives/choose.js'
+import {when}                                                           from 'lit/directives/when.js'
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
@@ -11,6 +11,7 @@ import {toType}                      from './converters/ToType'
 import {toUri}                       from './converters/ToUri'
 import {toUrl}                       from './converters/ToUrl'
 import {asDateTime}                  from './presenters/asDateTime'
+import {asReadable}                  from './presenters/asReadable'
 import {DateTime}                    from './structures'
 
 /**
@@ -34,11 +35,17 @@ export class Primitive extends LitElement {
   @property({type: Boolean})
   public showError: boolean = false
 
+  @property({type: Boolean})
+  public showOriginal: boolean = false
+
+  @property()
+  declare link: string
+
   @state()
   private error: boolean = false
 
   @state()
-  private parsedValue: unknown = ''
+  private presentableValue: unknown = ''
 
   static styles = css`
 
@@ -71,48 +78,68 @@ export class Primitive extends LitElement {
 
 
   protected render(): unknown {
-    return when(this.error,
-      () => html`
-          <div class="base">
-              ${this.label ? html`<div>${this.label}:</div>` : nothing}
-              <div class="error value"><slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot></div>
-              ${when(this.showError,
-        () => html`<div class="error message">(${this.parsedValue})</div>`,
-        () => nothing)}
-          </div>`,
-      () => html`
-          <div class="base">
-              ${this.label ? html`<div>${this.label}:</div>` : nothing}
-              <div class="value"><slot name="before"></slot>&nbsp;${this.parsedValue}&nbsp;<slot name="after"></slot></div> 
-          </div>`
-    )
+    return when(this.error, this.renderError(), this.renderValid())
   }
 
-  protected updated(_changedProperties: PropertyValues) {
-    if ((_changedProperties.has('value') || _changedProperties.has('type')) && this.value && this.type) {
+  protected willUpdate(_changedProperties: PropertyValues) {
+    if ((_changedProperties.has('value') || _changedProperties.has('type') || _changedProperties.has('original'))
+        && this.value
+        && this.type) {
       choose(this.type, [
-        [PrimitiveType.none, () => (this.parsedValue = this.value) && (this.error = false)],
+        [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
         [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
         [PrimitiveType.url, () => this.validOrError(toUrl, this.value)],
         [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
         [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
+        [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
       ])
     }
   }
 
+  private renderValid = (): () => TemplateResult => {
+    return () => when(this.link,
+      () => html`
+          <div class="base">
+              ${this.label ? html`<div>${this.label}:</div>` : nothing}
+              <div class="value">
+                  <slot name="before"></slot>&nbsp;<a href=${this.link}>${this.showOriginal ? this.value : this.presentableValue}</a>&nbsp;<slot name="after"></slot>
+              </div>
+          </div>`,
+      () => html`
+          <div class="base">
+              ${this.label ? html`<div>${this.label}:</div>` : nothing}
+              <div class="value">
+                  <slot name="before"></slot>&nbsp;${this.showOriginal ? this.value : this.presentableValue}&nbsp;<slot name="after"></slot>
+              </div>
+          </div>`
+    )
+  }
+
+  private renderError = (): () => TemplateResult => {
+    return () => html`
+          <div class="base">
+              ${this.label ? html`
+        <div>${this.label}:</div>` : nothing}
+              <div class="error value"><slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot></div>
+              ${when(this.showError,
+      () => html`
+          <div class="error message">(${this.presentableValue})</div>`,
+      () => nothing)}
+          </div>`
+  }
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     let parsedValue = valueOrError(fn, original)
 
     if (parsedValue.val) {
-      this.parsedValue = this.present(parsedValue.val)
+      this.presentableValue = this.present(parsedValue.val)
       this.error = false
     }
 
     if (parsedValue.err) {
-      this.parsedValue = parsedValue.err
+      this.presentableValue = parsedValue.err
       this.error = true
     }
   }
@@ -120,9 +147,8 @@ export class Primitive extends LitElement {
   private present(val: unknown): unknown {
 
     choose(this.type, [
-      [
-        PrimitiveType.datetime, () => val = asDateTime(val as DateTime)
-      ],
+      [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
+      [PrimitiveType.uri_type, () => val = asReadable(val as string)],
     ])
 
     return val

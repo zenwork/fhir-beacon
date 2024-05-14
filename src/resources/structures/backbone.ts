@@ -9,10 +9,7 @@ export type BackboneElement = BaseData & {
 export type Ingredient = BackboneElement & {
   item: CodeableReferenceData,
   isActive?: boolean
-} & {
   strengthRatio?: Ratiodata
-} | {
   strengthCodeableConcept?: CodeableConceptData
-} | {
   strengthQuantity?: QuantityData
 }

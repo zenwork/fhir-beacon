@@ -10,6 +10,7 @@ import {QuantityData} from './strucutures/complex'
 @customElement('bkn-quantity')
 export class Quantity extends BaseElement<QuantityData> {
 
+  constructor() {super('Quantity')}
 
   protected renderDisplay(data: QuantityData): TemplateResult {
     return html`
@@ -22,13 +23,11 @@ export class Quantity extends BaseElement<QuantityData> {
 
   protected renderStructure(data: QuantityData): TemplateResult {
     return html`
-          <div style="border-radius: 0.2rem; border: solid 0.1rem #0c2d6b; padding:0.2rem;background: #fcfcfc;">
               <fhir-primitive label="value" .value=${data.value} type="decimal" ?showError=${this.showError}></fhir-primitive>
               <fhir-primitive label="comparator" .value=${data.comparator} type="code" ?showError=${this.showError}></fhir-primitive>
               <fhir-primitive label="unit" .value=${data.unit} ?showError=${this.showError}></fhir-primitive>
               <fhir-primitive label="system" .value=${data.system} type="uri" ?showError=${this.showError}></fhir-primitive>
               <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError}></fhir-primitive>
-          </div>
       `
   }
 

@@ -1,18 +1,21 @@
-import {html, LitElement, TemplateResult} from 'lit'
-import {property}                         from 'lit/decorators.js'
-import {choose}                           from 'lit/directives/choose.js'
-import {join}                             from 'lit/directives/join.js'
+import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {property, state}                                           from 'lit/decorators.js'
+import {choose}                                                    from 'lit/directives/choose.js'
+import {BaseData}                                                  from './BaseData'
 import './util/Debug'
-import {BaseData}                         from './BaseData'
+import './util/StructureWrapper'
 
 export enum BaseElementMode {
   display = 'display',
   structure = 'structure',
   combined = 'combined',
-  'narrative' = 'narrative'
+  narrative = 'narrative'
 }
 
 export abstract class BaseElement<T extends BaseData> extends LitElement {
+
+  @property({reflect: true})
+  protected label: string = ''
 
   @property({type: BaseElementMode, converter})
   public mode: BaseElementMode = BaseElementMode.display
@@ -23,16 +26,34 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   @property({type: Object, attribute: 'data'})
   declare data: BaseData & { [key: string]: any }
 
-  protected render(): TemplateResult {
-    let data = this.convertData(this.data)
+  @state()
+  private convertedData: T | null = null
+
+  constructor(label: string) {
+    super()
+    this.label = label
+  }
+
+
+  protected willUpdate(_changedProperties: PropertyValues) {
+    if (_changedProperties.has('data')) {
+      this.convertedData = this.convertData(this.data)
+    }
+  }
+
+  protected render(): TemplateResult | TemplateResult[] {
+
+    let display = () => this.convertedData ? this.renderDisplay(this.convertedData) : nothing
+    let structure = () => html`
+        <fhir-structure-wrapper .label=${this.label}>
+            ${this.convertedData ? this.renderStructure(this.convertedData) : nothing}
+        </fhir-structure-wrapper>`
+    let combined = () => this.convertedData ? html`${[display(), structure()]}` : nothing
+
     return html`${choose(this.mode, [
-        [BaseElementMode.display, () => this.renderDisplay(data)],
-        [
-          BaseElementMode.structure,
-          () => html`
-              <fhir-wrapper>${this.renderStructure(data)}</fhir-wrapper>`
-        ],
-        [BaseElementMode.combined, () => this.renderCombined(data)],
+        [BaseElementMode.display, display],
+        [BaseElementMode.structure, structure],
+        [BaseElementMode.combined, combined],
       ],
       () => html`<h1>Error</h1>`)}`
   }
@@ -44,17 +65,33 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
    * @returns {TemplateResult} The rendered template result.
    */
   protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
-    return html`n/a`
+    if (this.data) {
+      return html`
+          <article part="element">
+              <header part="label">${this.label}</header>
+              <section part="value">n/a</section>
+          </article>
+      `
+    }
+    return html``
   }
 
   protected renderStructure(data: T): TemplateResult | TemplateResult[] {
-    return html`
-        <bkn-debug .data=${data}></bkn-debug>`
+    if (this.data) {
+      console.log('base element:', 'render structure', this.label, this.data)
+      return html`
+          <article part="element">
+              <header part="label">${this.label}</header>
+              <section part="value">
+                  <bkn-debug .data=${data}></bkn-debug>
+              </section>
+          </article>
+      `
+    }
+
+    return html``
   }
 
-  protected renderCombined(data: T): TemplateResult {
-    return html`${join([this.renderDisplay(data), this.renderStructure(data)], html``)}`
-  }
 
   protected convertData(data: BaseData & { [key: string]: any }): T {
     return data as T
