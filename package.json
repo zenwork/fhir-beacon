@@ -10,7 +10,8 @@
     "test": "npx playwright test",
     "test-watch": "npx playwright test --ui",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+      "build-storybook": "storybook build",
+      "publish": "npm ci && npm run build-storybook"
   },
   "private": true,
   "devDependencies": {
