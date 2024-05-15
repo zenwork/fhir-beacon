@@ -13,7 +13,7 @@ export class Coding extends BaseElement<CodingData> {
   }
   override renderDisplay(data: CodingData): TemplateResult {
     return html`
-        <fhir-wrapper .label=${this.label}>
+        <fhir-wrapper .label=${this.type}>
             <fhir-primitive label="display" .value=${data.display ? data.display : 'n/a'} ?showError=${this.showError}></fhir-primitive>
         </fhir-wrapper>
     `

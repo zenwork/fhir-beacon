@@ -21,37 +21,46 @@ export class Reference extends BaseElement<ReferenceData> {
   protected renderDisplay(data: ReferenceData): TemplateResult | TemplateResult[] {
     return [
       html`
-          <fhir-wrapper .label=${this.label}>
+          <fhir-wrapper .label=${this.type}>
               ${
-        when(data)(
-          [d => !!d.display && !!d.reference,
-           () => html`
-               <fhir-primitive label=${data.type ? data.type : 'display'} .value=${data.display} .link=${data.reference}></fhir-primitive>`
-          ],
-          [d => !!d.reference,
-           () => html`
-               <fhir-primitive label="link" .value=${data.reference} .link=${data.reference}></fhir-primitive>`
-          ],
-          [d => !!d.identifier,
-           () => html`
-               <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier>`
-          ],
-          otherwise(html`
-              <fhir-primitive label="display" .value=${data.display}></fhir-primitive>`)
-        )
-      }
+                      when(data)(
+                              [
+                                  d => !!d.display && !!d.reference,
+                                  () => html`
+                                      <fhir-primitive label=${data.type ? data.type : 'display'} .value=${data.display}
+                                                      .link=${data.reference}></fhir-primitive>`
+                              ],
+                              [
+                                  d => !!d.reference,
+                                  () => html`
+                                      <fhir-primitive label="link" .value=${data.reference} .link=${data.reference}></fhir-primitive>`
+                              ],
+                              [
+                                  d => !!d.identifier,
+                                  () => html`
+                                      <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier>`
+                              ],
+                              otherwise(html`
+                                  <fhir-primitive label="display" .value=${data.display}></fhir-primitive>`)
+                      )
+              }
           </fhir-wrapper>
       `
     ]
   }
 
 
+  /**
+   * NOTE: Reference can't be set to verbose because will go into infinite loop with Identifier
+   * @param data
+   * @protected
+   */
   protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
     return html`
-        <fhir-primitive label="reference" .value=${data.reference}></fhir-primitive>
-        <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type}></fhir-primitive>
+        <fhir-primitive label="reference" .value=${data.reference} .verbose=${true}></fhir-primitive>
+        <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} .verbose=${true}></fhir-primitive>
         <fhir-identifier .data=${data.identifier} .mode=${BaseElementMode.structure}></fhir-identifier>
-        <fhir-primitive label="display" .value=${data.display}></fhir-primitive>
+        <fhir-primitive label="display" .value=${data.display} .verbose=${true}></fhir-primitive>
     `
   }
 

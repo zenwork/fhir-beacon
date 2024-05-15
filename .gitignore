@@ -221,3 +221,4 @@ storybook-static
 
 # reference document directory
 refs
+!/test-results/

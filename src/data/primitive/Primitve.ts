@@ -35,26 +35,21 @@ export class Primitive extends LitElement {
   @property({type: Boolean})
   public showError: boolean = false
 
-  @property({type: Boolean})
-  public showOriginal: boolean = false
-
-  @property()
-  declare link: string
-
-  @state()
-  private error: boolean = false
-
-  @state()
-  private presentableValue: unknown = ''
-
   static styles = css`
 
       .base {
           height: 1.5rem;
-          margin: 0;
           padding: 0;
           display: flex;
           align-items: center;
+          font-size: 1rem;
+          margin: 0 0 0.3rem;
+      }
+
+      .label {
+          font-size: 1.05rem;
+          font-weight: bold;
+          color: darkslategray;
       }
 
       .error {
@@ -76,15 +71,27 @@ export class Primitive extends LitElement {
           font-size: 0.8rem;
       }`
 
+  @property({type: Boolean})
+  public showOriginal: boolean = false
+
+  @property()
+  declare link: string
+  @property()
+  public verbose: boolean = false
+  @state()
+  private error: boolean = false
+  @state()
+  private presentableValue: unknown = ''
 
   protected render(): unknown {
+    console.log('renderrrr')
     return when(this.error, this.renderError(), this.renderValid())
   }
 
   protected willUpdate(_changedProperties: PropertyValues) {
-    if ((_changedProperties.has('value') || _changedProperties.has('type') || _changedProperties.has('original'))
-        && this.value
-        && this.type) {
+    console.log('will update')
+    let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type') || _changedProperties.has('original')
+    if (watchedHaveChanged && this.value && this.type) {
       choose(this.type, [
         [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
         [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
@@ -99,35 +106,45 @@ export class Primitive extends LitElement {
   }
 
   private renderValid = (): () => TemplateResult => {
-    return () => when(this.link,
-      () => html`
-          <div class="base">
-              ${this.label ? html`<div>${this.label}:</div>` : nothing}
-              <div class="value">
-                  <slot name="before"></slot>&nbsp;<a href=${this.link}>${this.showOriginal ? this.value : this.presentableValue}</a>&nbsp;<slot name="after"></slot>
-              </div>
-          </div>`,
-      () => html`
-          <div class="base">
-              ${this.label ? html`<div>${this.label}:</div>` : nothing}
-              <div class="value">
-                  <slot name="before"></slot>&nbsp;${this.showOriginal ? this.value : this.presentableValue}&nbsp;<slot name="after"></slot>
-              </div>
-          </div>`
-    )
+    if (this.value || this.verbose) {
+      return () => when(this.link,
+        () => html`
+            <div class="base">
+                ${this.label ? html`
+                    <div class="label">${this.label}:</div>` : nothing}
+                <div class="value">
+                    <slot name="before"></slot>&nbsp;<a href=${this.link}>${this.showOriginal ? this.value : this.presentableValue}</a>&nbsp;<slot
+                        name="after"></slot>
+                </div>
+            </div>`,
+        () => html`
+            <div class="base">
+                ${this.label ? html`
+                    <div class="label">${this.label}:</div>` : nothing}
+                <div class="value">
+                    <slot name="before"></slot>&nbsp;${this.showOriginal ? this.value : this.presentableValue}&nbsp;<slot
+                        name="after"></slot>
+                </div>
+            </div>`
+      )
+    }
+
+    return () => html``
   }
 
   private renderError = (): () => TemplateResult => {
     return () => html`
-          <div class="base">
-              ${this.label ? html`
-        <div>${this.label}:</div>` : nothing}
-              <div class="error value"><slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot></div>
-              ${when(this.showError,
-      () => html`
-          <div class="error message">(${this.presentableValue})</div>`,
-      () => nothing)}
-          </div>`
+        <div class="base">
+            ${this.label ? html`
+                <div class="label">${this.label}:</div>` : nothing}
+            <div class="error value">
+                <slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot>
+            </div>
+            ${when(this.showError,
+                    () => html`
+                        <div class="error message">(${this.presentableValue})</div>`,
+                    () => nothing)}
+        </div>`
   }
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {

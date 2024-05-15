@@ -7,93 +7,105 @@
     "html": {
       "elements": [
         {
-          "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "fhir-narrative",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
             { "name": "status", "value": { "type": "string" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
             {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
             },
             { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
             {
               "name": "data",
               "value": { "type": "BaseData & { [key: string]: any }" }
-            }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
               { "name": "status", "value": { "type": "string" } },
               { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "showError", "value": { "type": "boolean" } },
               {
                 "name": "data",
                 "value": { "type": "BaseData & { [key: string]: any }" }
-              }
+              },
+              { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
           }
         },
         {
           "name": "fhir-reference",
-          "description": "\n---\n\n\n### **Methods:**\n ",
+          "description": "\n---\n\n\n### **Methods:**\n \n",
           "doc-url": "",
           "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
             {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
             },
             { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
             {
               "name": "data",
               "value": { "type": "BaseData & { [key: string]: any }" }
-            }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
               { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "showError", "value": { "type": "boolean" } },
               {
                 "name": "data",
                 "value": { "type": "BaseData & { [key: string]: any }" }
-              }
+              },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
           }
@@ -112,7 +124,7 @@
           }
         },
         {
-          "name": "fhir-wrapper",
+          "name": "fhir-structure-wrapper",
           "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
           "doc-url": "",
           "attributes": [
@@ -136,156 +148,6 @@
           "events": [],
           "js": {
             "properties": [{ "name": "label", "value": { "type": "string" } }],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-codeable-concept",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "bkn-coding",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-identifier",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-period",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "bkn-quantity",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "label",
-              "value": { "type": "string", "default": "label" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              }
-            ],
             "events": []
           }
         },
@@ -305,7 +167,11 @@
               "name": "showOriginal",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "link", "value": { "type": "string" } }
+            { "name": "link", "value": { "type": "string" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            }
           ],
           "events": [],
           "js": {
@@ -315,7 +181,178 @@
               { "name": "type", "value": { "type": "PrimitiveType" } },
               { "name": "showError", "value": { "type": "boolean" } },
               { "name": "showOriginal", "value": { "type": "boolean" } },
-              { "name": "link", "value": { "type": "string" } }
+              { "name": "link", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-codeable-concept",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "bkn-coding",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-identifier",
+          "description": "\n---\n\n\n### **Methods:**\n \n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-period",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-quantity",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "showError", "value": { "type": "boolean" } },
+            {
+              "name": "data",
+              "value": { "type": "BaseData & { [key: string]: any }" }
+            },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              {
+                "name": "data",
+                "value": { "type": "BaseData & { [key: string]: any }" }
+              },
+              { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
           }

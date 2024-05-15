@@ -19,23 +19,23 @@ export const OID: Story = {
 export const FhirDatatype: Story = {
   render: () =>
     html`
-<fhir-primitive 
-        label="readable" 
-        type="uri_type" 
-        value="AdministrableProductDefinition" >
-</fhir-primitive>
-<fhir-primitive 
-        label="unfomratted" 
-        type="uri_type" 
-        value="AdministrableProductDefinition" 
-        showOriginal=${true}>
-</fhir-primitive>
-<fhir-primitive 
-        label="error" 
-        type="uri_type" 
-        value="dataType" 
-        showError=${true}>
-</fhir-primitive>
+        <fhir-primitive
+                label="readable"
+                type="uri_type"
+                value="AdministrableProductDefinition">
+        </fhir-primitive>
+        <fhir-primitive
+                label="unfomratted"
+                type="uri_type"
+                value="AdministrableProductDefinition"
+                showOriginal=${true}>
+        </fhir-primitive>
+        <fhir-primitive
+                label="error"
+                type="uri_type"
+                value="dataType"
+                showError=${true}>
+        </fhir-primitive>
     `
 
 

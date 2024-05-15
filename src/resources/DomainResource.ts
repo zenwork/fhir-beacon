@@ -22,7 +22,7 @@ export class DomainResource<T extends DomainResourceData> extends BaseElement<T>
   protected renderNarrative(data: T): TemplateResult {
     if (data.text) {
       return html`
-          <fhir-wrapper .label=${this.label}>
+          <fhir-wrapper .label=${this.type}>
               <fhir-narrative .data=${data.text}></fhir-narrative>
           </fhir-wrapper>`
     }

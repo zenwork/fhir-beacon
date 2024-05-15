@@ -57,4 +57,5 @@ export type MedicationData = DomainResourceData & {
     lotNumber?: string
     expirationDate?: DateTime
   }
+  definition?: ReferenceData
 }

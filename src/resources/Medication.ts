@@ -17,26 +17,32 @@ export class Medication extends DomainResource<MedicationData> {
 
 
   protected renderStructure(data: MedicationData): TemplateResult | TemplateResult[] {
-    return html`
-        <fhir-identifier .data=${data.identifier} .mode=${BaseElementMode.structure}></fhir-identifier>
-        <fhir-codeable-concept .data=${data.code} .mode=${BaseElementMode.structure}></fhir-codeable-concept>
-        <fhir-primitive .type=${PrimitiveType.code} .label="status" .value=${data.status}></fhir-primitive>
-        <fhir-reference .data=${data.marketingAuthorisationHolder} .mode=${BaseElementMode.structure}></fhir-reference>
-        <fhir-codeable-concept .data=${data.doseForm} .mode=${BaseElementMode.structure}></fhir-codeable-concept>
-        <bkn-quantity .data=${data.totalVolume} .mode=${BaseElementMode.structure}></fhir-quantity>
-            <fhir-stucture-wrapper label="Ingredients">
-                ${map(data.ingredient, (i) => html`
-                    <!-- codeable reference -->
-                    <fhir-primitive .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}></fhir-primitive>
-                    <!-- ratio -->
-                    <fhir-codeable-concept .data=${i.strengthCodeableConcept} .mode=${BaseElementMode.structure}>
-                        <bkn-quantity .data=${i.strengthQuantity!} .mode=${BaseElementMode.structure}></fhir-quantity>
 
-                `)}
-            </fhir-stucture-wrapper>
-            <fhir-strucutre-wrapper label="Batch">
-                foo
-            </fhir-strucutre-wrapper>
+    return html`
+        <fhir-identifier label="identifier" .data=${data.identifier} .mode=${BaseElementMode.structure} .verbose=${true}></fhir-identifier>
+        <fhir-codeable-concept label="code" .data=${data.code} .mode=${BaseElementMode.structure} .verbose=${true}></fhir-codeable-concept>
+        <fhir-primitive label="status" .type=${PrimitiveType.code} .value=${data.status} .verbose=${true}></fhir-primitive>
+        <fhir-reference label="marketing authorization holder" .data=${data.marketingAuthorisationHolder} .mode=${BaseElementMode.structure}
+                        .verbose=${true}></fhir-reference>
+        <fhir-codeable-concept label="dose form" .data=${data.doseForm} .mode=${BaseElementMode.structure}
+                               .verbose=${true}></fhir-codeable-concept>
+        <fhir-quantity label="total volume" .data=${data.totalVolume} .mode=${BaseElementMode.structure} .verbose=${true}></fhir-quantity>
+        <fhir-stucture-wrapper label="ingredients">
+            ${map(data.ingredient, (i) => html`
+                <!-- codeable reference -->
+                <fhir-primitive .type=${PrimitiveType.none} label="is Active" .value=${i.isActive} .verbose=${true}></fhir-primitive>
+                <!-- ratio -->
+                <fhir-codeable-concept .data=${i.strengthCodeableConcept} .mode=${BaseElementMode.structure}
+                                       .verbose=${true}></fhir-codeable-concept>
+                <fhir-quantity .data=${i.strengthQuantity!} .mode=${BaseElementMode.structure} .verbose=${true}></fhir-quantity>
+
+            `)}
+        </fhir-stucture-wrapper>
+        <fhir-structure-wrapper label="batch">
+            the batch
+        </fhir-structure-wrapper>
+        <fhir-reference label="definition" .data=${data.definition} .mode=${BaseElementMode.structure} .verbose=${true}></fhir-reference>
+
 
     `
   }

@@ -7,7 +7,7 @@ import {asQuantityComparator}          from '../primitive/presenters/asQuantityC
 import {QuantityData} from './strucutures/complex'
 
 //TODO: rename to fhir-quanity
-@customElement('bkn-quantity')
+@customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData> {
 
   constructor() {super('Quantity')}
@@ -23,11 +23,12 @@ export class Quantity extends BaseElement<QuantityData> {
 
   protected renderStructure(data: QuantityData): TemplateResult {
     return html`
-              <fhir-primitive label="value" .value=${data.value} type="decimal" ?showError=${this.showError}></fhir-primitive>
-              <fhir-primitive label="comparator" .value=${data.comparator} type="code" ?showError=${this.showError}></fhir-primitive>
-              <fhir-primitive label="unit" .value=${data.unit} ?showError=${this.showError}></fhir-primitive>
-              <fhir-primitive label="system" .value=${data.system} type="uri" ?showError=${this.showError}></fhir-primitive>
-              <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError}></fhir-primitive>
+        <fhir-primitive label="value" .value=${data.value} type="decimal" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="comparator" .value=${data.comparator} type="code" ?showError=${this.showError}
+                        .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="unit" .value=${data.unit} ?showError=${this.showError} .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="system" .value=${data.system} type="uri" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
       `
   }
 

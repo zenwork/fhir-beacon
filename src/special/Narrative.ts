@@ -30,7 +30,7 @@ export class Narrative extends BaseElement<NarrativeData> {
   protected renderDisplay(data: NarrativeData): TemplateResult {
     console.log(data.div)
     return html`
-        <fhir-wrapper .label=${this.label}>
+        <fhir-wrapper .label=${this.type}>
             <div part="narrative">${unsafeHTML(data.div)}</div>
         </fhir-wrapper>
     `

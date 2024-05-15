@@ -15,7 +15,9 @@ export enum BaseElementMode {
 export abstract class BaseElement<T extends BaseData> extends LitElement {
 
   @property({reflect: true})
-  protected label: string = ''
+  public label: string = ''
+  @property({type: Boolean})
+  public verbose: boolean = false
 
   @property({type: BaseElementMode, converter})
   public mode: BaseElementMode = BaseElementMode.display
@@ -25,15 +27,16 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
 
   @property({type: Object, attribute: 'data'})
   declare data: BaseData & { [key: string]: any }
+  @property({reflect: true})
+  protected type: string = ''
 
   @state()
   private convertedData: T | null = null
 
-  constructor(label: string) {
+  constructor(type: string) {
     super()
-    this.label = label
+    this.type = type
   }
-
 
   protected willUpdate(_changedProperties: PropertyValues) {
     if (_changedProperties.has('data')) {
@@ -42,13 +45,13 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   }
 
   protected render(): TemplateResult | TemplateResult[] {
-
-    let display = () => this.convertedData ? this.renderDisplay(this.convertedData) : nothing
-    let structure = () => html`
-        <fhir-structure-wrapper .label=${this.label}>
-            ${this.convertedData ? this.renderStructure(this.convertedData) : nothing}
-        </fhir-structure-wrapper>`
+    let display = () => this.convertedData ? this.renderDisplay(this.convertedData ? this.convertedData : {}) : nothing
+    let structure = () => (this.data || this.verbose) ? html`
+        <fhir-structure-wrapper .label=${this.getElementLabel()}>
+            ${(this.convertedData || this.verbose) ? this.renderStructure(this.convertedData ? this.convertedData : {}) : nothing}
+        </fhir-structure-wrapper>` : html``
     let combined = () => this.convertedData ? html`${[display(), structure()]}` : nothing
+
 
     return html`${choose(this.mode, [
         [BaseElementMode.display, display],
@@ -56,6 +59,7 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
         [BaseElementMode.combined, combined],
       ],
       () => html`<h1>Error</h1>`)}`
+
   }
 
   /**
@@ -64,11 +68,11 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
    * @protected
    * @returns {TemplateResult} The rendered template result.
    */
-  protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
-    if (this.data) {
+  protected renderDisplay(data: T | {}): TemplateResult | TemplateResult[] {
+    if (this.data || this.verbose) {
       return html`
           <article part="element">
-              <header part="label">${this.label}</header>
+              <header part="label">${(this.getElementLabel())}</header>
               <section part="value">n/a</section>
           </article>
       `
@@ -76,12 +80,11 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
     return html``
   }
 
-  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
-    if (this.data) {
-      console.log('base element:', 'render structure', this.label, this.data)
+  protected renderStructure(data: T | {}): TemplateResult | TemplateResult[] {
+    if (this.data || this.verbose) {
       return html`
           <article part="element">
-              <header part="label">${this.label}</header>
+              <header part="label">${(this.getElementLabel())}</header>
               <section part="value">
                   <bkn-debug .data=${data}></bkn-debug>
               </section>
@@ -90,6 +93,10 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
     }
 
     return html``
+  }
+
+  protected getElementLabel = () => {
+    return this.label ? this.label + ' (' + this.type + ')' : this.type
   }
 
 
