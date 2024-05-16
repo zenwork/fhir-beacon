@@ -1,8 +1,9 @@
-import {css, html, TemplateResult}    from 'lit'
-import {repeat}                       from 'lit-html/directives/repeat.js'
-import {customElement}                from 'lit/decorators.js'
-import {BaseElement, BaseElementMode} from '../../BaseElement'
-import {CodeableConceptData}          from './strucutures/complex'
+import {css, html, nothing, TemplateResult} from 'lit'
+import {repeat}                             from 'lit-html/directives/repeat.js'
+import {customElement}                      from 'lit/decorators.js'
+import {BaseData}                           from '../../BaseData'
+import {BaseElement, BaseElementMode}       from '../../BaseElement'
+import {CodeableConceptData, CodingData}    from './strucutures/complex'
 import './Coding'
 
 @customElement('fhir-codeable-concept')
@@ -29,12 +30,21 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     `
   }
 
+  private static getCodings = (data: BaseData & { coding: CodingData[]; text?: string }) => {
+    if (data && data.coding) {
+      return repeat(data.coding,
+        (c, index) => html`
+            <bkn-coding .label=${'[' + (index + 1) + ']'} .data=${c} .mode=${BaseElementMode.structure}></bkn-coding>
+        `)
+    } else {
+      return nothing
+    }
+  }
+
   protected renderStructure(data: CodeableConceptData): TemplateResult {
     return html`
         <fhir-structure-wrapper label="coding">
-          ${repeat(data.coding, (c, index) => html`
-        <bkn-coding .label=${'[' + (index + 1) + ']'} .data=${c} .mode=${BaseElementMode.structure}></bkn-coding>
-    `)}
+            ${(CodeableConcept.getCodings(data))}
         </fhir-structure-wrapper>
         <fhir-primitive label="text" .value=${data.text}></fhir-primitive>
     `

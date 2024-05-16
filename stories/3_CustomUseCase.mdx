@@ -1,7 +1,10 @@
 import '../src'
+import {Meta} from '@storybook/blocks'
+
+<Meta title="Documentation/3. Customized Markup"/>
 
 Custom Examples
---------
+===============
 
 Can be used in highly customized ways
 
@@ -48,7 +51,7 @@ validation, formatting, lookup in code-ssytems, etc. is done.
 
 ### client-rendered html
 ```html
-<fhir-resource source="https://fhir/medication/med0301">
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
     <fhir-primitive fid="code.coding[0]" type="coding" label="name" >
         <fhir-primitive slot="after" fid="coding[0].code" type="code" before="(" after=")">
     </fhir-primitive>

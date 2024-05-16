@@ -16,6 +16,7 @@ export const valueOrError = <O, V>(fn: toPrimitive<O, V>, originalVal: O): ValOr
 }
 
 export enum PrimitiveType {
+  forced_error = 'forced_error',
   none = 'none',
   code = 'code',
   url = 'url',

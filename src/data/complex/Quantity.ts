@@ -23,12 +23,14 @@ export class Quantity extends BaseElement<QuantityData> {
 
   protected renderStructure(data: QuantityData): TemplateResult {
     return html`
-        <fhir-primitive label="value" .value=${data.value} type="decimal" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="value" .value=${data.value} type="decimal" ?showError=${this.showError}
+                        .verbose=${this.verbose}></fhir-primitive>
         <fhir-primitive label="comparator" .value=${data.comparator} type="code" ?showError=${this.showError}
-                        .verbose=${true}></fhir-primitive>
-        <fhir-primitive label="unit" .value=${data.unit} ?showError=${this.showError} .verbose=${true}></fhir-primitive>
-        <fhir-primitive label="system" .value=${data.system} type="uri" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
-        <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError} .verbose=${true}></fhir-primitive>
+                        .verbose=${this.verbose}></fhir-primitive>
+        <fhir-primitive label="unit" .value=${data.unit} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+        <fhir-primitive label="system" .value=${data.system} type="uri" ?showError=${this.showError}
+                        .verbose=${this.verbose}></fhir-primitive>
+        <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
       `
   }
 

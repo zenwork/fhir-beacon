@@ -24,9 +24,9 @@ export class Period extends BaseElement<PeriodData> {
   protected renderStructure(data: PeriodData): TemplateResult | TemplateResult[] {
     return [
       html`
-          <fhir-primitive label="start" type=${PrimitiveType.datetime} .value=${data.start} .verbose=${true}></fhir-primitive>`,
+          <fhir-primitive label="start" type=${PrimitiveType.datetime} .value=${data.start} .verbose=${this.verbose}></fhir-primitive>`,
       html`
-          <fhir-primitive label="end" type=${PrimitiveType.datetime} .value=${data.end} .verbose=${true}></fhir-primitive>`,
+          <fhir-primitive label="end" type=${PrimitiveType.datetime} .value=${data.end} .verbose=${this.verbose}></fhir-primitive>`,
 
     ]
   }

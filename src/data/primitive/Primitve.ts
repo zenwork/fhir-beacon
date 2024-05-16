@@ -7,6 +7,7 @@ import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
 import {toDatetime}                  from './converters/ToDatetime'
 import {toDecimal}                   from './converters/ToDecimal'
+import {toError}                     from './converters/ToError'
 import {toType}                      from './converters/ToType'
 import {toUri}                       from './converters/ToUri'
 import {toUrl}                       from './converters/ToUrl'
@@ -76,20 +77,21 @@ export class Primitive extends LitElement {
 
   @property()
   declare link: string
+
   @property()
   public verbose: boolean = false
+
   @state()
   private error: boolean = false
+
   @state()
   private presentableValue: unknown = ''
 
   protected render(): unknown {
-    console.log('renderrrr')
     return when(this.error, this.renderError(), this.renderValid())
   }
 
   protected willUpdate(_changedProperties: PropertyValues) {
-    console.log('will update')
     let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type') || _changedProperties.has('original')
     if (watchedHaveChanged && this.value && this.type) {
       choose(this.type, [
@@ -101,6 +103,7 @@ export class Primitive extends LitElement {
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
+        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
       ])
     }
   }

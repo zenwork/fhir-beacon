@@ -57,10 +57,10 @@ export class Reference extends BaseElement<ReferenceData> {
    */
   protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
     return html`
-        <fhir-primitive label="reference" .value=${data.reference} .verbose=${true}></fhir-primitive>
-        <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} .verbose=${true}></fhir-primitive>
-        <fhir-identifier .data=${data.identifier} .mode=${BaseElementMode.structure}></fhir-identifier>
-        <fhir-primitive label="display" .value=${data.display} .verbose=${true}></fhir-primitive>
+        <fhir-primitive label="reference" .value=${data.reference} .verbose=${this.verbose}></fhir-primitive>
+        <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} .verbose=${this.verbose}></fhir-primitive>
+        <fhir-identifier .data=${data.identifier} .mode=${BaseElementMode.structure} .verbose=${this.verbose}></fhir-identifier>
+        <fhir-primitive label="display" .value=${data.display} .verbose=${this.verbose}></fhir-primitive>
     `
   }
 

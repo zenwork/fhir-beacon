@@ -1,43 +1,49 @@
 {
-  "name": "fhir-beacon",
-  "version": "0.0.1",
-  "description": "FHIR web components",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "build": "cem analyze --config build/custom-elements-manifest.config.js",
-    "build-watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
-    "test": "npx playwright test",
-    "test-watch": "npx playwright test --ui",
-    "storybook": "storybook dev -p 6006",
-      "build-storybook": "storybook build",
-      "publish": "npm ci && npm run build-storybook"
-  },
-  "private": true,
-  "devDependencies": {
-    "@chromatic-com/storybook": "^1.3.3",
-    "@playwright/test": "^1.43.1",
-    "@shoelace-style/shoelace": "^2.15.0",
-    "@storybook/addon-essentials": "^8.0.9",
-    "@storybook/addon-links": "^8.0.9",
-    "@storybook/blocks": "^8.0.9",
-    "@storybook/test": "^8.0.9",
-    "@storybook/web-components": "^8.0.9",
-    "@storybook/web-components-vite": "^8.0.9",
-    "@types/node": "^20.12.8",
-    "lit": "^3.1.3",
-    "storybook": "^8.0.9",
-    "ts-lit-plugin": "^2.0.2",
-    "@web-types/lit": "^2.0.0-3",
-    "@custom-elements-manifest/analyzer": "^0.10.2",
-    "custom-element-jet-brains-integration": "^1.4.4"
-
-  },
-  "web-types": [
-    "./build/sl-web-types.json",
-    "./build/web-types.json"
-  ]
-
-
-
+    "name": "fhir-beacon",
+    "version": "0.0.1",
+    "description": "FHIR web components",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "build": "cem analyze --config build/custom-elements-manifest.config.js",
+        "build-watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
+        "tsc-watch": "tsc --watch",
+        "test-watch": "web-test-runner tests/**/*.test.ts --node-resolve --watch",
+        "test-playwright": "npx playwright test",
+        "test-playwright-watch": "npx playwright test --ui",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "publish": "npm ci && npm run build-storybook"
+    },
+    "private": true,
+    "devDependencies": {
+        "@chromatic-com/storybook": "^1.3.3",
+        "@custom-elements-manifest/analyzer": "^0.10.2",
+        "@playwright/test": "^1.43.1",
+        "@shoelace-style/shoelace": "^2.15.0",
+        "@storybook/addon-essentials": "^8.0.9",
+        "@storybook/addon-links": "^8.0.9",
+        "@storybook/blocks": "^8.0.9",
+        "@storybook/test": "^8.0.9",
+        "@storybook/web-components": "^8.0.9",
+        "@storybook/web-components-vite": "^8.0.9",
+        "@types/node": "^20.12.8",
+        "@web-types/lit": "^2.0.0-3",
+        "@web/dev-server-esbuild": "^1.0.2",
+        "@web/test-runner": "^0.18.2",
+        "custom-element-jet-brains-integration": "^1.4.4",
+        "lit": "^3.1.3",
+        "storybook": "^8.0.9",
+        "ts-lit-plugin": "^2.0.2",
+        "concurrently": "^8.2.2",
+        "@esm-bundle/chai": "^4.3.4",
+        "mocha": "^10.4.0",
+        "@types/mocha": "^10.0.6",
+        "@types/chai": "^4.3.16",
+        "mocha-typescript": "^1.1.17"
+    },
+    "web-types": [
+        "./build/sl-web-types.json",
+        "./build/web-types.json"
+    ]
 }

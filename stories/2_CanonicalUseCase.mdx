@@ -1,8 +1,10 @@
 import '../src'
+import {Meta} from '@storybook/blocks'
 
+<Meta title="Documentation/2. Resource Elements"/>
 
 Canonical Examples
---------
+==================
 
 Can be used with easy to use canonical components.
 
@@ -14,7 +16,7 @@ attribute details:
 
 ### Make it easy to use quickly:
 ```html
-<fhir-resource source="https://fhir/medication/med0301">
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
     <fhir-medication id="med0301" mode="read"></fhir-medication>
 </fhir-resource>
 ```
@@ -25,7 +27,7 @@ The above results in:
 
 ### Make it debuggabble:
 ```html
-<fhir-resource source="https://fhir/medication/med0301">
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
     <fhir-medication id="med0301" mode="read-full"></fhir-medication>
 </fhir-resource>
 ```
@@ -36,7 +38,7 @@ The above enables:
 ### Make it editable:
 ```html
 <form>
-    <fhir-resource source="https://fhir/medication/med0301">
+    <fhir-resource source="https://my-fhir-server.net/medication/med0301">
         <fhir-medication id="med0301" mode="write"></fhir-medication>
     </fhir-resource>
 </form>

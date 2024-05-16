@@ -10,7 +10,11 @@ const meta = {
       options: ['display', 'structure', 'combined'],
       control: {type: 'radio'},
     },
-  },
+    verbose: {
+      options: [true, false],
+      control: {type: 'radio'},
+    },
+  }
 
 }
 

@@ -6,10 +6,14 @@ const meta = {
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined', 'narrative'],
+      options: ['display', 'structure', 'combined'],
       control: {type: 'radio'},
     },
-  },
+    verbose: {
+      options: [true, false],
+      control: {type: 'radio'},
+    },
+  }
 
 }
 
