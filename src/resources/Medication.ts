@@ -49,8 +49,20 @@ export class Medication extends DomainResource<MedicationData> {
   protected renderStructure(data: MedicationData): TemplateResult | TemplateResult[] {
 
     return html`
-      <fhir-identifier label="identifier" .data=${data.identifier} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-identifier>
-      <fhir-codeable-concept label="code" .data=${data.code} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-codeable-concept>
+      <fhir-identifier
+          label="identifier"
+          .data=${data.identifier}
+          .mode=${BaseElementMode.structure}
+          .verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-identifier>
+      <fhir-codeable-concept
+          label="code"
+          .data=${data.code}
+          .mode=${BaseElementMode.structure}
+          .verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-codeable-concept>
       <fhir-primitive label="status" .type=${PrimitiveType.code} .value=${data.status} .verbose=${this.verbose}></fhir-primitive>
       <fhir-reference
           label="marketing authorization holder"
@@ -58,8 +70,20 @@ export class Medication extends DomainResource<MedicationData> {
           .mode=${BaseElementMode.structure}
           .verbose=${this.verbose}
       ></fhir-reference>
-      <fhir-codeable-concept label="dose form" .data=${data.doseForm} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-codeable-concept>
-      <fhir-quantity label="total volume" .data=${data.totalVolume} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-quantity>
+      <fhir-codeable-concept
+          label="dose form"
+          .data=${data.doseForm}
+          .mode=${BaseElementMode.structure}
+          .verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-codeable-concept>
+      <fhir-quantity
+          label="total volume"
+          .data=${data.totalVolume}
+          .mode=${BaseElementMode.structure}
+          .verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-quantity>
       <fhir-stucture-wrapper label="ingredients" ?open=${this.open}>
         ${map(data.ingredient, (i) => html`
           <fhir-primitive label="codeable reference" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>

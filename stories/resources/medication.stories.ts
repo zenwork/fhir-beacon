@@ -91,7 +91,7 @@ export const Med0310Display: Story = {
     data: medicationData,
     mode: 'display',
     showError: true,
-    verbose:false,
+    verbose: false,
     open: true
   }
 }
@@ -101,7 +101,7 @@ export const Med0310Structure: Story = {
     data: medicationData,
     mode: 'structure',
     showError: true,
-    verbose:false,
+    verbose: false,
     open: true
   }
 }

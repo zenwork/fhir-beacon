@@ -16,7 +16,7 @@ const meta = {
     },
     open: {
       options: [true, false],
-      control: {type: 'radio'},
+      control: {type: 'radio'}
     }
   }
 }
@@ -44,7 +44,7 @@ export const NarrativeUsingCssPartsFormatting: Story = {
     showError: false,
     id: 'formatted',
     verbose: false,
-    open:false
+    open: false
   }
 
 }

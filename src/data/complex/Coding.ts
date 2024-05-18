@@ -1,7 +1,6 @@
 import {html, TemplateResult}    from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {BaseElement}             from '../../BaseElement'
-import {asReadable}           from '../primitive/presenters/asReadable'
 
 import {CodingData} from './strucutures/complex'
 
@@ -10,7 +9,7 @@ import {CodingData} from './strucutures/complex'
 export class Coding extends BaseElement<CodingData> {
 
   @property({type: String})
-  public label=''
+  public label = ''
 
   constructor() {
     super('Coding')
@@ -27,7 +26,7 @@ export class Coding extends BaseElement<CodingData> {
           .label=${this.label}
           .value=${(Coding.comuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
-          .link=${data.system? data.system:undefined}
+          .link=${data.system ? data.system : undefined}
           ?showError=${this.showError}
       ></fhir-primitive>
     `

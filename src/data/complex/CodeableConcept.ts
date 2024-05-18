@@ -1,4 +1,4 @@
-import {css, html, TemplateResult}    from 'lit'
+import {html, TemplateResult}         from 'lit'
 import {repeat}                       from 'lit-html/directives/repeat.js'
 import {customElement, property}      from 'lit/decorators.js'
 import {BaseElement, BaseElementMode} from '../../BaseElement'
@@ -11,7 +11,7 @@ import '../../util/StructureWrapper'
 export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   @property()
-  label=''
+  label = ''
 
   constructor() {
     super('Codeable Concept')
@@ -22,7 +22,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
             ${repeat(data.coding, (c) => html`
               <fhir-coding .label=${this.label + ' coding'} .data=${c} .mode=${BaseElementMode.display}></fhir-coding>
             `)}
-            <fhir-primitive .label=${this.label +' coding'} .value=${data.text}></fhir-primitive>
+            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text}></fhir-primitive>
     `
   }
 
