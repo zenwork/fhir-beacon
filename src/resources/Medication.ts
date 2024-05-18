@@ -5,9 +5,8 @@ import {BaseElementMode}      from '../BaseElement'
 import {PrimitiveType}        from '../data/primitive/converters'
 import {DomainResource}       from './DomainResource'
 import {MedicationData}       from './structures'
-import '../util/StructureWrapper'
-import '../data/complex/CodeableConcept'
-import '../data/complex/Quantity'
+import '../util'
+import '../data'
 import '../special/Reference'
 
 @customElement('fhir-medication')
@@ -88,7 +87,9 @@ export class Medication extends DomainResource<MedicationData> {
         ${map(data.ingredient, (i) => html`
           <fhir-primitive label="codeable reference" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>
           <fhir-primitive
-              .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}
+              .type=${PrimitiveType.none} 
+              label="is Active" 
+              .value=${i.isActive}
               .verbose=${this.verbose}
           ></fhir-primitive>
           <fhir-primitive label="ratio" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>

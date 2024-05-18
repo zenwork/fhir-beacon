@@ -26,3 +26,5 @@ export type Language = string
 export type XHTML = string
 
 export type DateTime = string
+
+export type Markdown = string

@@ -66,6 +66,7 @@ export class Wrapper extends FhirElement {
       border: none;
     }
   `
+
   @property({type: String})
   label: string = ''
 

@@ -17,7 +17,7 @@ export type QuantityData = BaseData & {
   code?: Code
 }
 
-export type SimpleQuantityData = QuantityData //simple data rule applies
+export type SimpleQuantityData = Omit<QuantityData, 'comparator'>
 
 export type CodeableConceptData = BaseData & {
   coding: CodingData[]
@@ -35,4 +35,9 @@ export type IdentifierData = BaseData & {
   value?: string
   period?: PeriodData
   assigner?: ReferenceData
+}
+
+export type CodeableReferenceData = BaseData & {
+  concept?: CodeableConceptData
+  reference?: ReferenceData
 }

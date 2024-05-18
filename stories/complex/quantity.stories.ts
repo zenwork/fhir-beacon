@@ -1,7 +1,7 @@
 import {StoryObj} from '@storybook/web-components'
 import '../../src/data/./complex/Quantity'
 import '../../src/util/Debug'
-import '../../src/data/primitive/Primitve'
+import '../../src/data/primitive/Primitive'
 
 
 const meta = {

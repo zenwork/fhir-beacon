@@ -1,0 +1,24 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './substance.stories'
+
+<Meta of={Stories}/>
+
+# Substance Resource
+
+A homogeneous material with a definite composition.
+
+reference: [8.19 Resource Substance - Content R5](https://www.hl7.org/fhir/R5/substance.html)
+
+## Display
+
+<Canvas of={Stories.Display}/>
+
+## Structure
+
+<Canvas of={Stories.Structure}/>
+
+
+## Narrative
+
+<Canvas of={Stories.Narrative}/>

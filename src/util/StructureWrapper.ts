@@ -1,9 +1,9 @@
 import {css, html}               from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import '@shoelace-style/shoelace/dist/components/details/details'
-import '@shoelace-style/shoelace/dist/components/badge/badge.js'
-import '@shoelace-style/shoelace/dist/components/button/button.js'
 import {FhirElement}             from '../data/primitive/FhirElement'
+import '@shoelace-style/shoelace/dist/components/details/details'
+import '@shoelace-style/shoelace/dist/components/badge/badge'
+import '@shoelace-style/shoelace/dist/components/button/button'
 
 /**
  * Custom element for wrapping primitive content.
@@ -11,7 +11,7 @@ import {FhirElement}             from '../data/primitive/FhirElement'
  * @slot wrapper
  */
 @customElement('fhir-structure-wrapper')
-export class StrucutreWrapper extends FhirElement {
+export class StructureWrapper extends FhirElement {
 
   static styles = css`
     sl-details::part(base) {
@@ -19,7 +19,7 @@ export class StrucutreWrapper extends FhirElement {
       border-radius: 0;
       display: inline-flex;
       background: var(--sl-color-neutral-100);
-      padding: var(--sl-spacing-x-small);
+      padding: 0;
     }
 
     sl-details::part(header) {
@@ -74,7 +74,7 @@ export class StrucutreWrapper extends FhirElement {
   @property()
   label: string = ''
 
-  @property({type: String})
+  @property()
   fhirType: string = ''
 
   @property({type: Boolean})

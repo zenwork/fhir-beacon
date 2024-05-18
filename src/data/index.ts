@@ -1,4 +1,11 @@
 import './complex/Coding'
 import './complex/Quantity'
 import './complex/Identifier'
-import './primitive/Primitve'
+import './complex/CodeableConcept'
+
+import './primitive/FhirElement'
+import './primitive/Primitive'
+import './primitive/PrimitiveContext'
+import './primitive/PrimitiveError'
+import './primitive/PrimitiveValue'
+import './primitive/PrimitiveLabel'

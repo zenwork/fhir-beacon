@@ -4,7 +4,7 @@ import {choose}                                        from 'lit/directives/choo
 import {BaseData}                                      from './BaseData'
 import './util/Debug'
 import './util/StructureWrapper'
-import './data/primitive/Primitve'
+import './data/primitive/Primitive'
 import {PrimitiveType}                                 from './data/primitive/converters'
 import {FhirElement}                                   from './data/primitive/FhirElement'
 import {asReadable}                                    from './data/primitive/presenters/asReadable'
@@ -60,21 +60,19 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
   protected willUpdate(_changedProperties: PropertyValues) {
     super.willUpdate(_changedProperties)
-    if (_changedProperties.has('data')) {
-      this.convertedData = this.convertData(this.data)
-    }
     if (_changedProperties.has('verbose') && this.verbose) {
       if (!this.verboseAllowed()) this.recursionGuard = true
     } else {
       this.recursionGuard = false
     }
+    if (_changedProperties.has('data')) {
+      this.convertedData = this.convertData(this.data)
+    }
   }
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-    if (_changedProperties.has('data')) {
-      this.convertedData = this.convertData(this.data)
-    }
+
   }
 
   protected render(): TemplateResult | TemplateResult[] {

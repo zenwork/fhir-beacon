@@ -14,6 +14,10 @@ const meta = {
       options: [true, false],
       control: {type: 'radio'},
     },
+    showError: {
+      options: [true, false],
+      control: {type: 'radio'}
+    }
   }
 
 }

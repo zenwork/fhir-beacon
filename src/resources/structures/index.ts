@@ -1,8 +1,8 @@
 import {BaseData}                                                                          from '../../BaseData'
 import {CodeableConceptData, CodingData, IdentifierData, QuantityData, SimpleQuantityData} from '../../data/complex/strucutures/complex'
-import {Canonical, Code, DateTime, Id, Instant, Language, URI}                             from '../../data/primitive/structures'
+import {Canonical, Code, DateTime, Id, Instant, Language, Markdown, URI}                   from '../../data/primitive/structures'
 import {NarrativeData, ReferenceData}                                                      from '../../special/structures'
-import {Ingredient}                                                                        from './backbone'
+import {MedicationIngredientData, SubstanceIngredientData}                                 from './backbone'
 
 export type MetaData = {
   versionId?: Id
@@ -35,6 +35,7 @@ export type DomainResourceData = ResourceData & {
 }
 
 
+// see: https://www.hl7.org/fhir/R5/references.html#CodeableReference
 export type CodeableReferenceData = BaseData & {
   concept?: CodeableConceptData
   reference?: ReferenceData
@@ -52,10 +53,23 @@ export type MedicationData = DomainResourceData & {
   marketingAuthorisationHolder?: ReferenceData
   doseForm?: CodeableConceptData
   totalVolume?: QuantityData
-  ingredient?: Ingredient[]
+  ingredient?: MedicationIngredientData[]
   batch?: {
     lotNumber?: string
     expirationDate?: DateTime
   }
   definition?: ReferenceData
+}
+
+export type SubstanceData = DomainResourceData & {
+  identifier?: IdentifierData[]
+  instance: boolean
+  status?: Code
+  category: CodeableConceptData[]
+  code: CodeableReferenceData
+  description?: Markdown
+  expiry?: DateTime
+  quantity?: SimpleQuantityData
+  ingredient: SubstanceIngredientData[]
+
 }
