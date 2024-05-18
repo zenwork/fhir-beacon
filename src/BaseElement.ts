@@ -1,12 +1,14 @@
-import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
-import {property, state}                                           from 'lit/decorators.js'
-import {choose}                                                    from 'lit/directives/choose.js'
-import {BaseData}                                                  from './BaseData'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {property, state}                               from 'lit/decorators.js'
+import {choose}                                        from 'lit/directives/choose.js'
+import {BaseData}                                      from './BaseData'
 import './util/Debug'
 import './util/StructureWrapper'
 import './data/primitive/Primitve'
-import {PrimitiveType}                                             from './data/primitive/converters'
-import {hasSameAncestor}                                           from './util/hasSameAncestor'
+import {PrimitiveType}                                 from './data/primitive/converters'
+import {FhirElement}                                   from './data/primitive/FhirElement'
+import {asReadable}                                    from './data/primitive/presenters/asReadable'
+import {hasSameAncestor}                               from './util/hasSameAncestor'
 
 export enum BaseElementMode {
   display = 'display',
@@ -15,35 +17,43 @@ export enum BaseElementMode {
   narrative = 'narrative'
 }
 
-export abstract class BaseElement<T extends BaseData> extends LitElement {
+
+export abstract class BaseElement<T extends BaseData> extends FhirElement {
+
+  @property({type: Object, attribute: 'data'})
+  declare data: T
+  @property({type: BaseElementMode, converter})
+  public mode: BaseElementMode = BaseElementMode.display
 
   @property({reflect: true})
   public label: string = ''
+  @property({type: Boolean})
+  declare open: boolean
 
   @property({type: Boolean, reflect: true})
   public verbose: boolean = false
 
-  @property({type: BaseElementMode, converter})
-  public mode: BaseElementMode = BaseElementMode.display
-
   @property({type: Boolean})
   declare showError: boolean
-
-  @property({type: Object, attribute: 'data'})
-  declare data: BaseData & { [key: string]: any }
-
   @property({reflect: true})
   protected type: string = ''
 
   @state()
   private convertedData: T | null = null
-
-  private recursionGuard = false
+  /**
+   * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode certain FHIR datatypes go into a
+   * theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In reality they would never point to each other but if expanding on all
+   * possible values this could happen
+   *
+   * @type {boolean}
+   */
+  private recursionGuard: boolean = false
 
   constructor(type: string) {
     super()
     this.type = type
   }
+
 
   protected willUpdate(_changedProperties: PropertyValues) {
     if (_changedProperties.has('verbose') && this.verbose) {
@@ -62,12 +72,33 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   protected render(): TemplateResult | TemplateResult[] {
 
     let display = () => this.convertedData ? this.renderDisplay(this.convertedData ? this.convertedData : {}) : nothing
-    let structure = () => (this.data || this.isVerbose()) ? html`
-        <fhir-structure-wrapper .label=${this.getElementLabel()}>
+
+    let structure = () => {
+
+      if (this.data || this.isVerbose()) {
+        return html`
+          <fhir-structure-wrapper
+              .label=${this.getElementLabel()}
+              .fhirType=${this.getTypeLabel()}
+              .open=${this.open}
+          >
             ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {}) : nothing}
-        </fhir-structure-wrapper>` : this.recursionGuard ? html`
-        <fhir-primitive .type=${PrimitiveType.forced_error} label=${this.label} value="[(${this.type}) not rendered due to recursion guard]"
-                        .showError=${true}></fhir-primitive>` : html``
+          </fhir-structure-wrapper>`
+      }
+
+      if (this.recursionGuard) {
+        return html`
+          <fhir-primitive
+              .type=${PrimitiveType.forced_error}
+              label=${this.label}
+              value="[(${this.type}) not rendered due to recursion guard]"
+              .showError=${true}
+          ></fhir-primitive>`
+      }
+      console.log('nothing')
+      return html``
+
+    }
     let combined = () => this.convertedData ? html`${[display(), structure()]}` : nothing
 
 
@@ -114,16 +145,28 @@ export abstract class BaseElement<T extends BaseData> extends LitElement {
   }
 
   protected verboseAllowed() {
-    if (this.verbose && !this.findSameAncestor(this)) return true
-    return false
+    return this.verbose && !this.findSameAncestor(this)
+
   }
 
   protected getElementLabel = () => {
-    return this.label ? this.label + ' (' + this.type + ')' : this.type
+    if (this.mode == BaseElementMode.display) {
+      return ''
+    }
+    return this.label ? this.label : asReadable(this.type)
+
+  }
+
+  protected getTypeLabel = () => {
+    if (this.mode == BaseElementMode.display) {
+      return ''
+    }
+    return asReadable(this.type)
+
   }
 
 
-  protected convertData(data: BaseData & { [key: string]: any }): T {
+  protected convertData(data: T): T {
     return data as T
   }
 

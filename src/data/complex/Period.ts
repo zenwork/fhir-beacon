@@ -11,23 +11,16 @@ export class Period extends BaseElement<PeriodData> {
 
   protected renderDisplay(data: PeriodData): TemplateResult | TemplateResult[] {
     return html`
-        <fhir-wrapper .label=${this.type}>
-            ${[
-                html`
-                    <fhir-primitive label="start" type=${PrimitiveType.datetime} .value=${data.start}></fhir-primitive>`,
-                html`
-                    <fhir-primitive label="end" type=${PrimitiveType.datetime} .value=${data.end}></fhir-primitive>`,
-            ]}
-        </fhir-wrapper>`
+      <fhir-primitive label="since" type=${PrimitiveType.datetime} .value=${data.start}></fhir-primitive>
+      <fhir-primitive label="until" type=${PrimitiveType.datetime} .value=${data.end}></fhir-primitive>
+    `
   }
 
   protected renderStructure(data: PeriodData): TemplateResult | TemplateResult[] {
     return [
       html`
-          <fhir-primitive label="start" type=${PrimitiveType.datetime} .value=${data.start} .verbose=${this.verbose}></fhir-primitive>`,
-      html`
-          <fhir-primitive label="end" type=${PrimitiveType.datetime} .value=${data.end} .verbose=${this.verbose}></fhir-primitive>`,
-
+        <fhir-primitive label="start" type=${PrimitiveType.datetime} .value=${data.start} .verbose=${this.verbose}></fhir-primitive>
+        <fhir-primitive label="end" type=${PrimitiveType.datetime} .value=${data.end} .verbose=${this.verbose}></fhir-primitive>`
     ]
   }
 }

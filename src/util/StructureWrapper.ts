@@ -1,5 +1,9 @@
-import {css, html, LitElement}   from 'lit'
+import {css, html}               from 'lit'
 import {customElement, property} from 'lit/decorators.js'
+import '@shoelace-style/shoelace/dist/components/details/details'
+import '@shoelace-style/shoelace/dist/components/badge/badge.js'
+import '@shoelace-style/shoelace/dist/components/button/button.js'
+import {FhirElement}             from '../data/primitive/FhirElement'
 
 /**
  * Custom element for wrapping primitive content.
@@ -7,45 +11,86 @@ import {customElement, property} from 'lit/decorators.js'
  * @slot wrapper
  */
 @customElement('fhir-structure-wrapper')
-export class StrucutreWrapper extends LitElement {
+export class StrucutreWrapper extends FhirElement {
 
   static styles = css`
-      ::part(wrapper) {
-          margin-bottom: 0.5rem;
-      }
+    sl-details::part(base) {
+      border: none;
+      border-radius: 0;
+      display: inline-flex;
+      background: var(--sl-color-neutral-100);
+      padding: var(--sl-spacing-x-small);
+    }
 
-      ::part(label) {
-          font-size: 1.05rem;
-          font-weight: bold;
-          color: darkslategray;
-          /*text-decoration-line: underline;*/
-      }
+    sl-details::part(header) {
+      padding: var(--sl-spacing-small);
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+    }
 
-      ::part(value) {
-          display: inline-block;
-          white-space: nowrap;
-          border-radius: 0.2rem;
-          border: solid 0.1rem #676f7e;
-          padding: 0.2rem 0.2rem 0.2rem 1rem;
-          background: lightgoldenrodyellow;
-          font-size: smaller;
-          min-height: 1rem;
-          min-width: 20rem;
-      }
+    sl-details::part(summary-icon) {
+      padding: 0 0 0 0;
+      margin: 0 0 0 var(--sl-spacing-large);
+    }
+
+    sl-details::part(content) {
+      padding: var(--sl-spacing-small);
+    }
+
+    label {
+      font-size: var(--sl-font-size-medium);
+      color: var(--sl-color-primary-700);
+    }
+
+    sl-badge {
+      padding-left: var(--sl-spacing-x-small)
+    }
+
+    sl-badge::part(base) {
+      color: var(--sl-color-gray-500);
+      background-color: var(--sl-color-gray-200);
+      border-color: var(--sl-color-gray-400);
+      font-weight: var(--sl-font-weight-normal);
+      font-style: italic;
+    }
+
+    #arrow {
+      color: var(--sl-color-gray-300);
+      font-style: italic;
+      font-size: var(--sl-font-size-medium);
+      font-weight: var(--sl-font-weight-medium);
+      font-family: var(--sl-font-serif), serif;
+    }
+
+    ul {
+      padding: 0 0 0 var(--sl-spacing-x-small);
+      margin: 0;
+      border-left-style: solid;
+      border-left-width: 0.06rem;
+      border-left-color: var(--sl-color-primary-300);
+    }
   `
-  @property({type: String})
+  @property()
   label: string = ''
+
+  @property({type: String})
+  fhirType: string = ''
+
+  @property({type: Boolean})
+  public open: boolean = false
 
   protected render(): unknown {
     return html`
-        <div part="wrapper">
-            <article part="element">
-                <header part="label">${this.label}:</header>
-                <section part="value">
-                    <slot></slot>
-                </section>
-            </article>
-        </div>`
+      <sl-details part="base" ?open=${this.open}>
+        <div slot="summary"><label>${this.label}</label>
+          ${this.fhirType ? html`
+            <sl-badge pill>${this.fhirType}</sl-badge>` : html``}<span id="arrow">&#x21B4;</span></div>
+        <ul>
+          <slot part="value"></slot>
+        </ul>
+      </sl-details>
+    `
   }
 
 }

@@ -78,6 +78,7 @@ export const ShowStructWithErrors: Story = {
       code: 's'
     },
     mode: 'structure',
-    showError: true
+    showError: true,
+    open: true
   },
 }

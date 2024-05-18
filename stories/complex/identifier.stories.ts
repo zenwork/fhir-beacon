@@ -33,3 +33,12 @@ export const PatientIdentifier: Story = {
     }
   }
 }
+export const HospitalPatientIdentifier: Story = {
+  args: {
+    data: {
+      use: 'official',
+      system: 'urn:oid:2.16.840.1.113883.16.4.3.2.5',
+      value: '123'
+    }
+  }
+}

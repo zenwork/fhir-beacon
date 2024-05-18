@@ -5,7 +5,7 @@ const preview = {
             options:{
                 storySort:{
                     method:'alphabetical',
-                    order:['Documentation', ['introduction', 'Resource Element', 'Customized Markup', '*'], 'Datatypes',
+                    order:['Documentation', ['introduction', 'Resource Element', 'Customized Markup', '*'], 'Core', 'Datatypes',
                         ['Primitives', 'Complex', '*'], 'Resources', 'Special', '*']
                 }
             }

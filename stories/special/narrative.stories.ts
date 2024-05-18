@@ -13,9 +13,8 @@ const meta = {
     verbose: {
       options: [true, false],
       control: {type: 'radio'},
-    },
-  },
-
+    }
+  }
 }
 
 export default meta
@@ -29,6 +28,7 @@ export const NarrativeWithoutFormatting: Story = {
     },
     mode: 'display',
     showError: false,
+    verbose: false
   }
 }
 
@@ -40,7 +40,8 @@ export const NarrativeUsingCssPartsFormatting: Story = {
     },
     mode: 'display',
     showError: false,
-    id: 'formatted'
+    id: 'formatted',
+    verbose: false
   }
 
 }

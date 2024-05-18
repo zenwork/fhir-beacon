@@ -1,7 +1,6 @@
-import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
-import {customElement, property, state}                                 from 'lit/decorators.js'
-import {choose}                                                         from 'lit/directives/choose.js'
-import {when}                                                           from 'lit/directives/when.js'
+import {css, html, LitElement, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                        from 'lit/decorators.js'
+import {choose}                                                from 'lit/directives/choose.js'
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
@@ -14,6 +13,10 @@ import {toUrl}                       from './converters/ToUrl'
 import {asDateTime}                  from './presenters/asDateTime'
 import {asReadable}                  from './presenters/asReadable'
 import {DateTime}                    from './structures'
+import './PrimitiveLabel'
+import './PrimitiveValue'
+import './PrimitiveError'
+import './PrimitiveContext'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -24,11 +27,29 @@ import {DateTime}                    from './structures'
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
 
+  static styles = css`
+    li {
+      display: flex;
+      list-style-type: none;
+      padding-top: var(--sl-spacing-x-small);
+      padding-bottom: var(--sl-spacing-x-small);
+    }
+  `
+
   @property()
   declare label: string
 
   @property()
+  public delimiter: string = ': '
+
+  @property()
   public value: string = ''
+
+  @property()
+  declare link: string
+
+  @property()
+  declare context: string
 
   @property({type: PrimitiveType, converter: convertToPrimitiveType})
   public type: PrimitiveType = PrimitiveType.none
@@ -36,47 +57,9 @@ export class Primitive extends LitElement {
   @property({type: Boolean})
   public showError: boolean = false
 
-  static styles = css`
-
-      .base {
-          height: 1.5rem;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          font-size: 1rem;
-          margin: 0 0 0.3rem;
-      }
-
-      .label {
-          font-size: 1.05rem;
-          font-weight: bold;
-          color: darkslategray;
-      }
-
-      .error {
-          font-style: italic;
-      }
-
-      .value {
-          font-size: 1rem;
-          padding: 0.2rem;
-          margin: 0 0.5rem;
-      }
-
-      .message {
-          padding: 0.2rem;
-          margin: 0 0.5rem;
-          color: #f35656;
-          border-radius: 0.2rem;
-          background-color: #f3d3d8;
-          font-size: 0.8rem;
-      }`
-
   @property({type: Boolean})
   public showOriginal: boolean = false
 
-  @property()
-  declare link: string
 
   @property()
   public verbose: boolean = false
@@ -88,11 +71,11 @@ export class Primitive extends LitElement {
   private presentableValue: unknown = ''
 
   protected render(): unknown {
-    return when(this.error, this.renderError(), this.renderValid())
+    return this.error ? this.renderError() : this.renderValid()
   }
 
   protected willUpdate(_changedProperties: PropertyValues) {
-    let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type') || _changedProperties.has('original')
+    let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
     if (watchedHaveChanged && this.value && this.type) {
       choose(this.type, [
         [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
@@ -103,51 +86,36 @@ export class Primitive extends LitElement {
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
+        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)]
       ])
     }
   }
 
-  private renderValid = (): () => TemplateResult => {
-    if (this.value || this.verbose) {
-      return () => when(this.link,
-        () => html`
-            <div class="base">
-                ${this.label ? html`
-                    <div class="label">${this.label}:</div>` : nothing}
-                <div class="value">
-                    <slot name="before"></slot>&nbsp;<a href=${this.link}>${this.showOriginal ? this.value : this.presentableValue}</a>&nbsp;<slot
-                        name="after"></slot>
-                </div>
-            </div>`,
-        () => html`
-            <div class="base">
-                ${this.label ? html`
-                    <div class="label">${this.label}:</div>` : nothing}
-                <div class="value">
-                    <slot name="before"></slot>&nbsp;${this.showOriginal ? this.value : this.presentableValue}&nbsp;<slot
-                        name="after"></slot>
-                </div>
-            </div>`
-      )
-    }
+  //TODO: should not be an <li>. A primitive and a base element should be the same thing so the are handled the same way by the wrapper
 
-    return () => html``
+  private renderValid = (): TemplateResult => {
+    return this.value || this.verbose
+           ? html`
+          <li part="base">
+            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
+            <fhir-value text=${this.presentableValue} link=${this.link}>
+              <span slot="before"><slot name="before"></slot></span>
+              <span slot="after"><slot name="after"></slot></span>
+            </fhir-value>
+            <fhir-context text=${this.context}></fhir-context>
+          </li>`
+           : html``
   }
 
-  private renderError = (): () => TemplateResult => {
-    return () => html`
-        <div class="base">
-            ${this.label ? html`
-                <div class="label">${this.label}:</div>` : nothing}
-            <div class="error value">
-                <slot name="before"></slot>&nbsp;${this.value}&nbsp;<slot name="after"></slot>
-            </div>
-            ${when(this.showError,
-                    () => html`
-                        <div class="error message">(${this.presentableValue})</div>`,
-                    () => nothing)}
-        </div>`
+  private renderError = (): TemplateResult => {
+    return this.value || this.verbose
+           ? html`
+          <li part="base">
+            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
+            <fhir-value text=${this.value} link=${this.link}></fhir-value>&nbsp;
+            <fhir-error text=${this.presentableValue}></fhir-error>
+          </li>`
+           : html``
   }
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
@@ -168,7 +136,7 @@ export class Primitive extends LitElement {
 
     choose(this.type, [
       [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
-      [PrimitiveType.uri_type, () => val = asReadable(val as string)],
+      [PrimitiveType.uri_type, () => val = asReadable(val as string)]
     ])
 
     return val

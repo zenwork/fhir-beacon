@@ -15,8 +15,8 @@ export class Quantity extends BaseElement<QuantityData> {
   protected renderDisplay(data: QuantityData): TemplateResult {
     return html`
         <fhir-primitive label="value" .value=${data.value} type="decimal">
-            <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}</span>
-            <span slot="after">${data.unit}</span>
+          <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}&nbsp;</span>
+          <span slot="after">&nbsp;${data.unit}</span>
         </fhir-primitive>
     `
   }

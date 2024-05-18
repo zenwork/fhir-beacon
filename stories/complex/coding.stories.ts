@@ -6,7 +6,7 @@ import '../../src/data/primitive/Primitve'
 
 const meta = {
   title: 'Datatypes/Complex/Coding',
-  component: 'bkn-coding',
+  component: 'fhir-coding',
   argTypes: {
     mode: {
       options: ['display', 'structure', 'combined'],
@@ -69,6 +69,8 @@ export const ShowStructureWithErrors: Story = {
       display: 'Vascular headache, not elsewhere classified'
     },
     mode: 'combined',
-    showError: true
+    verbose: false,
+    showError: true,
+    open: true
   }
 }

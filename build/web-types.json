@@ -12,31 +12,27 @@
           "doc-url": "",
           "attributes": [
             { "name": "status", "value": { "type": "string" } },
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
               { "name": "status", "value": { "type": "string" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -44,33 +40,29 @@
         },
         {
           "name": "fhir-reference",
-          "description": "\n---\n\n\n### **Methods:**\n \n",
+          "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -81,30 +73,26 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -124,16 +112,59 @@
           }
         },
         {
+          "name": "fhir-empty-set",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "isSlotted", "value": { "type": "boolean" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-not-supported",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "description",
+              "value": { "type": "string", "default": "''" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "description", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-structure-wrapper",
           "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
           "doc-url": "",
           "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } }
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "fhirType",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            }
           ],
           "slots": [{ "name": "wrapper" }],
           "events": [],
           "js": {
-            "properties": [{ "name": "label", "value": { "type": "string" } }],
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "fhirType", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } }
+            ],
             "events": []
           }
         },
@@ -142,47 +173,23 @@
           "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
           "doc-url": "",
           "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } }
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "fhirType",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "true" }
+            }
           ],
           "slots": [{ "name": "wrapper" }],
           "events": [],
           "js": {
-            "properties": [{ "name": "label", "value": { "type": "string" } }],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-primitive",
-          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string" } },
-            { "name": "value", "value": { "type": "string", "default": "''" } },
-            { "name": "type", "value": { "type": "PrimitiveType" } },
-            {
-              "name": "showError",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showOriginal",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "link", "value": { "type": "string" } },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            }
-          ],
-          "events": [],
-          "js": {
             "properties": [
               { "name": "label", "value": { "type": "string" } },
-              { "name": "value", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "PrimitiveType" } },
-              { "name": "showError", "value": { "type": "boolean" } },
-              { "name": "showOriginal", "value": { "type": "boolean" } },
-              { "name": "link", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } }
+              { "name": "fhirType", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -192,64 +199,56 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
           }
         },
         {
-          "name": "bkn-coding",
+          "name": "fhir-coding",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -260,30 +259,26 @@
           "description": "\n---\n\n\n### **Methods:**\n \n",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -294,30 +289,26 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
             ],
             "events": []
@@ -328,31 +319,138 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
               "value": { "type": "boolean", "default": "false" }
             },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showError", "value": { "type": "boolean" } },
-            {
-              "name": "data",
-              "value": { "type": "BaseData & { [key: string]: any }" }
-            },
             { "name": "type", "value": { "type": "string", "default": "type" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
-              {
-                "name": "data",
-                "value": { "type": "BaseData & { [key: string]: any }" }
-              },
               { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-context",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "text", "value": { "type": "string", "default": "''" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [{ "name": "text", "value": { "type": "string" } }],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-error",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [{ "name": "text", "value": { "type": "string" } }],
+          "events": [],
+          "js": {
+            "properties": [{ "name": "text", "value": { "type": "string" } }],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-label",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "text", "value": { "type": "string" } },
+            {
+              "name": "delimiter",
+              "value": { "type": "string", "default": "': '" }
+            },
+            { "name": "for", "value": { "type": "string" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "text", "value": { "type": "string" } },
+              { "name": "delimiter", "value": { "type": "string" } },
+              { "name": "for", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-value",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "placeholder",
+              "value": { "type": "string", "default": "'n/a'" }
+            },
+            { "name": "text", "value": { "type": "string", "default": "''" } },
+            { "name": "link", "value": { "type": "string", "default": "''" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "placeholder", "value": { "type": "string" } },
+              { "name": "text", "value": { "type": "string" } },
+              { "name": "link", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-primitive",
+          "description": "Represents a custom element for displaying and parsing primitive values.\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string" } },
+            {
+              "name": "delimiter",
+              "value": { "type": "string", "default": "': '" }
+            },
+            { "name": "value", "value": { "type": "string", "default": "''" } },
+            { "name": "link", "value": { "type": "string" } },
+            { "name": "context", "value": { "type": "string" } },
+            { "name": "type", "value": { "type": "PrimitiveType" } },
+            {
+              "name": "showError",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showOriginal",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "delimiter", "value": { "type": "string" } },
+              { "name": "value", "value": { "type": "string" } },
+              { "name": "link", "value": { "type": "string" } },
+              { "name": "context", "value": { "type": "string" } },
+              { "name": "type", "value": { "type": "PrimitiveType" } },
+              { "name": "showError", "value": { "type": "boolean" } },
+              { "name": "showOriginal", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } }
             ],
             "events": []
           }
