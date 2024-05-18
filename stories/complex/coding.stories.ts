@@ -42,22 +42,6 @@ export const NoDisplayableValue: Story = {
   }
 }
 
-export const ShowStructure: Story = {
-  args:{
-    data:{
-      id: '123-456',
-      extension: [],
-      version: '1.0',
-      system: 'http://hl7.org/fhir/sid/icd-10',
-      code: 'G44.1',
-      display: 'Vascular headache, not elsewhere classified'
-    },
-    mode: 'structure',
-    showError: true
-  }
-
-}
-
 export const ShowStructureWithErrors: Story = {
   args: {
     data: {
@@ -68,7 +52,7 @@ export const ShowStructureWithErrors: Story = {
       code: 'not a valid code',
       display: 'Vascular headache, not elsewhere classified'
     },
-    mode: 'combined',
+    mode: 'structure',
     verbose: false,
     showError: true,
     open: true

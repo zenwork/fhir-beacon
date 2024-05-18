@@ -21,17 +21,15 @@ export class Narrative extends BaseElement<NarrativeData> {
   }
 
   protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
     if (_changedProperties.has('data')) {
       this.status = this.data.status
     }
   }
 
   protected renderDisplay(data: NarrativeData): TemplateResult {
-    return html`  bar
-        <fhir-wrapper .label=${this.type}>
-          foo
-            <div part="narrative">${unsafeHTML(data.div)}</div>
-        </fhir-wrapper>
+    return html`
+      <div part="narrative">${unsafeHTML(data.div)}</div>
     `
   }
 

@@ -199,9 +199,9 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
             { "name": "data", "value": { "type": "T" } },
             { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
             { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
@@ -213,9 +213,9 @@
           "events": [],
           "js": {
             "properties": [
+              { "name": "label", "value": { "type": "string" } },
               { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "label", "value": { "type": "string" } },
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },
@@ -229,9 +229,9 @@
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
             { "name": "data", "value": { "type": "T" } },
             { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
             { "name": "open", "value": { "type": "boolean" } },
             {
               "name": "verbose",
@@ -243,9 +243,9 @@
           "events": [],
           "js": {
             "properties": [
+              { "name": "label", "value": { "type": "string" } },
               { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "label", "value": { "type": "string" } },
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showError", "value": { "type": "boolean" } },

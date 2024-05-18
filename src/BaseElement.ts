@@ -22,11 +22,13 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
   @property({type: Object, attribute: 'data'})
   declare data: T
+
   @property({type: BaseElementMode, converter})
   public mode: BaseElementMode = BaseElementMode.display
 
   @property({reflect: true})
   public label: string = ''
+
   @property({type: Boolean})
   declare open: boolean
 
@@ -35,6 +37,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
   @property({type: Boolean})
   declare showError: boolean
+
   @property({reflect: true})
   protected type: string = ''
 
@@ -56,6 +59,10 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
 
   protected willUpdate(_changedProperties: PropertyValues) {
+    super.willUpdate(_changedProperties)
+    if (_changedProperties.has('data')) {
+      this.convertedData = this.convertData(this.data)
+    }
     if (_changedProperties.has('verbose') && this.verbose) {
       if (!this.verboseAllowed()) this.recursionGuard = true
     } else {
@@ -64,13 +71,13 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
     if (_changedProperties.has('data')) {
       this.convertedData = this.convertData(this.data)
     }
   }
 
   protected render(): TemplateResult | TemplateResult[] {
-
     let display = () => this.convertedData ? this.renderDisplay(this.convertedData ? this.convertedData : {}) : nothing
 
     let structure = () => {
@@ -95,10 +102,11 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
               .showError=${true}
           ></fhir-primitive>`
       }
-      console.log('nothing')
+
       return html``
 
     }
+
     let combined = () => this.convertedData ? html`${[display(), structure()]}` : nothing
 
 

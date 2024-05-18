@@ -1,6 +1,6 @@
 import {css, html, TemplateResult}    from 'lit'
 import {repeat}                       from 'lit-html/directives/repeat.js'
-import {customElement}                from 'lit/decorators.js'
+import {customElement, property}      from 'lit/decorators.js'
 import {BaseElement, BaseElementMode} from '../../BaseElement'
 import {CodeableConceptData}          from './strucutures/complex'
 import './Coding'
@@ -10,11 +10,8 @@ import '../../util/StructureWrapper'
 @customElement('fhir-codeable-concept')
 export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
-  static styles = css`
-      header {
-          font-weight: bold;
-      }
-  `
+  @property()
+  label=''
 
   constructor() {
     super('Codeable Concept')
@@ -22,12 +19,10 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
     return html`
-        <fhir-wrapper .label=${this.type}>
             ${repeat(data.coding, (c) => html`
-              <fhir-coding .data=${c} .mode=${BaseElementMode.display}></fhir-coding>
-    `)}
-            <fhir-primitive label="text" .value=${data.text}></fhir-primitive>
-        </fhir-wrapper>
+              <fhir-coding .label=${this.label + ' coding'} .data=${c} .mode=${BaseElementMode.display}></fhir-coding>
+            `)}
+            <fhir-primitive .label=${this.label +' coding'} .value=${data.text}></fhir-primitive>
     `
   }
 

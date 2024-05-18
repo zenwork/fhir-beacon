@@ -92,7 +92,7 @@ export class Primitive extends LitElement {
   }
 
   //TODO: should not be an <li>. A primitive and a base element should be the same thing so the are handled the same way by the wrapper
-
+  // TODO: should be able to put link on value OR on context
   private renderValid = (): TemplateResult => {
     return this.value || this.verbose
            ? html`

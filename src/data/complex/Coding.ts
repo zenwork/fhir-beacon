@@ -1,6 +1,6 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../BaseElement'
+import {html, TemplateResult}    from 'lit'
+import {customElement, property} from 'lit/decorators.js'
+import {BaseElement}             from '../../BaseElement'
 import {asReadable}           from '../primitive/presenters/asReadable'
 
 import {CodingData} from './strucutures/complex'
@@ -8,6 +8,9 @@ import {CodingData} from './strucutures/complex'
 //TODO: rename to fhir-coding
 @customElement('fhir-coding')
 export class Coding extends BaseElement<CodingData> {
+
+  @property({type: String})
+  public label=''
 
   constructor() {
     super('Coding')
@@ -21,9 +24,10 @@ export class Coding extends BaseElement<CodingData> {
   override renderDisplay(data: CodingData): TemplateResult {
     return html`
       <fhir-primitive
-          .label=${asReadable(this.type)}
+          .label=${this.label}
           .value=${(Coding.comuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
+          .link=${data.system? data.system:undefined}
           ?showError=${this.showError}
       ></fhir-primitive>
     `
