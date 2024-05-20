@@ -6,6 +6,10 @@ import {FhirElement}             from './FhirElement'
 export class PrimitiveContext extends FhirElement {
 
   static styles = css`
+    :host {
+      padding-top: var(--sl-spacing-2x-small);
+      padding-bottom: var(--sl-spacing-2x-small);
+    }
     span {
       color: var(--sl-color-gray-300);
       font-style: italic;

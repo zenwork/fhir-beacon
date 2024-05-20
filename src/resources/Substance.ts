@@ -7,12 +7,84 @@ import {DomainResource}       from './DomainResource'
 import {SubstanceData}        from './structures'
 import '../data/'
 import '../util/StructureWrapper'
+import '../util/Wrapper'
 import '../data/complex/CodeableConcept'
+import '../data/complex/CodeableReference'
+import '../resources/backbones/SubstanceIngredient'
 
 @customElement('fhir-substance')
 export class Substance extends DomainResource<SubstanceData> {
 
   constructor() {super('Substance')}
+
+  protected renderDisplay(data: SubstanceData): TemplateResult {
+
+    return html`
+      <fhir-primitive ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive
+          label="description"
+          .value=${data.description}
+          .context="id:${data.id}"
+          ?showError=${this.showError}
+          .verbose=${this.verbose}
+      ></fhir-primitive>
+      <fhir-identifier
+          .label="identifier"
+          .data=${data.identifier}
+          .mode=${BaseElementMode.display}
+          ?showError=${this.showError}
+          ?open=${this.open}
+          ?verbose=${this.verbose}
+      ></fhir-identifier>
+      <fhir-primitive label="instance" value=${data.instance} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+
+      ${map(data.category, (c, idx) => {
+        return html`
+          <fhir-wrapper label="category [${idx}]" ?open="${this.open}">
+            <fhir-codeable-concept
+                label="category"
+                .data=${c}
+                .mode=${BaseElementMode.display}
+                ?showError=${this.showError}
+                ?open=${this.open}
+                ?verbose=${this.verbose}
+            ></fhir-codeable-concept>
+          </fhir-wrapper>
+        `
+      })}
+      <fhir-codeable-reference
+          label="code"
+          .data=${data.code}
+          .mode=${BaseElementMode.display}
+          ?showError=${this.showError}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-codeable-reference>
+      <fhir-primitive label="expiry" value=${data.expiry} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-quantity
+          label="quantity"
+          .data=${data.quantity}
+          .mode=${BaseElementMode.display}
+          ?showError=${this.showError}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-quantity>
+      ${map(data.ingredient, (ing, idx) => html`
+        <fhir-wrapper label="ingredient [${idx}]" ?open="${this.open}">
+          <fhir-substance-ingredient
+              label="ingredient"
+              .data=${ing}
+              .mode=${BaseElementMode.display}
+              ?showError=${this.showError}
+              ?verbose=${this.verbose}
+              ?open=${this.open}
+          ></fhir-substance-ingredient>
+        </fhir-wrapper>
+      `)}
+    `
+  }
+
 
   protected renderStructure(data: SubstanceData): TemplateResult {
 
@@ -28,10 +100,9 @@ export class Substance extends DomainResource<SubstanceData> {
       ></fhir-identifier>
       <fhir-primitive label="instance" value=${data.instance} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
-      <fhir-stucture-wrapper label="categories" ?open=${this.open}>
+      <fhir-stucture-wrapper label="categories" ?open="${this.open}">
         ${map(data.category, (c) => {
-          console.log('category', c)
-          html`
+          return html`
             <fhir-codeable-concept
                 label="category"
                 .data=${c}
@@ -43,13 +114,14 @@ export class Substance extends DomainResource<SubstanceData> {
           `
         })}
       </fhir-stucture-wrapper>
-      <fhir-primitive
+      <fhir-codeable-reference
           label="code"
-          value="not implemented yet"
-          type=${PrimitiveType.forced_error}
+          .data=${data.code}
+          .mode=${BaseElementMode.structure}
           ?showError=${this.showError}
-          .verbose=${this.verbose}
-      ></fhir-primitive>
+          ?verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-codeable-reference>
       <fhir-primitive label="description" .value=${data.description} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
       <fhir-primitive label="expiry" value=${data.expiry} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
       <fhir-quantity
@@ -60,13 +132,18 @@ export class Substance extends DomainResource<SubstanceData> {
           .mode=${BaseElementMode.structure}
           .verbose=${this.verbose}
       ></fhir-quantity>
-      <fhir-primitive
-          label="ingredients"
-          value="not implemented yet"
-          type=${PrimitiveType.forced_error}
-          ?showError=${this.showError}
+      <fhir-stucture-wrapper label="ingredients" ?open="${this.open}">
+        ${map(data.ingredient, (ing) => html`
+          <fhir-substance-ingredient
+              label="ingredient"
+              .data=${ing}
+              .mode=${BaseElementMode.structure}
+              .showError=${this.showError}
           .verbose=${this.verbose}
-      ></fhir-primitive>
+              .open=${this.open}
+          ></fhir-substance-ingredient>
+        `)}
+      </fhir-stucture-wrapper>
 
     `
   }

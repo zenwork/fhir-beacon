@@ -5,6 +5,10 @@ import {FhirElement}             from './FhirElement'
 @customElement('fhir-error')
 export class PrimitiveError extends FhirElement {
   static styles = css`
+    :host {
+      padding-top: var(--sl-spacing-2x-small);
+      padding-bottom: var(--sl-spacing-2x-small);
+    }
     #message {
       background: lightpink;
     }

@@ -1,9 +1,9 @@
 import {css, html}               from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {FhirElement}             from '../data/primitive/FhirElement'
-import '@shoelace-style/shoelace/dist/components/details/details'
-import '@shoelace-style/shoelace/dist/components/badge/badge.js'
-import '@shoelace-style/shoelace/dist/components/button/button.js'
+import '@shoelace-style/shoelace/dist/components/tree/tree'
+import '@shoelace-style/shoelace/dist/components/tree-item/tree-item'
+import '@shoelace-style/shoelace/dist/components/tooltip/tooltip'
 
 /**
  * Custom element for wrapping primitive content.
@@ -14,43 +14,13 @@ import '@shoelace-style/shoelace/dist/components/button/button.js'
 export class Wrapper extends FhirElement {
 
   static styles = css`
-    sl-details::part(base) {
-      border: none;
-      display: inline-flex;
-
-    }
-
-    sl-details::part(header) {
-      padding: var(--sl-spacing-small);
-      padding-top: 0;
-      padding-bottom: 0;
-      padding-left: 0;
-    }
-
-    sl-details::part(summary-icon) {
-      padding: 0 0 0 0;
-      margin: 0 0 0 var(--sl-spacing-large);
-    }
-
-    sl-details::part(content) {
-      padding: var(--sl-spacing-small);
-    }
 
     label {
       font-size: var(--sl-font-size-medium);
-      color: var(--sl-color-primary-700);
+      color: var(--sl-color-neutral-500);
+      font-style: oblique;
     }
 
-    sl-badge {
-      padding-left: var(--sl-spacing-x-small)
-    }
-
-    sl-badge::part(base) {
-      color: var(--sl-color-gray-400);
-      background-color: var(--sl-color-gray-100);
-      font-weight: var(--sl-font-weight-normal);
-      font-style: italic;
-    }
 
     #arrow {
       color: var(--sl-color-gray-300);
@@ -60,10 +30,10 @@ export class Wrapper extends FhirElement {
       font-family: var(--sl-font-serif), serif;
     }
 
-    ul {
-      padding: 0 0 0 var(--sl-spacing-x-small);
-      margin: 0;
-      border: none;
+    #content {
+      display: table;
+      margin-left: var(--sl-spacing-medium);
+
     }
   `
 
@@ -78,14 +48,17 @@ export class Wrapper extends FhirElement {
 
   protected render(): unknown {
     return html`
-      <sl-details part="base" ?open=${this.open}>
-        <div slot="summary"><label>${this.label}</label>
-          ${this.fhirType ? html`
-            <sl-badge pill>${this.fhirType}</sl-badge>` : html``}<span id="arrow">&#x21B4;</span></div>
-        <ul>
-          <slot part="value"></slot>
-        </ul>
-      </sl-details>
+
+      <div id="label">
+        ${this.fhirType
+          ? html`
+              <sl-tooltip content="${this.fhirType}"><label>${this.label}</label></sl-tooltip>`
+          : html`<label>${this.label}</label>`}<span id="arrow">&#x21B4;</span>
+      </div>
+
+      <slot id="content"></slot>
+
+
     `
   }
 

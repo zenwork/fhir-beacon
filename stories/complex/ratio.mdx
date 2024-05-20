@@ -1,0 +1,17 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './ratio.stories'
+
+<Meta of={Stories}/>
+
+# Ratio
+
+A measured amount (or an amount that can potentially be measured).
+
+reference: [2.1.28.0.9 Ratio (R5)](https://www.hl7.org/fhir/datatypes.html#ratio)
+
+## Simple
+<Canvas of={Stories.SimpleRatio}/>
+
+## Unit Cost
+<Canvas of={Stories.UnitCost}/>

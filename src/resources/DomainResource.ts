@@ -14,8 +14,8 @@ export class DomainResource<T extends DomainResourceData> extends BaseElement<T>
             [
                 [BaseElementMode.narrative, () => this.renderNarrative(data)],
             ],
-            () => super.render())}
-    `
+        () => html`
+          <fhir-wrapper .label=${this.type}>${super.render()}`)}</fhir-wrapper>`
 
   }
 

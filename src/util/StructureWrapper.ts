@@ -29,6 +29,11 @@ export class StructureWrapper extends FhirElement {
       padding-left: 0;
     }
 
+    sl-details::part(header) {
+      /*border-bottom: dotted var(--sl-spacing-3x-small) var(--sl-color-neutral-200);*/
+
+    }
+
     sl-details::part(summary-icon) {
       padding: 0 0 0 0;
       margin: 0 0 0 var(--sl-spacing-large);
@@ -48,9 +53,9 @@ export class StructureWrapper extends FhirElement {
     }
 
     sl-badge::part(base) {
-      color: var(--sl-color-gray-500);
-      background-color: var(--sl-color-gray-200);
-      border-color: var(--sl-color-gray-400);
+      color: var(--sl-color-gray-400);
+      background-color: var(--sl-color-gray-50);
+      border-color: var(--sl-color-gray-300);
       font-weight: var(--sl-font-weight-normal);
       font-style: italic;
     }
@@ -83,9 +88,12 @@ export class StructureWrapper extends FhirElement {
   protected render(): unknown {
     return html`
       <sl-details part="base" ?open=${this.open}>
-        <div slot="summary"><label>${this.label}</label>
+        <div slot="summary">
+          <label><b>${this.label}</b></label>
           ${this.fhirType ? html`
-            <sl-badge pill>${this.fhirType}</sl-badge>` : html``}<span id="arrow">&#x21B4;</span></div>
+            <sl-badge pill>${this.fhirType}</sl-badge>` : html``}
+          <span id="arrow">&#x21B4;</span>
+        </div>
         <ul>
           <slot part="value"></slot>
         </ul>

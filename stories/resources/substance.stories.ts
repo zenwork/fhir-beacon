@@ -134,7 +134,7 @@ export const Display: Story = {
   args: {
     data,
     mode: 'display',
-    showError: true,
+    showError: false,
     verbose: false,
     open: true
   }

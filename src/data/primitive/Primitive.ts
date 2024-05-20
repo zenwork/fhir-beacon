@@ -31,8 +31,6 @@ export class Primitive extends LitElement {
     li {
       display: flex;
       list-style-type: none;
-      padding-top: var(--sl-spacing-x-small);
-      padding-bottom: var(--sl-spacing-x-small);
     }
   `
 
@@ -102,7 +100,7 @@ export class Primitive extends LitElement {
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>
-            <fhir-context text=${this.context}></fhir-context>
+            <fhir-context text=${this.context ? this.context + ' - ' : '' + (this.verbose ? '' + this.type : '')}></fhir-context>
           </li>`
            : html``
   }

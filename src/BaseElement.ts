@@ -13,6 +13,7 @@ import {hasSameAncestor}                               from './util/hasSameAnces
 export enum BaseElementMode {
   display = 'display',
   structure = 'structure',
+  structure_trace = 'structure_trace',
   combined = 'combined',
   narrative = 'narrative'
 }
@@ -29,13 +30,13 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   @property({reflect: true})
   public label: string = ''
 
-  @property({type: Boolean})
+  @property({type: Boolean, reflect: true})
   declare open: boolean
 
   @property({type: Boolean, reflect: true})
-  public verbose: boolean = false
+  declare verbose: boolean
 
-  @property({type: Boolean})
+  @property({type: Boolean, reflect: true})
   declare showError: boolean
 
   @property({reflect: true})
@@ -65,29 +66,52 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
     } else {
       this.recursionGuard = false
     }
-    if (_changedProperties.has('data')) {
-      this.convertedData = this.convertData(this.data)
+    if (_changedProperties.has('mode')) {
+      if (this.mode == BaseElementMode.structure_trace) {
+        this.verbose = true
+        this.showError = true
+        this.open = true
+      }
     }
   }
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-
+    if (_changedProperties.has('data')) {
+      this.convertedData = this.convertData(this.data)
+    }
   }
 
   protected render(): TemplateResult | TemplateResult[] {
-    let display = () => this.convertedData ? this.renderDisplay(this.convertedData ? this.convertedData : {}) : nothing
+    let display = () => {
+      if (this.convertedData) {
+        if (this.isVerbose()) {
+          return html`
+            <fhir-wrapper
+                .label=${this.getElementLabel()}
+                .fhirType=${this.getTypeLabel()}
+                .open=${this.open}
+            >
+              ${this.renderDisplay(this.convertedData)}
+            </fhir-wrapper>`
+        } else {
+          return html`${this.renderDisplay(this.convertedData)}`
+        }
+      } else {
+        return html``
+      }
+    }
 
     let structure = () => {
 
-      if (this.data || this.isVerbose()) {
+      if (this.convertedData || this.isVerbose()) {
         return html`
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
               .fhirType=${this.getTypeLabel()}
               .open=${this.open}
           >
-            ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {}) : nothing}
+            ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {} as T) : nothing}
           </fhir-structure-wrapper>`
       }
 
@@ -105,15 +129,16 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
     }
 
-    let combined = () => this.convertedData ? html`${[display(), structure()]}` : nothing
+    let combined = () => this.convertedData ? html`${[display(), structure()]}` : html``
 
 
     return html`${choose(this.mode, [
         [BaseElementMode.display, display],
         [BaseElementMode.structure, structure],
+        [BaseElementMode.structure_trace, structure],
         [BaseElementMode.combined, combined],
       ],
-      () => html`<h1>Error</h1>`)}`
+      () => html`<h2>Error: Unable to render the element</h2>`)}`
 
   }
 
@@ -123,7 +148,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
    * @protected
    * @returns {TemplateResult} The rendered template result.
    */
-  protected renderDisplay(data: T | {}): TemplateResult | TemplateResult[] {
+  protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
     if (this.data || this.isVerbose()) {
       return html`
           <article part="element">
@@ -135,7 +160,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
     return html``
   }
 
-  protected renderStructure(data: T | {}): TemplateResult | TemplateResult[] {
+  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
     if (this.data || this.isVerbose()) {
       return html`
           <article part="element">
@@ -156,19 +181,12 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected getElementLabel = () => {
-    if (this.mode == BaseElementMode.display) {
-      return ''
-    }
     return this.label ? this.label : asReadable(this.type)
 
   }
 
   protected getTypeLabel = () => {
-    if (this.mode == BaseElementMode.display) {
-      return ''
-    }
     return asReadable(this.type)
-
   }
 
 

@@ -1,21 +1,30 @@
 import {BaseData}                                    from '../../BaseData'
 import {CodeableConceptData, QuantityData}           from '../../data/complex/strucutures/complex'
 import {ReferenceData}                               from '../../special/structures'
-import {CodeableReferenceData, Extension, Ratiodata} from './index'
+import {CodeableReferenceData, Extension, RatioData} from './index'
 
-export type BackboneElement = BaseData & {
+export type BackboneElementData = BaseData & {
   modifierExtension: Extension[]
 }
 
-export type MedicationIngredientData = BackboneElement & {
-  item: CodeableReferenceData,
+// TODO: better solution needed -> choice of datatype models are a real pain to model. see: https://www.hl7.org/fhir/formats.html#choice
+
+// TODO: this needs to be split into three allowed versions
+export type MedicationIngredientData = BackboneElementData & {
+  item: CodeableReferenceData
   isActive?: boolean
-  strengthRatio?: Ratiodata
+  strengthRatio?: RatioData
   strengthCodeableConcept?: CodeableConceptData
   strengthQuantity?: QuantityData
 }
 
-export type SubstanceIngredientData = BackboneElement & {
-  quantity?: Ratiodata
-  substance: CodeableReferenceData | ReferenceData  // substance resource reference
+// below is substance[x] the substance resource. see: https://www.hl7.org/fhir/substance-definitions.html#Substance.ingredient.substance_x_
+export type SubstanceIngredientConceptData = BackboneElementData & {
+  quantity?: RatioData
+  substanceCodeableConcept: CodeableConceptData
+}
+
+export type SubstanceIngredientReferenceData = BackboneElementData & {
+  quantity?: RatioData
+  substanceReference: ReferenceData
 }

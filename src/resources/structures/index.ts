@@ -1,8 +1,8 @@
-import {BaseData}                                                                          from '../../BaseData'
-import {CodeableConceptData, CodingData, IdentifierData, QuantityData, SimpleQuantityData} from '../../data/complex/strucutures/complex'
-import {Canonical, Code, DateTime, Id, Instant, Language, Markdown, URI}                   from '../../data/primitive/structures'
-import {NarrativeData, ReferenceData}                                                      from '../../special/structures'
-import {MedicationIngredientData, SubstanceIngredientData}                                 from './backbone'
+import {BaseData}                                                                                   from '../../BaseData'
+import {CodeableConceptData, CodingData, IdentifierData, QuantityData, SimpleQuantityData}          from '../../data/complex/strucutures/complex'
+import {Canonical, Code, DateTime, Id, Instant, Language, Markdown, URI}                            from '../../data/primitive/structures'
+import {NarrativeData, ReferenceData}                                                               from '../../special/structures'
+import {MedicationIngredientData, SubstanceIngredientConceptData, SubstanceIngredientReferenceData} from './backbone'
 
 export type MetaData = {
   versionId?: Id
@@ -41,7 +41,7 @@ export type CodeableReferenceData = BaseData & {
   reference?: ReferenceData
 }
 
-export type Ratiodata = BaseData & {
+export type RatioData = BaseData & {
   numerator?: QuantityData
   denominator?: SimpleQuantityData
 }
@@ -70,6 +70,6 @@ export type SubstanceData = DomainResourceData & {
   description?: Markdown
   expiry?: DateTime
   quantity?: SimpleQuantityData
-  ingredient: SubstanceIngredientData[]
+  ingredient: (SubstanceIngredientConceptData | SubstanceIngredientReferenceData)[]
 
 }

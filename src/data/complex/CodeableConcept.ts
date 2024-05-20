@@ -1,6 +1,6 @@
 import {html, TemplateResult}         from 'lit'
 import {repeat}                       from 'lit-html/directives/repeat.js'
-import {customElement, property}      from 'lit/decorators.js'
+import {customElement}                from 'lit/decorators.js'
 import {BaseElement, BaseElementMode} from '../../BaseElement'
 import {CodeableConceptData}          from './strucutures/complex'
 import './Coding'
@@ -10,26 +10,29 @@ import '../../util/StructureWrapper'
 @customElement('fhir-codeable-concept')
 export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
-  @property()
-  label = ''
-
   constructor() {
     super('Codeable Concept')
+
   }
 
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
     return html`
             ${repeat(data.coding, (c) => html`
-              <fhir-coding .label=${this.label + ' coding'} .data=${c} .mode=${BaseElementMode.display}></fhir-coding>
+              <fhir-coding
+                  .label=${this.label + ' coding'} .data=${c} .mode=${BaseElementMode.display}
+                  .showError=${this.showError}
+                  .verbose=${this.verbose}
+                  .open=${this.open}
+              ></fhir-coding>
             `)}
-            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text}></fhir-primitive>
+            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text} .showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
     `
   }
 
   protected renderStructure(data: CodeableConceptData): TemplateResult[] {
     return [
       (data.coding && data.coding.length != 0 || this.verboseAllowed()) ? html`
-        <fhir-structure-wrapper label="codings" ?open=${this.open}>${(this.getCodings(data))}</fhir-structure-wrapper> ` : html``,
+        <fhir-structure-wrapper label="coding [list]" ?open=${this.open}>${(this.getCodings(data))}</fhir-structure-wrapper> ` : html``,
       html`
         <fhir-primitive label="text" .value=${data.text} .showError=${this.showError} .verbose=${this.verbose}></fhir-primitive> `
     ]

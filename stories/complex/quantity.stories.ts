@@ -69,6 +69,16 @@ export const MoneyQuantity: Story = {
 
 }
 
+export const SimpleQuantity: Story = {
+  args: {
+    data: {
+      value: '1'
+    },
+    mode: 'display',
+    showError: false
+  }
+}
+
 export const ShowStructWithErrors: Story = {
   args: {
     data: {
