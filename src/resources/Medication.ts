@@ -9,6 +9,7 @@ import '../util'
 import '../data'
 import '../special/Reference'
 
+
 @customElement('fhir-medication')
 export class Medication extends DomainResource<MedicationData> {
 
@@ -23,22 +24,36 @@ export class Medication extends DomainResource<MedicationData> {
       <fhir-reference label="marketing authorization holder" .data=${data.marketingAuthorisationHolder}></fhir-reference>
       <fhir-codeable-concept label="dose form" .data=${data.doseForm}></fhir-codeable-concept>
       <fhir-quantity label="total volume" .data=${data.totalVolume}></fhir-quantity>
-      <fhir-stucture-wrapper label="ingredients">
-        ${map(data.ingredient, (i) => html`
-          <fhir-primitive label="codeable reference" value="n/a" context="not implemented yet"></fhir-primitive>
+      <fhir-wrapper label="ingredients" ?open="${this.open}">
+        ${map(data.ingredient, (i, idx) => html`
+          <fhir-wrapper label="ingredient [${idx}]" ?open="${this.open}">
+            <fhir-codeable-reference label="item"
+                                     .data=${i.item}
+                                     .mode=${BaseElementMode.display}
+                                     .showError=${this.showError}
+                                     .verbose=${this.verbose}
+                                     .open=${this.open}
           <fhir-primitive
               .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}
 
           ></fhir-primitive>
-          <fhir-primitive label="ratio" value="n/a" context="not implemented yet"></fhir-primitive>
+            <fhir-ratio
+                label="ratio"
+                .data=${i.strengthRatio}
+                .mode=${BaseElementMode.display}
+                .showError=${this.showError}
+                .verbose=${this.verbose}
+                .open=${this.open}
+            ></fhir-ratio>
           <fhir-codeable-concept
               .data=${i.strengthCodeableConcept}
 
           ></fhir-codeable-concept>
           <fhir-quantity .data=${i.strengthQuantity!}></fhir-quantity>
 
+          </fhir-wrapper>
         `)}
-      </fhir-stucture-wrapper>
+      </fhir-wrapper>
       <fhir-primitive label="batch details" value="n/a" context="not implemented yet"></fhir-primitive>
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference>
 
@@ -83,25 +98,39 @@ export class Medication extends DomainResource<MedicationData> {
           .verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-quantity>
-      <fhir-stucture-wrapper label="ingredients" ?open=${this.open}>
-        ${map(data.ingredient, (i) => html`
-          <fhir-primitive label="codeable reference" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>
-          <fhir-primitive
-              .type=${PrimitiveType.none} 
-              label="is Active" 
-              .value=${i.isActive}
-              .verbose=${this.verbose}
-          ></fhir-primitive>
-          <fhir-primitive label="ratio" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>
-          <fhir-codeable-concept
-              .data=${i.strengthCodeableConcept} .mode=${BaseElementMode.structure}
-              .verbose=${this.verbose}
-              ?open=${this.open}
-          ></fhir-codeable-concept>
-          <fhir-quantity .data=${i.strengthQuantity!} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-quantity>
+      <fhir-structure-wrapper label="ingredients" ?open=${this.open}>
+        ${map(data.ingredient, (i, idx) => html`
+          <fhir-structure-wrapper label="ingredient [${idx}]" ?open=${this.open}>
+            <fhir-codeable-reference
+                label="item"
+                .data=${i.item}
+                .mode=${BaseElementMode.structure}
+                .showError=${this.showError}
+                .verbose=${this.verbose}
+                .open=${this.open}
+            ></fhir-codeable-reference>
+            <fhir-primitive
+                .type=${PrimitiveType.none}
+                label="is Active"
+                .value=${i.isActive}
+                .verbose=${this.verbose}
+            ></fhir-primitive>
+            <fhir-ratio
+                label="ratio" .data=${i.strengthRatio} .mode=${BaseElementMode.display}
+                .showError=${this.showError}
+                .verbose=${this.verbose}
+                .open=${this.open}
+            ></fhir-ratio>
+            <fhir-codeable-concept
+                .data=${i.strengthCodeableConcept} .mode=${BaseElementMode.structure}
+                .verbose=${this.verbose}
+                ?open=${this.open}
+            ></fhir-codeable-concept>
+            <fhir-quantity .data=${i.strengthQuantity!} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-quantity>
 
+          </fhir-structure-wrapper>
         `)}
-      </fhir-stucture-wrapper>
+      </fhir-structure-wrapper>
       <fhir-structure-wrapper label="batch" ?open=${this.open}>
         <fhir-primitive label="batch details" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>
       </fhir-structure-wrapper>

@@ -2,6 +2,7 @@ import './complex/Coding'
 import './complex/Quantity'
 import './complex/Identifier'
 import './complex/CodeableConcept'
+import './complex/CodeableReference'
 
 import './primitive/FhirElement'
 import './primitive/Primitive'

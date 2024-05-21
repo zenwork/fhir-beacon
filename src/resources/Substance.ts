@@ -100,7 +100,7 @@ export class Substance extends DomainResource<SubstanceData> {
       ></fhir-identifier>
       <fhir-primitive label="instance" value=${data.instance} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} ?showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
-      <fhir-stucture-wrapper label="categories" ?open="${this.open}">
+      <fhir-structure-wrapper label="categories" ?open="${this.open}">
         ${map(data.category, (c) => {
           return html`
             <fhir-codeable-concept
@@ -113,7 +113,7 @@ export class Substance extends DomainResource<SubstanceData> {
             ></fhir-codeable-concept>
           `
         })}
-      </fhir-stucture-wrapper>
+      </fhir-structure-wrapper>
       <fhir-codeable-reference
           label="code"
           .data=${data.code}
@@ -132,7 +132,7 @@ export class Substance extends DomainResource<SubstanceData> {
           .mode=${BaseElementMode.structure}
           .verbose=${this.verbose}
       ></fhir-quantity>
-      <fhir-stucture-wrapper label="ingredients" ?open="${this.open}">
+      <fhir-structure-wrapper label="ingredients" ?open=${this.open}>
         ${map(data.ingredient, (ing) => html`
           <fhir-substance-ingredient
               label="ingredient"
@@ -143,7 +143,7 @@ export class Substance extends DomainResource<SubstanceData> {
               .open=${this.open}
           ></fhir-substance-ingredient>
         `)}
-      </fhir-stucture-wrapper>
+      </fhir-structure-wrapper>
 
     `
   }
