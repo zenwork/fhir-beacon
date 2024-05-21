@@ -29,7 +29,7 @@ export const Valid2: Story = {
 
 export const Errors: Story = {
   render: () => html`
-      <fhir-primitive label="DateTime" type=${PrimitiveType.datetime} value="10:57:34" showError=${true}></fhir-primitive>
+    <fhir-primitive label="DateTime" type=${PrimitiveType.datetime} value="10:57:34" ?showerror=${false}></fhir-primitive>
       <fhir-primitive label="DateTime" type=${PrimitiveType.datetime} value="2013-06-08 10:57:34+01:00" showError=${true}></fhir-primitive>
       <fhir-primitive label="DateTime" type=${PrimitiveType.datetime} value="2013-06-081057340100" showError=${true}></fhir-primitive>
       <fhir-primitive label="DateTime" type=${PrimitiveType.datetime} value="2013-31" showError=${true}></fhir-primitive>

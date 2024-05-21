@@ -120,6 +120,10 @@ const meta = {
       options: ['display', 'structure', 'combined'],
       control: {type: 'radio'}
     },
+    showerror: {
+      options: [true, false],
+      control: {type: 'radio'}
+    },
     verbose: {
       options: [true, false],
       control: {type: 'radio'}
@@ -135,7 +139,7 @@ export const Display: Story = {
   args: {
     data,
     mode: 'display',
-    showError: false,
+    showerror: false,
     verbose: false,
     open: true
   }
@@ -145,7 +149,7 @@ export const Structure: Story = {
   args: {
     data,
     mode: 'structure',
-    showError: true,
+    showerror: true,
     verbose: false,
     open: true
   }
@@ -156,7 +160,7 @@ export const Narrative: Story = {
   args: {
     data,
     mode: 'narrative',
-    showError: false,
+    showerror: false,
     verbose: false,
     open: true
   }

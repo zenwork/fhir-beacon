@@ -21,6 +21,10 @@ export class PrimitiveValue extends FhirElement {
       font-style: italic;
       font-family: var(--sl-font-serif);
     }
+
+    .error {
+      text-decoration: underline wavy var(--sl-color-danger-600);
+    }
   `
   @property()
   public placeholder = 'n/a'
@@ -29,11 +33,14 @@ export class PrimitiveValue extends FhirElement {
   public text = ''
 
   @property()
+  declare variant: string
+
+  @property()
   public link = ''
 
   protected render(): unknown {
     return html`
-      <div id=${this.id}>
+      <div id=${this.id} class="${this.variant}">
         ${(this.computeValue())}
       </div>`
   }

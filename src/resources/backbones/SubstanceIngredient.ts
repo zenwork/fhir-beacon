@@ -15,7 +15,7 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
 
   protected renderDisplay(data: SubstanceIngredientConceptData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.showError, this.verbose, 'ingredient', 'substance[x] choice not found')
+    let substance: TemplateResult = renderError(this.showerror, this.verbose, 'ingredient', 'substance[x] choice not found')
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -23,9 +23,9 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
             label="substance"
             .data=${data.substanceCodeableConcept}
             .mode=${BaseElementMode.display}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-codeable-concept>
       `
     }
@@ -36,9 +36,9 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
             label="substance"
             .data=${data.substanceReference}
             .mode=${BaseElementMode.display}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-reference>
       `
     }
@@ -49,7 +49,7 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
           label="quantity"
           .data=${data.quantity}
           .mode=${BaseElementMode.display}
-          ?showError=${this.showError}
+          ?showerror=${this.showerror}
           ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-ratio>
@@ -60,7 +60,7 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
 
   protected renderStructure(data: SubstanceIngredientConceptData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.showError, this.verbose, 'ingredient', 'substance[x] choice not found')
+    let substance: TemplateResult = renderError(this.showerror, this.verbose, 'ingredient', 'substance[x] choice not found')
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -68,9 +68,9 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
             label="substance"
             .data=${data.substanceCodeableConcept}
             .mode=${BaseElementMode.structure}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-codeable-concept>
       `
     }
@@ -81,9 +81,9 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
             label="substance"
             .data=${data.substanceReference}
             .mode=${BaseElementMode.structure}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-reference>
       `
     }
@@ -93,7 +93,7 @@ export class SubstanceIngredient extends BaseElement<SubstanceIngredientConceptD
           label="quantity"
           .data=${data.quantity}
           .mode=${BaseElementMode.structure}
-          ?showError=${this.showError}
+          ?showerror=${this.showerror}
           ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-ratio>

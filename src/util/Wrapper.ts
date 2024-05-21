@@ -1,9 +1,7 @@
 import {css, html}               from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {FhirElement}             from '../data/primitive/FhirElement'
-import '@shoelace-style/shoelace/dist/components/tree/tree'
-import '@shoelace-style/shoelace/dist/components/tree-item/tree-item'
-import '@shoelace-style/shoelace/dist/components/tooltip/tooltip'
+
 
 /**
  * Custom element for wrapping primitive content.

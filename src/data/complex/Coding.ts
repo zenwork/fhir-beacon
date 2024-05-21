@@ -1,15 +1,12 @@
-import {html, TemplateResult}    from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {BaseElement}             from '../../BaseElement'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../BaseElement'
 
 import {CodingData} from './strucutures/complex'
 
 //TODO: rename to fhir-coding
 @customElement('fhir-coding')
 export class Coding extends BaseElement<CodingData> {
-
-  @property({type: String})
-  public label = ''
 
   constructor() {
     super('Coding')
@@ -27,19 +24,19 @@ export class Coding extends BaseElement<CodingData> {
           .value=${(Coding.comuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
           .link=${data.system ? data.system : undefined}
-          ?showError=${this.showError}
+          ?showerror=${this.showerror}
       ></fhir-primitive>
     `
   }
 
   protected renderStructure(data: CodingData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.id} ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="extension" .value=${data.extension} ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="version" .value=${data.version} ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="system" .value=${data.system} type="url" ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="code" .value=${data.code} type="code" ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="display" .value=${data.display} ?showError=${this.showError} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="id" .value=${data.id} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="extension" .value=${data.extension} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="version" .value=${data.version} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="system" .value=${data.system} type="url" ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="code" .value=${data.code} type="code" ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="display" .value=${data.display} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
     `
 
   }

@@ -33,7 +33,7 @@ export const NarrativeWithoutFormatting: Story = {
   args: {
     data: narativeData,
     mode: 'display',
-    showError: false,
+    'showerror': false,
     verbose: false
   }
 }
@@ -41,7 +41,7 @@ export const NarrativeUsingCssPartsFormatting: Story = {
   args: {
     data: narativeData,
     mode: 'display',
-    showError: false,
+    'showerror': false,
     id: 'formatted',
     verbose: false,
     open: false

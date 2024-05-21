@@ -30,9 +30,9 @@ export class Medication extends DomainResource<MedicationData> {
             <fhir-codeable-reference label="item"
                                      .data=${i.item}
                                      .mode=${BaseElementMode.display}
-                                     .showError=${this.showError}
-                                     .verbose=${this.verbose}
-                                     .open=${this.open}
+                                     ?showerror=${this.showerror}
+                                     ?verbose=${this.verbose}
+                                     ?open=${this.open}
           <fhir-primitive
               .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}
 
@@ -41,9 +41,9 @@ export class Medication extends DomainResource<MedicationData> {
                 label="ratio"
                 .data=${i.strengthRatio}
                 .mode=${BaseElementMode.display}
-                .showError=${this.showError}
-                .verbose=${this.verbose}
-                .open=${this.open}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
+                ?open=${this.open}
             ></fhir-ratio>
           <fhir-codeable-concept
               .data=${i.strengthCodeableConcept}
@@ -67,35 +67,41 @@ export class Medication extends DomainResource<MedicationData> {
           label="identifier"
           .data=${data.identifier}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-identifier>
       <fhir-codeable-concept
           label="code"
           .data=${data.code}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-codeable-concept>
-      <fhir-primitive label="status" .type=${PrimitiveType.code} .value=${data.status} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="status" .type=${PrimitiveType.code} .value=${data.status} ?verbose=${this.verbose}></fhir-primitive>
       <fhir-reference
           label="marketing authorization holder"
           .data=${data.marketingAuthorisationHolder}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-reference>
       <fhir-codeable-concept
           label="dose form"
           .data=${data.doseForm}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-codeable-concept>
       <fhir-quantity
           label="total volume"
           .data=${data.totalVolume}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-quantity>
       <fhir-structure-wrapper label="ingredients" ?open=${this.open}>
@@ -105,38 +111,58 @@ export class Medication extends DomainResource<MedicationData> {
                 label="item"
                 .data=${i.item}
                 .mode=${BaseElementMode.structure}
-                .showError=${this.showError}
-                .verbose=${this.verbose}
-                .open=${this.open}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
+                ?open=${this.open}
             ></fhir-codeable-reference>
             <fhir-primitive
-                .type=${PrimitiveType.none}
                 label="is Active"
+                .type=${PrimitiveType.none}
                 .value=${i.isActive}
-                .verbose=${this.verbose}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
             ></fhir-primitive>
             <fhir-ratio
-                label="ratio" .data=${i.strengthRatio} .mode=${BaseElementMode.display}
-                .showError=${this.showError}
-                .verbose=${this.verbose}
-                .open=${this.open}
+                label="ratio"
+                .data=${i.strengthRatio}
+                .mode=${BaseElementMode.display}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
+                ?open=${this.open}
             ></fhir-ratio>
             <fhir-codeable-concept
-                .data=${i.strengthCodeableConcept} .mode=${BaseElementMode.structure}
-                .verbose=${this.verbose}
+                .data=${i.strengthCodeableConcept}
+                .mode=${BaseElementMode.structure}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
                 ?open=${this.open}
             ></fhir-codeable-concept>
-            <fhir-quantity .data=${i.strengthQuantity!} .mode=${BaseElementMode.structure} .verbose=${this.verbose} ?open=${this.open}></fhir-quantity>
+            <fhir-quantity
+                .data=${i.strengthQuantity!}
+                .mode=${BaseElementMode.structure}
+                ?showerror=${this.showerror}
+                ?verbose=${this.verbose}
+                ?open=${this.open}
+            ></fhir-quantity>
 
           </fhir-structure-wrapper>
         `)}
       </fhir-structure-wrapper>
       <fhir-structure-wrapper label="batch" ?open=${this.open}>
-        <fhir-primitive label="batch details" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive>
+        <fhir-primitive
+            label="batch details"
+            value="not implemented yet"
+            type=${PrimitiveType.forced_error}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+        ></fhir-primitive>
       </fhir-structure-wrapper>
       <fhir-reference
-          label="definition" .data=${data.definition} .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
+          label="definition"
+          .data=${data.definition}
+          .mode=${BaseElementMode.structure}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
           ?open=${this.open}
       ></fhir-reference>
 

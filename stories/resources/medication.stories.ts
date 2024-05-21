@@ -13,6 +13,10 @@ const meta = {
       options: [true, false],
       control: {type: 'radio'},
     },
+    showerror: {
+      options: [true, false],
+      control: {type: 'radio'}
+    }
   }
 
 }
@@ -90,7 +94,7 @@ export const Med0310Display: Story = {
   args: {
     data: medicationData,
     mode: 'display',
-    showError: true,
+    showerror: true,
     verbose: false,
     open: true
   }
@@ -100,7 +104,7 @@ export const Med0310Structure: Story = {
   args: {
     data: medicationData,
     mode: 'structure',
-    showError: true,
+    showerror: true,
     verbose: false,
     open: true
   }

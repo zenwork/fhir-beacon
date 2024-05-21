@@ -36,6 +36,8 @@ export class Reference extends BaseElement<ReferenceData> {
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display}
                       .link=${data.reference}
+                      ?showerror=${this.showerror}
+                      ?verbose=${this.verbose}
                   ></fhir-primitive>`
               ],
               [
@@ -45,12 +47,20 @@ export class Reference extends BaseElement<ReferenceData> {
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display ? data.display : data.reference}
                       .link=${data.reference}
+                      ?showerror=${this.showerror}
+                      ?verbose=${this.verbose}
                   ></fhir-primitive>`
               ],
               [
                 ReferenceType_Ref2.identifier,
                 () => html`
-                  <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier>`
+                  <fhir-identifier
+                      label="identifier"
+                      .data=${data.identifier}
+                      .showerror=${this.showerror}
+                      .verbose=${this.verbose}
+                      .open=${this.open}
+                  ></fhir-identifier>`
               ],
               [
                 ReferenceType_Ref2.extension,
@@ -78,16 +88,17 @@ export class Reference extends BaseElement<ReferenceData> {
    */
   protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-primitive label="reference" .value=${data.reference} .verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="reference" .value=${data.reference} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} ?verbose=${this.verbose}></fhir-primitive>
       <fhir-identifier
           label="identifier"
           .data=${data.identifier}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-identifier>
-      <fhir-primitive label="display" .value=${data.display} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="display" .value=${data.display} ?verbose=${this.verbose}></fhir-primitive>
     `
   }
 

@@ -14,7 +14,7 @@ const meta = {
       options: [true, false],
       control: {type: 'radio'}
     },
-    showError: {
+    'showerror': {
       options: [true, false],
       control: {type: 'radio'}
     },
@@ -40,7 +40,7 @@ export const SimpleRatio: Story = {
       }
     },
     mode: 'display',
-    showError: false,
+    'showerror': false,
     verbose: false,
     open: true
 
@@ -64,7 +64,7 @@ export const UnitCost: Story = {
       }
     },
     mode: 'display',
-    showError: false,
+    'showerror': false,
     verbose: false,
     open: true
   }

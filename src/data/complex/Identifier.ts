@@ -29,18 +29,48 @@ export class Identifier extends BaseElement<IdentifierData> {
    */
   protected renderStructure(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use} .verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive
+          label="use"
+          type=${PrimitiveType.code}
+          .value=${data.use}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+      ></fhir-primitive>
       <fhir-codeable-concept
           label="type"
           .data=${data.type}
           .mode=${BaseElementMode.structure}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-codeable-concept>
-      <fhir-primitive type=${PrimitiveType.uri} label="system" .value=${data.system} .verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="value" .value=${data.value} .verbose=${this.verbose}></fhir-primitive>
-      <fhir-period label="period" .data=${data.period} .mode=${BaseElementMode.structure} .verbose=${this.verbose} .open=${this.open}></fhir-period>
-      <fhir-reference label="assigner" .data=${data.assigner} .mode=${BaseElementMode.structure} .verbose=${this.verbose} .open=${this.open}></fhir-reference>
+      <fhir-primitive
+          label="system"
+          type=${PrimitiveType.uri}
+          .value=${data.system}
+          ?verbose=${this.verbose}
+      ></fhir-primitive>
+      <fhir-primitive
+          label="value"
+          .value=${data.value}
+          ?verbose=${this.verbose}
+      ></fhir-primitive>
+      <fhir-period
+          label="period"
+          .data=${data.period}
+          .mode=${BaseElementMode.structure}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-period>
+      <fhir-reference
+          label="assigner"
+          .data=${data.assigner}
+          .mode=${BaseElementMode.structure}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
+      ></fhir-reference>
     `
   }
 }

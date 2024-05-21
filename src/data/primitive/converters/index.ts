@@ -1,3 +1,12 @@
+import './ToCode'
+import './ToDatetime'
+import './ToDecimal'
+import './ToError'
+import './ToReference'
+import './ToType'
+import './ToUri'
+import './ToUrl'
+
 export type toPrimitive<O, V> = (val: O) => V
 export type ValOrErr<O, V> = { type: 'ValOrErr', val: V, err: null } | { type: 'ValOrErr', val: O, err: string }
 

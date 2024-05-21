@@ -36,8 +36,8 @@ export class Narrative extends BaseElement<NarrativeData> {
   protected renderStructure(data: NarrativeData): TemplateResult {
     return html`
       <fhir-structure-wrapper .label=${this.type}>
-        <fhir-primitive label="status" .value=${data.status} .verbose=${this.verbose}} .showError=${this.showError}></fhir-primitive>
-        <fhir-primitive label="div" .value=${data.div} .verbose=${this.verbose}} .showError=${this.showError}></fhir-primitive>
+        <fhir-primitive label="status" .value=${data.status} ?verbose=${this.verbose}} ?showerror=${this.showerror}></fhir-primitive>
+        <fhir-primitive label="div" .value=${data.div} ?verbose=${this.verbose}} ?showerror=${this.showerror}></fhir-primitive>
       </fhir-structure-wrapper>
     `
   }

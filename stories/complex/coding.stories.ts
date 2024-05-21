@@ -54,7 +54,7 @@ export const ShowStructureWithErrors: Story = {
     },
     mode: 'structure',
     verbose: false,
-    showError: true,
+    'showerror': true,
     open: true
   }
 }

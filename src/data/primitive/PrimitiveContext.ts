@@ -11,7 +11,7 @@ export class PrimitiveContext extends FhirElement {
       padding-bottom: var(--sl-spacing-2x-small);
     }
     span {
-      color: var(--sl-color-gray-300);
+      color: var(--sl-color-gray-400);
       font-style: italic;
       font-family: var(--sl-font-serif), serif;
       margin-left: var(--sl-spacing-x-small);

@@ -16,7 +16,7 @@ const meta = {
       options: [true, false],
       control: {type: 'radio'},
     },
-    showError: {
+    'showerror': {
       options: [true, false],
       control: {type: 'radio'},
     },
@@ -36,7 +36,7 @@ export const DisplayableTime: Story = {
       code: 's'
     },
     mode: 'display',
-    showError: false
+    'showerror': false
   }
 }
 
@@ -50,7 +50,7 @@ export const AmountOfPrescribedMedicine: Story = {
       code: 'ug'
     },
     mode: 'display',
-    showError: false
+    'showerror': false
   },
 
 }
@@ -64,7 +64,7 @@ export const MoneyQuantity: Story = {
       code: 'USD'
     },
     mode: 'display',
-    showError: false
+    'showerror': false
   },
 
 }
@@ -75,7 +75,7 @@ export const SimpleQuantity: Story = {
       value: '1'
     },
     mode: 'display',
-    showError: false
+    'showerror': false
   }
 }
 
@@ -88,7 +88,7 @@ export const ShowStructWithErrors: Story = {
       code: 's'
     },
     mode: 'structure',
-    showError: true,
+    'showerror': true,
     open: true
   },
 }

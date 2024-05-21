@@ -24,17 +24,17 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
           label="concept"
           .data=${data.concept}
           .mode=${mode}
-          .showError=${this.showError}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-codeable-concept>
       <fhir-reference
           label="reference"
           .data=${data.reference}
           .mode=${mode}
-          .showError=${this.showError}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-reference>
     `
   }

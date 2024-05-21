@@ -10,14 +10,24 @@ export class PrimitiveLabel extends FhirElement {
       padding-top: var(--sl-spacing-2x-small);
       padding-bottom: var(--sl-spacing-2x-small);
     }
+
     label {
       color: var(--sl-color-primary-700);
+    }
+
+    /* TODO: variants should be formalised */
+    .error {
+      font-style: italic;
+
     }
 
   `
 
   @property()
   declare text: string
+
+  @property()
+  declare variant: string
 
   @property()
   public delimiter: string = ': '
@@ -30,7 +40,7 @@ export class PrimitiveLabel extends FhirElement {
 
 
   render() {
-    return html`<label for=${this.for}}>${this.isSlotted ? '' : this.text}${this.isSlotted || !this.text ? '' : this.delimiter}
+    return html`<label class="${this.variant}" for=${this.for}}>${this.isSlotted ? '' : this.text}${this.isSlotted || !this.text ? '' : this.delimiter}
       <slot></slot>
     </label>`
   }

@@ -1,6 +1,6 @@
-import {css, html, LitElement, PropertyValues, TemplateResult} from 'lit'
-import {customElement, property, state}                        from 'lit/decorators.js'
-import {choose}                                                from 'lit/directives/choose.js'
+import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                                 from 'lit/decorators.js'
+import {choose}                                                         from 'lit/directives/choose.js'
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
@@ -52,15 +52,14 @@ export class Primitive extends LitElement {
   @property({type: PrimitiveType, converter: convertToPrimitiveType})
   public type: PrimitiveType = PrimitiveType.none
 
-  @property({type: Boolean})
-  public showError: boolean = false
+  @property({type: Boolean, attribute: 'showerror'})
+  declare showerror: boolean
 
   @property({type: Boolean})
-  public showOriginal: boolean = false
-
+  declare showOriginal: boolean
 
   @property()
-  public verbose: boolean = false
+  declare verbose: boolean
 
   @state()
   private error: boolean = false
@@ -100,7 +99,7 @@ export class Primitive extends LitElement {
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>
-            <fhir-context text=${this.context ? this.context + ' - ' : '' + (this.verbose ? '' + this.type : '')}></fhir-context>
+            <fhir-context .text=${this.context ? this.context : ''}${this.context && this.verbose ? ' - ' : ''} ${this.verbose ? this.type : ''}></fhir-context>
           </li>`
            : html``
   }
@@ -109,9 +108,12 @@ export class Primitive extends LitElement {
     return this.value || this.verbose
            ? html`
           <li part="base">
-            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
-            <fhir-value text=${this.value} link=${this.link}></fhir-value>&nbsp;
-            <fhir-error text=${this.presentableValue}></fhir-error>
+            <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label>&nbsp;
+            <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value>
+                                                                                                     ${this.showerror
+                                                                                                       ? html`
+                                                                                                           <fhir-error text=${this.presentableValue}></fhir-error>`
+                                                                                                       : nothing}
           </li>`
            : html``
   }

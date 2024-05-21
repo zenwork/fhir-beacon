@@ -27,17 +27,17 @@ export class Ratio extends BaseElement<RatioData> {
         <fhir-quantity
             .data=${data.numerator}
             .mode=${BaseElementMode.display}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-quantity>
         <fhir-value text="&nbsp;/&nbsp;"></fhir-value>
         <fhir-quantity
             .data=${data.denominator}
             .mode=${BaseElementMode.display}
-            .showError=${this.showError}
-            .verbose=${this.verbose}
-            .open=${this.open}
+            ?showerror=${this.showerror}
+            ?verbose=${this.verbose}
+            ?open=${this.open}
         ></fhir-quantity>
       </li>
     `
@@ -49,17 +49,17 @@ export class Ratio extends BaseElement<RatioData> {
           label="numerator"
           .data=${data.numerator}
           .mode=${BaseElementMode.structure}
-          .showError=${this.showError}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-quantity>
       <fhir-quantity
           label="denominator"
           .data=${data.denominator}
           .mode=${BaseElementMode.structure}
-          .showError=${this.showError}
-          .verbose=${this.verbose}
-          .open=${this.open}
+          ?showerror=${this.showerror}
+          ?verbose=${this.verbose}
+          ?open=${this.open}
       ></fhir-quantity>
     `
   }

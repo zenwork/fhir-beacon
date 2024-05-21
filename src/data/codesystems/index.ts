@@ -1,5 +1,5 @@
-import FhirTypesCodeSystem  from './CodeSystem-fhir-types.json' assert {type: 'json'}
-import ComparatorCodeSystem from './CodeSystem-quantity-comparator.json' assert {type: 'json'}
+import FhirTypesCodeSystem  from './CodeSystem-fhir-types.json'
+import ComparatorCodeSystem from './CodeSystem-quantity-comparator.json'
 
 export {ComparatorCodeSystem as Comparators}
 export {FhirTypesCodeSystem}

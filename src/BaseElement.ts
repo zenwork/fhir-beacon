@@ -21,6 +21,7 @@ export enum BaseElementMode {
 
 export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
+  // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})
   declare data: T
 
@@ -37,13 +38,14 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   declare verbose: boolean
 
   @property({type: Boolean, reflect: true})
-  declare showError: boolean
+  declare showerror: boolean
 
   @property({reflect: true})
   protected type: string = ''
 
   @state()
   private convertedData: T | null = null
+
   /**
    * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode certain FHIR datatypes go into a
    * theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In reality they would never point to each other but if expanding on all
@@ -69,7 +71,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
     if (_changedProperties.has('mode')) {
       if (this.mode == BaseElementMode.structure_trace) {
         this.verbose = true
-        this.showError = true
+        this.showerror = true
         this.open = true
       }
     }
@@ -83,6 +85,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected render(): TemplateResult | TemplateResult[] {
+    console.log(this.type, this.showerror)
     let display = () => {
       if (this.convertedData) {
         if (this.isVerbose()) {
@@ -90,7 +93,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
             <fhir-wrapper
                 .label=${this.getElementLabel()}
                 .fhirType=${this.getTypeLabel()}
-                .open=${this.open}
+                ?open=${this.open}
             >
               ${this.renderDisplay(this.convertedData)}
             </fhir-wrapper>`
@@ -109,7 +112,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
               .fhirType=${this.getTypeLabel()}
-              .open=${this.open}
+              ?open=${this.open}
           >
             ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {} as T) : nothing}
           </fhir-structure-wrapper>`
@@ -121,7 +124,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
               .type=${PrimitiveType.forced_error}
               label=${this.label}
               value="[(${this.type}) not rendered due to recursion guard]"
-              .showError=${true}
+              ?showerror=${this.showerror}
           ></fhir-primitive>`
       }
 

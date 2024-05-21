@@ -20,12 +20,12 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
             ${repeat(data.coding, (c) => html`
               <fhir-coding
                   .label=${this.label + ' coding'} .data=${c} .mode=${BaseElementMode.display}
-                  .showError=${this.showError}
-                  .verbose=${this.verbose}
-                  .open=${this.open}
+                  ?showerror=${this.showerror}
+                  ?verbose=${this.verbose}
+                  ?open=${this.open}
               ></fhir-coding>
             `)}
-            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text} .showError=${this.showError} .verbose=${this.verbose}></fhir-primitive>
+            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
     `
   }
 
@@ -34,7 +34,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
       (data.coding && data.coding.length != 0 || this.verboseAllowed()) ? html`
         <fhir-structure-wrapper label="coding [list]" ?open=${this.open}>${(this.getCodings(data))}</fhir-structure-wrapper> ` : html``,
       html`
-        <fhir-primitive label="text" .value=${data.text} .showError=${this.showError} .verbose=${this.verbose}></fhir-primitive> `
+        <fhir-primitive label="text" .value=${data.text} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive> `
     ]
   }
 
@@ -46,7 +46,8 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
               .label=${'[' + (index + 1) + ']'}
               .data=${c}
               .mode=${BaseElementMode.structure}
-              .verbose=${this.verbose}
+              ?showerror=${this.showerror}
+              ?verbose=${this.verbose}
               ?open=${this.open}
           ></fhir-coding>
         `)

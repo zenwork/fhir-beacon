@@ -7,7 +7,7 @@ export const renderError = (showError: boolean, verbose: boolean, label: string,
         label=${label}
         value=${value}
         type=${PrimitiveType.forced_error}
-        ?showError=${showError}
+        ?showerror=${showError}
         ?verbose=${verbose}
     ></fhir-primitive>`
 }
