@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
     stories:[
@@ -7,7 +9,8 @@ const config = {
     addons:[
         '@storybook/addon-links',
         '@storybook/addon-essentials',
-        '@chromatic-com/storybook'
+        '@chromatic-com/storybook',
+        '@whitespace/storybook-addon-html'
     ],
     framework:{
         name:'@storybook/web-components-vite',

@@ -17,6 +17,7 @@ import './PrimitiveLabel'
 import './PrimitiveValue'
 import './PrimitiveError'
 import './PrimitiveContext'
+import './PrimitiveWrapper'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -27,12 +28,6 @@ import './PrimitiveContext'
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
 
-  static styles = css`
-    li {
-      display: flex;
-      list-style-type: none;
-    }
-  `
 
   @property()
   declare label: string
@@ -93,28 +88,28 @@ export class Primitive extends LitElement {
   private renderValid = (): TemplateResult => {
     return this.value || this.verbose
            ? html`
-          <li part="base">
+          <fhir-primitive-wrapper >
             <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
             <fhir-value text=${this.presentableValue} link=${this.link}>
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>
             <fhir-context .text=${this.context ? this.context : ''}${this.context && this.verbose ? ' - ' : ''} ${this.verbose ? this.type : ''}></fhir-context>
-          </li>`
+          </fhir-primitive-wrapper >`
            : html``
   }
 
   private renderError = (): TemplateResult => {
     return this.value || this.verbose
            ? html`
-          <li part="base">
-            <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label>&nbsp;
-            <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value>
-                                                                                                     ${this.showerror
-                                                                                                       ? html`
-                                                                                                           <fhir-error text=${this.presentableValue}></fhir-error>`
-                                                                                                       : nothing}
-          </li>`
+          <fhir-primitive-wrapper >
+            <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
+            <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
+                                                                                                      ${this.showerror
+                                                                                                        ? html`
+                                                                                                            <fhir-error text=${this.presentableValue}></fhir-error >`
+                                                                                                        : nothing}
+          </fhir-primitive-wrapper >`
            : html``
   }
 

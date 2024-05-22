@@ -1,12 +1,21 @@
 /** @type { import('@storybook/web-components').Preview } */
 const preview = {
     parameters:{
-        parameters:{
             options:{
                 storySort:{
                     method:'alphabetical',
-                    order:['Documentation', ['introduction', 'Resource Element', 'Customized Markup', '*'], 'Core', 'Datatypes',
-                        ['Primitives', 'Complex', '*'], 'Resources', 'Special', '*']
+                    order:[
+                        'Getting Started',
+                        'Web Components',
+                        'Shoelace',
+                        'FHIR Data Types',
+                        'FHIR Resources',
+                        'System', ['Atoms',
+                                   'Datatype Components', ['Primitive Type', 'Complex Type', 'Special Type', '*'],
+                                   'Resource Components', 'Backbones', '*'],
+                        'Use Cases', ['Static HTML', 'Frameworks', 'Modelling & Tracing', '*'],
+                        '*'
+                    ]
                 }
             }
         },
@@ -16,7 +25,6 @@ const preview = {
                 date:/Date$/i
             }
         }
-    }
 }
 
 export default preview

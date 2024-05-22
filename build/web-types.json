@@ -7,6 +7,60 @@
     "html": {
       "elements": [
         {
+          "name": "fhir-medication",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "data", "value": { "type": "T" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-substance",
+          "description": "\n---\n\n\n### **Methods:**\n ",
+          "doc-url": "",
+          "attributes": [
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "type", "value": { "type": "string", "default": "type" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "data", "value": { "type": "T" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "type", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-narrative",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
@@ -37,60 +91,6 @@
         },
         {
           "name": "fhir-reference",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "type", "value": { "type": "string", "default": "type" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "type", "value": { "type": "string" } }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n ",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "type", "value": { "type": "string", "default": "type" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "type", "value": { "type": "string" } }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-substance",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
@@ -503,6 +503,19 @@
               { "name": "text", "value": { "type": "string" } },
               { "name": "variant", "value": { "type": "string" } },
               { "name": "link", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-primitive-wrapper",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "isSlotted", "value": { "type": "boolean" } }
             ],
             "events": []
           }

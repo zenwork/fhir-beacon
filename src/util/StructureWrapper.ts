@@ -1,4 +1,4 @@
-import {css, html}               from 'lit'
+import {css, html, nothing} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {FhirElement}             from '../data/primitive/FhirElement'
 
@@ -89,7 +89,7 @@ export class StructureWrapper extends FhirElement {
           <label><b>${this.label}</b></label>
           ${this.fhirType ? html`
             <sl-badge pill>${this.fhirType}</sl-badge>` : html``}
-          <span id="arrow">&#x21B4;</span>
+          ${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
         </div>
         <ul>
           <slot part="value"></slot>

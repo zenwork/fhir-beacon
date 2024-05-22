@@ -48,15 +48,13 @@ export class PrimitiveLabel extends FhirElement {
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties)
 
-    if (this.assignedElements.length == 0) {
-      return
-    }
+    if (this.assignedElements.length == 0) return
 
     if (this.assignedElements[0].tagName == 'SLOT') {
       if ((this.assignedElements[0] as HTMLSlotElement).assignedElements().length > 0) {
         this.isSlotted = true
       }
-    } else if (this.assignedElements[0].children.length > 0) {
+    } else if (this.assignedElements[0].children?.length > 0) {
       this.isSlotted = true
     }
 

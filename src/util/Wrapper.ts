@@ -1,4 +1,4 @@
-import {css, html}               from 'lit'
+import {css, html, nothing} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {FhirElement}             from '../data/primitive/FhirElement'
 
@@ -51,7 +51,7 @@ export class Wrapper extends FhirElement {
         ${this.fhirType
           ? html`
               <sl-tooltip content="${this.fhirType}"><label>${this.label}</label></sl-tooltip>`
-          : html`<label>${this.label}</label>`}<span id="arrow">&#x21B4;</span>
+          : html`<label >${this.label}</label >`}${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
       </div>
 
       <slot id="content"></slot>

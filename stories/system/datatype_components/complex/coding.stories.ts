@@ -1,0 +1,60 @@
+import {StoryObj} from '@storybook/web-components'
+import '../../../../src/data/./complex/Coding'
+import '../../../../src/util/Debug'
+import '../../../../src/data/primitive/Primitive'
+
+
+const meta = {
+  title: 'System/Datatype Components/Complex Type/Coding',
+  component: 'fhir-coding',
+  argTypes: {
+    mode: {
+      options: ['display', 'structure', 'combined'],
+      control: {type: 'radio'},
+    },
+    verbose: {
+      options: [true, false],
+      control: {type: 'radio'},
+    },
+  }
+
+}
+
+export default meta
+type Story = StoryObj;
+
+export const DisplayableValue: Story = {
+  args:{
+    data:{
+      system: 'http://hl7.org/fhir/sid/icd-10',
+      code: 'G44.1',
+      display: 'Vascular headache, not elsewhere classified'
+    }
+  }
+  }
+
+export const NoDisplayableValue: Story = {
+  args:{
+    data:{
+      system: 'http://hl7.org/fhir/sid/icd-10',
+      code: 'G44.1'
+    }
+  }
+}
+
+export const ShowStructureWithErrors: Story = {
+  args: {
+    data: {
+      id: '123-456',
+      extension: [],
+      version: '1.0',
+      system: 'hl7.org/fhir/sid/icd-10',
+      code: 'not a valid code',
+      display: 'Vascular headache, not elsewhere classified'
+    },
+    mode: 'structure',
+    verbose: false,
+    'showerror': true,
+    open: true
+  }
+}
