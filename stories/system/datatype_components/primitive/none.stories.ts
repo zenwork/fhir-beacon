@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
 import '../../../../src/data/primitive/Primitive'
-import {Primitive} from '../../../../src/data/primitive/Primitive'
+import {Primitive}      from '../../../../src/data/primitive/Primitive'
 
 const meta = {
   title: 'System/Datatype Components/Primitive Type/None',

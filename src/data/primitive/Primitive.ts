@@ -1,6 +1,6 @@
-import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
-import {customElement, property, state}                                 from 'lit/decorators.js'
-import {choose}                                                         from 'lit/directives/choose.js'
+import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                            from 'lit/decorators.js'
+import {choose}                                                    from 'lit/directives/choose.js'
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'

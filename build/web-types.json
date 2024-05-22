@@ -7,7 +7,7 @@
     "html": {
       "elements": [
         {
-          "name": "fhir-medication",
+            "name": "fhir-medication",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
@@ -34,7 +34,7 @@
           }
         },
         {
-          "name": "fhir-substance",
+            "name": "fhir-substance",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
@@ -61,11 +61,11 @@
           }
         },
         {
-          "name": "fhir-narrative",
+            "name": "fhir-narrative",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
-            { "name": "status", "value": { "type": "string" } },
+              {"name": "status", "value": {"type": "string"}},
             { "name": "data", "value": { "type": "T" } },
             { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -77,7 +77,7 @@
           "events": [],
           "js": {
             "properties": [
-              { "name": "status", "value": { "type": "string" } },
+                {"name": "status", "value": {"type": "string"}},
               { "name": "data", "value": { "type": "T" } },
               { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "label", "value": { "type": "string" } },
@@ -90,7 +90,7 @@
           }
         },
         {
-          "name": "fhir-reference",
+            "name": "fhir-reference",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
           "attributes": [
@@ -508,19 +508,19 @@
           }
         },
         {
-          "name": "fhir-primitive-wrapper",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "isSlotted", "value": { "type": "boolean" } }
-            ],
-            "events": []
-          }
+            "name": "fhir-primitive-wrapper",
+            "description": "\n---\n",
+            "doc-url": "",
+            "attributes": [],
+            "events": [],
+            "js": {
+                "properties": [
+                    {"name": "isSlotted", "value": {"type": "boolean"}}
+                ],
+                "events": []
+            }
         },
-        {
+          {
           "name": "fhir-substance-ingredient",
           "description": "\n---\n\n\n### **Methods:**\n ",
           "doc-url": "",
