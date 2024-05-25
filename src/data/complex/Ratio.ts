@@ -1,7 +1,7 @@
-import {css, html, TemplateResult}    from 'lit'
-import {customElement}                from 'lit/decorators.js'
-import {BaseElement, BaseElementMode} from '../../BaseElement'
-import {RatioData}                    from '../../resources/structures'
+import {css, html, TemplateResult} from 'lit'
+import {customElement}             from 'lit/decorators.js'
+import {BaseElement}               from '../../BaseElement'
+import {RatioData}                 from '../../resources/structures'
 
 @customElement('fhir-ratio')
 export class Ratio extends BaseElement<RatioData> {
@@ -24,43 +24,17 @@ export class Ratio extends BaseElement<RatioData> {
     return html`
       <li part="base">
         <fhir-label text="${this.label}"></fhir-label>&nbsp;
-        <fhir-quantity
-            .data=${data.numerator}
-            .mode=${BaseElementMode.display}
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
-            ?open=${this.open}
-        ></fhir-quantity>
+        <fhir-quantity .data=${data.numerator}></fhir-quantity >
         <fhir-value text="&nbsp;/&nbsp;"></fhir-value>
-        <fhir-quantity
-            .data=${data.denominator}
-            .mode=${BaseElementMode.display}
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
-            ?open=${this.open}
-        ></fhir-quantity>
+        <fhir-quantity .data=${data.denominator}></fhir-quantity >
       </li>
     `
   }
 
   protected renderStructure(data: RatioData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-quantity
-          label="numerator"
-          .data=${data.numerator}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
-      ></fhir-quantity>
-      <fhir-quantity
-          label="denominator"
-          .data=${data.denominator}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
-      ></fhir-quantity>
+      <fhir-quantity label="numerator" .data=${data.numerator}></fhir-quantity >
+      <fhir-quantity label="denominator" .data=${data.denominator}></fhir-quantity >
     `
   }
 

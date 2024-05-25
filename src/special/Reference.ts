@@ -1,25 +1,41 @@
-import {html, TemplateResult}         from 'lit'
-import {customElement, state}         from 'lit/decorators.js'
-import {choose}                       from 'lit/directives/choose.js'
-import {BaseElement, BaseElementMode} from '../BaseElement'
-import {PrimitiveType}                from '../data/primitive/converters'
-import {asReadable}                   from '../data/primitive/presenters/asReadable'
-import {otherwise, when}              from '../util/when'
-import {ReferenceData}                from './structures'
+import {consume}                              from '@lit/context'
+import {html, PropertyValues, TemplateResult} from 'lit'
+import {customElement, state}                 from 'lit/decorators.js'
+import {choose}                               from 'lit/directives/choose.js'
+import {PrimitiveType}                        from '../data/primitive/converters'
+import {asReadable}                           from '../data/primitive/presenters/asReadable'
+import {containedDataContext}                 from '../resources/context'
+import {ResourceData}                         from '../resources/structures'
+import {ConsumerBaseElement}                  from '../util/ConsumerBaseElement'
+import {renderResourceComponent}              from '../util/renderResourceComponent'
+import {otherwise, when}                      from '../util/when'
+import {ReferenceData}                        from './structures'
 import '../data/primitive/Primitive'
 import '../util/Wrapper'
 import '../data/complex/Identifier'
 import '../util/NotSupported'
 
 @customElement('fhir-reference')
-export class Reference extends BaseElement<ReferenceData> {
+export class Reference extends ConsumerBaseElement<ReferenceData> {
+
+  @consume({context: containedDataContext, subscribe: true})
+  private contained: ResourceData[] = []
 
   @state()
-  private referenceType: ReferenceType_Ref2 = ReferenceType_Ref2.unknown
+  private containedResource: ResourceData | undefined
+
+  @state()
+  private referenceType: ReferenceType = ReferenceType.unknown
 
   constructor() {super('Reference')}
 
-  //TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the key this is
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+
+  }
+
+//TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the key this is
   // assigned to rather than defining the `type` property
   //TODO: need to figure out how to add all special rules and corner cases for references. see:
   // http://hl7.org/fhir/R5/datatypes.html#identifier
@@ -30,53 +46,51 @@ export class Reference extends BaseElement<ReferenceData> {
 
         ${choose(this.referenceType, [
               [
-                ReferenceType_Ref2.display,
+                ReferenceType.contained,
+                () => html`
+                  ${renderResourceComponent(this.containedResource)}
+                `
+              ],
+          [
+            ReferenceType.display,
                 () => html`
                   <fhir-primitive
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display}
                       .link=${data.reference}
-                      ?showerror=${this.showerror}
-                      ?verbose=${this.verbose}
                   ></fhir-primitive>`
               ],
               [
-                ReferenceType_Ref2.reference,
+                ReferenceType.reference,
                 () => html`
                   <fhir-primitive
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display ? data.display : data.reference}
                       .link=${data.reference}
-                      ?showerror=${this.showerror}
-                      ?verbose=${this.verbose}
                   ></fhir-primitive>`
               ],
               [
-                ReferenceType_Ref2.identifier,
+                ReferenceType.identifier,
                 () => html`
                   <fhir-identifier
                       label="identifier"
                       .data=${data.identifier}
-                      .showerror=${this.showerror}
-                      .verbose=${this.verbose}
-                      .open=${this.open}
                   ></fhir-identifier>`
               ],
               [
-                ReferenceType_Ref2.extension,
+                ReferenceType.extension,
                 () => html`
-                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType_Ref2.extension}"></fhir-not-supported>`
+                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType.extension}"></fhir-not-supported >`
               ],
               [
-                ReferenceType_Ref2.unknown,
+                ReferenceType.unknown,
                 () => html`
-                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType_Ref2.unknown}"></fhir-not-supported>`
+                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType.unknown}"></fhir-not-supported >`
               ]
 
             ]
         )
         }
-
       `
     ]
   }
@@ -88,17 +102,14 @@ export class Reference extends BaseElement<ReferenceData> {
    */
   protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-primitive label="reference" .value=${data.reference} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="reference" .value=${data.reference}></fhir-primitive >
+      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type}></fhir-primitive >
       <fhir-identifier
           label="identifier"
           .data=${data.identifier}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
+
       ></fhir-identifier>
-      <fhir-primitive label="display" .value=${data.display} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="display" .value=${data.display}></fhir-primitive >
     `
   }
 
@@ -107,23 +118,36 @@ export class Reference extends BaseElement<ReferenceData> {
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
     // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being able to request data that is in the
     // payload of the parent resource. Have to do this later with signals but when resolving the link call not here.
+    let isContainedRef = data?.reference?.startsWith('#')
+    let containedDataExists = this.contained.length > 0
 
-    //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).
-    this.referenceType = when<ReferenceData, ReferenceType_Ref2>(data)(
-      [d => !!d.extension, () => ReferenceType_Ref2.extension],
-      [d => !!d.reference, () => ReferenceType_Ref2.reference],
-      [d => !!d.identifier, () => ReferenceType_Ref2.identifier],
-      [d => !!d.display, () => ReferenceType_Ref2.display],
-      otherwise(() => ReferenceType_Ref2.unknown)
-    )
+    if (isContainedRef && containedDataExists) {
+      this.containedResource = this.contained.find(r => '#' + r.id === data.reference)
+    }
+
+    if (this.containedResource) {
+      this.referenceType = ReferenceType.contained
+    }
+
+    if (!this.referenceType) {
+      //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).
+      this.referenceType = when<ReferenceData, ReferenceType>(data)(
+        [d => !!d.extension, () => ReferenceType.extension],
+        [d => !!d.reference, () => ReferenceType.reference],
+        [d => !!d.identifier, () => ReferenceType.identifier],
+        [d => !!d.display, () => ReferenceType.display],
+        otherwise(() => ReferenceType.unknown)
+      )
+    }
     return data
   }
 }
 
-enum ReferenceType_Ref2 {
+enum ReferenceType {
   unknown = 'unknown',
   reference = 'reference',
   identifier = 'identifier',
   display = 'display',
-  extension = 'extension'
+  extension = 'extension',
+  contained = 'contained'
 }

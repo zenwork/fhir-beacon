@@ -1,8 +1,8 @@
-import {html, TemplateResult}         from 'lit'
-import {customElement}                from 'lit/decorators.js'
-import {BaseElement, BaseElementMode} from '../../BaseElement'
-import {PrimitiveType}                from '../primitive/converters'
-import {IdentifierData}               from './strucutures/complex'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../BaseElement'
+import {PrimitiveType}        from '../primitive/converters'
+import {IdentifierData}       from './strucutures/complex'
 import './CodeableConcept'
 import './Period'
 import '../../util/Wrapper'
@@ -15,9 +15,9 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   protected renderDisplay(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-codeable-concept .data=${data.type} .mode=${BaseElementMode.display}></fhir-codeable-concept>
+      <fhir-codeable-concept .data=${data.type}></fhir-codeable-concept >
       <fhir-primitive label="identifier" .value=${data.value} .context=${data.system}></fhir-primitive>
-      <fhir-period .data=${data.period} .mode=${BaseElementMode.display}></fhir-period>
+      <fhir-period .data=${data.period}></fhir-period >
     `
   }
 
@@ -29,48 +29,11 @@ export class Identifier extends BaseElement<IdentifierData> {
    */
   protected renderStructure(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-primitive
-          label="use"
-          type=${PrimitiveType.code}
-          .value=${data.use}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-      ></fhir-primitive>
-      <fhir-codeable-concept
-          label="type"
-          .data=${data.type}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
-      ></fhir-codeable-concept>
-      <fhir-primitive
-          label="system"
-          type=${PrimitiveType.uri}
-          .value=${data.system}
-          ?verbose=${this.verbose}
-      ></fhir-primitive>
-      <fhir-primitive
-          label="value"
-          .value=${data.value}
-          ?verbose=${this.verbose}
-      ></fhir-primitive>
-      <fhir-period
-          label="period"
-          .data=${data.period}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
-      ></fhir-period>
-      <fhir-reference
-          label="assigner"
-          .data=${data.assigner}
-          .mode=${BaseElementMode.structure}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
-      ></fhir-reference>
-    `
+      <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use}></fhir-primitive >
+      <fhir-codeable-concept label="type" .data=${data.type}></fhir-codeable-concept >
+      <fhir-primitive label="system" type=${PrimitiveType.uri} .value=${data.system}></fhir-primitive >
+      <fhir-primitive label="value" .value=${data.value}></fhir-primitive >
+      <fhir-period label="period" .data=${data.period}></fhir-period >
+      <fhir-reference label="assigner" .data=${data.assigner}></fhir-reference > `
   }
 }

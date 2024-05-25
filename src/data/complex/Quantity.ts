@@ -35,7 +35,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       `
     }
 
-    return renderError(this.showerror, this.verbose, 'quantity', 'must be Quantity or Simple Quantity')
+    return renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'quantity', 'must be Quantity or Simple Quantity')
   }
 
   protected renderStructure(data: QuantityData | SimpleQuantityData): TemplateResult {
@@ -46,35 +46,25 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
             label="value"
             .value=${data.value}
             type="decimal"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="comparator"
             .value=${data.comparator}
             type="code"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="unit"
             .value=${data.unit}
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="system"
             .value=${data.system}
             type="uri"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="code"
             .value=${data.code}
             type="code"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
       `
     }
@@ -85,33 +75,25 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
             label="value"
             .value=${data.value}
             type="decimal"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="unit"
             .value=${data.unit}
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="system"
             .value=${data.system}
             type="uri"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
         <fhir-primitive
             label="code"
             .value=${data.code}
             type="code"
-            ?showerror=${this.showerror}
-            ?verbose=${this.verbose}
         ></fhir-primitive>
       `
     }
 
-    return renderError(this.showerror, this.verbose, 'quantity', 'must be Quantity or Simple Quantity')
+    return renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'quantity', 'must be Quantity or Simple Quantity')
 
   }
 

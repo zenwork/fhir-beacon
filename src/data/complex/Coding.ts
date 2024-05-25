@@ -24,19 +24,18 @@ export class Coding extends BaseElement<CodingData> {
           .value=${(Coding.comuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
           .link=${data.system ? data.system : undefined}
-          ?showerror=${this.showerror}
-      ></fhir-primitive>
+      ></fhir-primitive >
     `
   }
 
   protected renderStructure(data: CodingData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.id} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="extension" .value=${data.extension} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="version" .value=${data.version} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="system" .value=${data.system} type="url" ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="code" .value=${data.code} type="code" ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
-      <fhir-primitive label="display" .value=${data.display} ?showerror=${this.showerror} ?verbose=${this.verbose}></fhir-primitive>
+      <fhir-primitive label="id" .value=${data.id}></fhir-primitive >
+      <fhir-primitive label="extension" .value=${data.extension}></fhir-primitive >
+      <fhir-primitive label="version" .value=${data.version}></fhir-primitive >
+      <fhir-primitive label="system" .value=${data.system} type="url"></fhir-primitive >
+      <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
+      <fhir-primitive label="display" .value=${data.display}></fhir-primitive >
     `
 
   }

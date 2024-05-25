@@ -1,8 +1,7 @@
 import './converters'
 import './presenters'
-import './structures'
 
-import './FhirElement'
+import './structures'
 import './Primitive'
 import './PrimitiveContext'
 import './PrimitiveError'

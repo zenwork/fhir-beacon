@@ -1,7 +1,8 @@
-import {html, TemplateResult}         from 'lit'
-import {customElement}                from 'lit/decorators.js'
-import {BaseElement, BaseElementMode} from '../../BaseElement'
-import {CodeableReferenceData}        from './strucutures/complex'
+import {html, TemplateResult}  from 'lit'
+import {customElement}         from 'lit/decorators.js'
+import {BaseElement}           from '../../BaseElement'
+import {BaseElementMode}       from '../../BaseElementMode'
+import {CodeableReferenceData} from './strucutures/complex'
 import './CodeableConcept'
 import '../../special/Reference'
 
@@ -23,18 +24,11 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
       <fhir-codeable-concept
           label="concept"
           .data=${data.concept}
-          .mode=${mode}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
+
       ></fhir-codeable-concept>
       <fhir-reference
           label="reference"
           .data=${data.reference}
-          .mode=${mode}
-          ?showerror=${this.showerror}
-          ?verbose=${this.verbose}
-          ?open=${this.open}
       ></fhir-reference>
     `
   }

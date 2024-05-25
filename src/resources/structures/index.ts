@@ -19,6 +19,7 @@ export type MetaData = {
 
 export type ResourceData = BaseData & {
   id?: Id,
+  resourceType: string //not in model but seems to always be there
   meta?: MetaData,
   implicitRules?: URI
   language?: Language

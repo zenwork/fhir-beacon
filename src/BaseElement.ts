@@ -1,3 +1,4 @@
+import {consume}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -5,40 +6,26 @@ import {BaseData}                                      from './BaseData'
 import './util/Debug'
 import './util/StructureWrapper'
 import './data/primitive/Primitive'
+import {BaseElementMode}                               from './BaseElementMode'
 import {PrimitiveType}                                 from './data/primitive/converters'
-import {FhirElement}                                   from './data/primitive/FhirElement'
-import {asReadable}                                    from './data/primitive/presenters/asReadable'
-import {hasSameAncestor}                               from './util/hasSameAncestor'
 
-export enum BaseElementMode {
-  display = 'display',
-  structure = 'structure',
-  structure_trace = 'structure_trace',
-  combined = 'combined',
-  narrative = 'narrative'
-}
+import {asReadable}                                                from './data/primitive/presenters/asReadable'
+import {FhirElement}                                               from './FhirElement'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from './resources/context'
+import {hasSameAncestor}                                           from './util/hasSameAncestor'
 
 
 export abstract class BaseElement<T extends BaseData> extends FhirElement {
+
+  @consume({context: displayConfigContext, subscribe: true})
+  protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})
   declare data: T
 
-  @property({type: BaseElementMode, converter})
-  public mode: BaseElementMode = BaseElementMode.display
-
   @property({reflect: true})
   public label: string = ''
-
-  @property({type: Boolean, reflect: true})
-  declare open: boolean
-
-  @property({type: Boolean, reflect: true})
-  declare verbose: boolean
-
-  @property({type: Boolean, reflect: true})
-  declare showerror: boolean
 
   @property({reflect: true})
   protected type: string = ''
@@ -63,16 +50,16 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
   protected willUpdate(_changedProperties: PropertyValues) {
     super.willUpdate(_changedProperties)
-    if (_changedProperties.has('verbose') && this.verbose) {
+    if (_changedProperties.has('verbose') && this.displayConfig.verbose) {
       if (!this.verboseAllowed()) this.recursionGuard = true
     } else {
       this.recursionGuard = false
     }
     if (_changedProperties.has('mode')) {
-      if (this.mode == BaseElementMode.structure_trace) {
-        this.verbose = true
-        this.showerror = true
-        this.open = true
+      if (this.displayConfig.mode == BaseElementMode.structure_trace) {
+        this.displayConfig.verbose = true
+        this.displayConfig.showerror = true
+        this.displayConfig.open = true
       }
     }
   }
@@ -85,7 +72,6 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected render(): TemplateResult | TemplateResult[] {
-    console.log(this.type, this.showerror)
     let display = () => {
       if (this.convertedData) {
         if (this.isVerbose()) {
@@ -93,7 +79,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
             <fhir-wrapper
                 .label=${this.getElementLabel()}
                 .fhirType=${this.getTypeLabel()}
-                ?open=${this.open}
+                ?open=${this.displayConfig.open}
             >
               ${this.renderDisplay(this.convertedData)}
             </fhir-wrapper>`
@@ -112,7 +98,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
               .fhirType=${this.getTypeLabel()}
-              ?open=${this.open}
+              ?open=${this.displayConfig.open}
           >
             ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {} as T) : nothing}
           </fhir-structure-wrapper>`
@@ -124,7 +110,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
               .type=${PrimitiveType.forced_error}
               label=${this.label}
               value="[(${this.type}) not rendered due to recursion guard]"
-              ?showerror=${this.showerror}
+              ?showerror=${this.displayConfig.showerror}
           ></fhir-primitive>`
       }
 
@@ -135,7 +121,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
     let combined = () => this.convertedData ? html`${[display(), structure()]}` : html``
 
 
-    return html`${choose(this.mode, [
+    return html`${choose(this.displayConfig.mode, [
         [BaseElementMode.display, display],
         [BaseElementMode.structure, structure],
         [BaseElementMode.structure_trace, structure],
@@ -179,7 +165,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected verboseAllowed() {
-    return this.verbose && !this.findSameAncestor(this)
+    return this.displayConfig.verbose && !this.findSameAncestor(this)
 
   }
 
@@ -198,7 +184,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   private isVerbose = () => {
-    return this.verbose && !this.recursionGuard
+    return this.displayConfig.verbose && !this.recursionGuard
   }
 
   private findSameAncestor(child: HTMLElement | null) {
@@ -210,7 +196,4 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
 
-}
-function converter(value: string | null): BaseElementMode {
-  return value ? <BaseElementMode>value : BaseElementMode.display
 }

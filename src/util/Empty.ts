@@ -1,6 +1,6 @@
 import {html}          from 'lit'
 import {customElement} from 'lit/decorators.js'
-import {FhirElement}   from '../data/primitive/FhirElement'
+import {FhirElement}   from '../FhirElement'
 
 @customElement('fhir-empty-set')
 export class Empty extends FhirElement {

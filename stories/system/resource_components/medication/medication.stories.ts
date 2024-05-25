@@ -1,5 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/resources/Medication'
+import '../../../../src/index'
 
 const meta = {
   title: 'System/Resource Components/Medication/Medication',

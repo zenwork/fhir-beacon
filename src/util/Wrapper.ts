@@ -1,6 +1,8 @@
-import {css, html, nothing}      from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {FhirElement}             from '../data/primitive/FhirElement'
+import {consume}                                                   from '@lit/context'
+import {css, html, nothing}                                        from 'lit'
+import {customElement, property}                                   from 'lit/decorators.js'
+import {FhirElement}                                               from '../FhirElement'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../resources/context'
 
 
 /**
@@ -10,6 +12,9 @@ import {FhirElement}             from '../data/primitive/FhirElement'
  */
 @customElement('fhir-wrapper')
 export class Wrapper extends FhirElement {
+
+  @consume({context: displayConfigContext, subscribe: true})
+  protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   static styles = css`
 

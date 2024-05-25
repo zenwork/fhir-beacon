@@ -1,6 +1,8 @@
-import {css, html, nothing}      from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {FhirElement}             from '../data/primitive/FhirElement'
+import {consume}                                                   from '@lit/context'
+import {css, html, nothing}                                        from 'lit'
+import {customElement, property}                                   from 'lit/decorators.js'
+import {FhirElement}                                               from '../FhirElement'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../resources/context'
 
 /**
  * Custom element for wrapping primitive content.
@@ -9,6 +11,9 @@ import {FhirElement}             from '../data/primitive/FhirElement'
  */
 @customElement('fhir-structure-wrapper')
 export class StructureWrapper extends FhirElement {
+
+  @consume({context: displayConfigContext, subscribe: true})
+  protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   static styles = css`
     sl-details::part(base) {
@@ -84,7 +89,7 @@ export class StructureWrapper extends FhirElement {
 
   protected render(): unknown {
     return html`
-      <sl-details part="base" ?open=${this.open}>
+      <sl-details part="base" ?open=${this.displayConfig.open}>
         <div slot="summary">
           <label><b>${this.label}</b></label>
           ${this.fhirType ? html`

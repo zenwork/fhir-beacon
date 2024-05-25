@@ -1,16 +1,22 @@
-let cssText = ''
+let globalSheets: CSSStyleSheet[] = []
 
-async function load(shadow: ShadowRoot, url: string) {
-  if (!cssText) {
-    const response = await fetch(url)
-    cssText = await response.text()
-  }
-  const sheet = new CSSStyleSheet()
-  sheet.replaceSync(cssText)
-  if (shadow) shadow.adoptedStyleSheets = [sheet, ...shadow.adoptedStyleSheets]
+export function loadStyles(shadow: ShadowRoot) {
+  shadow.adoptedStyleSheets.push(...getGlobalStyleSheets())
 }
 
-export async function loadStyles(shadow: ShadowRoot) {
+export function getGlobalStyleSheets() {
+  if (globalSheets.length === 0) {
+    globalSheets.push(...Array
+      .from(document.styleSheets)
+      .filter(css => css.title ? css.title === 'fhir-style' : false)
+      .map(x => {
 
-  // return await load(shadow, 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css')
+        const sheet = new CSSStyleSheet()
+        const css = Array.from(x.cssRules).map(rule => rule.cssText).join(' ')
+        sheet.replaceSync(css)
+        return sheet
+      }))
+  }
+
+  return globalSheets
 }

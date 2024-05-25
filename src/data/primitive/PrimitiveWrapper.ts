@@ -1,6 +1,6 @@
 import {css, html}     from 'lit'
 import {customElement} from 'lit/decorators.js'
-import {FhirElement}   from '../primitive/FhirElement'
+import {FhirElement}   from '../../FhirElement'
 
 @customElement('fhir-primitive-wrapper')
 export class PrimitiveWrapper extends FhirElement {

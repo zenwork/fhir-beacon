@@ -1,6 +1,6 @@
 import {LitElement} from 'lit'
 import {state}      from 'lit/decorators.js'
-import {loadStyles} from '../../util/LoadCss'
+import {loadStyles} from './util/LoadCss'
 
 export abstract class FhirElement extends LitElement {
 
@@ -9,7 +9,7 @@ export abstract class FhirElement extends LitElement {
 
   public connectedCallback() {
     super.connectedCallback()
-    loadStyles(this.shadowRoot!)
+    if (this.shadowRoot) loadStyles(this.shadowRoot)
   }
 
 }

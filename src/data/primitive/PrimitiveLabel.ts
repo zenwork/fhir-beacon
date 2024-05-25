@@ -1,6 +1,6 @@
 import {css, html, PropertyValues}                   from 'lit'
 import {customElement, property, queryAssignedNodes} from 'lit/decorators.js'
-import {FhirElement}                                 from './FhirElement'
+import {FhirElement}                                 from '../../FhirElement'
 
 @customElement('fhir-label')
 export class PrimitiveLabel extends FhirElement {
