@@ -1,6 +1,6 @@
 import {html, TemplateResult}                                             from 'lit'
 import {customElement}                                                    from 'lit/decorators.js'
-import {ConsumerBaseElement}                                              from '../../util/ConsumerBaseElement'
+import {ConsumerBaseElement}                                              from '../../ConsumerBaseElement'
 import {renderError}                                                      from '../../util/Errors'
 import {SubstanceIngredientConceptData, SubstanceIngredientReferenceData} from '../structures/backbone'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference}     from '../structures/type-guards'

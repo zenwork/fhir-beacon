@@ -2,11 +2,11 @@ import {consume}                              from '@lit/context'
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, state}                 from 'lit/decorators.js'
 import {choose}                               from 'lit/directives/choose.js'
+import {ConsumerBaseElement}                  from '../ConsumerBaseElement'
 import {PrimitiveType}                        from '../data/primitive/converters'
 import {asReadable}                           from '../data/primitive/presenters/asReadable'
 import {containedDataContext}                 from '../resources/context'
 import {ResourceData}                         from '../resources/structures'
-import {ConsumerBaseElement}                  from '../util/ConsumerBaseElement'
 import {renderResourceComponent}              from '../util/renderResourceComponent'
 import {otherwise, when}                      from '../util/when'
 import {ReferenceData}                        from './structures'
@@ -48,7 +48,7 @@ export class Reference extends ConsumerBaseElement<ReferenceData> {
               [
                 ReferenceType.contained,
                 () => html`
-                  ${renderResourceComponent(this.containedResource)}
+                  ${renderResourceComponent(this.containedResource, this.displayConfig)}
                 `
               ],
           [
@@ -128,8 +128,7 @@ export class Reference extends ConsumerBaseElement<ReferenceData> {
     if (this.containedResource) {
       this.referenceType = ReferenceType.contained
     }
-
-    if (!this.referenceType) {
+    if (this.referenceType == ReferenceType.unknown) {
       //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).
       this.referenceType = when<ReferenceData, ReferenceType>(data)(
         [d => !!d.extension, () => ReferenceType.extension],
@@ -139,6 +138,7 @@ export class Reference extends ConsumerBaseElement<ReferenceData> {
         otherwise(() => ReferenceType.unknown)
       )
     }
+
     return data
   }
 }

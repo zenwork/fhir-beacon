@@ -1,10 +1,10 @@
 import {css, html, TemplateResult} from 'lit'
 import {customElement}             from 'lit/decorators.js'
-import {BaseElement}               from '../../BaseElement'
+import {ConsumerBaseElement}       from '../../ConsumerBaseElement'
 import {RatioData}                 from '../../resources/structures'
 
 @customElement('fhir-ratio')
-export class Ratio extends BaseElement<RatioData> {
+export class Ratio extends ConsumerBaseElement<RatioData> {
   static styles = css`
     li {
       display: flex;

@@ -1,4 +1,3 @@
-import {consume}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -9,16 +8,11 @@ import './data/primitive/Primitive'
 import {BaseElementMode}                               from './BaseElementMode'
 import {PrimitiveType}                                 from './data/primitive/converters'
 
-import {asReadable}                                                from './data/primitive/presenters/asReadable'
-import {FhirElement}                                               from './FhirElement'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from './resources/context'
-import {hasSameAncestor}                                           from './util/hasSameAncestor'
-
+import {asReadable}      from './data/primitive/presenters/asReadable'
+import {FhirElement}     from './FhirElement'
+import {hasSameAncestor} from './util/hasSameAncestor'
 
 export abstract class BaseElement<T extends BaseData> extends FhirElement {
-
-  @consume({context: displayConfigContext, subscribe: true})
-  protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})
@@ -30,6 +24,18 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   @property({reflect: true})
   protected type: string = ''
 
+  @property({type: BaseElementMode, converter})
+  public mode: BaseElementMode = BaseElementMode.display
+
+  @property({type: Boolean, reflect: true})
+  declare open: boolean
+
+  @property({type: Boolean, reflect: true})
+  declare verbose: boolean
+
+  @property({type: Boolean, reflect: true})
+  declare showerror: boolean
+
   @state()
   private convertedData: T | null = null
 
@@ -40,34 +46,25 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
    *
    * @type {boolean}
    */
-  private recursionGuard: boolean = false
+  protected recursionGuard: boolean = false
 
   constructor(type: string) {
     super()
     this.type = type
-  }
 
-
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (_changedProperties.has('verbose') && this.displayConfig.verbose) {
-      if (!this.verboseAllowed()) this.recursionGuard = true
-    } else {
-      this.recursionGuard = false
-    }
-    if (_changedProperties.has('mode')) {
-      if (this.displayConfig.mode == BaseElementMode.structure_trace) {
-        this.displayConfig.verbose = true
-        this.displayConfig.showerror = true
-        this.displayConfig.open = true
-      }
-    }
   }
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
+
     if (_changedProperties.has('data')) {
       this.convertedData = this.convertData(this.data)
+    }
+
+    if (_changedProperties.has('verbose') && this.verbose) {
+      if (!this.verboseAllowed()) this.recursionGuard = true
+    } else {
+      this.recursionGuard = false
     }
   }
 
@@ -79,7 +76,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
             <fhir-wrapper
                 .label=${this.getElementLabel()}
                 .fhirType=${this.getTypeLabel()}
-                ?open=${this.displayConfig.open}
+                ?open=${this.open}
             >
               ${this.renderDisplay(this.convertedData)}
             </fhir-wrapper>`
@@ -98,10 +95,10 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
               .fhirType=${this.getTypeLabel()}
-              ?open=${this.displayConfig.open}
           >
             ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {} as T) : nothing}
-          </fhir-structure-wrapper>`
+          </fhir-structure-wrapper >
+        `
       }
 
       if (this.recursionGuard) {
@@ -110,7 +107,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
               .type=${PrimitiveType.forced_error}
               label=${this.label}
               value="[(${this.type}) not rendered due to recursion guard]"
-              ?showerror=${this.displayConfig.showerror}
+              ?showerror=${this.showerror}
           ></fhir-primitive>`
       }
 
@@ -121,11 +118,12 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
     let combined = () => this.convertedData ? html`${[display(), structure()]}` : html``
 
 
-    return html`${choose(this.displayConfig.mode, [
+    return html`${choose(this.mode, [
         [BaseElementMode.display, display],
         [BaseElementMode.structure, structure],
         [BaseElementMode.structure_trace, structure],
         [BaseElementMode.combined, combined],
+        [BaseElementMode.narrative, display]
       ],
       () => html`<h2>Error: Unable to render the element</h2>`)}`
 
@@ -165,7 +163,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   protected verboseAllowed() {
-    return this.displayConfig.verbose && !this.findSameAncestor(this)
+    return this.verbose && !this.findSameAncestor(this)
 
   }
 
@@ -184,7 +182,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
   private isVerbose = () => {
-    return this.displayConfig.verbose && !this.recursionGuard
+    return this.verbose && !this.recursionGuard
   }
 
   private findSameAncestor(child: HTMLElement | null) {
@@ -196,4 +194,8 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
   }
 
 
+}
+
+export function converter(value: string | null): BaseElementMode {
+  return value ? <BaseElementMode>value : BaseElementMode.display
 }

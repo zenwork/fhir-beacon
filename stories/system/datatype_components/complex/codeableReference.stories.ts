@@ -1,9 +1,13 @@
-import {StoryObj} from '@storybook/web-components'
+import {Meta, StoryObj} from '@storybook/web-components'
 import '../../../../src/data/complex/CodeableReference'
+import '../../../../src/shell/Shell'
+import {html}           from 'lit'
+
+type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 
 let title = 'system/Datatype Components/Complex Type/Codeable Reference'
-let component = 'fhir-codeable-reference'
+
 let data = {
   concept: {
     coding: [
@@ -25,28 +29,38 @@ let data = {
     display: 'Patient reported Headache'
   }
 }
-const meta = {
+const meta: Meta<CustomArgs> = {
   title,
-  component,
+  component: 'fhir-shell',
   argTypes: {
     mode: {
       options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'}
+      control: {type: 'inline-radio'}
     },
     verbose: {
       options: [true, false],
-      control: {type: 'radio'}
+      control: {type: 'inline-radio'}
     },
     open: {
       options: [true, false],
-      control: {type: 'radio'}
+      control: {type: 'inline-radio'}
+    },
+    showerror: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
     }
-  }
+  },
+  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) =>
+    html`
+      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
+        <fhir-codeable-reference .data=${data}></fhir-codeable-reference >
+      </fhir-shell >
+    `
 
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<CustomArgs>;
 
 export const Headache: Story = {
   args: {

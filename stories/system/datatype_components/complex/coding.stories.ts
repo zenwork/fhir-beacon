@@ -1,27 +1,43 @@
-import {StoryObj} from '@storybook/web-components'
+import {Meta, StoryObj} from '@storybook/web-components'
 import '../../../../src/data/./complex/Coding'
 import '../../../../src/util/Debug'
 import '../../../../src/data/primitive/Primitive'
+import '../../../../src/'
+import {html}           from 'lit'
 
+type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
-const meta = {
+const meta: Meta<CustomArgs> = {
   title: 'System/Datatype Components/Complex Type/Coding',
-  component: 'fhir-coding',
+  component: 'fhir-shell',
   argTypes: {
     mode: {
       options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'},
+      control: {type: 'inline-radio'}
     },
     verbose: {
       options: [true, false],
-      control: {type: 'radio'},
+      control: {type: 'inline-radio'}
     },
-  }
+    open: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
+    },
+    showerror: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
+    },
+  },
+  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) => html`
+    <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
+      <fhir-coding .data=${data}></fhir-coding >
+    </fhir-shell >
+  `
 
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<CustomArgs>;
 
 export const DisplayableValue: Story = {
   args:{
@@ -54,7 +70,7 @@ export const ShowStructureWithErrors: Story = {
     },
     mode: 'structure',
     verbose: false,
-    'showerror': true,
+    showerror: true,
     open: true
   }
 }

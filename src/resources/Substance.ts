@@ -1,12 +1,11 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {map}                  from 'lit/directives/map.js'
-import {PrimitiveType}        from '../data/primitive/converters'
-import {DomainResource}       from './DomainResource'
-import {SubstanceData}        from './structures'
+import {html, nothing, TemplateResult} from 'lit'
+import {customElement}                 from 'lit/decorators.js'
+import {map}                           from 'lit/directives/map.js'
+import {PrimitiveType}                 from '../data/primitive/converters'
+import {DomainResource}                from './DomainResource'
+import {SubstanceData}                 from './structures'
 import '../data/'
-import '../util/StructureWrapper'
-import '../util/Wrapper'
+import '../util/'
 import '../data/complex/CodeableConcept'
 import '../data/complex/CodeableReference'
 import '../resources/backbones/SubstanceIngredient'
@@ -26,7 +25,7 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code}></fhir-primitive >
       ${map(data.category, (c, idx) => {
         return html`
-          <fhir-wrapper label="category [${idx}]" ?open="${this.open}">
+          <fhir-wrapper label="category [${idx}]">
             <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >
           </fhir-wrapper >
         `
@@ -36,7 +35,7 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-quantity label="quantity" .data=${data.quantity}></fhir-quantity >
       ${map(data.ingredient,
           (ing, idx) => html`
-        <fhir-wrapper label="ingredient [${idx}]" ?open="${this.open}">
+            <fhir-wrapper label="ingredient [${idx}]">
           <fhir-substance-ingredient label="ingredient" .data=${ing}></fhir-substance-ingredient >
         </fhir-wrapper >
       `)}
@@ -53,22 +52,28 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-identifier .label="identifier" .data=${data.identifier}></fhir-identifier >
       <fhir-primitive label="instance" value=${data.instance}></fhir-primitive >
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code}></fhir-primitive >
-      <fhir-structure-wrapper label="categories">
-        ${map(data.category, (c) => {
-          return html`
-            <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >
-          `
-        })}
-      </fhir-structure-wrapper>
+      ${(data.category || this.verbose) ? html`
+        <fhir-structure-wrapper label="categories">
+          ${data.category ? map(data.category, (c) => {
+            return html`
+              <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >
+            `
+          }) : html`
+            <fhir-empty-set ></fhir-empty-set >`}
+        </fhir-structure-wrapper >
+      ` : nothing}
       <fhir-codeable-reference label="code" .data=${data.code}></fhir-codeable-reference >
       <fhir-primitive label="description" .value=${data.description}></fhir-primitive >
       <fhir-primitive label="expiry" value=${data.expiry}></fhir-primitive >
       <fhir-quantity label="quantity" .data=${data.quantity}></fhir-quantity >
+      ${(data.ingredient || this.verbose) ? html`
       <fhir-structure-wrapper label="ingredients" ?open=${this.open}>
-        ${map(data.ingredient, (ing) => html`
+        ${data.ingredient ? map(data.ingredient, (ing) => html`
           <fhir-substance-ingredient label="ingredient" .data=${ing}></fhir-substance-ingredient >
-        `)}
+        `) : html`
+          <fhir-empty-set ></fhir-empty-set >`}
       </fhir-structure-wrapper>
+      ` : nothing}
     `
   }
 

@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../BaseElement'
+import {ConsumerBaseElement}  from '../../ConsumerBaseElement'
 import {PrimitiveType}        from '../primitive/converters'
 import {IdentifierData}       from './strucutures/complex'
 import './CodeableConcept'
@@ -8,7 +8,7 @@ import './Period'
 import '../../util/Wrapper'
 
 @customElement('fhir-identifier')
-export class Identifier extends BaseElement<IdentifierData> {
+export class Identifier extends ConsumerBaseElement<IdentifierData> {
 
   //TODO: this still needs some work. There are a lot of corner cases
   constructor() {super('Identifier')}

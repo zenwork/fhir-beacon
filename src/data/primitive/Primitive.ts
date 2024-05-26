@@ -2,7 +2,7 @@ import {consume}                                                   from '@lit/co
 import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                            from 'lit/decorators.js'
 import {choose}                                                    from 'lit/directives/choose.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../resources/context'
+import {DisplayConfig, displayConfigContext}                       from '../../resources/context'
 
 import {PrimitiveType, valueOrError} from './converters'
 import {toCode}                      from './converters/ToCode'
@@ -31,7 +31,7 @@ import './PrimitiveWrapper'
 export class Primitive extends LitElement {
 
   @consume({context: displayConfigContext, subscribe: true})
-  protected displayConfig: DisplayConfig = defaultDisplayConfig
+  declare displayConfig: DisplayConfig
 
   @property()
   declare label: string
@@ -51,14 +51,14 @@ export class Primitive extends LitElement {
   @property({type: PrimitiveType, converter: convertToPrimitiveType})
   public type: PrimitiveType = PrimitiveType.none
 
-  // @property({type: Boolean, attribute: 'showerror'})
-  // declare showerror: boolean
-
   @property({type: Boolean})
   declare showOriginal: boolean
 
-  // @property()
-  // declare verbose: boolean
+  @property({type: Boolean})
+  declare showerror: boolean
+
+  @property()
+  declare verbose: boolean
 
   @state()
   private error: boolean = false
@@ -66,9 +66,6 @@ export class Primitive extends LitElement {
   @state()
   private presentableValue: unknown = ''
 
-  protected render(): unknown {
-    return this.error ? this.renderError() : this.renderValid()
-  }
 
   protected willUpdate(_changedProperties: PropertyValues) {
     let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
@@ -87,10 +84,22 @@ export class Primitive extends LitElement {
     }
   }
 
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (this.displayConfig) {
+      this.verbose = this.displayConfig.verbose
+      this.showerror = this.displayConfig.showerror
+    }
+  }
+
+  protected render(): unknown {
+    return this.error ? this.renderError() : this.renderValid()
+  }
+
   //TODO: should not be an <li>. A primitive and a base element should be the same thing so the are handled the same way by the wrapper
   // TODO: should be able to put link on value OR on context
   private renderValid = (): TemplateResult => {
-    return this.value || this.displayConfig.verbose
+    return this.value || this.displayConfig?.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
@@ -99,8 +108,8 @@ export class Primitive extends LitElement {
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>
             <fhir-context
-                .text=${this.context ? this.context : ''}${this.context && this.displayConfig.verbose ? ' - ' : ''}
-                ${this.displayConfig.verbose ? this.type : ''}
+                .text=${this.context ? this.context : ''}${this.context && this.displayConfig?.verbose ? ' - ' : ''}
+                ${this.displayConfig?.verbose ? this.type : ''}
             ></fhir-context >
           </fhir-primitive-wrapper >`
            : html``
@@ -112,7 +121,7 @@ export class Primitive extends LitElement {
           <fhir-primitive-wrapper >
             <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
             <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-                                                                                                      ${this.displayConfig.showerror
+                                                                                                      ${this.displayConfig?.showerror
                                                                                                         ? html`
                                                                                                             <fhir-error text=${this.presentableValue}></fhir-error >`
                                                                                                         : nothing}

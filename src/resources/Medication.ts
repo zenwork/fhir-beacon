@@ -28,7 +28,7 @@ export class Medication extends DomainResource<MedicationData> {
       <fhir-quantity label="total volume" .data=${data.totalVolume}></fhir-quantity>
       <fhir-wrapper label="ingredients" ?open="${this.open}">
         ${map(data.ingredient, (i, idx) => html`
-          <fhir-wrapper label="ingredient [${idx}]" ?open="${this.open}">
+          <fhir-wrapper label="ingredient [${idx}]">
             <fhir-codeable-reference label="item" .data=${i.item}></fhir-codeable-reference >
             <fhir-primitive .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}></fhir-primitive >
             <fhir-ratio label="ratio" .data=${i.strengthRatio}></fhir-ratio >
@@ -53,7 +53,7 @@ export class Medication extends DomainResource<MedicationData> {
       <fhir-reference label="marketing authorization holder" .data=${data.marketingAuthorisationHolder}></fhir-reference >
       <fhir-codeable-concept label="dose form" .data=${data.doseForm}></fhir-codeable-concept >
       <fhir-quantity label="total volume" .data=${data.totalVolume}></fhir-quantity >
-      <fhir-structure-wrapper label="ingredients" ?open=${this.open}>
+      <fhir-structure-wrapper label="ingredients">
         ${map(data.ingredient, (i, idx) => html`
           <fhir-structure-wrapper label="ingredient [${idx}]">
             <fhir-codeable-reference label="item" .data=${i.item}></fhir-codeable-reference >
@@ -64,7 +64,7 @@ export class Medication extends DomainResource<MedicationData> {
           </fhir-structure-wrapper >
         `)}
       </fhir-structure-wrapper >
-      <fhir-structure-wrapper label="batch" ?open=${this.open}>
+      <fhir-structure-wrapper label="batch">
         <fhir-primitive label="batch details" value="not implemented yet" type=${PrimitiveType.forced_error}></fhir-primitive >
       </fhir-structure-wrapper >
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference >

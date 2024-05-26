@@ -1,18 +1,18 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../BaseElement'
+import {ConsumerBaseElement}  from '../../ConsumerBaseElement'
 
 import {CodingData} from './strucutures/complex'
 
 //TODO: rename to fhir-coding
 @customElement('fhir-coding')
-export class Coding extends BaseElement<CodingData> {
+export class Coding extends ConsumerBaseElement<CodingData> {
 
   constructor() {
     super('Coding')
   }
 
-  private static comuteDisplay = (data: CodingData) => {
+  private static commuteDisplay = (data: CodingData) => {
     if (data.display) return data.display
     if (data.code) return data.code
   }
@@ -21,7 +21,7 @@ export class Coding extends BaseElement<CodingData> {
     return html`
       <fhir-primitive
           .label=${this.label}
-          .value=${(Coding.comuteDisplay(data))}
+          .value=${(Coding.commuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
           .link=${data.system ? data.system : undefined}
       ></fhir-primitive >

@@ -1,14 +1,14 @@
-import {provide}                              from '@lit/context'
-import {html, PropertyValues, TemplateResult} from 'lit'
-import {choose}                               from 'lit/directives/choose.js'
+import {provide}                                       from '@lit/context'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {choose}                                        from 'lit/directives/choose.js'
 
 import {BaseElementMode}         from '../BaseElementMode'
-import {ProviderBaseElement}     from '../util/ProviderBaseElement'
+import {ProviderBaseElement}     from '../ProviderBaseElement'
 import {renderResourceComponent} from '../util/renderResourceComponent'
 import {containedDataContext}    from './context'
 
 import {DomainResourceData, ResourceData} from './structures'
-import '../util/Wrapper'
+import '../util/'
 import '../special/Narrative'
 
 
@@ -41,9 +41,15 @@ export abstract class DomainResource<T extends DomainResourceData> extends Provi
 
   protected renderStructure(data: T): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-structure-wrapper label="contained" ?open=${this.open}>
-        ${this.renderStructureContained()}
-      </fhir-structure-wrapper >
+      ${(this.data.contained) ? html`
+        <fhir-structure-wrapper label="contained">
+          ${this.renderStructureContained()}
+        </fhir-structure-wrapper >
+      ` : nothing}
+      ${(!this.data.contained && this.verbose) ? html`
+        <fhir-structure-wrapper label="contained">
+          <fhir-empty-set ></fhir-empty-set >
+        </fhir-structure-wrapper >` : nothing}
     `
   }
 
@@ -54,7 +60,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Provi
   protected renderStructureContained(): TemplateResult[] {
     if (this.data?.contained) {
       return this.data.contained.map((c: ResourceData) => {
-        return renderResourceComponent(c)
+        return renderResourceComponent(c, this.display.value)
       })
     }
     return []
