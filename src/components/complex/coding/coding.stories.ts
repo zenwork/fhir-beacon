@@ -1,0 +1,76 @@
+import {Meta, StoryObj} from '@storybook/web-components'
+import './coding'
+import '../../../utilities/Debug'
+import '../../primitive/primitive'
+import '../../../index'
+import {html}           from 'lit'
+
+type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
+
+const meta: Meta<CustomArgs> = {
+  title: 'System/Datatype Components/Complex Type/Coding',
+  component: 'fhir-shell',
+  argTypes: {
+    mode: {
+      options: ['display', 'structure', 'combined'],
+      control: {type: 'inline-radio'}
+    },
+    verbose: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
+    },
+    open: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
+    },
+    showerror: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
+    },
+  },
+  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) => html`
+    <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
+      <fhir-coding .data=${data}></fhir-coding >
+    </fhir-shell >
+  `
+
+}
+
+export default meta
+type Story = StoryObj<CustomArgs>;
+
+export const DisplayableValue: Story = {
+  args:{
+    data:{
+      system: 'http://hl7.org/fhir/sid/icd-10',
+      code: 'G44.1',
+      display: 'Vascular headache, not elsewhere classified'
+    }
+  }
+  }
+
+export const NoDisplayableValue: Story = {
+  args:{
+    data:{
+      system: 'http://hl7.org/fhir/sid/icd-10',
+      code: 'G44.1'
+    }
+  }
+}
+
+export const ShowStructureWithErrors: Story = {
+  args: {
+    data: {
+      id: '123-456',
+      extension: [],
+      version: '1.0',
+      system: 'hl7.org/fhir/sid/icd-10',
+      code: 'not a valid code',
+      display: 'Vascular headache, not elsewhere classified'
+    },
+    mode: 'structure',
+    verbose: false,
+    showerror: true,
+    open: true
+  }
+}

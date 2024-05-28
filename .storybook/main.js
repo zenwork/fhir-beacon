@@ -1,8 +1,10 @@
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
     stories:[
+        '../src/**/*.mdx',
         '../stories/**/*.mdx',
-        '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+        '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+        '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
     ],
     addons:[
         '@storybook/addon-links',

@@ -1,8 +1,6 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
 
-import '../../../src/data/primitive'
-
 
 const meta: Meta = {
   title: 'System/Atoms/Primitive'

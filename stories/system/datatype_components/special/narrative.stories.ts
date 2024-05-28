@@ -1,5 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/special/Narrative'
+import '../../../../src/components/special/narrative/narrative'
 
 
 const meta = {
