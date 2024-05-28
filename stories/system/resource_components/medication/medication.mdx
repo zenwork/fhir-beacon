@@ -1,0 +1,33 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './medication.stories'
+
+<Meta of={Stories}/>
+
+# Medication Resource
+
+This resource is primarily used for the identification and definition of a medication, including ingredients, for the purposes of prescribing, dispensing, and administering a medication as well as for making statements about medication use.
+
+reference: [R5](http://hl7.org/fhir/R5/medication.html)
+
+## Med319 Display
+
+<Canvas of={Stories.Med0319Display} />
+
+## Med319 Structure
+
+<Canvas of={Stories.Med0319Structure} />
+
+
+## Med310 Display
+
+<Canvas of={Stories.Med0310Display}/>
+
+## Med310 Structure
+
+<Canvas of={Stories.Med0310Structure}/>
+
+
+## Med310 Narrative
+
+<Canvas of={Stories.Med0310Narrative}/>

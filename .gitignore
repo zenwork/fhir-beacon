@@ -217,7 +217,8 @@ storybook-static
 /blob-report/
 /playwright/.cache/
 /build/custom-elements.json
-/package-lock.json
+
 
 # reference document directory
 refs
+test-results/

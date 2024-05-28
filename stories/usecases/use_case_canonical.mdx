@@ -1,0 +1,45 @@
+    <Meta title = "Use Cases/Canonical Usage" / >
+
+Canonical Examples
+==================
+
+Can be used with easy to use canonical components.
+
+attribute details:
+* resource source - url or inlined data
+* medication id - identity of data structure to render from
+* medication mode - read | read-full | write
+*
+
+### Make it easy to use quickly:
+```html
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
+    <fhir-medication id="med0301" mode="read"></fhir-medication>
+</fhir-resource>
+```
+
+The above results in:
+* display all presentable values in the source in a human-readable format
+* apply some reasonable defaults to make it presentable
+
+### Make it debuggabble:
+```html
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
+    <fhir-medication id="med0301" mode="read-full"></fhir-medication>
+</fhir-resource>
+```
+
+The above enables:
+* display all values with technical details useful for developer and/or FHIR expert investigations
+
+### Make it editable:
+```html
+<form>
+    <fhir-resource source="https://my-fhir-server.net/medication/med0301">
+        <fhir-medication id="med0301" mode="write"></fhir-medication>
+    </fhir-resource>
+</form>
+```
+The above results in:
+* form that allows editing all values in the structure.
+* Note: this the trickiest bit as all sorts of value sets and code systems have to be supported.

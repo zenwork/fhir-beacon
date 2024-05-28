@@ -37,7 +37,12 @@ export class Debug extends LitElement {
 
       li {
           font-family: monospace;
-          font-size: 0.6rem
+          font-size: 0.6rem;
+          margin-top: 0.5rem;
+      }
+
+      pre {
+          margin: 0;
       }
 
       .key {
@@ -58,22 +63,32 @@ export class Debug extends LitElement {
     }
   }
 
+  private static stringify = (i: unknown) => {
+    let value = JSON.stringify(i, null, 2)
+    if (value.charAt(0) === '"') {
+      value = value.substring(1)
+      if (value.charAt(value.length - 1) === '"') {value = value.substring(0, value.length - 1)}
+    } else {
+
+      value = value.replace(/[{}\[\]]/g, '')
+      value = value.replace(/\n\s+\n/g, '')
+      value = value.replace(/:\s+/g, ': ')
+    }
+    return value
+  }
 
   protected render(): unknown {
     return html`
         <div>
             <ol>${map(Object.entries(this.data),
                     (i) => html`
-                        <li><span class="key">${i[0].padStart(this.longest, '\u00A0')}</span> : ${(Debug.stringify(i[1]))}</li>`)}
+                        <li><span class="key">${i[0].padStart(this.longest, '\u00A0')}</span> :
+                            <pre>${(Debug.stringify(i[1]))}</pre>
+                        </li>`)}
             </ol>
         </div>
     `
   }
 
-  private static stringify = (i: unknown) => {
-    let value = JSON.stringify(i)
-    if (value.charAt(0) === '"') {value = value.substring(1)}
-    if (value.charAt(value.length - 1) === '"') {value = value.substring(0, value.length - 1)}
-    return value
-  }
+
 }

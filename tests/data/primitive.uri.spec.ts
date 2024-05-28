@@ -1,5 +1,5 @@
 import {test}  from '@playwright/test'
-import {toUri} from '../../src/data/converters/ToUri'
+import {toUri} from '../../src/data/primitive/converters/ToUri'
 
 test.describe('Primitives', () => {
   test('should parse a URI', async ({page}) => {
