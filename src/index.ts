@@ -1,6 +1,6 @@
 import './codesystems'
 import './components'
-import './contexts/context'
+import './internal/contexts/context'
 import './internal'
 import './shell'
 import './utilities'

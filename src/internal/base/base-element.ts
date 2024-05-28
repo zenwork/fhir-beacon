@@ -4,16 +4,15 @@ import {choose}                               from 'lit/directives/choose.js'
 import {hasSameAncestor}                      from '../.././utilities/hasSameAncestor'
 import {PrimitiveType}                        from '../../components/primitive/type-converters'
 
-import {asReadable}      from '../../components/primitive/type-presenters/asReadable'
-import {FhirElement}     from '../../shell/FhirElement'
-import {BaseData}        from './BaseData'
+import {asReadable}                       from '../../components/primitive/type-presenters/asReadable'
+import {FhirElement}                      from '../../shell/FhirElement'
+import {BaseElementData, BaseElementMode} from './base-element.data'
 import '../.././utilities/Debug'
 import '../../shell/layout/Wrapper'
 import '../../shell/layout/structure-wrapper'
 import '../../components/primitive/primitive'
-import {BaseElementMode} from './BaseElementMode'
 
-export abstract class BaseElement<T extends BaseData> extends FhirElement {
+export abstract class BaseElement<T extends BaseElementData> extends FhirElement {
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})

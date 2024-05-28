@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult}    from 'lit'
 import {customElement}                    from 'lit/decorators.js'
-import {BaseData}                         from '../../../internal/base/BaseData'
-import {ConsumerBaseElement}              from '../../../internal/base/ConsumerBaseElement'
+import {BaseElementConsumer}              from '../../../internal/base/base-element-consumer'
+import {BaseElementData}                  from '../../../internal/base/base-element.data'
 import {renderError}                      from '../../../shell/layout/errors'
 import {asQuantityComparator}             from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, SimpleQuantityData} from './quantity.data'
@@ -11,7 +11,7 @@ import {isQuantity, isSimpleQuantity} from './quantity.type-guards'
 
 //TODO: rename to fhir-quanity
 @customElement('fhir-quantity')
-export class Quantity extends ConsumerBaseElement<QuantityData | SimpleQuantityData> {
+export class Quantity extends BaseElementConsumer<QuantityData | SimpleQuantityData> {
 
   constructor() {super('Quantity')}
 
@@ -76,7 +76,7 @@ export class Quantity extends ConsumerBaseElement<QuantityData | SimpleQuantityD
   }
 
 
-  protected convertData(data: BaseData & { [p: string]: any }): QuantityData {
+  protected convertData(data: BaseElementData & { [p: string]: any }): QuantityData {
     if (data.comparator) {
       // convert html encoded strings such as &gt;
       data.comparator = new DOMParser().parseFromString(data.comparator, 'text/html').body.textContent

@@ -1,10 +1,10 @@
 import {ContextProvider, ContextRoot} from '@lit/context'
 import {PropertyValues}               from 'lit'
-import {displayConfigContext}         from '../../contexts/context'
-import {BaseData}                     from './BaseData'
-import {BaseElement}                  from './BaseElement'
+import {displayConfigContext}         from '../contexts/context'
+import {BaseElement}                  from './base-element'
+import {BaseElementData}              from './base-element.data'
 
-export class ProviderBaseElement<T extends BaseData> extends BaseElement<T> {
+export class BaseElementProvider<T extends BaseElementData> extends BaseElement<T> {
 
   protected display = new ContextProvider(this, {context: displayConfigContext})
   private contextRoot = new ContextRoot()

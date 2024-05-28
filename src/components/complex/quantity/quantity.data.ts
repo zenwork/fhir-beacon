@@ -1,8 +1,8 @@
-import {BaseData}           from '../../../internal/base/BaseData'
+import {BaseElementData}    from '../../../internal/base/base-element.data'
 import {Code, Decimal, URI} from '../../primitive/primitive.data'
 
 //TODO: Rule: If a code for the unit is present, the system SHALL also be present. see: https://www.hl7.org/fhir/datatypes.html#quantity
-export type QuantityData = BaseData & {
+export type QuantityData = BaseElementData & {
   value?: Decimal //decimal
   comparator?: Code
   unit?: string

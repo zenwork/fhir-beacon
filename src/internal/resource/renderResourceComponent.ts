@@ -1,6 +1,7 @@
 import {html, TemplateResult} from 'lit'
-import {ResourceData}         from '../../components/resources'
-import {DisplayConfig}        from '../../contexts/context'
+import {DisplayConfig}        from '../contexts/context'
+
+import {ResourceData} from './domain-resource.data'
 
 export function renderResourceComponent(data: ResourceData | undefined, displayConfig: DisplayConfig): TemplateResult {
   if (data && displayConfig) {

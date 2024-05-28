@@ -1,9 +1,9 @@
 import {ContextProvider, ContextRoot} from '@lit/context'
 import {LitElement, PropertyValues}   from 'lit'
 import {customElement, property}      from 'lit/decorators.js'
-import {displayConfigContext}         from '../contexts/context'
-import {converter}                    from '../internal/base/BaseElement'
-import {BaseElementMode}              from '../internal/base/BaseElementMode'
+import {converter}                    from '../internal/base/base-element'
+import {BaseElementMode}              from '../internal/base/base-element.data'
+import {displayConfigContext}         from '../internal/contexts/context'
 
 @customElement('fhir-shell')
 export class Shell extends LitElement {

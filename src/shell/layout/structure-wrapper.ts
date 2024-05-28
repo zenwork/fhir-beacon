@@ -1,7 +1,7 @@
 import {consume}                                                   from '@lit/context'
 import {css, html, nothing}                                        from 'lit'
 import {customElement, property}                                   from 'lit/decorators.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../contexts/context'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../internal/contexts/context'
 import {FhirElement}                                               from '../FhirElement'
 
 /**

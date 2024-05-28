@@ -1,18 +1,18 @@
 import {provide}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {choose}                                        from 'lit/directives/choose.js'
-import {containedDataContext}                          from '../../contexts/context'
 
-import {BaseElementMode}         from '../../internal/base/BaseElementMode'
-import {ProviderBaseElement}     from '../../internal/base/ProviderBaseElement'
-import {renderResourceComponent} from '../../internal/resource/renderResourceComponent'
+import {BaseElementProvider}              from '../base/base-element-provider'
+import {BaseElementMode}                  from '../base/base-element.data'
+import {containedDataContext}             from '../contexts/context'
+import {DomainResourceData, ResourceData} from './domain-resource.data'
+import {renderResourceComponent}          from './renderResourceComponent'
 
-import {DomainResourceData, ResourceData} from './index'
 import '../../utilities'
-import '../special/narrative/narrative'
+import '../../components/special/narrative/narrative'
 
 
-export abstract class DomainResource<T extends DomainResourceData> extends ProviderBaseElement<T> {
+export abstract class DomainResource<T extends DomainResourceData> extends BaseElementProvider<T> {
 
   @provide({context: containedDataContext})
   declare contained: ResourceData[]

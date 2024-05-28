@@ -1,14 +1,14 @@
 import {html, TemplateResult} from 'lit'
 import {repeat}               from 'lit-html/directives/repeat.js'
 import {customElement}        from 'lit/decorators.js'
-import {ConsumerBaseElement}  from '../../../internal/base/ConsumerBaseElement'
+import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
 import {CodeableConceptData}  from './codeable-concept.data'
 import '../coding/coding'
 import '../../../shell/layout/empty'
 import '../../../shell/layout/structure-wrapper'
 
 @customElement('fhir-codeable-concept')
-export class CodeableConcept extends ConsumerBaseElement<CodeableConceptData> {
+export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {
 
   constructor() {
     super('Codeable Concept')

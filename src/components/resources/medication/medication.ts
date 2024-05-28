@@ -1,14 +1,14 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
+import {BaseElementMode}               from '../../../internal/base/base-element.data'
 
-import {BaseElementMode} from '../../../internal/base/BaseElementMode'
-import {PrimitiveType}   from '../../primitive/type-converters'
-
-import {DomainResource} from '../domain-resource'
-import {MedicationData} from '../index'
+import {DomainResource} from '../../../internal/resource/domain-resource'
 import '../../../utilities'
 import '../../special/reference/reference'
+
+import {PrimitiveType}  from '../../primitive/type-converters'
+import {MedicationData} from '../substance/medication.data'
 
 
 @customElement('fhir-medication')

@@ -6,17 +6,18 @@ import {otherwise, when}                      from '../../.././utilities/when'
 import '../../primitive/primitive'
 import '../../../shell/layout/Wrapper'
 import '../../complex/identifier/identifier'
-import {containedDataContext}                 from '../../../contexts/context'
-import {ConsumerBaseElement}                  from '../../../internal/base/ConsumerBaseElement'
-import {renderResourceComponent}              from '../../../internal/resource/renderResourceComponent'
-import {PrimitiveType}                        from '../../primitive/type-converters'
-import {asReadable}                           from '../../primitive/type-presenters/asReadable'
-import {ResourceData}                         from '../../resources'
-import {ReferenceData}                        from './reference.data'
+import {BaseElementConsumer}                  from '../../../internal/base/base-element-consumer'
+import {containedDataContext}                 from '../../../internal/contexts/context'
+
+import {ResourceData}            from '../../../internal/resource/domain-resource.data'
+import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
+import {PrimitiveType}           from '../../primitive/type-converters'
+import {asReadable}              from '../../primitive/type-presenters/asReadable'
+import {ReferenceData}           from './reference.data'
 import '../../../shell/layout/not-supported'
 
 @customElement('fhir-reference')
-export class Reference extends ConsumerBaseElement<ReferenceData> {
+export class Reference extends BaseElementConsumer<ReferenceData> {
 
   @consume({context: containedDataContext, subscribe: true})
   private contained: ResourceData[] = []

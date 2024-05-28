@@ -1,6 +1,6 @@
-import {BaseData} from '../../../internal/base/BaseData'
+import {BaseElementData} from '../../../internal/base/base-element.data'
 
-export type CodingData = BaseData & {
+export type CodingData = BaseElementData & {
   version?: string,
   system?: string,
   code?: string,

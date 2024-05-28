@@ -1,13 +1,13 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {PrimitiveType}                 from '../../primitive/type-converters'
-import {DomainResource}                from '../domain-resource'
-import {SubstanceData}                 from '../index'
+import {DomainResource}                from '../../../internal/resource/domain-resource'
 import '../../../utilities'
 import '../../complex/codeable-concept/codeable-concept'
 import '../../complex/codeable-reference/codeable-reference'
 import './substance-ingredient.backbone'
+import {PrimitiveType}                 from '../../primitive/type-converters'
+import {SubstanceData}                 from '../medication/substance.data'
 
 @customElement('fhir-substance')
 export class Substance extends DomainResource<SubstanceData> {

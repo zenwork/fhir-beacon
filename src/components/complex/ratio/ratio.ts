@@ -1,10 +1,11 @@
 import {css, html, TemplateResult} from 'lit'
 import {customElement}             from 'lit/decorators.js'
-import {ConsumerBaseElement}       from '../../../internal/base/ConsumerBaseElement'
-import {RatioData}                 from '../../resources'
+import {BaseElementConsumer}       from '../../../internal/base/base-element-consumer'
+
+import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
-export class Ratio extends ConsumerBaseElement<RatioData> {
+export class Ratio extends BaseElementConsumer<RatioData> {
   static styles = css`
     fhir-primitive-wrapper {
       display: flex;

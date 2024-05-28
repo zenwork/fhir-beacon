@@ -2,7 +2,7 @@ import {consume}                                                   from '@lit/co
 import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                            from 'lit/decorators.js'
 import {choose}                                                    from 'lit/directives/choose.js'
-import {DisplayConfig, displayConfigContext}                       from '../../contexts/context'
+import {DisplayConfig, displayConfigContext}                       from '../../internal/contexts/context'
 import {DateTime}                                                  from './primitive.data'
 import './primitive-label/primitive-label'
 import './primitive-value/primitive-value'

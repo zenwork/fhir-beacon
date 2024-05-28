@@ -1,10 +1,10 @@
 import {consume}                             from '@lit/context'
 import {PropertyValues}                      from 'lit'
-import {DisplayConfig, displayConfigContext} from '../../contexts/context'
-import {BaseData}                            from './BaseData'
-import {BaseElement}                         from './BaseElement'
+import {DisplayConfig, displayConfigContext} from '../contexts/context'
+import {BaseElement}                         from './base-element'
+import {BaseElementData}                     from './base-element.data'
 
-export class ConsumerBaseElement<T extends BaseData> extends BaseElement<T> {
+export class BaseElementConsumer<T extends BaseElementData> extends BaseElement<T> {
 
   @consume({context: displayConfigContext, subscribe: true})
   declare displayConfig: DisplayConfig

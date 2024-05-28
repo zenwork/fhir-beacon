@@ -1,9 +1,10 @@
-import {BaseData} from '../../../internal/base/BaseData'
+import {BaseElementData} from '../../../internal/base/base-element.data'
 
 import {ReferenceData}       from '../../special/reference/reference.data'
 import {CodeableConceptData} from '../codeable-concept/codeable-concept.data'
 
-export type CodeableReferenceData = BaseData & {
+// see: https://www.hl7.org/fhir/R5/references.html#CodeableReference
+export type CodeableReferenceData = BaseElementData & {
   concept?: CodeableConceptData
   reference?: ReferenceData
 }
