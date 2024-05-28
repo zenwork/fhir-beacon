@@ -50,6 +50,11 @@ export type RatioData = BaseData & {
   denominator?: SimpleQuantityData
 }
 
+type MedicationBatchData = BaseData & {
+  lotNumber?: string
+  expirationDate?: DateTime
+}
+
 export type MedicationData = DomainResourceData & {
   identifier: IdentifierData[]
   code?: CodeableConceptData
@@ -58,10 +63,7 @@ export type MedicationData = DomainResourceData & {
   doseForm?: CodeableConceptData
   totalVolume?: QuantityData
   ingredient?: MedicationIngredientData[]
-  batch?: {
-    lotNumber?: string
-    expirationDate?: DateTime
-  }
+  batch?: MedicationBatchData
   definition?: ReferenceData
 }
 

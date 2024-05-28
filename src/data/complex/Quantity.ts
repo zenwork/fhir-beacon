@@ -18,19 +18,30 @@ export class Quantity extends ConsumerBaseElement<QuantityData | SimpleQuantityD
 
   protected renderDisplay(data: QuantityData | SimpleQuantityData): TemplateResult {
 
+    // TODO: not sure this is a good idea
+    let displayValue: undefined | string | number = data.value
+    let type: string = 'decimal'
+    let after = data.unit || data.code
+    if (data.value == 1 && (data.unit || data.code)) {
+      displayValue = data.unit || data.code
+      type = 'none'
+      after = ''
+    }
+
+
     if (isQuantity(data)) {
       return html`
-        <fhir-primitive .label=${this.label} .value=${data.value} type="decimal">
-          <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}&nbsp;</span>
-          <span slot="after">&nbsp;${data.unit}</span>
+        <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+          <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}&nb</span >
+          <span slot="after">&nbsp;${after}</span >
         </fhir-primitive>
       `
     }
 
     if (isSimpleQuantity(data)) {
       return html`
-        <fhir-primitive .label=${this.label} .value=${data.value} type="decimal">
-          <span slot="after">&nbsp;${data.unit}</span>
+        <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+          <span slot="after">&nbsp;${after} </span >
         </fhir-primitive>
       `
     }
@@ -42,54 +53,20 @@ export class Quantity extends ConsumerBaseElement<QuantityData | SimpleQuantityD
 
     if (isQuantity(data)) {
       return html`
-        <fhir-primitive
-            label="value"
-            .value=${data.value}
-            type="decimal"
-        ></fhir-primitive>
-        <fhir-primitive
-            label="comparator"
-            .value=${data.comparator}
-            type="code"
-        ></fhir-primitive>
-        <fhir-primitive
-            label="unit"
-            .value=${data.unit}
-        ></fhir-primitive>
-        <fhir-primitive
-            label="system"
-            .value=${data.system}
-            type="uri"
-        ></fhir-primitive>
-        <fhir-primitive
-            label="code"
-            .value=${data.code}
-            type="code"
-        ></fhir-primitive>
+        <fhir-primitive label="value" .value=${data.value} type="decimal"></fhir-primitive >
+        <fhir-primitive label="comparator" .value=${data.comparator} type="code"></fhir-primitive >
+        <fhir-primitive label="unit" .value=${data.unit}></fhir-primitive >
+        <fhir-primitive label="system" .value=${data.system} type="uri"></fhir-primitive >
+        <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
       `
     }
 
     if (isSimpleQuantity(data)) {
       return html`
-        <fhir-primitive
-            label="value"
-            .value=${data.value}
-            type="decimal"
-        ></fhir-primitive>
-        <fhir-primitive
-            label="unit"
-            .value=${data.unit}
-        ></fhir-primitive>
-        <fhir-primitive
-            label="system"
-            .value=${data.system}
-            type="uri"
-        ></fhir-primitive>
-        <fhir-primitive
-            label="code"
-            .value=${data.code}
-            type="code"
-        ></fhir-primitive>
+        <fhir-primitive label="value" .value=${data.value} type="decimal"></fhir-primitive >
+        <fhir-primitive label="unit" .value=${data.unit}></fhir-primitive >
+        <fhir-primitive label="system" .value=${data.system} type="uri"></fhir-primitive >
+        <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
       `
     }
 

@@ -14,7 +14,6 @@ export class ProviderBaseElement<T extends BaseData> extends BaseElement<T> {
     this.contextRoot.attach(this)
   }
 
-
   public disconnectedCallback() {
     super.disconnectedCallback()
     this.contextRoot.detach(this)

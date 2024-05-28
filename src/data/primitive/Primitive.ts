@@ -52,7 +52,7 @@ export class Primitive extends LitElement {
   public type: PrimitiveType = PrimitiveType.none
 
   @property({type: Boolean})
-  declare showOriginal: boolean
+  declare showProvided: boolean
 
   @property({type: Boolean})
   declare showerror: boolean
@@ -99,11 +99,11 @@ export class Primitive extends LitElement {
   //TODO: should not be an <li>. A primitive and a base element should be the same thing so the are handled the same way by the wrapper
   // TODO: should be able to put link on value OR on context
   private renderValid = (): TemplateResult => {
-    return this.value || this.displayConfig?.verbose
+    return this.value || this.value == '' || this.displayConfig?.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
-            <fhir-value text=${this.presentableValue} link=${this.link}>
+            <fhir-value text=${this.showProvided ? this.value : this.presentableValue} link=${this.link}>
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>

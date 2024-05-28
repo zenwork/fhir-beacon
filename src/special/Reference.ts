@@ -48,7 +48,9 @@ export class Reference extends ConsumerBaseElement<ReferenceData> {
               [
                 ReferenceType.contained,
                 () => html`
+                  <fhir-primitive label='resource' value=${this.containedResource?.resourceType || 'contained'}></fhir-primitive >
                   ${renderResourceComponent(this.containedResource, this.displayConfig)}
+
                 `
               ],
           [

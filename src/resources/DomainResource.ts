@@ -22,9 +22,13 @@ export abstract class DomainResource<T extends DomainResourceData> extends Provi
     return html`${choose(this.mode,
             [
                 [BaseElementMode.narrative, () => this.renderNarrative(data)],
+              [
+                BaseElementMode.combined,
+                () => html`
+                  <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
+              ]
             ],
-        () => html`
-          <fhir-wrapper .label=${this.type}>${super.render()}`)}</fhir-wrapper>`
+      () => super.render())}`
 
   }
 
@@ -37,7 +41,6 @@ export abstract class DomainResource<T extends DomainResourceData> extends Provi
     }
     return html``
   }
-
 
   protected renderStructure(data: T): TemplateResult | TemplateResult[] {
     return html`

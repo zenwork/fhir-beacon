@@ -6,7 +6,7 @@ import {RatioData}                 from '../../resources/structures'
 @customElement('fhir-ratio')
 export class Ratio extends ConsumerBaseElement<RatioData> {
   static styles = css`
-    li {
+    fhir-primitive-wrapper {
       display: flex;
       list-style-type: none;
       padding-top: var(--sl-spacing-x-small);
@@ -22,12 +22,12 @@ export class Ratio extends ConsumerBaseElement<RatioData> {
 
   protected renderDisplay(data: RatioData): TemplateResult | TemplateResult[] {
     return html`
-      <li part="base">
+      <fhir-primitive-wrapper part="base">
         <fhir-label text="${this.label}"></fhir-label>&nbsp;
         <fhir-quantity .data=${data.numerator}></fhir-quantity >
         <fhir-value text="&nbsp;/&nbsp;"></fhir-value>
         <fhir-quantity .data=${data.denominator}></fhir-quantity >
-      </li>
+      </fhir-primitive-wrapper >
     `
   }
 

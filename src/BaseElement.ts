@@ -1,12 +1,13 @@
-import {html, nothing, PropertyValues, TemplateResult} from 'lit'
-import {property, state}                               from 'lit/decorators.js'
-import {choose}                                        from 'lit/directives/choose.js'
-import {BaseData}                                      from './BaseData'
+import {html, PropertyValues, TemplateResult} from 'lit'
+import {property, state}                      from 'lit/decorators.js'
+import {choose}                               from 'lit/directives/choose.js'
+import {BaseData}                             from './BaseData'
 import './util/Debug'
+import './util/Wrapper'
 import './util/StructureWrapper'
 import './data/primitive/Primitive'
-import {BaseElementMode}                               from './BaseElementMode'
-import {PrimitiveType}                                 from './data/primitive/converters'
+import {BaseElementMode}                      from './BaseElementMode'
+import {PrimitiveType}                        from './data/primitive/converters'
 
 import {asReadable}      from './data/primitive/presenters/asReadable'
 import {FhirElement}     from './FhirElement'
@@ -70,22 +71,19 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
   protected render(): TemplateResult | TemplateResult[] {
     let display = () => {
-      if (this.convertedData) {
-        if (this.isVerbose()) {
-          return html`
+
+      if (!this.convertedData) return html``
+      if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
+
+      // is verbose
+      return html`
             <fhir-wrapper
                 .label=${this.getElementLabel()}
                 .fhirType=${this.getTypeLabel()}
-                ?open=${this.open}
             >
               ${this.renderDisplay(this.convertedData)}
             </fhir-wrapper>`
-        } else {
-          return html`${this.renderDisplay(this.convertedData)}`
-        }
-      } else {
-        return html``
-      }
+
     }
 
     let structure = () => {
@@ -96,7 +94,7 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
               .label=${this.getElementLabel()}
               .fhirType=${this.getTypeLabel()}
           >
-            ${(this.convertedData || this.isVerbose()) ? this.renderStructure(this.convertedData ? this.convertedData : {} as T) : nothing}
+            ${this.renderStructure(this.convertedData ?? {} as T)}
           </fhir-structure-wrapper >
         `
       }
@@ -115,7 +113,17 @@ export abstract class BaseElement<T extends BaseData> extends FhirElement {
 
     }
 
-    let combined = () => this.convertedData ? html`${[display(), structure()]}` : html``
+    let combined = () => this.convertedData ?
+                         html`
+                           <fhir-shell .mode=${BaseElementMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+                             ${display()}
+                           </fhir-shell >
+                           <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
+                           <fhir-shell .mode=${BaseElementMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+                             ${structure()}
+                           </fhir-shell >
+                         ` :
+                         html``
 
 
     return html`${choose(this.mode, [

@@ -48,9 +48,8 @@ export class SubstanceIngredient extends ConsumerBaseElement<SubstanceIngredient
     }
 
     return html`
-      <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
       ${substance}
-
+      <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
     `
   }
 }

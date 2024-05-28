@@ -1,6 +1,7 @@
 import {consume}                                                   from '@lit/context'
 import {css, html, nothing}                                        from 'lit'
 import {customElement, property}                                   from 'lit/decorators.js'
+import {classMap}                                                  from 'lit/directives/class-map.js'
 import {FhirElement}                                               from '../FhirElement'
 import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../resources/context'
 
@@ -38,6 +39,14 @@ export class Wrapper extends FhirElement {
       margin-left: var(--sl-spacing-medium);
 
     }
+
+    .primary {
+      color: var(--sl-color-primary-700);
+    }
+
+    .secondary {
+      color: var(--sl-color-gray-700);
+    }
   `
 
   @property({type: String})
@@ -46,18 +55,26 @@ export class Wrapper extends FhirElement {
   @property({type: String})
   fhirType: string = ''
 
+  @property()
+  variant: 'primary' | 'secondary' | 'none' = 'none'
+
   @property({type: Boolean})
   open: boolean = true
 
   protected render(): unknown {
+    const classes = {primary: this.variant === 'primary', secondary: this.variant === 'secondary'}
     return html`
-
-      <div id="label">
-        ${this.fhirType
-          ? html`
-              <sl-tooltip content="${this.fhirType}"><label>${this.label}</label></sl-tooltip>`
-          : html`<label >${this.label}</label >`}${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
-      </div>
+      ${this.label ?
+        html`
+          <div id="label">
+            ${this.fhirType
+              ? html`
+                  <sl-tooltip content="${this.fhirType}"><label >${this.label}</label ></sl-tooltip >`
+              : html`<label class=${classMap(classes)}>${this.label}</label >`}${this.label || this.fhirType
+                                                                                 ? html`<span id="arrow">&#x21B4;</span >`
+                                                                                 : nothing}
+          </div >
+        ` : nothing}
 
       <slot id="content"></slot>
 

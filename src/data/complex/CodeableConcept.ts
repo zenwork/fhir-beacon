@@ -14,22 +14,22 @@ export class CodeableConcept extends ConsumerBaseElement<CodeableConceptData> {
     super('Codeable Concept')
   }
 
+  //TODO: review how to deal with fall-back situation. Is this a correct interpretation. We probably need some extensive testing
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
-    return html`
-            ${repeat(data.coding, (c) => html`
-              <fhir-coding
-                  .label=${this.label + ' coding'} .data=${c}
-
-              ></fhir-coding>
+    return data.coding ?
+           html`
+             ${repeat(data.coding, (c, idx) => html`
+               <fhir-coding .label=${this.label || 'name'}${data.coding.length > 1 ? '[' + idx + ']' : ''} .data=${c}></fhir-coding >
             `)}
-            <fhir-primitive .label=${this.label + ' coding'} .value=${data.text}></fhir-primitive >
-    `
+           ` :
+           html`
+             <fhir-primitive .label=${this.label || 'name'} .value=${data.text}></fhir-primitive >`
   }
 
   protected renderStructure(data: CodeableConceptData): TemplateResult[] {
     return [
       (data.coding && data.coding.length != 0 || this.verboseAllowed()) ? html`
-        <fhir-structure-wrapper label="coding [list]">${(this.getCodings(data))}</fhir-structure-wrapper > ` : html``,
+        <fhir-structure-wrapper label="coding [ ]">${(this.getCodings(data))}</fhir-structure-wrapper > ` : html``,
       html`
         <fhir-primitive label="text" .value=${data.text}></fhir-primitive > `
     ]

@@ -18,16 +18,16 @@ export class Substance extends DomainResource<SubstanceData> {
   protected renderDisplay(data: SubstanceData): TemplateResult {
 
     return html`
-      <fhir-primitive ></fhir-primitive >
       <fhir-primitive label="description" .value=${data.description} .context="id:${data.id}"></fhir-primitive >
       <fhir-identifier .label="identifier" .data=${data.identifier}></fhir-identifier >
-      <fhir-primitive label="instance" value=${data.instance}></fhir-primitive >
+      <fhir-primitive label="instance or kind" value=${data.instance ? 'instance' : 'kind'}></fhir-primitive >
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code}></fhir-primitive >
       ${map(data.category, (c, idx) => {
         return html`
-          <fhir-wrapper label="category [${idx}]">
-            <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >
-          </fhir-wrapper >
+          <fhir-codeable-concept
+              label="category ${(data.category && data.category.length > 1) ? '[' + (idx + 1) + ']' : ''}"
+              .data=${c}
+          ></fhir-codeable-concept >
         `
       })}
       <fhir-codeable-reference label="code" .data=${data.code}></fhir-codeable-reference >
@@ -35,10 +35,10 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-quantity label="quantity" .data=${data.quantity}></fhir-quantity >
       ${map(data.ingredient,
           (ing, idx) => html`
-            <fhir-wrapper label="ingredient [${idx}]">
-          <fhir-substance-ingredient label="ingredient" .data=${ing}></fhir-substance-ingredient >
-        </fhir-wrapper >
-      `)}
+            <fhir-wrapper label="ingredient ${(data.ingredient && data.ingredient.length > 1) ? '[' + (idx + 1) + ']' : ''}" variant="primary">
+              <fhir-substance-ingredient .data=${ing}></fhir-substance-ingredient >
+            </fhir-wrapper >
+          `)}
 
     `
   }
@@ -47,7 +47,6 @@ export class Substance extends DomainResource<SubstanceData> {
   protected renderStructure(data: SubstanceData): TemplateResult {
     let contained = super.renderStructure(data)
     return html`
-      <fhir-primitive label="id" value=${data.id}></fhir-primitive >
       ${contained}
       <fhir-identifier .label="identifier" .data=${data.identifier}></fhir-identifier >
       <fhir-primitive label="instance" value=${data.instance}></fhir-primitive >

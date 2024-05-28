@@ -1,6 +1,6 @@
-import {css, html}               from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {FhirElement}             from '../../FhirElement'
+import {css, html}                                      from 'lit'
+import {customElement, property, queryAssignedElements} from 'lit/decorators.js'
+import {FhirElement}                                    from '../../FhirElement'
 
 @customElement('fhir-value')
 export class PrimitiveValue extends FhirElement {
@@ -38,6 +38,13 @@ export class PrimitiveValue extends FhirElement {
   @property()
   public link = ''
 
+  @queryAssignedElements({slot: 'before'})
+  beforeSlot!: Array<HTMLElement>
+
+  @queryAssignedElements({slot: 'after'})
+  afterSlot!: Array<HTMLElement>
+
+
   protected render(): unknown {
     return html`
       <div id=${this.id} class="${this.variant}">
@@ -56,9 +63,11 @@ export class PrimitiveValue extends FhirElement {
         </a>
       `
     }
+
     if (!this.text && this.placeholder) {
       return html`<span class="placeholder">${this.placeholder}</span>`
     }
+
     return html`
       <slot name="before"></slot>${this.text}
       <slot name="after"></slot>`

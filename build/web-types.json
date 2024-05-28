@@ -147,6 +147,13 @@
               "value": { "type": "string", "default": "''" }
             },
             {
+              "name": "variant",
+              "value": {
+                "type": "'primary' | 'secondary' | 'none'",
+                "default": "'none'"
+              }
+            },
+            {
               "name": "open",
               "value": { "type": "boolean", "default": "true" }
             }
@@ -157,6 +164,10 @@
             "properties": [
               { "name": "label", "value": { "type": "string" } },
               { "name": "fhirType", "value": { "type": "string" } },
+              {
+                "name": "variant",
+                "value": { "type": "'primary' | 'secondary' | 'none'" }
+              },
               { "name": "open", "value": { "type": "boolean" } }
             ],
             "events": []
@@ -259,7 +270,7 @@
             { "name": "link", "value": { "type": "string" } },
             { "name": "context", "value": { "type": "string" } },
             { "name": "type", "value": { "type": "PrimitiveType" } },
-            { "name": "showOriginal", "value": { "type": "boolean" } },
+            { "name": "showProvided", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
             { "name": "verbose", "value": { "type": "boolean" } }
           ],
@@ -272,7 +283,7 @@
               { "name": "link", "value": { "type": "string" } },
               { "name": "context", "value": { "type": "string" } },
               { "name": "type", "value": { "type": "PrimitiveType" } },
-              { "name": "showOriginal", "value": { "type": "boolean" } },
+              { "name": "showProvided", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } }
             ],

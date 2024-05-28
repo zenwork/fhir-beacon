@@ -79,6 +79,17 @@ export const SimpleQuantity: Story = {
   }
 }
 
+export const SimpleQuantity2: Story = {
+  args: {
+    data: {
+      value: '1',
+      unit: 'day'
+    },
+    mode: 'display',
+    'showerror': false
+  }
+}
+
 export const ShowStructWithErrors: Story = {
   args: {
     data: {

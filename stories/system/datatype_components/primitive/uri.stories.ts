@@ -28,7 +28,8 @@ export const FhirDatatype: Story = {
                 label="unfomratted"
                 type="uri_type"
                 value="AdministrableProductDefinition"
-                showOriginal=${true}>
+                showProvided=${true}
+        >
         </fhir-primitive>
         <fhir-primitive
                 label="error"
