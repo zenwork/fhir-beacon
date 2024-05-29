@@ -6,7 +6,7 @@ import {html}           from 'lit'
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 
-let title = 'system/Datatype Components/Complex Type/Codeable Reference'
+let title = 'components/Datatypes/Complex Type/Codeable Reference'
 
 let data = {
   concept: {

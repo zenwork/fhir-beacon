@@ -19,16 +19,9 @@ export class Quantity extends BaseElementConsumer<QuantityData | SimpleQuantityD
 
   protected renderDisplay(data: QuantityData | SimpleQuantityData): TemplateResult {
 
-    // TODO: not sure this is a good idea
     let displayValue: undefined | string | number = data.value
     let type: string = 'decimal'
     let after = data.unit || data.code
-    if (data.value == 1 && (data.unit || data.code)) {
-      displayValue = data.unit || data.code
-      type = 'none'
-      after = ''
-    }
-
 
     if (isQuantity(data)) {
       return html`

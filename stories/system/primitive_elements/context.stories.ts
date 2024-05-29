@@ -5,18 +5,17 @@ import '../../../src/components/primitive/primitive'
 import '../../../node_modules/@shoelace-style/shoelace/dist/shoelace.js'
 
 const meta = {
-  title: 'System/Atoms/Primitive/Value'
+  title: 'Toolkit/Primitive Elements/Context Element'
 } satisfies Meta<typeof Primitive>
 
 export default meta
 type Story = StoryObj;
 
-export const Value: Story = {
+export const ContextElement: Story = {
   render: () => html`
     <fhir-wrapper >
-      <fhir-value text="John Smith"></fhir-value >
-      <fhir-value text="John Smith" link="http://foo.com/patient/1234"></fhir-value >
-      <fhir-value >Dr. Jill Muller</fhir-value >
+      <fhir-context text="some context"></fhir-value>
     </fhir-wrapper >
   `
+
 }

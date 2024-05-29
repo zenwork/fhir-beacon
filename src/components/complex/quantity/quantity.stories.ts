@@ -5,7 +5,7 @@ import '../../primitive/primitive'
 
 
 const meta = {
-  title: 'System/Datatype Components/Complex Type/Quantity',
+  title: 'Components/Datatypes/Complex Type/Quantity',
   component: 'fhir-quantity',
   argTypes: {
     mode: {
@@ -73,17 +73,6 @@ export const SimpleQuantity: Story = {
   args: {
     data: {
       value: '1'
-    },
-    mode: 'display',
-    'showerror': false
-  }
-}
-
-export const SimpleQuantity2: Story = {
-  args: {
-    data: {
-      value: '1',
-      unit: 'day'
     },
     mode: 'display',
     'showerror': false

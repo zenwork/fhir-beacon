@@ -3,7 +3,7 @@ import './ratio'
 
 
 const meta = {
-  title: 'System/Datatype Components/Complex Type/Ratio',
+  title: 'Components/Datatypes/Complex Type/Ratio',
   component: 'fhir-ratio',
   argTypes: {
     mode: {

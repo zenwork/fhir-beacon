@@ -6,14 +6,9 @@ const preview = {
             storySort:{
                 method:'alphabetical',
                 order:[
-                    'Getting Started',
-                    'Web Components',
-                    'Shoelace',
-                    'FHIR Data Types',
-                    'FHIR Resources',
-                    'System', ['Atoms',
-                               'Datatype Components', ['Primitive Type', 'Complex Type', 'Special Type', '*'],
-                               'Resource Components', 'Backbones', '*'],
+                    'Getting Started', ['Home', 'Installation', 'Usage', 'Customization'],
+                    'Components', ['Datatypes', ['Primitive Type', 'Complex Type', 'Special Type', '*'], 'Resources', '*'],
+                    'Toolkit', ['Primitive Elements', ['Primitive Element', '*'], '*'],
                     'Use Cases', ['Static HTML', 'Frameworks', 'Modelling & Tracing', '*'],
                     '*'
                 ]

@@ -4,7 +4,7 @@ import '../../../../src/components/primitive/primitive'
 import {Primitive}      from '../../../../src/components/primitive/primitive'
 
 const meta = {
-  title: 'System/Datatype Components/Primitive Type/Code',
+  title: 'Components/Datatypes/Primitive Type/Code',
   component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>
 

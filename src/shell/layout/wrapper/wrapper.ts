@@ -1,5 +1,5 @@
 import {consume}                                                   from '@lit/context'
-import {html, nothing}                                             from 'lit'
+import {html, TemplateResult}                                      from 'lit'
 import {customElement, property}                                   from 'lit/decorators.js'
 import {classMap}                                                  from 'lit/directives/class-map.js'
 import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../../internal/contexts/context'
@@ -30,27 +30,39 @@ export class Wrapper extends ShoelaceStyledElement {
   @property()
   variant: 'primary' | 'secondary' | 'none' = 'none'
 
-  @property({type: Boolean})
-  open: boolean = true
-
   protected render(): unknown {
     const classes = {primary: this.variant === 'primary', secondary: this.variant === 'secondary'}
-    return html`
-      ${this.label ?
-        html`
+
+    let label: TemplateResult
+    if (this.label && this.fhirType) {
+      label = html`
+        <sl-tooltip content="${this.fhirType}" placement="left">
           <div id="label">
-            ${this.fhirType
-              ? html`
-                  <sl-tooltip content="${this.fhirType}"><label >${this.label}</label ></sl-tooltip >`
-              : html`<label class=${classMap(classes)}>${this.label}</label >`}${this.label || this.fhirType
-                                                                                 ? html`<span id="arrow">&#x21B4;</span >`
-                                                                                 : nothing}
+            <label class=${classMap(classes)}>${this.label}</label >
+            <span id="arrow">&#x21B4;</span >
           </div >
-        ` : nothing}
-
+        </sl-tooltip >
+      `
+    } else if (this.label) {
+      label = html`
+        <div id="label">
+          <label class=${classMap(classes)}>${this.label}</label >
+          <span id="arrow">&#x21B4;</span >
+        </div >
+      `
+    } else if (this.fhirType) {
+      label = html`
+        <div id="label">
+          <label class=${classMap(classes)}>${this.fhirType}</label >
+          <span id="arrow">&#x21B4;</span >
+        </div >
+      `
+    } else {
+      label = html``
+    }
+    return html`
+      ${label}
       <slot id="content"></slot>
-
-
     `
   }
 

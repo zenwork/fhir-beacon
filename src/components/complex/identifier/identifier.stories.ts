@@ -3,7 +3,7 @@ import './identifier'
 
 
 const meta = {
-  title: 'System/Datatype Components/Complex Type/Identifier',
+  title: 'Components/Datatypes/Complex Type/Identifier',
   component: 'fhir-identifier',
   argTypes: {
     mode: {

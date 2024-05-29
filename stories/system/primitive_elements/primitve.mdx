@@ -1,0 +1,24 @@
+import {Canvas, Meta} from '@storybook/blocks'
+import '../../../src/index'
+
+import * as Stories from './primitive.stories'
+
+<Meta of={Stories} />
+
+# Primitive Element
+
+The `<fhir-primitive>` is core element of this library. It combines formatting elements with the FHIR logic required by
+primitive types to validate and show errors when values are incorrect. It also provides many compositional features
+to inrich these primitives with contextual information often found elsewhere in resources.
+
+### Validated Primitive Value
+<Canvas of={Stories.Simple} sourceState="shown" layout="centered" />
+
+### Display Context
+<Canvas of={Stories.WithContext} sourceState="shown" layout="centered" />
+
+### Displaying The Error
+<Canvas of={Stories.Dynamic} sourceState="shown" layout="centered" />
+
+### Composing your own
+<Canvas of={Stories.Static} sourceState="shown" layout="centered" />
