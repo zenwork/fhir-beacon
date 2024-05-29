@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
-import '../../../../src/data/primitive/Primitive'
-import {PrimitiveType}  from '../../../../src/data/primitive/converters'
-import {Primitive}      from '../../../../src/data/primitive/Primitive'
+import '../../../../src/components/primitive/primitive'
+import {Primitive}      from '../../../../src/components/primitive/primitive'
+import {PrimitiveType}  from '../../../../src/components/primitive/type-converters'
 
 const meta = {
   title: 'System/Datatype Components/Primitive Type/TimeDate',
