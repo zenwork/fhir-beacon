@@ -15,6 +15,8 @@ import {toCode}                      from './type-converters/toCode'
 import {toDatetime}                  from './type-converters/toDatetime'
 import {toDecimal}                   from './type-converters/toDecimal'
 import {toError}                     from './type-converters/toError'
+import {toId}                        from './type-converters/toId'
+import {toInstant}                   from './type-converters/toInstant'
 import {toType}                      from './type-converters/toType'
 import {toUri}                       from './type-converters/toUri'
 import {toUrl}                       from './type-converters/toUrl'
@@ -79,7 +81,9 @@ export class Primitive extends LitElement {
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)]
+        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
+        [PrimitiveType.id, () => this.validOrError(toId, this.value)],
+        [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)]
       ])
     }
   }
@@ -148,6 +152,7 @@ export class Primitive extends LitElement {
 
     choose(this.type, [
       [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
+      [PrimitiveType.instant, () => val = asDateTime(val as DateTime)],
       [PrimitiveType.uri_type, () => val = asReadable(val as string)]
     ])
 

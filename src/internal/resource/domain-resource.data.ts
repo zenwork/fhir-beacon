@@ -1,18 +1,7 @@
-import {CodingData}                            from '../../components/complex/coding/coding.data'
-import {Canonical, Id, Instant, Language, URI} from '../../components/primitive/primitive.data'
-import {NarrativeData}                         from '../../components/special/narrative/narrative.data'
-import {BaseElementData, Extension}            from '../base/base-element.data'
-
-// Todo: figure out when where Meta Data goes
-export type MetaData = {
-  versionId?: Id
-  lastUpdated?: Instant
-  source?: URI
-  profile: Canonical[]
-  security?: CodingData,
-  tag?: CodingData
-
-}
+import {Id, Language, URI}          from '../../components/primitive/primitive.data'
+import {MetaData}                   from '../../components/special/meta/meta.data'
+import {NarrativeData}              from '../../components/special/narrative/narrative.data'
+import {BaseElementData, Extension} from '../base/base-element.data'
 
 export type ResourceData = BaseElementData & {
   id?: Id,

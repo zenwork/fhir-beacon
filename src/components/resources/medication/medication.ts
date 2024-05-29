@@ -79,6 +79,7 @@ export class Medication extends DomainResource<MedicationData> {
         </fhir-structure-wrapper >
       ` : nothing}
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference >
+      <fhir-meta label="meta" .data=${data.meta}></fhir-meta >
 
 
     `

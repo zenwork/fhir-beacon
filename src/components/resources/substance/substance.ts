@@ -72,6 +72,7 @@ export class Substance extends DomainResource<SubstanceData> {
           <fhir-empty-set ></fhir-empty-set >`}
       </fhir-structure-wrapper>
       ` : nothing}
+      <fhir-meta label="meta" .data=${data.meta}></fhir-meta >
     `
   }
 
