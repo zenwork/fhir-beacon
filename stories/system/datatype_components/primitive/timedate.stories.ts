@@ -5,7 +5,7 @@ import {Primitive}      from '../../../../src/components/primitive/primitive'
 import {PrimitiveType}  from '../../../../src/components/primitive/type-converters'
 
 const meta = {
-  title: 'System/Datatype Components/Primitive Type/TimeDate',
+  title: 'Components/Datatypes/Primitive Type/TimeDate',
   component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>
 

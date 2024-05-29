@@ -3,7 +3,7 @@ import {html}           from 'lit'
 
 
 const meta: Meta = {
-  title: 'System/Atoms/Primitive'
+  title: 'Toolkit/Primitive Elements/Primitive Element'
 
 }
 
@@ -37,6 +37,16 @@ export const Dynamic: Story = {
         label="quantity" type='decimal'
         value="100,0" context="25064002"
         showerror
+    ></fhir-primitive >
+  `
+
+}
+
+export const WithContext: Story = {
+  render: () => html`
+    <fhir-primitive
+        label="quantity" type='decimal'
+        value="100.0" context="25064002"
     ></fhir-primitive >
   `
 

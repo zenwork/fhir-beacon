@@ -1,9 +1,9 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/components/special/narrative/narrative'
+import './narrative'
 
 
 const meta = {
-  title: 'System/Datatype Components/Special Type/Narrative',
+  title: 'Components/Datatypes/Special Type/Narrative',
   component: 'fhir-narrative',
   argTypes: {
     mode: {

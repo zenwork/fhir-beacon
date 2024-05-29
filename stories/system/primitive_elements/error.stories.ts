@@ -5,14 +5,14 @@ import '../../../src/components/primitive/primitive'
 import '../../../node_modules/@shoelace-style/shoelace/dist/shoelace.js'
 
 const meta = {
-  title: 'System/Atoms/Primitive/Error'
+  title: 'Toolkit/Primitive Elements/Error Element'
 } satisfies Meta<typeof Primitive>
 
 export default meta
 type Story = StoryObj;
 
 
-export const Error: Story = {
+export const ErrorElement: Story = {
   render: () => html`
     <fhir-error text="Some Error"></fhir-value>
   `

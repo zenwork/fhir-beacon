@@ -4,7 +4,7 @@ import '../../../../src/components/primitive/primitive'
 import {Primitive}      from '../../../../src/components/primitive/primitive'
 
 const meta = {
-  title: 'System/Datatype Components/Primitive Type/None',
+  title: 'Components/Datatypes/Primitive Type/None',
   tags: ['autodocs'],
   component: 'fhir-primitive',
 } satisfies Meta<typeof Primitive>

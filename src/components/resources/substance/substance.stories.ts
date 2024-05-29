@@ -1,7 +1,7 @@
 import {StoryObj} from '@storybook/web-components'
 import '../../../index'
 
-let title = 'System/Resource Components/Medication/Substance'
+let title = 'Components/Resources/Medication/Substance'
 let component = 'fhir-substance'
 let data = {
   resourceType: 'Substance',

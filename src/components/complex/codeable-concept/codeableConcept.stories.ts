@@ -6,7 +6,7 @@ import {html}           from 'lit'
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 const meta: Meta<CustomArgs> = {
-  title: 'System/Datatype Components/Complex Type/Codeable Concept',
+  title: 'Components/Datatypes/Complex Type/Codeable Concept',
   component: 'fhir-shell',
   argTypes: {
     mode: {

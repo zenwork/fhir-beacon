@@ -22,12 +22,22 @@ export class Ratio extends BaseElementConsumer<RatioData> {
   constructor() {super('Ratio')}
 
   protected renderDisplay(data: RatioData): TemplateResult | TemplateResult[] {
+
+    let denominator: TemplateResult
+    if (data.denominator?.value == 1 && (data.denominator.unit || data.denominator.code)) {
+      denominator = html`
+        <fhir-value text="${data.denominator.unit || data.denominator.code}"></fhir-va>`
+    } else {
+      denominator = html`
+        <fhir-quantity .data=${data.denominator}></fhir-quantity >`
+    }
+
     return html`
       <fhir-primitive-wrapper part="base">
-        <fhir-label text="${this.label}"></fhir-label>&nbsp;
+        <fhir-label text="${this.label}"></fhir-label >&nbsp;
         <fhir-quantity .data=${data.numerator}></fhir-quantity >
-        <fhir-value text="&nbsp;/&nbsp;"></fhir-value>
-        <fhir-quantity .data=${data.denominator}></fhir-quantity >
+        <fhir-value text="&nbsp;/&nbsp;"></fhir-value >
+        ${denominator}
       </fhir-primitive-wrapper >
     `
   }

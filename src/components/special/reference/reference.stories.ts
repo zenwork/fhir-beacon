@@ -1,9 +1,9 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/components/special/reference/reference'
+import './reference'
 
 
 const meta = {
-  title: 'System/Datatype Components/Special Type/Reference',
+  title: 'Components/Datatypes/Special Type/Reference',
   component: 'fhir-reference',
   argTypes: {
     mode: {

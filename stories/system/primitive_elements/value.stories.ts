@@ -5,18 +5,18 @@ import '../../../src/components/primitive/primitive'
 import '../../../node_modules/@shoelace-style/shoelace/dist/shoelace.js'
 
 const meta = {
-  title: 'System/Atoms/Primitive/Label'
+  title: 'Toolkit/Primitive Elements/Value Element'
 } satisfies Meta<typeof Primitive>
 
 export default meta
 type Story = StoryObj;
 
-export const Label: Story = {
+export const ValueElement: Story = {
   render: () => html`
     <fhir-wrapper >
-      <fhir-primitive label="Doctor" value="Alice Nixon" link="/practitioner/1234"></fhir-primitive >
-      <fhir-primitive label="Doctor" delimiter=" - " value="Jenny Nixon"></fhir-primitive >
-      <fhir-primitive label="link" value="1234" type="url" ?showError=${true}></fhir-primitive >
+      <fhir-value text="John Smith"></fhir-value >
+      <fhir-value text="John Smith" link="http://foo.com/patient/1234"></fhir-value >
+      <fhir-value >Dr. Jill Muller</fhir-value >
     </fhir-wrapper >
   `
 }

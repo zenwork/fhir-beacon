@@ -2,7 +2,7 @@ import {StoryObj} from '@storybook/web-components'
 import '../../../../src/index'
 
 const meta = {
-  title: 'System/Resource Components/Medication/Medication',
+  title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
   argTypes: {
     mode: {

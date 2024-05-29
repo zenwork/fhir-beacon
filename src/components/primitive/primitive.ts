@@ -108,7 +108,7 @@ export class Primitive extends LitElement {
               <span slot="after"><slot name="after"></slot></span>
             </fhir-value>
             <fhir-context
-                .text=${this.context ? this.context : ''}${this.context && this.displayConfig?.verbose ? ' - ' : ''}
+                .text=${this.context ?? ''}${this.context && this.displayConfig?.verbose ? ' - ' : ''}
                 ${this.displayConfig?.verbose ? this.type : ''}
             ></fhir-context >
           </fhir-primitive-wrapper >`
@@ -116,15 +116,16 @@ export class Primitive extends LitElement {
   }
 
   private renderError = (): TemplateResult => {
+    /* HTML */
     return this.value || this.displayConfig.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
             <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-                                                                                                      ${this.displayConfig?.showerror
-                                                                                                        ? html`
-                                                                                                            <fhir-error text=${this.presentableValue}></fhir-error >`
-                                                                                                        : nothing}
+            ${this.displayConfig?.showerror
+              ? html`
+                  <fhir-error text=${this.presentableValue}></fhir-error >`
+              : nothing}
           </fhir-primitive-wrapper >`
            : html``
   }
