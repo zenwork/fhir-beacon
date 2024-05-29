@@ -6,7 +6,7 @@ import {IdentifierData}       from './identifier.data'
 
 import '../codeable-concept/codeable-concept'
 import '../period/period'
-import '../../../shell/layout/Wrapper'
+import '../../../shell/layout/wrapper/wrapper'
 
 @customElement('fhir-identifier')
 export class Identifier extends BaseElementConsumer<IdentifierData> {

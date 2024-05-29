@@ -1,9 +1,11 @@
 import {consume}                                                   from '@lit/context'
-import {css, html, nothing}                                        from 'lit'
+import {html, nothing}                                             from 'lit'
 import {customElement, property}                                   from 'lit/decorators.js'
 import {classMap}                                                  from 'lit/directives/class-map.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../internal/contexts/context'
-import {FhirElement}                                               from '../FhirElement'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../../internal/contexts/context'
+import {hostStyles}                                                from '../../../styles/hostStyles'
+import {ShoelaceStyledElement}                                     from '../../shoelace-styled-element'
+import {componentStyles}                                           from './wrapper-styles'
 
 
 /**
@@ -12,42 +14,12 @@ import {FhirElement}                                               from '../Fhir
  * @slot wrapper
  */
 @customElement('fhir-wrapper')
-export class Wrapper extends FhirElement {
+export class Wrapper extends ShoelaceStyledElement {
 
   @consume({context: displayConfigContext, subscribe: true})
   protected displayConfig: DisplayConfig = defaultDisplayConfig
 
-  static styles = css`
-
-    label {
-      font-size: var(--sl-font-size-medium);
-      color: var(--sl-color-neutral-500);
-      font-style: oblique;
-    }
-
-
-    #arrow {
-      color: var(--sl-color-gray-300);
-      font-style: italic;
-      font-size: var(--sl-font-size-medium);
-      font-weight: var(--sl-font-weight-medium);
-      font-family: var(--sl-font-serif), serif;
-    }
-
-    #content {
-      display: table;
-      margin-left: var(--sl-spacing-medium);
-
-    }
-
-    .primary {
-      color: var(--sl-color-primary-700);
-    }
-
-    .secondary {
-      color: var(--sl-color-gray-700);
-    }
-  `
+  static styles = [hostStyles, componentStyles]
 
   @property({type: String})
   label: string = ''

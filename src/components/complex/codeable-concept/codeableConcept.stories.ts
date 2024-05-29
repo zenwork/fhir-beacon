@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import './codeable-concept'
-import '../../../shell/Shell'
+import '../../../shell/shell'
 import {html}           from 'lit'
 
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };

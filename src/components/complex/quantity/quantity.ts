@@ -2,7 +2,7 @@ import {html, nothing, TemplateResult}    from 'lit'
 import {customElement}                    from 'lit/decorators.js'
 import {BaseElementConsumer}              from '../../../internal/base/base-element-consumer'
 import {BaseElementData}                  from '../../../internal/base/base-element.data'
-import {renderError}                      from '../../../shell/layout/errors'
+import {renderError}                      from '../../../shell/layout/renderError'
 import {asQuantityComparator}             from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, SimpleQuantityData} from './quantity.data'
 

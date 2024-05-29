@@ -1,9 +1,9 @@
 import {css, html, nothing}      from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {FhirElement}             from '../../../shell/FhirElement'
+import {ShoelaceStyledElement}   from '../../../shell/shoelace-styled-element'
 
 @customElement('fhir-context')
-export class PrimitiveContext extends FhirElement {
+export class PrimitiveContext extends ShoelaceStyledElement {
 
   static styles = css`
     :host {

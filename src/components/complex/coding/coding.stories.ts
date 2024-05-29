@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import './coding'
-import '../../../utilities/Debug'
+import '../../../utilities/debug/debug'
 import '../../primitive/primitive'
 import '../../../index'
 import {html}           from 'lit'

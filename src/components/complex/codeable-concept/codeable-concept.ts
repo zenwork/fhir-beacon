@@ -4,8 +4,8 @@ import {customElement}        from 'lit/decorators.js'
 import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
 import {CodeableConceptData}  from './codeable-concept.data'
 import '../coding/coding'
-import '../../../shell/layout/empty'
-import '../../../shell/layout/structure-wrapper'
+import '../../../shell/layout/empty-set'
+import '../../../shell/layout/structure-wrapper/structure-wrapper'
 
 @customElement('fhir-codeable-concept')
 export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {

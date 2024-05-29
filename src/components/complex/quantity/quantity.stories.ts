@@ -1,6 +1,6 @@
 import {StoryObj} from '@storybook/web-components'
 import './quantity'
-import '../../../utilities/Debug'
+import '../../../utilities/debug/debug'
 import '../../primitive/primitive'
 
 

@@ -1,6 +1,6 @@
 let globalSheets: CSSStyleSheet[] = []
 
-export function loadStyles(shadow: ShadowRoot) {
+export function loadShoelaceStylesFromPage(shadow: ShadowRoot) {
   shadow.adoptedStyleSheets.push(...getGlobalStyleSheets())
 }
 

@@ -1,5 +1,5 @@
 import {expect, test} from '@playwright/test'
-import {toDatetime}   from './type-converters/ToDatetime'
+import {toDatetime}   from './type-converters/toDatetime'
 
 
 test.describe('Primitives', () => {

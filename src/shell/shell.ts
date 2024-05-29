@@ -10,13 +10,18 @@ export class Shell extends LitElement {
 
   @property({type: BaseElementMode, converter})
   public mode: BaseElementMode = BaseElementMode.display
+
   @property({type: Boolean, reflect: true})
   declare open: boolean
+
   @property({type: Boolean, reflect: true})
   declare verbose: boolean
+
   @property({type: Boolean, reflect: true})
   declare showerror: boolean
+
   protected display = new ContextProvider(this, {context: displayConfigContext})
+
   private contextRoot = new ContextRoot()
 
   public connectedCallback() {

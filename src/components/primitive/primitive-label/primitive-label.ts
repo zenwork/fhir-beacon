@@ -1,10 +1,10 @@
 import {html, PropertyValues}                        from 'lit'
 import {customElement, property, queryAssignedNodes} from 'lit/decorators.js'
-import {FhirElement}                                 from '../../../shell/FhirElement'
+import {ShoelaceStyledElement}                       from '../../../shell/shoelace-styled-element'
 import {componentStyles}                             from './primitive-label.styles'
 
 @customElement('fhir-label')
-export class PrimitiveLabel extends FhirElement {
+export class PrimitiveLabel extends ShoelaceStyledElement {
 
   static styles = componentStyles
 

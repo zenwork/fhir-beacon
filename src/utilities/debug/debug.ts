@@ -1,8 +1,10 @@
-import {css, html, LitElement, nothing, PropertyValues} from 'lit'
+import {html, LitElement, nothing, PropertyValues} from 'lit'
 
 import {customElement, property} from 'lit/decorators.js'
 import {map}                     from 'lit/directives/map.js'
 import {when}                    from 'lit/directives/when.js'
+import {hostStyles}              from '../../styles/hostStyles'
+import {componentStyles}         from './debug.styles'
 
 
 export function debug(debug: boolean, data: {}) {
@@ -20,35 +22,7 @@ export class Debug extends LitElement {
 
   private longest = 0
 
-  static styles = css`
-      div {
-          padding: 0;
-          margin: 0;
-      }
-
-      ol {
-          display: inline-block;
-          background: #dddddd;
-          color: #0c2d6b;
-          border-radius: 0.3rem;
-          margin: 0.5rem;
-          padding: 0.5rem 2rem;
-      }
-
-      li {
-          font-family: monospace;
-          font-size: 0.6rem;
-          margin-top: 0.5rem;
-      }
-
-      pre {
-          margin: 0;
-      }
-
-      .key {
-          font-weight: bold;
-      }
-  `
+  static styles = [hostStyles, componentStyles]
 
   protected willUpdate(_changedProperties: PropertyValues) {
     super.willUpdate(_changedProperties)

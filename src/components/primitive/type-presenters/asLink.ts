@@ -1,5 +1,5 @@
 import {html, TemplateResult} from 'lit'
-import {Reference}            from '../type-converters/ToReference'
+import {Reference}            from '../type-converters/toReference'
 
 
 export const asLink = (link: Reference | typeof URL, label?: string): TemplateResult => {

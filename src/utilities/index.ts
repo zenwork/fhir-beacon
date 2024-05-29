@@ -1,3 +1,3 @@
-import './Debug'
+import './debug/debug'
 import './hasSameAncestor'
 import './when'

@@ -4,7 +4,7 @@ import {unsafeHTML}                           from 'lit/directives/unsafe-html.j
 import {BaseElementConsumer}                  from '../../../internal/base/base-element-consumer'
 
 import {NarrativeData} from './narrative.data'
-import '../../../shell/layout/Wrapper'
+import '../../../shell/layout/wrapper/wrapper'
 
 @customElement('fhir-narrative')
 export class Narrative extends BaseElementConsumer<NarrativeData> {

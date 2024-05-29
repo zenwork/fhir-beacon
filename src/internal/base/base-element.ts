@@ -5,14 +5,14 @@ import {hasSameAncestor}                      from '../.././utilities/hasSameAnc
 import {PrimitiveType}                        from '../../components/primitive/type-converters'
 
 import {asReadable}                       from '../../components/primitive/type-presenters/asReadable'
-import {FhirElement}                      from '../../shell/FhirElement'
+import {ShoelaceStyledElement}            from '../../shell/shoelace-styled-element'
 import {BaseElementData, BaseElementMode} from './base-element.data'
-import '../.././utilities/Debug'
-import '../../shell/layout/Wrapper'
-import '../../shell/layout/structure-wrapper'
+import '../../utilities/debug/debug'
+import '../../shell/layout/wrapper/wrapper'
+import '../../shell/layout/structure-wrapper/structure-wrapper'
 import '../../components/primitive/primitive'
 
-export abstract class BaseElement<T extends BaseElementData> extends FhirElement {
+export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})

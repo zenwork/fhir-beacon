@@ -1,7 +1,7 @@
 import {html, TemplateResult}                                         from 'lit'
 import {customElement}                                                from 'lit/decorators.js'
 import {BaseElementConsumer}                                          from '../../../internal/base/base-element-consumer'
-import {renderError}                                                  from '../../../shell/layout/errors'
+import {renderError}                                                  from '../../../shell/layout/renderError'
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
 
