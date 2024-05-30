@@ -367,6 +367,10 @@
                 "type": "'primary' | 'secondary' | 'none'",
                 "default": "'none'"
               }
+            },
+            {
+              "name": "hide",
+              "value": { "type": "boolean", "default": "false" }
             }
           ],
           "slots": [{ "name": "wrapper" }],
@@ -378,7 +382,8 @@
               {
                 "name": "variant",
                 "value": { "type": "'primary' | 'secondary' | 'none'" }
-              }
+              },
+              { "name": "hide", "value": { "type": "boolean" } }
             ],
             "events": []
           }

@@ -17,44 +17,25 @@ export class Meta extends BaseElementConsumer<MetaData> {
       <fhir-primitive label="lastUpdated" type=${PrimitiveType.instant} .value=${data.lastUpdated}></fhir-primitive >
       <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source}></fhir-primitive >
       ${data.profile ? html`
-        ${data.profile.length > 1 ? html`
-          <fhir-wrapper label="profiles" variant="primary">
-            ${map(data.profile, p => html`
-              <fhir-primitive label="profile" type=${PrimitiveType.canonical} .value=${p}></fhir-primitive >
-            `)}
-          </fhir-wrapper >
-        ` : html`
+        <fhir-wrapper label="profiles" variant="primary" ?hide=${data.profile.length <= 1}>
           ${map(data.profile, p => html`
             <fhir-primitive label="profile" type=${PrimitiveType.canonical} .value=${p}></fhir-primitive >
           `)}
-        `}
+        </fhir-wrapper >
       ` : nothing}
       ${data.security ? html`
-        ${data.security.length > 1 ? html`
-          <fhir-wrapper label="security" variant="primary">
-            ${map(data.security, s => html`
-              <fhir-coding label="security" .data=${s}></fhir-coding >
-            `)}
-          </fhir-wrapper >
-        ` : html`
+        <fhir-wrapper label="security" variant="primary" ?hide=${data.security.length <= 1}>
           ${map(data.security, s => html`
             <fhir-coding label="security" .data=${s}></fhir-coding >
           `)}
-        `}
+        </fhir-wrapper >
       ` : nothing}
       ${data.tag ? html`
-        ${data.tag.length > 1 ? html`
-          <fhir-wrapper label="tags" variant="primary">
-            ${map(data.tag, t => html`
-              <fhir-coding label="tag" .data=${t}></fhir-coding >
-            `)}
-          </fhir-wrapper >
-        ` : html`
+        <fhir-wrapper label="tags" variant="primary" ?hide=${data.tag.length <= 1}=>
           ${map(data.tag, t => html`
             <fhir-coding label="tag" .data=${t}></fhir-coding >
           `)}
-        `}
-
+        </fhir-wrapper >
       ` : nothing}
     `
   }
