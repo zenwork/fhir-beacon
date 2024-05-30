@@ -1,6 +1,6 @@
 import {css} from 'lit'
 
-export let styles = css`
+export let componentStyles = css`
   sl-details::part(base) {
     border: none;
     border-radius: 0;
@@ -61,5 +61,18 @@ export let styles = css`
     border-left-style: solid;
     border-left-width: 0.06rem;
     border-left-color: var(--sl-color-primary-300);
+  }
+
+  i {
+    font-size: var(--sl-font-size-x-small);
+    color: var(--sl-color-gray-400)
+  }
+
+  .primary {
+    color: var(--sl-color-primary-700);
+  }
+
+  .secondary {
+    color: var(--sl-color-gray-700);
   }
 `

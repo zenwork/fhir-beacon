@@ -1,5 +1,6 @@
 import {html, TemplateResult} from 'lit'
-import {DisplayConfig}        from '../contexts/context'
+
+import {DisplayConfig} from '../contexts/context.data'
 
 import {ResourceData} from './domain-resource.data'
 

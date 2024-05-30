@@ -7,7 +7,7 @@ import '../../complex/codeable-concept/codeable-concept'
 import '../../complex/codeable-reference/codeable-reference'
 import './substance-ingredient.backbone'
 import {PrimitiveType}                 from '../../primitive/type-converters'
-import {SubstanceData}                 from '../medication/substance.data'
+import {SubstanceData}                 from './substance.data'
 
 @customElement('fhir-substance')
 export class Substance extends DomainResource<SubstanceData> {
@@ -51,7 +51,7 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-primitive label="instance" value=${data.instance}></fhir-primitive >
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code}></fhir-primitive >
       ${(data.category || this.verbose) ? html`
-        <fhir-structure-wrapper label="categories">
+        <fhir-structure-wrapper label="categories" ?hide=${data.category?.length > 1}>
           ${data.category ? map(data.category, (c) => {
             return html`
               <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >

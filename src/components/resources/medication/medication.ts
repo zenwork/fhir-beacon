@@ -8,7 +8,7 @@ import '../../../utilities'
 import '../../special/reference/reference'
 
 import {PrimitiveType}  from '../../primitive/type-converters'
-import {MedicationData} from '../substance/medication.data'
+import {MedicationData} from './medication.data'
 
 
 @customElement('fhir-medication')

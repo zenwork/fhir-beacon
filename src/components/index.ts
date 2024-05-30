@@ -1,4 +1,4 @@
 import './complex'
-import './primitive'
+import '../internal/events'
 import './resources'
 import './special'
