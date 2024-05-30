@@ -4,7 +4,7 @@ import {CodeableReferenceData}                                     from '../../c
 import {IdentifierData}                                            from '../../complex/identifier/identifier.data'
 import {SimpleQuantityData}                                        from '../../complex/quantity/quantity.data'
 import {Code, DateTime, Markdown}                                  from '../../primitive/primitive.data'
-import {SubstanceIngredientData, SubstanceIngredientReferenceData} from '../substance/substance-ingredient.data'
+import {SubstanceIngredientData, SubstanceIngredientReferenceData} from './substance-ingredient.data'
 
 export type SubstanceData = DomainResourceData & {
   identifier?: IdentifierData[]

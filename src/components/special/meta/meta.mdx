@@ -1,0 +1,29 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+
+import * as Stories from './meta.stories'
+
+<Meta of={Stories} />
+
+# Meta
+
+Each resource contains an element "meta", of type "Meta", which is a set of metadata that provides technical and workflow context to the resource. The metadata items are all optional, though some or all of them may be required in particular implementations or contexts of use.
+
+reference:
+* [2.1.27.5.3.7 Resource Metadata R5](https://www.hl7.org/fhir/resource.html#meta)
+* [2.1.27.5.3.8 Meta R5](https://www.hl7.org/fhir/resource.html#Meta)
+
+### Display
+<Canvas of={Stories.Display} />
+
+### Structure
+<Canvas of={Stories.Structure} />
+
+### Example 2
+<Canvas of={Stories.Data} />
+
+### Example 3
+<Canvas of={Stories.Data3} />
+
+### Example 4
+<Canvas of={Stories.Data4} />

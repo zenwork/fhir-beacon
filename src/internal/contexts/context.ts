@@ -1,10 +1,9 @@
-import {createContext}   from '@lit/context'
-import {BaseElementMode} from '../base/base-element.data'
+import {createContext} from '@lit/context'
 
-import {ResourceData} from '../resource/domain-resource.data'
+import {ResourceData}                       from '../resource/domain-resource.data'
+import {DisplayConfig}                      from './context.data'
+import {containedDataKey, displayConfigKey} from './contexts.keys'
 
 
-export const containedDataContext = createContext<ResourceData[]>(Symbol('fhir-contained-data'))
-export type DisplayConfig = { mode: BaseElementMode, showerror: boolean, verbose: boolean, open: boolean }
-export const defaultDisplayConfig = {mode: BaseElementMode.display, showerror: true, verbose: false, open: true}
-export const displayConfigContext = createContext<DisplayConfig>(Symbol('fhir-display-context'))
+export const containedDataContext = createContext<ResourceData[]>(containedDataKey)
+export const displayConfigContext = createContext<DisplayConfig>(displayConfigKey)

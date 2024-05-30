@@ -39,6 +39,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   @state()
   private convertedData: T | null = null
 
+  @state()
+  protected totalDataNodes: number = 0
+
   /**
    * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode certain FHIR datatypes go into a
    * theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In reality they would never point to each other but if expanding on all
@@ -58,6 +61,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     super.updated(_changedProperties)
 
     if (_changedProperties.has('data')) {
+      this.totalDataNodes = countNodes(this.data)
       this.convertedData = this.convertData(this.data)
     }
 
@@ -91,6 +95,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
         return html`
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
+              .resourceId=${this.data.id ?? ''}
               .fhirType=${this.getTypeLabel()}
           >
             ${this.renderStructure(this.convertedData ?? {} as T)}
@@ -205,4 +210,17 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
 export function converter(value: string | null): BaseElementMode {
   return value ? <BaseElementMode>value : BaseElementMode.display
+}
+
+function countNodes(jsonData: any) {
+  let count = 0
+  if (typeof jsonData === 'object' && jsonData !== null) {
+    for (let key in jsonData) {
+      if (jsonData.hasOwnProperty(key)) {
+        ++count
+        count += countNodes(jsonData[key])
+      }
+    }
+  }
+  return count
 }

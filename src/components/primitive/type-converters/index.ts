@@ -6,6 +6,7 @@ import './toReference'
 import './toType'
 import './toUri'
 import './toUrl'
+import './toId'
 
 export type toPrimitive<O, V> = (val: O) => V
 export type ValOrErr<O, V> = { type: 'ValOrErr', val: V, err: null } | { type: 'ValOrErr', val: O, err: string }
@@ -33,5 +34,8 @@ export enum PrimitiveType {
   decimal = 'decimal',
   datetime = 'datetime',
   uri_type = 'uri_type', //TODO: not 100% this belongs here
-  string_reference = 'string_reference'
+  string_reference = 'string_reference',
+  id = 'id',
+  instant = 'instant',
+  canonical = 'canonical',
 }

@@ -2,7 +2,8 @@ import {consume}                                                   from '@lit/co
 import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                            from 'lit/decorators.js'
 import {choose}                                                    from 'lit/directives/choose.js'
-import {DisplayConfig, displayConfigContext}                       from '../../internal/contexts/context'
+import {displayConfigContext}                                      from '../../internal/contexts/context'
+import {DisplayConfig}                                             from '../../internal/contexts/context.data'
 import {DateTime}                                                  from './primitive.data'
 import './primitive-label/primitive-label'
 import './primitive-value/primitive-value'
@@ -15,6 +16,8 @@ import {toCode}                      from './type-converters/toCode'
 import {toDatetime}                  from './type-converters/toDatetime'
 import {toDecimal}                   from './type-converters/toDecimal'
 import {toError}                     from './type-converters/toError'
+import {toId}                        from './type-converters/toId'
+import {toInstant}                   from './type-converters/toInstant'
 import {toType}                      from './type-converters/toType'
 import {toUri}                       from './type-converters/toUri'
 import {toUrl}                       from './type-converters/toUrl'
@@ -79,7 +82,9 @@ export class Primitive extends LitElement {
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)]
+        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
+        [PrimitiveType.id, () => this.validOrError(toId, this.value)],
+        [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)]
       ])
     }
   }
@@ -102,11 +107,11 @@ export class Primitive extends LitElement {
     return this.value || this.value == '' || this.displayConfig?.verbose
            ? html`
           <fhir-primitive-wrapper >
-            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label>&nbsp;
+            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp;
             <fhir-value text=${this.showProvided ? this.value : this.presentableValue} link=${this.link}>
-              <span slot="before"><slot name="before"></slot></span>
-              <span slot="after"><slot name="after"></slot></span>
-            </fhir-value>
+              <span slot="before"><slot name="before"></slot ></span >
+              <span slot="after"><slot name="after"></slot ></span >
+            </fhir-value >
             <fhir-context
                 .text=${this.context ?? ''}${this.context && this.displayConfig?.verbose ? ' - ' : ''}
                 ${this.displayConfig?.verbose ? this.type : ''}
@@ -148,6 +153,7 @@ export class Primitive extends LitElement {
 
     choose(this.type, [
       [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
+      [PrimitiveType.instant, () => val = asDateTime(val as DateTime)],
       [PrimitiveType.uri_type, () => val = asReadable(val as string)]
     ])
 

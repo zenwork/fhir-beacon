@@ -8,7 +8,7 @@ import '../../../utilities'
 import '../../special/reference/reference'
 
 import {PrimitiveType}  from '../../primitive/type-converters'
-import {MedicationData} from '../substance/medication.data'
+import {MedicationData} from './medication.data'
 
 
 @customElement('fhir-medication')
@@ -79,6 +79,7 @@ export class Medication extends DomainResource<MedicationData> {
         </fhir-structure-wrapper >
       ` : nothing}
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference >
+      <fhir-meta label="meta" .data=${data.meta}></fhir-meta >
 
 
     `

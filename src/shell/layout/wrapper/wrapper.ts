@@ -1,11 +1,13 @@
-import {consume}                                                   from '@lit/context'
-import {html, TemplateResult}                                      from 'lit'
-import {customElement, property}                                   from 'lit/decorators.js'
-import {classMap}                                                  from 'lit/directives/class-map.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext} from '../../../internal/contexts/context'
-import {hostStyles}                                                from '../../../styles/hostStyles'
-import {ShoelaceStyledElement}                                     from '../../shoelace-styled-element'
-import {componentStyles}                                           from './wrapper-styles'
+import {consume}                 from '@lit/context'
+import {html, TemplateResult}    from 'lit'
+import {customElement, property} from 'lit/decorators.js'
+import {classMap}                from 'lit/directives/class-map.js'
+import {displayConfigContext}    from '../../../internal/contexts/context'
+import {DisplayConfig}           from '../../../internal/contexts/context.data'
+import {defaultDisplayConfig}    from '../../../internal/contexts/context.defaults'
+import {hostStyles}              from '../../../styles/hostStyles'
+import {ShoelaceStyledElement}   from '../../shoelace-styled-element'
+import {componentStyles}         from './wrapper-styles'
 
 
 /**
@@ -30,11 +32,14 @@ export class Wrapper extends ShoelaceStyledElement {
   @property()
   variant: 'primary' | 'secondary' | 'none' = 'none'
 
+  @property({type: Boolean, reflect: true})
+  hide: boolean = false
+
   protected render(): unknown {
     const classes = {primary: this.variant === 'primary', secondary: this.variant === 'secondary'}
 
     let label: TemplateResult
-    if (this.label && this.fhirType) {
+    if (!this.hide && this.label && this.fhirType) {
       label = html`
         <sl-tooltip content="${this.fhirType}" placement="left">
           <div id="label">
@@ -43,14 +48,14 @@ export class Wrapper extends ShoelaceStyledElement {
           </div >
         </sl-tooltip >
       `
-    } else if (this.label) {
+    } else if (!this.hide && this.label) {
       label = html`
         <div id="label">
           <label class=${classMap(classes)}>${this.label}</label >
           <span id="arrow">&#x21B4;</span >
         </div >
       `
-    } else if (this.fhirType) {
+    } else if (!this.hide && this.fhirType) {
       label = html`
         <div id="label">
           <label class=${classMap(classes)}>${this.fhirType}</label >
@@ -62,7 +67,7 @@ export class Wrapper extends ShoelaceStyledElement {
     }
     return html`
       ${label}
-      <slot id="content"></slot>
+      <slot class="${classMap({content: !this.hide})}"></slot >
     `
   }
 

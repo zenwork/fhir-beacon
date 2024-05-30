@@ -17,7 +17,7 @@ export let componentStyles = css`
     font-family: var(--sl-font-serif), serif;
   }
 
-  #content {
+  .content {
     display: table;
     margin-left: var(--sl-spacing-medium);
 

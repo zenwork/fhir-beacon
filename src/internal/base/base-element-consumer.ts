@@ -1,8 +1,9 @@
-import {consume}                             from '@lit/context'
-import {PropertyValues}                      from 'lit'
-import {DisplayConfig, displayConfigContext} from '../contexts/context'
-import {BaseElement}                         from './base-element'
-import {BaseElementData}                     from './base-element.data'
+import {consume}              from '@lit/context'
+import {PropertyValues}       from 'lit'
+import {displayConfigContext} from '../contexts/context'
+import {DisplayConfig}        from '../contexts/context.data'
+import {BaseElement}          from './base-element'
+import {BaseElementData}      from './base-element.data'
 
 export class BaseElementConsumer<T extends BaseElementData> extends BaseElement<T> {
 
