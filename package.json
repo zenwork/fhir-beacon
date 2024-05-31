@@ -49,6 +49,7 @@
         "custom-element-jet-brains-integration": "^1.4.4",
         "eslint": "^9.3.0",
         "mocha": "^10.4.0",
+        "remark-gfm": "^4.0.0",
         "rollup-plugin-import-assert": "^3.0.1",
         "rollup-plugin-import-assertions": "^0.5.0",
         "rollup-plugin-inline-code": "^1.2.7",

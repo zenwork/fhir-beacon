@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm'
+
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
     stories:[
@@ -10,7 +12,17 @@ const config = {
         '@storybook/addon-links',
         '@storybook/addon-essentials',
         '@chromatic-com/storybook',
-        '@whitespace/storybook-addon-html'
+        '@whitespace/storybook-addon-html',
+        {
+            name:'@storybook/addon-docs',
+            options:{
+                mdxPluginOptions:{
+                    mdxCompileOptions:{
+                        remarkPlugins:[remarkGfm]
+                    }
+                }
+            }
+        }
     ],
     framework:{
         name:'@storybook/web-components-vite',

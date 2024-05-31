@@ -1,0 +1,23 @@
+import {Meta} from '@storybook/blocks'
+import '../../src/index'
+
+
+<Meta title="Toolkit/Customisation/Custom Element" />
+
+# Custom Rendering
+
+
+```html
+  <fhir-shell>
+    <fhir-source url="fhir/Medication?patient.identifier=http://example.com/fhir/mrn|1234" >
+        <fhir-codeable-concept label="name" data-path="Medication.code[0]"></fhir-codeable-concept>
+        <fhir-codeable-concept label="dose form" data-path="Medication.doseForm"></fhir-codeable-concept>
+    </fhir-source>
+</fhir-shell>
+```
+
+| element                                   | purpose                                                                                                                                                                                                                                                                                                                                                                |
+|-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<fhir-shell>`                            | application context for embedding this library anywhere. Currently has only limited purpose. Eventually will be a boundary for styling, shared data, security, event propagation, etc. )                                                                                                                                                                               |
+| `<fhir-source url="...">`                 | data source context for data being presented. the slotted elements will be repeated for each elemnet in the response recieved                                                                                                                                                                                                                                          |                                                                                                                                             |
+| `<fhir-codeable-concept data-path="...">` | The `data-path` attribute requires valid [fhir path](https://www.hl7.org/fhir/R5/fhirpath.html) notation to request data from the neerest parent `<fhir-source>` element. This is an alternative to setting data in the element using the `data` attribute. see also: [Codeable Concept Element](?path=/docs/components-datatypes-complex-type-codeable-concept--docs) |
