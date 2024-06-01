@@ -352,7 +352,7 @@
         },
         {
           "name": "fhir-bundle",
-          "description": "\n---\n\n\n### **Methods:**\n \n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },

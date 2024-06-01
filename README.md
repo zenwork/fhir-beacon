@@ -1,12 +1,7 @@
-import {Meta} from '@storybook/blocks'
-
-
-<Meta title="Getting Started/Home" />
-
-<img src="/images/logo.png" alt="logo" />
-
 FHIR Beacon
 ===========
+
+demo site: https://zenwork.github.io/fhir-beacon/
 
 * #### [FHIR](http://hl7.org/fhir/) UI components that do not require a backend 🏝️
 * #### Works with all frameworks 🖼️
@@ -15,10 +10,9 @@ FHIR Beacon
 * #### Fully customizable with CSS 🎨
 * #### Open source
 
-github repo: https://github.com/zenwork/fhir-beacon
-
 What Problems Does `fhir-beacon` Solve?
 -----
+
 * Build FHIR-based UIs in an idiomatic way that aligns to the standard
 * Provide out-of-the-box rendering of resources, complex, simple, and other FHIR data structures
 * Display errors
@@ -27,7 +21,6 @@ What Problems Does `fhir-beacon` Solve?
 * \[TODO] - edit data with full validation
 * \[TODO] - display collections as tables.
 
-
 Why Use Web Components?
 --------------
 
@@ -35,14 +28,15 @@ Web Components are a way to instruct the browser on the introduction of new cust
 like any other HTML markup.
 
 ```html
-<html>
-<head>
-  <script src="/js/my-element.js"></script>
-</head>
-<body>
-  <my-element title="Salutation" value="Hello World!"></my-element>
-</body>
-</html>
+
+<html >
+<head >
+  <script src="/js/my-element.js"></script >
+</head >
+<body >
+  <my-element title="Salutation" value="Hello World!"></my-element >
+</body >
+</html >
 ```
 
 ### A Browser Standard
@@ -51,6 +45,7 @@ Web component is a browser standard supported in all major browsers and one impl
 frameworks.
 
 They are made up of the following Browser APIs:
+
 * Custom Elements
 * Shodow DOM
 * Template Elements
@@ -60,17 +55,12 @@ They are made up of the following Browser APIs:
 ### Libraries
 
 Although no extra library is needed to create or interact with a web component, there are many librairies that make
-their development much easier. This UI toolkit leans masively on Lit and on Shoelace.
-
+their development easier.
 
 ### Resources
 
-#### dependencies
-* [Lit Library](https://lit.dev) - most popular library for implenting web components
-* [Shoelace](https://shoelace.style/) - A great UI library built with web components
-
-#### documenation
 * [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) - The specification
+* [Lit Library](https://lit.dev) - most popular library for implenting web components
 * [Web Component](https://webcomponents.dev/) - online IDE with demos of supporting libraries and
-frameworks
+  frameworks
 * [Browser Support](https://caniuse.com/custom-elementsv1)

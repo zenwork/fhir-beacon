@@ -1,5 +1,18 @@
 import {html, TemplateResult} from 'lit'
 import {map}                  from 'lit/directives/map.js'
+import {hasSome}              from './directives'
+
+//TODO: need to decide if backnbone elements have a seperate element or not
+export function renderSingleBackbone<T>(itemLabel: null | string,
+                                        idx: number | null,
+                                        verbose: boolean,
+                                        template: TemplateResult) {
+  return html`
+    <fhir-structure-wrapper label="${itemLabel} ${idx ? '[' + (idx + 1) + ']' : ''}" ?hide=${!itemLabel && !verbose}>
+      ${template}
+    </fhir-structure-wrapper >
+  `
+}
 
 /**
  * Renders a Backbone collection using provided template and labels.
@@ -21,12 +34,11 @@ export function renderBackboneCollection<T>(groupLabel: string,
   if (collection || verbose) {
     return html`
       <fhir-structure-wrapper label="${groupLabel}" ?hide=${!collection || collection.length <= 1}>
-        ${collection && collection.length > 0 ? map(collection, (i, idx) => html`
-          <fhir-structure-wrapper label="${itemLabel} [${idx + 1}]" ?hide=${!itemLabel && !verbose}>
-            ${templateGenerator(i, idx)}
-          </fhir-structure-wrapper >
-        `) : html`
-          <fhir-empty-list ></fhir-empty-list >`}
+        ${hasSome(collection)
+          ? map(collection, (i, idx) => renderSingleBackbone(itemLabel, idx, verbose, templateGenerator(i, idx)))
+          : html`
+              <fhir-empty-list ></fhir-empty-list >`
+        }
       </fhir-structure-wrapper >
     `
   }
