@@ -5,5 +5,6 @@ export let componentStyles = css`
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
+    padding-left: 0.3rem;
   }
 `

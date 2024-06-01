@@ -5,8 +5,8 @@ export let componentStyles = css`
     border: none;
     border-radius: 0;
     display: inline-flex;
-    background: var(--sl-color-neutral-100);
-    padding: 0;
+    background: none;
+    padding: 0 0 0 0.3rem;
   }
 
   sl-details::part(header) {

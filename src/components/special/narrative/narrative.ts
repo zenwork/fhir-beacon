@@ -35,10 +35,10 @@ export class Narrative extends BaseElementConsumer<NarrativeData> {
 
   protected renderStructure(data: NarrativeData): TemplateResult {
     return html`
-      <fhir-structure-wrapper .label=${this.type}>
         <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
-        <fhir-primitive label="div" .value=${data.div}></fhir-primitive >
-      </fhir-structure-wrapper>
+        <fhir-structure-wrapper label="div" forceclose>
+          <fhir-primitive .value=${data.div}></fhir-primitive >
+        </fhir-structure-wrapper >
     `
   }
 }

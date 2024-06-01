@@ -28,3 +28,11 @@ export type XHTML = string
 export type DateTime = string
 
 export type Markdown = string
+
+export type UnsignedInt = number
+
+export type Link = string
+
+export type FhirString = string
+
+export type Base64Binary = string

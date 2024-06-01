@@ -66,8 +66,10 @@ export class Wrapper extends ShoelaceStyledElement {
       label = html``
     }
     return html`
+      <div class='base'>
       ${label}
       <slot class="${classMap({content: !this.hide})}"></slot >
+      </div >
     `
   }
 

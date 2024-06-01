@@ -38,4 +38,8 @@ export enum PrimitiveType {
   id = 'id',
   instant = 'instant',
   canonical = 'canonical',
+  fhir_string = 'fhir_string',
+  base64 = 'base64',
+  unsigned_int = 'unsigned_int',
+  link = 'link'
 }

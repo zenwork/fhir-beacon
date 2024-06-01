@@ -1,14 +1,14 @@
 import {ContextProvider, ContextRoot} from '@lit/context'
 import {LitElement, PropertyValues}   from 'lit'
 import {customElement, property}      from 'lit/decorators.js'
-import {converter}                    from '../internal/base/base-element'
 import {BaseElementMode}              from '../internal/base/base-element.data'
 import {displayConfigContext}         from '../internal/contexts/context'
+import {toBaseElementModeEnum}        from '../utilities/toBaseElementModeEnum'
 
 @customElement('fhir-shell')
 export class Shell extends LitElement {
 
-  @property({type: BaseElementMode, converter})
+  @property({type: BaseElementMode, converter: toBaseElementModeEnum})
   public mode: BaseElementMode = BaseElementMode.display
 
   @property({type: Boolean, reflect: true})

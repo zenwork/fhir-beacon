@@ -12,13 +12,17 @@ import './primitive-context/primitive-context'
 import './primitive-wrapper/primitive-wrapper'
 
 import {PrimitiveType, valueOrError} from './type-converters'
+import {toBase64}                    from './type-converters/toBase64'
 import {toCode}                      from './type-converters/toCode'
 import {toDatetime}                  from './type-converters/toDatetime'
 import {toDecimal}                   from './type-converters/toDecimal'
 import {toError}                     from './type-converters/toError'
+import {toFhirString}                from './type-converters/toFhirString'
 import {toId}                        from './type-converters/toId'
 import {toInstant}                   from './type-converters/toInstant'
+import {toLink}                      from './type-converters/toLink'
 import {toType}                      from './type-converters/toType'
+import {toUnsignedInt}               from './type-converters/toUnsignedInt'
 import {toUri}                       from './type-converters/toUri'
 import {toUrl}                       from './type-converters/toUrl'
 import {asDateTime}                  from './type-presenters/asDateTime'
@@ -84,7 +88,11 @@ export class Primitive extends LitElement {
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
         [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
         [PrimitiveType.id, () => this.validOrError(toId, this.value)],
-        [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)]
+        [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)],
+        [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
+        [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
+        [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
+        [PrimitiveType.link, () => this.validOrError(toLink, this.value)]
       ])
     }
   }

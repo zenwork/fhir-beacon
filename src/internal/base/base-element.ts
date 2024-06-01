@@ -1,18 +1,26 @@
-import {html, PropertyValues, TemplateResult} from 'lit'
-import {property, state}                      from 'lit/decorators.js'
-import {choose}                               from 'lit/directives/choose.js'
-import {hasSameAncestor}                      from '../.././utilities/hasSameAncestor'
-import {PrimitiveType}                        from '../../components/primitive/type-converters'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {property, state}                               from 'lit/decorators.js'
+import {choose}                                        from 'lit/directives/choose.js'
+import {map}                                           from 'lit/directives/map.js'
+import {hasSameAncestor}                               from '../.././utilities/hasSameAncestor'
+import {PrimitiveType}                                 from '../../components/primitive/type-converters'
 
 import {asReadable}                       from '../../components/primitive/type-presenters/asReadable'
+import {hasSome}                          from '../../shell/layout/directives'
 import {ShoelaceStyledElement}            from '../../shell/shoelace-styled-element'
+import {hostStyles}                       from '../../styles/hostStyles'
+import {countNodes}                       from '../../utilities/countNodes'
+import {toBaseElementModeEnum}            from '../../utilities/toBaseElementModeEnum'
 import {BaseElementData, BaseElementMode} from './base-element.data'
 import '../../utilities/debug/debug'
 import '../../shell/layout/wrapper/wrapper'
 import '../../shell/layout/structure-wrapper/structure-wrapper'
 import '../../components/primitive/primitive'
+import {componentStyles}                  from './base-element.styles'
 
 export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
+
+  static styles = [hostStyles, componentStyles]
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({type: Object, attribute: 'data'})
@@ -24,11 +32,14 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   @property({reflect: true})
   protected type: string = ''
 
-  @property({type: BaseElementMode, converter})
+  @property({type: BaseElementMode, converter: toBaseElementModeEnum})
   public mode: BaseElementMode = BaseElementMode.display
 
   @property({type: Boolean, reflect: true})
   declare open: boolean
+
+  @property({type: Boolean, reflect: true})
+  public forceclose: boolean = false
 
   @property({type: Boolean, reflect: true})
   declare verbose: boolean
@@ -51,27 +62,31 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    */
   protected recursionGuard: boolean = false
 
+  @state()
+  private structureGenerators: { [key: string]: (data: T) => TemplateResult | TemplateResult[] } = {}
+
+  @state()
+  private displayGenerators: { [key: string]: (data: T) => TemplateResult | TemplateResult[] } = {}
+
   constructor(type: string) {
     super()
     this.type = type
-
+    this.addStructure('base-element', (data: T) => this.renderBaseElement(data))
   }
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
-
-    if (_changedProperties.has('data')) {
-      this.totalDataNodes = countNodes(this.data)
-      this.convertedData = this.convertData(this.data)
-    }
-
-    if (_changedProperties.has('verbose') && this.verbose) {
-      if (!this.verboseAllowed()) this.recursionGuard = true
-    } else {
-      this.recursionGuard = false
-    }
+  /**
+   * add a rendering generator
+   * @param name
+   * @param generator
+   */
+  addStructure(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
+    this.structureGenerators[name] = generator
   }
 
+  /**
+   * Rendering method for all elements
+   * @protected
+   */
   protected render(): TemplateResult | TemplateResult[] {
     let display = () => {
 
@@ -86,23 +101,27 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
             >
               ${this.renderDisplay(this.convertedData)}
             </fhir-wrapper>`
-
     }
 
     let structure = () => {
-
       if (this.convertedData || this.isVerbose()) {
         return html`
           <fhir-structure-wrapper
               .label=${this.getElementLabel()}
-              .resourceId=${this.data.id ?? ''}
+              .resourceId=${this.convertedData?.id ?? ''}
               .fhirType=${this.getTypeLabel()}
+              ?forceclose=${this.forceclose}
           >
+            <div class="frontmatter">
+              ${map(Object.values(this.structureGenerators), generator => generator(this.convertedData ?? {} as T))}
+            </div >
+
             ${this.renderStructure(this.convertedData ?? {} as T)}
           </fhir-structure-wrapper >
         `
       }
 
+      // stop rendering in verbose mode due to theoretically infinite models. ex: Identifier -> Reference -> Identifier -> and so on!
       if (this.recursionGuard) {
         return html`
           <fhir-primitive
@@ -142,36 +161,68 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
   /**
-   * Empty implementation that should be overriden to render the displayable values in the data.
-   *
+   * handle data updates
+   * @param _changedProperties
    * @protected
-   * @returns {TemplateResult} The rendered template result.
    */
-  protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
-    if (this.data || this.isVerbose()) {
-      return html`
-          <article part="element">
-              <header part="label">${(this.getElementLabel())}</header>
-              <section part="value">n/a</section>
-          </article>
-      `
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+
+    if (_changedProperties.has('data')) {
+      this.totalDataNodes = countNodes(this.data)
+      this.convertedData = this.convertData(this.data)
     }
-    return html``
+
+    if (_changedProperties.has('verbose') && this.verbose) {
+      if (!this.verboseAllowed()) this.recursionGuard = true
+    } else {
+      this.recursionGuard = false
+    }
   }
 
-  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
+  /**
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute generators instead.
+   * @param data
+   */
+  protected abstract renderDisplay(data: T): TemplateResult | TemplateResult[]
+
+  /**
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute generators instead.
+   * @param data
+   */
+  protected abstract renderStructure(data: T): TemplateResult | TemplateResult[]
+
+  /**
+   * Render formatted JSON data for debugging purposes
+   * @param data
+   * @protected
+   */
+  protected renderDebug(data: T): TemplateResult | TemplateResult[] {
     if (this.data || this.isVerbose()) {
       return html`
           <article part="element">
               <header part="label">${(this.getElementLabel())}</header>
               <section part="value">
-                  <bkn-debug .data=${data}></bkn-debug>
+                <fhir-debug .data=${data}></fhir-debug >
               </section>
           </article>
       `
     }
 
     return html``
+  }
+
+  /**
+   * Overridable method reserved for internal use. Do not call super in this method
+   * @param data
+   * @protected
+   */
+  private renderBaseElement(data: T): TemplateResult | TemplateResult[] {
+    return html`
+      <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive >
+      ${hasSome(data.extension) ? html`
+        <fhir-primitive label="extension" context="not implemented" .type=${PrimitiveType.none}></fhir-primitive >` : nothing}
+    `
   }
 
   protected verboseAllowed() {
@@ -206,21 +257,4 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
 
-}
-
-export function converter(value: string | null): BaseElementMode {
-  return value ? <BaseElementMode>value : BaseElementMode.display
-}
-
-function countNodes(jsonData: any) {
-  let count = 0
-  if (typeof jsonData === 'object' && jsonData !== null) {
-    for (let key in jsonData) {
-      if (jsonData.hasOwnProperty(key)) {
-        ++count
-        count += countNodes(jsonData[key])
-      }
-    }
-  }
-  return count
 }

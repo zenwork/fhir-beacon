@@ -5,7 +5,7 @@ import {DisplayConfig}        from '../contexts/context.data'
 import {BaseElement}          from './base-element'
 import {BaseElementData}      from './base-element.data'
 
-export class BaseElementConsumer<T extends BaseElementData> extends BaseElement<T> {
+export abstract class BaseElementConsumer<T extends BaseElementData> extends BaseElement<T> {
 
   @consume({context: displayConfigContext, subscribe: true})
   declare displayConfig: DisplayConfig

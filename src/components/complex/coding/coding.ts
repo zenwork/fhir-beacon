@@ -29,7 +29,6 @@ export class Coding extends BaseElementConsumer<CodingData> {
 
   protected renderStructure(data: CodingData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.id}></fhir-primitive >
       <fhir-primitive label="extension" .value=${data.extension}></fhir-primitive >
       <fhir-primitive label="version" .value=${data.version}></fhir-primitive >
       <fhir-primitive label="system" .value=${data.system} type="url"></fhir-primitive >

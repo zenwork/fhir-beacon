@@ -44,7 +44,7 @@ export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {
     }
     return [
       html`
-        <fhir-empty-set ></fhir-empty-set >`
+        <fhir-empty-list ></fhir-empty-list >`
     ]
   }
 }

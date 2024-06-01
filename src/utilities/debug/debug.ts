@@ -10,11 +10,11 @@ import {componentStyles}         from './debug.styles'
 export function debug(debug: boolean, data: {}) {
   return when(debug,
     () => html`
-        <bkn-debug .data=${data}></bkn-debug>`,
+      <fhir-debug .data=${data}></fhir-debug >`,
     () => nothing)
 }
 
-@customElement('bkn-debug')
+@customElement('fhir-debug')
 export class Debug extends LitElement {
 
   @property({type: Object})

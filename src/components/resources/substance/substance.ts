@@ -44,9 +44,7 @@ export class Substance extends DomainResource<SubstanceData> {
 
 
   protected renderStructure(data: SubstanceData): TemplateResult {
-    let contained = super.renderStructure(data)
     return html`
-      ${contained}
       <fhir-identifier .label="identifier" .data=${data.identifier}></fhir-identifier >
       <fhir-primitive label="instance" value=${data.instance}></fhir-primitive >
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code}></fhir-primitive >
@@ -57,7 +55,7 @@ export class Substance extends DomainResource<SubstanceData> {
               <fhir-codeable-concept label="category" .data=${c}></fhir-codeable-concept >
             `
           }) : html`
-            <fhir-empty-set ></fhir-empty-set >`}
+            <fhir-empty-list ></fhir-empty-list >`}
         </fhir-structure-wrapper >
       ` : nothing}
       <fhir-codeable-reference label="code" .data=${data.code}></fhir-codeable-reference >
@@ -69,10 +67,9 @@ export class Substance extends DomainResource<SubstanceData> {
         ${data.ingredient ? map(data.ingredient, (ing) => html`
           <fhir-substance-ingredient label="ingredient" .data=${ing}></fhir-substance-ingredient >
         `) : html`
-          <fhir-empty-set ></fhir-empty-set >`}
+          <fhir-empty-list ></fhir-empty-list >`}
       </fhir-structure-wrapper>
       ` : nothing}
-      <fhir-meta label="meta" .data=${data.meta}></fhir-meta >
     `
   }
 

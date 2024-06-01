@@ -4,10 +4,11 @@ import {displayConfigContext}         from '../contexts/context'
 import {BaseElement}                  from './base-element'
 import {BaseElementData}              from './base-element.data'
 
-export class BaseElementProvider<T extends BaseElementData> extends BaseElement<T> {
+export abstract class BaseElementProvider<T extends BaseElementData> extends BaseElement<T> {
 
   protected display = new ContextProvider(this, {context: displayConfigContext})
   private contextRoot = new ContextRoot()
+
 
   public connectedCallback() {
     super.connectedCallback()

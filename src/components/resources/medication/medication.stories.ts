@@ -11,11 +11,15 @@ const meta = {
     },
     verbose: {
       options: [true, false],
-      control: {type: 'radio'},
+      control: {type: 'boolean'}
     },
     showerror: {
       options: [true, false],
-      control: {type: 'radio'}
+      control: {type: 'boolean'}
+    },
+    open: {
+      options: [true, false],
+      control: {type: 'boolean'}
     }
   }
 

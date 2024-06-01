@@ -7,16 +7,20 @@ const meta = {
   component: 'fhir-reference',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'},
+      options: ['display', 'structure', 'summary', 'combined'],
+      control: {type: 'inline-radio'}
     },
     verbose: {
       options: [true, false],
-      control: {type: 'radio'},
+      control: {type: 'inline-radio'}
     },
-    'showerror': {
+    showerror: {
       options: [true, false],
-      control: {type: 'radio'}
+      control: {type: 'inline-radio'}
+    },
+    open: {
+      options: [true, false],
+      control: {type: 'inline-radio'}
     }
   }
 

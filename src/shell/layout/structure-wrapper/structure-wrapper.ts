@@ -36,13 +36,20 @@ export class StructureWrapper extends ShoelaceStyledElement {
   @property({type: Boolean})
   public open: boolean = false
 
+  @property({type: Boolean})
+  public forceclose: boolean = false
+
+
   protected render(): unknown {
+    let open = false
+    if (this.displayConfig.open) open = true
+    if (this.forceclose) open = false
     return this.hide
            ? html`
           <slot part="value"></slot >
       `
            : html`
-          <sl-details part="base" ?open=${this.displayConfig.open}>
+          <sl-details part="base" ?open=${open}>
             <div slot="summary">
               <label ><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
               ${this.fhirType ? html`

@@ -50,9 +50,8 @@ export class Medication extends DomainResource<MedicationData> {
   }
 
   protected renderStructure(data: MedicationData): TemplateResult | TemplateResult[] {
-    let contained = super.renderStructure(data)
+
     return html`
-      ${contained}
       <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
       <fhir-codeable-concept label="code" .data=${data.code}></fhir-codeable-concept >
       <fhir-primitive label="status" .type=${PrimitiveType.code} .value=${data.status}></fhir-primitive >
@@ -79,9 +78,6 @@ export class Medication extends DomainResource<MedicationData> {
         </fhir-structure-wrapper >
       ` : nothing}
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference >
-      <fhir-meta label="meta" .data=${data.meta}></fhir-meta >
-
-
     `
   }
 }
