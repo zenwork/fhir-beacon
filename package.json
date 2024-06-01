@@ -1,6 +1,7 @@
 {
     "name": "fhir-beacon",
     "version": "0.0.1",
+    "homepage": "https://zenwork.github.io/fhir-beacon/",
     "description": "FHIR web components",
     "type": "module",
     "main": "index.js",
@@ -49,6 +50,7 @@
         "@whitespace/storybook-addon-html": "^6.1.1",
         "concurrently": "^8.2.2",
         "custom-element-jet-brains-integration": "^1.4.4",
+        "dotenv": "^16.4.5",
         "eslint": "^9.3.0",
         "mocha": "^10.4.0",
         "remark-gfm": "^4.0.0",
