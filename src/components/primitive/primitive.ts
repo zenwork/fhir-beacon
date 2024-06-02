@@ -65,6 +65,9 @@ export class Primitive extends LitElement {
   declare showerror: boolean
 
   @property()
+  declare variant: string
+
+  @property()
   declare verbose: boolean
 
   @state()
@@ -116,7 +119,7 @@ export class Primitive extends LitElement {
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp;
-            <fhir-value text=${this.showProvided ? this.value : this.presentableValue} link=${this.link}>
+            <fhir-value text=${this.showProvided ? this.value : this.presentableValue} link=${this.link} variant="${this.variant}">
               <span slot="before"><slot name="before"></slot ></span >
               <span slot="after"><slot name="after"></slot ></span >
             </fhir-value >
@@ -163,6 +166,8 @@ export class Primitive extends LitElement {
       [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
       [PrimitiveType.instant, () => val = asDateTime(val as DateTime)],
       [PrimitiveType.uri_type, () => val = asReadable(val as string)]
+      // [PrimitiveType.base64, () => val = asWrapped(val as string,100)],
+
     ])
 
     return val

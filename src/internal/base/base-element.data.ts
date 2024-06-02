@@ -10,7 +10,8 @@ export enum BaseElementMode {
   structure = 'structure',
   structure_trace = 'structure_trace',
   combined = 'combined',
-  narrative = 'narrative'
+  narrative = 'narrative',
+  debug = 'debug'
 }
 
 export type Extension = BaseElementData & {

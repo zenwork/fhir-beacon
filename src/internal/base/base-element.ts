@@ -88,6 +88,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
+    // console.log(this.type, this.mode)
     let display = () => {
 
       if (!this.convertedData) return html``
@@ -148,13 +149,15 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
                          ` :
                          html``
 
+    const debug = () => this.renderDebug(this.data)
 
     return html`${choose(this.mode, [
         [BaseElementMode.display, display],
         [BaseElementMode.structure, structure],
         [BaseElementMode.structure_trace, structure],
         [BaseElementMode.combined, combined],
-        [BaseElementMode.narrative, display]
+        [BaseElementMode.narrative, display],
+        [BaseElementMode.debug, debug]
       ],
       () => html`<h2>Error: Unable to render the element</h2>`)}`
 
@@ -197,7 +200,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @param data
    * @protected
    */
-  protected renderDebug(data: T): TemplateResult | TemplateResult[] {
+  protected renderDebug(data: T): TemplateResult {
     if (this.data || this.isVerbose()) {
       return html`
           <article part="element">

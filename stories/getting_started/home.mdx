@@ -1,9 +1,10 @@
-import {Meta} from '@storybook/blocks'
-
+import {Canvas, Controls, Meta} from '@storybook/blocks'
+import '../../src/index'
+import * as Stories             from '../../src/components/resources/medication/medication.stories'
 
 <Meta title="Getting Started/Home" />
 
-<img src="/images/logo.png" alt="logo" />
+<img src="images/logo.png" alt="logo" />
 
 FHIR Beacon
 ===========
@@ -34,16 +35,25 @@ Why Use Web Components?
 Web Components are a way to instruct the browser on the introduction of new custom elements that can be used just
 like any other HTML markup.
 
+### The Markup
+
 ```html
-<html>
+<html lang="en">
 <head>
-  <script src="/js/my-element.js"></script>
+  <title>My FHIR App</title>
+  <script src="/js/fhir-beacon.js"></script>
 </head>
 <body>
-  <my-element title="Salutation" value="Hello World!"></my-element>
+  <fhir-medication label="Patient's Medication" data="{...}">
+  </fhir-medication>
 </body>
 </html>
 ```
+
+### What is rendered
+<Controls of={Stories.Med0319Display} exclude={'data'} />
+<Canvas of={Stories.Med0319Display} layout={'centered'} sourceState={'none'} />
+
 
 ### A Browser Standard
 

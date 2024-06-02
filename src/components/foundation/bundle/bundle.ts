@@ -30,17 +30,38 @@ export class Bundle extends BaseElementProvider<BundleData> {
           this.verbose)}
       ${renderBackboneCollection('entries', 'entry', data.entry,
           (entry) => {
+            let displayConfig = this.display.value
+            let verbose = displayConfig.verbose
+            let noIndex = null
             return html`
-              ${renderBackboneCollection('links', null, entry.link, (item, idx) => html`
+              ${renderBackboneCollection('links', noIndex, entry.link, (item, idx) => html`
                 <fhir-primitive label="link" .value=${item} .type=${PrimitiveType.link}></fhir-primitive >
               `, this.verbose)}
               <fhir-primitive label="fullURL" .value=${entry.fullUrl} .type=${PrimitiveType.uri}></fhir-primitive >
-              ${renderResourceComponent(entry.resource, this.display.value)}
-              ${renderSingleBackbone('search', null, this.display.value.verbose,
+              ${renderResourceComponent(entry.resource, displayConfig)}
+              ${renderSingleBackbone('search', noIndex, verbose,
                   html`
                     <fhir-primitive label="mode" .value=${entry.search?.mode} .type=${PrimitiveType.code}></fhir-primitive >
                     <fhir-primitive label="score" .value=${entry.search?.score} .type=${PrimitiveType.code}></fhir-primitive >
                   `)}
+              ${renderSingleBackbone('request', noIndex, verbose,
+                html`
+                    <fhir-primitive label="method" .value=${entry.request?.method} .type=${PrimitiveType.code}></fhir-primitive >
+                    <fhir-primitive label="url" .value=${entry.request?.url} .type=${PrimitiveType.uri}></fhir-primitive >
+                    <fhir-primitive label="ifNoneMatch" .value=${entry.request?.ifNoneMatch} .type=${PrimitiveType.fhir_string}></fhir-primitive >
+                    <fhir-primitive label="ifModifiedSince" .value=${entry.request?.ifModifiedSince} .type=${PrimitiveType.instant}></fhir-primitive >
+                    <fhir-primitive label="ifMatch" .value=${entry.request?.ifMatch} .type=${PrimitiveType.fhir_string}></fhir-primitive >
+                    <fhir-primitive label="ifNoneExist" .value=${entry.request?.ifNoneExist} .type=${PrimitiveType.fhir_string}></fhir-primitive >
+                  `)}
+              ${renderSingleBackbone('response', noIndex, verbose, html`
+              <fhir-primitive label="status" .value=${entry.response?.status} .type=${PrimitiveType.fhir_string}></fhir-primitive>
+                <fhir-primitive label="location" .value=${entry.response?.location} .type=${PrimitiveType.uri}></fhir-primitive>
+                <fhir-primitive label="etag" .value=${entry.response?.etag} .type=${PrimitiveType.fhir_string}></fhir-primitive>
+                <fhir-primitive label="lastModified" .value=${entry.response?.lastModified} .type=${PrimitiveType.instant}></fhir-primitive>
+              ${renderResourceComponent(entry.response?.outcome, displayConfig)}
+              `)}
+
+              ${renderResourceComponent(data.issues, displayConfig)}
             `
           },
           this.verbose

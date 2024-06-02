@@ -39,7 +39,7 @@ export const DisplayAndTypeAndReference: Story = {
   args: {
     data: patientData,
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -49,7 +49,7 @@ export const Reference: Story = {
       reference: 'http://fhir.hl7.org/svc/StructureDefinition/c8973a22-2b5b-4e76-9c66-00639c99e61b'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -60,7 +60,7 @@ export const ReferenceAndType: Story = {
       type: 'StructureDefinition'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -70,7 +70,7 @@ export const Display: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -81,7 +81,7 @@ export const DisplayAndType: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -95,7 +95,7 @@ export const Identifier: Story = {
         }
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -105,7 +105,7 @@ export const Unknown: Story = {
       type: 'Practitioner'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -113,7 +113,7 @@ export const Structure: Story = {
   args: {
     data: patientData,
     mode: 'structure',
-    'showerror': false,
+    showerror: false,
     verbose: true,
     open: true
   }

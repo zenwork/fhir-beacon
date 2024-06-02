@@ -67,7 +67,7 @@ export const Headache: Story = {
     data,
     mode: 'display',
     verbose: false,
-    'showerror': true,
+    showerror: true,
     open: true
   }
 }
@@ -77,7 +77,7 @@ export const HeadacheVerbose: Story = {
     data,
     mode: 'display',
     verbose: true,
-    'showerror': true,
+    showerror: true,
     open: true
   }
 }
@@ -87,7 +87,7 @@ export const Structure: Story = {
     data: data,
     mode: 'structure',
     verbose: true,
-    'showerror': true,
+    showerror: true,
     open: true
   }
 }

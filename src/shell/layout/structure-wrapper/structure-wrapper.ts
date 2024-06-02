@@ -44,6 +44,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
     let open = false
     if (this.displayConfig.open) open = true
     if (this.forceclose) open = false
+
     return this.hide
            ? html`
           <slot part="value"></slot >

@@ -6,7 +6,9 @@ import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
 export class Ratio extends BaseElementConsumer<RatioData> {
-  static styles = css`
+
+  static styles = [
+    css`
     fhir-primitive-wrapper {
       display: flex;
       list-style-type: none;
@@ -17,7 +19,8 @@ export class Ratio extends BaseElementConsumer<RatioData> {
     fhir-quantity::part(base) {
       padding: 0
     }
-  `
+    `
+  ]
 
   constructor() {super('Ratio')}
 

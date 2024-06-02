@@ -20,4 +20,9 @@ export let componentStyles = css`
   .error {
     text-decoration: underline wavy var(--sl-color-danger-600);
   }
+
+  .fixed-width {
+    max-width: 60vw;
+    word-wrap: break-word;
+  }
 `

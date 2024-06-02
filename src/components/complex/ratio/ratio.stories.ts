@@ -1,6 +1,11 @@
 import {StoryObj} from '@storybook/web-components'
 import './ratio'
+import {html}     from 'lit'
 
+let render = (args: any) => html`
+  <fhir-shell mode="${args.mode}" ?showerror=${args.showerror} ?verbose=${args.verbose} ?open=${args.open}}>
+    <fhir-ratio .data=${args.data}></fhir-ratio >
+  </fhir-shell >`
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Ratio',
@@ -14,7 +19,7 @@ const meta = {
       options: [true, false],
       control: {type: 'radio'}
     },
-    'showerror': {
+    showerror: {
       options: [true, false],
       control: {type: 'radio'}
     },
@@ -40,11 +45,11 @@ export const SimpleRatio: Story = {
       }
     },
     mode: 'display',
-    'showerror': false,
+    showerror: false,
     verbose: false,
     open: true
-
-  }
+  },
+  render
 }
 
 export const UnitCost: Story = {
@@ -64,9 +69,9 @@ export const UnitCost: Story = {
       }
     },
     mode: 'display',
-    'showerror': false,
+    showerror: false,
     verbose: false,
     open: true
-  }
-
+  },
+  render
 }
