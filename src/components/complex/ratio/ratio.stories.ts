@@ -1,11 +1,12 @@
-import {StoryObj} from '@storybook/web-components'
+import {StoryObj}               from '@storybook/web-components'
 import './ratio'
-import {html}     from 'lit'
+import '../../../../index'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
-let render = (args: any) => html`
-  <fhir-shell mode="${args.mode}" ?showerror=${args.showerror} ?verbose=${args.verbose} ?open=${args.open}}>
-    <fhir-ratio .data=${args.data}></fhir-ratio >
-  </fhir-shell >`
+
+const render = wrapInShell((args) => html`
+    <fhir-ratio .data=${args.data}></fhir-ratio>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Ratio',
@@ -32,7 +33,7 @@ const meta = {
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 export const SimpleRatio: Story = {
   args: {

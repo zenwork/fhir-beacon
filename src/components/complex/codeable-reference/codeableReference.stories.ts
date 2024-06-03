@@ -2,12 +2,14 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import './codeable-reference'
 import '../../../shell/shell'
 import {html}           from 'lit'
+import {wrapInShell}    from '../../../../stories/wrapInShell'
 
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 
 let title = 'components/Datatypes/Complex Type/Codeable Reference'
-
+const render = wrapInShell((args) => html`
+    <fhir-codeable-reference .data=${args.data}></fhir-codeable-reference>`)
 let data = {
   concept: {
     coding: [
@@ -50,12 +52,7 @@ const meta: Meta<CustomArgs> = {
       control: {type: 'inline-radio'}
     }
   },
-  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) =>
-    html`
-      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-codeable-reference .data=${data}></fhir-codeable-reference >
-      </fhir-shell >
-    `
+  render
 
 }
 
@@ -69,7 +66,8 @@ export const Headache: Story = {
     verbose: false,
     showerror: true,
     open: true
-  }
+  },
+  render
 }
 
 export const HeadacheVerbose: Story = {
@@ -79,7 +77,8 @@ export const HeadacheVerbose: Story = {
     verbose: true,
     showerror: true,
     open: true
-  }
+  },
+  render
 }
 
 export const Structure: Story = {
@@ -89,5 +88,6 @@ export const Structure: Story = {
     verbose: true,
     showerror: true,
     open: true
-  }
+  },
+  render
 }

@@ -4,7 +4,7 @@ export default create({
                           base:'light',
                           brandTitle:'FHIR Beacon',
                           brandUrl:'https://github.com/zenwork/fhir-beacon',
-                          brandImage:'../assets/images/logo3.png',
+                          brandImage:'images/logo3.png',
                           brandTarget:'_self',
                           appBg:'#fdfdf3'
                       })

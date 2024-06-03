@@ -1,6 +1,11 @@
-import {StoryObj} from '@storybook/web-components'
+import {StoryObj}               from '@storybook/web-components'
 import './reference'
+import '../../../../index'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
+const render = wrapInShell((args) => html`
+    <fhir-reference .data=${args.data}></fhir-reference>`)
 
 const meta = {
   title: 'Components/Datatypes/Special Type/Reference',
@@ -27,7 +32,7 @@ const meta = {
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 let patientData = {
   reference: 'http://someserver/Patient/id01230',
@@ -50,7 +55,8 @@ export const Reference: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const ReferenceAndType: Story = {
@@ -61,7 +67,8 @@ export const ReferenceAndType: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const Display: Story = {
@@ -71,7 +78,8 @@ export const Display: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const DisplayAndType: Story = {
@@ -82,7 +90,8 @@ export const DisplayAndType: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const Identifier: Story = {
@@ -96,7 +105,8 @@ export const Identifier: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const Unknown: Story = {
@@ -106,7 +116,8 @@ export const Unknown: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const Structure: Story = {
@@ -116,7 +127,8 @@ export const Structure: Story = {
     showerror: false,
     verbose: true,
     open: true
-  }
+  },
+  render
 }
 
 export const WithExtension: Story = {
@@ -130,5 +142,6 @@ export const WithExtension: Story = {
       ], ...patientData
     },
     mode: 'display'
-  }
+  },
+  render
 }

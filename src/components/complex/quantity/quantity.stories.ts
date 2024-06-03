@@ -1,8 +1,14 @@
-import {StoryObj} from '@storybook/web-components'
+import {StoryObj}               from '@storybook/web-components'
 import './quantity'
 import '../../../utilities/debug/debug'
 import '../../primitive/primitive'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
+import '../../../../index'
 
+
+const render = wrapInShell((args) => html`
+    <fhir-quantity .data=${args.data}></fhir-quantity>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Quantity',
@@ -25,7 +31,7 @@ const meta = {
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 export const DisplayableTime: Story = {
   args: {
@@ -37,7 +43,8 @@ export const DisplayableTime: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const AmountOfPrescribedMedicine: Story = {
@@ -52,7 +59,7 @@ export const AmountOfPrescribedMedicine: Story = {
     mode: 'display',
     showerror: false
   },
-
+  render
 }
 
 export const MoneyQuantity: Story = {
@@ -66,7 +73,7 @@ export const MoneyQuantity: Story = {
     mode: 'display',
     showerror: false
   },
-
+  render
 }
 
 export const SimpleQuantity: Story = {
@@ -76,7 +83,8 @@ export const SimpleQuantity: Story = {
     },
     mode: 'display',
     showerror: false
-  }
+  },
+  render
 }
 
 export const ShowStructWithErrors: Story = {
@@ -91,4 +99,5 @@ export const ShowStructWithErrors: Story = {
     showerror: true,
     open: true
   },
+  render
 }
