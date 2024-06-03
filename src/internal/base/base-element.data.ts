@@ -11,6 +11,7 @@ export enum BaseElementMode {
   structure_trace = 'structure_trace',
   combined = 'combined',
   narrative = 'narrative',
+  summary = 'summary',
   debug = 'debug'
 }
 

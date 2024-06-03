@@ -26,20 +26,25 @@ export const valueOrError = <O, V>(fn: toPrimitive<O, V>, originalVal: O): ValOr
 }
 
 export enum PrimitiveType {
-  forced_error = 'forced_error',
-  none = 'none',
+  base64 = 'base64',
+  boolean = 'boolean',
+  canonical = 'canonical',
   code = 'code',
-  url = 'url',
-  uri = 'uri',
-  decimal = 'decimal',
+  date = 'date',
   datetime = 'datetime',
-  uri_type = 'uri_type', //TODO: not 100% this belongs here
-  string_reference = 'string_reference',
+  decimal = 'decimal',
+  fhir_string = 'fhir_string',
+  forced_error = 'forced_error',
   id = 'id',
   instant = 'instant',
-  canonical = 'canonical',
-  fhir_string = 'fhir_string',
-  base64 = 'base64',
+  integer = 'integer',
+  integer64 = 'integer64',
+  link = 'link',
+  none = 'none',
+  positiveInt = 'positiveInt',
+  string_reference = 'string_reference',
   unsigned_int = 'unsigned_int',
-  link = 'link'
+  uri = 'uri',
+  uri_type = 'uri_type', //TODO: not 100% this belongs here
+  url = 'url',
 }

@@ -89,7 +89,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    */
   protected render(): TemplateResult | TemplateResult[] {
     // console.log(this.type, this.mode)
-    let display = () => {
+    const display = () => {
 
       if (!this.convertedData) return html``
       if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
@@ -104,7 +104,12 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
             </fhir-wrapper>`
     }
 
-    let structure = () => {
+    const summary = () => {
+      return html`
+        <fhir-not-supported description="not implemented yet"></fhir-not-supported >`
+    }
+
+    const structure = () => {
       if (this.convertedData || this.isVerbose()) {
         return html`
           <fhir-structure-wrapper
@@ -137,7 +142,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
     }
 
-    let combined = () => this.convertedData ?
+    const combined = () => this.convertedData ?
                          html`
                            <fhir-shell .mode=${BaseElementMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
                              ${display()}
@@ -157,6 +162,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
         [BaseElementMode.structure_trace, structure],
         [BaseElementMode.combined, combined],
         [BaseElementMode.narrative, display],
+        [BaseElementMode.summary, summary],
         [BaseElementMode.debug, debug]
       ],
       () => html`<h2>Error: Unable to render the element</h2>`)}`

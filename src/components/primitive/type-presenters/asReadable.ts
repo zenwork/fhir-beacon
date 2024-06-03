@@ -1,8 +1,12 @@
 const regex = /(\S)([A-Z])/g
 
-export function asReadable(camelCaseStr: string): string {
+export function asReadable(value: string): string {
 
-  return camelCaseStr
-    .replace(regex, '$1 $2')
-    .toLowerCase()
+  if (value) {
+    return value
+      .replace(regex, '$1 $2')
+      .toLowerCase()
+  }
+
+  return value
 }

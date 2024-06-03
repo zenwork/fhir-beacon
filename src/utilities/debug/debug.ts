@@ -38,15 +38,15 @@ export class Debug extends LitElement {
   }
 
   private static stringify = (i: unknown) => {
-    let value = JSON.stringify(i, null, 2)
+    let value = JSON.stringify(i, null, 4)
     if (value.charAt(0) === '"') {
       value = value.substring(1)
       if (value.charAt(value.length - 1) === '"') {value = value.substring(0, value.length - 1)}
     } else {
 
-      value = value.replace(/[{}\[\]]/g, '')
-      value = value.replace(/\n\s+\n/g, '')
-      value = value.replace(/:\s+/g, ': ')
+      // value = value.replace(/[{}\[\]]/g, '')
+      // value = value.replace(/\n\s+\n/g, '')
+      // value = value.replace(/:\s+/g, ': ')
     }
     return value
   }

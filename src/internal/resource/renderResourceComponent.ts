@@ -26,6 +26,15 @@ export function renderResourceComponent(data: ResourceData | undefined, displayC
               ?verbose=${displayConfig.verbose}
               ?open=${displayConfig.open}
           ></fhir-medication >`
+      case 'Patient':
+        return html`
+          <fhir-patient
+              .data=${data}
+              .mode=${displayConfig.mode}
+              ?showerror=${displayConfig.showerror}
+              ?verbose=${displayConfig.verbose}
+              ?open=${displayConfig.open}
+          ></fhir-patient >`
       default:
         return html`
           <fhir-primitive label="resource" value="[${data.resourceType}] is not supported" .type=${PrimitiveType.none}></fhir-primitive >

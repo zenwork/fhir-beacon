@@ -16,8 +16,8 @@ export class Identifier extends BaseElementConsumer<IdentifierData> {
 
   protected renderDisplay(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-codeable-concept .data=${data.type}></fhir-codeable-concept >
-      <fhir-primitive label="identifier" .value=${data.value} .context=${data.system}></fhir-primitive>
+      <fhir-primitive label="id" .value=${data.value} .context=${data.system}></fhir-primitive >
+      <fhir-codeable-concept label="type" .data=${data.type}></fhir-codeable-concept >
       <fhir-period .data=${data.period}></fhir-period >
     `
   }

@@ -9,7 +9,7 @@ export class NotSupported extends LitElement {
 
   protected render(): unknown {
     return html`
-      <fhir-wrapper>Unsupported Feature:${this.description}
+      <fhir-wrapper >Unsupported Feature${this.description ?? ': ' + this.description}
         <slot></slot>
       </fhir-wrapper>`
   }

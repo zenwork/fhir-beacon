@@ -13,14 +13,19 @@ import './primitive-wrapper/primitive-wrapper'
 
 import {PrimitiveType, valueOrError} from './type-converters'
 import {toBase64}                    from './type-converters/toBase64'
+import {toBoolean}                   from './type-converters/toBoolean'
 import {toCode}                      from './type-converters/toCode'
+import {toDate}                      from './type-converters/toDate'
 import {toDatetime}                  from './type-converters/toDatetime'
 import {toDecimal}                   from './type-converters/toDecimal'
 import {toError}                     from './type-converters/toError'
 import {toFhirString}                from './type-converters/toFhirString'
 import {toId}                        from './type-converters/toId'
 import {toInstant}                   from './type-converters/toInstant'
+import {toInteger}                   from './type-converters/toInteger'
+import {toInteger64}                 from './type-converters/toInteger64'
 import {toLink}                      from './type-converters/toLink'
+import {toPositiveInt}               from './type-converters/toPositiveInt'
 import {toType}                      from './type-converters/toType'
 import {toUnsignedInt}               from './type-converters/toUnsignedInt'
 import {toUri}                       from './type-converters/toUri'
@@ -81,21 +86,27 @@ export class Primitive extends LitElement {
     let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
     if (watchedHaveChanged && this.value && this.type) {
       choose(this.type, [
-        [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
+        [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
+        [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
         [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
-        [PrimitiveType.url, () => this.validOrError(toUrl, this.value)],
-        [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
-        [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
+        [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
         [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
-        [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
+        [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
+        [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
         [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
         [PrimitiveType.id, () => this.validOrError(toId, this.value)],
         [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)],
-        [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
+        [PrimitiveType.integer, () => this.validOrError(toInteger, this.value)],
+        [PrimitiveType.integer64, () => this.validOrError(toInteger64, this.value)],
+        [PrimitiveType.link, () => this.validOrError(toLink, this.value)],
+        [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
+        [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
+        [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
         [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
-        [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
-        [PrimitiveType.link, () => this.validOrError(toLink, this.value)]
+        [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
+        [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
+        [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
+
       ])
     }
   }

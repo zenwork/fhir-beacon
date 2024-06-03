@@ -22,7 +22,7 @@ export let componentStyles = css`
   }
 
   pre {
-    margin: 0;
+    margin: 0 0 0 3rem;
   }
 
   .key {
