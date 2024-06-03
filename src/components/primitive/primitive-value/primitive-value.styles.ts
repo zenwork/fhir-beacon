@@ -25,4 +25,19 @@ export let componentStyles = css`
     max-width: 60vw;
     word-wrap: break-word;
   }
+
+  .hide-overflow {
+      width: 30vw; /* set the initial width */
+      height: 2rem; /* set the initial height */
+      overflow: hidden; /* hide the overflowed text */
+      transition: height 1s; /* animate height */
+      word-wrap: break-word;
+  }
+
+  .hide-overflow:hover {
+      height: 12rem; /* expand to the full height on hover */
+      overflow-y: scroll;
+      overflow-x: hidden
+
+  }
 `

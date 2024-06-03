@@ -1,12 +1,14 @@
-import {StoryObj} from '@storybook/web-components'
+import {Meta, StoryObj} from '@storybook/web-components'
 import '../../../../src/index'
+import {html}           from 'lit'
+import {ShellArgs}      from '../../../../stories/wrapInShell'
 
-const meta = {
+const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined', 'narrative'],
+      options: ['display', 'summary', 'structure', 'narrative'],
       control: {type: 'radio'},
     },
     verbose: {
@@ -26,7 +28,7 @@ const meta = {
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 const data_310 = {
   resourceType: 'Medication',
@@ -292,5 +294,16 @@ export const FrontPageDemo: Story = {
     showerror: false,
     verbose: false,
     open: true
-  }
+  },
+  render: (args: ShellArgs) =>
+    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3>
+    <fhir-medication
+            .data=${args.data}
+            .mode=${args.mode}
+            .showerror=${args.showerror}
+            .verbose=${args.verbose}
+            .open=${args.open}>
+    </fhir-medication>
+    `
+
 }

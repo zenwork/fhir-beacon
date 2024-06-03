@@ -39,7 +39,7 @@ export class Medication extends DomainResource<MedicationData> {
 
       ` : nothing}
       ${(data.batch || this.verbose) ? html`
-        <fhir-wrapper label="batch">
+          <fhir-wrapper label="batch" variant="primary">
             <fhir-primitive label="lot number" .value=${data.batch?.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive>
             <fhir-primitive label="expiration date" .value=${data.batch?.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive>
         </fhir-wrapper >

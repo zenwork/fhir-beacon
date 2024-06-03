@@ -1,11 +1,15 @@
-export const hasSome = <T>(data: Array<any> | null | undefined) => {
-  return Array.isArray(data) && data.length > 0
+export const hasSome = (data: Array<any> | null | undefined, verbose: boolean = false) => {
+  return verbose || (Array.isArray(data) && data.length > 0)
 }
 
-export const hasOnlyOne = <T>(data: Array<any> | null | undefined) => {
-  return Array.isArray(data) && data.length == 1
+export const hasOnlyOne = (data: Array<any> | null | undefined, verbose: boolean = false) => {
+  return verbose || (Array.isArray(data) && data.length == 1)
 }
 
-export const hasNone = <T>(data: Array<any> | null | undefined) => {
-  return !data || (Array.isArray(data) && data.length <= 0)
+export const hasNone = (data: Array<any> | null | undefined, verbose: boolean = false) => {
+  return verbose || (!data || (Array.isArray(data) && data.length <= 0))
+}
+
+export const isDefined = (data: any | null | undefined, verbose: boolean = false) => {
+  return verbose || data
 }
