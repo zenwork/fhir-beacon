@@ -40,8 +40,8 @@ export class Medication extends DomainResource<MedicationData> {
       ` : nothing}
       ${(data.batch || this.verbose) ? html`
         <fhir-wrapper label="batch">
-          <fhir-primitive label="lot number" .value=${data.batch?.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive >
-          <fhir-primitive label="expiration date" .value=${data.batch?.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive >
+            <fhir-primitive label="lot number" .value=${data.batch?.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive>
+            <fhir-primitive label="expiration date" .value=${data.batch?.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive>
         </fhir-wrapper >
       ` : nothing}
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference>
@@ -73,8 +73,8 @@ export class Medication extends DomainResource<MedicationData> {
       ` : nothing}
       ${(data.batch || this.verbose) ? html`
         <fhir-structure-wrapper label="batch">
-          <fhir-primitive label="lot number" .value=${data.batch?.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive >
-          <fhir-primitive label="expiration date" .value=${data.batch?.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive >
+            <fhir-primitive label="lot number" .value=${data.batch?.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive>
+            <fhir-primitive label="expiration date" .value=${data.batch?.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive>
         </fhir-structure-wrapper >
       ` : nothing}
       <fhir-reference label="definition" .data=${data.definition}></fhir-reference >
