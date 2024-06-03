@@ -27,7 +27,7 @@ export let componentStyles = css`
   }
 
   .hide-overflow {
-      width: 30rem; /* set the initial width */
+    width: 30rem; /* set the initial width */
       height: 2rem; /* set the initial height */
       overflow: hidden; /* hide the overflowed text */
       transition: height 1s; /* animate height */
