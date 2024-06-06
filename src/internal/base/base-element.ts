@@ -32,7 +32,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   @property({reflect: true})
   protected type: string = ''
 
-  @property({type: BaseElementMode, converter: toBaseElementModeEnum})
+  @property({ type: BaseElementMode, converter: toBaseElementModeEnum, reflect: true })
   public mode: BaseElementMode = BaseElementMode.display
 
   @property({type: Boolean, reflect: true})
@@ -46,6 +46,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   @property({type: Boolean, reflect: true})
   declare showerror: boolean
+
+  @property({ type: Boolean, reflect: true })
+  declare summary: boolean
 
   @state()
   private convertedData: T | null = null
@@ -88,84 +91,88 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
-    // console.log(this.type, this.mode)
-    const display = () => {
+    if ((this.summary && this.summaryMode()) || (!this.summaryMode())) {
+      const display = () => {
 
-      if (!this.convertedData) return html``
-      if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
+        if (!this.convertedData) return html``
+        if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
 
-      // is verbose
-      return html`
-            <fhir-wrapper
-                .label=${this.getElementLabel()}
-                .fhirType=${this.getTypeLabel()}
-            >
-              ${this.renderDisplay(this.convertedData)}
-            </fhir-wrapper>`
-    }
-
-    const summary = () => {
-      return html`
-        <fhir-not-supported description="not implemented yet"></fhir-not-supported >`
-    }
-
-    const structure = () => {
-      if (this.convertedData || this.isVerbose()) {
+        // is verbose
         return html`
-          <fhir-structure-wrapper
+          <fhir-wrapper
               .label=${this.getElementLabel()}
-              .resourceId=${this.convertedData?.id ?? ''}
               .fhirType=${this.getTypeLabel()}
-              ?forceclose=${this.forceclose}
           >
-            <div class="frontmatter">
-              ${map(Object.values(this.structureGenerators), generator => generator(this.convertedData ?? {} as T))}
-            </div >
-
-            ${this.renderStructure(this.convertedData ?? {} as T)}
-          </fhir-structure-wrapper >
-        `
+            ${this.renderDisplay(this.convertedData)}
+          </fhir-wrapper >`
       }
 
-      // stop rendering in verbose mode due to theoretically infinite models. ex: Identifier -> Reference -> Identifier -> and so on!
-      if (this.recursionGuard) {
+      const summary = () => {
         return html`
-          <fhir-primitive
-              .type=${PrimitiveType.forced_error}
-              label=${this.label}
-              value="[(${this.type}) not rendered due to recursion guard]"
-              ?showerror=${this.showerror}
-          ></fhir-primitive>`
+          <fhir-not-supported description="not implemented yet"></fhir-not-supported >`
       }
 
+      const structure = () => {
+        if (this.convertedData || this.isVerbose()) {
+          return html`
+            <fhir-structure-wrapper
+                .label=${this.getElementLabel()}
+                .resourceId=${this.convertedData?.id ?? ''}
+                .fhirType=${this.getTypeLabel()}
+                ?forceclose=${this.forceclose}
+                ?summary=${this.summary}
+            >
+              <div class="frontmatter">
+                ${map(Object.values(this.structureGenerators), generator => generator(this.convertedData ?? {} as T))}
+              </div >
+
+              ${this.renderStructure(this.convertedData ?? {} as T)}
+            </fhir-structure-wrapper >
+          `
+        }
+
+        // stop rendering in verbose mode due to theoretically infinite models. ex: Identifier -> Reference -> Identifier -> and so on!
+        if (this.recursionGuard) {
+          return html`
+            <fhir-primitive
+                .type=${PrimitiveType.forced_error}
+                label=${this.label}
+                value="[(${this.type}) not rendered due to recursion guard]"
+                ?showerror=${this.showerror}
+            ></fhir-primitive >`
+        }
+
+        return html``
+
+      }
+
+      const combined = () => this.convertedData ?
+                             html`
+                               <fhir-shell .mode=${BaseElementMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+                                 ${display()}
+                               </fhir-shell >
+                               <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
+                               <fhir-shell .mode=${BaseElementMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+                                 ${structure()}
+                               </fhir-shell >
+                             ` :
+                             html``
+
+      const debug = () => this.renderDebug(this.data)
+
+      return html`${choose(this.mode, [
+          [BaseElementMode.combined, combined],
+          [BaseElementMode.display, display],
+          [BaseElementMode.display_summary, display],
+          [BaseElementMode.narrative, display],
+          [BaseElementMode.structure, structure],
+          [BaseElementMode.structure_summary, structure],
+          [BaseElementMode.debug, debug]
+        ],
+        () => html`<h2 >Error: Unable to render the element</h2 >`)}`
+    } else {
       return html``
-
     }
-
-    const combined = () => this.convertedData ?
-                         html`
-                           <fhir-shell .mode=${BaseElementMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                             ${display()}
-                           </fhir-shell >
-                           <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
-                           <fhir-shell .mode=${BaseElementMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                             ${structure()}
-                           </fhir-shell >
-                         ` :
-                         html``
-
-    const debug = () => this.renderDebug(this.data)
-
-    return html`${choose(this.mode, [
-        [BaseElementMode.display, display],
-        [BaseElementMode.structure, structure],
-        [BaseElementMode.structure_trace, structure],
-        [BaseElementMode.combined, combined],
-        [BaseElementMode.narrative, display],
-        [BaseElementMode.summary, summary],
-        [BaseElementMode.debug, debug]
-      ],
-      () => html`<h2>Error: Unable to render the element</h2>`)}`
 
   }
 
@@ -176,6 +183,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    */
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
+    // if (_changedProperties.has('summary')) {
+    //   console.log(this.label, 'in summary', this.summary)
+    // }
 
     if (_changedProperties.has('data')) {
       this.totalDataNodes = countNodes(this.data)
@@ -266,4 +276,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
 
+  private summaryMode() {
+    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
+  }
 }

@@ -5,30 +5,17 @@ import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
 const render = wrapInShell((args) => html`
-    <fhir-reference .data=${args.data}></fhir-reference>`)
+  <fhir-reference .data=${args.data} summary></fhir-reference >`)
 
 const meta = {
   title: 'Components/Datatypes/Special Type/Reference',
   component: 'fhir-reference',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'summary', 'combined'],
-      control: {type: 'inline-radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    open: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'inline-radio' } },
+    showerror: { options: [false, true], control: { type: 'inline-radio' } },
+    open: { options: [false, true], control: { type: 'inline-radio' } }
   }
-
 }
 
 export default meta

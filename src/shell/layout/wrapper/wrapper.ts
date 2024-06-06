@@ -1,13 +1,15 @@
-import {consume}                 from '@lit/context'
-import {html, TemplateResult}    from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {classMap}                from 'lit/directives/class-map.js'
-import {displayConfigContext}    from '../../../internal/contexts/context'
-import {DisplayConfig}           from '../../../internal/contexts/context.data'
-import {defaultDisplayConfig}    from '../../../internal/contexts/context.defaults'
-import {hostStyles}              from '../../../styles/hostStyles'
-import {ShoelaceStyledElement}   from '../../shoelace-styled-element'
-import {componentStyles}         from './wrapper-styles'
+import {consume}                              from '@lit/context'
+import {html, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property}              from 'lit/decorators.js'
+import {classMap}                             from 'lit/directives/class-map.js'
+import {BaseElementMode}                      from '../../../internal/base/base-element.data'
+import {displayConfigContext}                 from '../../../internal/contexts/context'
+import {DisplayConfig}                        from '../../../internal/contexts/context.data'
+import {defaultDisplayConfig}                 from '../../../internal/contexts/context.defaults'
+import {hostStyles}                           from '../../../styles/hostStyles'
+import {toBaseElementModeEnum}                from '../../../utilities/toBaseElementModeEnum'
+import {ShoelaceStyledElement}                from '../../shoelace-styled-element'
+import {componentStyles}                      from './wrapper-styles'
 
 
 /**
@@ -35,42 +37,67 @@ export class Wrapper extends ShoelaceStyledElement {
   @property({type: Boolean, reflect: true})
   hide: boolean = false
 
-  protected render(): unknown {
-    const classes = {primary: this.variant === 'primary', secondary: this.variant === 'secondary'}
+  @property({ type: Boolean, reflect: true })
+  declare open: boolean
 
-    let label: TemplateResult
-    if (!this.hide && this.label && this.fhirType) {
-      label = html`
-        <sl-tooltip content="${this.fhirType}" placement="left">
+  @property({ type: BaseElementMode, reflect: true, converter: toBaseElementModeEnum })
+  declare mode: BaseElementMode
+
+  @property({ type: Boolean, reflect: true })
+  declare summary: boolean
+
+  protected render(): unknown {
+    if (!this.summaryMode() || (this.summary && this.summaryMode())) {
+      const classes = { primary: this.variant === 'primary', secondary: this.variant === 'secondary' }
+
+      let label: TemplateResult
+      if (!this.hide && this.label && this.fhirType) {
+        label = html`
+          <sl-tooltip content="${this.fhirType}" placement="left">
+            <div id="label">
+              <label class=${classMap(classes)}>${this.label}</label >
+              <span id="arrow">&#x21B4;</span >
+            </div >
+          </sl-tooltip >
+        `
+      } else if (!this.hide && this.label) {
+        label = html`
           <div id="label">
             <label class=${classMap(classes)}>${this.label}</label >
             <span id="arrow">&#x21B4;</span >
           </div >
-        </sl-tooltip >
-      `
-    } else if (!this.hide && this.label) {
-      label = html`
-        <div id="label">
-          <label class=${classMap(classes)}>${this.label}</label >
-          <span id="arrow">&#x21B4;</span >
+        `
+      } else if (!this.hide && this.fhirType) {
+        label = html`
+          <div id="label">
+            <label class=${classMap(classes)}>${this.fhirType}</label >
+            <span id="arrow">&#x21B4;</span >
+          </div >
+        `
+      } else {
+        label = html``
+      }
+      return html`
+        <div class='base'>
+          ${label}
+          <slot class="${classMap({ content: !this.hide })}"></slot >
         </div >
       `
-    } else if (!this.hide && this.fhirType) {
-      label = html`
-        <div id="label">
-          <label class=${classMap(classes)}>${this.fhirType}</label >
-          <span id="arrow">&#x21B4;</span >
-        </div >
-      `
-    } else {
-      label = html``
     }
-    return html`
-      <div class='base'>
-      ${label}
-      <slot class="${classMap({content: !this.hide})}"></slot >
-      </div >
-    `
+
+    return html``
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (this.displayConfig) {
+      this.open = this.displayConfig.open
+      this.mode = this.displayConfig.mode
+    }
+  }
+
+  private summaryMode() {
+    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
   }
 
 

@@ -15,19 +15,20 @@ export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {
   }
 
   //TODO: review how to deal with fall-back situation. Is this a correct interpretation. We probably need some extensive testing
+  //TODO: display summary is problematic because it does not represent the spec correctly sometimes if layout is modified
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
 
     if (data.coding) {
       return html`
         ${wrap('identifiers', data.coding, this.displayConfig.verbose,
             (i, x) => html`
-              <fhir-coding .label=${this.label || 'name'}${x} .data=${i}></fhir-coding >`)}
+              <fhir-coding .label=${this.label || 'name'}${x} .data=${i} summary></fhir-coding >`)}
       `
     }
 
     if (data.text) {
       return html`
-        <fhir-primitive .label=${this.label ?? 'name'} .value=${data.text}></fhir-primitive >`
+        <fhir-primitive .label=${'name'} .value=${data.text} summary></fhir-primitive >`
     }
 
     return html`
@@ -38,9 +39,9 @@ export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {
     return [
       wraps('codings', data.coding, this.displayConfig.verbose,
         (i, x) => html`
-          <fhir-coding label="coding${x}}" .data=${i}></fhir-coding >`),
+          <fhir-coding label="coding${x}" .data=${i} summary></fhir-coding >`),
       html`
-        <fhir-primitive label="text" .value=${data.text}></fhir-primitive > `
+        <fhir-primitive label="text" .value=${data.text} summary></fhir-primitive > `
     ]
   }
 

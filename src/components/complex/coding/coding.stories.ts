@@ -11,26 +11,14 @@ const meta: Meta<CustomArgs> = {
   title: 'Components/Datatypes/Complex Type/Coding',
   component: 'fhir-shell',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'inline-radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    open: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   },
   render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) => html`
     <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-      <fhir-coding .data=${data}></fhir-coding >
+      <fhir-coding .data=${data} summary></fhir-coding >
     </fhir-shell >
   `
 

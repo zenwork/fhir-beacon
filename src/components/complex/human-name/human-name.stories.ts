@@ -9,16 +9,16 @@ let path = 'Components/Datatypes/Complex Type/Human Name'
 let elementName = 'fhir-human-name'
 
 let render = wrapInShell(({ data }) => html`
-  <fhir-human-name .data=${data}></fhir-human-name >`)
+  <fhir-human-name .data=${data} summary></fhir-human-name >`)
 
 const meta = {
   title: path,
   component: elementName,
   argTypes: {
-    mode: { options: ['display', 'summary', 'structure', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [true, false], control: { type: 'boolean' } },
-    showerror: { options: [true, false], control: { type: 'boolean' } },
-    open: { options: [true, false], control: { type: 'boolean' } }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   }
 }
 

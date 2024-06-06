@@ -12,8 +12,8 @@ export abstract class Resource<T extends ResourceData> extends BaseElementProvid
 
   private renderResourceStructure(data: T): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-meta label="meta" .data=${data.meta} ?forceclose=${true}></fhir-meta >
-      <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri}></fhir-primitive >
+      <fhir-meta label="meta" .data=${data.meta} ?forceclose=${true} summary></fhir-meta >
+      <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri} summary></fhir-primitive >
       <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
     `
   }

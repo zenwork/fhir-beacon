@@ -16,9 +16,9 @@ export class Identifier extends BaseElementConsumer<IdentifierData> {
 
   protected renderDisplay(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.value} .context=${data.system}></fhir-primitive >
-      <fhir-codeable-concept label="type" .data=${data.type}></fhir-codeable-concept >
-      <fhir-period .data=${data.period}></fhir-period >
+      <fhir-primitive label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive >
+      <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
+      <fhir-period .data=${data.period} summary></fhir-period >
     `
   }
 
@@ -30,11 +30,11 @@ export class Identifier extends BaseElementConsumer<IdentifierData> {
    */
   protected renderStructure(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use}></fhir-primitive >
-      <fhir-codeable-concept label="type" .data=${data.type}></fhir-codeable-concept >
-      <fhir-primitive label="system" type=${PrimitiveType.uri} .value=${data.system}></fhir-primitive >
-      <fhir-primitive label="value" .value=${data.value}></fhir-primitive >
-      <fhir-period label="period" .data=${data.period}></fhir-period >
-      <fhir-reference label="assigner" .data=${data.assigner}></fhir-reference > `
+      <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use} summary></fhir-primitive >
+      <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
+      <fhir-primitive label="system" type=${PrimitiveType.uri} .value=${data.system} summary></fhir-primitive >
+      <fhir-primitive label="value" .value=${data.value} summary></fhir-primitive >
+      <fhir-period label="period" .data=${data.period} summary></fhir-period >
+      <fhir-reference label="assigner" .data=${data.assigner} summary></fhir-reference > `
   }
 }

@@ -10,9 +10,14 @@ export class Period extends BaseElementConsumer<PeriodData> {
   constructor() {super('Period')}
 
   protected renderDisplay(data: PeriodData): TemplateResult | TemplateResult[] {
+    // TODO: fixed this hacked css
     return html`
-      <fhir-primitive label="since" type=${PrimitiveType.datetime} .value=${data.start}></fhir-primitive >
-      <fhir-primitive label="until" type=${PrimitiveType.datetime} .value=${data.end}></fhir-primitive >
+      <fhir-primitive-wrapper >
+        <fhir-label >period:</fhir-label >
+        <fhir-primitive type=${PrimitiveType.datetime} .value=${data.start} summary></fhir-primitive >
+        <fhir-label >&nbsp;&#x21E2;</fhir-label >
+        <fhir-primitive type=${PrimitiveType.datetime} .value=${data.end} summary></fhir-primitive >
+      </fhir-primitive-wrapper >
     `
   }
 
@@ -23,12 +28,14 @@ export class Period extends BaseElementConsumer<PeriodData> {
             label="start"
             type=${PrimitiveType.datetime}
             .value=${data.start}
-        ></fhir-primitive>
+            summary
+        ></fhir-primitive >
         <fhir-primitive
             label="end"
             type=${PrimitiveType.datetime}
             .value=${data.end}
-        ></fhir-primitive>`
+            summary
+        ></fhir-primitive >`
     ]
   }
 }

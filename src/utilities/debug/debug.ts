@@ -54,12 +54,12 @@ export class Debug extends LitElement {
   protected render(): unknown {
     return html`
         <div>
-            <ol>${map(Object.entries(this.data),
+          <ul >${map(Object.entries(this.data),
                     (i) => html`
-                        <li><span class="key">${i[0].padStart(this.longest, '\u00A0')}</span> :
+                      <li ><span class="key">${i[0]}</span > :
                             <pre>${(Debug.stringify(i[1]))}</pre>
                         </li>`)}
-            </ol>
+          </ul >
         </div>
     `
   }

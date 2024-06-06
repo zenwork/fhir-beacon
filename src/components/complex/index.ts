@@ -1,5 +1,6 @@
 import './quantity/quantity.type-guards'
 
+import './address/address'
 import './codeable-concept/codeable-concept'
 import './codeable-reference/codeable-reference'
 import './coding/coding'

@@ -41,7 +41,7 @@ export let componentStyles = css`
 
   sl-badge::part(base) {
     color: var(--sl-color-gray-400);
-    background-color: var(--sl-color-gray-50);
+    background-color: var(--sl-color-gray-100);
     border-color: var(--sl-color-gray-300);
     font-weight: var(--sl-font-weight-normal);
     font-style: italic;

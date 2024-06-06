@@ -1,10 +1,12 @@
-import {consume}                                                   from '@lit/context'
-import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
-import {customElement, property, state}                            from 'lit/decorators.js'
-import {choose}                                                    from 'lit/directives/choose.js'
-import {displayConfigContext}                                      from '../../internal/contexts/context'
-import {DisplayConfig}                                             from '../../internal/contexts/context.data'
-import {DateTime}                                                  from './primitive.data'
+import {consume}                                                        from '@lit/context'
+import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                                 from 'lit/decorators.js'
+import {choose}                                                         from 'lit/directives/choose.js'
+import {BaseElementMode}                                                from '../../internal/base/base-element.data'
+import {displayConfigContext}                                           from '../../internal/contexts/context'
+import {DisplayConfig}                                                  from '../../internal/contexts/context.data'
+import {toBaseElementModeEnum}                                          from '../../utilities/toBaseElementModeEnum'
+import {DateTime}                                                       from './primitive.data'
 import './primitive-label/primitive-label'
 import './primitive-value/primitive-value'
 import './primitive-error/primitive-error'
@@ -42,42 +44,63 @@ import {asReadable}                  from './type-presenters/asReadable'
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
 
-  @consume({context: displayConfigContext, subscribe: true})
+  static styles = [
+    css`
+      sl-badge {
+        padding-left: var(--sl-spacing-x-small)
+      }
+
+      sl-badge::part(base) {
+        color: var(--sl-color-gray-400);
+        background-color: var(--sl-color-gray-100);
+        border-color: var(--sl-color-gray-300);
+        font-weight: var(--sl-font-weight-normal);
+        font-style: italic;
+      }
+    `
+  ]
+
+  @consume({ context: displayConfigContext, subscribe: true })
   declare displayConfig: DisplayConfig
 
-  @property()
+  @property({ reflect: true })
   declare label: string
 
-  @property()
+  @property({ reflect: true })
   public delimiter: string = ': '
 
-  @property()
+  @property({ reflect: true })
   public value: string = ''
 
-  @property()
+  @property({ reflect: true })
   declare link: string
 
-  @property()
+  @property({ reflect: true })
   declare context: string
 
-  @property({type: PrimitiveType, converter: convertToPrimitiveType})
+  @property({ type: PrimitiveType, converter: convertToPrimitiveType, reflect: true })
   public type: PrimitiveType = PrimitiveType.none
 
-  @property({type: Boolean})
+  @property({ type: Boolean, reflect: true })
   declare showProvided: boolean
 
-  @property({type: Boolean})
+  @property({ type: BaseElementMode, converter: toBaseElementModeEnum, reflect: true })
+  declare mode: BaseElementMode
+
+  @property({ type: Boolean, reflect: true })
   declare showerror: boolean
 
-  @property()
+  @property({ type: String, reflect: true })
   declare variant: string
 
-  @property()
+  @property({ type: Boolean, reflect: true })
   declare verbose: boolean
+
+  @property({ type: Boolean, reflect: true })
+  declare summary: boolean
 
   @state()
   private error: boolean = false
-
   @state()
   private presentableValue: unknown = ''
 
@@ -114,42 +137,53 @@ export class Primitive extends LitElement {
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (this.displayConfig) {
+      this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
     }
   }
 
   protected render(): unknown {
-    return this.error ? this.renderError() : this.renderValid()
+    if ((this.summary && this.summaryMode()) || (!this.summaryMode())) {
+      // console.log('rendering', this.label, this.summary, this.displayConfig.mode)
+      return this.error ? this.renderError() : this.renderValid()
+    }
+    // console.log('not rendering', this.label)
+    return html``
   }
 
-  //TODO: should not be an <li>. A primitive and a base element should be the same thing so the are handled the same way by the wrapper
   // TODO: should be able to put link on value OR on context
   private renderValid = (): TemplateResult => {
-    return this.value || this.value == '' || this.displayConfig?.verbose
+    return this.value || this.value == '' || this.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp;
-            <fhir-value text=${this.showProvided ? this.value : this.presentableValue} link=${this.link} variant="${this.variant}">
+            <fhir-value
+                text=${this.showProvided ? this.value : this.presentableValue}
+                link=${this.link}
+                .variant=${this.variant}
+            >
               <span slot="before"><slot name="before"></slot ></span >
               <span slot="after"><slot name="after"></slot ></span >
             </fhir-value >
             <fhir-context
-                .text=${this.context ?? ''}${this.context && this.displayConfig?.verbose ? ' - ' : ''}
-                ${this.displayConfig?.verbose ? this.type : ''}
+                .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}
+                ${this.verbose ? this.type : ''}
             ></fhir-context >
+            ${this.summary && this.mode == BaseElementMode.structure ? html`
+              <sl-badge pill>&sum;</sl-badge >` : nothing}
           </fhir-primitive-wrapper >`
            : html``
   }
 
   private renderError = (): TemplateResult => {
     /* HTML */
-    return this.value || this.displayConfig.verbose
+    return this.value || this.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
             <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-            ${this.displayConfig?.showerror
+            ${this.showerror
               ? html`
                   <fhir-error text=${this.presentableValue}></fhir-error >`
               : nothing}
@@ -182,6 +216,10 @@ export class Primitive extends LitElement {
     ])
 
     return val
+  }
+
+  private summaryMode() {
+    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
   }
 }
 

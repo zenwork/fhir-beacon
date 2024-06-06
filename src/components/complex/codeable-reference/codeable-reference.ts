@@ -12,15 +12,15 @@ export class CodeableReference extends BaseElementConsumer<CodeableReferenceData
 
   protected renderDisplay(data: CodeableReferenceData): TemplateResult {
     return html`
-      <fhir-codeable-concept label="" .data=${data.concept}></fhir-codeable-concept >
-      <fhir-reference label="name" .data=${data.reference}></fhir-reference >
+      <fhir-codeable-concept label="" .data=${data.concept} summary></fhir-codeable-concept >
+      <fhir-reference label="name" .data=${data.reference} summary></fhir-reference >
     `
   }
 
   protected renderStructure(data: CodeableReferenceData): TemplateResult {
     return html`
-      <fhir-codeable-concept label="concept" .data=${data.concept}></fhir-codeable-concept >
-      <fhir-reference label="reference" .data=${data.reference}></fhir-reference >
+      <fhir-codeable-concept label="concept" .data=${data.concept} summary></fhir-codeable-concept >
+      <fhir-reference label="reference" .data=${data.reference} summary></fhir-reference >
     `
   }
 }

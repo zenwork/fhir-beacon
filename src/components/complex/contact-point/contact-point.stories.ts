@@ -1,9 +1,24 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/index'
-import {data}     from './patient.story.data'
+import './contact-point'
+import '../../../../index'
 
-let path = 'Components/Resources/Patient/Patient'
-let elementName = 'fhir-patient'
+let path = 'Components/Datatypes/Complex Type/Contact Point'
+let elementName = 'fhir-contact-point'
+let data = {
+  extension: [
+    {
+      url: 'http://hl7.org/fhir/StructureDefinition/iso21090-TEL-address',
+      valueUri: 'tel:+15556755745'
+    }
+  ],
+  system: 'phone',
+  value: '(555) 675 5745',
+  use: 'home',
+  period: {
+    start: '2022-07-01',
+    end: '2024-07-01'
+  }
+}
 
 const meta = {
   title: path,

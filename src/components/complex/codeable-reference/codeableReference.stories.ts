@@ -9,7 +9,7 @@ type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: bool
 
 let title = 'components/Datatypes/Complex Type/Codeable Reference'
 const render = wrapInShell((args) => html`
-    <fhir-codeable-reference .data=${args.data}></fhir-codeable-reference>`)
+  <fhir-codeable-reference .data=${args.data} summary></fhir-codeable-reference >`)
 let data = {
   concept: {
     coding: [
@@ -35,22 +35,10 @@ const meta: Meta<CustomArgs> = {
   title,
   component: 'fhir-shell',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'inline-radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    open: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   },
   render
 

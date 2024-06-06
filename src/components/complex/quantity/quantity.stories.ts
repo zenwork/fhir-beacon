@@ -14,18 +14,10 @@ const meta = {
   title: 'Components/Datatypes/Complex Type/Quantity',
   component: 'fhir-quantity',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'},
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'},
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'radio'},
-    },
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   }
 
 }

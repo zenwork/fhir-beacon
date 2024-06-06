@@ -6,13 +6,13 @@ export type BaseElementData = {
 }
 
 export enum BaseElementMode {
-  display = 'display',
-  structure = 'structure',
-  structure_trace = 'structure_trace',
   combined = 'combined',
+  debug = 'debug',
+  display = 'display',
+  display_summary = 'display_summary',
   narrative = 'narrative',
-  summary = 'summary',
-  debug = 'debug'
+  structure = 'structure',
+  structure_summary = 'structure_summary'
 }
 
 export type Extension = BaseElementData & {

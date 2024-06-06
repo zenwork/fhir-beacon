@@ -8,7 +8,7 @@ const meta: Meta<ShellArgs> = {
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'summary', 'structure', 'narrative'],
+      options: ['display', 'display_summary', 'structure', 'structure_summary', 'narrative', 'debug'],
       control: {type: 'radio'},
     },
     verbose: {

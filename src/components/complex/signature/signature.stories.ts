@@ -9,14 +9,14 @@ let elementName = 'fhir-shell'
 let subcomponents = {signature: 'fhir-signature'}
 
 const render = wrapInShell((args) => html`
-    <fhir-signature .data=${args.data}></fhir-signature>`)
+  <fhir-signature .data=${args.data} summary></fhir-signature >`)
 
 const meta: Meta<ShellArgs> = {
   title: path,
   component: elementName,
   subcomponents,
   argTypes: {
-    mode: {options: ['display', 'structure', 'summary', 'combined', 'debug'], control: {type: 'inline-radio'}},
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
     verbose: {options: [true, false], control: {type: 'inline-radio'}},
     showerror: {options: [true, false], control: {type: 'inline-radio'}},
     open: {options: [true, false], control: {type: 'inline-radio'}}

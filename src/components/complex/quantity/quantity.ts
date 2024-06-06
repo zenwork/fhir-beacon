@@ -47,20 +47,20 @@ export class Quantity extends BaseElementConsumer<QuantityData | SimpleQuantityD
 
     if (isQuantity(data)) {
       return html`
-        <fhir-primitive label="value" .value=${data.value} type="decimal"></fhir-primitive >
-        <fhir-primitive label="comparator" .value=${data.comparator} type="code"></fhir-primitive >
-        <fhir-primitive label="unit" .value=${data.unit}></fhir-primitive >
-        <fhir-primitive label="system" .value=${data.system} type="uri"></fhir-primitive >
-        <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
+        <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
+        <fhir-primitive label="comparator" .value=${data.comparator} type="code" summary></fhir-primitive >
+        <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
+        <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
+        <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
       `
     }
 
     if (isSimpleQuantity(data)) {
       return html`
-        <fhir-primitive label="value" .value=${data.value} type="decimal"></fhir-primitive >
-        <fhir-primitive label="unit" .value=${data.unit}></fhir-primitive >
-        <fhir-primitive label="system" .value=${data.system} type="uri"></fhir-primitive >
-        <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
+        <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
+        <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
+        <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
+        <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
       `
     }
 

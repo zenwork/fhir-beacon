@@ -32,7 +32,7 @@ export class Ratio extends BaseElementConsumer<RatioData> {
         <fhir-value text="${data.denominator.unit || data.denominator.code}"></fhir-va>`
     } else {
       denominator = html`
-        <fhir-quantity .data=${data.denominator}></fhir-quantity >`
+        <fhir-quantity .data=${data.denominator} summary></fhir-quantity >`
     }
 
     return html`
@@ -47,8 +47,8 @@ export class Ratio extends BaseElementConsumer<RatioData> {
 
   protected renderStructure(data: RatioData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-quantity label="numerator" .data=${data.numerator}></fhir-quantity >
-      <fhir-quantity label="denominator" .data=${data.denominator}></fhir-quantity >
+      <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >
+      <fhir-quantity label="denominator" .data=${data.denominator} summary></fhir-quantity >
     `
   }
 

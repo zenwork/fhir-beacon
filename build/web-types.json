@@ -42,9 +42,11 @@
             { "name": "context", "value": { "type": "string" } },
             { "name": "type", "value": { "type": "PrimitiveType" } },
             { "name": "showProvided", "value": { "type": "boolean" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
             { "name": "showerror", "value": { "type": "boolean" } },
             { "name": "variant", "value": { "type": "string" } },
-            { "name": "verbose", "value": { "type": "boolean" } }
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -56,9 +58,11 @@
               { "name": "context", "value": { "type": "string" } },
               { "name": "type", "value": { "type": "PrimitiveType" } },
               { "name": "showProvided", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
               { "name": "showerror", "value": { "type": "boolean" } },
               { "name": "variant", "value": { "type": "string" } },
-              { "name": "verbose", "value": { "type": "boolean" } }
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -81,15 +85,16 @@
           "description": "\n---\n",
           "doc-url": "",
           "attributes": [
-            {
-              "name": "description",
-              "value": { "type": "string", "default": "''" }
-            }
+            { "name": "description", "value": { "type": "string" } },
+            { "name": "label", "value": { "type": "string" } },
+            { "name": "variant", "value": { "type": "string" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "description", "value": { "type": "string" } }
+              { "name": "description", "value": { "type": "string" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "variant", "value": { "type": "string" } }
             ],
             "events": []
           }
@@ -125,7 +130,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -137,7 +143,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -160,7 +167,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -172,7 +180,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -195,7 +204,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -207,7 +217,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -230,7 +241,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -242,7 +254,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -265,7 +278,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -277,7 +291,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -300,7 +315,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -312,7 +328,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -335,7 +352,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -347,7 +365,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -370,7 +389,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -382,7 +402,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -405,7 +426,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -417,7 +439,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -525,7 +548,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -537,7 +561,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -561,7 +586,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -574,7 +600,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -597,7 +624,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -609,7 +637,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -632,7 +661,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -644,7 +674,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -667,7 +698,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -679,7 +711,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -702,7 +735,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -714,7 +748,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -737,7 +772,8 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } }
+            { "name": "showerror", "value": { "type": "boolean" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -749,7 +785,8 @@
               { "name": "open", "value": { "type": "boolean" } },
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } }
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
@@ -779,7 +816,12 @@
             {
               "name": "forceclose",
               "value": { "type": "boolean", "default": "false" }
-            }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "mode", "value": { "type": "BaseElementMode" } }
           ],
           "slots": [{ "name": "wrapper" }],
           "events": [],
@@ -790,7 +832,9 @@
               { "name": "fhirType", "value": { "type": "string" } },
               { "name": "hide", "value": { "type": "boolean" } },
               { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } }
+              { "name": "forceclose", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } }
             ],
             "events": []
           }
@@ -815,7 +859,10 @@
             {
               "name": "hide",
               "value": { "type": "boolean", "default": "false" }
-            }
+            },
+            { "name": "open", "value": { "type": "boolean" } },
+            { "name": "mode", "value": { "type": "BaseElementMode" } },
+            { "name": "summary", "value": { "type": "boolean" } }
           ],
           "slots": [{ "name": "wrapper" }],
           "events": [],
@@ -827,7 +874,10 @@
                 "name": "variant",
                 "value": { "type": "'primary' | 'secondary' | 'none'" }
               },
-              { "name": "hide", "value": { "type": "boolean" } }
+              { "name": "hide", "value": { "type": "boolean" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "mode", "value": { "type": "BaseElementMode" } },
+              { "name": "summary", "value": { "type": "boolean" } }
             ],
             "events": []
           }
