@@ -7,10 +7,10 @@ import {data}           from './address.story.data'
 
 let path = 'Components/Datatypes/Complex Type/Address'
 
-const meta:Meta<ShellArgs> = {
+const meta: Meta<ShellArgs> = {
   title: path,
   component: 'fhir-shell',
-  subcomponents:{ 'fhir-address':'fhir-address' },
+  subcomponents: { 'fhir-address': 'fhir-address' },
   argTypes: {
     mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
     verbose: { options: [false, true], control: { type: 'boolean' } },

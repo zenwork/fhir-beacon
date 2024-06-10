@@ -2,7 +2,7 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import './codeable-concept'
 import '../../../shell/shell'
 import {html}           from 'lit'
-import {ShellArgs} from '../../../../stories/wrapInShell'
+import {ShellArgs}      from '../../../../stories/wrapInShell'
 
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
