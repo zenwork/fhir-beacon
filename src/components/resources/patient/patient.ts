@@ -57,7 +57,7 @@ export class Patient extends BaseElementProvider<PatientData> {
             <fhir-primitive label="deceasedDateTime" .value=${data.deceased} .type=${PrimitiveType.datetime} summary></fhir-primitive >`
       }
       ${wraps('addresses', data.address, this.verbose, (a, x) => html`
-        <fhir-address label="address${x}" .data=${a} summary></fhir-address summary >
+        <fhir-address label="address${x}" .data=${a} summary></fhir-address >
       `)}
     `
   }

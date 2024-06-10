@@ -2,6 +2,7 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import './codeable-concept'
 import '../../../shell/shell'
 import {html}           from 'lit'
+import {ShellArgs} from '../../../../stories/wrapInShell'
 
 type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
@@ -14,10 +15,17 @@ const meta: Meta<CustomArgs> = {
     showerror: { options: [false, true], control: { type: 'boolean' } },
     open: { options: [false, true], control: { type: 'boolean' } }
   },
-  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) =>
+  render: ({
+             data,
+             mode: mode = 'display',
+             verbose: verbose = false,
+             showerror: showerror = false,
+             open: open = false,
+             summary: summary = true
+           }: ShellArgs) =>
     html`
       <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-codeable-concept .data=${data} summary></fhir-codeable-concept >
+        <fhir-codeable-concept .data=${data} ?summary=${summary}}></fhir-codeable-concept >
       </fhir-shell >
     `
 

@@ -66,7 +66,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
                 ${this.fhirType ? html`
                   <sl-badge pill>${this.fhirType}</sl-badge >` : nothing}
                 ${this.summary && this.displayConfig?.mode === BaseElementMode.structure ? html`
-                  <sl-badge pill>&sum;</sl-badge >` : nothing}
+                  <sl-badge id="summary" pill>&sum;</sl-badge >` : nothing}
                 ${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
               </div >
               <ul >

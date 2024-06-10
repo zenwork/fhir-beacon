@@ -6,14 +6,39 @@ import '../../src/index'
 
 # Custom Rendering
 
+The example below can be used anywhere you can use html and web components.
 
 ```html
-  <fhir-shell>
-    <fhir-source url="fhir/Medication?patient.identifier=http://example.com/fhir/mrn|1234" >
-        <fhir-codeable-concept label="name" data-path="Medication.code[0]"></fhir-codeable-concept>
-        <fhir-codeable-concept label="dose form" data-path="Medication.doseForm"></fhir-codeable-concept>
-    </fhir-source>
-</fhir-shell>
+<fhir-shell token="access/login"> <!-- url to get token. Can be redirected to log in  -->
+  <table >
+    <thead >
+      <tr >
+        <th>#</th >
+        <th>name</th >
+        <th>dose</th >
+      </tr >
+    </thead >
+  </table >
+  <!-- data-url or data attributes can be used depending on the rendering approach -->
+<fhir-bundle data-url="fhir/Medication?patient.identifier=http://example.com/fhir/mrn|1234">
+  <fhir-medication override-template="med" >
+    <!-- providing template will override the `renderDisplay()` function defined by `<fhir-medication>` -->
+    <tamplate id="med">
+      <tr >
+        <td>
+          <fhir-value fpath="Bundle.entry.index"></fhir-value>
+        </td>
+        <td >
+          <fhir-codeable-concept label="name" fpath="Bundle.entry.code[0]"></fhir-codeable-concept >
+        </td >
+        <td >
+          <fhir-codeable-concept label="dose form" fpath="Bundle.entry.doseForm"></fhir-codeable-concept >
+        </td >
+      </tr >
+    </tamplate >
+  </fhir-medication >
+</fhir-bundle>
+</fhir-shell >
 ```
 
 | element                                   | purpose                                                                                                                                                                                                                                                                                                                                                                |

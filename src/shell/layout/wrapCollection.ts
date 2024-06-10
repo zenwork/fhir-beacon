@@ -15,10 +15,11 @@ import './empty-set'
 export function wrap<T>(colName: string,
                         data: T[],
                         verbose: boolean,
-                        generator: { (data: T, idx: string): TemplateResult }): TemplateResult | any {
+                        generator: { (data: T, idx: string): TemplateResult },
+                        summary: boolean = true): TemplateResult | any {
   return hasMany(data)
          ? html`
-        <fhir-wrapper label="${colName}" variant="primary">
+      <fhir-wrapper label="${colName}" variant="primary" ?summary=${summary}>
           ${map(data, (i: T, x: number) => generator(i, show(x)))}
         </fhir-wrapper > `
          : hasOnlyOne(data)
@@ -50,7 +51,10 @@ export function wrapc<T>(colName: string,
                 <fhir-wrapper label=${colName + show(x)}>${generator(i, '')}</fhir-wrapper >`)}
         </fhir-wrapper > `
          : hasOnlyOne(data)
-           ? generator(data[0], '')
+           ? html`
+        <fhir-wrapper label="${colName}" variant="primary">
+          ${generator(data[0], '')}
+        </fhir-wrapper > `
            : verbose
              ? html`
                 <fhir-wrapper label="${colName}">
@@ -69,11 +73,13 @@ export function wrapc<T>(colName: string,
 export function wraps<T>(colName: string,
                          data: T[],
                          verbose: boolean,
-                         generator: { (data: T, idx: string): TemplateResult }): TemplateResult | any {
+                         generator: { (data: T, idx: string): TemplateResult },
+                         summary: boolean = true
+): TemplateResult | any {
 
   return hasMany(data)
          ? html`
-        <fhir-structure-wrapper label="${colName}">
+      <fhir-structure-wrapper label="${colName}" ?summary=${summary}>
           ${map(data, (i: T, x: number) => generator(i, show(x)))}
         </fhir-structure-wrapper > `
          : hasOnlyOne(data)

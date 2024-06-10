@@ -35,7 +35,7 @@ export type AddressData = BaseElementData & {
   use?: Code
   type?: Code
   text?: FhirString
-  line?: FhirString
+  line: FhirString[]
   city?: FhirString
   district?: FhirString
   state?: FhirString
