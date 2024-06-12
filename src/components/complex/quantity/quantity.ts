@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult}    from 'lit'
 import {customElement}                    from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {BaseElementContextConsumer}       from '../../../internal/base/base-element-context-consumer'
 import {BaseElementData}                  from '../../../internal/base/base-element.data'
 import {renderError}                      from '../../../shell/layout/renderError'
 import {asQuantityComparator}             from '../../primitive/type-presenters/asQuantityComparator'

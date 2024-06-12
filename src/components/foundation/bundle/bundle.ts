@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult}                  from 'lit'
 import {customElement}                                  from 'lit/decorators.js'
-import {BaseElementContextProvider} from '../../../internal/base/base-element-context-provider'
+import {BaseElementContextProvider}                     from '../../../internal/base/base-element-context-provider'
 import {renderResourceComponent}                        from '../../../internal/resource/renderResourceComponent'
 import {hasSome, isDefined}                             from '../../../shell/layout/directives'
 import {renderBackboneCollection, renderSingleBackbone} from '../../../shell/layout/renderBackboneCollection'

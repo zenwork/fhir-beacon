@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
 import {hasSome}                       from '../../../shell/layout/directives'
 import {wrap, wraps}                   from '../../../shell/layout/wrapCollection'
 import {PrimitiveType}                 from '../../primitive/type-converters'

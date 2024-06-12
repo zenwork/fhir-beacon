@@ -1,9 +1,9 @@
-import {ContextProvider, ContextRoot} from '@lit/context'
+import {ContextProvider, ContextRoot}      from '@lit/context'
 import {PropertyValues}                    from 'lit'
 import {contextData, displayConfigContext} from '../contexts/context'
-import {FhirDataContextImpl}          from '../contexts/FhirContextData'
-import {BaseElement}                  from './base-element'
-import {BaseElementData}              from './base-element.data'
+import {FhirDataContextImpl}               from '../contexts/FhirContextData'
+import {BaseElement}                       from './base-element'
+import {BaseElementData}                   from './base-element.data'
 
 export abstract class BaseElementContextProvider<T extends BaseElementData> extends BaseElement<T> {
 

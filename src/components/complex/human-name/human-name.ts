@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
 import {hasMany, hasOnlyOne}           from '../../../shell/layout/directives'
 import {PrimitiveType}                 from '../../primitive/type-converters'
 import {HumanNameData}                 from '../../resources/patient/patient.data'

@@ -1,9 +1,9 @@
 import {createContext} from '@lit/context'
 
-import {ResourceData}    from '../resource/domain-resource.data'
+import {ResourceData}                                       from '../resource/domain-resource.data'
 import {DisplayConfig}                                      from './context.data'
 import {containedDataKey, contextDataKey, displayConfigKey} from './contexts.keys'
-import {FhirDataContext} from './FhirContextData'
+import {FhirDataContext}                                    from './FhirContextData'
 
 
 export const containedDataContext = createContext<ResourceData[]>(containedDataKey)
