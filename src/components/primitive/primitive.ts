@@ -3,9 +3,9 @@ import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'li
 import {customElement, property, state}                                 from 'lit/decorators.js'
 import {choose}                                                         from 'lit/directives/choose.js'
 import {BaseElementMode}                                                from '../../internal/base/base-element.data'
-import {contextData, displayConfigContext} from '../../internal/contexts/context'
+import {contextData, displayConfigContext}                              from '../../internal/contexts/context'
 import {DisplayConfig}                                                  from '../../internal/contexts/context.data'
-import {FhirDataContext}                   from '../../internal/contexts/FhirContextData'
+import {FhirDataContext}                                                from '../../internal/contexts/FhirContextData'
 import {toBaseElementModeEnum}                                          from '../../utilities/toBaseElementModeEnum'
 import {DateTime}                                                       from './primitive.data'
 import './primitive-label/primitive-label'
@@ -77,7 +77,7 @@ export class Primitive extends LitElement {
   public value: string = ''
 
   @property({ attribute: 'value-path', reflect: true })
-  public valuePath: string = ''
+  declare valuePath: string
 
   @property({ reflect: true })
   declare link: string
