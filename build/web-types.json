@@ -113,45 +113,45 @@
           }
         },
         {
-          "name": "fhir-address",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+            "name": "fhir-address",
+            "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+            "doc-url": "",
+            "attributes": [
+                {"name": "data", "value": {"type": "T"}},
+                {"name": "label", "value": {"type": "string", "default": "''"}},
+                {
+                    "name": "type",
+                    "value": {"type": "string", "default": "type"}
+                },
+                {"name": "mode", "value": {"type": "BaseElementMode"}},
+                {"name": "open", "value": {"type": "boolean"}},
+                {
+                    "name": "forceclose",
+                    "value": {"type": "boolean", "default": "false"}
+                },
+                {"name": "verbose", "value": {"type": "boolean"}},
+                {"name": "showerror", "value": {"type": "boolean"}},
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
-            "events": []
-          }
+            "events": [],
+            "js": {
+                "properties": [
+                    {"name": "data", "value": {"type": "T"}},
+                    {"name": "label", "value": {"type": "string"}},
+                    {"name": "type", "value": {"type": "string"}},
+                    {"name": "mode", "value": {"type": "BaseElementMode"}},
+                    {"name": "open", "value": {"type": "boolean"}},
+                    {"name": "forceclose", "value": {"type": "boolean"}},
+                    {"name": "verbose", "value": {"type": "boolean"}},
+                    {"name": "showerror", "value": {"type": "boolean"}},
+                    {"name": "summary", "value": {"type": "boolean"}},
+                    {"name": "override-template", "value": {"type": "string"}}
+                ],
+                "events": []
+            }
         },
-        {
+          {
           "name": "fhir-codeable-concept",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
@@ -170,8 +170,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -184,8 +184,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -209,8 +209,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -223,8 +223,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -248,8 +248,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -262,86 +262,86 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
-            "events": []
+              "events": []
           }
         },
-        {
-          "name": "fhir-contact-point",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-human-name",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-            { "name": "mode", "value": { "type": "BaseElementMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "type", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "BaseElementMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+          {
+              "name": "fhir-contact-point",
+              "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "data", "value": {"type": "T"}},
+                  {"name": "label", "value": {"type": "string", "default": "''"}},
+                  {
+                      "name": "type",
+                      "value": {"type": "string", "default": "type"}
+                  },
+                  {"name": "mode", "value": {"type": "BaseElementMode"}},
+                  {"name": "open", "value": {"type": "boolean"}},
+                  {
+                      "name": "forceclose",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {"name": "verbose", "value": {"type": "boolean"}},
+                  {"name": "showerror", "value": {"type": "boolean"}},
+                  {"name": "summary", "value": {"type": "boolean"}},
+                  {"name": "override-template", "value": {"type": "string"}}
+              ],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "data", "value": {"type": "T"}},
+                      {"name": "label", "value": {"type": "string"}},
+                      {"name": "type", "value": {"type": "string"}},
+                      {"name": "mode", "value": {"type": "BaseElementMode"}},
+                      {"name": "open", "value": {"type": "boolean"}},
+                      {"name": "forceclose", "value": {"type": "boolean"}},
+                      {"name": "verbose", "value": {"type": "boolean"}},
+                      {"name": "showerror", "value": {"type": "boolean"}},
+                      {"name": "summary", "value": {"type": "boolean"}},
+                      {"name": "override-template", "value": {"type": "string"}}
+                  ],
+                  "events": []
+              }
+          },
+          {
+              "name": "fhir-human-name",
+              "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "data", "value": {"type": "T"}},
+                  {"name": "label", "value": {"type": "string", "default": "''"}},
+                  {
+                      "name": "type",
+                      "value": {"type": "string", "default": "type"}
+                  },
+                  {"name": "mode", "value": {"type": "BaseElementMode"}},
+                  {"name": "open", "value": {"type": "boolean"}},
+                  {
+                      "name": "forceclose",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {"name": "verbose", "value": {"type": "boolean"}},
+                  {"name": "showerror", "value": {"type": "boolean"}},
+                  {"name": "summary", "value": {"type": "boolean"}},
+                  {"name": "override-template", "value": {"type": "string"}}
+              ],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "data", "value": {"type": "T"}},
+                      {"name": "label", "value": {"type": "string"}},
+                      {"name": "type", "value": {"type": "string"}},
+                      {"name": "mode", "value": {"type": "BaseElementMode"}},
+                      {"name": "open", "value": {"type": "boolean"}},
+                      {"name": "forceclose", "value": {"type": "boolean"}},
+                      {"name": "verbose", "value": {"type": "boolean"}},
+                      {"name": "showerror", "value": {"type": "boolean"}},
+                      {"name": "summary", "value": {"type": "boolean"}},
+                      {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -365,8 +365,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -379,8 +379,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -404,8 +404,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -418,8 +418,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -443,8 +443,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -457,8 +457,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -482,8 +482,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -496,8 +496,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -521,8 +521,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -535,8 +535,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -560,8 +560,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -574,8 +574,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -666,7 +666,7 @@
           }
         },
         {
-          "name": "fhir-medication",
+            "name": "fhir-medication",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -684,8 +684,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -698,14 +698,14 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
         },
         {
-          "name": "fhir-patient",
+            "name": "fhir-patient",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -723,8 +723,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -737,14 +737,14 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
         },
         {
-          "name": "fhir-substance-ingredient",
+            "name": "fhir-substance-ingredient",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -762,8 +762,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -776,14 +776,14 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
         },
         {
-          "name": "fhir-substance",
+            "name": "fhir-substance",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -801,8 +801,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -815,18 +815,18 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
         },
         {
-          "name": "fhir-narrative",
+            "name": "fhir-narrative",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
-            { "name": "status", "value": { "type": "string" } },
+              {"name": "status", "value": {"type": "string"}},
             { "name": "data", "value": { "type": "T" } },
             { "name": "label", "value": { "type": "string", "default": "''" } },
             {
@@ -841,13 +841,13 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "status", "value": { "type": "string" } },
+                {"name": "status", "value": {"type": "string"}},
               { "name": "data", "value": { "type": "T" } },
               { "name": "label", "value": { "type": "string" } },
               { "name": "type", "value": { "type": "string" } },
@@ -856,14 +856,14 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
         },
         {
-          "name": "fhir-meta",
+            "name": "fhir-meta",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructure(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -881,8 +881,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -895,8 +895,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }
@@ -920,8 +920,8 @@
             },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "showerror", "value": { "type": "boolean" } },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
+              {"name": "summary", "value": {"type": "boolean"}},
+              {"name": "override-template", "value": {"type": "string"}}
           ],
           "events": [],
           "js": {
@@ -934,8 +934,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
+                {"name": "summary", "value": {"type": "boolean"}},
+                {"name": "override-template", "value": {"type": "string"}}
             ],
             "events": []
           }

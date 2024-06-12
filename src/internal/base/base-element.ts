@@ -188,7 +188,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     super.updated(_changedProperties)
 
     if (_changedProperties.has('overrideTemplate')) {
-      let elem= document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
+      let elem = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
       if (elem && elem.content) {
         const template = elem.content
         if (this.shadowRoot && template) {

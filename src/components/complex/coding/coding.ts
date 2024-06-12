@@ -1,7 +1,7 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
-import {CodingData}           from './coding.data'
+import {html, TemplateResult}       from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {CodingData}                 from './coding.data'
 
 //TODO: rename to fhir-coding
 @customElement('fhir-coding')

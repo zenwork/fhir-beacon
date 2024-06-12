@@ -1,7 +1,7 @@
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
-import {BaseElementContextConsumer}                  from '../../../internal/base/base-element-context-consumer'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 
 import {NarrativeData} from './narrative.data'
 import '../../../shell/layout/wrapper/wrapper'

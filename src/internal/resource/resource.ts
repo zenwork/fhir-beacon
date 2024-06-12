@@ -1,7 +1,7 @@
-import {html, TemplateResult} from 'lit'
-import {PrimitiveType}        from '../../components/primitive/type-converters'
-import {BaseElementContextProvider}  from '../base/base-element-context-provider'
-import {ResourceData}         from './domain-resource.data'
+import {html, TemplateResult}       from 'lit'
+import {PrimitiveType}              from '../../components/primitive/type-converters'
+import {BaseElementContextProvider} from '../base/base-element-context-provider'
+import {ResourceData}               from './domain-resource.data'
 
 export abstract class Resource<T extends ResourceData> extends BaseElementContextProvider<T> {
 

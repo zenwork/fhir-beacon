@@ -1,8 +1,8 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
-import {PrimitiveType}        from '../../primitive/type-converters'
-import {ContactPointData}     from '../../resources/patient/patient.data'
+import {html, TemplateResult}       from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {PrimitiveType}              from '../../primitive/type-converters'
+import {ContactPointData}           from '../../resources/patient/patient.data'
 import '../period/period'
 
 @customElement('fhir-contact-point')

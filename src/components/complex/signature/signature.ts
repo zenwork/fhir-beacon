@@ -1,6 +1,6 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
+import {html, TemplateResult}       from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 
 import {SignatureData} from '../../foundation/bundle/bundle.data'
 import {PrimitiveType} from '../../primitive/type-converters'

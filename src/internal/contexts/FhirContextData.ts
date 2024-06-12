@@ -11,6 +11,8 @@ export interface FhirDataContext {
 
 export class FhirDataContextImpl implements FhirDataContext {
 
+  declare _data: any
+
   public get data(): {} & BaseElementData {
     return this._data
   }
@@ -18,8 +20,6 @@ export class FhirDataContextImpl implements FhirDataContext {
   public set data(value: {} & BaseElementData) {
     this._data = value
   }
-
-  declare _data: any
 
   getAt<X>(path: string): X | null {
     if (path) {

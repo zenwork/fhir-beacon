@@ -1,7 +1,7 @@
 import {ContextProvider, ContextRoot} from '@lit/context'
 import {PropertyValues}                    from 'lit'
 import {contextData, displayConfigContext} from '../contexts/context'
-import {FhirDataContextImpl} from '../contexts/FhirContextData'
+import {FhirDataContextImpl}          from '../contexts/FhirContextData'
 import {BaseElement}                  from './base-element'
 import {BaseElementData}              from './base-element.data'
 
@@ -10,7 +10,7 @@ export abstract class BaseElementContextProvider<T extends BaseElementData> exte
   protected display = new ContextProvider(this, {context: displayConfigContext})
   private contextRoot = new ContextRoot()
 
-  protected contextDataReducer = new ContextProvider(this,{context:contextData})
+  protected contextDataReducer = new ContextProvider(this, { context: contextData })
 
 
   public connectedCallback() {

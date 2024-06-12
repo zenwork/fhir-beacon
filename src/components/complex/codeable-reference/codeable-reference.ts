@@ -1,7 +1,7 @@
-import {html, TemplateResult}  from 'lit'
-import {customElement}         from 'lit/decorators.js'
-import {BaseElementContextConsumer}   from '../../../internal/base/base-element-context-consumer'
-import {CodeableReferenceData} from './codeable-reference.data'
+import {html, TemplateResult}       from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {CodeableReferenceData}      from './codeable-reference.data'
 import '../codeable-concept/codeable-concept'
 import '../../special/reference/reference'
 

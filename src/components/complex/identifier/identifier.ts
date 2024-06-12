@@ -1,8 +1,8 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
-import {PrimitiveType}        from '../../primitive/type-converters'
-import {IdentifierData}       from './identifier.data'
+import {html, TemplateResult}       from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {PrimitiveType}              from '../../primitive/type-converters'
+import {IdentifierData}             from './identifier.data'
 
 import '../codeable-concept/codeable-concept'
 import '../period/period'

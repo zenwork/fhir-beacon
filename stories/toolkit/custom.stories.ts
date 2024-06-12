@@ -150,7 +150,7 @@ const meta: Meta<ShellArgs> = {
             <sl-card class="card-header">
               <div slot="header">
                 <fhir-primitive value-path="$.code.coding[0].display"></fhir-primitive >
-                <sl-icon name="capsule-pill"></sl-icon>
+                <sl-icon name="capsule-pill"></sl-icon >
               </div >
               <fhir-codeable-concept label="dose" data-path="$.doseForm"></fhir-codeable-concept >
               <fhir-primitive label="lot" value-path="$.batch.lotNumber"></fhir-primitive >

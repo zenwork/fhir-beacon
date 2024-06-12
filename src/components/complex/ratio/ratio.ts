@@ -1,6 +1,6 @@
-import {css, html, TemplateResult} from 'lit'
-import {customElement}             from 'lit/decorators.js'
-import {BaseElementContextConsumer}       from '../../../internal/base/base-element-context-consumer'
+import {css, html, TemplateResult}  from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 
 import {RatioData} from './ratio.data'
 
