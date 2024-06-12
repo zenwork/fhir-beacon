@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
-import {BaseElementConsumer}           from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}           from '../../../internal/base/base-element-context-consumer'
 import {hasSome}                       from '../../../shell/layout/directives'
 import {wrap, wraps}                   from '../../../shell/layout/wrapCollection'
 import {PrimitiveType}                 from '../../primitive/type-converters'
@@ -8,7 +8,7 @@ import {AddressData}                   from '../../resources/patient/patient.dat
 import '../../../index'
 
 @customElement('fhir-address')
-export class Address extends BaseElementConsumer<AddressData> {
+export class Address extends BaseElementContextConsumer<AddressData> {
 
   constructor() {super('Address')}
 

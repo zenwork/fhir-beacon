@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {BaseElementConsumer}           from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}           from '../../../internal/base/base-element-context-consumer'
 import {hasMany, hasOnlyOne}           from '../../../shell/layout/directives'
 import {PrimitiveType}                 from '../../primitive/type-converters'
 import {HumanNameData}                 from '../../resources/patient/patient.data'
@@ -9,7 +9,7 @@ import '../../../shell/layout/structure-wrapper/structure-wrapper'
 import '../../../index'
 
 @customElement('fhir-human-name')
-export class HumanName extends BaseElementConsumer<HumanNameData> {
+export class HumanName extends BaseElementContextConsumer<HumanNameData> {
 
   protected renderDisplay(data: HumanNameData): TemplateResult | TemplateResult[] {
 

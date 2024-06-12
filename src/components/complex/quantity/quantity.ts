@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult}    from 'lit'
 import {customElement}                    from 'lit/decorators.js'
-import {BaseElementConsumer}              from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}              from '../../../internal/base/base-element-context-consumer'
 import {BaseElementData}                  from '../../../internal/base/base-element.data'
 import {renderError}                      from '../../../shell/layout/renderError'
 import {asQuantityComparator}             from '../../primitive/type-presenters/asQuantityComparator'
@@ -11,7 +11,7 @@ import {isQuantity, isSimpleQuantity} from './quantity.type-guards'
 
 //TODO: rename to fhir-quanity
 @customElement('fhir-quantity')
-export class Quantity extends BaseElementConsumer<QuantityData | SimpleQuantityData> {
+export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQuantityData> {
 
   constructor() {super('Quantity')}
 

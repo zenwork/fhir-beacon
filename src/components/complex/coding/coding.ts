@@ -1,11 +1,11 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
 import {CodingData}           from './coding.data'
 
 //TODO: rename to fhir-coding
 @customElement('fhir-coding')
-export class Coding extends BaseElementConsumer<CodingData> {
+export class Coding extends BaseElementContextConsumer<CodingData> {
 
   constructor() {
     super('Coding')

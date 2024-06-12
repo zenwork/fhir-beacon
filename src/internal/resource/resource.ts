@@ -1,9 +1,9 @@
 import {html, TemplateResult} from 'lit'
 import {PrimitiveType}        from '../../components/primitive/type-converters'
-import {BaseElementProvider}  from '../base/base-element-provider'
+import {BaseElementContextProvider}  from '../base/base-element-context-provider'
 import {ResourceData}         from './domain-resource.data'
 
-export abstract class Resource<T extends ResourceData> extends BaseElementProvider<T> {
+export abstract class Resource<T extends ResourceData> extends BaseElementContextProvider<T> {
 
   protected constructor(type: string) {
     super(type)

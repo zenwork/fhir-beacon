@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult}                  from 'lit'
 import {customElement}                                  from 'lit/decorators.js'
-import {BaseElementProvider}                            from '../../../internal/base/base-element-provider'
+import {BaseElementContextProvider}                            from '../../../internal/base/base-element-context-provider'
 import {renderResourceComponent}                        from '../../../internal/resource/renderResourceComponent'
 import {hasSome, isDefined}                             from '../../../shell/layout/directives'
 import {renderBackboneCollection, renderSingleBackbone} from '../../../shell/layout/renderBackboneCollection'
@@ -9,7 +9,7 @@ import {BundleData}                                     from './bundle.data'
 import '../../../index'
 
 @customElement('fhir-bundle')
-export class Bundle extends BaseElementProvider<BundleData> {
+export class Bundle extends BaseElementContextProvider<BundleData> {
   constructor() {super('Bundle')}
 
 

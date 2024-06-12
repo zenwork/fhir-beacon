@@ -1,12 +1,12 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
 
 import {SignatureData} from '../../foundation/bundle/bundle.data'
 import {PrimitiveType} from '../../primitive/type-converters'
 
 @customElement('fhir-signature')
-export class Signature extends BaseElementConsumer<SignatureData> {
+export class Signature extends BaseElementContextConsumer<SignatureData> {
 
   constructor() {super('Signature')}
 

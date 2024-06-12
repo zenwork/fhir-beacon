@@ -6,7 +6,7 @@ import {otherwise, when}      from '../../.././utilities/when'
 import '../../primitive/primitive'
 import '../../../shell/layout/wrapper/wrapper'
 import '../../complex/identifier/identifier'
-import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}  from '../../../internal/base/base-element-context-consumer'
 import {containedDataContext} from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
@@ -17,7 +17,7 @@ import {ReferenceData}           from './reference.data'
 import '../../../shell/layout/not-supported'
 
 @customElement('fhir-reference')
-export class Reference extends BaseElementConsumer<ReferenceData> {
+export class Reference extends BaseElementContextConsumer<ReferenceData> {
 
   @consume({context: containedDataContext, subscribe: true})
   private contained: ResourceData[] = []

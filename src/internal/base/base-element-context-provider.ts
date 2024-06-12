@@ -1,13 +1,16 @@
 import {ContextProvider, ContextRoot} from '@lit/context'
-import {PropertyValues}               from 'lit'
-import {displayConfigContext}         from '../contexts/context'
+import {PropertyValues}                    from 'lit'
+import {contextData, displayConfigContext} from '../contexts/context'
+import {FhirDataContextImpl} from '../contexts/FhirContextData'
 import {BaseElement}                  from './base-element'
 import {BaseElementData}              from './base-element.data'
 
-export abstract class BaseElementProvider<T extends BaseElementData> extends BaseElement<T> {
+export abstract class BaseElementContextProvider<T extends BaseElementData> extends BaseElement<T> {
 
   protected display = new ContextProvider(this, {context: displayConfigContext})
   private contextRoot = new ContextRoot()
+
+  protected contextDataReducer = new ContextProvider(this,{context:contextData})
 
 
   public connectedCallback() {
@@ -23,6 +26,12 @@ export abstract class BaseElementProvider<T extends BaseElementData> extends Bas
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
 
+    if (_changedProperties.has('data')) {
+      let context = new FhirDataContextImpl()
+      context.data = this.data
+      this.contextDataReducer.setValue(context)
+      // console.log('mode',this.mode, this.display.value)
+    }
     if (_changedProperties.has('mode')) {
       this.display.setValue({...this.display.value, mode: this.mode})
       // console.log('mode',this.mode, this.display.value)

@@ -3,8 +3,9 @@ import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'li
 import {customElement, property, state}                                 from 'lit/decorators.js'
 import {choose}                                                         from 'lit/directives/choose.js'
 import {BaseElementMode}                                                from '../../internal/base/base-element.data'
-import {displayConfigContext}                                           from '../../internal/contexts/context'
+import {contextData, displayConfigContext} from '../../internal/contexts/context'
 import {DisplayConfig}                                                  from '../../internal/contexts/context.data'
+import {FhirDataContext}                   from '../../internal/contexts/FhirContextData'
 import {toBaseElementModeEnum}                                          from '../../utilities/toBaseElementModeEnum'
 import {DateTime}                                                       from './primitive.data'
 import './primitive-label/primitive-label'
@@ -63,6 +64,9 @@ export class Primitive extends LitElement {
   @consume({ context: displayConfigContext, subscribe: true })
   declare displayConfig: DisplayConfig
 
+  @consume({ context: contextData, subscribe: true })
+  declare contextData: FhirDataContext
+
   @property({ reflect: true })
   declare label: string
 
@@ -71,6 +75,9 @@ export class Primitive extends LitElement {
 
   @property({ reflect: true })
   public value: string = ''
+
+  @property({ attribute: 'value-path', reflect: true })
+  public valuePath: string = ''
 
   @property({ reflect: true })
   declare link: string
@@ -141,14 +148,17 @@ export class Primitive extends LitElement {
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
     }
+
+    if (_changedProperties.has('valuePath') && this.contextData) {
+      //TODO: need better error handling
+      this.value = this.contextData.getAt(this.valuePath) ?? 'path not resolved'
+    }
   }
 
   protected render(): unknown {
     if ((this.summary && this.summaryMode()) || (!this.summaryMode())) {
-      // console.log('rendering', this.label, this.summary, this.displayConfig.mode)
       return this.error ? this.renderError() : this.renderValid()
     }
-    // console.log('not rendering', this.label)
     return html``
   }
 

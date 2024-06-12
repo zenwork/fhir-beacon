@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElementProvider}  from '../../../internal/base/base-element-provider'
+import {BaseElementContextProvider}  from '../../../internal/base/base-element-context-provider'
 import {wrapc, wraps}         from '../../../shell/layout/wrapCollection'
 import {isDeceasedBoolean}    from '../../complex/quantity/quantity.type-guards'
 import {PrimitiveType}        from '../../primitive/type-converters'
@@ -12,7 +12,7 @@ import '../../complex/contact-point/contact-point'
 import '../../complex/'
 
 @customElement('fhir-patient')
-export class Patient extends BaseElementProvider<PatientData> {
+export class Patient extends BaseElementContextProvider<PatientData> {
 
   constructor() {
     super('Patient')

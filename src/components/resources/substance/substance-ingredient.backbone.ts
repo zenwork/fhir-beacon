@@ -1,6 +1,6 @@
 import {html, TemplateResult}                                         from 'lit'
 import {customElement}                                                from 'lit/decorators.js'
-import {BaseElementConsumer}                                          from '../../../internal/base/base-element-consumer'
+import {BaseElementContextConsumer}                                          from '../../../internal/base/base-element-context-consumer'
 import {renderError}                                                  from '../../../shell/layout/renderError'
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
@@ -8,7 +8,7 @@ import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './su
 import '../../complex/ratio/ratio'
 
 @customElement('fhir-substance-ingredient')
-export class SubstanceIngredientBackbone extends BaseElementConsumer<SubstanceIngredientData | SubstanceIngredientReferenceData> {
+export class SubstanceIngredientBackbone extends BaseElementContextConsumer<SubstanceIngredientData | SubstanceIngredientReferenceData> {
   constructor() {
     super('Ingredient')
   }

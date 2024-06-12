@@ -1,12 +1,15 @@
-import {Meta} from '@storybook/blocks'
+import {Canvas, Meta, Story} from '@storybook/blocks'
 import '../../src/index'
 
+import * as Stories from './custom.stories'
 
-<Meta title="Toolkit/Customisation/Custom Element" />
+<Meta of={Stories} />
 
 # Custom Rendering
 
 The example below can be used anywhere you can use html and web components.
+
+<Canvas of={Stories.Display} />
 
 ```html
 <fhir-shell token="access/login"> <!-- url to get token. Can be redirected to log in  -->

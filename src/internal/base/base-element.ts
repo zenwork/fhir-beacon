@@ -50,6 +50,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   @property({ type: Boolean, reflect: true })
   declare summary: boolean
 
+  @property({ type: String, reflect: true, attribute: 'override-template' })
+  declare overrideTemplate: string
+
   @state()
   private convertedData: T | null = null
 
@@ -75,6 +78,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     super()
     this.type = type
     this.addStructure('base-element', (data: T) => this.renderBaseElement(data))
+
   }
 
   /**
@@ -91,7 +95,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
-    if ((this.summary && this.summaryMode()) || (!this.summaryMode())) {
+    if (!this.overrideTemplate && ((this.summary && this.summaryMode()) || (!this.summaryMode()))) {
       const display = () => {
 
         if (!this.convertedData) return html``
@@ -173,7 +177,6 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     } else {
       return html``
     }
-
   }
 
   /**
@@ -183,11 +186,16 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    */
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-    // if (_changedProperties.has('summary')) {
-    //   console.log(this.label, 'in summary', this.summary)
-    // }
 
-    if (_changedProperties.has('data')) {
+    if (_changedProperties.has('overrideTemplate')) {
+      let elem= document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
+      if (elem && elem.content) {
+        const template = elem.content
+        if (this.shadowRoot && template) {
+          this.shadowRoot.appendChild(template.cloneNode(true))
+        }
+      }
+    } else if (_changedProperties.has('data')) {
       this.totalDataNodes = countNodes(this.data)
       this.convertedData = this.convertData(this.data)
     }
