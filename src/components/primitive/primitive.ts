@@ -74,7 +74,7 @@ export class Primitive extends LitElement {
   public delimiter: string = ': '
 
   @property({ reflect: true })
-  public value: string = ''
+  declare value: string
 
   @property({ attribute: 'value-path', reflect: true })
   declare valuePath: string
@@ -149,9 +149,20 @@ export class Primitive extends LitElement {
       this.showerror = this.displayConfig.showerror
     }
 
+    // override value with valuePath
     if (_changedProperties.has('valuePath') && this.contextData) {
-      //TODO: need better error handling
-      this.value = this.contextData.getAt(this.valuePath) ?? 'path not resolved'
+      if (this.value && this.valuePath) {
+        console.warn('primitve: valuePath is overriding value attribute. Do not set both')
+      }
+
+      try {
+        this.value = this.contextData.getAt(this.valuePath)
+      } catch (e) {
+        console.log(`unable to retrieve value-path: ${this.valuePath}`)
+        this.value = `unable to retrieve value-path: ${this.valuePath}`
+        this.type = PrimitiveType.forced_error
+      }
+
     }
   }
 
@@ -203,6 +214,7 @@ export class Primitive extends LitElement {
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     let parsedValue = valueOrError(fn, original)
+    console.log(parsedValue)
 
     if (parsedValue.val) {
       this.presentableValue = this.present(parsedValue.val)

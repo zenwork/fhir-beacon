@@ -2,6 +2,7 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import '../../src'
 import {html}           from 'lit'
 import {ShellArgs}      from '../../stories/wrapInShell'
+import '../../demo-code/customisation/custom-lit/custom-element'
 
 
 let path = 'Toolkit/Customisation/Custom Element'
@@ -118,31 +119,6 @@ const meta: Meta<ShellArgs> = {
              summary: summary = true
            }: ShellArgs) =>
     html`
-      <script type="module">
-
-
-        // customElements.define('my-custom-element', class MyCustomElement extends HTMLElement {
-        //   constructor() {
-        //     super()
-        //     this.attachShadow({mode:'open'})
-        //   }
-        //
-        //   connectedCallback() {
-        //     console.log('foo')
-        //     this.shadowRoot.innerHTML ='placeholder'
-        //     const evt = new CustomEvent('context-request', {
-        //       context:'fhir-context-data',
-        //       subscribe:true,
-        //       callback:(value, unsubscribe) => {
-        //         console.log('bar')
-        //         this.shadowRoot.innerHTML = '<div>id:' + value.getAt('$.id') + '</div>'
-        //       }
-        //     })
-        //
-        //     this.dispatchEvent(evt)
-        //   }
-        // })
-      </script >
       <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
         <fhir-medication .data=${data} ?summary=${summary} override-template="med">
           <template id="med">
@@ -154,7 +130,7 @@ const meta: Meta<ShellArgs> = {
               </div >
               <fhir-codeable-concept label="dose" data-path="$.doseForm"></fhir-codeable-concept >
               <fhir-primitive label="lot" value-path="$.batch.lotNumber"></fhir-primitive >
-
+              <!--              <my-custom-element></my-custom-element>-->
             </sl-card >
           </template >
         </fhir-medication >

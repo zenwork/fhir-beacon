@@ -6,7 +6,7 @@ export interface FhirDataContext {
   data: {} & BaseElementData
 
   // TODO: for now just a string... but path should become FHIR path
-  getAt<X>(path: string): X | null
+  getAt<X>(path: string): X
 }
 
 export class FhirDataContextImpl implements FhirDataContext {
@@ -21,11 +21,11 @@ export class FhirDataContextImpl implements FhirDataContext {
     this._data = value
   }
 
-  getAt<X>(path: string): X | null {
+  getAt<X>(path: string): X {
     if (path) {
       let array = jp.query(this.data, path) as X[]
       if (array) return array[0] as X
     }
-    return null
+    throw new SyntaxError(`Could not resolve ${path}`)
   }
 }
