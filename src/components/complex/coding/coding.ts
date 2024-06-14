@@ -22,7 +22,7 @@ export class Coding extends BaseElementContextConsumer<CodingData> {
           .label=${this.label}
           .value=${(Coding.commuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
-          .link=${data.system ? data.system : undefined}
+        .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
           summary
       ></fhir-primitive >
     `
