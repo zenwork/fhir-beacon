@@ -7,45 +7,12 @@ import * as Stories from './custom.stories'
 
 # Custom Rendering
 
-The example below can be used anywhere you can use html and web components.
+`fhir-beacon` components can be combined with plain html or even other layout components to accomplish complex designs.
 
-<Canvas of={Stories.Display} />
+Steps to follow:
+* define an overriding template
+* bind it to the component by name
+* use the `data-path` with JSONpath (maybe should be FHIRPath) to request a data context gets applied to a component. this overrides the `data` path
+* use CSS custom properties and `:part()` query selectors to apply theming that can peirces through the components shadow dom
 
-```html
-<fhir-shell token="access/login"> <!-- url to get token. Can be redirected to log in  -->
-  <table >
-    <thead >
-      <tr >
-        <th>#</th >
-        <th>name</th >
-        <th>dose</th >
-      </tr >
-    </thead >
-  </table >
-  <!-- data-url or data attributes can be used depending on the rendering approach -->
-<fhir-bundle data-url="fhir/Medication?patient.identifier=http://example.com/fhir/mrn|1234">
-  <fhir-medication override-template="med" >
-    <!-- providing template will override the `renderDisplay()` function defined by `<fhir-medication>` -->
-    <tamplate id="med">
-      <tr >
-        <td>
-          <fhir-value fpath="Bundle.entry.index"></fhir-value>
-        </td>
-        <td >
-          <fhir-codeable-concept label="name" fpath="Bundle.entry.code[0]"></fhir-codeable-concept >
-        </td >
-        <td >
-          <fhir-codeable-concept label="dose form" fpath="Bundle.entry.doseForm"></fhir-codeable-concept >
-        </td >
-      </tr >
-    </tamplate >
-  </fhir-medication >
-</fhir-bundle>
-</fhir-shell >
-```
-
-| element                                   | purpose                                                                                                                                                                                                                                                                                                                                                                |
-|-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<fhir-shell>`                            | application context for embedding this library anywhere. Currently has only limited purpose. Eventually will be a boundary for styling, shared data, security, event propagation, etc. )                                                                                                                                                                               |
-| `<fhir-source url="...">`                 | data source context for data being presented. the slotted elements will be repeated for each elemnet in the response recieved                                                                                                                                                                                                                                          |                                                                                                                                             |
-| `<fhir-codeable-concept data-path="...">` | The `data-path` attribute requires valid [fhir path](https://www.hl7.org/fhir/R5/fhirpath.html) notation to request data from the neerest parent `<fhir-source>` element. This is an alternative to setting data in the element using the `data` attribute. see also: [Codeable Concept Element](?path=/docs/components-datatypes-complex-type-codeable-concept--docs) |
+<Canvas of={Stories.Display} layout={'centered'} sourceState={'shown'   }/>

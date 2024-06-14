@@ -11,7 +11,8 @@ export abstract class ShoelaceStyledElement extends LitElement {
 
   public connectedCallback() {
     super.connectedCallback()
-    if (this.shadowRoot) loadShoelaceStylesFromPage(this.shadowRoot)
+    // TODO: figure out the best way to provide the standrad css theme. At the moment this is blocking overriding in specific locations
+    // if (this.shadowRoot) loadShoelaceStylesFromPage(this.shadowRoot)
   }
 
 }

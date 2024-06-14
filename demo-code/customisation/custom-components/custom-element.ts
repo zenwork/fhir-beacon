@@ -2,7 +2,7 @@ import {FhirDataContext} from '../../../src/internal/contexts/FhirContextData'
 
 type Context<KeyType, ValueType> = KeyType & { __context__: ValueType };
 
-export function createContext<ValueType, K = unknown>(key: K) {
+function createContext<ValueType, K = unknown>(key: K) {
   return key as Context<K, ValueType>
 }
 
@@ -29,22 +29,22 @@ class MyCustomElement extends HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.render()
-  }
+    setTimeout(() => {
+      console.log('dispatching')
+      this.dispatchEvent(
+        // TODO: this is not working and I am not sure why
+        new ContextRequestEvent<FhirDataContext>(
+          myContext,
+          (ctx) => {
+            console.log(ctx)
+            this.value = ctx.getAt('$.id')
 
-  connectedCallback() {
-    this.dispatchEvent(
-      // TODO: this is not working and I am not sure why
-      new ContextRequestEvent<FhirDataContext>(
-        myContext,
-        (ctx) => {
-          console.log(ctx)
-          this.value = ctx.getAt('$.id')
-
-          this.render()
-        },
-        true
+            this.render()
+          },
+          true
+        )
       )
-    )
+    }, 2000)
   }
 
   render() {
@@ -52,4 +52,4 @@ class MyCustomElement extends HTMLElement {
   }
 }
 
-customElements.define('my-custom-element', MyCustomElement)
+customElements.define('custom-element', MyCustomElement)

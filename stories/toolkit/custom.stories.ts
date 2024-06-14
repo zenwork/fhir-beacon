@@ -2,7 +2,8 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import '../../src'
 import {html}           from 'lit'
 import {ShellArgs}      from '../../stories/wrapInShell'
-import '../../demo-code/customisation/custom-lit/custom-element'
+import '../../demo-code/customisation/custom-components/custom-lit-element'
+import '../../demo-code/customisation/custom-components/custom-element'
 
 
 let path = 'Toolkit/Customisation/Custom Element'
@@ -17,7 +18,7 @@ let data = {
     {
       resourceType: 'Organization',
       id: 'mmanu',
-      name: 'Medication Manufacturer'
+      name: 'ACME Pharma'
     }
   ],
   code: {
@@ -119,18 +120,50 @@ const meta: Meta<ShellArgs> = {
              summary: summary = true
            }: ShellArgs) =>
     html`
-      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-medication .data=${data} ?summary=${summary} override-template="med">
+      <!-- Theming change -->
+      <style >
+        :root {
+          --sl-color-primary-700: var(--sl-color-purple-700);
+        }
+      </style >
+
+      <fhir-shell >
+        <!-- tell the component the name of the template that should be used-->
+        <fhir-medication .data=${data} override-template="med">
+          <!-- define the med template that will override the components default display. -->
+          <!-- templates are a web standard that allow defining a template  -->
           <template id="med">
+            <!-- styles defined here will me loaded into the shadow DOM and -->
+            <style >
+              h4 {
+                color: var(--sl-color-primary-700);
+                display: flex;
+                align-items: center;
+                column-gap: 0.5rem
+              }
+
+              h5 {
+                color: var(--sl-color-primary-700)
+              }
+
+              sl-icon {
+                font-size: 1.5rem;
+                color: var(--sl-color-primary-700)
+              }
+            </style >
             <h3 >Medication Card</h3 >
             <sl-card class="card-header">
-              <div slot="header">
-                <fhir-primitive value-path="$.code.coding[0].display"></fhir-primitive >
+              <h4 slot="header">
                 <sl-icon name="capsule-pill"></sl-icon >
-              </div >
+                <fhir-primitive value-path="$.code.coding[0].display"></fhir-primitive >
+              </h4 >
               <fhir-codeable-concept label="dose" data-path="$.doseForm"></fhir-codeable-concept >
               <fhir-primitive label="lot" value-path="$.batch.lotNumber"></fhir-primitive >
-              <!--              <my-custom-element></my-custom-element>-->
+              <h5 slot="footer">
+                <custom-lit-element label="manufacturer" data-path="$.contained[0].name"></custom-lit-element >
+<!--                TODO: debug outside of storybook-->
+<!--                <custom-element label="manufacturer" data-path="$.contained[0].name"></custom-element >-->
+              </h5 >
             </sl-card >
           </template >
         </fhir-medication >
