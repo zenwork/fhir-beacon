@@ -161,8 +161,8 @@ const meta: Meta<ShellArgs> = {
               <fhir-primitive label="lot" value-path="$.batch.lotNumber"></fhir-primitive >
               <h5 slot="footer">
                 <custom-lit-element label="manufacturer" data-path="$.contained[0].name"></custom-lit-element >
-<!--                TODO: debug outside of storybook-->
-<!--                <custom-element label="manufacturer" data-path="$.contained[0].name"></custom-element >-->
+                <!--                TODO: debug outside of storybook-->
+                <!--                <custom-element label="manufacturer" data-path="$.contained[0].name"></custom-element >-->
               </h5 >
             </sl-card >
           </template >

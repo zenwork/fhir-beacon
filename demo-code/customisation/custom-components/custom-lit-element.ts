@@ -13,7 +13,7 @@ export class CustomLitElement extends LitElement {
   @property({ reflect: true })
   declare label: string
 
-  @property({attribute:'data-path', reflect: true })
+  @property({ attribute: 'data-path', reflect: true })
   declare dataPath: string
 
   @state()

@@ -1,8 +1,6 @@
 import {LitElement} from 'lit'
 import {state}      from 'lit/decorators.js'
 
-import {loadShoelaceStylesFromPage} from '../styles/loadShoelaceStylesFromPage'
-
 export abstract class ShoelaceStyledElement extends LitElement {
 
 
