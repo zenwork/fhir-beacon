@@ -179,7 +179,6 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   /**
    * Render formatted JSON data for debugging purposes
-   * @param data
    * @protected
    */
   protected renderDebug(): TemplateResult {
