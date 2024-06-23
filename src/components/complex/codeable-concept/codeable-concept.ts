@@ -17,7 +17,6 @@ export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptD
   //TODO: review how to deal with fall-back situation. Is this a correct interpretation. We probably need some extensive testing
   //TODO: display summary is problematic because it does not represent the spec correctly sometimes if layout is modified
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
-
     if (data.coding) {
       return html`
         ${wrap('identifiers', data.coding, this.displayConfig.verbose,
@@ -44,6 +43,4 @@ export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptD
         <fhir-primitive label="text" .value=${data.text} summary></fhir-primitive > `
     ]
   }
-
-
 }

@@ -3,7 +3,7 @@ import '../../src'
 import {html}           from 'lit'
 import {ShellArgs}      from '../../stories/wrapInShell'
 import '../../demo-code/customisation/custom-components/custom-lit-element'
-import '../../demo-code/customisation/custom-components/custom-element'
+import '../../demo-code/customisation/custom-components/custom-element.js'
 
 
 let path = 'Toolkit/Customisation/Custom Element'
@@ -105,12 +105,7 @@ const meta: Meta<ShellArgs> = {
   title: path,
   component: 'fhir-shell',
   subcomponents: { 'fhir-medication': 'fhir-medication' },
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  },
+  argTypes: {},
   render: ({
              data,
              mode: mode = 'display',
@@ -142,7 +137,7 @@ const meta: Meta<ShellArgs> = {
                 column-gap: 0.5rem
               }
 
-              h5 {
+              .footer {
                 color: var(--sl-color-primary-700)
               }
 
@@ -159,11 +154,10 @@ const meta: Meta<ShellArgs> = {
               </h4 >
               <fhir-codeable-concept label="dose" data-path="$.doseForm"></fhir-codeable-concept >
               <fhir-primitive label="lot" value-path="$.batch.lotNumber"></fhir-primitive >
-              <h5 slot="footer">
+              <div class='footer' slot="footer">
                 <custom-lit-element label="manufacturer" data-path="$.contained[0].name"></custom-lit-element >
-                <!--                TODO: debug outside of storybook-->
-                <!--                <custom-element label="manufacturer" data-path="$.contained[0].name"></custom-element >-->
-              </h5 >
+                <custom-element ></custom-element >
+              </div >
             </sl-card >
           </template >
         </fhir-medication >
@@ -177,20 +171,6 @@ type Story = StoryObj<ShellArgs>;
 
 export const Display: Story = {
   args: {
-    data,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true
-  }
-}
-
-export const Structure: Story = {
-  args: {
-    data,
-    mode: 'structure',
-    showerror: true,
-    verbose: true,
-    open: true
+    data
   }
 }

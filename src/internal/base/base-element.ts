@@ -1,51 +1,47 @@
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
-import {map}                                           from 'lit/directives/map.js'
 import {hasSameAncestor}                               from '../.././utilities/hasSameAncestor'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters'
 
-import {asReadable}                       from '../../components/primitive/type-presenters/asReadable'
-import {hasSome}                          from '../../shell/layout/directives'
-import {ShoelaceStyledElement}            from '../../shell/shoelace-styled-element'
-import {hostStyles}                       from '../../styles/hostStyles'
-import {countNodes}                       from '../../utilities/countNodes'
-import {toBaseElementModeEnum}            from '../../utilities/toBaseElementModeEnum'
-import {BaseElementData, BaseElementMode} from './base-element.data'
+import {asReadable}                   from '../../components/primitive/type-presenters/asReadable'
+import {hasSome}                      from '../../shell/layout/directives'
+import {ShoelaceStyledElement}        from '../../shell/shoelace-styled-element'
+import {hostStyles}                   from '../../styles/hostStyles'
+import {countNodes}                   from '../../utilities/countNodes'
+import {toBaseElementModeEnum}        from '../../utilities/toBaseElementModeEnum'
+import {BaseElementData, DisplayMode} from './base-element.data'
 import '../../utilities/debug/debug'
 import '../../shell/layout/wrapper/wrapper'
 import '../../shell/layout/structure-wrapper/structure-wrapper'
 import '../../components/primitive/primitive'
-import {componentStyles}                  from './base-element.styles'
+import {componentStyles}              from './base-element.styles'
+
+type GeneratorGroup<T> = { [key: string]: (data: T) => TemplateResult | TemplateResult[] }
+type Generators<T> = { structure: GeneratorGroup<T>, display: GeneratorGroup<T> }
 
 export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
 
   static styles = [hostStyles, componentStyles]
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
-  @property({type: Object, attribute: 'data'})
+  @property({ type: Object, attribute: 'data' })
   declare data: T
 
-  @property({reflect: true})
+  @property({ reflect: true })
   public label: string = ''
-
-  @property({reflect: true})
-  protected type: string = ''
-
-  @property({ type: BaseElementMode, converter: toBaseElementModeEnum, reflect: true })
-  public mode: BaseElementMode = BaseElementMode.display
-
-  @property({type: Boolean, reflect: true})
+  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  public mode: DisplayMode = DisplayMode.display
+  @property({ type: Boolean, reflect: true })
   declare open: boolean
-
-  @property({type: Boolean, reflect: true})
+  @property({ type: Boolean, reflect: true })
   public forceclose: boolean = false
-
-  @property({type: Boolean, reflect: true})
+  @property({ type: Boolean, reflect: true })
   declare verbose: boolean
-
-  @property({type: Boolean, reflect: true})
+  @property({ type: Boolean, reflect: true })
   declare showerror: boolean
+  @property({ reflect: true })
+  protected type: string = ''
 
   @property({ type: Boolean, reflect: true })
   declare summary: boolean
@@ -58,10 +54,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   @state()
   protected totalDataNodes: number = 0
-
   /**
    * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode certain FHIR datatypes go into a
-   * theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In reality they would never point to each other but if expanding on all
+   * theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In reality, they would never point to each other but if expanding on all
    * possible values this could happen
    *
    * @type {boolean}
@@ -69,15 +64,31 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   protected recursionGuard: boolean = false
 
   @state()
-  private structureGenerators: { [key: string]: (data: T) => TemplateResult | TemplateResult[] } = {}
-
-  @state()
-  private displayGenerators: { [key: string]: (data: T) => TemplateResult | TemplateResult[] } = {}
+  private templateGenerators: Generators<T> = { structure: {}, display: {} }
 
   constructor(type: string) {
     super()
     this.type = type
-    this.addStructure('base-element', (data: T) => this.renderBaseElement(data))
+    this.addStructureTempateGenerator('base-element', (data: T) => this.renderBaseElement(data))
+  }
+
+  /**
+   * Rendering method for all elements
+   * @protected
+   */
+  protected render(): TemplateResult | TemplateResult[] {
+    // console.log('render loop', this.type, this.mode)
+    return html`${choose(this.mode, [
+        [DisplayMode.combined, () => this.renderCombinedWrapper()],
+        [DisplayMode.display, () => this.renderDisplayWrapper()],
+        [DisplayMode.display_summary, () => this.renderDisplayWrapper()],
+        [DisplayMode.narrative, () => this.renderDisplayWrapper()],
+        [DisplayMode.override, () => this.renderTemplate()],
+        [DisplayMode.structure, () => this.renderStructureWrapper()],
+        [DisplayMode.structure_summary, () => this.renderStructureWrapper()],
+        [DisplayMode.debug, () => this.renderDebug()]
+      ],
+      () => html`<h2 >Error: Unable to render the element</h2 >`)}`
 
   }
 
@@ -86,97 +97,104 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @param name
    * @param generator
    */
-  addStructure(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
-    this.structureGenerators[name] = generator
+  protected addStructureTempateGenerator(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
+    this.templateGenerators.structure[name] = generator
+  }
+
+  protected renderStructureWrapper() {
+    if (this.convertedData || this.isVerbose()) {
+      return html`
+        <fhir-structure-wrapper
+          .label=${this.getElementLabel()}
+          .resourceId=${this.convertedData?.id ?? ''}
+          .fhirType=${this.getTypeLabel()}
+          ?forceclose=${this.forceclose}
+          ?summary=${this.summary}
+        >
+          <div class="frontmatter">
+            ${this.convertedData ? this.renderGroup(this.convertedData, 'structure') : nothing}
+          </div >
+
+          ${this.renderStructure(this.convertedData ?? {} as T)}
+        </fhir-structure-wrapper >
+      `
+    }
+
+    // stop rendering in verbose mode due to theoretically infinite models.
+    // ex: Identifier -> Reference -> Identifier -> and so on!
+    if (this.recursionGuard) {
+      return html`
+        <fhir-primitive
+          .type=${PrimitiveType.forced_error}
+          label=${this.label}
+          value="[(${this.type}) not rendered due to recursion guard]"
+          ?showerror=${this.showerror}
+        ></fhir-primitive >`
+    }
+
+    return html``
+  }
+
+  protected renderDisplayWrapper() {
+    if (!this.convertedData) return html``
+    if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
+
+    // is verbose
+    return html`
+      <fhir-wrapper
+        .label=${this.getElementLabel()}
+        .fhirType=${this.getTypeLabel()}
+      >
+        ${this.renderDisplay(this.convertedData)}
+      </fhir-wrapper >`
+  }
+
+  protected renderCombinedWrapper() {
+    return this.convertedData ?
+           html`
+             <fhir-shell .mode=${DisplayMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+               ${this.renderDisplayWrapper()}
+             </fhir-shell >
+             <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
+             <fhir-shell .mode=${DisplayMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+               ${this.renderStructureWrapper()}
+             </fhir-shell >
+           ` :
+           html``
+  }
+
+  protected renderOverrideWrapper() {
+    if (!this.convertedData) return html``
+    if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
+
+    // is verbose
+    return html`
+      <fhir-wrapper
+        .label=${this.getElementLabel()}
+        .fhirType=${this.getTypeLabel()}
+      >
+        ${this.renderDisplay(this.convertedData)}
+      </fhir-wrapper >`
   }
 
   /**
-   * Rendering method for all elements
+   * Render formatted JSON data for debugging purposes
+   * @param data
    * @protected
    */
-  protected render(): TemplateResult | TemplateResult[] {
-    if (!this.overrideTemplate && ((this.summary && this.summaryMode()) || (!this.summaryMode()))) {
-      const display = () => {
-
-        if (!this.convertedData) return html``
-        if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
-
-        // is verbose
-        return html`
-          <fhir-wrapper
-              .label=${this.getElementLabel()}
-              .fhirType=${this.getTypeLabel()}
-          >
-            ${this.renderDisplay(this.convertedData)}
-          </fhir-wrapper >`
-      }
-
-      const summary = () => {
-        return html`
-          <fhir-not-supported description="not implemented yet"></fhir-not-supported >`
-      }
-
-      const structure = () => {
-        if (this.convertedData || this.isVerbose()) {
-          return html`
-            <fhir-structure-wrapper
-                .label=${this.getElementLabel()}
-                .resourceId=${this.convertedData?.id ?? ''}
-                .fhirType=${this.getTypeLabel()}
-                ?forceclose=${this.forceclose}
-                ?summary=${this.summary}
-            >
-              <div class="frontmatter">
-                ${map(Object.values(this.structureGenerators), generator => generator(this.convertedData ?? {} as T))}
-              </div >
-
-              ${this.renderStructure(this.convertedData ?? {} as T)}
-            </fhir-structure-wrapper >
-          `
-        }
-
-        // stop rendering in verbose mode due to theoretically infinite models. ex: Identifier -> Reference -> Identifier -> and so on!
-        if (this.recursionGuard) {
-          return html`
-            <fhir-primitive
-                .type=${PrimitiveType.forced_error}
-                label=${this.label}
-                value="[(${this.type}) not rendered due to recursion guard]"
-                ?showerror=${this.showerror}
-            ></fhir-primitive >`
-        }
-
-        return html``
-
-      }
-
-      const combined = () => this.convertedData ?
-                             html`
-                               <fhir-shell .mode=${BaseElementMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                                 ${display()}
-                               </fhir-shell >
-                               <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
-                               <fhir-shell .mode=${BaseElementMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                                 ${structure()}
-                               </fhir-shell >
-                             ` :
-                             html``
-
-      const debug = () => this.renderDebug(this.data)
-
-      return html`${choose(this.mode, [
-          [BaseElementMode.combined, combined],
-          [BaseElementMode.display, display],
-          [BaseElementMode.display_summary, display],
-          [BaseElementMode.narrative, display],
-          [BaseElementMode.structure, structure],
-          [BaseElementMode.structure_summary, structure],
-          [BaseElementMode.debug, debug]
-        ],
-        () => html`<h2 >Error: Unable to render the element</h2 >`)}`
-    } else {
-      return html``
+  protected renderDebug(): TemplateResult {
+    if (this.data || this.isVerbose()) {
+      return html`
+        <article part="element">
+          <header part="label">${(this.getElementLabel())}</header >
+          <section part="value">
+            <fhir-debug .data=${this.data}></fhir-debug >
+          </section >
+        </article >
+      `
     }
+
+    return html``
   }
 
   /**
@@ -188,13 +206,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     super.updated(_changedProperties)
 
     if (_changedProperties.has('overrideTemplate')) {
-      let elem = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
-      if (elem && elem.content) {
-        const template = elem.content
-        if (this.shadowRoot && template) {
-          this.shadowRoot.appendChild(template.cloneNode(true))
-        }
-      }
+      this.mode = DisplayMode.override
     } else if (_changedProperties.has('data')) {
       this.totalDataNodes = countNodes(this.data)
       this.convertedData = this.convertData(this.data)
@@ -208,36 +220,36 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
   /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute generators instead.
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
    * @param data
    */
   protected abstract renderDisplay(data: T): TemplateResult | TemplateResult[]
 
   /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute generators instead.
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
    * @param data
    */
   protected abstract renderStructure(data: T): TemplateResult | TemplateResult[]
 
-  /**
-   * Render formatted JSON data for debugging purposes
-   * @param data
-   * @protected
-   */
-  protected renderDebug(data: T): TemplateResult {
-    if (this.data || this.isVerbose()) {
-      return html`
-          <article part="element">
-              <header part="label">${(this.getElementLabel())}</header>
-              <section part="value">
-                <fhir-debug .data=${data}></fhir-debug >
-              </section>
-          </article>
-      `
+  private renderTemplate(): TemplateResult {
+    if (this.shadowRoot) {
+      let templateElement = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
+      if (templateElement && templateElement.content) {
+        const content = templateElement.content
+        if (content) {
+          //TODO: investigate if this should be rendered with a lit html template
+          this.shadowRoot.appendChild(content.cloneNode(true))
+        }
+      }
     }
-
+    this.requestUpdate()
     return html``
   }
+
+  private renderGroup(data: T, group: 'structure' | 'display'): TemplateResult | TemplateResult[] {
+    return [...Object.values(this.templateGenerators[group]).map(gen => gen(data)).flat()]
+  }
+
 
   /**
    * Overridable method reserved for internal use. Do not call super in this method
@@ -267,6 +279,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
 
+
   protected convertData(data: T): T {
     return data as T
   }
@@ -283,8 +296,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     return false
   }
 
-
   private summaryMode() {
-    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 }

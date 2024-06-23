@@ -10,9 +10,10 @@ import * as Stories from './custom.stories'
 `fhir-beacon` components can be combined with plain html or even other layout components to accomplish complex designs.
 
 Steps to follow:
-* define an overriding template
-* bind it to the component by name
-* use the `data-path` with JSONpath (maybe should be FHIRPath) to request a data context gets applied to a component. this overrides the `data` path
+* Define an overriding `<template></template>`
+* bind the template to the fhir component with a unique name using the `name` attribute. This allows managing multiple templates.
+* Add elements in the template that support `fhir-beacon`'s data binding mechanism. This can be done by extending
+* use the `data-path` attribute to specify the data  with JSONpath (maybe should be FHIRPath) to request a data context gets applied to a component. this overrides the `data` path
 * use CSS custom properties and `:part()` query selectors to apply theming that can peirces through the components shadow dom
 
 <Canvas of={Stories.Display} layout={'centered'} sourceState={'shown'} />

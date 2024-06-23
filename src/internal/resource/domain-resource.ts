@@ -2,7 +2,7 @@ import {provide}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {choose}                                        from 'lit/directives/choose.js'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters'
-import {BaseElementMode}                               from '../base/base-element.data'
+import {DisplayMode}                                   from '../base/base-element.data'
 import {containedDataContext}                          from '../contexts/context'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'
@@ -20,7 +20,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
   protected constructor(type: string) {
     super(type)
-    this.addStructure('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
+    this.addStructureTempateGenerator('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
   }
 
   protected render(): TemplateResult {
@@ -28,9 +28,9 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     return html`
       <div part="domain-resource">${choose(this.mode,
             [
-                [BaseElementMode.narrative, () => this.renderNarrative(data)],
+              [DisplayMode.narrative, () => this.renderNarrative(data)],
               [
-                BaseElementMode.combined,
+                DisplayMode.combined,
                 () => html`
                   <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
               ]

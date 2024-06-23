@@ -1,7 +1,7 @@
 import {consume}                       from '@lit/context'
 import {html, nothing, PropertyValues} from 'lit'
 import {customElement, property}       from 'lit/decorators.js'
-import {BaseElementMode}               from '../../../internal/base/base-element.data'
+import {DisplayMode}                   from '../../../internal/base/base-element.data'
 import {displayConfigContext}          from '../../../internal/contexts/context'
 import {DisplayConfig}                 from '../../../internal/contexts/context.data'
 import {defaultDisplayConfig}          from '../../../internal/contexts/context.defaults'
@@ -45,7 +45,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
   public summary: boolean = false
 
   @property({ type: Boolean, reflect: true, converter: toBaseElementModeEnum })
-  private mode: BaseElementMode = BaseElementMode.structure
+  private mode: DisplayMode = DisplayMode.structure
 
 
 
@@ -65,7 +65,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
                 <label ><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
                 ${this.fhirType ? html`
                   <sl-badge pill>${this.fhirType}</sl-badge >` : nothing}
-                ${this.summary && this.displayConfig?.mode === BaseElementMode.structure ? html`
+                ${this.summary && this.displayConfig?.mode === DisplayMode.structure ? html`
                   <sl-badge id="summary" pill>&sum;</sl-badge >` : nothing}
                 ${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
               </div >
@@ -89,7 +89,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
   }
 
   private summaryMode() {
-    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 
 }

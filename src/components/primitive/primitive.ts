@@ -2,7 +2,7 @@ import {consume}                                                        from '@l
 import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                                 from 'lit/decorators.js'
 import {choose}                                                         from 'lit/directives/choose.js'
-import {BaseElementMode}                                                from '../../internal/base/base-element.data'
+import {DisplayMode}                                                    from '../../internal/base/base-element.data'
 import {contextData, displayConfigContext}                              from '../../internal/contexts/context'
 import {DisplayConfig}                                                  from '../../internal/contexts/context.data'
 import {FhirDataContext}                                                from '../../internal/contexts/FhirContextData'
@@ -91,8 +91,8 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   declare showProvided: boolean
 
-  @property({ type: BaseElementMode, converter: toBaseElementModeEnum, reflect: true })
-  declare mode: BaseElementMode
+  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
   declare showerror: boolean
@@ -191,7 +191,7 @@ export class Primitive extends LitElement {
                 .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}
                 ${this.verbose ? this.type : ''}
             ></fhir-context >
-            ${this.summary && this.mode == BaseElementMode.structure ? html`
+            ${this.summary && this.mode == DisplayMode.structure ? html`
               <sl-badge pill>&sum;</sl-badge >` : nothing}
           </fhir-primitive-wrapper >`
            : html``
@@ -214,7 +214,6 @@ export class Primitive extends LitElement {
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     let parsedValue = valueOrError(fn, original)
-    console.log(parsedValue)
 
     if (parsedValue.val) {
       this.presentableValue = this.present(parsedValue.val)
@@ -241,7 +240,7 @@ export class Primitive extends LitElement {
   }
 
   private summaryMode() {
-    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 }
 

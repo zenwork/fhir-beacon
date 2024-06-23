@@ -2,7 +2,7 @@ import {consume}                              from '@lit/context'
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {classMap}                             from 'lit/directives/class-map.js'
-import {BaseElementMode}                      from '../../../internal/base/base-element.data'
+import {DisplayMode}                          from '../../../internal/base/base-element.data'
 import {displayConfigContext}                 from '../../../internal/contexts/context'
 import {DisplayConfig}                        from '../../../internal/contexts/context.data'
 import {defaultDisplayConfig}                 from '../../../internal/contexts/context.defaults'
@@ -40,8 +40,8 @@ export class Wrapper extends ShoelaceStyledElement {
   @property({ type: Boolean, reflect: true })
   declare open: boolean
 
-  @property({ type: BaseElementMode, reflect: true, converter: toBaseElementModeEnum })
-  declare mode: BaseElementMode
+  @property({ type: DisplayMode, reflect: true, converter: toBaseElementModeEnum })
+  declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
   declare summary: boolean
@@ -97,7 +97,7 @@ export class Wrapper extends ShoelaceStyledElement {
   }
 
   private summaryMode() {
-    return this.mode === BaseElementMode.display_summary || this.mode === BaseElementMode.structure_summary
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 
 

@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {BaseElementMode}               from '../../../internal/base/base-element.data'
+import {DisplayMode}                   from '../../../internal/base/base-element.data'
 
 import {DomainResource} from '../../../internal/resource/domain-resource'
 import '../../../utilities'
@@ -33,7 +33,7 @@ export class Medication extends DomainResource<MedicationData> {
         ${map(data.ingredient, (i, idx) => html`
           <fhir-wrapper
               label="ingredient ${(data.ingredient && data.ingredient.length > 1) ? '[' + (idx + 1) + ']' : ''}" ?hide=${this.mode
-                                                                                                                         == BaseElementMode.display_summary} variant="primary"
+                                                                                                                         == DisplayMode.display_summary} variant="primary"
           >
             <fhir-codeable-reference label="item" .data=${i.item}></fhir-codeable-reference >
             <fhir-primitive .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}></fhir-primitive >
@@ -70,7 +70,7 @@ export class Medication extends DomainResource<MedicationData> {
           <fhir-structure-wrapper label="ingredient [${idx}]">
             <fhir-codeable-reference label="item" .data=${i.item}></fhir-codeable-reference >
             <fhir-primitive label="is Active" .type=${PrimitiveType.none} .value=${i.isActive}></fhir-primitive >
-            <fhir-ratio label="ratio" .data=${i.strengthRatio} .mode=${BaseElementMode.display}></fhir-ratio >
+            <fhir-ratio label="ratio" .data=${i.strengthRatio} .mode=${DisplayMode.display}></fhir-ratio >
             <fhir-codeable-concept .data=${i.strengthCodeableConcept}></fhir-codeable-concept >
             <fhir-quantity .data=${i.strengthQuantity!}></fhir-quantity >
           </fhir-structure-wrapper >

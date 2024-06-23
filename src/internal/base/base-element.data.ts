@@ -5,14 +5,15 @@ export type BaseElementData = {
   extension?: [],
 }
 
-export enum BaseElementMode {
+export enum DisplayMode {
   combined = 'combined',
   debug = 'debug',
   display = 'display',
   display_summary = 'display_summary',
   narrative = 'narrative',
+  override = 'override',
   structure = 'structure',
-  structure_summary = 'structure_summary'
+  structure_summary = 'structure_summary',
 }
 
 export type Extension = BaseElementData & {

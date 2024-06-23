@@ -7,7 +7,7 @@ export abstract class Resource<T extends ResourceData> extends BaseElementContex
 
   protected constructor(type: string) {
     super(type)
-    this.addStructure('resource', (data: T) => this.renderResourceStructure(data))
+    this.addStructureTempateGenerator('resource', (data: T) => this.renderResourceStructure(data))
   }
 
   private renderResourceStructure(data: T): TemplateResult | TemplateResult[] {

@@ -5,7 +5,7 @@ import {contextData, displayConfigContext} from '../contexts/context'
 import {DisplayConfig}                     from '../contexts/context.data'
 import {FhirDataContext}                   from '../contexts/FhirContextData'
 import {BaseElement}                       from './base-element'
-import {BaseElementData}                   from './base-element.data'
+import {BaseElementData, DisplayMode}      from './base-element.data'
 
 export abstract class BaseElementContextConsumer<T extends BaseElementData> extends BaseElement<T> {
 
@@ -28,8 +28,8 @@ export abstract class BaseElementContextConsumer<T extends BaseElementData> exte
         && this.displayConfig) {
 
       // console.log(this.type, this.displayConfig)
-
-      this.mode = this.displayConfig.mode
+      // TODO: make this better. this is implicit behaviour
+      this.mode = (this.dataPath || this.displayConfig.mode === DisplayMode.override) ? this.mode : this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
       this.open = this.displayConfig.open
       this.showerror = this.displayConfig.showerror
@@ -38,5 +38,6 @@ export abstract class BaseElementContextConsumer<T extends BaseElementData> exte
     if (_changedProperties.has('dataPath') && this.contextData) {
       this.data = this.contextData.getAt(this.dataPath)
     }
+
   }
 }
