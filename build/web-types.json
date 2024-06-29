@@ -116,7 +116,7 @@
         },
         {
           "name": "fhir-address",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -157,7 +157,7 @@
         },
         {
           "name": "fhir-codeable-concept",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -198,7 +198,7 @@
         },
         {
           "name": "fhir-codeable-reference",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -239,7 +239,7 @@
         },
         {
           "name": "fhir-coding",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -280,48 +280,7 @@
         },
         {
           "name": "fhir-contact-point",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data-path", "value": { "type": "string" } },
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data-path", "value": { "type": "string" } },
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "DisplayMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "type", "value": { "type": "string" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-human-name",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -362,7 +321,48 @@
         },
         {
           "name": "fhir-identifier",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "data-path", "value": { "type": "string" } },
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+            {
+              "name": "type",
+              "value": { "type": "string", "default": "type" }
+            },
+            { "name": "summary", "value": { "type": "boolean" } },
+            { "name": "override-template", "value": { "type": "string" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "data-path", "value": { "type": "string" } },
+              { "name": "data", "value": { "type": "T" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "mode", "value": { "type": "DisplayMode" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "forceclose", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "type", "value": { "type": "string" } },
+              { "name": "summary", "value": { "type": "boolean" } },
+              { "name": "override-template", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-human-name",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -403,7 +403,7 @@
         },
         {
           "name": "fhir-period",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -444,7 +444,7 @@
         },
         {
           "name": "fhir-quantity",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -485,7 +485,7 @@
         },
         {
           "name": "fhir-ratio",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -526,7 +526,7 @@
         },
         {
           "name": "fhir-signature",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -567,7 +567,7 @@
         },
         {
           "name": "fhir-bundle",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -691,7 +691,7 @@
         },
         {
           "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -730,7 +730,7 @@
         },
         {
           "name": "fhir-patient",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -769,7 +769,7 @@
         },
         {
           "name": "fhir-substance-ingredient",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -810,7 +810,7 @@
         },
         {
           "name": "fhir-substance",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -849,7 +849,7 @@
         },
         {
           "name": "fhir-meta",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -890,7 +890,7 @@
         },
         {
           "name": "fhir-narrative",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "status", "value": { "type": "string" } },
@@ -916,6 +916,47 @@
           "js": {
             "properties": [
               { "name": "status", "value": { "type": "string" } },
+              { "name": "data-path", "value": { "type": "string" } },
+              { "name": "data", "value": { "type": "T" } },
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "mode", "value": { "type": "DisplayMode" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "forceclose", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "type", "value": { "type": "string" } },
+              { "name": "summary", "value": { "type": "boolean" } },
+              { "name": "override-template", "value": { "type": "string" } }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-reference",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "data-path", "value": { "type": "string" } },
+            { "name": "data", "value": { "type": "T" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+            {
+              "name": "type",
+              "value": { "type": "string", "default": "type" }
+            },
+            { "name": "summary", "value": { "type": "boolean" } },
+            { "name": "override-template", "value": { "type": "string" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
               { "name": "data-path", "value": { "type": "string" } },
               { "name": "data", "value": { "type": "T" } },
               { "name": "label", "value": { "type": "string" } },
@@ -975,47 +1016,6 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "summary", "value": { "type": "boolean" } },
               { "name": "mode", "value": { "type": "DisplayMode" } }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-reference",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "data-path", "value": { "type": "string" } },
-            { "name": "data", "value": { "type": "T" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-            { "name": "summary", "value": { "type": "boolean" } },
-            { "name": "override-template", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "data-path", "value": { "type": "string" } },
-              { "name": "data", "value": { "type": "T" } },
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "DisplayMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "type", "value": { "type": "string" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-              { "name": "override-template", "value": { "type": "string" } }
             ],
             "events": []
           }

@@ -10,7 +10,6 @@ export class Period extends BaseElementContextConsumer<PeriodData> {
   constructor() {super('Period')}
 
   protected renderDisplay(data: PeriodData): TemplateResult | TemplateResult[] {
-    // TODO: fixed this hacked css
     return html`
       <fhir-primitive-wrapper >
         <fhir-label >period:</fhir-label >
@@ -22,8 +21,7 @@ export class Period extends BaseElementContextConsumer<PeriodData> {
   }
 
   protected renderStructure(data: PeriodData): TemplateResult | TemplateResult[] {
-    return [
-      html`
+    return html`
         <fhir-primitive
             label="start"
             type=${PrimitiveType.datetime}
@@ -36,6 +34,5 @@ export class Period extends BaseElementContextConsumer<PeriodData> {
             .value=${data.end}
             summary
         ></fhir-primitive >`
-    ]
   }
 }

@@ -1,6 +1,7 @@
 import {html}                                           from 'lit'
 import {customElement, property, queryAssignedElements} from 'lit/decorators.js'
 import {ShoelaceStyledElement}                          from '../../../shell/shoelace-styled-element'
+import {isBlank}                                        from '../../../utilities/isBlank'
 import {componentStyles}                                from './primitive-value.styles'
 
 @customElement('fhir-value')
@@ -36,7 +37,6 @@ export class PrimitiveValue extends ShoelaceStyledElement {
   }
 
   private computeValue = () => {
-
     if (this.link) {
       return html`
         <a href=${this.link}>
@@ -47,13 +47,12 @@ export class PrimitiveValue extends ShoelaceStyledElement {
       `
     }
 
-    if (!this.text && this.placeholder) {
+    if (isBlank(this.text) && this.placeholder) {
       return html`<span class="placeholder">${this.placeholder}</span>`
     }
 
     return html`
       <slot name="before"></slot>${this.text}
       <slot name="after"></slot>`
-
   }
 }

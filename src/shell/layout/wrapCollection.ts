@@ -69,6 +69,7 @@ export function wrapc<T>(colName: string,
  * @param data
  * @param verbose
  * @param generator
+ * @param summary
  */
 export function wraps<T>(colName: string,
                          data: T[],

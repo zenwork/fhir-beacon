@@ -6,6 +6,7 @@ import {DisplayMode}                                                    from '..
 import {contextData, displayConfigContext}                              from '../../internal/contexts/context'
 import {DisplayConfig}                                                  from '../../internal/contexts/context.data'
 import {FhirDataContext}                                                from '../../internal/contexts/FhirContextData'
+import {isBlank}                                                        from '../../utilities/isBlank'
 import {toBaseElementModeEnum}                                          from '../../utilities/toBaseElementModeEnum'
 import {DateTime}                                                       from './primitive.data'
 import './primitive-label/primitive-label'
@@ -114,7 +115,7 @@ export class Primitive extends LitElement {
 
   protected willUpdate(_changedProperties: PropertyValues) {
     let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
-    if (watchedHaveChanged && this.value && this.type) {
+    if (watchedHaveChanged && !isBlank(this.value) && this.type) {
       choose(this.type, [
         [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
         [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
@@ -162,7 +163,6 @@ export class Primitive extends LitElement {
         this.value = `unable to retrieve value-path: ${this.valuePath}`
         this.type = PrimitiveType.forced_error
       }
-
     }
   }
 
@@ -198,8 +198,7 @@ export class Primitive extends LitElement {
   }
 
   private renderError = (): TemplateResult => {
-    /* HTML */
-    return this.value || this.verbose
+    return !isBlank(this.value) || this.verbose
            ? html`
           <fhir-primitive-wrapper >
             <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
@@ -215,7 +214,7 @@ export class Primitive extends LitElement {
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     let parsedValue = valueOrError(fn, original)
 
-    if (parsedValue.val) {
+    if (!isBlank(parsedValue.val)) {
       this.presentableValue = this.present(parsedValue.val)
       this.error = false
     }
@@ -235,7 +234,6 @@ export class Primitive extends LitElement {
       // [PrimitiveType.base64, () => val = asWrapped(val as string,100)],
 
     ])
-
     return val
   }
 

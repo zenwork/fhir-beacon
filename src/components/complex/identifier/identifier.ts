@@ -22,12 +22,6 @@ export class Identifier extends BaseElementContextConsumer<IdentifierData> {
     `
   }
 
-  /**
-   * NOTE: Identifier can't be set to verbose because will go into infinite loop with Reference
-   * TODO: do something about infinite recursion of types so vrbose mode works
-   * @param data
-   * @protected
-   */
   protected renderStructure(data: IdentifierData): TemplateResult {
     return html`
       <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use} summary></fhir-primitive >

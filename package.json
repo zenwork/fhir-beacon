@@ -11,7 +11,7 @@
         "demo": "wds --watch",
         "tsc": "tsc",
         "tsc-watch": "tsc --watch",
-        "test-watch": "web-test-runner tests/**/*.test.ts --node-resolve --watch",
+        "test-watch": "web-test-runner src/**/*.test.ts --node-resolve --watch",
         "test-playwright": "npx playwright test",
         "test-playwright-watch": "npx playwright test --ui",
         "storybook": "storybook dev -p 6006",

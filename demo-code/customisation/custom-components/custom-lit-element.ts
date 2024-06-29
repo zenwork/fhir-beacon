@@ -1,10 +1,10 @@
-import {html}                    from 'lit'
+import {html, TemplateResult}    from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {FhirContextElement}      from '../../../src/fhir-context-element'
 
 
 /**
- * Custom
+ * Custom Lit element example
  */
 @customElement('custom-lit-element')
 export class CustomLitElement extends FhirContextElement {
@@ -15,7 +15,7 @@ export class CustomLitElement extends FhirContextElement {
   @property({ reflect: true })
   declare label: string
 
-  protected render(): unknown {
+  protected render(): TemplateResult {
     return html`${this.label}: ${this.value}`
   }
 

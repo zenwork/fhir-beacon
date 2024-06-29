@@ -24,7 +24,7 @@ export abstract class FhirContextElement extends LitElement {
    * @private
    */
   @state()
-  private declare value: string
+  protected declare value: string
 
   constructor(dataPath: string | null) {
     super()

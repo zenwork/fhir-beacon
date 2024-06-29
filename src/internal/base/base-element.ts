@@ -20,6 +20,9 @@ import {componentStyles}              from './base-element.styles'
 type GeneratorGroup<T> = { [key: string]: (data: T) => TemplateResult | TemplateResult[] }
 type Generators<T> = { structure: GeneratorGroup<T>, display: GeneratorGroup<T> }
 
+export type ValidationError = { id: string, err: string }
+export type ValidationErrors = ValidationError[]
+
 export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
 
   static styles = [hostStyles, componentStyles]
@@ -65,6 +68,8 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   @state()
   private templateGenerators: Generators<T> = { structure: {}, display: {} }
+
+  private errors: ValidationErrors = []
 
   constructor(type: string) {
     super()
@@ -208,6 +213,8 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
       this.mode = DisplayMode.override
     } else if (_changedProperties.has('data')) {
       this.totalDataNodes = countNodes(this.data)
+      let validationErrors = this.validate(this.data)
+      this.errors.push(...validationErrors)
       this.convertedData = this.convertData(this.data)
     }
 
@@ -278,9 +285,23 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
 
-
+  // TODO: should be renamed to something like `prepare`.
+  // TODO: providing T and returning T does not make sense. Something needs to be better designed to support converting of data to other types.
+  // TODO: something is needed to store complex errors that depend on multiple prop validation. Maybe should be in a separate method.
   protected convertData(data: T): T {
     return data as T
+  }
+
+  /**
+   * validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`. it is recommended to call
+   * `super.validate(T)` as well.
+   * @param data data to validate
+   * @return errors found
+   * @protected
+   */
+  protected validate(data: T): ValidationErrors {
+    // override to do custom validation
+    return []
   }
 
   private isVerbose = () => {
