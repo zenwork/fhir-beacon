@@ -24,7 +24,7 @@ export class Address extends BaseElementContextConsumer<AddressData> {
     return html`
       <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive >
       <fhir-primitive label="type" .value=${data.type} .type=${PrimitiveType.code} summary></fhir-primitive >
-      ${hasSome(data.line, this.verbose) ? wrap('street', data.line, this.verbose, (l, i) => html`
+      ${hasSome(data.line, this.verbose) ? wrap('street', data.line, this.verbose, l => html`
         <fhir-primitive .value=${l} .type=${PrimitiveType.fhir_string} summary>
           <span slot="after">,</span >
         </fhir-primitive >

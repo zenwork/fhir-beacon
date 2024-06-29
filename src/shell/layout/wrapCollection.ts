@@ -11,6 +11,7 @@ import './empty-set'
  * @param data
  * @param verbose
  * @param generator
+ * @param summary
  */
 export function wrap<T>(colName: string,
                         data: T[],
