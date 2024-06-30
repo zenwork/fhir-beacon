@@ -1,0 +1,21 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './human-name.stories'
+
+<Meta of={Stories} />
+
+# Human Name
+
+FHIR spec description in a couple of lines
+
+reference:
+* [ FHIR Reference (R5)](...)
+
+
+
+
+<Canvas of={Stories.Display} />
+
+<Canvas of={Stories.Display2} />
+
+<Canvas of={Stories.Structure} />

@@ -1,29 +1,25 @@
-import {StoryObj} from '@storybook/web-components'
+import {StoryObj}               from '@storybook/web-components'
 import './reference'
+import '../../../../index'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
+const render = wrapInShell((args) => html`
+  <fhir-reference .data=${args.data} summary></fhir-reference >`)
 
 const meta = {
   title: 'Components/Datatypes/Special Type/Reference',
   component: 'fhir-reference',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'},
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'},
-    },
-    'showerror': {
-      options: [true, false],
-      control: {type: 'radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'inline-radio' } },
+    showerror: { options: [false, true], control: { type: 'inline-radio' } },
+    open: { options: [false, true], control: { type: 'inline-radio' } }
   }
-
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 let patientData = {
   reference: 'http://someserver/Patient/id01230',
@@ -35,7 +31,7 @@ export const DisplayAndTypeAndReference: Story = {
   args: {
     data: patientData,
     mode: 'display',
-    'showerror': false
+    showerror: false
   }
 }
 
@@ -45,8 +41,9 @@ export const Reference: Story = {
       reference: 'http://fhir.hl7.org/svc/StructureDefinition/c8973a22-2b5b-4e76-9c66-00639c99e61b'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const ReferenceAndType: Story = {
@@ -56,8 +53,9 @@ export const ReferenceAndType: Story = {
       type: 'StructureDefinition'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const Display: Story = {
@@ -66,8 +64,9 @@ export const Display: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const DisplayAndType: Story = {
@@ -77,8 +76,9 @@ export const DisplayAndType: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const Identifier: Story = {
@@ -91,8 +91,9 @@ export const Identifier: Story = {
         }
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const Unknown: Story = {
@@ -101,18 +102,20 @@ export const Unknown: Story = {
       type: 'Practitioner'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const Structure: Story = {
   args: {
     data: patientData,
     mode: 'structure',
-    'showerror': false,
+    showerror: false,
     verbose: true,
     open: true
-  }
+  },
+  render
 }
 
 export const WithExtension: Story = {
@@ -126,5 +129,6 @@ export const WithExtension: Story = {
       ], ...patientData
     },
     mode: 'display'
-  }
+  },
+  render
 }

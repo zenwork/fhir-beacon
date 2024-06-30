@@ -8,3 +8,5 @@ import './utilities'
 
 import './components/primitive/primitive-context/primitive-context'
 import './components/complex'
+
+import './fhir-context-element'

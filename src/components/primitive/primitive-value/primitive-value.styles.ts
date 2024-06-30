@@ -20,4 +20,24 @@ export let componentStyles = css`
   .error {
     text-decoration: underline wavy var(--sl-color-danger-600);
   }
+
+  .fixed-width {
+    max-width: 40rem;
+    word-wrap: break-word;
+  }
+
+  .hide-overflow {
+    width: 30rem; /* set the initial width */
+      height: 2rem; /* set the initial height */
+      overflow: hidden; /* hide the overflowed text */
+      transition: height 1s; /* animate height */
+      word-wrap: break-word;
+  }
+
+  .hide-overflow:hover {
+      height: 12rem; /* expand to the full height on hover */
+      overflow-y: scroll;
+      overflow-x: hidden
+
+  }
 `

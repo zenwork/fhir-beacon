@@ -1,4 +1,4 @@
-{
+export const CodeSystemFhirTypes = {
     "resourceType": "CodeSystem",
     "id": "fhir-types",
     "url": "http://hl7.org/fhir/fhir-types",

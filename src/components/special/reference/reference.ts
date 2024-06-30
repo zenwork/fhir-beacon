@@ -1,13 +1,13 @@
-import {consume}                              from '@lit/context'
-import {html, PropertyValues, TemplateResult} from 'lit'
-import {customElement, state}                 from 'lit/decorators.js'
-import {choose}                               from 'lit/directives/choose.js'
-import {otherwise, when}                      from '../../.././utilities/when'
+import {consume}                    from '@lit/context'
+import {html, TemplateResult}       from 'lit'
+import {customElement, state}       from 'lit/decorators.js'
+import {choose}                     from 'lit/directives/choose.js'
+import {otherwise, when}            from '../../.././utilities/when'
 import '../../primitive/primitive'
 import '../../../shell/layout/wrapper/wrapper'
 import '../../complex/identifier/identifier'
-import {BaseElementConsumer}                  from '../../../internal/base/base-element-consumer'
-import {containedDataContext}                 from '../../../internal/contexts/context'
+import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {containedDataContext}       from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -17,7 +17,7 @@ import {ReferenceData}           from './reference.data'
 import '../../../shell/layout/not-supported'
 
 @customElement('fhir-reference')
-export class Reference extends BaseElementConsumer<ReferenceData> {
+export class Reference extends BaseElementContextConsumer<ReferenceData> {
 
   @consume({context: containedDataContext, subscribe: true})
   private contained: ResourceData[] = []
@@ -30,11 +30,6 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
 
   constructor() {super('Reference')}
 
-
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
-
-  }
 
 //TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the key this is
   // assigned to rather than defining the `type` property
@@ -49,7 +44,7 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
               [
                 ReferenceType.contained,
                 () => html`
-                  <fhir-primitive label='resource' value=${this.containedResource?.resourceType || 'contained'}></fhir-primitive >
+                  <fhir-primitive label='resource' value=${this.containedResource?.resourceType || 'contained'} summary></fhir-primitive >
                   ${renderResourceComponent(this.containedResource, this.displayConfig)}
 
                 `
@@ -61,6 +56,7 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display}
                       .link=${data.reference}
+                      summary
                   ></fhir-primitive>`
               ],
               [
@@ -70,6 +66,7 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                       .value=${data.display ? data.display : data.reference}
                       .link=${data.reference}
+                      summary
                   ></fhir-primitive>`
               ],
               [
@@ -78,6 +75,7 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
                   <fhir-identifier
                       label="identifier"
                       .data=${data.identifier}
+                      summary
                   ></fhir-identifier>`
               ],
               [
@@ -105,14 +103,14 @@ export class Reference extends BaseElementConsumer<ReferenceData> {
    */
   protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-primitive label="reference" .value=${data.reference}></fhir-primitive >
-      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type}></fhir-primitive >
+      <fhir-primitive label="reference" .value=${data.reference} summary></fhir-primitive >
+      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
       <fhir-identifier
           label="identifier"
           .data=${data.identifier}
-
+          summary
       ></fhir-identifier>
-      <fhir-primitive label="display" .value=${data.display}></fhir-primitive >
+      <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
     `
   }
 

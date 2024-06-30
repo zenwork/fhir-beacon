@@ -8,23 +8,15 @@ const meta = {
   title: 'Components/Datatypes/Special Type/Meta',
   component: 'fhir-meta',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined', 'narrative'],
-      control: {type: 'radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   },
   render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) =>
     html`
       <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-meta .data=${data}></fhir-meta >
+        <fhir-meta .data=${data} summary></fhir-meta >
       </fhir-shell >
     `
 

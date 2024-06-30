@@ -19,6 +19,9 @@ export type URI = URL
  */
 export type Decimal = number
 
+export type Integer = number
+export type Integer64 = BigInt
+
 export type Canonical = URI
 
 export type Language = string
@@ -27,4 +30,16 @@ export type XHTML = string
 
 export type DateTime = string
 
+export type FhirDate = string
+
 export type Markdown = string
+
+export type PositiveInt = number
+
+export type UnsignedInt = number
+
+export type Link = string
+
+export type FhirString = string
+
+export type Base64Binary = string

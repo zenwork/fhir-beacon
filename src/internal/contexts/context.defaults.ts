@@ -1,3 +1,3 @@
-import {BaseElementMode} from '../base/base-element.data'
+import {DisplayMode} from '../base/base-element.data'
 
-export const defaultDisplayConfig = {mode: BaseElementMode.display, showerror: true, verbose: false, open: true}
+export const defaultDisplayConfig = { mode: DisplayMode.display, showerror: true, verbose: false, open: true }

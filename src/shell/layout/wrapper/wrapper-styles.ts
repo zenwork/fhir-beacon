@@ -2,6 +2,11 @@ import {css} from 'lit'
 
 export let componentStyles = css`
 
+  .base {
+    background: none;
+    padding: 0 0 0 0.3rem;
+  }
+
   label {
     font-size: var(--sl-font-size-medium);
     color: var(--sl-color-neutral-500);

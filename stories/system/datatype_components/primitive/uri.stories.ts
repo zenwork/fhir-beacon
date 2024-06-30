@@ -35,7 +35,8 @@ export const FhirDatatype: Story = {
                 label="error"
                 type="uri_type"
                 value="dataType"
-                showError=${true}>
+          showerror=${true}
+        >
         </fhir-primitive>
     `
 

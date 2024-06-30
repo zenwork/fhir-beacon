@@ -1,0 +1,17 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './patient.stories'
+
+<Meta of={Stories} />
+
+# Patient
+
+Demographics and other administrative information about an individual or animal receiving care or other health-related services.
+
+reference:
+* [ 8.1 Resource Patient (R5)](http://hl7.org/fhir/patient.html#resource)
+
+
+<Canvas of={Stories.Display} />
+
+<Canvas of={Stories.Structure} />
