@@ -57,7 +57,7 @@ export const StructureWrapper: Story = {
   render: () => html`
     <fhir-structure-wrapper label="Contact" fhirType="Practitioner">
       <fhir-primitive label="gender" value="male"></fhir-primitive >
-      <fhir-structure-wrapper label="Name" fhirType="HumanName" variant="primary">
+      <fhir-structure-wrapper label="Name" fhirType="HumanName">
         <fhir-primitive label="title" value="Dr."></fhir-primitive >
         <fhir-primitive label="first name" value="Jack"></fhir-primitive >
         <fhir-primitive label="last name" value="Smith"></fhir-primitive >
