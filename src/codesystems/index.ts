@@ -1,21 +1,21 @@
-import FhirTypesCodeSystem  from './CodeSystem-fhir-types.json'
-import ComparatorCodeSystem from './CodeSystem-quantity-comparator.json'
-import AgeValueSet          from './ValueSet-age-units.json'
-import DistanceValueSet     from './ValueSet-distance-units.json'
-import DurationValueSet     from './ValueSet-duration-units.json'
+import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
+import {CodeSystemQuantityComparator} from './CodeSystem-quantity-comparator'
+import {ValueSetAgeUnits}             from './ValueSet-age-units'
+import {ValueSetDistanceUnits}        from './ValueSet-distance-units'
+import {ValueSetDurationUnits}        from './ValueSet-duration-units'
 
-export {ComparatorCodeSystem as Comparators}
-export {FhirTypesCodeSystem}
+export {CodeSystemQuantityComparator as Comparators}
+export {CodeSystemFhirTypes}
 
 
 //TODO: PERFORMANCE: should be done at build time
 export type FhirType = { code: string, kind: string, abstract: boolean, definition: string }
 export type ValueSet = { lvl?: number, source?: string, code?: string, display?: string, definition?: string, comment?: string }
 
-export const FhirTypes: FhirType[] = extract(FhirTypesCodeSystem.concept, [])
-export const FhirDistances: ValueSet[] = extractValueSet(DistanceValueSet)
-export const FhirAges: ValueSet[] = extractValueSet(AgeValueSet)
-export const FhirDuration: ValueSet[] = extractValueSet(DurationValueSet)
+export const FhirTypes: FhirType[] = extract(CodeSystemFhirTypes.concept, [])
+export const FhirDistances: ValueSet[] = extractValueSet(ValueSetDistanceUnits)
+export const FhirAges: ValueSet[] = extractValueSet(ValueSetAgeUnits)
+export const FhirDuration: ValueSet[] = extractValueSet(ValueSetDurationUnits)
 
 function extract(concepts: any[], types: FhirType[]) {
   let extracted = concepts.map((c: any) => {

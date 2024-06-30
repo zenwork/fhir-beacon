@@ -1,4 +1,4 @@
-{
+export const CodeSystemQuantityComparator = {
     "resourceType": "CodeSystem",
     "id": "quantity-comparator",
     "url": "http://hl7.org/fhir/quantity-comparator",

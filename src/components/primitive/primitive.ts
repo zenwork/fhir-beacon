@@ -198,6 +198,7 @@ export class Primitive extends LitElement {
   }
 
   private renderError = (): TemplateResult => {
+    console.log(this.presentableValue)
     return !isBlank(this.value) || this.verbose
            ? html`
           <fhir-primitive-wrapper >
