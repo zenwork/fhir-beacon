@@ -21,7 +21,8 @@
     "include": ["**/*.ts"],
     "plugins": [
         {
-            "name": "ts-lit-plugin"
+            "name": "ts-lit-plugin",
+            "strict": true
         }
     ]
 }

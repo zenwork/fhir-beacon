@@ -153,7 +153,7 @@ export class Primitive extends LitElement {
     // override value with valuePath
     if (_changedProperties.has('valuePath') && this.contextData) {
       if (this.value && this.valuePath) {
-        console.warn('primitve: valuePath is overriding value attribute. Do not set both')
+        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
       }
 
       try {
@@ -175,25 +175,34 @@ export class Primitive extends LitElement {
 
   // TODO: should be able to put link on value OR on context
   private renderValid = (): TemplateResult => {
-    return this.value || this.value == '' || this.verbose
+    const elements: any[] = []
+
+    if (this.label) elements.push(html`
+      <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp`)
+
+    if (this.value) elements.push(html`
+      <fhir-value
+        text=${this.showProvided ? this.value : this.presentableValue}
+        link=${this.link}
+        .variant=${this.variant}
+      >
+        <span slot="before"><slot name="before"></slot ></span >
+        <span slot="after"><slot name="after"></slot ></span >
+      </fhir-value >`)
+
+    if (this.context) elements.push(html`
+      <fhir-context
+        .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose ? this.type : ''}
+      ></fhir-context >`)
+
+    if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
+      <sl-badge pill>&sum;</sl-badge >`)
+
+    return elements.length > 1 || this.value || this.verbose
            ? html`
-          <fhir-primitive-wrapper >
-            <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp;
-            <fhir-value
-                text=${this.showProvided ? this.value : this.presentableValue}
-                link=${this.link}
-                .variant=${this.variant}
-            >
-              <span slot="before"><slot name="before"></slot ></span >
-              <span slot="after"><slot name="after"></slot ></span >
-            </fhir-value >
-            <fhir-context
-                .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}
-                ${this.verbose ? this.type : ''}
-            ></fhir-context >
-            ${this.summary && this.mode == DisplayMode.structure ? html`
-              <sl-badge pill>&sum;</sl-badge >` : nothing}
-          </fhir-primitive-wrapper >`
+        <fhir-primitive-wrapper >
+          ${elements}
+        </fhir-primitive-wrapper >`
            : html``
   }
 

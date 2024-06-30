@@ -8,16 +8,16 @@ export class PrimitiveLabel extends ShoelaceStyledElement {
 
   static styles = componentStyles
 
-  @property()
+  @property({ reflect: true })
   declare text: string
 
-  @property()
+  @property({ reflect: true })
   declare variant: string
 
-  @property()
-  public delimiter: string = ': '
+  @property({ reflect: true })
+  public delimiter: string = ':'
 
-  @property()
+  @property({ reflect: true })
   declare for: string
 
   @queryAssignedNodes()

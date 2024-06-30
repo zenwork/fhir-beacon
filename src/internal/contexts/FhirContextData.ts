@@ -1,4 +1,4 @@
-import jp                from 'jsonpath'
+import {JSONPath}        from 'jsonpath-plus'
 import {BaseElementData} from '../base/base-element.data'
 
 export interface FhirDataContext {
@@ -23,7 +23,7 @@ export class FhirDataContextImpl implements FhirDataContext {
 
   getAt<X>(path: string): X {
     if (path) {
-      let array = jp.query(this.data, path) as X[]
+      let array = JSONPath({ path, json: this.data }) as X[]
       if (array) return array[0] as X
     }
     throw new SyntaxError(`Could not resolve ${path}`)
