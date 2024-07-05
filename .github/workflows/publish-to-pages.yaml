@@ -52,3 +52,12 @@ jobs:
             -   name: Deploy to GitHub Pages
                 id: deployment
                 uses: actions/deploy-pages@v4
+
+            -   name: Upload coverage to Codecov
+                uses: codecov/codecov-action@v2
+                with:
+                    token: ${{ secrets.CODECOV_TOKEN }}
+                    files: ./coverage/*
+                    flags: unittests
+                    name: codecov-repo
+                    fail_ci_if_error: true
