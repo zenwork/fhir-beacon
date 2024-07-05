@@ -27,10 +27,17 @@ jobs:
             -   uses: actions/setup-node@v4
                 with:
                     node-version: 21
-            -   run: npx playwright install-deps
-            -   run: npx playwright install
-            -   run: npm ci
-            -   run: npm run test-all-browsers
+
+            -   name: Install dependencies
+                run: npm ci
+
+            -   name: Install playwright browsers
+                run: npx playwright install --with-deps
+
+            -   name: Run tests
+                run: npx playwright test
+
+            -   name: Publish
             -   run: npm run publish
 
             -   name: Setup Pages
