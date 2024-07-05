@@ -44,7 +44,8 @@ jobs:
                 continue-on-error: true
                 run: npm list
 
-            -   name: Install dependencies
+            -   if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+                name: Install dependencies
                 run: npm ci
 
             -   name: Install playwright browsers
