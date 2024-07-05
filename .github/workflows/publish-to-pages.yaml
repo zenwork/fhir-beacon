@@ -54,6 +54,13 @@ jobs:
                 uses: actions/deploy-pages@v4
 
             -   name: Store test results
-                uses: scacap/action-surefire-report@v1
+                uses: actions/upload-artifact@v2
                 with:
-                    report_paths: '**/test-results.xml'
+                    name: junit-test-results
+                    path: ./results/*.xml
+
+            -   name: Publish test results
+                uses: mikepenz/action-junit-report@v3.1.0
+                with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
+                    report_paths: '**/results/*.xml'
