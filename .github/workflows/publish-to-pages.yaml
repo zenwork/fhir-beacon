@@ -39,16 +39,13 @@ jobs:
                         ${{ runner.os }}-build-
                         ${{ runner.os }}-
 
-            -   name: Get installed Playwright version
-                id: playwright-version
-                run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
             -   name: Cache playwright binaries
                 uses: actions/cache@v3
                 id: playwright-cache
                 with:
                     path: |
                         ~/.cache/ms-playwright
-                    key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+                    key: ${{ runner.os }}-playwright-latest
 
             -   if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
                 name: List the state of node modules
