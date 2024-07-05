@@ -47,8 +47,7 @@ jobs:
                         ~/.cache/ms-playwright
                     key: ${{ runner.os }}-playwright-latest
 
-            -   if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-                name: List the state of node modules
+            -   name: List the state of node modules
                 continue-on-error: true
                 run: npm list
 
