@@ -1,3 +1,6 @@
+import {defaultReporter} from '@web/test-runner'
+import {junitReporter}   from '@web/test-runner-junit-reporter'
+
 const filteredLogs = ['Running in dev mode', 'Lit is in dev mode']
 
 export default /** @type {import('@web/test-runner').TestRunnerConfig} */ ({
@@ -29,4 +32,14 @@ export default /** @type {import('@web/test-runner').TestRunnerConfig} */ ({
     concurrency:1,
 
     // See documentation for all available options
+
+    reporters:[
+        // use the default reporter only for reporting test progress
+        defaultReporter({reportTestResults:false, reportTestProgress:true}),
+        // use another reporter to report test results
+        junitReporter({
+                          outputPath:'./results/test-results.xml', // default `'./test-results.xml'`
+                          reportLogs:true // default `false`
+                      })
+    ]
 })

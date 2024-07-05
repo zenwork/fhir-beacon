@@ -223,3 +223,4 @@ storybook-static
 refs
 test-results/
 /.npmrc
+results/
