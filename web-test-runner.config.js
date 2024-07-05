@@ -1,5 +1,5 @@
-import {defaultReporter} from '@web/test-runner'
-import {junitReporter}   from '@web/test-runner-junit-reporter'
+import {defaultReporter, summaryReporter} from '@web/test-runner'
+import {junitReporter}                    from '@web/test-runner-junit-reporter'
 
 const filteredLogs = ['Running in dev mode', 'Lit is in dev mode']
 
@@ -34,6 +34,7 @@ export default /** @type {import('@web/test-runner').TestRunnerConfig} */ ({
     // See documentation for all available options
 
     reporters:[
+        summaryReporter({flatten:false}),
         // use the default reporter only for reporting test progress
         defaultReporter({reportTestResults:false, reportTestProgress:true}),
         // use another reporter to report test results
