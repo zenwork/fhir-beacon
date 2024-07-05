@@ -1,6 +1,6 @@
 import '../../../index'
 
-describe('fhir primitive lable', () => {
+describe('fhir primitive label', () => {
 
   it('should display nothing', async () => {
 
