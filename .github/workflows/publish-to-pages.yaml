@@ -28,6 +28,7 @@ jobs:
         with:
           node-version: 21
       -   run: npx playwright install-deps
+      -   run: npm ci
       -   run: npm run test-all-browsers
       - run: npm run publish
 
