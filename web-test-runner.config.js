@@ -1,10 +1,8 @@
-import {playwrightLauncher} from '@web/test-runner-playwright'
-
 const filteredLogs = ['Running in dev mode', 'Lit is in dev mode']
 
 export default /** @type {import('@web/test-runner').TestRunnerConfig} */ ({
     /** Test files to run */
-    files:'dist/**/*.ctest.js',
+    files:'dist/**/*.test.js',
 
     /** Resolve bare module imports */
     nodeResolve:{
@@ -29,13 +27,6 @@ export default /** @type {import('@web/test-runner').TestRunnerConfig} */ ({
 
     /** Amount of test files per browser to test concurrently */
     concurrency:1,
-
-    /** Browsers to run tests on */
-    browsers:[
-        playwrightLauncher({product:'chromium'})
-        //   playwrightLauncher({ product: 'firefox' }),
-        //   playwrightLauncher({ product: 'webkit' }),
-    ]
 
     // See documentation for all available options
 })

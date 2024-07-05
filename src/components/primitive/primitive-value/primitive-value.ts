@@ -1,6 +1,7 @@
 import {html}                                           from 'lit'
 import {customElement, property, queryAssignedElements} from 'lit/decorators.js'
 import {ShoelaceStyledElement}                          from '../../../shell/shoelace-styled-element'
+import {textHostStyles}                                 from '../../../styles/textHostStyles'
 import {isBlank}                                        from '../../../utilities/isBlank'
 import {componentStyles}                                from './primitive-value.styles'
 
@@ -8,7 +9,7 @@ import {componentStyles}                                from './primitive-value.
 export class PrimitiveValue extends ShoelaceStyledElement {
 
 
-  static styles = componentStyles
+  static styles = [textHostStyles, componentStyles]
 
   @property()
   public placeholder = 'n/a'
@@ -52,7 +53,8 @@ export class PrimitiveValue extends ShoelaceStyledElement {
     }
 
     return html`
-      <slot name="before"></slot>${this.text}
+      <slot name="before"></slot >
+      ${this.text}
       <slot name="after"></slot>`
   }
 }

@@ -1,8 +1,7 @@
-import {test}  from '@playwright/test'
 import {toUri} from './type-converters/toUri'
 
-test.describe('Primitives', () => {
-  test('should parse a URI', async ({page}) => {
+describe('Primitives', () => {
+  it('should parse a URI', async () => {
     toUri('https://john.doe@www.example.com:1234/forum/questions/?tag=networking&order=newest#top')
     toUri('https://john.doe@www.example.com:1234/forum/questions/?tag=networking&order=newest#:~:text=whatever')
     toUri('ldap://[2001:db8::7]/c=GB?objectClass?one')

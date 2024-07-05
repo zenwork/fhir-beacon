@@ -48,6 +48,9 @@ export class Primitive extends LitElement {
 
   static styles = [
     css`
+      :host {
+        user-select: text;
+      }
       sl-badge {
         padding-left: var(--sl-spacing-x-small)
       }

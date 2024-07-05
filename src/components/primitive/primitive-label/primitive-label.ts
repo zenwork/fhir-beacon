@@ -1,12 +1,13 @@
 import {html, PropertyValues}                        from 'lit'
 import {customElement, property, queryAssignedNodes} from 'lit/decorators.js'
 import {ShoelaceStyledElement}                       from '../../../shell/shoelace-styled-element'
+import {textHostStyles}                              from '../../../styles/textHostStyles'
 import {componentStyles}                             from './primitive-label.styles'
 
 @customElement('fhir-label')
 export class PrimitiveLabel extends ShoelaceStyledElement {
 
-  static styles = componentStyles
+  static styles = [textHostStyles, componentStyles]
 
   @property({ reflect: true })
   declare text: string
@@ -25,7 +26,8 @@ export class PrimitiveLabel extends ShoelaceStyledElement {
 
 
   render() {
-    return html`<label class="${this.variant}" for=${this.for}}>${this.isSlotted ? '' : this.text}${this.isSlotted || !this.text ? '' : this.delimiter}
+    return html`<label class="${this.variant}" for=${this.for}>
+      ${this.isSlotted ? html`` : this.text}${this.isSlotted || !this.text ? '' : this.delimiter}
       <slot></slot>
     </label>`
   }

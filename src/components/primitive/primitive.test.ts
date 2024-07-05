@@ -90,10 +90,9 @@ describe('fhir Primitive', () => {
         </fhir-value>
         <fhir-error text="TypeError: decimal must be a valid number"></fhir-error>
       </fhir-primitive-wrapper>
-
-
     `)
 
+    await expect(el).dom.to.equalSnapshot()
 
   })
 })

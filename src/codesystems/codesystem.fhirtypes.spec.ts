@@ -1,38 +1,38 @@
-import {expect, test} from '@playwright/test'
-import {FhirTypes}    from './index'
+import {expect}    from '@open-wc/testing'
+import {FhirTypes} from './index'
 
 
-test.describe('Code Systems', () => {
-  test('should be 231 types', async () => {
-    expect(FhirTypes.length).toBe(231)
+describe('Code Systems', () => {
+  it('should be 231 types', async () => {
+    await expect(FhirTypes.length).to.equal(231)
   })
 
-  test.describe('by kind', () => {
-    test('should find by resource', async () => {
-      expect(FhirTypes.filter(t => t.kind === 'resource').length).toBe(162)
+  describe('by kind', () => {
+    it('should find by resource', async () => {
+      await expect(FhirTypes.filter(t => t.kind === 'resource').length).to.equal(162)
     })
-    test('should find by primitive', async () => {
-      expect(FhirTypes.filter(t => t.kind === 'primitive').length).toBe(21)
+    it('should find by primitive', async () => {
+      await expect(FhirTypes.filter(t => t.kind === 'primitive').length).to.equal(21)
 
     })
-    test('should find by datatype', async () => {
-      expect(FhirTypes.filter(t => t.kind === 'datatype').length).toBe(47)
+    it('should find by datatype', async () => {
+      await expect(FhirTypes.filter(t => t.kind === 'datatype').length).to.equal(47)
     })
   })
 
-  test('by abstract flag', () => {
-    expect(FhirTypes.filter(t => t.abstract).length).toBe(10)
+  it('by abstract flag', async () => {
+    await expect(FhirTypes.filter(t => t.abstract).length).to.equal(10)
   })
 
-  test.describe('by code', () => {
-    test('should find Patient', async () => {
-      expect(FhirTypes.filter(t => t.code === 'Patient').length).toBe(1)
+  describe('by code', () => {
+    it('should find Patient', async () => {
+      await expect(FhirTypes.filter(t => t.code === 'Patient').length).to.equal(1)
     })
-    test('should find DateTime', async () => {
-      expect(FhirTypes.filter(t => t.code === 'dateTime').length).toBe(1)
+    it('should find DateTime', async () => {
+      await expect(FhirTypes.filter(t => t.code === 'dateTime').length).to.equal(1)
     })
-    test('should find Reference', async () => {
-      expect(FhirTypes.filter(t => t.code === 'Reference').length).toBe(1)
+    it('should find Reference', async () => {
+      await expect(FhirTypes.filter(t => t.code === 'Reference').length).to.equal(1)
     })
   })
 

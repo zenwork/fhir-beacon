@@ -11,11 +11,9 @@
         "demo": "wds --watch",
         "tsc": "tsc",
         "tsc-watch": "tsc --watch",
+        "test-all-browsers": "tsc && wtr --coverage --playwright --browsers chromium firefox webkit",
         "test": "tsc && wtr --coverage",
         "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
-        "test-watch": "web-test-runner src/**/*.test.ts --node-resolve --watch",
-        "test-playwright": "npx playwright test",
-        "test-playwright-watch": "npx playwright test --ui",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "publish": "npm ci && npm run build-storybook"

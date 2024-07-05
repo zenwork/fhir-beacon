@@ -9,6 +9,7 @@ export let componentStyles = css`
   div {
     color: var(--sl-color-gray-800);
     padding-left: var(--sl-spacing-3x-small);
+    user-select: text;
   }
 
   .placeholder {

@@ -1,51 +1,51 @@
-import {expect, test} from '@playwright/test'
-import {Code}         from './primitive.data'
-import {toCode}       from './type-converters/toCode'
-import {toUrl}        from './type-converters/toUrl'
+import {assert, expect} from '@open-wc/testing'
+import {Code}           from './primitive.data'
+import {toCode}         from './type-converters/toCode'
+import {toUrl}          from './type-converters/toUrl'
 
 
-test.describe('Primitives', () => {
-  test('should parse a URL', async ({page}) => {
+describe('Primitives', () => {
+  it('should parse a URL', async () => {
     let url = toUrl('http://hl7.org/fhir/sid/icd-10')
 
-    expect(url.protocol).toBe('http:')
-    expect(url.hostname).toBe('hl7.org')
-    expect(url.pathname).toBe('/fhir/sid/icd-10')
+    await expect(url.protocol).to.equal('http:')
+    await expect(url.hostname).to.equal('hl7.org')
+    await expect(url.pathname).to.equal('/fhir/sid/icd-10')
 
   })
 
-  test('should fail to parse a valid URL', async ({page}) => {
-    expect(() => {
+  it('should fail to parse a valid URL', async () => {
+    assert.throws(() => {
       toUrl('')
-    }).toThrowError()
+    })
 
-    expect(() => {
+    assert.throws(() => {
       toUrl(null as unknown as string)
-    }).toThrowError()
+    })
 
-    expect(() => {
+    assert.throws(() => {
       toUrl('http//hl7.org/fhir/sid/icd-10')
-    }).toThrowError()
+    })
 
   })
 
-  test('should parse a valid Code', async ({page}) => {
+  it('should parse a valid Code', async () => {
 
     let code: Code = toCode('G44.1')
-    expect(code).toBe('G44.1')
+    await expect(code).to.equal('G44.1')
 
     code = toCode('G44.1 123')
-    expect(code).toBe('G44.1 123')
+    await expect(code).to.equal('G44.1 123')
 
     code = toCode('A-B-C D')
-    expect(code).toBe('A-B-C D')
+    await expect(code).to.equal('A-B-C D')
   })
 
-  test('should fail to parse invalid Code', async ({page}) => {
+  it('should fail to parse invalid Code', async () => {
 
-    expect(() => {
+    assert.throws(() => {
       toCode('G44  .1 asdsa')
 
-    }).toThrowError()
+    })
   })
 })

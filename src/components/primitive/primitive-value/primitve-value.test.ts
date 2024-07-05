@@ -1,7 +1,7 @@
 import '../../../index'
 import {expect, fixture} from '@open-wc/testing'
 import {html}            from 'lit'
-import {dimmensions}     from './dimensions'
+import {dimmensions}     from '../../../../tests/dimensions'
 import {PrimitiveValue}  from './primitive-value'
 
 describe('fhir primitive value', () => {
@@ -83,13 +83,18 @@ describe('fhir primitive value', () => {
 
     await expect(el).shadowDom.to.equal(`
             <div>
-              <span class="placeholder">
-                missing value
-              </span>
+              <slot name="before"></slot>
+              100
+              <slot name="after"></slot>
             </div>
 
 
       `)
+
+    await expect(el).lightDom.to.equal(`
+      <span slot="before">over</span>
+      <span slot="after">percent</span>
+    `)
 
   })
 
