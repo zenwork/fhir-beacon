@@ -92,7 +92,7 @@ describe('fhir Primitive', () => {
       </fhir-primitive-wrapper>
     `)
 
-    await expect(el).dom.to.equalSnapshot()
+    expect(el).dom.to.equalSnapshot()
 
   })
 })
