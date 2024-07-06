@@ -25,32 +25,14 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v4
 
-            -   name: Cache node cache
-                id: npm-cache
-                uses: actions/cache@v3
-                env:
-                    cache-name: cache-npm-cache
+            -   name: Setup Node.js with node_modules cache
+                id: node-with-cache
+                uses: magnetikonline/action-node-modules-cache@v2
                 with:
-                    # npm cache files are stored in `~/.npm` on Linux/macOS
-                    path: ~/.npm
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                    restore-keys: |
-                        ${{ runner.os }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-build-
-                        ${{ runner.os }}-
-
-            -   name: Cache node modules
-                id: npm-node-modules
-                uses: actions/cache@v3
-                env:
-                    cache-name: cache-node-modules
-                with:
-                    path: node_modules
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                    restore-keys: |
-                        ${{ runner.os }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-build-
-                        ${{ runner.os }}-
+                    node-version: 21.x
+            -   name: Install npm packages
+                if: steps.node-with-cache.outputs.cache-hit != 'true'
+                run: npm ci
 
             -   name: Cache playwright binaries
                 uses: actions/cache@v3
@@ -59,13 +41,6 @@ jobs:
                     path: |
                         ~/.cache/ms-playwright
                     key: ${{ runner.os }}-playwright-latest
-
-            #            -   name: List the state of node modules
-            #                continue-on-error: true
-            #                run: npm list
-
-            -   name: Install dependencies
-                run: npm ci
 
             -   if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
                 name: Install playwright browsers
