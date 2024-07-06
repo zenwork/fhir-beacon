@@ -11,7 +11,7 @@
         "demo": "wds --watch",
         "tsc": "tsc",
         "tsc-watch": "tsc --watch",
-        "test-all-browsers": "tsc && wtr --coverage --playwright --browsers chromium firefox",
+        "test-all-browsers": "tsc && wtr --coverage --playwright --browsers chromium firefox webkit",
         "test": "tsc && wtr --coverage",
         "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
         "storybook": "storybook dev -p 6006",
