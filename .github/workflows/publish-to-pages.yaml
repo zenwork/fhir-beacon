@@ -25,15 +25,6 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v4
 
-            -   name: Setup Node.js with node_modules cache
-                id: node-with-cache
-                uses: magnetikonline/action-node-modules-cache@v2
-                with:
-                    node-version: ^21.7.3
-            -   name: Install npm packages
-                if: steps.node-with-cache.outputs.cache-hit != 'true'
-                run: npm ci
-
             -   name: Cache playwright binaries
                 uses: actions/cache@v3
                 id: playwright-cache
@@ -46,8 +37,12 @@ jobs:
                 name: Install playwright browsers
                 run: npx playwright install --with-deps
 
-            -   name: Run tests
-                run: npm run test-all-browsers
+            -   uses: actions/setup-node@v4
+                with:
+                    node-version: 21
+                    cache: 'npm'
+            -   run: npm ci
+            -   run: npm run test-all-browsers
 
             -   name: Publish
                 run: npm run publish
