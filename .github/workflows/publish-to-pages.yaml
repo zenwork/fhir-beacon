@@ -32,7 +32,7 @@ jobs:
                     cache: 'npm'
             -   run: npm ci
 
-            -   name: Cache playwright binaries
+            -   name: Use playwright binaries cache
                 uses: actions/cache@v3
                 id: playwright-cache
                 with:
