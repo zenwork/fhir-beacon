@@ -7,6 +7,6 @@ import {hasNone} from './hasNone'
  * @param obj the object to inspect
  * @param props the properties to check for
  */
-export function hasAllOrNone(obj: any, props: string[]) {
+export function hasAllOrNone(obj: unknown, props: string[]) {
   return hasAll(obj, props) || hasNone(obj, props)
 }

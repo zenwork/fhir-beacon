@@ -11,7 +11,7 @@ const getAncestor = (child: HTMLElement | null) => {
 
 export const hasSameAncestor = (child: HTMLElement | null): boolean => {
   let found = false
-  let childName = child?.tagName
+  const childName = child?.tagName
   let currentAncestor = getAncestor(child)
   let currentName = currentAncestor?.tagName
 

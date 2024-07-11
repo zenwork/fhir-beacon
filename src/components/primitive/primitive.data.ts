@@ -28,6 +28,8 @@ export type Language = string
 
 export type XHTML = string
 
+export type Time = string
+
 export type DateTime = string
 
 export type FhirDate = string

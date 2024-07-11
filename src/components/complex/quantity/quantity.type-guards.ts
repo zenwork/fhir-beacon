@@ -1,16 +1,18 @@
-import {DateTime}                         from '../../primitive/primitive.data'
-import {valueOrError}                     from '../../primitive/type-converters'
-import {toDatetime}                       from '../../primitive/type-converters/toDatetime'
-import {DeceasedBoolean}                  from '../../resources/patient/patient.data'
-import {QuantityData, SimpleQuantityData} from './quantity.data'
+import {hasNone}                               from '../../../utilities/hasNone'
+import {DateTime, FhirString}                  from '../../primitive/primitive.data'
+import {valueOrError}                          from '../../primitive/type-converters'
+import {toDatetime}                            from '../../primitive/type-converters/toDatetime'
+import {DeceasedBoolean}                       from '../../resources/patient/patient.data'
+import {ReferenceData}                         from '../../special/reference/reference.data'
+import {AuthorFhirString, AuthorReferenceData} from '../annotation/annotation.data'
+import {QuantityData, SimpleQuantityData}      from './quantity.data'
 
 export function isQuantity(quantity: QuantityData | SimpleQuantityData): quantity is QuantityData {
   return (quantity as QuantityData).comparator !== undefined
 }
 
 export function isSimpleQuantity(quantity: QuantityData | SimpleQuantityData): quantity is SimpleQuantityData {
-  // @ts-ignore
-  return quantity['comparator'] === undefined
+  return 'comparator' in quantity
 }
 
 
@@ -19,6 +21,15 @@ export function isDeceasedBoolean(val: unknown): val is DeceasedBoolean {
 }
 
 export function isDeceasedDateTime(val: unknown): val is DeceasedBoolean {
-  let valOrErr = valueOrError(toDatetime, val as DateTime)
+  const valOrErr = valueOrError(toDatetime, val as DateTime)
   return !!valOrErr.err
+}
+
+export function isAuthorReference(val: ReferenceData | FhirString): val is AuthorReferenceData {
+  console.log(hasNone(val, ['reference', 'type', 'identifier', 'display']))
+  return typeof val !== 'string' && !hasNone(val, ['reference', 'type', 'identifier', 'display'])
+}
+
+export function isAuthorFhirString(val: ReferenceData | FhirString): val is AuthorFhirString {
+  return typeof val === 'string'
 }

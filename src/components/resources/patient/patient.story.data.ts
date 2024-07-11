@@ -1,4 +1,4 @@
-export let data = {
+export const data = {
   resourceType: 'Patient',
   id: 'f201',
   text: {

@@ -1,6 +1,7 @@
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
+import {map}                                           from 'lit/directives/map.js'
 import {hasSameAncestor}                               from '../.././utilities/hasSameAncestor'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters'
 
@@ -21,8 +22,6 @@ type GeneratorGroup<T> = { [key: string]: (data: T) => TemplateResult | Template
 type Generators<T> = { structure: GeneratorGroup<T>, display: GeneratorGroup<T> }
 
 export type ValidationError = { id: string, err: string }
-export type ValidationErrors = ValidationError[]
-
 export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
 
   static styles = [hostStyles, componentStyles]
@@ -69,7 +68,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   @state()
   private templateGenerators: Generators<T> = { structure: {}, display: {} }
 
-  private errors: ValidationErrors = []
+  public errors: ValidationErrors = []
 
   constructor(type: string) {
     super()
@@ -142,6 +141,22 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   protected renderDisplayWrapper() {
     if (!this.convertedData) return html``
+    if (!this.isVerbose()) return html`
+      ${this.renderDisplay(this.convertedData)}
+    `
+
+    // is verbose
+    return html`
+      <fhir-wrapper
+        .label=${this.getElementLabel()}
+        .fhirType=${this.getTypeLabel()}
+      >
+        ${this.renderDisplay(this.convertedData)}
+      </fhir-wrapper >`
+  }
+
+  protected renderOverrideWrapper() {
+    if (!this.convertedData) return html``
     if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
 
     // is verbose
@@ -157,29 +172,49 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   protected renderCombinedWrapper() {
     return this.convertedData ?
            html`
-             <fhir-shell .mode=${DisplayMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+             <fhir-shell
+               .mode=${DisplayMode.display}
+               ?showerror=${this.showerror}
+               ?verbose=${this.verbose}
+               ?open=${this.open}
+             >
                ${this.renderDisplayWrapper()}
              </fhir-shell >
              <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)">
-             <fhir-shell .mode=${DisplayMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
+             <fhir-shell
+               .mode=${DisplayMode.structure}
+               ?showerror=${this.showerror}
+               ?verbose=${this.verbose}
+               ?open=${this.open}
+             >
                ${this.renderStructureWrapper()}
              </fhir-shell >
            ` :
            html``
   }
 
-  protected renderOverrideWrapper() {
-    if (!this.convertedData) return html``
-    if (!this.isVerbose()) return html`${this.renderDisplay(this.convertedData)}`
+  /**
+   * handle data updates
+   * @param _changedProperties
+   * @protected
+   */
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
 
-    // is verbose
-    return html`
-      <fhir-wrapper
-        .label=${this.getElementLabel()}
-        .fhirType=${this.getTypeLabel()}
-      >
-        ${this.renderDisplay(this.convertedData)}
-      </fhir-wrapper >`
+    if (_changedProperties.has('overrideTemplate')) {
+      this.mode = DisplayMode.override
+    } else if (_changedProperties.has('data')) {
+      this.totalDataNodes = countNodes(this.data)
+      const validationErrors = this.validate(this.data)
+      this.errors.push(...validationErrors)
+      this.convertedData = this.convertData(this.data)
+    }
+
+    if (_changedProperties.has('verbose') && this.verbose) {
+      if (!this.verboseAllowed()) this.recursionGuard = true
+    } else {
+      this.recursionGuard = false
+    }
   }
 
   /**
@@ -201,28 +236,17 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     return html``
   }
 
-  /**
-   * handle data updates
-   * @param _changedProperties
-   * @protected
-   */
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
+  private renderValidationErrors(): TemplateResult {
 
-    if (_changedProperties.has('overrideTemplate')) {
-      this.mode = DisplayMode.override
-    } else if (_changedProperties.has('data')) {
-      this.totalDataNodes = countNodes(this.data)
-      let validationErrors = this.validate(this.data)
-      this.errors.push(...validationErrors)
-      this.convertedData = this.convertData(this.data)
-    }
+    if (this.showerror && this.errors.length > 0) {
+      return html`
+        <fhir-wrapper label="Validation Issues" variant="validation-error">
+          ${map(this.errors, e => html`<p >${e.id} - ${e.err}</p >`)}
+        </fhir-wrapper >
+      `
 
-    if (_changedProperties.has('verbose') && this.verbose) {
-      if (!this.verboseAllowed()) this.recursionGuard = true
-    } else {
-      this.recursionGuard = false
     }
+    return html``
   }
 
   /**
@@ -239,7 +263,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   private renderTemplate(): TemplateResult {
     if (this.shadowRoot) {
-      let templateElement = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
+      const templateElement = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
       if (templateElement && templateElement.content) {
         const content = templateElement.content
         if (content) {
@@ -320,3 +344,5 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 }
+
+export type ValidationErrors = ValidationError[]

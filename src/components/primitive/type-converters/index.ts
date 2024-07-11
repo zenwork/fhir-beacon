@@ -40,6 +40,7 @@ export enum PrimitiveType {
   integer = 'integer',
   integer64 = 'integer64',
   link = 'link',
+  markdown = 'markdown',
   none = 'none',
   positiveInt = 'positiveInt',
   string_reference = 'string_reference',

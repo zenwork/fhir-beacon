@@ -1,0 +1,16 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './observation.stories'
+
+<Meta of={Stories} />
+
+# Observation
+
+Measurements and simple assertions made about a patient, device or other subject.
+
+reference:
+* [10.1.4 Resource Content (R5)](https://www.hl7.org/fhir/observation.html#resource)
+
+<Canvas of={Stories.Display} />
+
+<Canvas of={Stories.Structure} />

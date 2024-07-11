@@ -14,7 +14,8 @@
         "test-all-browsers": "tsc && wtr --coverage --playwright --browsers chromium firefox",
         "test": "tsc && wtr --coverage",
         "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
-        "storybook": "storybook dev -p 6006",
+        "storybook": "storybook dev -p 9999",
+        "storybook:clean": "rm -rf node_modules/.cache/storybook",
         "build-storybook": "storybook build",
         "publish": "npm ci && npm run build-storybook"
     },
@@ -28,6 +29,7 @@
     "devDependencies": {
         "@chromatic-com/storybook": "^1.3.3",
         "@custom-elements-manifest/analyzer": "^0.10.2",
+        "@eslint/js": "^9.6.0",
         "@esm-bundle/chai": "^4.3.4",
         "@open-wc/semantic-dom-diff": "^0.20.1",
         "@open-wc/testing": "^3.0.0-next.5",
@@ -56,7 +58,8 @@
         "concurrently": "^8.2.2",
         "custom-element-jet-brains-integration": "^1.4.4",
         "dotenv": "^16.4.5",
-        "eslint": "^9.3.0",
+        "eslint": "^9.6.0",
+        "globals": "^15.8.0",
         "lit-html": "^3.1.4",
         "mocha": "^10.4.0",
         "remark-gfm": "^4.0.0",

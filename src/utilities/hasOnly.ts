@@ -6,5 +6,5 @@
  * @param prop the property to check for
  */
 export function hasOnly(obj: any, prop: string) {
-  return Object.keys(obj).length === 1 && obj.hasOwnProperty(prop) && obj[prop]
+  return Object.keys(obj as Record<any, unknown>).length === 1 && Object.prototype.hasOwnProperty.call(obj, prop) && obj[prop]
 }

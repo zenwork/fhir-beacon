@@ -5,5 +5,5 @@
  * @param props the properties to check for
  */
 export function hasAll(obj: any, props: string[]) {
-  return props.reduce((acc, p) => obj.hasOwnProperty(p) && obj[p] && acc, true)
+  return props.reduce((acc, p) => Object.prototype.hasOwnProperty.call(obj, p) && obj[p] && acc, true)
 }

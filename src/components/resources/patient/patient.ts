@@ -16,7 +16,6 @@ export class Patient extends BaseElementContextProvider<PatientData> {
 
   constructor() {
     super('Patient')
-    this.summary = true
   }
 
   protected renderDisplay(data: PatientData): TemplateResult | TemplateResult[] {

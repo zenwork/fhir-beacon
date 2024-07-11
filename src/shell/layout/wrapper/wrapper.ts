@@ -32,7 +32,7 @@ export class Wrapper extends ShoelaceStyledElement {
   fhirType: string = ''
 
   @property()
-  variant: 'primary' | 'secondary' | 'none' = 'none'
+  variant: 'primary' | 'secondary' | 'validation-error' | 'none' = 'none'
 
   @property({type: Boolean, reflect: true})
   hide: boolean = false
@@ -48,7 +48,8 @@ export class Wrapper extends ShoelaceStyledElement {
 
   protected render(): unknown {
     if (!this.summaryMode() || (this.summary && this.summaryMode())) {
-      const classes = { primary: this.variant === 'primary', secondary: this.variant === 'secondary' }
+      const classes = { primary: this.variant === 'primary', secondary: this.variant === 'secondary', 'validation-error': this.variant === 'validation-error' }
+      const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
 
       let label: TemplateResult
       if (!this.hide && this.label && this.fhirType) {
@@ -78,7 +79,7 @@ export class Wrapper extends ShoelaceStyledElement {
         label = html``
       }
       return html`
-        <div class='base'>
+        <div class='base ${classMap(borderClasses)}'>
           ${label}
           <slot class="${classMap({ content: !this.hide })}"></slot >
         </div >

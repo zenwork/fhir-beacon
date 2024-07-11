@@ -29,6 +29,7 @@ import {toInstant}                   from './type-converters/toInstant'
 import {toInteger}                   from './type-converters/toInteger'
 import {toInteger64}                 from './type-converters/toInteger64'
 import {toLink}                      from './type-converters/toLink'
+import {toMarkdown}                  from './type-converters/toMarkdown'
 import {toPositiveInt}               from './type-converters/toPositiveInt'
 import {toType}                      from './type-converters/toType'
 import {toUnsignedInt}               from './type-converters/toUnsignedInt'
@@ -117,7 +118,7 @@ export class Primitive extends LitElement {
 
 
   protected willUpdate(_changedProperties: PropertyValues) {
-    let watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
+    const watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
     if (watchedHaveChanged && !isBlank(this.value) && this.type) {
       choose(this.type, [
         [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
@@ -133,6 +134,7 @@ export class Primitive extends LitElement {
         [PrimitiveType.integer, () => this.validOrError(toInteger, this.value)],
         [PrimitiveType.integer64, () => this.validOrError(toInteger64, this.value)],
         [PrimitiveType.link, () => this.validOrError(toLink, this.value)],
+        [PrimitiveType.markdown, () => this.validOrError(toMarkdown, this.value)],
         [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
         [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
         [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
@@ -161,7 +163,7 @@ export class Primitive extends LitElement {
 
       try {
         this.value = this.contextData.getAt(this.valuePath)
-      } catch (e) {
+      } catch (_) {
         console.log(`unable to retrieve value-path: ${this.valuePath}`)
         this.value = `unable to retrieve value-path: ${this.valuePath}`
         this.type = PrimitiveType.forced_error
@@ -225,7 +227,7 @@ export class Primitive extends LitElement {
   }
 
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
-    let parsedValue = valueOrError(fn, original)
+    const parsedValue = valueOrError(fn, original)
 
     if (!isBlank(parsedValue.val)) {
       this.presentableValue = this.present(parsedValue.val)

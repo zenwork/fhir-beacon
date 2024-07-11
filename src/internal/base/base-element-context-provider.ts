@@ -27,7 +27,7 @@ export abstract class BaseElementContextProvider<T extends BaseElementData> exte
     super.updated(_changedProperties)
 
     if (_changedProperties.has('data')) {
-      let context = new FhirDataContextImpl()
+      const context = new FhirDataContextImpl()
       context.data = this.data
       this.contextDataReducer.setValue(context)
       // console.log('mode',this.mode, this.display.value)

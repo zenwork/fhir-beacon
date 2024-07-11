@@ -121,7 +121,7 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
   protected validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
     const errors = super.validate(data)
     if (!hasAllOrNone(data, ['code', 'system'])) {
-      errors.push({ id: this.type + ':qty-3', err: `${this.type}: code and system should be set or none of the two` })
+      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
     }
 
 

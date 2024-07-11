@@ -123,12 +123,8 @@ const meta: Meta<ShellArgs> = {
       </style >
 
       <fhir-shell >
-        <!-- tell the component the name of the template that should be used-->
         <fhir-medication .data=${data} override-template="med">
-          <!-- define the med template that will override the components default display. -->
-          <!-- templates are a web standard that allow defining a template  -->
           <template id="med">
-            <!-- styles defined here will me loaded into the shadow DOM and -->
             <style >
               h4 {
                 color: var(--sl-color-primary-700);
