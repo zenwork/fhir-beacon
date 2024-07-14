@@ -36,7 +36,7 @@ describe('fhir primitive label', () => {
     await expect(el).shadowDom.to.equal(`
     <label class="error" for="">id:<slot></slot></label>`)
 
-    let label = el.shadowRoot?.querySelector('label')
+    const label = el.shadowRoot?.querySelector('label')
     if (label) await expect(getComputedStyle(label).fontStyle).to.eq('italic')
   })
 

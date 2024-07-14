@@ -10,7 +10,7 @@ const create = ({tagName, ancestor, shadow = false, addSlot = false, appendToSlo
   addSlot?: boolean,
   appendToSlot?: boolean
 }) => {
-  let child = document.createElement(tagName)
+  const child = document.createElement(tagName)
   child.id = 'c' + id++
 
   if (shadow) {
@@ -41,7 +41,7 @@ describe('function: has same ancestor', () => {
   })
 
   it('should return false if it reaches body without finding a match', async () => {
-    let child = create({tagName: 'div', ancestor: document.body})
+    const child = create({ tagName: 'div', ancestor: document.body })
     await expect(hasSameAncestor(child)).to.equal(false)
   })
 

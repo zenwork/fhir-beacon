@@ -8,11 +8,11 @@ export class ObservationDefinition extends DomainResource<ObservationDefinitionD
 
   constructor() {super('ObservationDefinition')}
 
-  protected renderDisplay(data: ObservationDefinitionData): TemplateResult | TemplateResult[] {
+  protected renderDisplay(): TemplateResult | TemplateResult[] {
     return html``
   }
 
-  protected renderStructure(data: ObservationDefinitionData): TemplateResult | TemplateResult[] {
+  protected renderStructure(): TemplateResult | TemplateResult[] {
     return html``
   }
 

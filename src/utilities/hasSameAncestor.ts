@@ -1,8 +1,7 @@
 const getAncestor = (child: HTMLElement | null) => {
   if (child) {
     if (child.getRootNode() instanceof ShadowRoot) {
-      // @ts-ignore
-      return child.getRootNode({composed: false})?.host
+      return (child.getRootNode({ composed: false }) as unknown as any).host
     }
     return child?.parentElement
   }

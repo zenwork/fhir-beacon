@@ -1,6 +1,6 @@
 import {css} from 'lit'
 
-export let componentStyles = css`
+export const componentStyles = css`
   div {
     padding: 0;
     margin: 0;

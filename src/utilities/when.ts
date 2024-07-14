@@ -27,13 +27,14 @@ export function when<WHEN, THEN>(target: WHEN): (...statements: Array<Evaluation
   return (...statements: Array<Evaluation<WHEN, THEN>>) => {
     let then: any = null
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     function extracted<THEN>(getThen: (() => THEN) | THEN | (THEN & Function)) {
       then = (typeof getThen === 'function') ? (getThen as Do<THEN>)() : getThen as THEN
       return true
     }
 
     statements.some(statement => {
-      let condition = statement[0]
+      const condition = statement[0]
       if (typeof condition === 'function') {
         if ((condition as When<WHEN>)(target)) return extracted(statement[1])
       } else {

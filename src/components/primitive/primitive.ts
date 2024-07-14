@@ -163,6 +163,7 @@ export class Primitive extends LitElement {
 
       try {
         this.value = this.contextData.getAt(this.valuePath)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_) {
         console.log(`unable to retrieve value-path: ${this.valuePath}`)
         this.value = `unable to retrieve value-path: ${this.valuePath}`

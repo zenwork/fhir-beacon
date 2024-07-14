@@ -1,13 +1,12 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
 import '../../../../src/components/primitive/primitive'
-import {Primitive}      from '../../../../src/components/primitive/primitive'
 import {PrimitiveType}  from '../../../../src/components/primitive/type-converters'
 
 const meta = {
   title: 'Components/Datatypes/Primitive Type/TimeDate',
   component: 'fhir-primitive',
-} satisfies Meta<typeof Primitive>
+} satisfies Meta
 
 export default meta
 type Story = StoryObj;

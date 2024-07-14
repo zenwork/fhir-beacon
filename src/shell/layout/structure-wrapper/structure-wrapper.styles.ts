@@ -1,6 +1,6 @@
 import {css} from 'lit'
 
-export let componentStyles = css`
+export const componentStyles = css`
   sl-details::part(base) {
     border: none;
     border-radius: 0;

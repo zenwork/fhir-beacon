@@ -5,10 +5,10 @@ import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 import {data, data3}            from './human-name.story.data'
 
 
-let path = 'Components/Datatypes/Complex Type/Human Name'
-let elementName = 'fhir-human-name'
+const path = 'Components/Datatypes/Complex Type/Human Name'
+const elementName = 'fhir-human-name'
 
-let render = wrapInShell(({ data }) => html`
+const render = wrapInShell(({ data }) => html`
   <fhir-human-name .data=${data} summary></fhir-human-name >`)
 
 const meta = {

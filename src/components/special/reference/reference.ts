@@ -119,8 +119,8 @@ export class Reference extends BaseElementContextConsumer<ReferenceData> {
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
     // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being able to request data that is in the
     // payload of the parent resource. Have to do this later with signals but when resolving the link call not here.
-    let isContainedRef = data?.reference?.startsWith('#')
-    let containedDataExists = this.contained.length > 0
+    const isContainedRef = data?.reference?.startsWith('#')
+    const containedDataExists = this.contained.length > 0
 
     if (isContainedRef && containedDataExists) {
       this.containedResource = this.contained.find(r => '#' + r.id === data.reference)

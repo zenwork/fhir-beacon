@@ -26,11 +26,11 @@ export class Bundle extends BaseElementContextProvider<BundleData> {
                 this.verbose) : nothing}
         ${hasSome(data.entry, this.display?.value?.verbose) ? renderBackboneCollection('entries', 'entry', data.entry,
                 (entry) => {
-                    let displayConfig = this.display?.value
-                    let verbose = displayConfig.verbose
-                    let noIndex = null
+                  const displayConfig = this.display?.value
+                  const verbose = displayConfig.verbose
+                  const noIndex = null
                     return html`
-                        ${hasSome(entry.link, verbose) ? renderBackboneCollection('links', noIndex, entry.link, (item, idx) => html`
+                        ${hasSome(entry.link, verbose) ? renderBackboneCollection('links', noIndex, entry.link, (item) => html`
                             <fhir-primitive label="link" .value=${item} .type=${PrimitiveType.link}></fhir-primitive>
                         `, this.verbose) : nothing}
                         ${renderResourceComponent(entry.resource, displayConfig)}
@@ -60,11 +60,11 @@ export class Bundle extends BaseElementContextProvider<BundleData> {
                 this.verbose) : nothing}
         ${hasSome(data.entry, this.display?.value?.verbose) ? renderBackboneCollection('entries', 'entry', data.entry,
                 (entry) => {
-                    let displayConfig = this.display?.value
-                    let verbose = displayConfig.verbose
-                    let noIndex = null
+                  const displayConfig = this.display?.value
+                  const verbose = displayConfig.verbose
+                  const noIndex = null
                     return html`
-                        ${hasSome(entry.link, verbose) ? renderBackboneCollection('links', noIndex, entry.link, (item, idx) => html`
+                        ${hasSome(entry.link, verbose) ? renderBackboneCollection('links', noIndex, entry.link, (item) => html`
                             <fhir-primitive label="link" .value=${item} .type=${PrimitiveType.link}></fhir-primitive>
                         `, this.verbose) : nothing}
                         <fhir-primitive label="fullURL" .value=${entry.fullUrl} .type=${PrimitiveType.uri}></fhir-primitive>

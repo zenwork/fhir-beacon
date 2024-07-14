@@ -21,7 +21,7 @@ const meta = {
 export default meta
 type Story = StoryObj<ShellArgs>;
 
-let patientData = {
+const patientData = {
   reference: 'http://someserver/Patient/id01230',
   type: 'Patient',
   display: 'Jack Smith'

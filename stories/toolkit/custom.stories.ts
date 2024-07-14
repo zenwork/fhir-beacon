@@ -6,8 +6,8 @@ import '../../demo-code/customisation/custom-components/custom-lit-element'
 import '../../demo-code/customisation/custom-components/custom-element.js'
 
 
-let path = 'Toolkit/Customisation/Custom Element'
-let data = {
+const path = 'Toolkit/Customisation/Custom Element'
+const data = {
   resourceType: 'Medication',
   id: 'med0308',
   text: {
@@ -107,12 +107,7 @@ const meta: Meta<ShellArgs> = {
   subcomponents: { 'fhir-medication': 'fhir-medication' },
   argTypes: {},
   render: ({
-             data,
-             mode: mode = 'display',
-             verbose: verbose = false,
-             showerror: showerror = false,
-             open: open = false,
-             summary: summary = true
+             data
            }: ShellArgs) =>
     html`
       <!-- Theming change -->

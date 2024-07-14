@@ -6,7 +6,7 @@ import {toUrl}          from './type-converters/toUrl'
 
 describe('Primitives', () => {
   it('should parse a URL', async () => {
-    let url = toUrl('http://hl7.org/fhir/sid/icd-10')
+    const url = toUrl('http://hl7.org/fhir/sid/icd-10')
 
     await expect(url.protocol).to.equal('http:')
     await expect(url.hostname).to.equal('hl7.org')

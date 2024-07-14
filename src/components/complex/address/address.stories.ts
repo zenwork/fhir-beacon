@@ -5,7 +5,7 @@ import {ShellArgs}      from '../../../../stories/wrapInShell'
 import {data}           from './address.story.data'
 
 
-let path = 'Components/Datatypes/Complex Type/Address'
+const path = 'Components/Datatypes/Complex Type/Address'
 
 const meta: Meta<ShellArgs> = {
   title: path,

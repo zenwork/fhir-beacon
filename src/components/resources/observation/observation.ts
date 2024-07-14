@@ -8,11 +8,11 @@ export class Observation extends BaseElementContextProvider<ObservationData> {
 
   constructor() {super('Observation')}
 
-  protected renderDisplay(data: ObservationData): TemplateResult | TemplateResult[] {
+  protected renderDisplay(): TemplateResult | TemplateResult[] {
     return html``
   }
 
-  protected renderStructure(data: ObservationData): TemplateResult | TemplateResult[] {
+  protected renderStructure(): TemplateResult | TemplateResult[] {
     return html``
   }
 

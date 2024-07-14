@@ -1,4 +1,4 @@
-export let data = {
+export const data = {
   resourceType: 'Bundle',
   id: 'bundle-references',
   type: 'collection',

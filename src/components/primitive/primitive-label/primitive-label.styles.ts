@@ -1,6 +1,6 @@
 import {css} from 'lit'
 
-export let componentStyles = css`
+export const componentStyles = css`
   :host {
     padding-top: var(--sl-spacing-2x-small);
     padding-bottom: var(--sl-spacing-2x-small);

@@ -113,7 +113,7 @@ describe('fhir primitive value', () => {
              </div>
       `)
 
-    let div: HTMLDivElement | null | undefined = el.shadowRoot?.querySelector('div.hide-overflow')
+    const div: HTMLDivElement | null | undefined = el.shadowRoot?.querySelector('div.hide-overflow')
     if (div) {
       const { h, w } = dimmensions(div, 'rem')
 
@@ -161,7 +161,7 @@ describe('fhir primitive value', () => {
              </div>
       `)
 
-    let div: HTMLDivElement | null | undefined = el.shadowRoot?.querySelector('div.fixed-width')
+    const div: HTMLDivElement | null | undefined = el.shadowRoot?.querySelector('div.fixed-width')
     if (div) {
       const { w } = dimmensions(div, 'rem')
 

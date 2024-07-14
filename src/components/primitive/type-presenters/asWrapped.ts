@@ -1,6 +1,6 @@
 export const asWrapped = (inputStr: string, n: number): string => {
 
-  let tempArr = []
+  const tempArr = []
   for (let i = 0; i < inputStr.length; i += n) {
     tempArr.push(inputStr.substring(i, i + n) + (i + n < inputStr.length ? '<wbr>' : ''))
   }

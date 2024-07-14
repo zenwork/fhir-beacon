@@ -24,7 +24,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   }
 
   protected render(): TemplateResult {
-    let data = this.convertData(this.data)
+    const data = this.convertData(this.data)
     return html`
       <div part="domain-resource">${choose(this.mode,
             [

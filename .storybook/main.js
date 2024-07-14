@@ -34,6 +34,7 @@ const config = {
     },
     webpackFinal:async (config) => {
         config.devtool = 'source-map' // This line enables source maps
+        // eslint-disable-next-line no-undef
         config.output.publicPath = process.env.BASE_URL || '/'
         return config
     }

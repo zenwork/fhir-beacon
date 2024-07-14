@@ -323,6 +323,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @return errors found
    * @protected
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected validate(data: T): ValidationErrors {
     // override to do custom validation
     return []

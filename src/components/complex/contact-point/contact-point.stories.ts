@@ -2,9 +2,9 @@ import {StoryObj} from '@storybook/web-components'
 import './contact-point'
 import '../../../../index'
 
-let path = 'Components/Datatypes/Complex Type/Contact Point'
-let elementName = 'fhir-contact-point'
-let data = {
+const path = 'Components/Datatypes/Complex Type/Contact Point'
+const elementName = 'fhir-contact-point'
+const data = {
   extension: [
     {
       url: 'http://hl7.org/fhir/StructureDefinition/iso21090-TEL-address',

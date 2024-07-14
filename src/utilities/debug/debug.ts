@@ -7,7 +7,7 @@ import {hostStyles}              from '../../styles/hostStyles'
 import {componentStyles}         from './debug.styles'
 
 
-export function debug(debug: boolean, data: {}) {
+export function debug(debug: boolean, data: object) {
   return when(debug,
     () => html`
       <fhir-debug .data=${data}></fhir-debug >`,
@@ -18,7 +18,7 @@ export function debug(debug: boolean, data: {}) {
 export class Debug extends LitElement {
 
   @property({type: Object})
-  public data: {} = {}
+  public data: object = {}
 
   private longest = 0
 
@@ -30,7 +30,7 @@ export class Debug extends LitElement {
       this.longest = 0
       Object
         .entries(this.data)
-        .forEach(([key, _]) => {
+        .forEach(([key]) => {
             if (key.length > this.longest) {this.longest = key.length}
           }
         )

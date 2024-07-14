@@ -3,5 +3,5 @@ import {toPrimitive} from './index'
 
 export const toError: toPrimitive<string, string> = (value: string): string => {
 
-  throw new Error(`Unable to render do to internal constraint`)
+  throw new Error(value ?? `Unable to render due to internal constraint`)
 }

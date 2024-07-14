@@ -20,7 +20,7 @@ export type URI = URL
 export type Decimal = number
 
 export type Integer = number
-export type Integer64 = BigInt
+export type Integer64 = bigint
 
 export type Canonical = URI
 

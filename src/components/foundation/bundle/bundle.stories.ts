@@ -3,8 +3,8 @@ import './bundle'
 import {data}     from './bundle.story.data'
 
 
-let path = 'Components/Foundation/Bundle'
-let elementName = 'fhir-bundle'
+const path = 'Components/Foundation/Bundle'
+const elementName = 'fhir-bundle'
 
 const meta = {
   title: path,

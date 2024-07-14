@@ -1,7 +1,7 @@
 import {html, TemplateResult} from 'lit'
 import {DisplayMode}          from '../src/internal/base/base-element.data'
 
-export type ShellArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean, summary?: boolean };
+export type ShellArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean, summary?: boolean };
 
 export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
 

@@ -3,8 +3,8 @@ import {StoryObj}   from '@storybook/web-components'
 import {createMeta} from '../../../../stories/storybook-utils'
 import {data}       from './observation.story.data'
 
-let path = 'Components/Resources/Observation/Observation'
-let elementName = 'fhir-observation'
+const path = 'Components/Resources/Observation/Observation'
+const elementName = 'fhir-observation'
 
 const meta = {
   title: path,

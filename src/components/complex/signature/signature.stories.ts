@@ -4,9 +4,9 @@ import '../../../../index'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 import {data}                   from './story.data'
 
-let path = 'Components/Datatypes/Complex Type/Signature'
-let elementName = 'fhir-shell'
-let subcomponents = {signature: 'fhir-signature'}
+const path = 'Components/Datatypes/Complex Type/Signature'
+const elementName = 'fhir-shell'
+const subcomponents = { signature: 'fhir-signature' }
 
 const render = wrapInShell((args) => html`
   <fhir-signature .data=${args.data} summary></fhir-signature >`)

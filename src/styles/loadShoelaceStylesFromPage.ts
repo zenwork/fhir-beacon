@@ -1,4 +1,4 @@
-let globalSheets: CSSStyleSheet[] = []
+const globalSheets: CSSStyleSheet[] = []
 
 // TODO: I don't think I need this feature. Probably fine to require that it's loaded by the parent page
 

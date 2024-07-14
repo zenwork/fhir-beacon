@@ -4,13 +4,13 @@ import '../../../shell/shell'
 import {html}           from 'lit'
 import {wrapInShell}    from '../../../../stories/wrapInShell'
 
-type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
+type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 
-let title = 'components/Datatypes/Complex Type/Codeable Reference'
+const title = 'components/Datatypes/Complex Type/Codeable Reference'
 const render = wrapInShell((args) => html`
   <fhir-codeable-reference .data=${args.data} summary></fhir-codeable-reference >`)
-let data = {
+const data = {
   concept: {
     coding: [
       {

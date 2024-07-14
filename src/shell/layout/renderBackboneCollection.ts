@@ -3,7 +3,7 @@ import {map}                  from 'lit/directives/map.js'
 import {hasSome}              from './directives'
 
 //TODO: need to decide if backnbone elements have a seperate element or not
-export function renderSingleBackbone<T>(itemLabel: null | string,
+export function renderSingleBackbone(itemLabel: null | string,
                                         idx: number | null,
                                         verbose: boolean,
                                         template: TemplateResult) {

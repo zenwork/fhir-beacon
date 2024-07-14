@@ -11,7 +11,7 @@ const decimalRegex = /^-?(0|[1-9][0-9]{0,17})(\.[0-9]{1,17})?([eE][+-]?[0-9]{1,9
  */
 export const toDecimal: toPrimitive<string, Decimal> = (decimal: string) => {
 
-  let number = parseFloat(decimal)
+  const number = parseFloat(decimal)
   if (!Number.isFinite(number)) {
     throw new TypeError(`decimal must be a valid number`)
   }

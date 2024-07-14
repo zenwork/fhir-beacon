@@ -23,9 +23,9 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
 
   protected renderDisplay(data: QuantityData | SimpleQuantityData): TemplateResult {
 
-    let displayValue: undefined | string | number = data.value
-    let type: string = 'decimal'
-    let after = data.unit || data.code
+    const displayValue: undefined | string | number = data.value
+    const type: string = 'decimal'
+    const after = data.unit || data.code
 
     if (isQuantity(data)) {
       return html`
@@ -83,7 +83,7 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
       this.variation = QuantityVariations.simple
     }
 
-    let isBlankOrUcum = !data.system || data.system.toString() === 'http://unitsofmeasure.org'
+    const isBlankOrUcum = !data.system || data.system.toString() === 'http://unitsofmeasure.org'
 
     // rule: dis-1
     if (data.unit

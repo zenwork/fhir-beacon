@@ -1,4 +1,4 @@
-export let data = {
+export const data = {
   use: 'work',
   text: '1050 W Wishard Blvd\nRG,\n5th floor\nIndianapolis, IN 46240',
   line: ['1050 W Wishard Blvd', 'RG 5th floor'],

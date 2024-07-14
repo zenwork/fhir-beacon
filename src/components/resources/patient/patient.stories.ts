@@ -2,8 +2,8 @@ import {StoryObj} from '@storybook/web-components'
 import '../../../../src/index'
 import {data}     from './patient.story.data'
 
-let path = 'Components/Resources/Patient/Patient'
-let elementName = 'fhir-patient'
+const path = 'Components/Resources/Patient/Patient'
+const elementName = 'fhir-patient'
 
 const meta = {
   title: path,

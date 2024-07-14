@@ -18,7 +18,7 @@ export const FhirAges: ValueSet[] = extractValueSet(ValueSetAgeUnits)
 export const FhirDuration: ValueSet[] = extractValueSet(ValueSetDurationUnits)
 
 function extract(concepts: any[], types: FhirType[]) {
-  let extracted = concepts.map((c: any) => {
+  const extracted = concepts.map((c: any) => {
 
     let kind = ''
     let abstract = false
@@ -26,11 +26,11 @@ function extract(concepts: any[], types: FhirType[]) {
       if (p.code === 'kind') kind = p.valueCode
       if (p.code === 'abstract-type') abstract = true
     })
-    let code = c.code
-    let definition = c.definition
+    const code = c.code
+    const definition = c.definition
 
 
-    let mapped = {code, kind, abstract, definition}
+    const mapped = { code, kind, abstract, definition }
     if (c.concept) extract(c.concept, types)
     return mapped
   })
@@ -40,8 +40,8 @@ function extract(concepts: any[], types: FhirType[]) {
 
 function extractValueSet(vs: any) {
   const extract: ValueSet[] = []
-  let include = vs.compose.include[0]
-  let concept = include.concept
+  const include = vs.compose.include[0]
+  const concept = include.concept
   extract.push(...concept.map((c: any) => ({ source: include.system, ...c })))
   return extract
 }

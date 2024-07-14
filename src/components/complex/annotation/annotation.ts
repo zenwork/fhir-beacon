@@ -55,7 +55,7 @@ export class Annotation extends BaseElementContextConsumer<AnnotationData> {
 }
 
 
-type Choice<C, D> = { data: any, html: (data: any, context: C) => TemplateResult }
+type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 
 /**
  * Applies a conditional template rendering based on the given choices to resolve "on-of" cases depicted with an [x]
@@ -67,7 +67,7 @@ type Choice<C, D> = { data: any, html: (data: any, context: C) => TemplateResult
  */
 function oneOf<C extends BaseElementContextConsumer<D>, D extends BaseElementData>(
   context: C,
-  choices: Choice<C, D>[]): TemplateResult | TemplateResult[] {
+  choices: Choice<C>[]): TemplateResult | TemplateResult[] {
 
   const results: TemplateResult[] = []
 
