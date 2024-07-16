@@ -116,7 +116,7 @@
         },
         {
           "name": "fhir-address",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -157,7 +157,7 @@
         },
         {
           "name": "fhir-annotation",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -198,7 +198,7 @@
         },
         {
           "name": "fhir-codeable-concept",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -239,7 +239,7 @@
         },
         {
           "name": "fhir-codeable-reference",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -280,7 +280,7 @@
         },
         {
           "name": "fhir-coding",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -321,7 +321,7 @@
         },
         {
           "name": "fhir-contact-point",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -362,7 +362,7 @@
         },
         {
           "name": "fhir-human-name",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -403,7 +403,7 @@
         },
         {
           "name": "fhir-identifier",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -444,7 +444,7 @@
         },
         {
           "name": "fhir-period",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -485,7 +485,7 @@
         },
         {
           "name": "fhir-quantity",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -526,7 +526,7 @@
         },
         {
           "name": "fhir-ratio",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -567,7 +567,7 @@
         },
         {
           "name": "fhir-signature",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -608,7 +608,7 @@
         },
         {
           "name": "fhir-bundle",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -732,7 +732,7 @@
         },
         {
           "name": "fhir-meta",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -773,7 +773,7 @@
         },
         {
           "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -812,7 +812,7 @@
         },
         {
           "name": "fhir-narrative",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "status", "value": { "type": "string" } },
@@ -855,7 +855,7 @@
         },
         {
           "name": "fhir-reference",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -896,7 +896,7 @@
         },
         {
           "name": "fhir-observation",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -935,7 +935,7 @@
         },
         {
           "name": "fhir-observation-definition",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -974,7 +974,7 @@
         },
         {
           "name": "fhir-patient",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },
@@ -1013,7 +1013,7 @@
         },
         {
           "name": "fhir-substance-ingredient",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data-path", "value": { "type": "string" } },
@@ -1054,7 +1054,7 @@
         },
         {
           "name": "fhir-substance",
-          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "data", "value": { "type": "T" } },

@@ -27,7 +27,7 @@ const meta: Meta<ShellArgs> = {
            }: ShellArgs) =>
     html`
       <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-address .data=${data} ?summary=${summary}}></fhir-codeable-concept >
+        <fhir-address .data=${data} ?summary=${summary}}></fhir-address >
       </fhir-shell >
     `
 }

@@ -1,4 +1,4 @@
-import {consume}                           from '@lit/context'
+import {consume, ContextRoot}              from '@lit/context'
 import {PropertyValues}                    from 'lit'
 import {property}                          from 'lit/decorators.js'
 import {contextData, displayConfigContext} from '../contexts/context'
@@ -6,6 +6,12 @@ import {DisplayConfig}                     from '../contexts/context.data'
 import {FhirDataContext}                   from '../contexts/FhirContextData'
 import {BaseElement}                       from './base-element'
 import {BaseElementData, DisplayMode}      from './base-element.data'
+
+//TODO: adding this context root to the document.body is a bit of a hack and may or may not work when there are multiple shells in one document.
+(function init() {
+  console.log('adding a context root to the body')
+  new ContextRoot().attach(document.body)
+})()
 
 export abstract class BaseElementContextConsumer<T extends BaseElementData> extends BaseElement<T> {
 
@@ -18,14 +24,22 @@ export abstract class BaseElementContextConsumer<T extends BaseElementData> exte
   @property({ type: String, attribute: 'data-path' })
   declare dataPath: string
 
+
+  protected willUpdate(_changedProperties: PropertyValues) {
+    super.willUpdate(_changedProperties)
+    if (this.displayConfig) {
+      // console.log('will',this.type, this.displayConfig)
+    }
+  }
+
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-    // console.log(this.type, _changedProperties, this.displayConfig)
     if (!_changedProperties.has('mode')
         && !_changedProperties.has('verbose')
         && !_changedProperties.has('open')
         && !_changedProperties.has('showerror')
         && this.displayConfig) {
+
 
       // console.log(this.type, this.displayConfig)
       // TODO: make this better. this is implicit behaviour

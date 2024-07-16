@@ -35,11 +35,11 @@ export const ValidationErrors: Story = {
       authorReference: {
         reference: 'Patient/example'
       },
+      authorString: 'Jack Smith',
       time: '2022-02-08T10:18:14.034+10:00',
       text: 'I don\'t think that this is true, or what I said, and it should be corrected',
-      authorString: 'Jack Smith'
     },
-    mode: 'display',
+    mode: 'structure_summary',
     showerror: true,
     verbose: false,
     open: true

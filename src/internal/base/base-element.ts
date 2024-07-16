@@ -1,7 +1,6 @@
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
-import {map}                                           from 'lit/directives/map.js'
 import {hasSameAncestor}                               from '../.././utilities/hasSameAncestor'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters'
 
@@ -32,16 +31,22 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
 
   @property({ reflect: true })
   public label: string = ''
+
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
   public mode: DisplayMode = DisplayMode.display
+
   @property({ type: Boolean, reflect: true })
   declare open: boolean
+
   @property({ type: Boolean, reflect: true })
   public forceclose: boolean = false
+
   @property({ type: Boolean, reflect: true })
   declare verbose: boolean
+
   @property({ type: Boolean, reflect: true })
   declare showerror: boolean
+
   @property({ reflect: true })
   protected type: string = ''
 
@@ -106,7 +111,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
   protected renderStructureWrapper() {
+    console.log(this.type, 'render structure')
     if (this.convertedData || this.isVerbose()) {
+      console.log('do render', this.type, this.convertedData)
       return html`
         <fhir-structure-wrapper
           .label=${this.getElementLabel()}
@@ -236,30 +243,32 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     return html``
   }
 
-  private renderValidationErrors(): TemplateResult {
-
-    if (this.showerror && this.errors.length > 0) {
-      return html`
-        <fhir-wrapper label="Validation Issues" variant="validation-error">
-          ${map(this.errors, e => html`<p >${e.id} - ${e.err}</p >`)}
-        </fhir-wrapper >
-      `
-
-    }
-    return html``
+  /**
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
+   * @param data
+   */
+  protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
+    return this.renderAlways(data)
   }
 
   /**
    * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
    * @param data
    */
-  protected abstract renderDisplay(data: T): TemplateResult | TemplateResult[]
+  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
+    return this.renderAlways(data)
+  }
 
   /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
+   * Empty default implementation. Implement this method when the template is identical in all modes
    * @param data
+   * @protected
    */
-  protected abstract renderStructure(data: T): TemplateResult | TemplateResult[]
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected renderAlways(data: T): TemplateResult | TemplateResult[] {
+    console.log('render NOTHING')
+    return html``
+  }
 
   private renderTemplate(): TemplateResult {
     if (this.shadowRoot) {

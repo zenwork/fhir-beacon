@@ -12,7 +12,7 @@ export default {
     appIndex:'./demo/index.html',
     rootDir:'.',
     plugins:[
-        esbuildPlugin({ts:true, json:true, css:true}),
+        esbuildPlugin({ts:true, json:true}),
         impAss()
 
     ]

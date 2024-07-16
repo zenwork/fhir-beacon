@@ -30,23 +30,23 @@ export abstract class BaseElementContextProvider<T extends BaseElementData> exte
       const context = new FhirDataContextImpl()
       context.data = this.data
       this.contextDataReducer.setValue(context)
-      // console.log('mode',this.mode, this.display.value)
+      // console.log(this.type,'mode',this.mode, this.display.value)
     }
     if (_changedProperties.has('mode')) {
       this.display.setValue({...this.display.value, mode: this.mode})
-      // console.log('mode',this.mode, this.display.value)
+      // console.log(this.type,'mode',this.mode, this.display.value)
     }
     if (_changedProperties.has('showerror')) {
       this.display.setValue({...this.display.value, showerror: this.showerror})
-      // console.log('showerror',this.showerror, this.display.value)
+      // console.log(this.type,'showerror',this.showerror, this.display.value)
     }
     if (_changedProperties.has('verbose')) {
       this.display.setValue({...this.display.value, verbose: this.verbose})
-      // console.log('verbose',this.verbose, this.display.value)
+      // console.log(this.type,'verbose',this.verbose, this.display.value)
     }
     if (_changedProperties.has('open')) {
       this.display.setValue({...this.display.value, open: this.open})
-      // console.log('open', this.open, this.display.value)
+      // console.log(this.type,'open', this.open, this.display.value)
     }
   }
 }
