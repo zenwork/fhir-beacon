@@ -1,5 +1,4 @@
 import {StoryObj}               from '@storybook/web-components'
-import './human-name'
 import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 import {data, data3}            from './human-name.story.data'

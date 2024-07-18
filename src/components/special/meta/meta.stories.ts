@@ -1,5 +1,4 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/index'
 import {html}     from 'lit'
 
 type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };

@@ -3,9 +3,6 @@ import {customElement}              from 'lit/decorators.js'
 import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 import {wrap, wraps}                from '../../../shell/layout/wrapCollection'
 import {CodeableConceptData}        from './codeable-concept.data'
-import '../coding/coding'
-import '../../../shell/layout/empty-set'
-import '../../../shell/layout/structure-wrapper/structure-wrapper'
 
 @customElement('fhir-codeable-concept')
 export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptData> {

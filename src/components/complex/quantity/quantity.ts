@@ -1,6 +1,6 @@
 import {html, nothing, TemplateResult}         from 'lit'
 import {customElement}                         from 'lit/decorators.js'
-import {FhirAges, FhirDistances, FhirDuration} from '../../../codesystems'
+import {FhirAges, FhirDistances, FhirDuration} from '../../../codesystems/code-systems'
 import {ValidationErrors}                      from '../../../internal/base/base-element'
 import {BaseElementContextConsumer}            from '../../../internal/base/base-element-context-consumer'
 import {renderError}                           from '../../../shell/layout/renderError'

@@ -4,9 +4,9 @@ import {BaseElementContextProvider}                     from '../../../internal/
 import {renderResourceComponent}                        from '../../../internal/resource/renderResourceComponent'
 import {hasSome, isDefined}                             from '../../../shell/layout/directives'
 import {renderBackboneCollection, renderSingleBackbone} from '../../../shell/layout/renderBackboneCollection'
-import {PrimitiveType}                                  from '../../primitive/type-converters'
+import {PrimitiveType}                                  from '../../primitive/type-converters/type-converters'
 import {BundleData}                                     from './bundle.data'
-import '../../../index'
+
 
 @customElement('fhir-bundle')
 export class Bundle extends BaseElementContextProvider<BundleData> {

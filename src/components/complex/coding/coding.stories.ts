@@ -1,8 +1,4 @@
 import {Meta, StoryObj} from '@storybook/web-components'
-import './coding'
-import '../../../utilities/debug/debug'
-import '../../primitive/primitive'
-import '../../../index'
 import {html}           from 'lit'
 
 type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };

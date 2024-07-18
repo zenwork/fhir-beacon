@@ -1,5 +1,5 @@
 import {html}               from 'lit-html'
-import {FhirContextElement} from '../../../src/fhir-context-element'
+import {FhirContextElement} from 'src/internal/fhir-context-element.js'
 
 /**
  * Simple Component that doesn't implement LitElement reactive elements

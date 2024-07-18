@@ -1,5 +1,5 @@
 import {html, TemplateResult}       from 'lit'
-import {PrimitiveType}              from '../../components/primitive/type-converters'
+import {PrimitiveType}              from '../../components/primitive/type-converters/type-converters'
 import {BaseElementContextProvider} from '../base/base-element-context-provider'
 import {ResourceData}               from './domain-resource.data'
 

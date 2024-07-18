@@ -1,4 +1,3 @@
-import '../../../../src/index'
 import {StoryObj}   from '@storybook/web-components'
 import {createMeta} from '../../../../stories/storybook-utils'
 import {data}       from './observation-definition.story.data'

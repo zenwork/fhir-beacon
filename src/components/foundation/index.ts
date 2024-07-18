@@ -1,1 +1,3 @@
-import './bundle/bundle'
+// created by autobarrel, do not modify directly
+
+export * from './bundle/'

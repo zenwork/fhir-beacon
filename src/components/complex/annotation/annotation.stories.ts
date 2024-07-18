@@ -1,5 +1,4 @@
 import {Meta, StoryObj}  from '@storybook/web-components'
-import './annotation'
 import {html}            from 'lit'
 import {createShellMeta} from '../../../../stories/storybook-utils'
 import {ShellArgs}       from '../../../../stories/wrapInShell'

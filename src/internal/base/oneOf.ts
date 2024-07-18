@@ -1,5 +1,5 @@
 import {html, TemplateResult} from 'lit'
-import {BaseElement}          from '../../internal/base/base-element'
+import {BaseElement}          from './base-element'
 
 type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 

@@ -1,6 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import './contact-point'
-import '../../../../index'
+
 
 const path = 'Components/Datatypes/Complex Type/Contact Point'
 const elementName = 'fhir-contact-point'

@@ -1,6 +1,4 @@
 import {StoryObj}               from '@storybook/web-components'
-import './ratio'
-import '../../../../index'
 import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 

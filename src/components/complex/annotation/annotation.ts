@@ -2,8 +2,8 @@ import {html, TemplateResult}              from 'lit'
 import {customElement}                     from 'lit/decorators.js'
 import {ValidationError, ValidationErrors} from '../../../internal/base/base-element'
 import {BaseElementContextConsumer}        from '../../../internal/base/base-element-context-consumer'
-import {oneOf}                             from '../../../shell/layout/oneOf'
-import {PrimitiveType}                     from '../../primitive/type-converters'
+import {oneOf}                             from '../../../internal/base/oneOf'
+import {PrimitiveType}                     from '../../primitive/type-converters/type-converters'
 import {AnnotationData}                    from './annotation.data'
 
 @customElement('fhir-annotation')

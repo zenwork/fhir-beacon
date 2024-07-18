@@ -1,5 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../index'
+
 
 const title = 'Components/Resources/Medication/Substance'
 const component = 'fhir-substance'

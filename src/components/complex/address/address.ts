@@ -1,12 +1,10 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
-import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
-import {hasSome}                       from '../../../shell/layout/directives'
-import {wrap, wraps}                   from '../../../shell/layout/wrapCollection'
-import {hasOnly}                       from '../../../utilities/hasOnly'
-import {PrimitiveType}                 from '../../primitive/type-converters'
-import {AddressData}                   from '../../resources/patient/patient.data'
-import '../../../index'
+import {BaseElementContextConsumer}    from '../../../internal'
+import {hasSome, wrap, wraps}          from '../../../shell'
+import {hasOnly}                       from '../../../utilities'
+import {PrimitiveType}                 from '../../primitive'
+import {AddressData}                   from '../../resources'
 
 @customElement('fhir-address')
 export class Address extends BaseElementContextConsumer<AddressData> {

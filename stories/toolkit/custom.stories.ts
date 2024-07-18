@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/web-components'
-import '../../src'
-import {html}           from 'lit'
-import {ShellArgs}      from '../../stories/wrapInShell'
+
+import {html}      from 'lit'
+import {ShellArgs} from '../../stories/wrapInShell'
 import '../../demo-code/customisation/custom-components/custom-lit-element'
 import '../../demo-code/customisation/custom-components/custom-element.js'
 

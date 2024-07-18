@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/web-components'
-import '../../../../src/index'
 import {html}           from 'lit'
 import {ShellArgs}      from '../../../../stories/wrapInShell'
+
 
 const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
@@ -9,19 +9,19 @@ const meta: Meta<ShellArgs> = {
   argTypes: {
     mode: {
       options: ['display', 'display_summary', 'structure', 'structure_summary', 'narrative', 'debug'],
-      control: {type: 'radio'},
+      control: { type: 'radio' }
     },
     verbose: {
       options: [true, false],
-      control: {type: 'boolean'}
+      control: { type: 'boolean' }
     },
     showerror: {
       options: [true, false],
-      control: {type: 'boolean'}
+      control: { type: 'boolean' }
     },
     open: {
       options: [true, false],
-      control: {type: 'boolean'}
+      control: { type: 'boolean' }
     }
   }
 
@@ -133,7 +133,7 @@ const data_319 = {
 
   },
   doseForm: {
-    coding: [{system: 'http://snomed.info/sct', code: '385101003', display: 'Ointment'}],
+    coding: [{ system: 'http://snomed.info/sct', code: '385101003', display: 'Ointment' }],
     text: 'Ointment'
   },
   ingredient: [
@@ -150,8 +150,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 5, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 5, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     },
     {
@@ -167,8 +167,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 1, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 1, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     },
     {
@@ -184,8 +184,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 94, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 94, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     }
   ],
@@ -296,14 +296,15 @@ export const FrontPageDemo: Story = {
     open: true
   },
   render: (args: ShellArgs) =>
-    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3>
+    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3 >
     <fhir-medication
-            .data=${args.data}
-            .mode=${args.mode}
-            .showerror=${args.showerror}
-            .verbose=${args.verbose}
-            .open=${args.open}>
-    </fhir-medication>
+      .data=${args.data}
+      .mode=${args.mode}
+      .showerror=${args.showerror}
+      .verbose=${args.verbose}
+      .open=${args.open}
+    >
+    </fhir-medication >
     `
 
 }

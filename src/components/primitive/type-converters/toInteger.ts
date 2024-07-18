@@ -1,5 +1,5 @@
 import {Integer}     from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 export const toInteger: toPrimitive<unknown, Integer> = (value: unknown): Integer => {
 

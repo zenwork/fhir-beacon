@@ -1,5 +1,5 @@
 import {Id}          from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 const idRegex = /^[A-Za-z0-9\-.]{1,64}$/
 

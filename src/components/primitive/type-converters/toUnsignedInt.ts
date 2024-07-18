@@ -1,5 +1,5 @@
 import {UnsignedInt} from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 export const toUnsignedInt: toPrimitive<unknown, UnsignedInt> = (value: unknown): UnsignedInt => {
 

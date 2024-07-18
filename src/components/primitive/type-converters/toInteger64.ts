@@ -1,5 +1,5 @@
 import {Integer64}   from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 export const toInteger64: toPrimitive<unknown, Integer64> = (value: unknown): Integer64 => {
 

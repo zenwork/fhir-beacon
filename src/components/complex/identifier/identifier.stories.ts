@@ -1,8 +1,7 @@
 import {StoryObj}               from '@storybook/web-components'
-import './identifier'
 import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
-import '../../../../index'
+
 
 const render = wrapInShell((args) => html`
   <fhir-identifier .data=${args.data} ?summary=${args.summary}></fhir-identifier >`)

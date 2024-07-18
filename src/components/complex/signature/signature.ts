@@ -3,7 +3,7 @@ import {customElement}              from 'lit/decorators.js'
 import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 
 import {SignatureData} from '../../foundation/bundle/bundle.data'
-import {PrimitiveType} from '../../primitive/type-converters'
+import {PrimitiveType} from '../../primitive/type-converters/type-converters'
 
 @customElement('fhir-signature')
 export class Signature extends BaseElementContextConsumer<SignatureData> {

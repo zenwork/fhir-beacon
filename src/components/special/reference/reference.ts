@@ -3,18 +3,14 @@ import {html, TemplateResult}       from 'lit'
 import {customElement, state}       from 'lit/decorators.js'
 import {choose}                     from 'lit/directives/choose.js'
 import {otherwise, when}            from '../../.././utilities/when'
-import '../../primitive/primitive'
-import '../../../shell/layout/wrapper/wrapper'
-import '../../complex/identifier/identifier'
 import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
 import {containedDataContext}       from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
-import {PrimitiveType}           from '../../primitive/type-converters'
+import {PrimitiveType}           from '../../primitive/type-converters/type-converters'
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
-import '../../../shell/layout/not-supported'
 
 @customElement('fhir-reference')
 export class Reference extends BaseElementContextConsumer<ReferenceData> {

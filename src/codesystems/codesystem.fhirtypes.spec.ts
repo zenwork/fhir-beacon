@@ -1,5 +1,5 @@
 import {expect}    from '@open-wc/testing'
-import {FhirTypes} from './index'
+import {FhirTypes} from './code-systems'
 
 
 describe('Code Systems', () => {
@@ -32,7 +32,7 @@ describe('Code Systems', () => {
       await expect(FhirTypes.filter(t => t.code === 'dateTime').length).to.equal(1)
     })
     it('should find Reference', async () => {
-      await expect(FhirTypes.filter(t => t.code === 'Reference').length).to.equal(1)
+      await expect(FhirTypes.filter(t => t.code === 'Ref').length).to.equal(1)
     })
   })
 

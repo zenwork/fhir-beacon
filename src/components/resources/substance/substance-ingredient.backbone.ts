@@ -5,7 +5,6 @@ import {renderError}                                                  from '../.
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
 
-import '../../complex/ratio/ratio'
 
 @customElement('fhir-substance-ingredient')
 export class SubstanceIngredientBackbone extends BaseElementContextConsumer<SubstanceIngredientData | SubstanceIngredientReferenceData> {

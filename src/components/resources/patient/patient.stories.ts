@@ -1,5 +1,4 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../../src/index'
 import {data}     from './patient.story.data'
 
 const path = 'Components/Resources/Patient/Patient'

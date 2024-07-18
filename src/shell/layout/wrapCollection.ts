@@ -1,9 +1,6 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {map}                           from 'lit/directives/map.js'
 import {hasMany, hasOnlyOne}           from './directives'
-import './structure-wrapper/structure-wrapper'
-import './wrapper/wrapper'
-import './empty-set'
 
 /**
  * Wrap a collection with the structured wrapper only when there is more than one entry

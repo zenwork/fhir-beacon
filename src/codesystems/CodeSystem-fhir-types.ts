@@ -414,8 +414,8 @@ export const CodeSystemFhirTypes = {
                                     "property": [{"code": "kind", "valueCode": "datatype"}]
                                 },
                                 {
-                                    "code": "Reference",
-                                    "display": "Reference",
+                                  'code': 'Ref',
+                                  'display': 'Ref',
                                     "definition": "Reference Type: A reference from one resource to another.",
                                     "property": [{"code": "kind", "valueCode": "datatype"}]
                                 },

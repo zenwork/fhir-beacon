@@ -1,6 +1,4 @@
 import {StoryObj} from '@storybook/web-components'
-import './narrative'
-
 
 const meta = {
   title: 'Components/Datatypes/Special Type/Narrative',

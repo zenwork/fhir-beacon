@@ -45,3 +45,5 @@ export type Link = string
 export type FhirString = string
 
 export type Base64Binary = string
+
+export type Ref = string

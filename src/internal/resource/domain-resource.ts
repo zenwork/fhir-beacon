@@ -1,15 +1,13 @@
 import {provide}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {choose}                                        from 'lit/directives/choose.js'
-import {PrimitiveType}                                 from '../../components/primitive/type-converters'
+import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
 import {DisplayMode}                                   from '../base/base-element.data'
 import {containedDataContext}                          from '../contexts/context'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'
 
-import '../../utilities'
-import '../../components/special/narrative/narrative'
-import {Resource}                                      from './resource'
+import {Resource} from './resource'
 
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {

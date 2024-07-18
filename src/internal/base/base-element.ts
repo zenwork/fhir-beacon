@@ -2,7 +2,7 @@ import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property, state}                               from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
 import {hasSameAncestor}                               from '../.././utilities/hasSameAncestor'
-import {PrimitiveType}                                 from '../../components/primitive/type-converters'
+import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
 
 import {asReadable}                   from '../../components/primitive/type-presenters/asReadable'
 import {hasSome}                      from '../../shell/layout/directives'
@@ -11,10 +11,6 @@ import {hostStyles}                   from '../../styles/hostStyles'
 import {countNodes}                   from '../../utilities/countNodes'
 import {toBaseElementModeEnum}        from '../../utilities/toBaseElementModeEnum'
 import {BaseElementData, DisplayMode} from './base-element.data'
-import '../../utilities/debug/debug'
-import '../../shell/layout/wrapper/wrapper'
-import '../../shell/layout/structure-wrapper/structure-wrapper'
-import '../../components/primitive/primitive'
 import {componentStyles}              from './base-element.styles'
 
 type GeneratorGroup<T> = { [key: string]: (data: T) => TemplateResult | TemplateResult[] }
@@ -111,9 +107,9 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   }
 
   protected renderStructureWrapper() {
-    console.log(this.type, 'render structure')
+    // console.log(this.type, 'render structure')
     if (this.convertedData || this.isVerbose()) {
-      console.log('do render', this.type, this.convertedData)
+      // console.log('do render', this.type, this.convertedData)
       return html`
         <fhir-structure-wrapper
           .label=${this.getElementLabel()}
@@ -350,9 +346,6 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
     return false
   }
 
-  private summaryMode() {
-    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
-  }
 }
 
 export type ValidationErrors = ValidationError[]

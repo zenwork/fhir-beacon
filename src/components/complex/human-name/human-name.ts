@@ -3,10 +3,8 @@ import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
 import {hasMany, hasOnlyOne}           from '../../../shell/layout/directives'
-import {PrimitiveType}                 from '../../primitive/type-converters'
+import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {HumanNameData}                 from '../../resources/patient/patient.data'
-import '../../../shell/layout/structure-wrapper/structure-wrapper'
-import '../../../index'
 
 @customElement('fhir-human-name')
 export class HumanName extends BaseElementContextConsumer<HumanNameData> {

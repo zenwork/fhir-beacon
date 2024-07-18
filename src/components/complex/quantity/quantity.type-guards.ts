@@ -1,7 +1,7 @@
 import {hasNone}                               from '../../../utilities/hasNone'
 import {DateTime, FhirString}                  from '../../primitive/primitive.data'
-import {valueOrError}                          from '../../primitive/type-converters'
 import {toDatetime}                            from '../../primitive/type-converters/toDatetime'
+import {valueOrError}                          from '../../primitive/type-converters/type-converters'
 import {DeceasedBoolean}                       from '../../resources/patient/patient.data'
 import {ReferenceData}                         from '../../special/reference/reference.data'
 import {AuthorFhirString, AuthorReferenceData} from '../annotation/annotation.data'

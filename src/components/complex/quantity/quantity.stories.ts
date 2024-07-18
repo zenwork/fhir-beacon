@@ -1,10 +1,6 @@
 import {StoryObj}               from '@storybook/web-components'
-import './quantity'
-import '../../../utilities/debug/debug'
-import '../../primitive/primitive'
 import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
-import '../../../../index'
 
 
 const render = wrapInShell((args) => html`

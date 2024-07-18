@@ -1,6 +1,5 @@
 import {Meta, StoryObj}         from '@storybook/web-components'
 import {html}                   from 'lit'
-import '../../../../index'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 import {data}                   from './story.data'
 

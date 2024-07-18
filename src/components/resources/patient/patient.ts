@@ -3,13 +3,8 @@ import {customElement}              from 'lit/decorators.js'
 import {BaseElementContextProvider} from '../../../internal/base/base-element-context-provider'
 import {wrapc, wraps}               from '../../../shell/layout/wrapCollection'
 import {isDeceasedBoolean}          from '../../complex/quantity/quantity.type-guards'
-import {PrimitiveType}              from '../../primitive/type-converters'
+import {PrimitiveType}              from '../../primitive/type-converters/type-converters'
 import {PatientData}                from './patient.data'
-import '../../complex/human-name/human-name'
-import '../../../shell/layout/structure-wrapper/structure-wrapper'
-import '../../../shell/layout/empty-set'
-import '../../complex/contact-point/contact-point'
-import '../../complex/'
 
 @customElement('fhir-patient')
 export class Patient extends BaseElementContextProvider<PatientData> {

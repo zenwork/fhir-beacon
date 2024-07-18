@@ -1,6 +1,4 @@
 import {Meta, StoryObj} from '@storybook/web-components'
-import './codeable-reference'
-import '../../../shell/shell'
 import {html}           from 'lit'
 import {wrapInShell}    from '../../../../stories/wrapInShell'
 

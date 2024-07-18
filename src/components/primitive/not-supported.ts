@@ -1,6 +1,6 @@
 import {html, LitElement}        from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {PrimitiveType}           from '../../components/primitive/type-converters'
+import {PrimitiveType}           from './type-converters/type-converters'
 
 @customElement('fhir-not-supported')
 export class NotSupported extends LitElement {

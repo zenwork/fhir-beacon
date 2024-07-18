@@ -1,14 +1,11 @@
-import {consume}                       from '@lit/context'
-import {html, nothing, PropertyValues} from 'lit'
-import {customElement, property}       from 'lit/decorators.js'
-import {DisplayMode}                   from '../../../internal/base/base-element.data'
-import {displayConfigContext}          from '../../../internal/contexts/context'
-import {DisplayConfig}                 from '../../../internal/contexts/context.data'
-import {defaultDisplayConfig}          from '../../../internal/contexts/context.defaults'
-import {hostStyles}                    from '../../../styles/hostStyles'
-import {toBaseElementModeEnum}         from '../../../utilities/toBaseElementModeEnum'
-import {ShoelaceStyledElement}         from '../../shoelace-styled-element'
-import {componentStyles}               from './structure-wrapper.styles'
+import {consume}                                                                from '@lit/context'
+import {html, nothing, PropertyValues}                                          from 'lit'
+import {customElement, property}                                                from 'lit/decorators.js'
+import {defaultDisplayConfig, DisplayConfig, displayConfigContext, DisplayMode} from '../../../internal'
+import {hostStyles}                                                             from '../../../styles'
+import {toBaseElementModeEnum}                                                  from '../../../utilities'
+import {ShoelaceStyledElement}                                                  from '../../shoelace-styled-element'
+import {componentStyles}                                                        from './structure-wrapper.styles'
 
 /**
  * Custom element for wrapping primitive content.

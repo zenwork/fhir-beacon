@@ -1,4 +1,3 @@
-import '../../../index'
 import {expect, fixture} from '@open-wc/testing'
 import {html}            from 'lit'
 import {Primitive}       from '../primitive'

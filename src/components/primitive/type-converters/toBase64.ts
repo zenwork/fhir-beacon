@@ -1,5 +1,5 @@
 import {Base64Binary, FhirString} from '../primitive.data'
-import {toPrimitive}              from './index'
+import {toPrimitive}              from './type-converters'
 
 export const toBase64: toPrimitive<unknown, FhirString> = (value: unknown): Base64Binary => {
   if (typeof value !== 'string') {

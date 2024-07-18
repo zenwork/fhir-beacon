@@ -1,5 +1,5 @@
 import {Code}        from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 /**
  * Regular expression pattern for matching a FHIR code.

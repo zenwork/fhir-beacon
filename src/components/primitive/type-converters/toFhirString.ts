@@ -1,7 +1,6 @@
 import {FhirString}  from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
-export type Type = string
 export const toFhirString: toPrimitive<unknown, FhirString> = (unknown: unknown): FhirString => {
 
   if (typeof unknown !== 'string') {

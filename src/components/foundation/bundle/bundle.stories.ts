@@ -1,5 +1,4 @@
 import {StoryObj} from '@storybook/web-components'
-import './bundle'
 import {data}     from './bundle.story.data'
 
 

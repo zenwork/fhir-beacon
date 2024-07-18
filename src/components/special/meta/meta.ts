@@ -2,8 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
-import '../../complex/coding/coding'
-import {PrimitiveType}                 from '../../primitive/type-converters'
+import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {MetaData}                      from './meta.data'
 
 @customElement('fhir-meta')

@@ -1,7 +1,7 @@
 import {html, TemplateResult}       from 'lit'
 import {customElement}              from 'lit/decorators.js'
-import {PrimitiveType}              from '../../../components/primitive/type-converters'
 import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {PrimitiveType}              from '../../primitive/type-converters/type-converters'
 import {PeriodData}                 from './period.data'
 
 @customElement('fhir-period')

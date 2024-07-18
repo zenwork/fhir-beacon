@@ -1,5 +1,5 @@
 import {Link}        from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 export const toLink: toPrimitive<unknown, Link> = (value: unknown): Link => {
   const regex = /^(http|https):\/\/[^ "]+$/

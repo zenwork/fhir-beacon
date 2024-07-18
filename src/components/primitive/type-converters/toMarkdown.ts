@@ -1,5 +1,5 @@
 import {Markdown}    from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 const regex = /^[\s\S]+$/
 

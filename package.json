@@ -6,6 +6,10 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
+        "vite::dev": "vite",
+        "vite::build": "vite build",
+        "vite::preview": "vite preview",
+        "autobarrel": "autobarrel --watch --config ./autobarrel.json",
         "build": "cem analyze --config build/custom-elements-manifest.config.js",
         "build-watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
         "demo": "wds --watch",
@@ -55,6 +59,7 @@
         "@web/test-runner-junit-reporter": "^0.7.1",
         "@web/test-runner-playwright": "^0.11.0",
         "@whitespace/storybook-addon-html": "^6.1.1",
+        "autobarrel": "^1.2.0",
         "concurrently": "^8.2.2",
         "custom-element-jet-brains-integration": "^1.4.4",
         "dotenv": "^16.4.5",
@@ -68,7 +73,8 @@
         "rollup-plugin-inline-code": "^1.2.7",
         "storybook": "^8.0.9",
         "ts-lit-plugin": "^2.0.2",
-        "typescript-eslint": "^8.0.0-alpha.14"
+        "typescript-eslint": "^8.0.0-alpha.14",
+        "vite": "^5.3.4"
     },
     "web-types": [
         "./build/sl-web-types.json",

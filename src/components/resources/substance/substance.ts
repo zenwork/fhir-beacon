@@ -2,11 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {DomainResource}                from '../../../internal/resource/domain-resource'
-import '../../../utilities'
-import '../../complex/codeable-concept/codeable-concept'
-import '../../complex/codeable-reference/codeable-reference'
-import './substance-ingredient.backbone'
-import {PrimitiveType}                 from '../../primitive/type-converters'
+import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {SubstanceData}                 from './substance.data'
 
 @customElement('fhir-substance')
