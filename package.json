@@ -20,7 +20,7 @@
         "vite::dev": "vite",
         "vite::preview": "vite preview",
         "vitest": "vitest run",
-        "vitest::github": "vitest run --reporter=github-actions",
+        "vitest::github": "vitest run",
         "vitest::watch": "vitest watch",
         "vitest::watch::browser": "vitest watch --browser.headless=false"
     },
@@ -36,7 +36,6 @@
         "@custom-elements-manifest/analyzer": "^0.10.2",
         "@eslint/js": "^9.6.0",
         "@open-wc/semantic-dom-diff": "^0.20.1",
-        "@playwright/test": "^1.43.1",
         "@storybook/addon-essentials": "^8.0.9",
         "@storybook/addon-links": "^8.0.9",
         "@storybook/addon-storysource": "^8.1.2",
@@ -60,16 +59,17 @@
         "dotenv": "^16.4.5",
         "eslint": "^9.6.0",
         "globals": "^15.8.0",
+        "html-format": "^1.1.7",
         "lit-html": "^3.1.4",
+        "playwright": "^1.45.2",
         "remark-gfm": "^4.0.0",
+        "shadow-dom-testing-library": "^1.11.2",
         "storybook": "^8.0.9",
         "ts-lit-plugin": "^2.0.2",
         "typescript-eslint": "^8.0.0-alpha.14",
         "vite": "^5.3.4",
         "vitest": "^2.0.3",
-        "webdriverio": "^8.39.1",
-        "html-format": "^1.1.7",
-        "shadow-dom-testing-library": "^1.11.2"
+        "webdriverio": "^8.39.1"
     },
     "web-types": [
         "./build/sl-web-types.json",

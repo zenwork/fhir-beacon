@@ -18,6 +18,9 @@ export default defineProject(
         headless: true,
         provider: 'playwright'
       },
-      reporters: process.env.GITHUB_ACTIONS ? ['dot', 'junit'] : ['dot']
+      reporters: ['verbose', 'junit'],
+      outputFile: {
+        junit: './results/junit-report.xml'
+      }
     }
   })
