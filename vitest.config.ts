@@ -18,6 +18,6 @@ export default defineProject(
         headless: true,
         provider: 'playwright'
       },
-      reporters: process.env.GITHUB_ACTIONS ? ['dot', 'github-actions', 'junit'] : ['dot']
+      reporters: process.env.GITHUB_ACTIONS ? ['dot', 'junit'] : ['dot']
     }
   })
