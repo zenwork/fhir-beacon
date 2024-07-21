@@ -1,63 +1,78 @@
-import {expect, fixture} from '@open-wc/testing'
-import {html}            from 'lit'
-import {Primitive}       from '../primitive'
+import {html}                   from 'lit'
+import {describe, expect, test} from 'vitest'
+import {fixture}                from '../../../../tests/lit-vitest-fixture'
+import {PrimitiveLabel}         from './primitive-label'
 
 describe('fhir primitive label', () => {
 
-  it('should display nothing', async () => {
+  test('should display nothing', async () => {
 
-    const el = await fixture<Primitive>(html`
-      <fhir-label ></fhir-label >
-    `)
+    const el = await fixture<PrimitiveLabel>(html`
+      <fhir-label >foo</fhir-label >
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-    <label for=""><slot></slot></label>`)
+    const label = el.deepQuerySelector('label')
+    expect(label).toHaveTextContent('')
+
   })
 
-  it('should display slotted content', async () => {
+  test('should display attribute value', async () => {
 
-    const el = await fixture<Primitive>(html`
-      <fhir-label >id</fhir-label >
-    `)
+    const el = await fixture<PrimitiveLabel>(html`
+      <fhir-label text="id"></fhir-label >
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-    <label for=""><slot></slot></label>`)
+    const label = el.deepQuerySelector('label')
+    expect(label).toHaveTextContent(`id`)
 
-    await expect(el).lightDom.to.equal(`id`)
   })
 
-  it('should display id label in error state', async () => {
+  test('should display default slotted value', async () => {
 
-    const el = await fixture<Primitive>(html`
+    // language=HTML format=false
+    const el = await fixture<PrimitiveLabel>(html`
+      <fhir-label >special slotted id<div slot="ignored">don't show</div ></fhir-label >
+    `).first()
+
+    const slot = el.queryDefaultSlot()
+    expect(slot.length).toEqual(1)
+    expect(slot[0].textContent).toStrictEqual(`special slotted id`)
+
+  })
+
+
+  test('should display id label in error state', async () => {
+
+    const el = await fixture<PrimitiveLabel>(html`
       <fhir-label text="id" variant="error"></fhir-label >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-    <label class="error" for="">id:<slot></slot></label>`)
+    const label = el.deepQuerySelector('label') as HTMLLabelElement
+    expect(label).toHaveTextContent(`id`)
+    await expect(getComputedStyle(label!).fontStyle).to.eq('italic')
 
-    const label = el.shadowRoot?.querySelector('label')
-    if (label) await expect(getComputedStyle(label).fontStyle).to.eq('italic')
   })
 
-  it('should add for for label', async () => {
+  test('should add for for label', async () => {
 
-    const el = await fixture<Primitive>(html`
+    const el = await fixture<PrimitiveLabel>(html`
       <fhir-label for="identity" text="id"></fhir-label >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-    <label for="identity">id:<slot></slot></label>`)
+    const label = el.deepQuerySelector('label') as HTMLLabelElement
+    expect(label!.htmlFor).toEqual(`identity`)
 
   })
 
-  it('should use alternative delimiter', async () => {
+  test('should use alternative delimiter', async () => {
 
-    const el = await fixture<Primitive>(html`
+    const el = await fixture<PrimitiveLabel>(html`
       <fhir-label text="id" delimiter="->"></fhir-label >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-    <label for="">id-><slot></slot></label>`)
+    const label = el.deepQuerySelector('label')
+    expect(label).toHaveTextContent(`id->`)
 
   })
+
 })

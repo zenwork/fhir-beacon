@@ -1,5 +1,5 @@
 {
-    "paths": ["./src/**"],
+    "paths": ["./src/**", "./tests"],
     "ignore": ["./src", "./components"],
     "exclude": [
         "**/*.story.data.ts",

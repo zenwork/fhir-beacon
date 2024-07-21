@@ -1,98 +1,83 @@
-import {expect, fixture} from '@open-wc/testing'
-import {html}            from 'lit'
-import {Primitive}       from './primitive'
-import '../../../index'
+import {html}                           from 'lit'
+import {assert, describe, expect, test} from 'vitest'
+import {fixture}                        from '../../../tests/lit-vitest-fixture'
+import {Primitive}                      from './primitive'
+import {PrimitiveLabel}                 from './primitive-label'
+import {PrimitiveValue}                 from './primitive-value'
 
 describe('fhir Primitive', () => {
 
-  it('should display nothing', async () => {
+  test('should display nothing', async () => {
     const el = await fixture<Primitive>(html`
       <fhir-primitive ></fhir-primitive >
-    `)
-    await expect(el).shadowDom.to.equal('')
+    `).first()
+
+    // TODO: find a way to assert emptiness better
+    // only contains lit specific comments
+    expect(el.shadowRoot!.innerHTML).toMatch(/^<!--.*-->$/)
+
   })
 
-  it('should display label', async () => {
+  test('should display label', async () => {
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" verbose></fhir-primitive >
-    `)
-    await expect(el).shadowDom.to
-      .equal(`
-          <fhir-primitive-wrapper>
-            <fhir-label delimiter=": " text="code"></fhir-label>
-          </fhir-primitive-wrapper>
-      `)
+    `).first()
 
+    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    assert.exists(label)
+    await expect(label.delimiter).to.equal(': ')
+    await expect(label.text).to.equal('code')
 
   })
 
-  it('should should display a label when label attribute is defined', async () => {
+  test('should should display a label when label attribute is defined', async () => {
+
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" value="abc"></fhir-primitive >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-      <fhir-primitive-wrapper>
-        <fhir-label delimiter=": " text="code" > </fhir-label>
-        <fhir-value link="" text="abc" >
-          <span slot="before">
-            <slot name="before">
-            </slot>
-          </span>
-          <span slot="after">
-            <slot name="after">
-            </slot>
-          </span>
-      </fhir-value>
-      </fhir-primitive-wrapper>
+    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    await expect(label.text).to.equal('code')
 
-
-    `)
-
+    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    await expect(value.text).to.equal('abc')
 
   })
 
-  it('should should display a label, a value, and a context', async () => {
+  test('should should display a label, a value, and a context', async () => {
+
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" value="abc" context="important"></fhir-primitive >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-      <fhir-primitive-wrapper>
-        <fhir-label delimiter=": " text="code" > </fhir-label>
-        <fhir-value link="" text="abc" >
-          <span slot="before">
-            <slot name="before">
-            </slot>
-          </span>
-          <span slot="after">
-            <slot name="after">
-            </slot>
-          </span>
-      </fhir-value>
-      <fhir-context></fhir-context>
-      </fhir-primitive-wrapper>
+    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    await expect(label.text).to.equal('code')
 
+    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    await expect(value.text).to.equal('abc')
 
-    `)
+    const span = el.deepQuerySelector(['fhir-context', 'span']) as HTMLSpanElement
+    await expect(span.textContent).to.equal('(important)')
+
   })
 
 
-  xit('should display a label, a value, and an error', async () => {
+  test('should display a label, a value, and an error', async () => {
+
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" value="abc" type="decimal" showerror></fhir-primitive >
-    `)
+    `).first()
 
-    await expect(el).shadowDom.to.equal(`
-      <fhir-primitive-wrapper>
-        <fhir-label delimiter=": " text="code" variant="error"></fhir-label>
-        <fhir-value link="" text="abc" variant="error">
-        </fhir-value>
-        <fhir-error text="TypeError: decimal must be a valid number"></fhir-error>
-      </fhir-primitive-wrapper>
-    `)
+    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    await expect(label!.text).to.equal('code')
 
-    expect(el).dom.to.equalSnapshot()
+    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    await expect(value!.text).to.equal('abc')
+
+    const div = el.deepQuerySelector(['fhir-error', 'div']) as HTMLSpanElement
+    await expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
+
+
 
   })
 })

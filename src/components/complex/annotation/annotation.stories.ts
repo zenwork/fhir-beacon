@@ -38,7 +38,7 @@ export const ValidationErrors: Story = {
       time: '2022-02-08T10:18:14.034+10:00',
       text: 'I don\'t think that this is true, or what I said, and it should be corrected',
     },
-    mode: 'structure_summary',
+    mode: 'display',
     showerror: true,
     verbose: false,
     open: true

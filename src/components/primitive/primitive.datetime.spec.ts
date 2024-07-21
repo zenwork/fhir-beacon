@@ -1,5 +1,5 @@
-import {assert}     from '@open-wc/testing'
-import {toDatetime} from './type-converters/toDatetime'
+import {describe, expect, it} from 'vitest'
+import {toDatetime}           from './type-converters/toDatetime'
 
 
 describe('Primitives', () => {
@@ -13,21 +13,21 @@ describe('Primitives', () => {
 
   })
   it('should fail to parse datetime string', async () => {
-    assert.throw(() => {
+    expect(() => {
       toDatetime('abc')
-    })
+    }).toThrowError()
 
-    assert.throw(() => {
+    expect(() => {
       toDatetime('1971-12-31T23:59:59.99911:00')
-    })
+    }).toThrowError()
 
-    assert.throw(() => {
+    expect(() => {
       toDatetime('1971-12-31T235959999')
-    })
+    }).toThrowError()
 
-    assert.throw(() => {
+    expect(() => {
       toDatetime('-12-31T23:59:59.999')
-    })
+    }).toThrowError()
   })
 
 })

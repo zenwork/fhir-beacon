@@ -16,7 +16,10 @@
         "rootDir": "./",
         "declaration": true,
         "incremental": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "types": [
+            "@vitest/browser/providers/playwright"
+        ]
     },
     "include": ["**/*.ts"],
     "plugins": [
