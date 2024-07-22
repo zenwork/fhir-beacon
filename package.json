@@ -9,7 +9,7 @@
         "autobarrel": "autobarrel --watch --config ./autobarrel.json",
         "manifest::build": "cem analyze --config build/custom-elements-manifest.config.js",
         "manifest::watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
-        "publish": "npm ci && npm run build-storybook",
+        "publish": "npm ci && npm run storybook::build",
         "storybook": "storybook dev -p 9999",
         "storybook::build": "storybook build",
         "storybook:clean": "rm -rf node_modules/.cache/storybook",
