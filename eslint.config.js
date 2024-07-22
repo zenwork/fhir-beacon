@@ -5,10 +5,12 @@ import tseslint from 'typescript-eslint'
 export default [
     {
         ignores:[
-            'dist/**',
-            'coverage/**',
-            'node_modules/**'
-        ],
+            '**/dist/*',
+            '**/coverage/*',
+            '**/node_modules/*'
+        ]
+    },
+    {
         files:['src/**/*.ts',
                'stories/**/*.ts',
                'tests/**/*.ts',

@@ -49,7 +49,7 @@ describe('fhir primitive label', () => {
 
     const label = el.deepQuerySelector('label') as HTMLLabelElement
     expect(label).toHaveTextContent(`id`)
-    await expect(getComputedStyle(label!).fontStyle).to.eq('italic')
+    expect(getComputedStyle(label!).fontStyle).to.eq('italic')
 
   })
 

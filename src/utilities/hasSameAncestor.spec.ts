@@ -1,5 +1,4 @@
-import {expect} from '@open-wc/testing'
-
+import { describe, expect, test } from 'vitest'
 import {hasSameAncestor} from './hasSameAncestor'
 
 let id = 0
@@ -34,56 +33,57 @@ const create = ({tagName, ancestor, shadow = false, addSlot = false, appendToSlo
 
   return child
 }
+
 describe('function: has same ancestor', () => {
 
-  it('should return false when null is provided', async () => {
-    await expect(hasSameAncestor(null)).to.equal(false)
+  test('should return false when null is provided',  () => {
+    expect(hasSameAncestor(null)).to.equal(false)
   })
 
-  it('should return false if it reaches body without finding a match', async () => {
+  test('should return false if it reaches body without finding a match',  () => {
     const child = create({ tagName: 'div', ancestor: document.body })
-    await expect(hasSameAncestor(child)).to.equal(false)
+    expect(hasSameAncestor(child)).to.equal(false)
   })
 
-  it('should return true if first ancestor is same', async () => {
+  test('should return true if first ancestor is same',  () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'div', ancestor: child})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return true if same ancestor is far away', async () => {
+  test('should return true if same ancestor is far away',  () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'div', ancestor: child})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return true if there is a shadowroot in between', async () => {
+  test('should return true if there is a shadowroot in between',  () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'div', ancestor: child})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return true if the starting point is a shadowroot', async () => {
+  test('should return true if the starting point is a shadowroot',  () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'div', ancestor: child, shadow: true})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return true if they are all shadowroots', async () => {
+  test('should return true if they are all shadowroots',  () => {
     let child = create({tagName: 'div', ancestor: document.body, shadow: true})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'div', ancestor: child, shadow: true})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return true if there are many shadowroots in between', async () => {
+  test('should return true if there are many shadowroots in between',  () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -92,10 +92,10 @@ describe('function: has same ancestor', () => {
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'div', ancestor: child})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  it('should return false if there are many shadowroots but no same element', async () => {
+  test('should return false if there are many shadowroots but no same element',  () => {
     let child = create({tagName: 'p', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -104,15 +104,15 @@ describe('function: has same ancestor', () => {
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'div', ancestor: child})
-    await expect(hasSameAncestor(child)).to.equal(false)
+    expect(hasSameAncestor(child)).to.equal(false)
   })
 
-  it('should return true with slotted elements', async () => {
+  test('should return true with slotted elements',  () => {
     let child = create({tagName: 'div', ancestor: document.body, shadow: true})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true, addSlot: true})
     child = create({tagName: 'div', ancestor: child, appendToSlot: true})
-    await expect(hasSameAncestor(child)).to.equal(true)
+    expect(hasSameAncestor(child)).to.equal(true)
   })
 
 })

@@ -34,7 +34,6 @@ HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selec
 
     throw new IllegalStateError('element not found')
 
-
   }
 }
 

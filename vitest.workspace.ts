@@ -5,7 +5,7 @@ export default defineWorkspace([
     test: {
       name: 'unit-tests',
       include: [
-        'src/**/primitive.datetime.spec.ts'
+        'src/**/*.test.ts'
       ],
       environment: 'node'
     }
@@ -17,9 +17,9 @@ export default defineWorkspace([
       globals: false,
       setupFiles: './vitest.setup.ts',
       include: [
-        'src/**/primitive.test.ts',
-        'src/**/primitive-value.test.ts',
-        'src/**/primitive-label.test.ts'
+        'src/**/primitive.spec.ts',
+        'src/**/primitive-value.spec.ts',
+        'src/**/primitive-label.spec.ts'
 
       ],
       browser: {

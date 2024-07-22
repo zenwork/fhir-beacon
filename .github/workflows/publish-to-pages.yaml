@@ -45,7 +45,7 @@ jobs:
                 run: npx playwright install --with-deps
 
             -   name: Run tests
-                run: npm run vitest::github
+                run: npm run vitest
 
             -   name: Publish
                 run: npm run publish

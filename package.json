@@ -7,6 +7,8 @@
     "main": "index.js",
     "scripts": {
         "autobarrel": "autobarrel --watch --config ./autobarrel.json",
+        "eslint": "eslint",
+        "eslint::fix": "eslint --fix"
         "manifest::build": "cem analyze --config build/custom-elements-manifest.config.js",
         "manifest::watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
         "publish": "npm ci && npm run storybook::build",
@@ -19,9 +21,7 @@
         "vite::dev": "vite",
         "vite::preview": "vite preview",
         "vitest": "vitest run",
-        "vitest::github": "vitest run",
         "vitest::watch": "vitest watch --browser.headless=false",
-        "vitest::watch::browser": "vitest watch --browser.headless=false"
     },
     "private": true,
     "dependencies": {
