@@ -1,16 +1,15 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
-import {TestableHtmlElement}                      from './TestableElement'
 
 
 const elements: any[] = []
 
-type TestableElement<T extends LitElement> = T & TestableHtmlElement
+type TestableElement<T extends LitElement> = T
 
 class FixtureResult<T extends LitElement> {
   private readonly promises: Promise<boolean>[]
-  private readonly reactiveElements: (TestableElement<T>)[]
+  private readonly reactiveElements: (T)[]
 
-  constructor(promises: Promise<boolean>[], reactiveElements: TestableElement<T>[]) {
+  constructor(promises: Promise<boolean>[], reactiveElements: T[]) {
     this.promises = promises
     this.reactiveElements = reactiveElements
   }

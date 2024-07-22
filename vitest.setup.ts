@@ -1,11 +1,10 @@
-import './index'
 import {deepQuerySelector, deepQuerySelectorAll} from 'shadow-dom-testing-library'
 import {IllegalStateError}                       from './tests/lit-vitest-fixture'
 import {queryDefaultSlot, querySlot}             from './tests/query-slot'
 
+// TODO: loading everything for now... should not do this once proper separation of import trees
+import './index'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selector: string | string[]): T {
   if (typeof selector === 'string') {
     const result = deepQuerySelector<T>(this, selector)
@@ -38,8 +37,6 @@ HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selec
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(selector: string | string[]): T[] {
   if (typeof selector === 'string') {
     const result = deepQuerySelectorAll<T>(this, selector)
@@ -71,14 +68,10 @@ HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(se
 }
 
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 HTMLElement.prototype.queryDefaultSlot = function (): Node[] {
   return queryDefaultSlot(this)
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 HTMLElement.prototype.querySlot = function (slotName: string): Element[] {
   return querySlot(this, slotName)
 }
