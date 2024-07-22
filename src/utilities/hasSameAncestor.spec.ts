@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest'
-import {hasSameAncestor} from './hasSameAncestor'
+import {describe, expect, test} from 'vitest'
+import {hasSameAncestor}        from './hasSameAncestor'
 
 let id = 0
 const create = ({tagName, ancestor, shadow = false, addSlot = false, appendToSlot = false}: {
@@ -36,22 +36,22 @@ const create = ({tagName, ancestor, shadow = false, addSlot = false, appendToSlo
 
 describe('function: has same ancestor', () => {
 
-  test('should return false when null is provided',  () => {
+  test('should return false when null is provided', () => {
     expect(hasSameAncestor(null)).to.equal(false)
   })
 
-  test('should return false if it reaches body without finding a match',  () => {
+  test('should return false if it reaches body without finding a match', () => {
     const child = create({ tagName: 'div', ancestor: document.body })
     expect(hasSameAncestor(child)).to.equal(false)
   })
 
-  test('should return true if first ancestor is same',  () => {
+  test('should return true if first ancestor is same', () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'div', ancestor: child})
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return true if same ancestor is far away',  () => {
+  test('should return true if same ancestor is far away', () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -59,7 +59,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return true if there is a shadowroot in between',  () => {
+  test('should return true if there is a shadowroot in between', () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true})
@@ -67,7 +67,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return true if the starting point is a shadowroot',  () => {
+  test('should return true if the starting point is a shadowroot', () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -75,7 +75,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return true if they are all shadowroots',  () => {
+  test('should return true if they are all shadowroots', () => {
     let child = create({tagName: 'div', ancestor: document.body, shadow: true})
     child = create({tagName: 'p', ancestor: child, shadow: true})
     child = create({tagName: 'p', ancestor: child, shadow: true})
@@ -83,7 +83,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return true if there are many shadowroots in between',  () => {
+  test('should return true if there are many shadowroots in between', () => {
     let child = create({tagName: 'div', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -95,7 +95,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(true)
   })
 
-  test('should return false if there are many shadowroots but no same element',  () => {
+  test('should return false if there are many shadowroots but no same element', () => {
     let child = create({tagName: 'p', ancestor: document.body})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child})
@@ -107,7 +107,7 @@ describe('function: has same ancestor', () => {
     expect(hasSameAncestor(child)).to.equal(false)
   })
 
-  test('should return true with slotted elements',  () => {
+  test('should return true with slotted elements', () => {
     let child = create({tagName: 'div', ancestor: document.body, shadow: true})
     child = create({tagName: 'p', ancestor: child})
     child = create({tagName: 'p', ancestor: child, shadow: true, addSlot: true})
