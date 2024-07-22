@@ -1,6 +1,7 @@
 // This is needed to avoid TS typing issues
 export {}
 
+// WARN: This is only for testing purpose
 declare global {
 
   interface HTMLElement {

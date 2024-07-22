@@ -224,3 +224,4 @@ refs
 test-results/
 /.npmrc
 results/
+**/__screenshots__/

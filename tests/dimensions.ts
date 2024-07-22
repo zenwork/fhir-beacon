@@ -10,7 +10,7 @@ const getPixDimmensions = (el: HTMLElement) => {
   return { hPx, wPx }
 }
 
-export const dimmensions = (div: HTMLDivElement, as: 'px' | 'rem') => {
+export const dimmensions = (div: HTMLElement, as: 'px' | 'rem') => {
   const { hPx, wPx } = getPixDimmensions(div)
   if (as === 'px') {
     return { h: hPx, w: wPx }

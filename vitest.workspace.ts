@@ -25,13 +25,15 @@ export default defineWorkspace([
       browser: {
         enabled: true,
         name: 'chromium',
-        headless: true,
-        provider: 'playwright'
+        headless: false,
+        provider: 'playwright',
+        viewport: { width: 1000, height: 800 }
       },
       typecheck: {
         enabled: true,
         tsconfig: './tsconfig.test.json'
-      }
+      },
+      testTimeout: 5000
     }
   }
 ])

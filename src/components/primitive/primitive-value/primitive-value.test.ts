@@ -1,10 +1,11 @@
 import {html}                   from 'lit'
 import {describe, expect, test} from 'vitest'
 import {dimmensions}            from '../../../../tests/dimensions'
-import {getSlotContent}         from '../../../../tests/get-slot-content'
-import {fixture}                from '../../../../tests/lit-vitest-fixture'
-import {queryShadow}            from '../../../../tests/query-shadow'
-import {PrimitiveValue}         from './primitive-value'
+
+import {fixture}     from '../../../../tests/lit-vitest-fixture'
+import {queryShadow} from '../../../../tests/query-shadow'
+
+import {PrimitiveValue} from './primitive-value'
 
 describe('fhir primitive value', () => {
 
@@ -53,7 +54,6 @@ describe('fhir primitive value', () => {
     expect(span.classList[0]).toEqual(`placeholder`)
     expect(span.textContent).toEqual(`missing value`)
 
-
   })
 
   test('should display prefix and suffixes', async () => {
@@ -66,13 +66,13 @@ describe('fhir primitive value', () => {
     `).first()
 
 
-    const before = queryShadow<HTMLSlotElement>(el, 'slot[name="before"]')
-    expect(getSlotContent(before)).toEqual(`over`)
+    const before = el.querySlot('before')[0]
+    expect(before).toHaveTextContent(`over`)
 
     expect.element(el.renderRoot as Element).toHaveTextContent('100')
 
-    const after = queryShadow<HTMLSlotElement>(el, 'slot[name="after"]')
-    expect(getSlotContent(after)).toEqual(`percent`)
+    const after = el.querySlot('after')[0]
+    expect(after).toHaveTextContent(`percent`)
 
   })
 
@@ -82,7 +82,9 @@ describe('fhir primitive value', () => {
     const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Amet luctus venenatis lectus magna fringilla urna porttitor. Dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Tellus in hac habitasse platea. Posuere urna nec tincidunt praesent semper feugiat nibh. Tortor pretium viverra suspendisse potenti nullam ac tortor. Fusce id velit ut tortor pretium viverra suspendisse potenti. Enim eu turpis egestas pretium aenean pharetra. Non consectetur a erat nam at lectus. Amet est placerat in egestas erat imperdiet sed.'
 
     const el = await fixture<PrimitiveValue>(html`
+      <div style="height:5rem; width:10rem">
       <fhir-value text="${text}" variant="hide-overflow"></fhir-value >
+      </div >
     `).first()
 
     const div: HTMLDivElement = queryShadow(el, 'div')
@@ -93,24 +95,24 @@ describe('fhir primitive value', () => {
 
       const { h, w } = dimmensions(div, 'rem')
 
-      await expect(h).to.equal(2)
-      await expect(w).to.equal(30)
+      expect(h).to.equal(2)
+      expect(w).to.equal(30)
 
     } else {
       expect.fail('shadow root content not found')
     }
 
     // TODO: next minor release might work better.
-    // const target = document.querySelector('fhir-value')
-    // console.log(target)
-    // await userEvent.hover(target!,{timeout:2000})
+    // waiting for https://github.com/vitest-dev/vitest/pull/6175
+    // await userEvent.hover(div)
+
+    // await el.updateComplete
+
+    // if (target) {
+    //   const { h, w } = dimmensions(target, 'rem')
     //
-    //
-    // if (div) {
-    //   const { h, w } = dimmensions(div, 'rem')
-    //
-    //   await expect(h).to.equal(12)
-    //   await expect(w).to.equal(30)
+    //   expect(h).to.equal(12)
+    //   expect(w).to.equal(30)
     // } else {
     //   expect.fail('shadow root content not found')
     // }
@@ -130,9 +132,10 @@ describe('fhir primitive value', () => {
       .toHaveTextContent(text)
 
 
-    // if (div) {
-    //   const { w } = dimmensions(div, 'rem')
-    //   await expect(w).to.equal(40)
-    // } else { expect.fail('shadow root content not found') }
+    if (div) {
+      const { w } = dimmensions(div, 'rem')
+      expect(w).toEqual(40)
+    } else { expect.fail('shadow root content not found') }
+
   })
 })
