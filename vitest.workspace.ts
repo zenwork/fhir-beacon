@@ -25,7 +25,7 @@ export default defineWorkspace([
       browser: {
         enabled: true,
         name: 'chromium',
-        headless: false,
+        headless: true,
         provider: 'playwright',
         viewport: { width: 1000, height: 800 }
       },
