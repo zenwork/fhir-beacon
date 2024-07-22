@@ -1,9 +1,8 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
 
+export const emptyLitShadow = /^<!--.*-->$/
 
 const elements: any[] = []
-
-type TestableElement<T extends LitElement> = T
 
 class FixtureResult<T extends LitElement> {
   private readonly promises: Promise<boolean>[]
@@ -52,7 +51,7 @@ export function fixture<T extends LitElement>(template: TemplateResult): Fixture
 
     // store for eventual cleanup
     elements.push(wrapper)
-    const reactiveElements: TestableElement<T>[] = getDerivedChildren(wrapper.children)
+    const reactiveElements: T[] = getDerivedChildren(wrapper.children)
 
     return new FixtureResult<T>(reactiveElements.map(e => e.updateComplete), reactiveElements)
   }

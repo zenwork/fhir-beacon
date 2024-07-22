@@ -1,6 +1,6 @@
 import {html}                           from 'lit'
 import {assert, describe, expect, test} from 'vitest'
-import {fixture}                        from '../../../tests/lit-vitest-fixture'
+import {emptyLitShadow, fixture}        from '../../../tests/lit-vitest-fixture'
 import {Primitive}                      from './primitive'
 import {PrimitiveLabel}                 from './primitive-label'
 import {PrimitiveValue}                 from './primitive-value'
@@ -14,7 +14,7 @@ describe('fhir Primitive', () => {
 
     // TODO: find a way to assert emptiness better
     // only contains lit specific comments
-    expect(el.shadowRoot!.innerHTML).toMatch(/^<!--.*-->$/)
+    expect(el.shadowRoot!.innerHTML).toMatch(emptyLitShadow)
 
   })
 

@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest'
-import {toDatetime}           from './type-converters/toDatetime'
+import {toDatetime}           from './toDatetime'
 
 
 describe('Primitives', () => {

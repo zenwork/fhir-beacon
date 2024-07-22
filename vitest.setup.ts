@@ -1,7 +1,7 @@
-import {deepQuerySelector, deepQuerySelectorAll} from 'shadow-dom-testing-library'
-import {beforeAll}                               from 'vitest'
-import {IllegalStateError}                       from './tests/lit-vitest-fixture'
-import {queryDefaultSlot, querySlot}             from './tests/query-slot'
+import {deepQuerySelector, deepQuerySelectorAll, logShadowDOM} from 'shadow-dom-testing-library'
+import {beforeAll}                                             from 'vitest'
+import {IllegalStateError}                                     from './tests/lit-vitest-fixture'
+import {queryDefaultSlot, querySlot}                           from './tests/query-slot'
 
 // TODO: loading everything for now... should not do this once proper separation of import trees
 import './index'
@@ -76,6 +76,10 @@ HTMLElement.prototype.querySlot = function (slotName: string): Element[] {
   return querySlot(this, slotName)
 }
 
+HTMLElement.prototype.logShadowDOM = function (): void {
+  console.log('==> SHADOW DOM <==')
+  logShadowDOM(this)
+}
 
 beforeAll(() => {
   document.head.innerHTML = `

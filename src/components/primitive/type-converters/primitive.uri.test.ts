@@ -1,5 +1,5 @@
 import {describe, test} from 'vitest'
-import {toUri}          from './type-converters/toUri'
+import {toUri}          from './toUri'
 
 describe('Primitives', () => {
   test('should parse a URI', async () => {

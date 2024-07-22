@@ -12,6 +12,8 @@ declare global {
     queryDefaultSlot(): Node[]
 
     querySlot(slotName: string): Element[]
+
+    logShadowDOM(): void
   }
 
 }
