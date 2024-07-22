@@ -25,8 +25,8 @@ describe('fhir Primitive', () => {
 
     const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
     assert.exists(label)
-    await expect(label.delimiter).to.equal(': ')
-    await expect(label.text).to.equal('code')
+    expect(label.delimiter).to.equal(': ')
+    expect(label.text).to.equal('code')
 
   })
 
@@ -37,10 +37,10 @@ describe('fhir Primitive', () => {
     `).first()
 
     const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
-    await expect(label.text).to.equal('code')
+    expect(label.text).to.equal('code')
 
     const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
-    await expect(value.text).to.equal('abc')
+    expect(value.text).to.equal('abc')
 
   })
 
@@ -51,13 +51,13 @@ describe('fhir Primitive', () => {
     `).first()
 
     const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
-    await expect(label.text).to.equal('code')
+    expect(label.text).to.equal('code')
 
     const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
-    await expect(value.text).to.equal('abc')
+    expect(value.text).to.equal('abc')
 
     const span = el.deepQuerySelector(['fhir-context', 'span']) as HTMLSpanElement
-    await expect(span.textContent).to.equal('(important)')
+    expect(span.textContent).to.equal('(important)')
 
   })
 
@@ -69,15 +69,13 @@ describe('fhir Primitive', () => {
     `).first()
 
     const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
-    await expect(label!.text).to.equal('code')
+    expect(label!.text).to.equal('code')
 
     const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
-    await expect(value!.text).to.equal('abc')
+    expect(value!.text).to.equal('abc')
 
     const div = el.deepQuerySelector(['fhir-error', 'div']) as HTMLSpanElement
-    await expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
-
-
+    expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
 
   })
 })

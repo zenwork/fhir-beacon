@@ -4,9 +4,7 @@ export default defineWorkspace([
   {
     test: {
       name: 'unit-tests',
-      include: [
-        'src/**/*.test.ts'
-      ],
+      include: ['src/**/*.test.ts'],
       environment: 'node'
     }
   },
@@ -16,12 +14,7 @@ export default defineWorkspace([
       name: 'browser-tests',
       globals: false,
       setupFiles: './vitest.setup.ts',
-      include: [
-        'src/**/primitive.spec.ts',
-        'src/**/primitive-value.spec.ts',
-        'src/**/primitive-label.spec.ts'
-
-      ],
+      include: ['src/**/*.spec.ts'],
       browser: {
         enabled: true,
         name: 'chromium',

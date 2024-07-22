@@ -1,7 +1,7 @@
 import {assert, describe, expect, test} from 'vitest'
-import {Code}                           from './primitive.data'
-import {toCode}                         from './type-converters/toCode'
-import {toUrl}                          from './type-converters/toUrl'
+import {Code}                           from '../primitive.data'
+import {toCode}                         from './toCode'
+import {toUrl}                          from './toUrl'
 
 
 describe('Primitives', () => {
