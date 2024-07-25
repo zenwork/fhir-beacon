@@ -62,7 +62,7 @@ describe('fhir Primitive', () => {
   })
 
 
-  test('should display a label, a value, and an error', async () => {
+  test('should display an error when the type-check fails', async () => {
 
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" value="abc" type="decimal" showerror></fhir-primitive >

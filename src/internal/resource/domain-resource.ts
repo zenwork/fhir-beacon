@@ -18,7 +18,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
   protected constructor(type: string) {
     super(type)
-    this.addStructureTempateGenerator('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
+    this.addStructureTemplateGenerator('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
   }
 
   protected render(): TemplateResult {
@@ -61,12 +61,12 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
         <fhir-narrative label="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
       `,
       html`
-      ${(this.data.contained) ? html`
+        ${(this.data.contained) ? html`
         <fhir-structure-wrapper label="contained" ?forceclose=${true}>
           ${this.renderStructureContained()}
         </fhir-structure-wrapper >
       ` : nothing}
-      ${(!this.data.contained && this.verbose) ? html`
+        ${(!this.data.contained && this.verbose) ? html`
         <fhir-structure-wrapper label="contained" ?forceclose=${true}>
           <fhir-empty-list ></fhir-empty-list >
         </fhir-structure-wrapper >` : nothing}
@@ -81,7 +81,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   protected renderStructureContained(): TemplateResult[] {
     if (this.data?.contained) {
       return this.data.contained.map((c: ResourceData) => {
-        return renderResourceComponent(c, this.display.value)
+        return renderResourceComponent(c, this.getDisplayConfig())
       })
     }
     return []

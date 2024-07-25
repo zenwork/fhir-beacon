@@ -8,7 +8,9 @@ import {SubstanceData}                 from './substance.data'
 @customElement('fhir-substance')
 export class Substance extends DomainResource<SubstanceData> {
 
-  constructor() {super('Substance')}
+  constructor() {
+    super('Substance')
+  }
 
   protected renderDisplay(data: SubstanceData): TemplateResult {
 

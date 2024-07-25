@@ -6,7 +6,9 @@ import {ObservationDefinitionData} from './observation-definition.data'
 @customElement('fhir-observation-definition')
 export class ObservationDefinition extends DomainResource<ObservationDefinitionData> {
 
-  constructor() {super('ObservationDefinition')}
+  constructor() {
+    super('ObservationDefinition')
+  }
 
   protected renderDisplay(): TemplateResult | TemplateResult[] {
     return html``

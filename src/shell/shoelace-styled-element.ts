@@ -1,11 +1,16 @@
 import {LitElement} from 'lit'
-import {state}      from 'lit/decorators.js'
 
-export abstract class ShoelaceStyledElement extends LitElement {
+export class ShoelaceStyledElement extends LitElement {
 
+  protected isSlotted() {
+    try {
+      return this.shadowRoot!.querySelector('slot')!.assignedNodes()!.length > 0
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      return false
+    }
 
-  @state()
-  protected isSlotted = false
+  }
 
   public connectedCallback() {
     super.connectedCallback()

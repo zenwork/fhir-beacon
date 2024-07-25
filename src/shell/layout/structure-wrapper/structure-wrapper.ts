@@ -48,7 +48,7 @@ export class StructureWrapper extends ShoelaceStyledElement {
 
   protected render(): unknown {
     // console.log(this.label,this.fhirType,this.summary,this.displayConfig.mode)
-    if (!this.summaryMode() || (this.summary && this.summaryMode())) {
+    // if (!this.summaryMode() || (this.summary && this.summaryMode())) {
       let open = false
       if (this.displayConfig.open) open = true
       if (this.forceclose) open = false
@@ -71,9 +71,9 @@ export class StructureWrapper extends ShoelaceStyledElement {
               </ul >
             </sl-details >
         `
-    }
+    // }
 
-    return html``
+    // return html``
   }
 
 

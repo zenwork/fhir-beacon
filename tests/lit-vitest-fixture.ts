@@ -1,6 +1,6 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
 
-export const emptyLitShadow = /^<!--.*-->$/
+export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
 
 const elements: any[] = []
 

@@ -10,10 +10,17 @@ export class PrimitiveWrapper extends ShoelaceStyledElement {
   static styles = [textHostStyles, componentStyles]
 
   protected render(): unknown {
-    return html`
-      <li part="wrapper">
-        <slot ></slot >
-      </li >
-    `
+
+    if (this.hasChildNodes()) {
+      return html`
+        <li part="wrapper">
+          <slot ></slot >
+        </li >
+      `
+    }
+
+    return html``
   }
+
+
 }

@@ -11,7 +11,6 @@ export class Medication extends DomainResource<MedicationData> {
 
   constructor() {
     super('Medication')
-    this.summary = true
   }
 
   protected renderDisplay(data: MedicationData): TemplateResult | TemplateResult[] {

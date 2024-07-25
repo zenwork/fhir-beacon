@@ -1,13 +1,14 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextProvider} from '../../../internal/base/base-element-context-provider'
-import {wrapc, wraps}               from '../../../shell/layout/wrapCollection'
-import {isDeceasedBoolean}          from '../../complex/quantity/quantity.type-guards'
-import {PrimitiveType}              from '../../primitive/type-converters/type-converters'
-import {PatientData}                from './patient.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {DomainResource}       from '../../../internal'
+
+import {wrapc, wraps}      from '../../../shell/layout/wrapCollection'
+import {isDeceasedBoolean} from '../../complex/quantity/quantity.type-guards'
+import {PrimitiveType}     from '../../primitive/type-converters/type-converters'
+import {PatientData}       from './patient.data'
 
 @customElement('fhir-patient')
-export class Patient extends BaseElementContextProvider<PatientData> {
+export class Patient extends DomainResource<PatientData> {
 
   constructor() {
     super('Patient')

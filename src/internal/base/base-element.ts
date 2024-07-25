@@ -10,6 +10,7 @@ import {ShoelaceStyledElement}        from '../../shell/shoelace-styled-element'
 import {hostStyles}                   from '../../styles/hostStyles'
 import {countNodes}                   from '../../utilities/countNodes'
 import {toBaseElementModeEnum}        from '../../utilities/toBaseElementModeEnum'
+import {DisplayConfig}                from '../contexts'
 import {BaseElementData, DisplayMode} from './base-element.data'
 import {componentStyles}              from './base-element.styles'
 
@@ -17,7 +18,8 @@ type GeneratorGroup<T> = { [key: string]: (data: T) => TemplateResult | Template
 type Generators<T> = { structure: GeneratorGroup<T>, display: GeneratorGroup<T> }
 
 export type ValidationError = { id: string, err: string }
-export abstract class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
+
+export class BaseElement<T extends BaseElementData> extends ShoelaceStyledElement {
 
   static styles = [hostStyles, componentStyles]
 
@@ -74,8 +76,13 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
   constructor(type: string) {
     super()
     this.type = type
-    this.addStructureTempateGenerator('base-element', (data: T) => this.renderBaseElement(data))
+    this.addStructureTemplateGenerator('base-element', (data: T) => this.renderBaseElement(data))
   }
+
+  public getDisplayConfig(): DisplayConfig {
+    return { open: this.open, verbose: this.verbose, mode: this.mode, showerror: this.showerror }
+  }
+
 
   /**
    * Rendering method for all elements
@@ -102,7 +109,7 @@ export abstract class BaseElement<T extends BaseElementData> extends ShoelaceSty
    * @param name
    * @param generator
    */
-  protected addStructureTempateGenerator(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
+  public addStructureTemplateGenerator(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
     this.templateGenerators.structure[name] = generator
   }
 

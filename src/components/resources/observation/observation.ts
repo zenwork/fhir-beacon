@@ -1,12 +1,15 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextProvider} from '../../../internal/base/base-element-context-provider'
-import {ObservationData}            from './observation.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {DomainResource}       from '../../../internal'
+
+import {ObservationData} from './observation.data'
 
 @customElement('fhir-observation')
-export class Observation extends BaseElementContextProvider<ObservationData> {
+export class Observation extends DomainResource<ObservationData> {
 
-  constructor() {super('Observation')}
+  constructor() {
+    super('Observation')
+  }
 
   protected renderDisplay(): TemplateResult | TemplateResult[] {
     return html``

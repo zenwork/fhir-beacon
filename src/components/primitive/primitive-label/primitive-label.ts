@@ -28,16 +28,10 @@ export class PrimitiveLabel extends ShoelaceStyledElement {
   render() {
     return html`
       <label class="${this.variant}" for=${this.for}>
-        ${this.isSlotted ? html`` : this.text}${this.isSlotted || !this.text ? '' : this.delimiter}
+        ${this.isSlotted() ? html`` : this.text}${this.isSlotted() || !this.text ? '' : this.delimiter}
         <slot ></slot >
       </label >`
   }
 
-  public connectedCallback() {
-    super.connectedCallback()
-    if (this.assignedElements.length == 0) return
-
-    this.isSlotted = true
-  }
 
 }

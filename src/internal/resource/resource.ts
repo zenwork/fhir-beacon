@@ -1,13 +1,16 @@
-import {html, TemplateResult}       from 'lit'
-import {PrimitiveType}              from '../../components/primitive/type-converters/type-converters'
-import {BaseElementContextProvider} from '../base/base-element-context-provider'
-import {ResourceData}               from './domain-resource.data'
+import {html, TemplateResult}                   from 'lit'
+import {PrimitiveType}                          from '../../components/primitive/type-converters/type-converters'
+import {BaseElement, ContextProviderController} from '../base'
+import {ResourceData}                           from './domain-resource.data'
 
-export abstract class Resource<T extends ResourceData> extends BaseElementContextProvider<T> {
+export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
+
+  private context: ContextProviderController<T>
 
   protected constructor(type: string) {
     super(type)
-    this.addStructureTempateGenerator('resource', (data: T) => this.renderResourceStructure(data))
+    this.context = new ContextProviderController(this)
+    this.addStructureTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
   }
 
   private renderResourceStructure(data: T): TemplateResult | TemplateResult[] {
