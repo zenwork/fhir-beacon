@@ -9,7 +9,7 @@ import {BaseElementData, DisplayMode}      from './base-element.data'
 
 //TODO: adding this context root to the document.body is a bit of a hack and may or may not work when there are multiple shells in one document.
 (function init() {
-  console.log('adding a context root to the body')
+  // console.debug('adding a context root to the body')
   new ContextRoot().attach(document.body)
 })()
 
@@ -24,13 +24,6 @@ export abstract class BaseElementContextConsumer<T extends BaseElementData> exte
   @property({ type: String, attribute: 'data-path' })
   declare dataPath: string
 
-
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (this.displayConfig) {
-      // console.log('will',this.type, this.displayConfig)
-    }
-  }
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)

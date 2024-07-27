@@ -1,3 +1,4 @@
+import Promise      from 'lie'
 import {LitElement} from 'lit'
 
 export class ShoelaceStyledElement extends LitElement {
@@ -12,10 +13,8 @@ export class ShoelaceStyledElement extends LitElement {
 
   }
 
-  public connectedCallback() {
-    super.connectedCallback()
-    // TODO: figure out the best way to provide the standrad css theme. At the moment this is blocking overriding in specific locations
-    // if (this.shadowRoot) loadShoelaceStylesFromPage(this.shadowRoot)
-  }
 
+  public get updateComplete(): Promise<boolean> {
+    return super.updateComplete
+  }
 }

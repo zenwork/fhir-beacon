@@ -45,7 +45,7 @@ export class BaseElement<T extends BaseElementData> extends ShoelaceStyledElemen
   @property({ type: Boolean, reflect: true })
   declare showerror: boolean
 
-  @property({ reflect: true })
+  @property({ reflect: false })
   protected type: string = ''
 
   @property({ type: Boolean, reflect: true })
@@ -89,7 +89,12 @@ export class BaseElement<T extends BaseElementData> extends ShoelaceStyledElemen
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
-    // console.log('render loop', this.type, this.mode)
+
+    if (!this.convertedData && this.showerror) {
+      return html`
+        <fhir-error text="no data provided"></fhir-error >`
+    }
+
     return html`${choose(this.mode, [
         [DisplayMode.combined, () => this.renderCombinedWrapper()],
         [DisplayMode.display, () => this.renderDisplayWrapper()],

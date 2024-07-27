@@ -87,7 +87,9 @@ describe('fhir primitive value', () => {
       </div >
     `).first()
 
-    const div: HTMLDivElement = queryShadow(el, 'div')
+    await el.updateComplete
+
+    const div = el.deepQuerySelector<HTMLDivElement>('div')
     expect(div)
       .toHaveTextContent(text)
 

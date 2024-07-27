@@ -12,7 +12,7 @@ export function isQuantity(quantity: QuantityData | SimpleQuantityData): quantit
 }
 
 export function isSimpleQuantity(quantity: QuantityData | SimpleQuantityData): quantity is SimpleQuantityData {
-  return 'comparator' in quantity
+  return !('comparator' in quantity)
 }
 
 

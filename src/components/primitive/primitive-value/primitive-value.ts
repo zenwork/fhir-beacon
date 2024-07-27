@@ -1,5 +1,6 @@
 import {html}                                           from 'lit'
 import {customElement, property, queryAssignedElements} from 'lit/decorators.js'
+import {classMap}                                       from 'lit/directives/class-map.js'
 import {ShoelaceStyledElement}                          from '../../../shell/shoelace-styled-element'
 import {textHostStyles}                                 from '../../../styles/textHostStyles'
 import {isBlank}                                        from '../../../utilities/isBlank'
@@ -31,16 +32,22 @@ export class PrimitiveValue extends ShoelaceStyledElement {
 
 
   protected render(): unknown {
+    const classes = {
+      placeholder: this.variant === 'placeholder',
+      error: this.variant === 'error',
+      'fixed-width': this.variant === 'fixed-width',
+      'hide-overflow': this.variant === 'hide-overflow'
+    }
     return html`
-      <div id=${this.id} class="${this.variant}">
-        ${(this.computeValue())}
+      <div class="${classMap(classes)}">
+        ${this.computeValue()}
       </div>`
   }
 
   private computeValue = () => {
     if (this.link) {
       return html`
-        <a href=${this.link}>
+        <a href="${this.link}" >
           <slot name="before"></slot>
           ${this.text}
           <slot name="after"></slot>

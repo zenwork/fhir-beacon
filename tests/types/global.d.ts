@@ -5,9 +5,9 @@ export {}
 declare global {
 
   interface HTMLElement {
-    deepQuerySelector(selector: string | string[]): unknown
+    deepQuerySelector<T extends HTMLElement>(selector: string | string[]): T
 
-    deepQuerySelectorAll(selector: string | string[]): unknown[]
+    deepQuerySelectorAll<T extends HTMLElement>(selector: string | string[]): T[]
 
     queryDefaultSlot(): Node[]
 

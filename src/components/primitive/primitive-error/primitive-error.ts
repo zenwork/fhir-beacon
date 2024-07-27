@@ -1,12 +1,13 @@
 import {html}                    from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {ShoelaceStyledElement}   from '../../../shell/shoelace-styled-element'
+import {textHostStyles}          from '../../../styles'
 import {componentStyles}         from './primitive-error.styles'
 
 @customElement('fhir-error')
 export class PrimitiveError extends ShoelaceStyledElement {
 
-  static styles = componentStyles
+  static styles = [textHostStyles, componentStyles]
 
   @property()
   declare text: string

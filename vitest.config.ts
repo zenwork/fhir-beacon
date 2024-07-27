@@ -6,7 +6,7 @@ export default defineProject(
     test: {
       globals: false,
       setupFiles: './vitest.setup.ts',
-      reporters: ['verbose', 'junit'],
+      reporters: ['default', 'junit'],
       outputFile: {
         junit: './results/junit-report.xml'
       },
@@ -14,5 +14,5 @@ export default defineProject(
         enabled: true,
         tsconfig: './tsconfig.test.json'
       }
-    },
+    }
   })

@@ -13,7 +13,7 @@ HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selec
       return result
     }
 
-    throw new IllegalStateError('element not found')
+    throw new IllegalStateError('deepQuerySelector: element not found')
 
   } else {
 
@@ -24,7 +24,7 @@ HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selec
       if (temp) {
         result = temp
       } else {
-        throw new IllegalStateError('element not found')
+        throw new IllegalStateError('deepQuerySelector: element not found')
       }
     })
 
@@ -32,7 +32,7 @@ HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selec
       return result as T
     }
 
-    throw new IllegalStateError('element not found')
+    throw new IllegalStateError('deepQuerySelector: element not found')
 
   }
 }
@@ -44,7 +44,7 @@ HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(se
       return result
     }
 
-    throw new IllegalStateError('element not found')
+    throw new IllegalStateError('deepQuerySelectorAll: element not found')
   } else {
 
     let result: any = document
@@ -54,7 +54,7 @@ HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(se
       if (temp) {
         result = temp
       } else {
-        throw new IllegalStateError('element not found')
+        throw new IllegalStateError('deepQuerySelectorAll: element not found')
       }
     })
 
@@ -62,7 +62,7 @@ HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(se
       return result as T[]
     }
 
-    throw new IllegalStateError('element not found')
+    throw new IllegalStateError('deepQuerySelectorAll: element not found')
 
   }
 }
@@ -80,10 +80,39 @@ const doubleSpace = / {2}/g
 const litComments = /<!--.*-->/gm
 const doubleSpaced = /\n\s+\n/gm
 HTMLElement.prototype.logShadowDOM = function (): void {
-  const shadow = this.shadowRoot!.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
-  const light = this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
-  const tag = this.tagName.toLowerCase()
-  console.log(`<${tag}>\n  #shadow-dom${shadow}\n  #light-dom${light}\n</${tag}>`)
+  try {
+    let shadow = 'n/a'
+    if (this.shadowRoot) {
+      shadow = this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? ''
+      shadow = shadow ?? this.shadowRoot.textContent
+    }
+    const light = this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
+    const tag = this.tagName.toLowerCase()
+    const outerHTML = this.outerHTML
+    const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
+    let data: string = ''
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    if (this.data) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      data = pad(JSON.stringify(this.data, null, 2))
+    }
+    console.log(`${tagAndAttributes}\n  #shadow-dom${shadow}\n  #light-dom${light}\n  #data\n${data}\n\n</${tag}>`)
+  } catch (e) { console.log(e) }
+}
+
+function pad(input: string) {
+  // Split the input string into an array of lines
+  const lines = input.split('\n')
+
+  // Pad each line with two spaces
+  const paddedLines = lines.map(line => '    ' + line)
+
+  // Join the padded lines back into a single string
+  const output = paddedLines.join('\n')
+
+  return output
 }
 
 beforeAll(() => {

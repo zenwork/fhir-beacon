@@ -12,3 +12,12 @@ export type QuantityData = BaseElementData & {
 
 
 export type SimpleQuantityData = Omit<QuantityData, 'comparator'>
+
+export enum QuantityVariations {
+  age = 'age',
+  count = 'count',
+  distance = 'distance',
+  duration = 'duration',
+  simple = 'simple',
+  unknown = 'unknown',
+}

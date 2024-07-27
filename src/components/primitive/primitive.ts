@@ -4,6 +4,7 @@ import {customElement, property, state}                                    from 
 import {choose}                                                            from 'lit/directives/choose.js'
 import {DisplayMode}                                                       from '../../internal'
 import {contextData, DisplayConfig, displayConfigContext, FhirDataContext} from '../../internal/contexts'
+import {textHostStyles}                                                    from '../../styles'
 import {isBlank, toBaseElementModeEnum}                                    from '../../utilities'
 import {DateTime}                                                          from './primitive.data'
 import {
@@ -24,6 +25,7 @@ import {asDateTime, asReadable}      from './type-presenters'
 export class Primitive extends LitElement {
 
   static styles = [
+    textHostStyles,
     css`
       :host {
         user-select: text;
@@ -189,7 +191,7 @@ export class Primitive extends LitElement {
   }
 
   private renderError = (): TemplateResult => {
-    console.log(this.presentableValue)
+    // console.log(this.presentableValue)
     return !isBlank(this.value) || this.verbose
            ? html`
           <fhir-primitive-wrapper >

@@ -1,13 +1,13 @@
-import {html, nothing, TemplateResult}         from 'lit'
-import {customElement}                         from 'lit/decorators.js'
-import {FhirAges, FhirDistances, FhirDuration} from '../../../codesystems/code-systems'
-import {ValidationErrors}                      from '../../../internal/base/base-element'
-import {BaseElementContextConsumer}            from '../../../internal/base/base-element-context-consumer'
-import {renderError}                           from '../../../shell/layout/renderError'
-import {hasAllOrNone}                          from '../../../utilities/hasAllOrNone'
-import {isWholeNumber}                         from '../../../utilities/isWhole'
-import {asQuantityComparator}                  from '../../primitive/type-presenters/asQuantityComparator'
-import {QuantityData, SimpleQuantityData}      from './quantity.data'
+import {html, nothing, TemplateResult}                        from 'lit'
+import {customElement}                                        from 'lit/decorators.js'
+import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
+import {ValidationErrors}                                     from '../../../internal/base/base-element'
+import {BaseElementContextConsumer}                           from '../../../internal/base/base-element-context-consumer'
+import {renderError}                                          from '../../../shell/layout/renderError'
+import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
+import {isWholeNumber}                                        from '../../../utilities/isWhole'
+import {asQuantityComparator}                                 from '../../primitive/type-presenters/asQuantityComparator'
+import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.data'
 
 
 import {isQuantity, isSimpleQuantity} from './quantity.type-guards'
@@ -15,6 +15,7 @@ import {isQuantity, isSimpleQuantity} from './quantity.type-guards'
 //TODO: rename to fhir-quanity
 @customElement('fhir-quantity')
 export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQuantityData> {
+
   private variation: QuantityVariations = QuantityVariations.unknown
 
   constructor() {super('Quantity')}
@@ -114,7 +115,6 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
       this.variation = QuantityVariations.age
     }
 
-
     return data
   }
 
@@ -128,13 +128,4 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
     return errors
 
   }
-}
-
-export enum QuantityVariations {
-  age = 'age',
-  count = 'count',
-  distance = 'distance',
-  duration = 'duration',
-  simple = 'simple',
-  unknown = 'unknown',
 }

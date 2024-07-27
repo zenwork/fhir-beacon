@@ -4,9 +4,9 @@ export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
 
 const elements: any[] = []
 
-class FixtureResult<T extends LitElement> {
+class FixtureResult<T extends HTMLElement> {
   private readonly promises: Promise<boolean>[]
-  private readonly reactiveElements: (T)[]
+  private readonly reactiveElements: T[] = []
 
   constructor(promises: Promise<boolean>[], reactiveElements: T[]) {
     this.promises = promises
@@ -38,7 +38,7 @@ class FixtureResult<T extends LitElement> {
  * @returns {Promise<T[]>} - A promise that resolves with an array of elements that extend LitElement.
  * @throws {IllegalStateError} - If the element with the generated id is not found.
  */
-export function fixture<T extends LitElement>(template: TemplateResult): FixtureResult<T> {
+export function fixture<T extends HTMLElement>(template: TemplateResult): FixtureResult<T> {
 
   const id = `test-${((Math.random() * 100000).toFixed(0))}`
   const wrappedTemplate = html`
@@ -51,9 +51,9 @@ export function fixture<T extends LitElement>(template: TemplateResult): Fixture
 
     // store for eventual cleanup
     elements.push(wrapper)
-    const reactiveElements: T[] = getDerivedChildren(wrapper.children)
+    const reactiveElements: LitElement[] = getDerivedChildren(wrapper.children)
 
-    return new FixtureResult<T>(reactiveElements.map(e => e.updateComplete), reactiveElements)
+    return new FixtureResult<T>(reactiveElements.map(e => e.updateComplete), reactiveElements as unknown as T[])
   }
 
   throw new IllegalStateError(`element with id=${id} not found`)
