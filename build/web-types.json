@@ -160,7 +160,7 @@
           }
         },
         {
-            "name": "fhir-codeable-concept",
+            "name": "fhir-annotation",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n\n\n",
           "doc-url": "",
           "attributes": [
@@ -201,7 +201,7 @@
           }
         },
         {
-          "name": "fhir-annotation",
+            "name": "fhir-codeable-concept",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n\n\n",
           "doc-url": "",
           "attributes": [
@@ -365,7 +365,7 @@
           }
         },
         {
-            "name": "fhir-period",
+            "name": "fhir-human-name",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n\n\n",
           "doc-url": "",
           "attributes": [
@@ -447,7 +447,7 @@
           }
         },
         {
-            "name": "fhir-human-name",
+            "name": "fhir-period",
           "description": "\n---\n\n\n### **Methods:**\n \n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n\n\n",
           "doc-url": "",
           "attributes": [
