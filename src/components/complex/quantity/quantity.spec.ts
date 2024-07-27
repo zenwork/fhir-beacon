@@ -4,8 +4,10 @@ import {describe, expect, test} from 'vitest'
 import {aTimeout}               from '../../../../tests/aTimeout'
 
 import {emptyLitShadow, fixture}        from '../../../../tests/lit-vitest-fixture'
+import {testPrimitive}                  from '../../../../tests/testPrimitive'
 import {PrimitiveError, PrimitiveValue} from '../../primitive'
 import {Quantity}                       from './quantity'
+
 
 describe('Quantity', () => {
 
@@ -114,14 +116,3 @@ describe('Quantity', () => {
   })
 
 })
-
-
-const testPrimitive = (p: HTMLElement, prop: { key: string, value: string | null }) => {
-  expect(p).toHaveAttribute('label', prop.key)
-
-  if (prop.value !== null) {
-    expect(p).toHaveAttribute('value', prop.value)
-  } else {
-    expect(p.getAttribute('value')).toBeNull()
-  }
-}

@@ -1,4 +1,5 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
+import {aTimeout}                                 from './aTimeout'
 
 export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
 
@@ -15,16 +16,19 @@ class FixtureResult<T extends HTMLElement> {
 
   async all() {
     await Promise.all(this.promises)
+    await aTimeout(100)
     return this.reactiveElements
   }
 
   async first() {
     await Promise.all(this.promises)
+    await aTimeout(100)
     return this.reactiveElements[0]
   }
 
   async at(index: number) {
     await Promise.all(this.promises)
+    await aTimeout(100)
     return this.reactiveElements[index]
   }
 }

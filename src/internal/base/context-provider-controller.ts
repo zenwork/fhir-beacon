@@ -1,5 +1,5 @@
-import {ContextProvider}    from '@lit/context'
-import {ReactiveController} from 'lit'
+import {ContextProvider}                     from '@lit/context'
+import {ReactiveController, ReactiveElement} from 'lit'
 
 import {contextData, displayConfigContext} from '../contexts/context'
 import {FhirDataContextImpl}               from '../contexts/FhirContextData'
@@ -13,10 +13,13 @@ export class ContextProviderController<T extends BaseElementData> implements Rea
   private dataCtx: ContextProvider<typeof contextData>
 
   constructor(host: BaseElement<T>) {
+
     this.host = host
     host.addController(this)
-    this.displayCtx = new ContextProvider(host, { context: displayConfigContext })
-    this.dataCtx = new ContextProvider(host, { context: contextData })
+
+    const reactive = host as unknown as ReactiveElement
+    this.displayCtx = new ContextProvider(reactive, { context: displayConfigContext })
+    this.dataCtx = new ContextProvider(reactive, { context: contextData })
   }
 
   hostUpdated() {
