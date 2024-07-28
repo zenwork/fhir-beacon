@@ -1,6 +1,6 @@
 import {html}                    from 'lit'
 import {describe, expect, test}  from 'vitest'
-import {emptyLitShadow, fixture} from '../../../../tests/lit-vitest-fixture'
+import {emptyLitShadow, fixture} from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveError}          from './primitive-error'
 
 
@@ -19,7 +19,7 @@ describe('PrimitiveError', () => {
       <fhir-error text="Some error message"></fhir-error >
     `).first()
 
-    const err = error.deepQuerySelector('div')
+    const err = error.deepQuerySelector({ select: 'div' })
     expect(err).toHaveTextContent('Some error message')
   })
 })

@@ -1,6 +1,6 @@
 import {html}                    from 'lit'
 import {describe, expect, test}  from 'vitest'
-import {emptyLitShadow, fixture} from '../../../../tests/lit-vitest-fixture'
+import {emptyLitShadow, fixture} from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveWrapper}        from './primitive-wrapper'
 
 describe('PrimitiveWrapper', () => {

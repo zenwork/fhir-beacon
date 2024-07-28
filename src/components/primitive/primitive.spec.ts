@@ -1,6 +1,6 @@
 import {html}                           from 'lit'
 import {assert, describe, expect, test} from 'vitest'
-import {emptyLitShadow, fixture}        from '../../../tests/lit-vitest-fixture'
+import {emptyLitShadow, fixture}        from '../../../tests/lit/lit-vitest-fixture'
 import {Primitive}                      from './primitive'
 import {PrimitiveLabel}                 from './primitive-label'
 import {PrimitiveValue}                 from './primitive-value'
@@ -22,8 +22,7 @@ describe('fhir Primitive', () => {
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" verbose></fhir-primitive >
     `).first()
-
-    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
     assert.exists(label)
     expect(label.delimiter).to.equal(': ')
     expect(label.text).to.equal('code')
@@ -36,10 +35,10 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc"></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label.text).to.equal('code')
 
-    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
     expect(value.text).to.equal('abc')
 
   })
@@ -50,13 +49,13 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc" context="important"></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label.text).to.equal('code')
 
-    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
     expect(value.text).to.equal('abc')
 
-    const span = el.deepQuerySelector(['fhir-context', 'span']) as HTMLSpanElement
+    const span = el.deepQuerySelector<HTMLSpanElement>({ select: ['fhir-context', 'span'] })
     expect(span.textContent).to.equal('(important)')
 
   })
@@ -68,13 +67,13 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc" type="decimal" showerror></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector('fhir-label') as PrimitiveLabel
+    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label!.text).to.equal('code')
 
-    const value = el.deepQuerySelector('fhir-value') as PrimitiveValue
+    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
     expect(value!.text).to.equal('abc')
 
-    const div = el.deepQuerySelector(['fhir-error', 'div']) as HTMLSpanElement
+    const div = el.deepQuerySelector<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
     expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
 
   })

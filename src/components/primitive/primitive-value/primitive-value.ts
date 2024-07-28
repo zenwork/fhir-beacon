@@ -24,9 +24,13 @@ export class PrimitiveValue extends ShoelaceStyledElement {
   @property()
   public link = ''
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   @queryAssignedElements({slot: 'before'})
   beforeSlot!: Array<HTMLElement>
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   @queryAssignedElements({slot: 'after'})
   afterSlot!: Array<HTMLElement>
 

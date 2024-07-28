@@ -1,6 +1,6 @@
 import {html}                   from 'lit'
 import {describe, expect, test} from 'vitest'
-import {fixture}                from '../../../../tests/lit-vitest-fixture'
+import {fixture}                from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveLabel}         from './primitive-label'
 
 describe('fhir primitive label', () => {
@@ -11,7 +11,7 @@ describe('fhir primitive label', () => {
       <fhir-label >foo</fhir-label >
     `).first()
 
-    const label = el.deepQuerySelector('label')
+    const label = el.deepQuerySelector({ select: 'label' })
     expect(label).toHaveTextContent('')
 
   })
@@ -22,7 +22,7 @@ describe('fhir primitive label', () => {
       <fhir-label text="id"></fhir-label >
     `).first()
 
-    const label = el.deepQuerySelector('label')
+    const label = el.deepQuerySelector({ select: 'label' })
     expect(label).toHaveTextContent(`id`)
 
   })
@@ -47,7 +47,7 @@ describe('fhir primitive label', () => {
       <fhir-label text="id" variant="error"></fhir-label >
     `).first()
 
-    const label = el.deepQuerySelector('label') as HTMLLabelElement
+    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent(`id`)
     expect(getComputedStyle(label!).fontStyle).to.eq('italic')
 
@@ -59,7 +59,7 @@ describe('fhir primitive label', () => {
       <fhir-label for="identity" text="id"></fhir-label >
     `).first()
 
-    const label = el.deepQuerySelector('label') as HTMLLabelElement
+    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
     expect(label!.htmlFor).toEqual(`identity`)
 
   })
@@ -70,7 +70,7 @@ describe('fhir primitive label', () => {
       <fhir-label text="id" delimiter="->"></fhir-label >
     `).first()
 
-    const label = el.deepQuerySelector('label')
+    const label = el.deepQuerySelector({ select: 'label' })
     expect(label).toHaveTextContent(`id->`)
 
   })

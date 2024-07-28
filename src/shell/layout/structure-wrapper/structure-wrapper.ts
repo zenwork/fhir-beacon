@@ -15,6 +15,8 @@ import {componentStyles}                                                        
 @customElement('fhir-structure-wrapper')
 export class StructureWrapper extends ShoelaceStyledElement {
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   @consume({context: displayConfigContext, subscribe: true})
   protected displayConfig: DisplayConfig = defaultDisplayConfig
 

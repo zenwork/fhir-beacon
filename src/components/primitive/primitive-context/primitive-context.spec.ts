@@ -1,6 +1,6 @@
 import {html}                    from 'lit'
 import {describe, expect, test}  from 'vitest'
-import {emptyLitShadow, fixture} from '../../../../tests/lit-vitest-fixture'
+import {emptyLitShadow, fixture} from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveContext}        from './primitive-context'
 
 describe('PrimitiveContext', () => {
@@ -21,7 +21,7 @@ describe('PrimitiveContext', () => {
       <fhir-context text="some context"></fhir-context >
     `).first()
 
-    const span = context.deepQuerySelector('span')
+    const span = context.deepQuerySelector({ select: 'span' })
     expect(span).toHaveTextContent('(some context)')
 
   })

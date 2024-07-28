@@ -1,71 +1,57 @@
-import {deepQuerySelector, deepQuerySelectorAll} from 'shadow-dom-testing-library'
-import {beforeAll}                               from 'vitest'
-import {IllegalStateError}                       from './tests/lit-vitest-fixture'
-import {queryDefaultSlot, querySlot}             from './tests/query-slot'
+import {deepQuerySelectorAll}        from 'shadow-dom-testing-library'
+import {beforeAll}                   from 'vitest'
+
 
 // TODO: loading everything for now... should not do this once proper separation of import trees
 import './index'
+import {queryDefaultSlot, querySlot} from './tests/shadowDomUtils/query-slot'
+import {hostOf}                      from './tests/shadowDomUtils/shadowDomUtils'
 
-HTMLElement.prototype.deepQuerySelector = function <T extends HTMLElement>(selector: string | string[]): T {
-  if (typeof selector === 'string') {
-    const result = deepQuerySelector<T>(this, selector)
-    if (result) {
-      return result
+export type Query = { select: string | string[], expect?: number }
+HTMLElement.prototype.deepQuerySelector =
+  function <T extends HTMLElement | HTMLElement[]>({ select, expect = 1 }: Query): T {
+
+    let results: any[] = [this]
+
+    if (typeof select === 'string') {
+
+      results = deepQuerySelectorAll(results[0], select)
     }
 
-    throw new IllegalStateError('deepQuerySelector: element not found')
+    if (Array.isArray(select)) {
+      // search down stack of values
+      let intermediateSet: any[] = results
 
-  } else {
+      select.forEach((sel) => {
+        intermediateSet = intermediateSet.map((el) => deepQuerySelectorAll(el, sel)).flat()
+      })
 
-    let result: any = document
-
-    selector.forEach((sel) => {
-      const temp = deepQuerySelector<HTMLElement>(result, sel)
-      if (temp) {
-        result = temp
+      if (intermediateSet) {
+        results = intermediateSet
       } else {
-        throw new IllegalStateError('deepQuerySelector: element not found')
+        throw new BeaconTestError('deepQuerySelector: element not found')
       }
-    })
 
-    if (result !== document) {
-      return result as T
+
     }
 
-    throw new IllegalStateError('deepQuerySelector: element not found')
+    if (results) {
+      if (results.length === expect) {
+        if (results.length === 1) {
+          return results[0] as T
+        }
+        return results as T
+      }
+
+      const found = results ? results.length : '0'
+      const paths = results.map(hostOf).join('\n')
+      throw new BeaconTestError(
+        `deepQuerySelectorAll: unexpected number of elements found.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
+    }
+
+    throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
 
   }
-}
-
-HTMLElement.prototype.deepQuerySelectorAll = function <T extends HTMLElement>(selector: string | string[]): T[] {
-  if (typeof selector === 'string') {
-    const result = deepQuerySelectorAll<T>(this, selector)
-    if (result) {
-      return result
-    }
-
-    throw new IllegalStateError('deepQuerySelectorAll: element not found')
-  } else {
-
-    let result: any = document
-
-    selector.forEach((sel) => {
-      const temp = deepQuerySelectorAll<HTMLElement>(result, sel)
-      if (temp) {
-        result = temp
-      } else {
-        throw new IllegalStateError('deepQuerySelectorAll: element not found')
-      }
-    })
-
-    if (result !== document) {
-      return result as T[]
-    }
-
-    throw new IllegalStateError('deepQuerySelectorAll: element not found')
-
-  }
-}
 
 
 HTMLElement.prototype.queryDefaultSlot = function (): Node[] {
@@ -230,3 +216,18 @@ beforeAll(() => {
 </style>
   `
 })
+
+/**
+ * Represents an error that occurs during the execution of a Beacon Test.
+ *
+ * @class
+ * @extends Error
+ *
+ * @param {string} message - The error message.
+ */
+export class BeaconTestError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'BeaconTestError'
+  }
+}

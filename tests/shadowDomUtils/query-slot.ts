@@ -1,4 +1,4 @@
-import {IllegalStateError} from './lit-vitest-fixture'
+import {IllegalStateError} from '../lit/lit-vitest-fixture'
 
 /**
  * Queries for elements assigned to a named slot within a shadow DOM.

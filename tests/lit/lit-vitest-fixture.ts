@@ -1,5 +1,5 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
-import {aTimeout}                                 from './aTimeout'
+import {aTimeout}                                 from '../aTimeout'
 
 export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
 

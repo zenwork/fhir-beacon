@@ -12,6 +12,8 @@ import {Resource} from './resource'
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   @provide({context: containedDataContext})
   declare contained: ResourceData[]
 
