@@ -1,26 +1,23 @@
 import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {ValidationErrors}                                     from '../../../internal/base/base-element'
-import {BaseElementContextConsumer}                           from '../../../internal/base/base-element-context-consumer'
+import {BaseElement, ValidationErrors}                        from '../../../internal'
 import {renderError}                                          from '../../../shell/layout/renderError'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
 import {asQuantityComparator}                                 from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.data'
+import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
 
 
-import {isQuantity, isSimpleQuantity} from './quantity.type-guards'
-
-//TODO: rename to fhir-quanity
+// TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity :-(
 @customElement('fhir-quantity')
-export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQuantityData> {
+export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   private variation: QuantityVariations = QuantityVariations.unknown
 
   constructor() {super('Quantity')}
 
-  // TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity :-(
 
   protected renderDisplay(data: QuantityData | SimpleQuantityData): TemplateResult {
 
@@ -33,7 +30,7 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
         <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
           <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}&nbsp;</span >
           <span slot="after">&nbsp;${after}</span >
-        </fhir-primitive>
+        </fhir-primitive >
       `
     }
 
@@ -41,11 +38,11 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
       return html`
         <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
           <span slot="after">&nbsp;${after} </span >
-        </fhir-primitive>
+        </fhir-primitive >
       `
     }
 
-    return renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'quantity', 'must be Quantity or Simple Quantity')
+    return renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'quantity', 'must be Quantity or Simple Quantity')
   }
 
   protected renderStructure(data: QuantityData | SimpleQuantityData): TemplateResult {
@@ -71,7 +68,7 @@ export class Quantity extends BaseElementContextConsumer<QuantityData | SimpleQu
       `
     }
 
-    return renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'quantity', 'must be Quantity or Simple Quantity')
+    return renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'quantity', 'must be Quantity or Simple Quantity')
 
   }
 

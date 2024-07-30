@@ -1,7 +1,7 @@
-import {BaseElementData}                  from '../../../internal/base/base-element.data'
+import {FhirDataElementData}              from '../../../internal/base/fhir-data-element.data'
 import {QuantityData, SimpleQuantityData} from '../quantity/quantity.data'
 
-export type RatioData = BaseElementData & {
+export type RatioData = FhirDataElementData & {
   numerator?: QuantityData
   denominator?: SimpleQuantityData
 }

@@ -1,13 +1,13 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
-import {BaseElementContextConsumer}    from '../../../internal'
+import {BaseElement}                   from '../../../internal'
 import {hasSome, wrap, wraps}          from '../../../shell'
 import {hasOnly}                       from '../../../utilities'
 import {PrimitiveType}                 from '../../primitive'
 import {AddressData}                   from '../../resources'
 
 @customElement('fhir-address')
-export class Address extends BaseElementContextConsumer<AddressData> {
+export class Address extends BaseElement<AddressData> {
 
   constructor() {super('Address')}
 

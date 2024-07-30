@@ -47,7 +47,7 @@ frameworks.
 They are made up of the following Browser APIs:
 
 * Custom Elements
-* Shodow DOM
+* Shadow DOM
 * Template Elements
 * CSS custom properties
 * CSS Parts

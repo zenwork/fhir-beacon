@@ -47,7 +47,8 @@
         "@testing-library/dom": "^10.3.2",
         "@types/node": "^20.12.8",
         "@types/query-selector-shadow-dom": "^1.0.4",
-        "@vitest/browser": "^2.0.3",
+        "@vitest/browser": "^2.0.4",
+        "@vitest/ui": "^2.0.4",
         "@web-types/lit": "^2.0.0-3",
         "@web/dev-server": "^0.4.5",
         "@web/dev-server-esbuild": "^1.0.2",
@@ -61,7 +62,7 @@
         "globals": "^15.8.0",
         "html-format": "^1.1.7",
         "lit-html": "^3.1.4",
-        "playwright": "^1.45.2",
+        "playwright": "^1.45.3",
         "query-selector-shadow-dom": "^1.0.1",
         "remark-gfm": "^4.0.0",
         "shadow-dom-testing-library": "^1.11.2",
@@ -69,7 +70,7 @@
         "ts-lit-plugin": "^2.0.2",
         "typescript-eslint": "^8.0.0-alpha.14",
         "vite": "^5.3.4",
-        "vitest": "^2.0.3"
+        "vitest": "^2.0.4"
     },
     "web-types": [
         "./build/sl-web-types.json",

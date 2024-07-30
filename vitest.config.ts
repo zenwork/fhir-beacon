@@ -6,7 +6,7 @@ export default defineProject(
     test: {
       globals: false,
       setupFiles: './vitest.setup.ts',
-      reporters: ['default', 'junit'],
+      reporters: ['dot', 'junit'],
       outputFile: {
         junit: './results/junit-report.xml'
       },

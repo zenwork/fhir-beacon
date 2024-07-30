@@ -1,3 +1,5 @@
+export * from './src/types'
+
 /* Core Stuff */
 export * from './src/internal'
 

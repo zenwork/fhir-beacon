@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
+import {DisplayMode}          from '../../types'
 import {BaseElement}          from './base-element'
-import {DisplayMode}          from './base-element.data'
 
 type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 
@@ -14,7 +14,7 @@ type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Choice<C>[]): TemplateResult | TemplateResult[] {
 
   const templateResults: TemplateResult[] = []
-
+  console.log(choices)
   // add template if data is present
   choices.forEach(choice => {
     if (choice.data) {
@@ -29,7 +29,7 @@ export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Ch
 
   // return all results and error messages if showerror is set
   if (contextElement.showerror) {
-    const matchingError = contextElement.errors.find(e => e.id.match(/.*author\[x].*/))
+    const matchingError = contextElement.errors.find(e => e.id.match(/.*author\[x].*!/))
     if (contextElement.mode === DisplayMode.structure || contextElement.mode === DisplayMode.structure_summary) {
       return html`
         <fhir-structure-wrapper .label=${matchingError?.id ?? 'unknown error id'} variant='validation-error'>
@@ -37,6 +37,8 @@ export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Ch
           ${html`<fhir-error text="${matchingError?.err ?? 'unknown error'}" ></fhir-error >`}
         </fhir-structure-wrapper >`
     }
+    /*
+     */
     return html`
       <fhir-wrapper .label=${matchingError?.id ?? 'unknown error id'} variant='validation-error'>
         ${templateResults}

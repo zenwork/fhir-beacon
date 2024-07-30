@@ -1,12 +1,12 @@
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
-import {BaseElementContextConsumer}           from '../../../internal/base/base-element-context-consumer'
+import {BaseElement}                          from '../../../internal'
 
 import {NarrativeData} from './narrative.data'
 
 @customElement('fhir-narrative')
-export class Narrative extends BaseElementContextConsumer<NarrativeData> {
+export class Narrative extends BaseElement<NarrativeData> {
 
   constructor() {
     super('Narrative')

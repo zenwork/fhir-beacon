@@ -1,11 +1,11 @@
-import {css, html, TemplateResult}  from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
+import {css, html, TemplateResult} from 'lit'
+import {customElement}             from 'lit/decorators.js'
+import {BaseElement}               from '../../../internal/base'
 
 import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
-export class Ratio extends BaseElementContextConsumer<RatioData> {
+export class Ratio extends BaseElement<RatioData> {
 
   static styles = [
     css`

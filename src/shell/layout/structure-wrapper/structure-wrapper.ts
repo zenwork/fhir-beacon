@@ -1,11 +1,11 @@
-import {consume}                                                                from '@lit/context'
-import {html, nothing, PropertyValues}                                          from 'lit'
-import {customElement, property}                                                from 'lit/decorators.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext, DisplayMode} from '../../../internal'
-import {hostStyles}                                                             from '../../../styles'
-import {toBaseElementModeEnum}                                                  from '../../../utilities'
-import {ShoelaceStyledElement}                                                  from '../../shoelace-styled-element'
-import {componentStyles}                                                        from './structure-wrapper.styles'
+import {consume}                                    from '@lit/context'
+import {html, LitElement, nothing, PropertyValues}  from 'lit'
+import {customElement, property}                    from 'lit/decorators.js'
+import {defaultDisplayConfig, displayConfigContext} from '../../../internal/contexts'
+import {hostStyles}                                 from '../../../styles'
+import {DisplayConfig, DisplayMode}                 from '../../../types'
+import {toBaseElementModeEnum}                      from '../../../utilities'
+import {componentStyles}                            from './structure-wrapper.styles'
 
 /**
  * Custom element for wrapping primitive content.
@@ -13,10 +13,8 @@ import {componentStyles}                                                        
  * @slot wrapper
  */
 @customElement('fhir-structure-wrapper')
-export class StructureWrapper extends ShoelaceStyledElement {
+export class StructureWrapper extends LitElement {
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   @consume({context: displayConfigContext, subscribe: true})
   protected displayConfig: DisplayConfig = defaultDisplayConfig
 

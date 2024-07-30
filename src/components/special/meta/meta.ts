@@ -1,12 +1,12 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
+import {BaseElement}                   from '../../../internal'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {MetaData}                      from './meta.data'
 
 @customElement('fhir-meta')
-export class Meta extends BaseElementContextConsumer<MetaData> {
+export class Meta extends BaseElement<MetaData> {
 
   constructor() {super('Meta')}
 

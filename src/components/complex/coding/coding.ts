@@ -1,10 +1,10 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {CodingData}                 from './coding.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../../internal/base'
+import {CodingData}           from './coding.data'
 
 @customElement('fhir-coding')
-export class Coding extends BaseElementContextConsumer<CodingData> {
+export class Coding extends BaseElement<CodingData> {
 
   constructor() {
     super('Coding')
@@ -16,6 +16,7 @@ export class Coding extends BaseElementContextConsumer<CodingData> {
   }
 
   override renderDisplay(data: CodingData): TemplateResult {
+    console.log('code', Coding.commuteDisplay(data))
     return html`
       <fhir-primitive
           .label=${this.label}

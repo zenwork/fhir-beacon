@@ -52,7 +52,6 @@ export function fixture<T extends HTMLElement>(template: TemplateResult): Fixtur
   const wrapper: Element | null = document.body.querySelector(`#${id}`)
 
   if (wrapper) {
-
     // store for eventual cleanup
     elements.push(wrapper)
     const reactiveElements: LitElement[] = getDerivedChildren(wrapper.children)

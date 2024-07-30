@@ -1,9 +1,7 @@
 import {html, TemplateResult} from 'lit'
 import {PrimitiveType}        from '../../components/primitive/type-converters/type-converters'
-
-import {DisplayConfig} from '../contexts/context.data'
-
-import {ResourceData} from './domain-resource.data'
+import {DisplayConfig}        from '../../types'
+import {ResourceData}         from './domain-resource.data'
 
 export function renderResourceComponent(data: ResourceData | undefined, displayConfig: DisplayConfig): TemplateResult {
   if (data && displayConfig) {

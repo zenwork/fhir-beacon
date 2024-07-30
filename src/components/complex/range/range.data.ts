@@ -1,7 +1,7 @@
-import {BaseElementData}    from '../../../internal/base/base-element.data'
-import {SimpleQuantityData} from '../quantity/quantity.data'
+import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
+import {SimpleQuantityData}  from '../quantity/quantity.data'
 
-export type RangeData = BaseElementData & {
+export type RangeData = FhirDataElementData & {
   low?: SimpleQuantityData
   high?: SimpleQuantityData
 }

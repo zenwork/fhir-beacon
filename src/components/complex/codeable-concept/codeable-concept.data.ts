@@ -1,7 +1,7 @@
-import {BaseElementData} from '../../../internal/base/base-element.data'
-import {CodingData}      from '../coding/coding.data'
+import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
+import {CodingData}          from '../coding/coding.data'
 
-export type CodeableConceptData = BaseElementData & {
+export type CodeableConceptData = FhirDataElementData & {
   coding: CodingData[]
   text?: string
 }

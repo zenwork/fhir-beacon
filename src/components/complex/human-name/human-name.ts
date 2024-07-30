@@ -1,13 +1,13 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {BaseElementContextConsumer}    from '../../../internal/base/base-element-context-consumer'
+import {BaseElement}                   from '../../../internal/base'
 import {hasMany, hasOnlyOne}           from '../../../shell/layout/directives'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {HumanNameData}                 from '../../resources/patient/patient.data'
 
 @customElement('fhir-human-name')
-export class HumanName extends BaseElementContextConsumer<HumanNameData> {
+export class HumanName extends BaseElement<HumanNameData> {
 
   protected renderDisplay(data: HumanNameData): TemplateResult | TemplateResult[] {
 
@@ -33,7 +33,7 @@ export class HumanName extends BaseElementContextConsumer<HumanNameData> {
       <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive >
       <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
       <fhir-primitive label="family" .value=${data.family} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-      ${hasMany(data.given, this.displayConfig.verbose)
+      ${hasMany(data.given, this.getDisplayConfig().verbose)
         ? html`
             <fhir-structure-wrapper label='given'>
               ${map(data.given,

@@ -1,11 +1,11 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {PrimitiveType}              from '../../primitive/type-converters/type-converters'
-import {IdentifierData}             from './identifier.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../../internal/base'
+import {PrimitiveType}        from '../../primitive/type-converters/type-converters'
+import {IdentifierData}       from './identifier.data'
 
 @customElement('fhir-identifier')
-export class Identifier extends BaseElementContextConsumer<IdentifierData> {
+export class Identifier extends BaseElement<IdentifierData> {
 
   //TODO: this still needs some work. There are a lot of corner cases
   constructor() {super('Identifier')}

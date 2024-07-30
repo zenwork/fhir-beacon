@@ -1,4 +1,4 @@
-import {BaseElementData}                                                                              from '../../../internal/base/base-element.data'
+import {FhirDataElementData}                                                                          from '../../../internal/base/fhir-data-element.data'
 import {BackboneElementData}                                                                          from '../../../internal/resource/backbone.data'
 import {DomainResourceData}                                                                           from '../../../internal/resource/domain-resource.data'
 import {
@@ -9,7 +9,7 @@ import {PeriodData}                                                             
 import {Base64Binary, Code, DateTime, Decimal, FhirDate, FhirString, Integer, Integer64, PositiveInt} from '../../primitive/primitive.data'
 import {ReferenceData}                                                                                from '../../special/reference/reference.data'
 
-export type HumanNameData = BaseElementData & {
+export type HumanNameData = FhirDataElementData & {
   use?: Code
   text?: FhirString
   family?: FhirString
@@ -19,7 +19,7 @@ export type HumanNameData = BaseElementData & {
   period?: PeriodData
 }
 
-export type ContactPointData = BaseElementData & {
+export type ContactPointData = FhirDataElementData & {
   system?: Code
   value?: FhirString
   use?: Code
@@ -31,7 +31,7 @@ export type ContactPointData = BaseElementData & {
 export type DeceasedBoolean = boolean
 export type DeceasedDateTime = DateTime
 
-export type AddressData = BaseElementData & {
+export type AddressData = FhirDataElementData & {
   use?: Code
   type?: Code
   text?: FhirString
@@ -47,7 +47,7 @@ export type AddressData = BaseElementData & {
 export type MultipleBirthBoolean = boolean
 export type MultipleBirthInteger = Integer
 
-export type AttachmentData = BaseElementData & {
+export type AttachmentData = FhirDataElementData & {
   contentType?: Code
   language?: Code
   data?: Base64Binary

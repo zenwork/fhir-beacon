@@ -1,6 +1,6 @@
-import {BaseElementData} from '../../../internal/base/base-element.data'
+import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
 
-export type CodingData = BaseElementData & {
+export type CodingData = FhirDataElementData & {
   version?: string,
   system?: string,
   code?: string,

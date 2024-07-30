@@ -7,7 +7,9 @@ export default [
         ignores:[
             '**/dist/*',
             '**/coverage/*',
-            '**/node_modules/*'
+            '**/node_modules/*',
+            '**/html/*',
+            '**/storybook-static/*'
         ]
     },
     {

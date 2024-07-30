@@ -2,7 +2,7 @@ import {provide}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {choose}                                        from 'lit/directives/choose.js'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
-import {DisplayMode}                                   from '../base/base-element.data'
+import {DisplayMode}                                   from '../../types'
 import {containedDataContext}                          from '../contexts/context'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'
@@ -12,8 +12,6 @@ import {Resource} from './resource'
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   @provide({context: containedDataContext})
   declare contained: ResourceData[]
 

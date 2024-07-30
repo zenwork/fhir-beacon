@@ -1,13 +1,12 @@
-import {html, TemplateResult}              from 'lit'
-import {customElement}                     from 'lit/decorators.js'
-import {ValidationError, ValidationErrors} from '../../../internal/base/base-element'
-import {BaseElementContextConsumer}        from '../../../internal/base/base-element-context-consumer'
-import {oneOf}                             from '../../../internal/base/oneOf'
-import {PrimitiveType}                     from '../../primitive/type-converters/type-converters'
-import {AnnotationData}                    from './annotation.data'
+import {html, TemplateResult}                           from 'lit'
+import {customElement}                                  from 'lit/decorators.js'
+import {BaseElement, ValidationError, ValidationErrors} from '../../../internal'
+import {oneOf}                                          from '../../../internal/base/oneOf'
+import {PrimitiveType}                                  from '../../primitive/type-converters/type-converters'
+import {AnnotationData}                                 from './annotation.data'
 
 @customElement('fhir-annotation')
-export class Annotation extends BaseElementContextConsumer<AnnotationData> {
+export class Annotation extends BaseElement<AnnotationData> {
 
   constructor() {super('Annotation')}
 
@@ -20,8 +19,8 @@ export class Annotation extends BaseElementContextConsumer<AnnotationData> {
     return errors
   }
 
-  protected renderAlways(data: AnnotationData): TemplateResult | TemplateResult[] {
-    //console.log(this.type, 'render always', data)
+  protected renderAll(data: AnnotationData): TemplateResult | TemplateResult[] {
+    console.log(this.type, 'render always', data)
     const author = oneOf(this,
       [
         {

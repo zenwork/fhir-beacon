@@ -1,7 +1,8 @@
 // created by autobarrel, do not modify directly
 
-export * from './base-element-context-consumer'
-export * from './base-element.data'
 export * from './base-element'
-export * from './context-provider-controller'
+export * from './fhir-data-element.data'
+export * from './fhir-data-element'
+export * from './fhir-presentable-element.data'
+export * from './fhir-presentable-element'
 export * from './oneOf'

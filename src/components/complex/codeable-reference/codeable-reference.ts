@@ -1,10 +1,10 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {CodeableReferenceData}      from './codeable-reference.data'
+import {html, TemplateResult}  from 'lit'
+import {customElement}         from 'lit/decorators.js'
+import {BaseElement}           from '../../../internal/base'
+import {CodeableReferenceData} from './codeable-reference.data'
 
 @customElement('fhir-codeable-reference')
-export class CodeableReference extends BaseElementContextConsumer<CodeableReferenceData> {
+export class CodeableReference extends BaseElement<CodeableReferenceData> {
 
   constructor() {super('CodeableReference')}
 

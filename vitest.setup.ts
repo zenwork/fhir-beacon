@@ -1,9 +1,7 @@
+import './index'
 import {deepQuerySelectorAll}        from 'shadow-dom-testing-library'
 import {beforeAll}                   from 'vitest'
-
-
 // TODO: loading everything for now... should not do this once proper separation of import trees
-import './index'
 import {queryDefaultSlot, querySlot} from './tests/shadowDomUtils/query-slot'
 import {hostOf}                      from './tests/shadowDomUtils/shadowDomUtils'
 
@@ -14,7 +12,6 @@ HTMLElement.prototype.deepQuerySelector =
     let results: any[] = [this]
 
     if (typeof select === 'string') {
-
       results = deepQuerySelectorAll(results[0], select)
     }
 
@@ -31,8 +28,6 @@ HTMLElement.prototype.deepQuerySelector =
       } else {
         throw new BeaconTestError('deepQuerySelector: element not found')
       }
-
-
     }
 
     if (results) {

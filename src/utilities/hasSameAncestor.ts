@@ -9,6 +9,7 @@ const getAncestor = (child: HTMLElement | null) => {
 }
 
 export const hasSameAncestor = (child: HTMLElement | null): boolean => {
+
   let found = false
   const childName = child?.tagName
   let currentAncestor = getAncestor(child)

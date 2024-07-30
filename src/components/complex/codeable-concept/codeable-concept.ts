@@ -1,11 +1,11 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {wrap, wraps}                from '../../../shell/layout/wrapCollection'
-import {CodeableConceptData}        from './codeable-concept.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../../internal'
+import {wrap, wraps}          from '../../../shell/layout/wrapCollection'
+import {CodeableConceptData}  from './codeable-concept.data'
 
 @customElement('fhir-codeable-concept')
-export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptData> {
+export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   constructor() {
     super('Codeable Concept')
@@ -16,13 +16,14 @@ export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptD
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
     if (data.coding) {
       return html`
-        ${wrap('identifiers', data.coding, this.displayConfig.verbose,
+        ${wrap('identifiers', data.coding, this.getDisplayConfig().verbose,
             (i, x) => html`
               <fhir-coding .label=${this.label || 'name'}${x} .data=${i} summary></fhir-coding >`)}
       `
     }
 
     if (data.text) {
+      console.log(data.text)
       return html`
         <fhir-primitive .label=${'name'} .value=${data.text} summary></fhir-primitive >`
     }
@@ -33,7 +34,7 @@ export class CodeableConcept extends BaseElementContextConsumer<CodeableConceptD
 
   protected renderStructure(data: CodeableConceptData): TemplateResult[] {
     return [
-      wraps('codings', data.coding, this.displayConfig.verbose,
+      wraps('codings', data.coding, this.getDisplayConfig().verbose,
         (i, x) => html`
           <fhir-coding label="coding${x}" .data=${i} summary></fhir-coding >`),
       html`

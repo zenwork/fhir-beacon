@@ -1,4 +1,3 @@
-import Promise      from 'lie'
 import {LitElement} from 'lit'
 
 export class ShoelaceStyledElement extends LitElement {
@@ -14,7 +13,4 @@ export class ShoelaceStyledElement extends LitElement {
   }
 
 
-  public get updateComplete(): Promise<boolean> {
-    return super.updateComplete
-  }
 }

@@ -1,4 +1,4 @@
-import {BaseElementData}                  from '../../../internal/base/base-element.data'
+import {FhirDataElementData}              from '../../../internal/base/fhir-data-element.data'
 import {BackboneElementData}              from '../../../internal/resource/backbone.data'
 import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
 import {AnnotationData}                   from '../../complex/annotation/annotation.data'
@@ -19,7 +19,7 @@ type BoundDuration = QuantityData //TODO: should be constrained to a duration: h
 type BoundRange = RangeData
 type BoundPeriod = PeriodData
 
-type TimingData = BaseElementData & {
+type TimingData = FhirDataElementData & {
   event?: DateTime
   bound?: BoundDuration | BoundRange | BoundPeriod
   count?: PositiveInt
@@ -44,7 +44,7 @@ type EffectivePeriod = PeriodData
 type EffectiveTiming = TimingData
 type EffectiveInstant = Instant
 
-type SampledData = BaseElementData & {
+type SampledData = FhirDataElementData & {
   origin: SimpleQuantityData
   interval?: Decimal
   intervalUnit?: Code

@@ -1,16 +1,38 @@
-import {html, TemplateResult}                   from 'lit'
-import {PrimitiveType}                          from '../../components/primitive/type-converters/type-converters'
-import {BaseElement, ContextProviderController} from '../base'
-import {ResourceData}                           from './domain-resource.data'
+import {html, PropertyValues, TemplateResult} from 'lit'
+import {property}                             from 'lit/decorators.js'
+import {PrimitiveType}                        from '../../components/primitive/type-converters/type-converters'
+import {DisplayMode}                          from '../../types'
+import {BaseElement}                          from '../base'
+import {ContextProviderController}            from '../contexts'
+import {ResourceData}                         from './domain-resource.data'
 
 export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
-  private context: ContextProviderController<T>
+  @property({ type: String, reflect: true, attribute: 'override-template' })
+  declare overrideTemplate: string
+  private dataContextProvider: ContextProviderController<T, Resource<T>>
 
   protected constructor(type: string) {
     super(type)
-    this.context = new ContextProviderController(this)
+    this.dataContextProvider = new ContextProviderController(this)
     this.addStructureTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
+  }
+
+  protected render(): TemplateResult | TemplateResult[] {
+    if (this.overrideTemplate && this.mode === DisplayMode.override) {
+      return this.renderTemplate()
+    } else {
+      return super.render()
+    }
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (_changedProperties.has('overrideTemplate') || _changedProperties.has('mode')) {
+      if (this.overrideTemplate) {
+        this.mode = DisplayMode.override
+      }
+    }
   }
 
   private renderResourceStructure(data: T): TemplateResult | TemplateResult[] {
@@ -19,5 +41,20 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
       <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri} summary></fhir-primitive >
       <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
     `
+  }
+
+  private renderTemplate(): TemplateResult {
+    if (this.shadowRoot) {
+      const templateElement = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
+      if (templateElement && templateElement.content) {
+        const content = templateElement.content
+        if (content) {
+          //TODO: investigate if this should be rendered with a lit html template
+          this.shadowRoot.appendChild(content.cloneNode(true))
+        }
+      }
+    }
+    this.requestUpdate()
+    return html``
   }
 }

@@ -1,12 +1,13 @@
-import {consume}                                                                from '@lit/context'
-import {html, PropertyValues}                                                   from 'lit'
-import {customElement, property}                                                from 'lit/decorators.js'
-import {classMap}                                                               from 'lit/directives/class-map.js'
-import {defaultDisplayConfig, DisplayConfig, displayConfigContext, DisplayMode} from '../../../internal'
-import {hostStyles}                                                             from '../../../styles'
-import {toBaseElementModeEnum}                                                  from '../../../utilities'
-import {ShoelaceStyledElement}                                                  from '../../shoelace-styled-element'
-import {componentStyles}                                                        from './wrapper-styles'
+import {consume}                                    from '@lit/context'
+import {html, PropertyValues}                       from 'lit'
+import {customElement, property}                    from 'lit/decorators.js'
+import {classMap}                                   from 'lit/directives/class-map.js'
+import {defaultDisplayConfig, displayConfigContext} from '../../../internal'
+import {hostStyles}                                 from '../../../styles'
+import {DisplayConfig, DisplayMode}                 from '../../../types'
+import {toBaseElementModeEnum}                      from '../../../utilities'
+import {ShoelaceStyledElement}                      from '../../shoelace-styled-element'
+import {componentStyles}                            from './wrapper-styles'
 
 
 /**

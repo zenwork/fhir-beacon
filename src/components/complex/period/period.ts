@@ -1,11 +1,11 @@
-import {html, TemplateResult}       from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {PrimitiveType}              from '../../primitive/type-converters/type-converters'
-import {PeriodData}                 from './period.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../../internal'
+import {PrimitiveType}        from '../../primitive/type-converters/type-converters'
+import {PeriodData}           from './period.data'
 
 @customElement('fhir-period')
-export class Period extends BaseElementContextConsumer<PeriodData> {
+export class Period extends BaseElement<PeriodData> {
 
   constructor() {super('Period')}
 

@@ -16,11 +16,11 @@ describe('Quantity', () => {
     expect(quantity.shadowRoot!.innerHTML).toMatch(emptyLitShadow)
   })
 
-  test('should show error when no data is provided and set to show error', async () => {
+  test('should not show and error when no data is provided and set to show error', async () => {
     const quantity = await fixture<Quantity>(html`
-      <fhir-quantity label="quantity" showerror></fhir-quantity >`).first()
-    const error = quantity.deepQuerySelector({ select: 'fhir-error' })
-    expect(error).toHaveAttribute('text', 'no data provided')
+      <fhir-quantity label="quantity" showerror></fhir-quantity >
+    `).first()
+    expect(quantity.shadowRoot!.innerHTML).toMatch(emptyLitShadow)
   })
 
   test('quantity should show a simple quantity', async () => {

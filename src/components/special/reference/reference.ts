@@ -1,10 +1,10 @@
-import {consume}                    from '@lit/context'
-import {html, TemplateResult}       from 'lit'
-import {customElement, state}       from 'lit/decorators.js'
-import {choose}                     from 'lit/directives/choose.js'
-import {otherwise, when}            from '../../.././utilities/when'
-import {BaseElementContextConsumer} from '../../../internal/base/base-element-context-consumer'
-import {containedDataContext}       from '../../../internal/contexts/context'
+import {consume}              from '@lit/context'
+import {html, TemplateResult} from 'lit'
+import {customElement, state} from 'lit/decorators.js'
+import {choose}               from 'lit/directives/choose.js'
+import {otherwise, when}      from '../../.././utilities/when'
+import {BaseElement}          from '../../../internal'
+import {containedDataContext} from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -13,7 +13,7 @@ import {asReadable}              from '../../primitive/type-presenters/asReadabl
 import {ReferenceData}           from './reference.data'
 
 @customElement('fhir-reference')
-export class Reference extends BaseElementContextConsumer<ReferenceData> {
+export class Reference extends BaseElement<ReferenceData> {
 
   @consume({context: containedDataContext, subscribe: true})
   private contained: ResourceData[] = []
@@ -41,7 +41,7 @@ export class Reference extends BaseElementContextConsumer<ReferenceData> {
                 ReferenceType.contained,
                 () => html`
                   <fhir-primitive label='resource' value=${this.containedResource?.resourceType || 'contained'} summary></fhir-primitive >
-                  ${renderResourceComponent(this.containedResource, this.displayConfig)}
+                  ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
 
                 `
               ],

@@ -45,7 +45,7 @@ classDiagram
 classDiagram
     BaseElementContextProvider <|-- Shell
     Shell *--> `fhir-[element name]`
-    BaseElementContextConsumer <|-- `fhir-[element name]`
+    ContextConsumerController <|-- `fhir-[element name]`
 ```
 
 ## FHIR element model
@@ -54,19 +54,19 @@ classDiagram
 
 ```mermaid
 classDiagram
-    note for BaseElementContextConsumer "TODO: should be a mixin"
+    note for ContextConsumerController "TODO: should be a mixin"
     note for BaseElementContextProvider "TODO: should be a mixin"
     note for `fhir-[element name]-resource` "TODO: add '-resource' suffix to resources"
 
-    class BaseElementContextConsumer
+    class ContextConsumerController
     class BaseElementContextProvider
 
-%%    BaseElement <|-- BaseElementContextConsumer
+%%    BaseElement <|-- ContextConsumerController
 %%    BaseElement <|-- BaseElementContextProvider
 %%    BaseElementContextProvider <|-- Resource
     BaseElement <|-- Resource
     Resource <|-- DomainResource
-%%    BaseElementContextConsumer <|-- `fhir-[element name]`
+%%    ContextConsumerController <|-- `fhir-[element name]`
     BaseElement <|-- `fhir-[element name]`
     DomainResource <|-- `fhir-[element name]-resource`: "context\nproducer\nelements"
     `fhir-[element name]-resource` *--> "1" `fhir-[element name]`: "context\nconsumer\nelements"

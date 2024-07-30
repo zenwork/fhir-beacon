@@ -1,5 +1,6 @@
 import {html, TemplateResult} from 'lit'
-import {DisplayMode}          from '../src/internal/base/base-element.data'
+
+import {DisplayMode} from '../src/types'
 
 export type ShellArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean, summary?: boolean };
 

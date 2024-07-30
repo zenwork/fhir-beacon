@@ -1,16 +1,16 @@
-import {consume}                                                           from '@lit/context'
-import {css, html, LitElement, nothing, PropertyValues, TemplateResult}    from 'lit'
-import {customElement, property, state}                                    from 'lit/decorators.js'
-import {choose}                                                            from 'lit/directives/choose.js'
-import {DisplayMode}                                                       from '../../internal'
-import {contextData, DisplayConfig, displayConfigContext, FhirDataContext} from '../../internal/contexts'
-import {textHostStyles}                                                    from '../../styles'
-import {isBlank, toBaseElementModeEnum}                                    from '../../utilities'
-import {DateTime}                                                          from './primitive.data'
+import {consume}                                                        from '@lit/context'
+import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                                 from 'lit/decorators.js'
+import {choose}                                                         from 'lit/directives/choose.js'
+import {contextData, displayConfigContext, FhirDataContext}             from '../../internal/contexts'
+import {textHostStyles}                                                 from '../../styles'
+import {DisplayConfig, DisplayMode}                                     from '../../types'
+import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
+import {DateTime}                                                       from './primitive.data'
 import {
   toBase64, toBoolean, toCode, toDate, toDatetime, toDecimal, toError, toFhirString, toId, toInstant, toInteger, toInteger64, toLink, toMarkdown, toPositiveInt,
   toType, toUnsignedInt, toUri, toUrl
-}                                                                          from './type-converters'
+}                                                                       from './type-converters'
 
 import {PrimitiveType, valueOrError} from './type-converters/type-converters'
 import {asDateTime, asReadable}      from './type-presenters'
