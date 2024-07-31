@@ -1,5 +1,5 @@
 import {Code}        from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 /**
  * Regular expression pattern for matching a FHIR code.
@@ -30,7 +30,7 @@ const codeRegex = /^(\S+\s)?\S+$/
  * @returns {T} - The converted code.
  */
 export const toCode: toPrimitive<string, Code> = (code: string): Code => {
-  let match = codeRegex.test(code)
+  const match = codeRegex.test(code)
   if (match) {
     return code as Code
   }

@@ -1,12 +1,14 @@
 import {css, html, TemplateResult} from 'lit'
 import {customElement}             from 'lit/decorators.js'
-import {BaseElementConsumer}       from '../../../internal/base/base-element-consumer'
+import {BaseElement}               from '../../../internal/base'
 
 import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
-export class Ratio extends BaseElementConsumer<RatioData> {
-  static styles = css`
+export class Ratio extends BaseElement<RatioData> {
+
+  static styles = [
+    css`
     fhir-primitive-wrapper {
       display: flex;
       list-style-type: none;
@@ -17,7 +19,8 @@ export class Ratio extends BaseElementConsumer<RatioData> {
     fhir-quantity::part(base) {
       padding: 0
     }
-  `
+    `
+  ]
 
   constructor() {super('Ratio')}
 
@@ -29,7 +32,7 @@ export class Ratio extends BaseElementConsumer<RatioData> {
         <fhir-value text="${data.denominator.unit || data.denominator.code}"></fhir-va>`
     } else {
       denominator = html`
-        <fhir-quantity .data=${data.denominator}></fhir-quantity >`
+        <fhir-quantity .data=${data.denominator} summary></fhir-quantity >`
     }
 
     return html`
@@ -44,8 +47,8 @@ export class Ratio extends BaseElementConsumer<RatioData> {
 
   protected renderStructure(data: RatioData): TemplateResult | TemplateResult[] {
     return html`
-      <fhir-quantity label="numerator" .data=${data.numerator}></fhir-quantity >
-      <fhir-quantity label="denominator" .data=${data.denominator}></fhir-quantity >
+      <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >
+      <fhir-quantity label="denominator" .data=${data.denominator} summary></fhir-quantity >
     `
   }
 

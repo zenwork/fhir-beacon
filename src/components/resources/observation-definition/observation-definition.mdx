@@ -1,0 +1,16 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './observation-definition.stories'
+
+<Meta of={Stories} />
+
+# Observation Definition
+
+Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
+
+reference:
+* [8.29.4 Resource Content (R5)](https://www.hl7.org/fhir/observationdefinition.html#resource)
+
+<Canvas of={Stories.Display} />
+
+<Canvas of={Stories.Structure} />

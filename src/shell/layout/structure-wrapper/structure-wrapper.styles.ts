@@ -1,12 +1,12 @@
 import {css} from 'lit'
 
-export let componentStyles = css`
+export const componentStyles = css`
   sl-details::part(base) {
     border: none;
     border-radius: 0;
     display: inline-flex;
-    background: var(--sl-color-neutral-100);
-    padding: 0;
+    background: none;
+    padding: 0 0 0 0.3rem;
   }
 
   sl-details::part(header) {
@@ -41,7 +41,7 @@ export let componentStyles = css`
 
   sl-badge::part(base) {
     color: var(--sl-color-gray-400);
-    background-color: var(--sl-color-gray-50);
+    background-color: var(--sl-color-gray-100);
     border-color: var(--sl-color-gray-300);
     font-weight: var(--sl-font-weight-normal);
     font-style: italic;

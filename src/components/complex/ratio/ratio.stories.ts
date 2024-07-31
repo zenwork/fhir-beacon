@@ -1,33 +1,25 @@
-import {StoryObj} from '@storybook/web-components'
-import './ratio'
+import {StoryObj}               from '@storybook/web-components'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
+
+const render = wrapInShell((args) => html`
+    <fhir-ratio .data=${args.data}></fhir-ratio>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Ratio',
   component: 'fhir-ratio',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'}
-    },
-    'showerror': {
-      options: [true, false],
-      control: {type: 'radio'}
-    },
-    open: {
-      options: [true, false],
-      control: {type: 'radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   }
 
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 export const SimpleRatio: Story = {
   args: {
@@ -40,11 +32,11 @@ export const SimpleRatio: Story = {
       }
     },
     mode: 'display',
-    'showerror': false,
+    showerror: false,
     verbose: false,
     open: true
-
-  }
+  },
+  render
 }
 
 export const UnitCost: Story = {
@@ -64,9 +56,9 @@ export const UnitCost: Story = {
       }
     },
     mode: 'display',
-    'showerror': false,
+    showerror: false,
     verbose: false,
     open: true
-  }
-
+  },
+  render
 }

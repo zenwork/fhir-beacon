@@ -1,14 +1,14 @@
 import {Meta, StoryObj} from '@storybook/web-components'
-import './codeable-reference'
-import '../../../shell/shell'
 import {html}           from 'lit'
+import {wrapInShell}    from '../../../../stories/wrapInShell'
 
-type CustomArgs = { data: {}, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
+type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
 
-let title = 'components/Datatypes/Complex Type/Codeable Reference'
-
-let data = {
+const title = 'components/Datatypes/Complex Type/Codeable Reference'
+const render = wrapInShell((args) => html`
+  <fhir-codeable-reference .data=${args.data} summary></fhir-codeable-reference >`)
+const data = {
   concept: {
     coding: [
       {
@@ -33,29 +33,12 @@ const meta: Meta<CustomArgs> = {
   title,
   component: 'fhir-shell',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'inline-radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    open: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'inline-radio'}
-    }
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   },
-  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) =>
-    html`
-      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-codeable-reference .data=${data}></fhir-codeable-reference >
-      </fhir-shell >
-    `
+  render
 
 }
 
@@ -67,9 +50,10 @@ export const Headache: Story = {
     data,
     mode: 'display',
     verbose: false,
-    'showerror': true,
+    showerror: true,
     open: true
-  }
+  },
+  render
 }
 
 export const HeadacheVerbose: Story = {
@@ -77,9 +61,10 @@ export const HeadacheVerbose: Story = {
     data,
     mode: 'display',
     verbose: true,
-    'showerror': true,
+    showerror: true,
     open: true
-  }
+  },
+  render
 }
 
 export const Structure: Story = {
@@ -87,7 +72,8 @@ export const Structure: Story = {
     data: data,
     mode: 'structure',
     verbose: true,
-    'showerror': true,
+    showerror: true,
     open: true
-  }
+  },
+  render
 }

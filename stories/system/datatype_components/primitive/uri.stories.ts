@@ -1,12 +1,10 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
-import '../../../../src/components/primitive/primitive'
-import {Primitive}      from '../../../../src/components/primitive/primitive'
 
 const meta = {
   title: 'Components/Datatypes/Primitive Type/Uri',
   component: 'fhir-primitive',
-} satisfies Meta<typeof Primitive>
+} satisfies Meta
 
 export default meta
 type Story = StoryObj;
@@ -35,7 +33,8 @@ export const FhirDatatype: Story = {
                 label="error"
                 type="uri_type"
                 value="dataType"
-                showError=${true}>
+          showerror=${true}
+        >
         </fhir-primitive>
     `
 

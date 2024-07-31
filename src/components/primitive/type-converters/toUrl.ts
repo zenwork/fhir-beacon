@@ -1,4 +1,4 @@
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 /**
  * Converts and validates a string to a URL object.

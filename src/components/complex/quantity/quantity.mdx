@@ -10,17 +10,34 @@ A measured amount (or an amount that can potentially be measured).
 
 reference: [2.1.28.0.6 Quantity (R5)](http://hl7.org/fhir/R5/datatypes.html#quantity)
 
-## Valid
-<Canvas of={Stories.DisplayableTime}/>
+# Display View
 
-## Amount of prescribed medicine
+## a simple quantity
+<Canvas of={Stories.Simple} />
+
+## an amount of prescribed medicine
 <Canvas of={Stories.AmountOfPrescribedMedicine}/>
+<Canvas of={Stories.AmountOfPrescribedMedicine2} />
 
-## Amount of prescribed medicine
-<Canvas of={Stories.MoneyQuantity}/>
+## an amount of time
+<Canvas of={Stories.DisplayableTime} />
 
-## Simple Quantity
-<Canvas of={Stories.SimpleQuantity}/>
+## an amount of money
+<Canvas of={Stories.Money} />
+
+# Structure View
+
+## subtype: distance
+<Canvas of={Stories.Distance} />
+
+## subtype: age
+<Canvas of={Stories.Age} />
+
+## subtype: duration
+<Canvas of={Stories.Duration} />
+
+## subtype: count
+<Canvas of={Stories.Count} />
 
 ## Show Structure with errors
 <Canvas of={Stories.ShowStructWithErrors}/>

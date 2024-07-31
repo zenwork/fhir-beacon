@@ -1,7 +1,7 @@
-import {BaseElementData} from '../../../internal/base/base-element.data'
-import {DateTime}        from '../../primitive/primitive.data'
+import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
+import {DateTime}            from '../../primitive/primitive.data'
 
-export type PeriodData = BaseElementData & {
+export type PeriodData = FhirDataElementData & {
   start?: DateTime
   end?: DateTime
 }

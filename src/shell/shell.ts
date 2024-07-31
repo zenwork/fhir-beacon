@@ -1,15 +1,15 @@
-import {ContextProvider, ContextRoot} from '@lit/context'
-import {LitElement, PropertyValues}   from 'lit'
-import {customElement, property}      from 'lit/decorators.js'
-import {converter}                    from '../internal/base/base-element'
-import {BaseElementMode}              from '../internal/base/base-element.data'
-import {displayConfigContext}         from '../internal/contexts/context'
+import {ContextProvider}            from '@lit/context'
+import {LitElement, PropertyValues} from 'lit'
+import {customElement, property}    from 'lit/decorators.js'
+import {displayConfigContext}       from '../internal'
+import {DisplayMode}                from '../types'
+import {toBaseElementModeEnum}      from '../utilities'
 
 @customElement('fhir-shell')
 export class Shell extends LitElement {
 
-  @property({type: BaseElementMode, converter})
-  public mode: BaseElementMode = BaseElementMode.display
+  @property({ type: DisplayMode, converter: toBaseElementModeEnum })
+  public mode: DisplayMode = DisplayMode.display
 
   @property({type: Boolean, reflect: true})
   declare open: boolean
@@ -22,42 +22,29 @@ export class Shell extends LitElement {
 
   protected display = new ContextProvider(this, {context: displayConfigContext})
 
-  private contextRoot = new ContextRoot()
-
-  public connectedCallback() {
-    super.connectedCallback()
-    this.contextRoot.attach(this)
-  }
-
-
-  public disconnectedCallback() {
-    super.disconnectedCallback()
-    this.contextRoot.detach(this)
-  }
-
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
 
     if (_changedProperties.has('mode')) {
       this.display.setValue({...this.display.value, mode: this.mode})
-      // console.log('mode',this.mode, this.display.value)
+      // console.log('shell','mode',this.mode, this.display.value)
     }
     if (_changedProperties.has('showerror')) {
       this.display.setValue({...this.display.value, showerror: this.showerror})
-      // console.log('showerror',this.showerror, this.display.value)
+      // console.log('shell','showerror',this.showerror, this.display.value)
     }
     if (_changedProperties.has('verbose')) {
       this.display.setValue({...this.display.value, verbose: this.verbose})
-      // console.log('verbose',this.verbose, this.display.value)
+      // console.log('shell','verbose',this.verbose, this.display.value)
     }
     if (_changedProperties.has('open')) {
       this.display.setValue({...this.display.value, open: this.open})
-      // console.log('open', this.open, this.display.value)
+      // console.log('shell','open', this.open, this.display.value)
     }
   }
-
 
   protected createRenderRoot() {
     return this
   }
+
 }

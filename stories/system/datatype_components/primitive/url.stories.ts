@@ -1,12 +1,10 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 import {html}           from 'lit'
-import '../../../../src/components/primitive/primitive'
-import {Primitive}      from '../../../../src/components/primitive/primitive'
 
 const meta = {
   title: 'Components/Datatypes/Primitive Type/Url',
   component: 'fhir-primitive',
-} satisfies Meta<typeof Primitive>
+} satisfies Meta
 
 export default meta
 type Story = StoryObj;
@@ -23,10 +21,10 @@ export const Invalid: Story = {
 
 export const InvalidWithError: Story = {
   render: () => html`
-      <fhir-primitive .showError=${true} type="url" value="//not a url"></fhir-primitive>`,
+    <fhir-primitive .showerror=${true} type="url" value="//not a url"></fhir-primitive >`,
 }
 
 export const InvalidRelativeUrlWithError: Story = {
   render: () => html`
-      <fhir-primitive .showError=${true} type="url" value="a/b/c"></fhir-primitive>`,
+    <fhir-primitive .showerror=${true} type="url" value="a/b/c"></fhir-primitive >`,
 }

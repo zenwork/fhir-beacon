@@ -1,8 +1,7 @@
-import {FhirTypes}   from '../../../codesystems'
-import {toPrimitive} from './index'
+import {FhirTypes}         from '../../../codesystems/code-systems'
+import {toPrimitive, Type} from './type-converters'
 
 
-export type Type = string
 export const toType: toPrimitive<string, Type> = (value: string): Type => {
 
   if (value && FhirTypes.find(f => f.kind === 'resource' && f.code === value)) return value as Type

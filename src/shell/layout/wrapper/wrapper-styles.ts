@@ -1,6 +1,11 @@
 import {css} from 'lit'
 
-export let componentStyles = css`
+export const componentStyles = css`
+
+  .base {
+    background: none;
+    padding: 0 0 0 0.3rem;
+  }
 
   label {
     font-size: var(--sl-font-size-medium);
@@ -29,5 +34,18 @@ export let componentStyles = css`
 
   .secondary {
     color: var(--sl-color-gray-700);
+  }
+
+  .validation-error {
+    background-color: var(--sl-color-red-300);
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  .validation-error-border {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--sl-color-red-100);
+    border-radius: 0.5rem;
   }
 `

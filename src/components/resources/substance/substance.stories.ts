@@ -1,9 +1,9 @@
 import {StoryObj} from '@storybook/web-components'
-import '../../../index'
 
-let title = 'Components/Resources/Medication/Substance'
-let component = 'fhir-substance'
-let data = {
+
+const title = 'Components/Resources/Medication/Substance'
+const component = 'fhir-substance'
+const data = {
   resourceType: 'Substance',
   id: 'f205',
   text: {

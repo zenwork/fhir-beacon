@@ -1,6 +1,7 @@
-import './substance/substance'
-import './substance/substance-ingredient.data'
-import './substance/substance-ingredient.type-guard'
-import './substance/substance-ingredient.backbone'
-import './medication/medication'
-import './medication/medication-ingredient.data'
+// created by autobarrel, do not modify directly
+
+export * from './medication/'
+export * from './observation/'
+export * from './observation-definition/'
+export * from './patient/'
+export * from './substance/'

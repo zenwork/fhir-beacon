@@ -1,7 +1,7 @@
-import {BaseElementData} from '../../../internal/base/base-element.data'
-import {Code, XHTML}     from '../../primitive/primitive.data'
+import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
+import {Code, XHTML}         from '../../primitive/primitive.data'
 
-export type NarrativeData = BaseElementData & {
+export type NarrativeData = FhirDataElementData & {
   status: Code
   div: XHTML
 }

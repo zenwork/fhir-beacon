@@ -1,12 +1,11 @@
-import {consume}                 from '@lit/context'
-import {html, nothing}           from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {displayConfigContext}    from '../../../internal/contexts/context'
-import {DisplayConfig}           from '../../../internal/contexts/context.data'
-import {defaultDisplayConfig}    from '../../../internal/contexts/context.defaults'
-import {hostStyles}              from '../../../styles/hostStyles'
-import {ShoelaceStyledElement}   from '../../shoelace-styled-element'
-import {componentStyles}         from './structure-wrapper.styles'
+import {consume}                                    from '@lit/context'
+import {html, LitElement, nothing, PropertyValues}  from 'lit'
+import {customElement, property}                    from 'lit/decorators.js'
+import {defaultDisplayConfig, displayConfigContext} from '../../../internal/contexts'
+import {hostStyles}                                 from '../../../styles'
+import {DisplayConfig, DisplayMode}                 from '../../../types'
+import {toBaseElementModeEnum}                      from '../../../utilities'
+import {componentStyles}                            from './structure-wrapper.styles'
 
 /**
  * Custom element for wrapping primitive content.
@@ -14,7 +13,7 @@ import {componentStyles}         from './structure-wrapper.styles'
  * @slot wrapper
  */
 @customElement('fhir-structure-wrapper')
-export class StructureWrapper extends ShoelaceStyledElement {
+export class StructureWrapper extends LitElement {
 
   @consume({context: displayConfigContext, subscribe: true})
   protected displayConfig: DisplayConfig = defaultDisplayConfig
@@ -33,27 +32,61 @@ export class StructureWrapper extends ShoelaceStyledElement {
   @property()
   public hide: boolean = false
 
-  @property({type: Boolean})
+  @property({ type: Boolean, reflect: true })
   public open: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public forceclose: boolean = false
+
+  @property({ type: Boolean, reflect: true })
+  public summary: boolean = false
+
+  @property({ type: Boolean, reflect: true, converter: toBaseElementModeEnum })
+  private mode: DisplayMode = DisplayMode.structure
+
+
+
   protected render(): unknown {
-    return this.hide
-           ? html`
-          <slot part="value"></slot >
-      `
-           : html`
-          <sl-details part="base" ?open=${this.displayConfig.open}>
-            <div slot="summary">
-              <label ><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
-              ${this.fhirType ? html`
-                <sl-badge pill>${this.fhirType}</sl-badge >` : html``}
-              ${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
-            </div >
-            <ul >
-              <slot part="value"></slot >
-            </ul >
-          </sl-details >
-      `
+    // console.log(this.label,this.fhirType,this.summary,this.displayConfig.mode)
+    // if (!this.summaryMode() || (this.summary && this.summaryMode())) {
+      let open = false
+      if (this.displayConfig.open) open = true
+      if (this.forceclose) open = false
+
+      return this.hide
+             ? html`
+            <slot part="value"></slot > `
+             : html`
+            <sl-details part="base" ?open=${open}>
+              <div slot="summary">
+                <label ><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
+                ${this.fhirType ? html`
+                  <sl-badge pill>${this.fhirType}</sl-badge >` : nothing}
+                ${this.summary && this.displayConfig?.mode === DisplayMode.structure ? html`
+                  <sl-badge id="summary" pill>&sum;</sl-badge >` : nothing}
+                ${this.label || this.fhirType ? html`<span id="arrow">&#x21B4;</span >` : nothing}
+              </div >
+              <ul >
+                <slot part="value"></slot >
+              </ul >
+            </sl-details >
+        `
+    // }
+
+    // return html``
+  }
+
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (this.displayConfig) {
+      this.open = this.displayConfig.open
+      this.mode = this.displayConfig.mode
+    }
+  }
+
+  private summaryMode() {
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 
 }

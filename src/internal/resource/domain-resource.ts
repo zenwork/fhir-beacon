@@ -1,34 +1,40 @@
 import {provide}                                       from '@lit/context'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {choose}                                        from 'lit/directives/choose.js'
+import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
+import {DisplayMode}                                   from '../../types'
+import {containedDataContext}                          from '../contexts/context'
+import {DomainResourceData, ResourceData}              from './domain-resource.data'
+import {renderResourceComponent}                       from './renderResourceComponent'
 
-import {BaseElementProvider}              from '../base/base-element-provider'
-import {BaseElementMode}                  from '../base/base-element.data'
-import {containedDataContext}             from '../contexts/context'
-import {DomainResourceData, ResourceData} from './domain-resource.data'
-import {renderResourceComponent}          from './renderResourceComponent'
-
-import '../../utilities'
-import '../../components/special/narrative/narrative'
+import {Resource} from './resource'
 
 
-export abstract class DomainResource<T extends DomainResourceData> extends BaseElementProvider<T> {
+export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
   @provide({context: containedDataContext})
   declare contained: ResourceData[]
 
+
+  protected constructor(type: string) {
+    super(type)
+    this.addStructureTemplateGenerator('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
+  }
+
   protected render(): TemplateResult {
-    let data = this.convertData(this.data)
-    return html`${choose(this.mode,
+    const data = this.convertData(this.data)
+    return html`
+      <div part="domain-resource">${choose(this.mode,
             [
-                [BaseElementMode.narrative, () => this.renderNarrative(data)],
+              [DisplayMode.narrative, () => this.renderNarrative(data)],
               [
-                BaseElementMode.combined,
+                DisplayMode.combined,
                 () => html`
                   <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
               ]
             ],
-      () => super.render())}`
+          () => super.render())}
+      </div >`
 
   }
 
@@ -42,38 +48,42 @@ export abstract class DomainResource<T extends DomainResourceData> extends BaseE
     return html``
   }
 
-  protected renderStructure(data: T): TemplateResult | TemplateResult[] {
-    return html`
-      ${(this.data.contained) ? html`
-        <fhir-structure-wrapper label="contained">
-          ${this.renderStructureContained()}
-        </fhir-structure-wrapper >
-      ` : nothing}
-      ${(!this.data.contained && this.verbose) ? html`
-        <fhir-structure-wrapper label="contained">
-          <fhir-empty-set ></fhir-empty-set >
-        </fhir-structure-wrapper >` : nothing}
-    `
-  }
-
-  protected getContainedData(id: string) {
-    return this.data?.contained?.find((c: ResourceData) => c.id === id)
-  }
-
-  protected renderStructureContained(): TemplateResult[] {
-    if (this.data?.contained) {
-      return this.data.contained.map((c: ResourceData) => {
-        return renderResourceComponent(c, this.display.value)
-      })
-    }
-    return []
-  }
-
-
   protected willUpdate(_changedProperties: PropertyValues) {
     super.willUpdate(_changedProperties)
     if (_changedProperties.has('data')) {
       this.contained = this.data?.contained || []
     }
+  }
+
+  protected renderDomainResourceStructure(data: T): TemplateResult | TemplateResult[] {
+    return [
+      html`
+        <fhir-narrative label="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
+      `,
+      html`
+        ${(this.data.contained) ? html`
+        <fhir-structure-wrapper label="contained" ?forceclose=${true}>
+          ${this.renderStructureContained()}
+        </fhir-structure-wrapper >
+      ` : nothing}
+        ${(!this.data.contained && this.verbose) ? html`
+        <fhir-structure-wrapper label="contained" ?forceclose=${true}>
+          <fhir-empty-list ></fhir-empty-list >
+        </fhir-structure-wrapper >` : nothing}
+      `,
+      html`
+        <fhir-primitive label="extension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
+        <fhir-primitive label="modifierExtension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
+    `
+    ]
+  }
+
+  protected renderStructureContained(): TemplateResult[] {
+    if (this.data?.contained) {
+      return this.data.contained.map((c: ResourceData) => {
+        return renderResourceComponent(c, this.getDisplayConfig())
+      })
+    }
+    return []
   }
 }

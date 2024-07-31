@@ -1,31 +1,25 @@
-import {StoryObj} from '@storybook/web-components'
-import './quantity'
-import '../../../utilities/debug/debug'
-import '../../primitive/primitive'
+import {StoryObj}               from '@storybook/web-components'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
+
+const render = wrapInShell((args) => html`
+    <fhir-quantity .data=${args.data}></fhir-quantity>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Quantity',
   component: 'fhir-quantity',
   argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'},
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'},
-    },
-    'showerror': {
-      options: [true, false],
-      control: {type: 'radio'},
-    },
+    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    verbose: { options: [false, true], control: { type: 'boolean' } },
+    showerror: { options: [false, true], control: { type: 'boolean' } },
+    open: { options: [false, true], control: { type: 'boolean' } }
   }
 
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 export const DisplayableTime: Story = {
   args: {
@@ -36,8 +30,9 @@ export const DisplayableTime: Story = {
       code: 's'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const AmountOfPrescribedMedicine: Story = {
@@ -50,12 +45,26 @@ export const AmountOfPrescribedMedicine: Story = {
       code: 'ug'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   },
-
+  render
 }
 
-export const MoneyQuantity: Story = {
+export const AmountOfPrescribedMedicine2: Story = {
+  args: {
+    data: {
+      value: '3',
+      unit: 'capsules',
+      system: 'http://snomed.info/sct',
+      code: '385049006'
+    },
+    mode: 'display',
+    showerror: false
+  },
+  render
+}
+
+export const Money: Story = {
   args: {
     data: {
       value: '100',
@@ -64,19 +73,20 @@ export const MoneyQuantity: Story = {
       code: 'USD'
     },
     mode: 'display',
-    'showerror': false
+    showerror: false
   },
-
+  render
 }
 
-export const SimpleQuantity: Story = {
+export const Simple: Story = {
   args: {
     data: {
       value: '1'
     },
     mode: 'display',
-    'showerror': false
-  }
+    showerror: false
+  },
+  render
 }
 
 export const ShowStructWithErrors: Story = {
@@ -88,7 +98,65 @@ export const ShowStructWithErrors: Story = {
       code: 's'
     },
     mode: 'structure',
-    'showerror': true,
+    showerror: true,
     open: true
   },
+  render
+}
+
+export const Distance: Story = {
+  args: {
+    data: {
+      value: '100',
+      unit: 'kilometers',
+      system: 'http://unitsofmeasure.org',
+      code: 'km'
+    },
+    mode: 'structure',
+    showerror: true,
+    open: true
+  },
+  render
+}
+export const Age: Story = {
+  args: {
+    data: {
+      value: '18',
+      unit: 'months',
+      system: 'http://unitsofmeasure.org',
+      code: 'mo'
+    },
+    mode: 'structure',
+    showerror: true,
+    open: true
+  },
+  render
+}
+
+export const Duration: Story = {
+  args: {
+    data: {
+      value: '0',
+      unit: 'milliseconds',
+      system: 'http://unitsofmeasure.org',
+      code: 'ms'
+    },
+    mode: 'structure',
+    showerror: true,
+    open: true
+  },
+  render
+}
+
+export const Count: Story = {
+  args: {
+    data: {
+      value: '1',
+      code: '1'
+    },
+    mode: 'structure',
+    showerror: true,
+    open: true
+  },
+  render
 }

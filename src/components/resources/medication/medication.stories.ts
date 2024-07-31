@@ -1,28 +1,34 @@
-import {StoryObj} from '@storybook/web-components'
-import '../../../../src/index'
+import {Meta, StoryObj} from '@storybook/web-components'
+import {html}           from 'lit'
+import {ShellArgs}      from '../../../../stories/wrapInShell'
 
-const meta = {
+
+const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined', 'narrative'],
-      control: {type: 'radio'},
+      options: ['display', 'display_summary', 'structure', 'structure_summary', 'narrative', 'debug'],
+      control: { type: 'radio' }
     },
     verbose: {
       options: [true, false],
-      control: {type: 'radio'},
+      control: { type: 'boolean' }
     },
     showerror: {
       options: [true, false],
-      control: {type: 'radio'}
+      control: { type: 'boolean' }
+    },
+    open: {
+      options: [true, false],
+      control: { type: 'boolean' }
     }
   }
 
 }
 
 export default meta
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 const data_310 = {
   resourceType: 'Medication',
@@ -127,7 +133,7 @@ const data_319 = {
 
   },
   doseForm: {
-    coding: [{system: 'http://snomed.info/sct', code: '385101003', display: 'Ointment'}],
+    coding: [{ system: 'http://snomed.info/sct', code: '385101003', display: 'Ointment' }],
     text: 'Ointment'
   },
   ingredient: [
@@ -144,8 +150,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 5, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 5, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     },
     {
@@ -161,8 +167,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 1, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 1, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     },
     {
@@ -178,8 +184,8 @@ const data_319 = {
         }
       },
       strengthRatio: {
-        numerator: {value: 94, system: 'http://unitsofmeasure.org', code: 'g'},
-        denominator: {value: 100, system: 'http://unitsofmeasure.org', code: 'g'}
+        numerator: { value: 94, system: 'http://unitsofmeasure.org', code: 'g' },
+        denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
       }
     }
   ],
@@ -213,4 +219,92 @@ export const Med0319Structure: Story = {
     verbose: false,
     open: true
   }
+}
+
+export const FrontPageDemo: Story = {
+  args: {
+    data: {
+      resourceType: 'Medication',
+      id: 'med0307',
+      text: {
+        status: 'generated',
+        div: '<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Medication</b><a name="med0307"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Medication &quot;med0307&quot; </p></div><p><b>code</b>: Novolog 100u/ml <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="http://terminology.hl7.org/5.1.0/CodeSystem-v3-ndc.html">National drug codes</a>#0169-7501-11)</span></p><p><b>marketingAuthorizationHolder</b>: <a name="mmanu"> </a></p><blockquote><p/><p><a name="mmanu"> </a></p><p><b>name</b>: Medication Manufacturer</p></blockquote><p><b>doseForm</b>: Injection solution (qualifier value) <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#385219001)</span></p><blockquote><p><b>ingredient</b></p><h3>Items</h3><table class="grid"><tr><td>-</td><td><b>Concept</b></td></tr><tr><td>*</td><td>Insulin Aspart (substance) <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#325072002)</span></td></tr></table><p><b>strength</b>: 100 U<span style="background: LightGoldenRodYellow"> (Details: UCUM code U = \'U\')</span>/1 mL<span style="background: LightGoldenRodYellow"> (Details: UCUM code mL = \'mL\')</span></p></blockquote><h3>Batches</h3><table class="grid"><tr><td>-</td><td><b>LotNumber</b></td><td><b>ExpirationDate</b></td></tr><tr><td>*</td><td>12345</td><td>2019-10-31</td></tr></table></div>'
+      },
+      contained: [
+        {
+          resourceType: 'Organization',
+          id: 'mmanu',
+          name: 'Medication Manufacturer'
+        }
+      ],
+      code: {
+        coding: [
+          {
+            system: 'http://hl7.org/fhir/sid/ndc',
+            code: '0169-7501-11',
+            display: 'Novolog 100u/ml'
+          }
+        ]
+      },
+      marketingAuthorizationHolder: {
+        reference: '#mmanu'
+      },
+      doseForm: {
+        coding: [
+          {
+            system: 'http://snomed.info/sct',
+            code: '385219001',
+            display: 'Injection solution (qualifier value)'
+          }
+        ]
+      },
+      ingredient: [
+        {
+          item: {
+            concept: {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '325072002',
+                  display: 'Insulin Aspart (substance)'
+                }
+              ]
+            }
+          },
+          strengthRatio: {
+            numerator: {
+              value: 100,
+              system: 'http://unitsofmeasure.org',
+              code: 'U'
+            },
+            denominator: {
+              value: 1,
+              system: 'http://unitsofmeasure.org',
+              code: 'mL'
+            }
+          }
+        }
+      ],
+      batch: {
+        lotNumber: '12345',
+        expirationDate: '2019.10-31'
+      }
+    },
+    mode: 'display',
+    showerror: false,
+    verbose: false,
+    open: true
+  },
+  render: (args: ShellArgs) =>
+    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3 >
+    <fhir-medication
+      .data=${args.data}
+      .mode=${args.mode}
+      .showerror=${args.showerror}
+      .verbose=${args.verbose}
+      .open=${args.open}
+    >
+    </fhir-medication >
+    `
+
 }

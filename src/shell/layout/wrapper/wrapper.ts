@@ -1,13 +1,13 @@
-import {consume}                 from '@lit/context'
-import {html, TemplateResult}    from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {classMap}                from 'lit/directives/class-map.js'
-import {displayConfigContext}    from '../../../internal/contexts/context'
-import {DisplayConfig}           from '../../../internal/contexts/context.data'
-import {defaultDisplayConfig}    from '../../../internal/contexts/context.defaults'
-import {hostStyles}              from '../../../styles/hostStyles'
-import {ShoelaceStyledElement}   from '../../shoelace-styled-element'
-import {componentStyles}         from './wrapper-styles'
+import {consume}                                    from '@lit/context'
+import {html, PropertyValues}                       from 'lit'
+import {customElement, property}                    from 'lit/decorators.js'
+import {classMap}                                   from 'lit/directives/class-map.js'
+import {defaultDisplayConfig, displayConfigContext} from '../../../internal'
+import {hostStyles}                                 from '../../../styles'
+import {DisplayConfig, DisplayMode}                 from '../../../types'
+import {toBaseElementModeEnum}                      from '../../../utilities'
+import {ShoelaceStyledElement}                      from '../../shoelace-styled-element'
+import {componentStyles}                            from './wrapper-styles'
 
 
 /**
@@ -30,17 +30,50 @@ export class Wrapper extends ShoelaceStyledElement {
   fhirType: string = ''
 
   @property()
-  variant: 'primary' | 'secondary' | 'none' = 'none'
+  variant: 'primary' | 'secondary' | 'validation-error' | 'none' = 'none'
 
   @property({type: Boolean, reflect: true})
   hide: boolean = false
 
-  protected render(): unknown {
-    const classes = {primary: this.variant === 'primary', secondary: this.variant === 'secondary'}
+  @property({ type: Boolean, reflect: true })
+  declare open: boolean
 
-    let label: TemplateResult
+  @property({ type: DisplayMode, reflect: true, converter: toBaseElementModeEnum })
+  declare mode: DisplayMode
+
+  @property({ type: Boolean, reflect: true })
+  declare summary: boolean
+
+
+  protected render(): unknown {
+    if (!this.summaryMode() || (this.summary && this.summaryMode())) {
+
+
+      const label = this.generateLabel()
+
+      const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
+
+      return html`
+        <div class='base ${classMap(borderClasses)}'>
+          ${label}
+          <slot class="${classMap({ content: !this.hide })}"></slot >
+        </div >
+      `
+    }
+
+    return html``
+  }
+
+  private generateLabel = () => {
+
+    const classes = {
+      primary: this.variant === 'primary',
+      secondary: this.variant === 'secondary',
+      'validation-error': this.variant === 'validation-error'
+    }
+
     if (!this.hide && this.label && this.fhirType) {
-      label = html`
+      return html`
         <sl-tooltip content="${this.fhirType}" placement="left">
           <div id="label">
             <label class=${classMap(classes)}>${this.label}</label >
@@ -49,26 +82,34 @@ export class Wrapper extends ShoelaceStyledElement {
         </sl-tooltip >
       `
     } else if (!this.hide && this.label) {
-      label = html`
+      return html`
         <div id="label">
           <label class=${classMap(classes)}>${this.label}</label >
           <span id="arrow">&#x21B4;</span >
         </div >
       `
     } else if (!this.hide && this.fhirType) {
-      label = html`
+      return html`
         <div id="label">
           <label class=${classMap(classes)}>${this.fhirType}</label >
           <span id="arrow">&#x21B4;</span >
         </div >
       `
     } else {
-      label = html``
+      return html``
     }
-    return html`
-      ${label}
-      <slot class="${classMap({content: !this.hide})}"></slot >
-    `
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (this.displayConfig) {
+      this.open = this.displayConfig.open
+      this.mode = this.displayConfig.mode
+    }
+  }
+
+  private summaryMode() {
+    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 
 

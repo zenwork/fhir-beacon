@@ -1,8 +1,7 @@
 const getAncestor = (child: HTMLElement | null) => {
   if (child) {
     if (child.getRootNode() instanceof ShadowRoot) {
-      // @ts-ignore
-      return child.getRootNode({composed: false})?.host
+      return (child.getRootNode({ composed: false }) as unknown as any).host
     }
     return child?.parentElement
   }
@@ -10,8 +9,9 @@ const getAncestor = (child: HTMLElement | null) => {
 }
 
 export const hasSameAncestor = (child: HTMLElement | null): boolean => {
+
   let found = false
-  let childName = child?.tagName
+  const childName = child?.tagName
   let currentAncestor = getAncestor(child)
   let currentName = currentAncestor?.tagName
 

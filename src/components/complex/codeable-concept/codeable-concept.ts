@@ -1,50 +1,44 @@
 import {html, TemplateResult} from 'lit'
-import {repeat}               from 'lit-html/directives/repeat.js'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
+import {BaseElement}          from '../../../internal'
+import {wrap, wraps}          from '../../../shell/layout/wrapCollection'
 import {CodeableConceptData}  from './codeable-concept.data'
-import '../coding/coding'
-import '../../../shell/layout/empty-set'
-import '../../../shell/layout/structure-wrapper/structure-wrapper'
 
 @customElement('fhir-codeable-concept')
-export class CodeableConcept extends BaseElementConsumer<CodeableConceptData> {
+export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   constructor() {
     super('Codeable Concept')
   }
 
   //TODO: review how to deal with fall-back situation. Is this a correct interpretation. We probably need some extensive testing
+  //TODO: display summary is problematic because it does not represent the spec correctly sometimes if layout is modified
   protected renderDisplay(data: CodeableConceptData): TemplateResult {
-    return data.coding ?
-           html`
-             ${repeat(data.coding, (c, idx) => html`
-               <fhir-coding .label=${this.label || 'name'}${data.coding.length > 1 ? '[' + idx + ']' : ''} .data=${c}></fhir-coding >
-            `)}
-           ` :
-           html`
-             <fhir-primitive .label=${this.label ?? 'name'} .value=${data.text}></fhir-primitive >`
+    if (data.coding) {
+      return html`
+        ${wrap('identifiers', data.coding, this.getDisplayConfig().verbose,
+            (i, x) => html`
+              <fhir-coding .label=${this.label || 'name'}${x} .data=${i} summary></fhir-coding >`)}
+      `
+    }
+
+    if (data.text) {
+      console.log(data.text)
+      return html`
+        <fhir-primitive .label=${'name'} .value=${data.text} summary></fhir-primitive >`
+    }
+
+    return html`
+      <fhir-not-supported ></fhir-not-supported >`
   }
 
   protected renderStructure(data: CodeableConceptData): TemplateResult[] {
     return [
-      (data.coding && data.coding.length != 0 || this.verboseAllowed()) ? html`
-        <fhir-structure-wrapper label="codings" .hide="${data.coding?.length <= 1}">${(this.getCodings(data))}</fhir-structure-wrapper > ` : html``,
+      wraps('codings', data.coding, this.getDisplayConfig().verbose,
+        (i, x) => html`
+          <fhir-coding label="coding${x}" .data=${i} summary></fhir-coding >`),
       html`
-        <fhir-primitive label="text" .value=${data.text}></fhir-primitive > `
-    ]
-  }
-
-  private getCodings = (data: CodeableConceptData) => {
-    if (data && data.coding) {
-      return repeat(data.coding,
-        (c, index) => html`
-          <fhir-coding .label=${'coding [' + (index + 1) + ']'} .data=${c}></fhir-coding >
-        `)
-    }
-    return [
-      html`
-        <fhir-empty-set ></fhir-empty-set >`
+        <fhir-primitive label="text" .value=${data.text} summary></fhir-primitive > `
     ]
   }
 }

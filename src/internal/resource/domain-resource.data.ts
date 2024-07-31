@@ -1,9 +1,9 @@
-import {Id, Language, URI}          from '../../components/primitive/primitive.data'
-import {MetaData}                   from '../../components/special/meta/meta.data'
-import {NarrativeData}              from '../../components/special/narrative/narrative.data'
-import {BaseElementData, Extension} from '../base/base-element.data'
+import {Id, Language, URI}              from '../../components/primitive/primitive.data'
+import {MetaData}                       from '../../components/special/meta/meta.data'
+import {NarrativeData}                  from '../../components/special/narrative/narrative.data'
+import {Extension, FhirDataElementData} from '../base/fhir-data-element.data'
 
-export type ResourceData = BaseElementData & {
+export type ResourceData = FhirDataElementData & {
   id?: Id,
   resourceType: string //not in model but seems to always be there
   meta?: MetaData,

@@ -1,13 +1,12 @@
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
-import {BaseElementConsumer}                  from '../../../internal/base/base-element-consumer'
+import {BaseElement}                          from '../../../internal'
 
 import {NarrativeData} from './narrative.data'
-import '../../../shell/layout/wrapper/wrapper'
 
 @customElement('fhir-narrative')
-export class Narrative extends BaseElementConsumer<NarrativeData> {
+export class Narrative extends BaseElement<NarrativeData> {
 
   constructor() {
     super('Narrative')
@@ -35,10 +34,10 @@ export class Narrative extends BaseElementConsumer<NarrativeData> {
 
   protected renderStructure(data: NarrativeData): TemplateResult {
     return html`
-      <fhir-structure-wrapper .label=${this.type}>
         <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
-        <fhir-primitive label="div" .value=${data.div}></fhir-primitive >
-      </fhir-structure-wrapper>
+        <fhir-structure-wrapper label="div" forceclose>
+          <fhir-primitive .value=${data.div}></fhir-primitive >
+        </fhir-structure-wrapper >
     `
   }
 }

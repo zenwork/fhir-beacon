@@ -1,41 +1,25 @@
-import './toCode'
-import './toDatetime'
-import './toDecimal'
-import './toError'
-import './toReference'
-import './toType'
-import './toUri'
-import './toUrl'
-import './toId'
+// created by autobarrel, do not modify directly
 
-export type toPrimitive<O, V> = (val: O) => V
-export type ValOrErr<O, V> = { type: 'ValOrErr', val: V, err: null } | { type: 'ValOrErr', val: O, err: string }
-
-/**
- * Wrap value with an error message when operation failed. When there is no error the value is also cast to an expected type. When there
- * was an error the original value type is returned.
- * @param fn
- * @param originalVal
- */
-export const valueOrError = <O, V>(fn: toPrimitive<O, V>, originalVal: O): ValOrErr<O, V> => {
-  try {
-    return {type: 'ValOrErr', val: fn(originalVal), err: null}
-  } catch (e: any) {
-    return {type: 'ValOrErr', val: originalVal, err: e.toString()}
-  }
-}
-
-export enum PrimitiveType {
-  forced_error = 'forced_error',
-  none = 'none',
-  code = 'code',
-  url = 'url',
-  uri = 'uri',
-  decimal = 'decimal',
-  datetime = 'datetime',
-  uri_type = 'uri_type', //TODO: not 100% this belongs here
-  string_reference = 'string_reference',
-  id = 'id',
-  instant = 'instant',
-  canonical = 'canonical',
-}
+export * from './toBase64'
+export * from './toBoolean'
+export * from './toCanonical'
+export * from './toCode'
+export * from './toDate'
+export * from './toDatetime'
+export * from './toDecimal'
+export * from './toError'
+export * from './toFhirString'
+export * from './toId'
+export * from './toInstant'
+export * from './toInteger'
+export * from './toInteger64'
+export * from './toLink'
+export * from './toMarkdown'
+export * from './toPositiveInt'
+export * from './toReference'
+export * from './toTime'
+export * from './toType'
+export * from './toUnsignedInt'
+export * from './toUri'
+export * from './toUrl'
+export * from './type-converters'

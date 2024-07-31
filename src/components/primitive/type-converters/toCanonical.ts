@@ -1,10 +1,10 @@
 import {Id}          from '../primitive.data'
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 const canonicalRegex = /^\S*$/
 
 export const toCanonical: toPrimitive<string, Id> = (canonical: string): Id => {
-  let match = canonicalRegex.test(canonical)
+  const match = canonicalRegex.test(canonical)
   if (match) {
     return canonical as Id
   }

@@ -1,21 +1,23 @@
 import {html, TemplateResult}                                         from 'lit'
 import {customElement}                                                from 'lit/decorators.js'
-import {BaseElementConsumer}                                          from '../../../internal/base/base-element-consumer'
+import {BaseElement}                                                  from '../../../internal/base'
 import {renderError}                                                  from '../../../shell/layout/renderError'
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
 
-import '../../complex/ratio/ratio'
 
 @customElement('fhir-substance-ingredient')
-export class SubstanceIngredientBackbone extends BaseElementConsumer<SubstanceIngredientData | SubstanceIngredientReferenceData> {
+export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredientData | SubstanceIngredientReferenceData> {
   constructor() {
     super('Ingredient')
   }
 
   protected renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'ingredient', 'substance[x] choice not found')
+    let substance: TemplateResult = renderError(this.getDisplayConfig().showerror,
+      this.getDisplayConfig().verbose,
+      'ingredient',
+      'substance[x] choice not found')
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -35,7 +37,8 @@ export class SubstanceIngredientBackbone extends BaseElementConsumer<SubstanceIn
 
   protected renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.displayConfig.showerror, this.displayConfig.verbose, 'ingredient', 'substance[x] choice not found')
+    let substance: TemplateResult = renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
+                                                                                                                                  + ' found')
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`

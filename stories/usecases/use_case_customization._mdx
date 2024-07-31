@@ -1,0 +1,105 @@
+import {Meta} from '@storybook/blocks'
+
+
+<Meta title="Use Cases/Customized Markup" />
+
+Custom Examples
+===============
+
+Can be used in highly customized ways
+
+
+## in pure HTML:
+attribute description:
+* fid - json path (maybe could be fhir path) to anchor the primitive to a node in the provided data.
+* type - type of fhir data defined at `fid`. `fid` is added to parent `fid`. Providing the type ensures that required
+validation, formatting, lookup in code-ssytems, etc. is done.
+
+#### fragments of FHIR data statically generated sites
+##### markup
+```html
+<fhir-primitive type="code" label="name" value="G.44"></fhir-primitive>
+```
+##### output
+<div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
+    <fhir-primitive type="code" label="name" value="G.44"></fhir-primitive>
+</div>
+
+##### markup
+```html
+<fhir-primitive type="url" label="name" value="://fhir.acme.com" showError></fhir-primitive>
+```
+##### output
+<div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
+    <fhir-primitive type="url" label="name" value="://fhir.acme.com" showError></fhir-primitive>
+</div>
+
+----
+
+#### statically generated sites
+```html
+<fhir-resource data="{...}">
+    <fhir-primitive fid="code.coding[0]" type="coding" label="name"></fhir-primitive>
+</fhir-resource>
+```
+##### output
+<div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
+    <div><span>name: </span><span>Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)</span></div>
+</div>
+
+----
+
+### client-rendered html
+```html
+<fhir-resource source="https://my-fhir-server.net/medication/med0301">
+    <fhir-primitive fid="code.coding[0]" type="coding" label="name" >
+        <fhir-primitive slot="after" fid="coding[0].code" type="code" before="(" after=")">
+    </fhir-primitive>
+    <fhir-primitive fid="doseForm.coding[0]" type="coding" label="dose type"></fhir-primitive>
+</fhir-resource>
+```
+
+#### output
+<div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
+    <div>
+        <span>name: </span>
+        <span>Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)</span>
+        <span>(0409-6531-02)</span>
+    </div>
+    <div><span>dose type: </span><span>Injection Solution (qualifier value)</span></div>
+</div>
+
+----
+
+## Make it flexible in JS
+
+### Lit template markup:
+attribute description:
+* type - type of fhir data defined in `.value`. Providing the type ensures that required validation, formatting,
+lookup in code-ssytems, etc. is done.
+* value - the value (object or string) to validate, format and present
+* slot - slotable web content before and after the primitive value. The `before` and `after` attributes can be used for
+simple strings.
+
+```js
+return html`
+    <fhir-primitive label="name" .value=${data.code.coding[0].display} >
+        <fhir-primitive slot="after" .value=${data.code.coding[0].code} type="code" before="(" after=")">
+    </fhir-primitive>
+    <fhir-primitive label="dose type" .value=${data.doseForm.coding[0].display}></fhir-primitive>`
+```
+
+#### output
+<div style={{border:"solid lightgray 0.1rem", borderRadius:"0.2rem", padding:"0.5rem"}}>
+    <div>
+        <span>name: </span>
+        <span>Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)</span>
+        <span>(0409-6531-02)</span>
+    </div>
+    <div><span>dose type: </span><span>Injection Solution (qualifier value)</span></div>
+</div>
+
+To make this whole library work we need to be able to also make custom views where the user only interacts with a
+subset of values. For this we need smart components such as <code>fhir-primitve></code> that can extract data from
+FHIR complex types using smart defaults (ex: finding the <code>display</code> value) or with explicit annotations
+(ex: <code>coding.code</code>).

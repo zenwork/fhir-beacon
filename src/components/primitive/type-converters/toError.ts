@@ -1,7 +1,7 @@
-import {toPrimitive} from './index'
+import {toPrimitive} from './type-converters'
 
 
 export const toError: toPrimitive<string, string> = (value: string): string => {
 
-  throw new Error(`Unable to render do to internal constraint`)
+  throw new Error(value ?? `Unable to render due to internal constraint`)
 }

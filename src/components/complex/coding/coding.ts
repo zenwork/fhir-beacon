@@ -1,11 +1,10 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {BaseElementConsumer}  from '../../../internal/base/base-element-consumer'
+import {BaseElement}          from '../../../internal/base'
 import {CodingData}           from './coding.data'
 
-//TODO: rename to fhir-coding
 @customElement('fhir-coding')
-export class Coding extends BaseElementConsumer<CodingData> {
+export class Coding extends BaseElement<CodingData> {
 
   constructor() {
     super('Coding')
@@ -17,24 +16,25 @@ export class Coding extends BaseElementConsumer<CodingData> {
   }
 
   override renderDisplay(data: CodingData): TemplateResult {
+    console.log('code', Coding.commuteDisplay(data))
     return html`
       <fhir-primitive
           .label=${this.label}
           .value=${(Coding.commuteDisplay(data))}
           .context=${data.display ? data.code : undefined}
-          .link=${data.system ? data.system : undefined}
+        .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
+          summary
       ></fhir-primitive >
     `
   }
 
   protected renderStructure(data: CodingData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.id}></fhir-primitive >
-      <fhir-primitive label="extension" .value=${data.extension}></fhir-primitive >
-      <fhir-primitive label="version" .value=${data.version}></fhir-primitive >
-      <fhir-primitive label="system" .value=${data.system} type="url"></fhir-primitive >
-      <fhir-primitive label="code" .value=${data.code} type="code"></fhir-primitive >
-      <fhir-primitive label="display" .value=${data.display}></fhir-primitive >
+      <fhir-primitive label="extension" .value=${data.extension} summary></fhir-primitive >
+      <fhir-primitive label="version" .value=${data.version} summary></fhir-primitive >
+      <fhir-primitive label="system" .value=${data.system} type="url" summary></fhir-primitive >
+      <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
+      <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
     `
 
   }

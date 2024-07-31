@@ -1,0 +1,19 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './annotation.stories'
+
+<Meta of={Stories} />
+
+# Annotation
+
+FHIR spec description in a couple of lines
+
+reference:
+* [ FHIR Reference (R5)](...)
+
+
+<Canvas of={Stories.Display} />
+
+<Canvas of={Stories.ValidationErrors} />
+
+<Canvas of={Stories.Structure} />

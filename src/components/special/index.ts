@@ -1,3 +1,5 @@
-import './narrative/narrative'
-import './reference/reference'
-import './meta/meta'
+// created by autobarrel, do not modify directly
+
+export * from './meta/'
+export * from './narrative/'
+export * from './reference/'
