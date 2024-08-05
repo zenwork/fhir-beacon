@@ -26,7 +26,6 @@ export function isDeceasedDateTime(val: unknown): val is DeceasedBoolean {
 }
 
 export function isAuthorReference(val: ReferenceData | FhirString): val is AuthorReferenceData {
-  console.log(hasNone(val, ['reference', 'type', 'identifier', 'display']))
   return typeof val !== 'string' && !hasNone(val, ['reference', 'type', 'identifier', 'display'])
 }
 

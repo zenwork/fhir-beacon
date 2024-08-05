@@ -10,17 +10,16 @@ export class Coding extends BaseElement<CodingData> {
     super('Coding')
   }
 
-  private static commuteDisplay = (data: CodingData) => {
+  private static computeDisplay = (data: CodingData) => {
     if (data.display) return data.display
     if (data.code) return data.code
   }
 
   override renderDisplay(data: CodingData): TemplateResult {
-    console.log('code', Coding.commuteDisplay(data))
     return html`
       <fhir-primitive
           .label=${this.label}
-          .value=${(Coding.commuteDisplay(data))}
+        .value=${Coding.computeDisplay(data)}
           .context=${data.display ? data.code : undefined}
         .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
           summary
@@ -36,7 +35,6 @@ export class Coding extends BaseElement<CodingData> {
       <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
       <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
     `
-
   }
 
 

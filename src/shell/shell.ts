@@ -27,19 +27,18 @@ export class Shell extends LitElement {
 
     if (_changedProperties.has('mode')) {
       this.display.setValue({...this.display.value, mode: this.mode})
-      // console.log('shell','mode',this.mode, this.display.value)
     }
+
     if (_changedProperties.has('showerror')) {
       this.display.setValue({...this.display.value, showerror: this.showerror})
-      // console.log('shell','showerror',this.showerror, this.display.value)
     }
+
     if (_changedProperties.has('verbose')) {
       this.display.setValue({...this.display.value, verbose: this.verbose})
-      // console.log('shell','verbose',this.verbose, this.display.value)
     }
+
     if (_changedProperties.has('open')) {
       this.display.setValue({...this.display.value, open: this.open})
-      // console.log('shell','open', this.open, this.display.value)
     }
   }
 

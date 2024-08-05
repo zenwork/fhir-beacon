@@ -31,7 +31,6 @@ export class ContextProviderController<T extends FhirDataElementData, B extends 
       const context = new FhirDataContextImpl()
       context.data = data
       this.dataCtx.setValue(context)
-      // console.log(this.type,'mode',this.mode, this.display.value)
     }
 
     const mode = this.host.mode
@@ -41,22 +40,18 @@ export class ContextProviderController<T extends FhirDataElementData, B extends 
 
     if (mode && this.displayCtx.value?.mode !== mode) {
       this.displayCtx.setValue({ ...this.displayCtx.value, mode })
-      // console.log(this.type,'mode',this.mode, this.display.value)
     }
 
     if (showerror && this.displayCtx.value?.showerror !== showerror) {
       this.displayCtx.setValue({ ...this.displayCtx.value, showerror })
-      // console.log(this.type,'showerror',this.showerror, this.display.value)
     }
 
     if (verbose && this.displayCtx.value?.verbose !== verbose) {
       this.displayCtx.setValue({ ...this.displayCtx.value, verbose })
-      // console.log(this.type,'verbose',this.verbose, this.display.value)
     }
 
     if (open && this.displayCtx.value?.open !== open) {
       this.displayCtx.setValue({ ...this.displayCtx.value, open })
-      // console.log(this.type,'open', this.open, this.display.value)
     }
   }
 }

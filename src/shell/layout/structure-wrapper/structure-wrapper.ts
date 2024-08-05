@@ -47,8 +47,6 @@ export class StructureWrapper extends LitElement {
 
 
   protected render(): unknown {
-    // console.log(this.label,this.fhirType,this.summary,this.displayConfig.mode)
-    // if (!this.summaryMode() || (this.summary && this.summaryMode())) {
       let open = false
       if (this.displayConfig.open) open = true
       if (this.forceclose) open = false

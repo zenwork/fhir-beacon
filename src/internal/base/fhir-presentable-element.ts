@@ -21,7 +21,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
   public label: string = ''
 
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
-  public mode: DisplayMode = DisplayMode.display
+  declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
   declare open: boolean
@@ -52,6 +52,8 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
 
   protected constructor(type: string) {
     super(type)
+    // TODO: setting default mode should be reviewed as part of https://github.com/zenwork/fhir-beacon/issues/9
+    this.mode = DisplayMode.display
     // consume display configuration provided by a context providing element
     new DisplayContextConsumerController(this)
     this.addStructureTemplateGenerator('base-element', (data: T) => this.renderBaseElement(data))
@@ -94,26 +96,30 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
-    return html`${choose(this.mode, [
-        [DisplayMode.combined, () => this.renderCombinedWrapper()],
-        [DisplayMode.display, () => this.renderDisplayWrapper()],
-        [DisplayMode.display_summary, () => this.renderDisplayWrapper()],
-        [DisplayMode.narrative, () => this.renderDisplayWrapper()],
-        // [DisplayMode.override, () => this.renderTemplate()],
-        [DisplayMode.structure, () => this.renderStructureWrapper()],
-        [DisplayMode.structure_summary, () => this.renderStructureWrapper()],
-        [DisplayMode.debug, () => this.renderDebug()]
-      ],
-      () => html`
-        <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error >`)}`
+    if (this.mode) {
+      return html`${choose(this.mode, [
+          [DisplayMode.combined, () => this.renderCombinedWrapper()],
+          [DisplayMode.display, () => this.renderDisplayWrapper()],
+          [DisplayMode.display_summary, () => this.renderDisplayWrapper()],
+          [DisplayMode.narrative, () => this.renderDisplayWrapper()],
+          // [DisplayMode.override, () => this.renderTemplate()],
+          [DisplayMode.structure, () => this.renderStructureWrapper()],
+          [DisplayMode.structure_summary, () => this.renderStructureWrapper()],
+          [DisplayMode.debug, () => this.renderDebug()]
+        ],
+        () => html`
+          <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error >`)}`
+    }
+
+    return html``
 
   }
 
   protected renderDisplayWrapper() {
     if (!this.convertedData) return html``
-    if (!this.isVerbose()) return html`
-      ${this.renderDisplay(this.convertedData)}
-    `
+    if (!this.verbose) {
+      return html` ${this.renderDisplay(this.convertedData)} `
+    }
 
     // is verbose
     return html`
@@ -127,7 +133,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
 
   protected renderStructureWrapper() {
 
-    if (this.convertedData || this.verboseWantedAndAllowed()) {
+    if (this.convertedData || this.verboseRequestedAndAllowed()) {
       return html`
         <fhir-structure-wrapper
           .label=${this.getElementLabel()}
@@ -147,7 +153,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
 
     // stop rendering in verbose mode due to theoretically infinite models.
     // ex: Identifier -> Reference -> Identifier -> and so on!
-    if (!this.verboseWantedAndAllowed()) {
+    if (this.verboseRequestedAndNotAllowed()) {
       return html`
         <fhir-primitive
           .type=${PrimitiveType.forced_error}
@@ -156,7 +162,6 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
           ?showerror=${this.showerror}
         ></fhir-primitive >`
     }
-
     return html``
   }
 
@@ -189,7 +194,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
    * @protected
    */
   protected renderDebug(): TemplateResult {
-    if (this.data || this.isVerbose()) {
+    if (this.data || this.verboseRequestedAndAllowed()) {
       return html`
         <article part="element">
           <header part="label">${(this.getElementLabel())}</header >
@@ -211,11 +216,6 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
     return asReadable(this.type)
   }
 
-  protected verboseWantedAndAllowed() {
-    this.hasIdenticalAncestor(this)
-    return this.isVerbose()
-  }
-
   /**
    * Overridable method reserved for internal use. Do not call super in this method
    * @param data
@@ -233,8 +233,12 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
     return [...Object.values(this.templateGenerators[group]).map(gen => gen(data)).flat()]
   }
 
-  private isVerbose() {
+  private verboseRequestedAndAllowed() {
     return this.verbose && !this.hasIdenticalAncestor(this)
+  }
+
+  private verboseRequestedAndNotAllowed() {
+    return this.verbose && this.hasIdenticalAncestor(this)
   }
 
   private hasIdenticalAncestor(child: HTMLElement | null) {

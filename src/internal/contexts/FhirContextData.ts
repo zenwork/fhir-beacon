@@ -24,7 +24,6 @@ export class FhirDataContextImpl implements FhirDataContext {
   getAt<X>(path: string): X {
     if (path) {
       const array = JSONPath({ path, json: this.data }) as X[]
-      console.log('path', path, array)
       if (array) return array[0] as X
     }
     throw new SyntaxError(`Could not resolve ${path}`)

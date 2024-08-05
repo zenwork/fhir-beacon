@@ -88,16 +88,7 @@ export class DisplayContextConsumerController<T extends FhirDataElementData> imp
     )
   }
 
-  public hostUpdated(): void {
-  }
-
-
   public hostConnected(): void {
-    // if (this.host.overrideTemplate) {
-    //   console.log('set',this.host.type,'override')
-    //   this.host.mode = DisplayMode.override
-    //
-    // }
   }
 
 }

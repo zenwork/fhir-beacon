@@ -23,7 +23,6 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     }
 
     if (data.text) {
-      console.log(data.text)
       return html`
         <fhir-primitive .label=${'name'} .value=${data.text} summary></fhir-primitive >`
     }
