@@ -20,7 +20,6 @@ export class Annotation extends BaseElement<AnnotationData> {
   }
 
   protected renderAll(data: AnnotationData): TemplateResult | TemplateResult[] {
-    console.log(this.type, 'render always', data)
     const author = oneOf(this,
       [
         {

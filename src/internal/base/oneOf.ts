@@ -14,7 +14,6 @@ type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Choice<C>[]): TemplateResult | TemplateResult[] {
 
   const templateResults: TemplateResult[] = []
-  console.log(choices)
   // add template if data is present
   choices.forEach(choice => {
     if (choice.data) {

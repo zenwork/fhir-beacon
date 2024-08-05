@@ -15,7 +15,6 @@ export class Medication extends DomainResource<MedicationData> {
   }
 
   protected renderDisplay(data: MedicationData): TemplateResult | TemplateResult[] {
-    console.log(JSON.stringify(data.code, null, 2))
     return html`
       <fhir-identifier label="identifier" .data=${data.identifier} summary></fhir-identifier >
       <fhir-codeable-concept label="code" .data=${data.code} summary></fhir-codeable-concept >
