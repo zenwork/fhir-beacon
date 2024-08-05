@@ -1,4 +1,3 @@
-import is                                       from '@sindresorhus/is'
 import {html, nothing, TemplateResult}          from 'lit'
 import {property, state}                        from 'lit/decorators.js'
 import {choose}                                 from 'lit/directives/choose.js'
