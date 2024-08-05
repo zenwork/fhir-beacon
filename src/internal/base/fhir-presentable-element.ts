@@ -21,7 +21,6 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
   public label: string = ''
 
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
-  // public mode: DisplayMode = DisplayMode.display
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
@@ -53,6 +52,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
 
   protected constructor(type: string) {
     super(type)
+    // TODO: setting default mode should be reviewed as part of https://github.com/zenwork/fhir-beacon/issues/9
     this.mode = DisplayMode.display
     // consume display configuration provided by a context providing element
     new DisplayContextConsumerController(this)
