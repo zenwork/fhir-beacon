@@ -40,7 +40,11 @@ export class Reference extends BaseElement<ReferenceData> {
               [
                 ReferenceType.contained,
                 () => html`
-                  <fhir-primitive label='resource' value=${this.containedResource?.resourceType || 'contained'} summary></fhir-primitive >
+                  <fhir-primitive
+                    label='resource'
+                    value=${this.containedResource?.resourceType || 'contained'}
+                    summary
+                  ></fhir-primitive >
                   ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
 
                 `
@@ -77,12 +81,12 @@ export class Reference extends BaseElement<ReferenceData> {
               [
                 ReferenceType.extension,
                 () => html`
-                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType.extension}"></fhir-not-supported >`
+                  <fhir-not-supported description="unable to render ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
               ],
               [
                 ReferenceType.unknown,
                 () => html`
-                  <fhir-not-supported description="unable to render when reference sub-type is ${ReferenceType.unknown}"></fhir-not-supported >`
+                  <fhir-not-supported description="unable to render ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
               ]
 
             ]

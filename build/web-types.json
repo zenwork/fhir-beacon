@@ -28,23 +28,13 @@
           }
         },
         {
-            "name": "fhir-empty-list",
-            "description": "\n---\n",
-            "doc-url": "",
-            "attributes": [],
-            "events": [],
-            "js": {
-                "properties": [{"name": "isSlotted", "value": {}}],
-                "events": []
-            }
-        },
-          {
           "name": "fhir-not-supported",
           "description": "\n---\n",
           "doc-url": "",
           "attributes": [
             { "name": "description", "value": { "type": "string" } },
             { "name": "label", "value": { "type": "string" } },
+              {"name": "error", "value": {"type": "string"}},
             { "name": "variant", "value": { "type": "string" } }
           ],
           "events": [],
@@ -52,6 +42,7 @@
             "properties": [
               { "name": "description", "value": { "type": "string" } },
               { "name": "label", "value": { "type": "string" } },
+                {"name": "error", "value": {"type": "string"}},
               { "name": "variant", "value": { "type": "string" } }
             ],
             "events": []
@@ -75,6 +66,7 @@
             { "name": "showProvided", "value": { "type": "boolean" } },
             { "name": "mode", "value": { "type": "DisplayMode" } },
             { "name": "showerror", "value": { "type": "boolean" } },
+              {"name": "errormessage", "value": {"type": "string"}},
             { "name": "variant", "value": { "type": "string" } },
             { "name": "verbose", "value": { "type": "boolean" } },
             { "name": "summary", "value": { "type": "boolean" } }
@@ -92,6 +84,7 @@
               { "name": "showProvided", "value": { "type": "boolean" } },
               { "name": "mode", "value": { "type": "DisplayMode" } },
               { "name": "showerror", "value": { "type": "boolean" } },
+                {"name": "errormessage", "value": {"type": "string"}},
               { "name": "variant", "value": { "type": "string" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "summary", "value": { "type": "boolean" } }
@@ -100,153 +93,32 @@
           }
         },
         {
-          "name": "fhir-debug",
+            "name": "fhir-empty-list",
           "description": "\n---\n",
           "doc-url": "",
-          "attributes": [
-            { "name": "data", "value": { "type": "object", "default": "{}" } }
-          ],
+            "attributes": [],
           "events": [],
           "js": {
-            "properties": [{ "name": "data", "value": { "type": "object" } }],
+              "properties": [{"name": "isSlotted", "value": {}}],
             "events": []
           }
         },
         {
-            "name": "fhir-structure-wrapper",
-            "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
+            "name": "fhir-debug",
+            "description": "\n---\n",
           "doc-url": "",
           "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-              {
-                  "name": "resourceId",
-                  "value": {"type": "string", "default": "''"}
-              },
-              {
-                  "name": "fhirType",
-                  "value": {"type": "string", "default": "''"}
-              },
-              {
-                  "name": "hide",
-                  "value": {"type": "boolean", "default": "false"}
-              },
-              {
-                  "name": "open",
-                  "value": {"type": "boolean", "default": "false"}
-              },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-                "name": "summary",
-                "value": {"type": "boolean", "default": "false"}
-            },
-              {"name": "mode", "value": {"type": "DisplayMode"}}
+              {"name": "data", "value": {"type": "object", "default": "{}"}}
           ],
-            "slots": [{"name": "wrapper"}],
           "events": [],
           "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-                {"name": "resourceId", "value": {"type": "string"}},
-                {"name": "fhirType", "value": {"type": "string"}},
-                {"name": "hide", "value": {"type": "boolean"}},
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-                {"name": "mode", "value": {"type": "DisplayMode"}}
-            ],
+              "properties": [{"name": "data", "value": {"type": "object"}}],
               "events": []
           }
         },
           {
-              "name": "fhir-wrapper",
-              "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
-              "doc-url": "",
-              "attributes": [
-                  {"name": "label", "value": {"type": "string", "default": "''"}},
-                  {
-                      "name": "fhirType",
-                      "value": {"type": "string", "default": "''"}
-                  },
-                  {
-                      "name": "variant",
-                      "value": {
-                          "type": "'primary' | 'secondary' | 'validation-error' | 'none'",
-                          "default": "'none'"
-                      }
-                  },
-                  {
-                      "name": "hide",
-                      "value": {"type": "boolean", "default": "false"}
-                  },
-                  {"name": "open", "value": {"type": "boolean"}},
-                  {"name": "mode", "value": {"type": "DisplayMode"}},
-                  {"name": "summary", "value": {"type": "boolean"}}
-              ],
-              "slots": [{"name": "wrapper"}],
-              "events": [],
-              "js": {
-                  "properties": [
-                      {"name": "label", "value": {"type": "string"}},
-                      {"name": "fhirType", "value": {"type": "string"}},
-                      {
-                          "name": "variant",
-                          "value": {
-                              "type": "'primary' | 'secondary' | 'validation-error' | 'none'"
-                          }
-                      },
-                      {"name": "hide", "value": {"type": "boolean"}},
-                      {"name": "open", "value": {"type": "boolean"}},
-                      {"name": "mode", "value": {"type": "DisplayMode"}},
-                      {"name": "summary", "value": {"type": "boolean"}}
-            ],
-            "events": []
-          }
-        },
-        {
-            "name": "fhir-bundle",
-            "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-              {"name": "summary", "value": {"type": "boolean"}},
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-              {"name": "data", "value": {"type": "T"}},
-              {"name": "data-path", "value": {"type": "string"}}
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "DisplayMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-                {"name": "summary", "value": {"type": "boolean"}},
-              { "name": "type", "value": { "type": "string" } },
-                {"name": "data", "value": {"type": "T"}},
-                {"name": "data-path", "value": {"type": "string"}}
-            ],
-            "events": []
-          }
-        },
-        {
-            "name": "fhir-address",
-            "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+              "name": "fhir-address",
+              "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -314,8 +186,8 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
-              { "name": "summary", "value": { "type": "boolean" } },
-                {"name": "type", "value": {"type": "string"}},
+                {"name": "summary", "value": {"type": "boolean"}},
+              { "name": "type", "value": { "type": "string" } },
                 {"name": "data", "value": {"type": "T"}},
                 {"name": "data-path", "value": {"type": "string"}}
             ],
@@ -392,6 +264,45 @@
               { "name": "forceclose", "value": { "type": "boolean" } },
               { "name": "verbose", "value": { "type": "boolean" } },
               { "name": "showerror", "value": { "type": "boolean" } },
+              { "name": "summary", "value": { "type": "boolean" } },
+                {"name": "type", "value": {"type": "string"}},
+                {"name": "data", "value": {"type": "T"}},
+                {"name": "data-path", "value": {"type": "string"}}
+            ],
+            "events": []
+          }
+        },
+        {
+            "name": "fhir-coding",
+            "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+              {"name": "summary", "value": {"type": "boolean"}},
+            {
+              "name": "type",
+              "value": { "type": "string", "default": "type" }
+            },
+              {"name": "data", "value": {"type": "T"}},
+              {"name": "data-path", "value": {"type": "string"}}
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "mode", "value": { "type": "DisplayMode" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "forceclose", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
                 {"name": "summary", "value": {"type": "boolean"}},
               { "name": "type", "value": { "type": "string" } },
                 {"name": "data", "value": {"type": "T"}},
@@ -401,7 +312,7 @@
           }
         },
         {
-            "name": "fhir-coding",
+            "name": "fhir-human-name",
             "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -479,7 +390,7 @@
           }
         },
         {
-            "name": "fhir-human-name",
+            "name": "fhir-identifier",
             "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -511,45 +422,6 @@
               { "name": "showerror", "value": { "type": "boolean" } },
               { "name": "summary", "value": { "type": "boolean" } },
                 {"name": "type", "value": {"type": "string"}},
-                {"name": "data", "value": {"type": "T"}},
-                {"name": "data-path", "value": {"type": "string"}}
-            ],
-            "events": []
-          }
-        },
-        {
-            "name": "fhir-identifier",
-            "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            { "name": "open", "value": { "type": "boolean" } },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            { "name": "verbose", "value": { "type": "boolean" } },
-            { "name": "showerror", "value": { "type": "boolean" } },
-              {"name": "summary", "value": {"type": "boolean"}},
-            {
-              "name": "type",
-              "value": { "type": "string", "default": "type" }
-            },
-              {"name": "data", "value": {"type": "T"}},
-              {"name": "data-path", "value": {"type": "string"}}
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "value": { "type": "string" } },
-              { "name": "mode", "value": { "type": "DisplayMode" } },
-              { "name": "open", "value": { "type": "boolean" } },
-              { "name": "forceclose", "value": { "type": "boolean" } },
-              { "name": "verbose", "value": { "type": "boolean" } },
-              { "name": "showerror", "value": { "type": "boolean" } },
-                {"name": "summary", "value": {"type": "boolean"}},
-              { "name": "type", "value": { "type": "string" } },
                 {"name": "data", "value": {"type": "T"}},
                 {"name": "data-path", "value": {"type": "string"}}
             ],
@@ -635,6 +507,45 @@
           }
         },
         {
+            "name": "fhir-signature",
+            "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            { "name": "open", "value": { "type": "boolean" } },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            { "name": "verbose", "value": { "type": "boolean" } },
+            { "name": "showerror", "value": { "type": "boolean" } },
+              {"name": "summary", "value": {"type": "boolean"}},
+            {
+              "name": "type",
+              "value": { "type": "string", "default": "type" }
+            },
+              {"name": "data", "value": {"type": "T"}},
+              {"name": "data-path", "value": {"type": "string"}}
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "value": { "type": "string" } },
+              { "name": "mode", "value": { "type": "DisplayMode" } },
+              { "name": "open", "value": { "type": "boolean" } },
+              { "name": "forceclose", "value": { "type": "boolean" } },
+              { "name": "verbose", "value": { "type": "boolean" } },
+              { "name": "showerror", "value": { "type": "boolean" } },
+                {"name": "summary", "value": {"type": "boolean"}},
+              { "name": "type", "value": { "type": "string" } },
+                {"name": "data", "value": {"type": "T"}},
+                {"name": "data-path", "value": {"type": "string"}}
+            ],
+            "events": []
+          }
+        },
+        {
             "name": "fhir-ratio",
             "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
@@ -674,7 +585,7 @@
           }
         },
         {
-            "name": "fhir-signature",
+            "name": "fhir-bundle",
             "description": "\n---\n\n\n### **Methods:**\n \n\n\n\n\n- **addStructureTemplateGenerator(name: _string_, generator: _(data: T) => TemplateResult | TemplateResult[]_)** - add a rendering generator\n\n",
           "doc-url": "",
           "attributes": [
@@ -726,17 +637,6 @@
             }
         },
           {
-              "name": "fhir-error",
-              "description": "\n---\n",
-              "doc-url": "",
-              "attributes": [{"name": "text", "value": {"type": "string"}}],
-              "events": [],
-              "js": {
-                  "properties": [{"name": "text", "value": {"type": "string"}}],
-                  "events": []
-              }
-          },
-          {
               "name": "fhir-label",
               "description": "\n---\n",
               "doc-url": "",
@@ -761,6 +661,28 @@
               }
           },
           {
+              "name": "fhir-error",
+              "description": "\n---\n",
+              "doc-url": "",
+              "attributes": [{"name": "text", "value": {"type": "string"}}],
+              "events": [],
+              "js": {
+                  "properties": [{"name": "text", "value": {"type": "string"}}],
+                  "events": []
+              }
+          },
+          {
+              "name": "fhir-primitive-wrapper",
+              "description": "\n---\n",
+              "doc-url": "",
+              "attributes": [],
+              "events": [],
+              "js": {
+                  "properties": [{"name": "isSlotted", "value": {}}],
+                  "events": []
+              }
+          },
+          {
               "name": "fhir-value",
               "description": "\n---\n",
               "doc-url": "",
@@ -781,17 +703,6 @@
                       {"name": "variant", "value": {"type": "string"}},
                       {"name": "link", "value": {"type": "string"}}
                   ],
-                  "events": []
-              }
-          },
-          {
-              "name": "fhir-primitive-wrapper",
-              "description": "\n---\n",
-              "doc-url": "",
-              "attributes": [],
-              "events": [],
-              "js": {
-                  "properties": [{"name": "isSlotted", "value": {}}],
                   "events": []
               }
           },
@@ -1155,6 +1066,99 @@
                 {"name": "data", "value": {"type": "T"}},
                 {"name": "data-path", "value": {"type": "string"}}
             ],
+              "events": []
+          }
+        },
+          {
+              "name": "fhir-structure-wrapper",
+              "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "label", "value": {"type": "string", "default": "''"}},
+                  {
+                      "name": "resourceId",
+                      "value": {"type": "string", "default": "''"}
+                  },
+                  {
+                      "name": "fhirType",
+                      "value": {"type": "string", "default": "''"}
+                  },
+                  {
+                      "name": "hide",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {
+                      "name": "open",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {
+                      "name": "forceclose",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {
+                      "name": "summary",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {"name": "mode", "value": {"type": "DisplayMode"}}
+              ],
+              "slots": [{"name": "wrapper"}],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "label", "value": {"type": "string"}},
+                      {"name": "resourceId", "value": {"type": "string"}},
+                      {"name": "fhirType", "value": {"type": "string"}},
+                      {"name": "hide", "value": {"type": "boolean"}},
+                      {"name": "open", "value": {"type": "boolean"}},
+                      {"name": "forceclose", "value": {"type": "boolean"}},
+                      {"name": "summary", "value": {"type": "boolean"}},
+                      {"name": "mode", "value": {"type": "DisplayMode"}}
+                  ],
+                  "events": []
+              }
+          },
+          {
+              "name": "fhir-wrapper",
+              "description": "Custom element for wrapping primitive content.\n---\n\n\n### **Slots:**\n - **wrapper** - undefined",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "label", "value": {"type": "string", "default": "''"}},
+                  {
+                      "name": "fhirType",
+                      "value": {"type": "string", "default": "''"}
+                  },
+                  {
+                      "name": "variant",
+                      "value": {
+                          "type": "'primary' | 'secondary' | 'validation-error' | 'none'",
+                          "default": "'none'"
+                      }
+                  },
+                  {
+                      "name": "hide",
+                      "value": {"type": "boolean", "default": "false"}
+                  },
+                  {"name": "open", "value": {"type": "boolean"}},
+                  {"name": "mode", "value": {"type": "DisplayMode"}},
+                  {"name": "summary", "value": {"type": "boolean"}}
+              ],
+              "slots": [{"name": "wrapper"}],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "label", "value": {"type": "string"}},
+                      {"name": "fhirType", "value": {"type": "string"}},
+                      {
+                          "name": "variant",
+                          "value": {
+                              "type": "'primary' | 'secondary' | 'validation-error' | 'none'"
+                          }
+                      },
+                      {"name": "hide", "value": {"type": "boolean"}},
+                      {"name": "open", "value": {"type": "boolean"}},
+                      {"name": "mode", "value": {"type": "DisplayMode"}},
+                      {"name": "summary", "value": {"type": "boolean"}}
+                  ],
             "events": []
           }
         }
