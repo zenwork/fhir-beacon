@@ -17,9 +17,13 @@ export class NotSupported extends LitElement {
   @property()
   declare variant: string
 
-  protected render(): unknown {
 
-    if (!this.variant) {
+  protected createRenderRoot() {
+    return this
+  }
+
+  protected render(): unknown {
+    if (!this.variant && (this.label || this.description)) {
       return html`
         <fhir-primitive
           .label="${this.label}"
@@ -59,7 +63,7 @@ export class NotSupported extends LitElement {
       return html`
         <fhir-primitive
           .label="${this.label || 'error'}"
-          value="rendering stopped"
+          value="Rendering Stopped"
           .errormessage=${this.error}
           .type=${PrimitiveType.forced_error}
         >

@@ -62,7 +62,7 @@ const litComments = /<!--.*-->/gm
 const doubleSpaced = /\n\s+\n/gm
 HTMLElement.prototype.logShadowDOM = function (): void {
   try {
-    let shadow = 'n/a'
+    let shadow = ''
     if (this.shadowRoot) {
       shadow = this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? ''
       shadow = shadow ?? this.shadowRoot.textContent
@@ -79,7 +79,7 @@ HTMLElement.prototype.logShadowDOM = function (): void {
       // @ts-expect-error
       data = pad(JSON.stringify(this.data, null, 2))
     }
-    console.log(`${tagAndAttributes}\n  #shadow-dom${shadow}\n  #light-dom${light}\n  #data\n${data}\n\n</${tag}>`)
+    console.log(`${tagAndAttributes}\n  #shadow-dom${shadow}\n\n  #light-dom${light}\n\n  #data\n${data}\n\n</${tag}>`)
   } catch (e) { console.log(e) }
 }
 
