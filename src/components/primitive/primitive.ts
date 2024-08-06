@@ -80,6 +80,10 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   declare showerror: boolean
 
+  // override error message only shown if type validation fails
+  @property({ type: String, reflect: true })
+  declare errormessage: string
+
   @property({ type: String, reflect: true })
   declare variant: string
 
@@ -198,7 +202,7 @@ export class Primitive extends LitElement {
             <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
             ${this.showerror
               ? html`
-                  <fhir-error text=${this.presentableValue}></fhir-error >`
+                <fhir-error text=${this.errormessage ?? this.presentableValue}></fhir-error >`
               : nothing}
           </fhir-primitive-wrapper >`
            : html``

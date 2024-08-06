@@ -155,12 +155,11 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
     // ex: Identifier -> Reference -> Identifier -> and so on!
     if (this.verboseRequestedAndNotAllowed()) {
       return html`
-        <fhir-primitive
-          .type=${PrimitiveType.forced_error}
+        <fhir-not-supported
+          variant="stop"
           label=${this.label}
-          value="(${this.type}) not rendered due to recursion guard"
-          ?showerror=${this.showerror}
-        ></fhir-primitive >`
+          error="If rendered, '${this.label}' would render recursively for ever due to the fhir model definition."
+        ></fhir-not-supported >`
     }
     return html``
   }

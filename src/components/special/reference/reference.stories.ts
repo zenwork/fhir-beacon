@@ -126,7 +126,7 @@ export const WithExtension: Story = {
         }
       ], ...patientData
     },
-    mode: 'display'
+    mode: 'display', showerror: true
   },
   render
 }
