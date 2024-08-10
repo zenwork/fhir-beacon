@@ -127,10 +127,7 @@ export class Primitive extends LitElement {
 
       ])
     }
-  }
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
     if (this.displayConfig) {
       this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose

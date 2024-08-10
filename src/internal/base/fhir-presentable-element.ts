@@ -126,6 +126,9 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
       <fhir-wrapper
         .label=${this.getElementLabel()}
         .fhirType=${this.getTypeLabel()}
+        .mode=${this.mode}
+        .open=${this.open}
+        .hide=${!this.verbose}
       >
         ${this.renderDisplay(this.convertedData)}
       </fhir-wrapper >`

@@ -1,8 +1,7 @@
-import {LitElement, PropertyValues}            from 'lit'
-import {property, state}                       from 'lit/decorators.js'
-import {FhirDataContext}                       from '../contexts'
-import {DataContextConsumerController}         from '../contexts/context-consumer-controller'
-import {FhirDataElementData, ValidationErrors} from './fhir-data-element.data'
+import {LitElement, PropertyValues}                     from 'lit'
+import {property, state}                                from 'lit/decorators.js'
+import {DataContextConsumerController, FhirDataContext} from '../contexts'
+import {FhirDataElementData, ValidationErrors}          from './fhir-data-element.data'
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
@@ -59,6 +58,12 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
    */
   protected abstract convertData(data: T): T
 
+
+  public attributeChangedCallback(name: string, _old: string | null, value: string | null) {
+    super.attributeChangedCallback(name, _old, value)
+
+  }
+
   /**
    * Updates the component's state based on the changed properties.
    *
@@ -66,8 +71,8 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
    *
    * @return {void}
    */
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
+  protected willUpdate(_changedProperties: PropertyValues): void {
+    super.willUpdate(_changedProperties)
 
     // assign data received through context
     if (_changedProperties.has('dataPath') && this.dataContext) {

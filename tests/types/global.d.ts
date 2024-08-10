@@ -1,4 +1,6 @@
 // This is needed to avoid TS typing issues
+
+
 import {Query} from '../../vitest.setup'
 
 export {}
@@ -26,6 +28,8 @@ declare global {
     querySlot(slotName: string): Element[]
 
     logShadowDOM(): void
+
+    queryByShadowText<T extends HTMLElement>(text: string): T | null
   }
 
 }

@@ -1,9 +1,9 @@
 import './index'
-import {deepQuerySelectorAll}        from 'shadow-dom-testing-library'
-import {beforeAll}                   from 'vitest'
+import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
+import {beforeAll}                           from 'vitest'
 // TODO: loading everything for now... should not do this once proper separation of import trees
-import {queryDefaultSlot, querySlot} from './tests/shadowDomUtils/query-slot'
-import {hostOf}                      from './tests/shadowDomUtils/shadowDomUtils'
+import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
+import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
 
 export type Query = { select: string | string[], expect?: number }
 HTMLElement.prototype.deepQuerySelector =
@@ -79,9 +79,17 @@ HTMLElement.prototype.logShadowDOM = function (): void {
       // @ts-expect-error
       data = pad(JSON.stringify(this.data, null, 2))
     }
-    console.log(`${tagAndAttributes}\n  #shadow-dom${shadow}\n\n  #light-dom${light}\n\n  #data\n${data}\n\n</${tag}>`)
+    console.log(`${tagAndAttributes}\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>`)
   } catch (e) { console.log(e) }
 }
+
+HTMLElement.prototype.queryByShadowText = function <T extends HTMLElement>(text: string): T | null {
+  return shadowQueries.queryByShadowText(this, text) as T | null
+}
+
+
+
+
 
 function pad(input: string) {
   // Split the input string into an array of lines
@@ -95,6 +103,7 @@ function pad(input: string) {
 
   return output
 }
+
 
 beforeAll(() => {
   document.head.innerHTML = `

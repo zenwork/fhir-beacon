@@ -3,7 +3,7 @@ import {defineWorkspace} from 'vitest/config'
 export default defineWorkspace([
   {
     test: {
-      name: 'unit-tests',
+      name: 'unit',
       include: ['src/**/*.test.ts'],
       environment: 'node'
     }
@@ -11,13 +11,16 @@ export default defineWorkspace([
   {
     esbuild: false,
     test: {
-      name: 'browser-tests',
+      name: 'browser',
       globals: false,
       setupFiles: './vitest.setup.ts',
       include: ['src/**/*.spec.ts'],
       browser: {
         enabled: true,
+
         name: 'chromium',
+        screenshotFailures: true,
+        providerOptions: { debugger: true },
         provider: 'playwright',
         viewport: { width: 1000, height: 800 }
       },
@@ -26,6 +29,15 @@ export default defineWorkspace([
         tsconfig: './tsconfig.test.json'
       },
       testTimeout: 5000
+    }
+  },
+  {
+    esbuild: false,
+    test: {
+      name: 'jsdom',
+      setupFiles: './vitest.setup.ts',
+      include: ['src/**/*.jsdom.ts'],
+      environment: 'jsdom'
     }
   }
 ])

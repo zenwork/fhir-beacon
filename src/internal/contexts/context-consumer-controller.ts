@@ -75,12 +75,12 @@ export class DisplayContextConsumerController<T extends FhirDataElementData> imp
             // never propagate override because there is an external template providing the rendering
             // TODO: this is not the best way to solve this
             if (config.mode !== DisplayMode.override) {
-              host.mode = config.mode ?? host.mode
+              if (config.mode !== undefined) host.mode = config.mode
             }
 
-            host.showerror = config.showerror ?? host.showerror
-            host.open = config.open ?? host.open
-            host.verbose = config.verbose ?? host.verbose
+            if (config.showerror !== undefined) host.showerror = config.showerror
+            if (config.open !== undefined) host.open = config.open
+            if (config.verbose !== undefined) host.verbose = config.verbose
           }
 
         }
