@@ -1,6 +1,6 @@
 import {URI} from '../../components/primitive/primitive.data'
 
-export const NoDataSet:FhirDataElementData = Object.freeze({id:'FHIR::BEACON::NULL::OBJECT'})
+export const NoDataSet: FhirDataElementData = Object.freeze({ id: 'FHIR::BEACON::NULL::OBJECT' })
 
 //TODO: Should be renamed
 export type FhirDataElementData = {

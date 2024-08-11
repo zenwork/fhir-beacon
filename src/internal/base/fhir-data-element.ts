@@ -1,7 +1,7 @@
-import {LitElement, PropertyValues}                     from 'lit'
-import {property, state}                                from 'lit/decorators.js'
-import {DataContextConsumerController, FhirDataContext} from '../contexts'
-import {FhirDataElementData, NoDataSet, ValidationErrors}  from './fhir-data-element.data'
+import {LitElement, PropertyValues}                       from 'lit'
+import {property, state}                                  from 'lit/decorators.js'
+import {DataContextConsumerController, FhirDataContext}   from '../contexts'
+import {FhirDataElementData, NoDataSet, ValidationErrors} from './fhir-data-element.data'
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
