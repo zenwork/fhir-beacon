@@ -12,9 +12,9 @@ export const BeaconAssert = {
           quantity: Quantity, label: string,
           { id, variation, value, unit, system, code }: QuantitySimple) {
 
-          expect(quantity.deepQuerySelector<PrimitiveLabel[]>({ select: 'label', expect: 7 })[0]).toHaveTextContent(label)
+          expect(quantity.queryShadow<PrimitiveLabel[]>({ select: 'label', expect: 7 })[0]).toHaveTextContent(label)
 
-          const primitives = quantity.deepQuerySelector<Primitive[]>({ select: 'fhir-primitive', expect: 6 })
+          const primitives = quantity.queryShadow<Primitive[]>({ select: 'fhir-primitive', expect: 6 })
 
           testPrimitive(primitives[0], { key: 'id', value: id })
           testPrimitive(primitives[1], { key: 'variation', value: variation })

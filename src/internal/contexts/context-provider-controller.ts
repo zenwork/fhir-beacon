@@ -38,20 +38,8 @@ export class ContextProviderController<T extends FhirDataElementData, B extends 
     const verbose = this.host.verbose
     const open = this.host.open
 
-    if (mode && this.displayCtx.value?.mode !== mode) {
-      this.displayCtx.setValue({ ...this.displayCtx.value, mode })
-    }
+    this.displayCtx.setValue({ ...this.displayCtx.value, mode, showerror, verbose, open })
 
-    if (showerror && this.displayCtx.value?.showerror !== showerror) {
-      this.displayCtx.setValue({ ...this.displayCtx.value, showerror })
-    }
 
-    if (verbose && this.displayCtx.value?.verbose !== verbose) {
-      this.displayCtx.setValue({ ...this.displayCtx.value, verbose })
-    }
-
-    if (open && this.displayCtx.value?.open !== open) {
-      this.displayCtx.setValue({ ...this.displayCtx.value, open })
-    }
   }
 }

@@ -23,7 +23,7 @@ describe('PrimitiveWrapper', () => {
     `).first()
 
     expect(wrapper.shadowRoot!.innerHTML).not.to.match(emptyLitShadow)
-    expect(wrapper.queryDefaultSlot()[0].textContent!.trim()).toStrictEqual('Some content')
+    expect(wrapper.queryShadowDefaultSlot()[0].textContent!.trim()).toStrictEqual('Some content')
 
   })
 })

@@ -23,7 +23,7 @@ describe('Ratio', () => {
     `).first()
 
     await ratio.updateComplete
-    const quantities = ratio.deepQuerySelector<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
+    const quantities = ratio.queryShadow<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
 
     expect(quantities[0].data).toEqual({ value: '1' })
     expect(quantities[1].data).toEqual({ value: '128' })
@@ -53,7 +53,7 @@ describe('Ratio', () => {
       </fhir-shell >
     `).first()
 
-    ratio.deepQuerySelector({ select: 'fhir-value', expect: 3 })
+    ratio.queryShadow({ select: 'fhir-value', expect: 3 })
 
     const elements = await findAllByShadowText(ratio, anyMatcher('103.5', 'US$', '/', 'day'))
     expect(elements[1]).toHaveTextContent('103.5')
@@ -72,17 +72,17 @@ describe('Ratio', () => {
       </fhir-shell >
     `).first()
 
-    const details = shell.deepQuerySelector<SlDetails[]>({ select: 'sl-details', expect: 3 })
+    const details = shell.queryShadow<SlDetails[]>({ select: 'sl-details', expect: 3 })
 
 
     // label
-    expect(details[0].deepQuerySelector<HTMLElement>({ select: 'label' })).toHaveTextContent('ratio')
+    expect(details[0].queryShadow<HTMLElement>({ select: 'label' })).toHaveTextContent('ratio')
 
     // id
-    const id = shell.deepQuerySelector<Primitive[]>({ select: 'fhir-primitive', expect: 13 })
+    const id = shell.queryShadow<Primitive[]>({ select: 'fhir-primitive', expect: 13 })
     testPrimitive(id[0], { key: 'id', value: null })
 
-    const quantities = shell.deepQuerySelector<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
+    const quantities = shell.queryShadow<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
 
 
     // numerator

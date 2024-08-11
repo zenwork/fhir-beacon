@@ -35,10 +35,10 @@ describe('Quantity', () => {
       <fhir-quantity label="quantity" .data=${data} showerror></fhir-quantity >
     `).first()
 
-    const primitive = quantity.deepQuerySelector<Primitive>({ select: 'fhir-primitive' })
+    const primitive = quantity.queryShadow<Primitive>({ select: 'fhir-primitive' })
     expect(primitive).toHaveAttribute('value', '25')
     expect(primitive).toHaveAttribute('label', 'quantity')
-    expect(primitive.querySlot('after')[0]).toHaveTextContent('sec')
+    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('sec')
 
   })
 
@@ -56,11 +56,11 @@ describe('Quantity', () => {
       <fhir-quantity label="quantity" .data=${data} showerror></fhir-quantity >
     `).first()
 
-    const primitive = quantity.deepQuerySelector<Primitive>({ select: 'fhir-primitive' })
+    const primitive = quantity.queryShadow<Primitive>({ select: 'fhir-primitive' })
     expect(primitive).toHaveAttribute('value', '40000')
     expect(primitive).toHaveAttribute('value', '40000')
-    expect(primitive.querySlot('before')[0]).toHaveTextContent('greater than')
-    expect(primitive.querySlot('after')[0]).toHaveTextContent('ug/L')
+    expect(primitive.queryShadowNamedSlot('before')[0]).toHaveTextContent('greater than')
+    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('ug/L')
 
   })
 
@@ -84,10 +84,10 @@ describe('Quantity', () => {
     await quantity.updateComplete
     await quantity.updateComplete
 
-    const header = quantity.deepQuerySelector({ select: 'sl-details' })
+    const header = quantity.queryShadow({ select: 'sl-details' })
     expect(header).toHaveTextContent('time')
 
-    const elements = quantity.deepQuerySelector<HTMLElement[]>({ select: 'fhir-primitive', expect: 6 })
+    const elements = quantity.queryShadow<HTMLElement[]>({ select: 'fhir-primitive', expect: 6 })
     expect(elements.length).toEqual(6)
 
     // valid properties
@@ -95,21 +95,21 @@ describe('Quantity', () => {
     testPrimitive(elements[1], { key: 'variation', value: 'duration' })
     testPrimitive(elements[2], { key: 'value', value: 'abc' })
     testPrimitive(elements[3], { key: 'unit', value: 'sec' })
-    expect(elements[3].deepQuerySelector({ select: 'sl-badge' })).toHaveTextContent('∑')
+    expect(elements[3].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
     testPrimitive(elements[4], { key: 'system', value: 'http://unitsofmeasure.org' })
-    expect(elements[4].deepQuerySelector({ select: 'sl-badge' })).toHaveTextContent('∑')
+    expect(elements[4].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
     testPrimitive(elements[5], { key: 'code', value: 's' })
-    expect(elements[5].deepQuerySelector({ select: 'sl-badge' })).toHaveTextContent('∑')
+    expect(elements[5].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
 
     // invalid property
     // check error is underlined
-    const value = elements[2].deepQuerySelector<HTMLElement>({ select: 'fhir-value' })
-    const div = value.deepQuerySelector<HTMLDivElement>({ select: 'div' })
+    const value = elements[2].queryShadow<HTMLElement>({ select: 'fhir-value' })
+    const div = value.queryShadow<HTMLDivElement>({ select: 'div' })
     expect(div!).toHaveTextContent('abc')
     expect(getComputedStyle(div).textDecoration).toEqual('underline wavy rgb(220, 38, 38)')
 
     // check error message is displayed
-    const error = elements[2].deepQuerySelector({ select: 'fhir-error' })
+    const error = elements[2].queryShadow({ select: 'fhir-error' })
     expect(error).toHaveAttribute('text', 'TypeError: decimal must be a valid number')
 
   })

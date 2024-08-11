@@ -96,6 +96,8 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
+    if (this.verbose && !this.convertedData) return html`
+      <fhir-not-supported variant="no-data"></fhir-not-supported >`
     if (this.mode) {
       return html`${choose(this.mode, [
           [DisplayMode.combined, () => this.renderCombinedWrapper()],
@@ -126,6 +128,9 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
       <fhir-wrapper
         .label=${this.getElementLabel()}
         .fhirType=${this.getTypeLabel()}
+        .mode=${this.mode}
+        .open=${this.open}
+        .hide=${!this.verbose}
       >
         ${this.renderDisplay(this.convertedData)}
       </fhir-wrapper >`

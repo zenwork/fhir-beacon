@@ -1,13 +1,14 @@
 import './index'
-import {deepQuerySelectorAll}        from 'shadow-dom-testing-library'
-import {beforeAll}                   from 'vitest'
+import format                                from 'html-format'
+import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
+import {beforeAll}                           from 'vitest'
 // TODO: loading everything for now... should not do this once proper separation of import trees
-import {queryDefaultSlot, querySlot} from './tests/shadowDomUtils/query-slot'
-import {hostOf}                      from './tests/shadowDomUtils/shadowDomUtils'
+import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
+import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
+import {Query}                               from './tests/types/global'
 
-export type Query = { select: string | string[], expect?: number }
-HTMLElement.prototype.deepQuerySelector =
-  function <T extends HTMLElement | HTMLElement[]>({ select, expect = 1 }: Query): T {
+Element.prototype.queryShadow =
+  function <T extends Element | Element[]>({ select, expect = 1 }: Query): T {
 
     let results: any[] = [this]
 
@@ -47,27 +48,30 @@ HTMLElement.prototype.deepQuerySelector =
     throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
 
   }
-
-
-HTMLElement.prototype.queryDefaultSlot = function (): Node[] {
-  return queryDefaultSlot(this)
+Element.prototype.shadowedChildren = function (): HTMLCollection {
+  return this.shadowRoot ? this.shadowRoot.children : new HTMLCollection()
 }
 
-HTMLElement.prototype.querySlot = function (slotName: string): Element[] {
-  return querySlot(this, slotName)
+
+Element.prototype.queryShadowDefaultSlot = function (): Node[] {
+  return queryDefaultSlot(this as HTMLElement)
+}
+
+Element.prototype.queryShadowNamedSlot = function (slotName: string): Element[] {
+  return querySlot(this as HTMLElement, slotName)
 }
 
 const doubleSpace = / {2}/g
 const litComments = /<!--.*-->/gm
 const doubleSpaced = /\n\s+\n/gm
-HTMLElement.prototype.logShadowDOM = function (): void {
+Element.prototype.logShadow = function (): void {
   try {
     let shadow = ''
     if (this.shadowRoot) {
-      shadow = this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? ''
+      shadow = format(this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? '', ' '.repeat(4), 60)
       shadow = shadow ?? this.shadowRoot.textContent
     }
-    const light = this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
+    const light = format(this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n'), ' '.repeat(4), 60)
     const tag = this.tagName.toLowerCase()
     const outerHTML = this.outerHTML
     const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
@@ -79,9 +83,17 @@ HTMLElement.prototype.logShadowDOM = function (): void {
       // @ts-expect-error
       data = pad(JSON.stringify(this.data, null, 2))
     }
-    console.log(`${tagAndAttributes}\n  #shadow-dom${shadow}\n\n  #light-dom${light}\n\n  #data\n${data}\n\n</${tag}>`)
+    console.log(`${tagAndAttributes}\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>`)
   } catch (e) { console.log(e) }
 }
+
+Element.prototype.queryShadowByText = function <T extends Element>(text: string): T | null {
+  return shadowQueries.queryByShadowText(this as HTMLElement, text) as T | null
+}
+
+
+
+
 
 function pad(input: string) {
   // Split the input string into an array of lines
@@ -95,6 +107,7 @@ function pad(input: string) {
 
   return output
 }
+
 
 beforeAll(() => {
   document.head.innerHTML = `

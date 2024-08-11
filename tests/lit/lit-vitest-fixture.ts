@@ -39,10 +39,11 @@ class FixtureResult<T extends HTMLElement> {
  *
  * @template T - The type of elements that extend LitElement.
  * @param {TemplateResult} template - The template to be rendered.
+ * @param type
  * @returns {Promise<T[]>} - A promise that resolves with an array of elements that extend LitElement.
  * @throws {IllegalStateError} - If the element with the generated id is not found.
  */
-export function fixture<T extends HTMLElement>(template: TemplateResult): FixtureResult<T> {
+export function fixture<T extends LitElement>(template: TemplateResult, tagname?: string): FixtureResult<T> {
 
   const id = `test-${((Math.random() * 100000).toFixed(0))}`
   const wrappedTemplate = html`
@@ -54,7 +55,7 @@ export function fixture<T extends HTMLElement>(template: TemplateResult): Fixtur
   if (wrapper) {
     // store for eventual cleanup
     elements.push(wrapper)
-    const reactiveElements: LitElement[] = getDerivedChildren(wrapper.children)
+    const reactiveElements: T[] = getDerivedChildren(wrapper.children, tagname)
 
     return new FixtureResult<T>(reactiveElements.map(e => e.updateComplete), reactiveElements as unknown as T[])
   }
@@ -66,10 +67,11 @@ export function fixture<T extends HTMLElement>(template: TemplateResult): Fixtur
  * Returns an array of derived children from the given HTMLCollection.
  *
  * @param elements - The HTMLCollection to search for derived children.
+ * @param type
  * @returns An array of derived children as type T, which extends LitElement.
  */
-function getDerivedChildren<T extends LitElement>(elements: HTMLCollection): T[] {
-  const derivedChildren: LitElement[] = []
+function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type?: string): T[] {
+  const derivedChildren: T[] = []
 
   Array
     .from(elements)
@@ -77,9 +79,10 @@ function getDerivedChildren<T extends LitElement>(elements: HTMLCollection): T[]
       if (element instanceof HTMLElement) {
 
         function search(node: Node) {
-          if (node instanceof LitElement) {
-            derivedChildren.push(node)
+          if (node instanceof LitElement && (!type || node.tagName === type)) {
+            derivedChildren.push(node as T)
           }
+
           node.childNodes.forEach(search)
         }
 
@@ -87,7 +90,7 @@ function getDerivedChildren<T extends LitElement>(elements: HTMLCollection): T[]
       }
     })
 
-  return derivedChildren as T[]
+  return derivedChildren
 }
 
 /**

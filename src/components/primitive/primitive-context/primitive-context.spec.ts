@@ -21,7 +21,7 @@ describe('PrimitiveContext', () => {
       <fhir-context text="some context"></fhir-context >
     `).first()
 
-    const span = context.deepQuerySelector({ select: 'span' })
+    const span = context.queryShadow({ select: 'span' })
     expect(span).toHaveTextContent('(some context)')
 
   })

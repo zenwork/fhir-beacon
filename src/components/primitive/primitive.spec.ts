@@ -22,7 +22,7 @@ describe('fhir Primitive', () => {
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" verbose></fhir-primitive >
     `).first()
-    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
     assert.exists(label)
     expect(label.delimiter).to.equal(': ')
     expect(label.text).to.equal('code')
@@ -35,10 +35,10 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc"></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label.text).to.equal('code')
 
-    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
+    const value = el.queryShadow<PrimitiveValue>({ select: 'fhir-value' })
     expect(value.text).to.equal('abc')
 
   })
@@ -49,13 +49,13 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc" context="important"></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label.text).to.equal('code')
 
-    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
+    const value = el.queryShadow<PrimitiveValue>({ select: 'fhir-value' })
     expect(value.text).to.equal('abc')
 
-    const span = el.deepQuerySelector<HTMLSpanElement>({ select: ['fhir-context', 'span'] })
+    const span = el.queryShadow<HTMLSpanElement>({ select: ['fhir-context', 'span'] })
     expect(span.textContent).to.equal('(important)')
 
   })
@@ -67,13 +67,13 @@ describe('fhir Primitive', () => {
       <fhir-primitive label="code" value="abc" type="decimal" showerror></fhir-primitive >
     `).first()
 
-    const label = el.deepQuerySelector<PrimitiveLabel>({ select: 'fhir-label' })
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
     expect(label!.text).to.equal('code')
 
-    const value = el.deepQuerySelector<PrimitiveValue>({ select: 'fhir-value' })
+    const value = el.queryShadow<PrimitiveValue>({ select: 'fhir-value' })
     expect(value!.text).to.equal('abc')
 
-    const div = el.deepQuerySelector<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
+    const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
     expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
 
   })

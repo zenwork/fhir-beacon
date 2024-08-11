@@ -14,7 +14,7 @@ describe('fhir primitive value', () => {
       <fhir-value ></fhir-value >
     `).first()
 
-    const element = el.deepQuerySelector({ select: 'span' }) as HTMLSpanElement
+    const element = el.queryShadow({ select: 'span' }) as HTMLSpanElement
     expect(element?.classList[0]).toEqual('placeholder')
     await expect.element(element!).toHaveTextContent('n/a')
 
@@ -26,7 +26,7 @@ describe('fhir primitive value', () => {
       <fhir-value text="hello"></fhir-value >
     `).first()
 
-    const element = el.deepQuerySelector({ select: 'div' }) as HTMLDivElement
+    const element = el.queryShadow({ select: 'div' }) as HTMLDivElement
     expect.element(element).toHaveTextContent('hello')
 
   })
@@ -37,7 +37,7 @@ describe('fhir primitive value', () => {
       <fhir-value text="hello" link="https://google.com"></fhir-value >
     `).first()
 
-    const element = el.deepQuerySelector({ select: 'a' }) as HTMLAnchorElement
+    const element = el.queryShadow({ select: 'a' }) as HTMLAnchorElement
     expect.element(element).toHaveTextContent('hello')
     expect(element.href).toEqual('https://google.com/')
 
@@ -49,7 +49,7 @@ describe('fhir primitive value', () => {
       <fhir-value text="" placeholder="missing value"></fhir-value >
     `).first()
 
-    const span = el.deepQuerySelector({ select: 'span' }) as HTMLSpanElement
+    const span = el.queryShadow({ select: 'span' }) as HTMLSpanElement
     expect(span.classList[0]).toEqual(`placeholder`)
     expect(span.textContent).toEqual(`missing value`)
 
@@ -65,12 +65,12 @@ describe('fhir primitive value', () => {
     `).first()
 
 
-    const before = el.querySlot('before')[0]
+    const before = el.queryShadowNamedSlot('before')[0]
     expect(before).toHaveTextContent(`over`)
 
     expect.element(el.renderRoot as Element).toHaveTextContent('100')
 
-    const after = el.querySlot('after')[0]
+    const after = el.queryShadowNamedSlot('after')[0]
     expect(after).toHaveTextContent(`percent`)
 
   })
@@ -88,7 +88,7 @@ describe('fhir primitive value', () => {
 
     await el.updateComplete
 
-    const div = el.deepQuerySelector<HTMLDivElement>({ select: 'div' })
+    const div = el.queryShadow<HTMLDivElement>({ select: 'div' })
     expect(div)
       .toHaveTextContent(text)
 
@@ -128,7 +128,7 @@ describe('fhir primitive value', () => {
     const el = await fixture<PrimitiveValue>(html`
       <fhir-value text=${text} variant="fixed-width"></fhir-value > `).first()
 
-    const div: HTMLDivElement = el.deepQuerySelector({ select: 'div' })
+    const div: HTMLDivElement = el.queryShadow({ select: 'div' })
     expect(div)
       .toHaveTextContent(text)
 

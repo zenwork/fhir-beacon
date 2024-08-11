@@ -1,6 +1,7 @@
 import {consume}                                    from '@lit/context'
 import {html, LitElement, nothing, PropertyValues}  from 'lit'
 import {customElement, property}                    from 'lit/decorators.js'
+import {classMap}                                   from 'lit/directives/class-map.js'
 import {defaultDisplayConfig, displayConfigContext} from '../../../internal/contexts'
 import {hostStyles}                                 from '../../../styles'
 import {DisplayConfig, DisplayMode}                 from '../../../types'
@@ -19,6 +20,9 @@ export class StructureWrapper extends LitElement {
   protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   static styles = [hostStyles, componentStyles]
+
+  @property()
+  variant: 'primary' | 'secondary' | 'validation-error' | undefined
 
   @property()
   label: string = ''
@@ -50,14 +54,21 @@ export class StructureWrapper extends LitElement {
       let open = false
       if (this.displayConfig.open) open = true
       if (this.forceclose) open = false
+    const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
+    const classes = {
+      primary: this.variant === 'primary',
+      secondary: this.variant === 'secondary',
+      'validation-error': this.variant === 'validation-error'
+    }
 
       return this.hide
              ? html`
             <slot part="value"></slot > `
              : html`
+            <div class="${classMap(borderClasses)}">
             <sl-details part="base" ?open=${open}>
-              <div slot="summary">
-                <label ><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
+              <div slot="summary" >
+                <label class=${classMap(classes)}><b >${this.label}</b > ${this.resourceId ? html`<i >(id: ${this.resourceId})</i >` : nothing}</label >
                 ${this.fhirType ? html`
                   <sl-badge pill>${this.fhirType}</sl-badge >` : nothing}
                 ${this.summary && this.displayConfig?.mode === DisplayMode.structure ? html`
@@ -68,15 +79,13 @@ export class StructureWrapper extends LitElement {
                 <slot part="value"></slot >
               </ul >
             </sl-details >
+            </div>
         `
-    // }
-
-    // return html``
   }
 
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
+  protected willUpdate(_changedProperties: PropertyValues) {
+    super.willUpdate(_changedProperties)
     if (this.displayConfig) {
       this.open = this.displayConfig.open
       this.mode = this.displayConfig.mode

@@ -19,7 +19,7 @@ describe('PrimitiveError', () => {
       <fhir-error text="Some error message"></fhir-error >
     `).first()
 
-    const err = error.deepQuerySelector({ select: 'div' })
+    const err = error.queryShadow({ select: 'div' })
     expect(err).toHaveTextContent('Some error message')
   })
 })
