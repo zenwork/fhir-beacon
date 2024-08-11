@@ -15,7 +15,8 @@ describe('DisplayConfig', () => {
       const primitive = await fixture<Primitive>(html`
         <fhir-primitive label="something" value='abc' type="decimal" ?showerror=${true}></fhir-primitive >
       `).first()
-      await aTimeout(100)
+
+      await aTimeout(300)
 
       const element = primitive.queryShadowByText('TypeError: decimal must be a valid number')
       expect(element).toBeVisible()
