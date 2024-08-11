@@ -1,7 +1,7 @@
 import {LitElement, PropertyValues}                     from 'lit'
 import {property, state}                                from 'lit/decorators.js'
 import {DataContextConsumerController, FhirDataContext} from '../contexts'
-import {FhirDataElementData, ValidationErrors}          from './fhir-data-element.data'
+import {FhirDataElementData, NoDataSet, ValidationErrors}  from './fhir-data-element.data'
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
@@ -15,7 +15,7 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
 
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({ type: Object, attribute: 'data' })
-  public declare data: T
+  public data: T = NoDataSet as T
 
   @property({ type: String, attribute: 'data-path' })
   public declare dataPath: string
@@ -80,7 +80,7 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
     }
 
     // validate anc convert data set as a property or set through context
-    if (_changedProperties.has('data')) {
+    if (_changedProperties.has('data') && this.data && this.data !== NoDataSet) {
       const validationErrors = this.validate(this.data)
       this.errors.push(...validationErrors)
       this.convertedData = this.convertData(this.data)

@@ -172,13 +172,14 @@ describe('DisplayConfig', () => {
         </fhir-shell >
       `, new Annotation().tagName).first()
 
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 8 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 6 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 14 }))
 
     })
 

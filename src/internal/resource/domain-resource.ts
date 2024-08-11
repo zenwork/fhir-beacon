@@ -22,7 +22,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   }
 
   protected render(): TemplateResult {
-    const data = this.convertData(this.data)
+    // const data = this.convertData(this.data)
     if (!this.verbose && !this.showerror && !this.convertedData) return html``
     return html`
       <div part="domain-resource">${choose(this.mode,

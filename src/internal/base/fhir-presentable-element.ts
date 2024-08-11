@@ -8,9 +8,9 @@ import {hostStyles}                             from '../../styles'
 import {DisplayConfig, DisplayMode}             from '../../types'
 import {hasSameAncestor, toBaseElementModeEnum} from '../../utilities'
 import {DisplayContextConsumerController}       from '../contexts/context-consumer-controller'
-import {FhirDataElement}                        from './fhir-data-element'
-import {FhirDataElementData}                    from './fhir-data-element.data'
-import {Generators}                             from './fhir-presentable-element.data'
+import {FhirDataElement}             from './fhir-data-element'
+import {FhirDataElementData, NoDataSet} from './fhir-data-element.data'
+import {Generators}                  from './fhir-presentable-element.data'
 import {componentStyles}                        from './fhir-presentable-element.styles'
 
 export abstract class FhirPresentableElement<T extends FhirDataElementData> extends FhirDataElement<T> {
@@ -96,7 +96,7 @@ export abstract class FhirPresentableElement<T extends FhirDataElementData> exte
    * @protected
    */
   protected render(): TemplateResult | TemplateResult[] {
-    if (this.verbose && !this.convertedData) return html`
+    if (this.verbose && (this.data === NoDataSet)) return html`
       <fhir-not-supported variant="no-data"></fhir-not-supported >`
     if (this.mode) {
       return html`${choose(this.mode, [

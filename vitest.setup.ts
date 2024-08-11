@@ -42,7 +42,7 @@ Element.prototype.queryShadow =
       const found = results ? results.length : '0'
       const paths = results.map(hostOf).join('\n')
       throw new BeaconTestError(
-        `deepQuerySelectorAll: unexpected number of elements found.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
+        `deepQuerySelectorAll: unexpected number of elements found for: ${select}.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
     }
 
     throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
