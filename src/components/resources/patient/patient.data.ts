@@ -1,4 +1,4 @@
-import {FhirDataElementData}                                                                          from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}                                                                              from '../../../internal/base/fhir-data-element.data'
 import {BackboneElementData}                                                                          from '../../../internal/resource/backbone.data'
 import {DomainResourceData}                                                                           from '../../../internal/resource/domain-resource.data'
 import {
@@ -9,7 +9,7 @@ import {PeriodData}                                                             
 import {Base64Binary, Code, DateTime, Decimal, FhirDate, FhirString, Integer, Integer64, PositiveInt} from '../../primitive/primitive.data'
 import {ReferenceData}                                                                                from '../../special/reference/reference.data'
 
-export type HumanNameData = FhirDataElementData & {
+export type HumanNameData = FhirElementData & {
   use?: Code
   text?: FhirString
   family?: FhirString
@@ -19,7 +19,7 @@ export type HumanNameData = FhirDataElementData & {
   period?: PeriodData
 }
 
-export type ContactPointData = FhirDataElementData & {
+export type ContactPointData = FhirElementData & {
   system?: Code
   value?: FhirString
   use?: Code
@@ -31,7 +31,7 @@ export type ContactPointData = FhirDataElementData & {
 export type DeceasedBoolean = boolean
 export type DeceasedDateTime = DateTime
 
-export type AddressData = FhirDataElementData & {
+export type AddressData = FhirElementData & {
   use?: Code
   type?: Code
   text?: FhirString
@@ -47,7 +47,7 @@ export type AddressData = FhirDataElementData & {
 export type MultipleBirthBoolean = boolean
 export type MultipleBirthInteger = Integer
 
-export type AttachmentData = FhirDataElementData & {
+export type AttachmentData = FhirElementData & {
   contentType?: Code
   language?: Code
   data?: Base64Binary

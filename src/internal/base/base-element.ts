@@ -1,6 +1,6 @@
-import {html, TemplateResult}                  from 'lit'
-import {FhirDataElementData, ValidationErrors} from './fhir-data-element.data'
-import {FhirPresentableElement}                from './fhir-presentable-element'
+import {html, TemplateResult}              from 'lit'
+import {FhirElementData, ValidationErrors} from './fhir-data-element.data'
+import {FhirPresentableElement}            from './fhir-presentable-element'
 
 
 /**
@@ -9,7 +9,7 @@ import {FhirPresentableElement}                from './fhir-presentable-element'
  * @param {string} type - The type of the instance being created. Should be one of the canonical FHIR names
  * @typeparam T - The type of data associated with the base element.
  */
-export class BaseElement<T extends FhirDataElementData> extends FhirPresentableElement<T> {
+export class BaseElement<T extends FhirElementData> extends FhirPresentableElement<T> {
 
   constructor(type: string) {
     super(type)

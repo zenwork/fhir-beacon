@@ -2,7 +2,7 @@ import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
 import {FhirDataElement}                     from '../base/fhir-data-element'
-import {FhirDataElementData}                 from '../base/fhir-data-element.data'
+import {FhirElementData}                     from '../base/fhir-data-element.data'
 import {FhirPresentableElement}              from '../base/fhir-presentable-element'
 import {contextData, displayConfigContext}   from './context'
 
@@ -20,7 +20,7 @@ import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'
  * @typeparam {T extends FhirDataElementData} - The type of data to consume from the data context.
  * @implements {ReactiveController}
  */
-export class DataContextConsumerController<T extends FhirDataElementData> implements ReactiveController {
+export class DataContextConsumerController<T extends FhirElementData> implements ReactiveController {
 
   private host: FhirDataElement<T> & ReactiveElement
 
@@ -58,7 +58,7 @@ export class DataContextConsumerController<T extends FhirDataElementData> implem
  *
  * @param {FhirPresentableElement<T> & ReactiveElement} host - The host element that will be updated based on the display configuration context
  */
-export class DisplayContextConsumerController<T extends FhirDataElementData> implements ReactiveController {
+export class DisplayContextConsumerController<T extends FhirElementData> implements ReactiveController {
   private host: FhirPresentableElement<T> & ReactiveElement
   private isOverridden: boolean = false
 

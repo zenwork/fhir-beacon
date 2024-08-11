@@ -1,13 +1,13 @@
 import {ContextProvider}                     from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {BaseElement}                         from '../base/base-element'
-import {FhirDataElementData}                 from '../base/fhir-data-element.data'
+import {FhirElementData}                     from '../base/fhir-data-element.data'
 
 import {contextData, displayConfigContext} from './context'
 import {FhirDataContextImpl}               from './FhirContextData'
 
 //TODO: maybe shoudl be split into two separate controllers
-export class ContextProviderController<T extends FhirDataElementData, B extends BaseElement<T>> implements ReactiveController {
+export class ContextProviderController<T extends FhirElementData, B extends BaseElement<T>> implements ReactiveController {
 
   private host: B
   private displayCtx: ContextProvider<typeof displayConfigContext>

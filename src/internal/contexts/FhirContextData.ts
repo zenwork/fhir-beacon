@@ -1,9 +1,9 @@
-import {JSONPath}            from 'jsonpath-plus'
-import {FhirDataElementData} from '../base/fhir-data-element.data'
+import {JSONPath}        from 'jsonpath-plus'
+import {FhirElementData} from '../base/fhir-data-element.data'
 
 export interface FhirDataContext {
 
-  data: {} & FhirDataElementData
+  data: {} & FhirElementData
 
   // TODO: for now just a string... but path should become FHIR path
   getAt<X>(path: string): X
@@ -13,11 +13,11 @@ export class FhirDataContextImpl implements FhirDataContext {
 
   declare _data: any
 
-  public get data(): {} & FhirDataElementData {
+  public get data(): {} & FhirElementData {
     return this._data
   }
 
-  public set data(value: {} & FhirDataElementData) {
+  public set data(value: {} & FhirElementData) {
     this._data = value
   }
 

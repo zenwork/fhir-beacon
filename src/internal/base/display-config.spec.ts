@@ -185,7 +185,7 @@ describe('DisplayConfig', () => {
 
 
   })
-  describe('complex types', () => {
+  describe('resource types', () => {
     it('should show resource errors when verbose is enabled', async () => {
       const medication = await fixture<Medication>(html`
         <fhir-shell verbose showerror>

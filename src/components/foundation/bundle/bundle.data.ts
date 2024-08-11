@@ -1,4 +1,4 @@
-import {FhirDataElementData} from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}     from '../../../internal/base/fhir-data-element.data'
 import {BackboneElementData} from '../../../internal/resource/backbone.data'
 import {ResourceData}        from '../../../internal/resource/domain-resource.data'
 
@@ -8,7 +8,7 @@ import {Base64Binary, Code, Decimal, FhirString, Instant, Link, UnsignedInt, URI
 import {ReferenceData}                                                            from '../../special/reference/reference.data'
 
 
-export type BundleData = FhirDataElementData & {
+export type BundleData = FhirElementData & {
 
   identifier?: IdentifierData,
   type: Code,
@@ -57,7 +57,7 @@ export type BundleEntryResponseBackbone = BackboneElementData & {
   outcome?: ResourceData
 }
 
-export type SignatureData = FhirDataElementData & {
+export type SignatureData = FhirElementData & {
   type: CodingData[]
   when?: Instant
   who?: ReferenceData
