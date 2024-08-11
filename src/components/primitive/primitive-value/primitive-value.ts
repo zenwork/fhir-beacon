@@ -47,7 +47,7 @@ export class PrimitiveValue extends ShoelaceStyledElement {
   private computeValue = () => {
     if (this.link) {
       return html`
-        <a href="${this.link}" >
+        <a href="${this.link}" target='_blank'>
           <slot name="before"></slot>
           ${this.text}
           <slot name="after"></slot>

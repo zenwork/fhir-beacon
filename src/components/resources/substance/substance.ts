@@ -2,6 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {DomainResource}                from '../../../internal/resource/domain-resource'
+import {wrap}                          from '../../../shell'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {SubstanceData}                 from './substance.data'
 
@@ -19,24 +20,23 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier >
       <fhir-primitive label="instance or kind" value=${data.instance ? 'instance' : 'kind'} summary></fhir-primitive >
       <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive >
-      ${map(data.category, (c, idx) => {
+      ${wrap('', 'category', data.category, this.verbose, (c, idx, context) => {
         return html`
           <fhir-codeable-concept
-              label="category ${(data.category && data.category.length > 1) ? '[' + (idx + 1) + ']' : ''}"
-              .data=${c}
-              summary
+            .context=${context}
+            label="substance"
+            .data=${c}
+            summary
           ></fhir-codeable-concept >
         `
       })}
-      <fhir-codeable-reference label="code" .data=${data.code} summary></fhir-codeable-reference >
+      <fhir-codeable-reference context="code" label="code" .data=${data.code} summary></fhir-codeable-reference >
       <fhir-primitive label="expiry" value=${data.expiry} summary></fhir-primitive >
       <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity >
-      ${map(data.ingredient,
-          (ing, idx) => html`
-            <fhir-wrapper label="ingredient ${(data.ingredient && data.ingredient.length > 1) ? '[' + (idx + 1) + ']' : ''}" variant="primary">
-              <fhir-substance-ingredient .data=${ing} summary></fhir-substance-ingredient >
-            </fhir-wrapper >
-          `)}
+      ${wrap('', 'ingredient', data.ingredient, this.verbose,
+        (ing, idx, ctx) => html`
+          <fhir-substance-ingredient .context=${ctx} .label=${'ingredient' + idx} .data=${ing} summary></fhir-substance-ingredient >
+        `)}
 
     `
   }
@@ -63,11 +63,11 @@ export class Substance extends DomainResource<SubstanceData> {
       <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity >
       ${(data.ingredient || this.verbose) ? html`
         <fhir-structure-wrapper label="ingredients" ?open=${this.open} summary>
-        ${data.ingredient ? map(data.ingredient, (ing) => html`
-          <fhir-substance-ingredient label="ingredient" .data=${ing} summary></fhir-substance-ingredient >
-        `) : html`
-          <fhir-empty-list ></fhir-empty-list >`}
-      </fhir-structure-wrapper>
+          ${data.ingredient ? map(data.ingredient, (ing) => html`
+            <fhir-substance-ingredient label="ingredient" .data=${ing} summary></fhir-substance-ingredient >
+          `) : html`
+            <fhir-empty-list ></fhir-empty-list >`}
+        </fhir-structure-wrapper >
       ` : nothing}
     `
   }

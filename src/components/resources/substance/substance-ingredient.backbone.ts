@@ -31,8 +31,12 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
       `
     }
 
-    return html` ${substance}
-    <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio > `
+    return html`
+      <fhir-wrapper .label=${this.label}>
+        ${substance}
+        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+      </fhir-wrapper >
+    `
   }
 
   protected renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {

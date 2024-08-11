@@ -1,10 +1,10 @@
-import {consume}              from '@lit/context'
-import {html, TemplateResult} from 'lit'
-import {customElement, state} from 'lit/decorators.js'
-import {choose}               from 'lit/directives/choose.js'
-import {otherwise, when}      from '../../.././utilities/when'
-import {BaseElement}          from '../../../internal'
-import {containedDataContext} from '../../../internal/contexts/context'
+import {consume}                       from '@lit/context'
+import {html, nothing, TemplateResult} from 'lit'
+import {customElement, state}          from 'lit/decorators.js'
+import {choose}                        from 'lit/directives/choose.js'
+import {otherwise, when}               from '../../.././utilities/when'
+import {BaseElement}                   from '../../../internal'
+import {containedDataContext}          from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -81,12 +81,14 @@ export class Reference extends BaseElement<ReferenceData> {
               [
                 ReferenceType.extension,
                 () => html`
-                  <fhir-not-supported description="unable to render ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
+                  <fhir-not-supported description="unable to render reference of type ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
               ],
               [
                 ReferenceType.unknown,
-                () => html`
-                  <fhir-not-supported description="unable to render ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
+                () => this.data
+                      ? html`
+                    <fhir-not-supported description="unable to render reference of type ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
+                      : nothing
               ]
 
             ]

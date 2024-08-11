@@ -10,7 +10,7 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
 
   protected renderDisplay(data: CodeableReferenceData): TemplateResult {
     return html`
-      <fhir-codeable-concept label="" .data=${data.concept} summary></fhir-codeable-concept >
+      <fhir-codeable-concept .context=${this.context} label="concept" .data=${data.concept} summary></fhir-codeable-concept >
       <fhir-reference label="name" .data=${data.reference} summary></fhir-reference >
     `
   }

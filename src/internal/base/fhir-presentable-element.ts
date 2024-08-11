@@ -18,6 +18,9 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   static styles = [hostStyles, componentStyles]
 
   @property({ reflect: true })
+  public context: string = ''
+
+  @property({ reflect: true })
   public label: string = ''
 
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
@@ -119,21 +122,10 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
   protected renderDisplayWrapper() {
     if (!this.convertedData) return html``
-    if (!this.verbose) {
-      return html` ${this.renderDisplay(this.convertedData)} `
-    }
 
-    // is verbose
-    return html`
-      <fhir-wrapper
-        .label=${this.getElementLabel()}
-        .fhirType=${this.getTypeLabel()}
-        .mode=${this.mode}
-        .open=${this.open}
-        .hide=${!this.verbose}
-      >
-        ${this.renderDisplay(this.convertedData)}
-      </fhir-wrapper >`
+    return html` ${this.renderDisplay(this.convertedData)} `
+
+
   }
 
   protected renderStructureWrapper() {
@@ -213,7 +205,17 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   }
 
   protected getElementLabel = () => {
-    return this.label ? this.label : asReadable(this.type)
+    if (this.label) {
+      return this.label
+    }
+
+    if (this.mode != DisplayMode.display && this.mode != DisplayMode.display_summary) {
+      // console.log(this.type, this.mode , typeof this.mode === 'string')
+      return asReadable(this.type)
+    }
+
+    return ''
+
   }
 
   protected getTypeLabel = () => {

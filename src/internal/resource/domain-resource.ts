@@ -27,7 +27,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     return html`
       <div part="domain-resource">${choose(this.mode,
             [
-              [DisplayMode.narrative, () => this.renderNarrative(data)],
+              [DisplayMode.narrative, () => this.renderNarrative(this.data)],
               [
                 DisplayMode.combined,
                 () => html`

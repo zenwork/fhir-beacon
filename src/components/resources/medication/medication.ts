@@ -2,6 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {DomainResource}                from '../../../internal'
+import {wrap}                          from '../../../shell'
 import {DisplayMode}                   from '../../../types'
 import {PrimitiveType}                 from '../../primitive'
 import {MedicationData}                from './medication.data'
@@ -22,19 +23,16 @@ export class Medication extends DomainResource<MedicationData> {
       <fhir-reference label="marketing authorization holder" .data=${data.marketingAuthorisationHolder} summary></fhir-reference >
       <fhir-codeable-concept label="dose form" .data=${data.doseForm}></fhir-codeable-concept >
       <fhir-quantity label="total volume" .data=${data.totalVolume} summary></fhir-quantity >
-      ${((data.ingredient && data.ingredient.length > 0) || this.verbose) ? html`
 
-        ${map(data.ingredient, (i, idx) => html`
-          <fhir-wrapper
-            label="ingredient ${(data.ingredient && data.ingredient.length > 1) ? '[' + (idx + 1) + ']' : ''}" ?hide=${this.mode
-                                                                                                                       == DisplayMode.display_summary} variant="primary"
-          >
-            <fhir-codeable-reference label="item" .data=${i.item}></fhir-codeable-reference >
-            <fhir-primitive .type=${PrimitiveType.none} label="is Active" .value=${i.isActive}></fhir-primitive >
-            <fhir-ratio label="ratio" .data=${i.strengthRatio}></fhir-ratio >
-            <fhir-codeable-concept .data=${i.strengthCodeableConcept}></fhir-codeable-concept >
-            <fhir-quantity .data=${i.strengthQuantity!}></fhir-quantity >
-          </fhir-wrapper >
+
+      ${data.ingredient ? html`
+
+        ${wrap('', 'ingredient', data.ingredient, this.verbose, (i, _, ctx) => html`
+          <fhir-codeable-reference .context=${ctx} label="item" .data=${i.item}></fhir-codeable-reference >
+          <fhir-primitive label="is Active" .value=${i.isActive} .type=${PrimitiveType.none}></fhir-primitive >
+          <fhir-ratio .context=${ctx} label="ratio" .data=${i.strengthRatio}></fhir-ratio >
+          <fhir-codeable-concept .context=${ctx} label="strength" .data=${i.strengthCodeableConcept}></fhir-codeable-concept >
+          <fhir-quantity .context=${ctx} label="strength" .data=${i.strengthQuantity!}></fhir-quantity >
         `)}
 
       ` : nothing}

@@ -1,7 +1,7 @@
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
-import {BaseElement}                          from '../../../internal'
+import {BaseElement, NoDataSet}               from '../../../internal'
 
 import {NarrativeData} from './narrative.data'
 
@@ -21,7 +21,7 @@ export class Narrative extends BaseElement<NarrativeData> {
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-    if (_changedProperties.has('data')) {
+    if (_changedProperties.has('data') && this.data !== NoDataSet) {
       this.status = this.data.status
     }
   }

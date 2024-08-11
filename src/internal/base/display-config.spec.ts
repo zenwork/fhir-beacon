@@ -50,7 +50,7 @@ describe('DisplayConfig', () => {
         ></fhir-primitive >
       `).all()
 
-      expect(primitives[0].queryShadowByText('(week)')).toBeVisible()
+      assert.ok(primitives[0].queryShadow({ select: 'fhir-context', expect: 0 }))
       expect(primitives[1].queryShadowByText('(week - positiveInt)')).toBeVisible()
 
       primitives[0].verbose = true

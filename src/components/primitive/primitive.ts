@@ -175,7 +175,7 @@ export class Primitive extends LitElement {
         <span slot="after"><slot name="after"></slot ></span >
       </fhir-value >`)
 
-    if (this.context) elements.push(html`
+    if (this.context && this.verbose) elements.push(html`
       <fhir-context
         .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose ? this.type : ''}
       ></fhir-context >`)
