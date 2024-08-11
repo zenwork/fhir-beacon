@@ -1,9 +1,12 @@
-import {html}                                     from 'lit'
-import {describe, expect, it}                     from 'vitest'
-import {aTimeout}                                 from '../../../tests/aTimeout'
-import {fixture}                                  from '../../../tests/lit/lit-vitest-fixture'
-import {Primitive, PrimitiveError, PrimitiveType} from '../../components'
-import {DisplayMode}                              from '../../types'
+import {html}                                                             from 'lit'
+import {assert, describe, expect, it}                                     from 'vitest'
+import {aTimeout}                                                         from '../../../tests/aTimeout'
+import {fixture}                                                          from '../../../tests/lit/lit-vitest-fixture'
+import {Annotation, Medication, Primitive, PrimitiveError, PrimitiveType} from '../../components'
+import {data as annotationData}                                           from '../../components/complex/annotation/annotation.story.data'
+import {Shell}                                                            from '../../shell'
+import {DisplayMode}                                                      from '../../types'
+
 
 describe('DisplayConfig', () => {
   describe('primitive', () => {
@@ -12,8 +15,9 @@ describe('DisplayConfig', () => {
       const primitive = await fixture<Primitive>(html`
         <fhir-primitive label="something" value='abc' type="decimal" ?showerror=${true}></fhir-primitive >
       `).first()
+      await aTimeout(100)
 
-      const element = primitive.queryByShadowText('TypeError: decimal must be a valid number')
+      const element = primitive.queryShadowByText('TypeError: decimal must be a valid number')
       expect(element).toBeVisible()
       expect(getComputedStyle(element!).backgroundColor).toEqual('rgb(254, 202, 202)')
 
@@ -22,7 +26,7 @@ describe('DisplayConfig', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(element).not.toBeUndefined
-      primitive.deepQuerySelector<PrimitiveError>({ select: ['fhir-error'], expect: 0 })
+      primitive.queryShadow<PrimitiveError>({ select: ['fhir-error'], expect: 0 })
 
     })
 
@@ -45,13 +49,13 @@ describe('DisplayConfig', () => {
         ></fhir-primitive >
       `).all()
 
-      expect(primitives[0].queryByShadowText('(week)')).toBeVisible()
-      expect(primitives[1].queryByShadowText('(week - positiveInt)')).toBeVisible()
+      expect(primitives[0].queryShadowByText('(week)')).toBeVisible()
+      expect(primitives[1].queryShadowByText('(week - positiveInt)')).toBeVisible()
 
       primitives[0].verbose = true
       await aTimeout(200)
 
-      expect(primitives[0].queryByShadowText('(week - decimal)')).toBeVisible()
+      expect(primitives[0].queryShadowByText('(week - decimal)')).toBeVisible()
 
     })
 
@@ -71,19 +75,152 @@ describe('DisplayConfig', () => {
       `).all()
 
 
-      expect(primitives[0].queryByShadowText('something:')).toBeVisible()
-      expect(primitives[0].queryByShadowText('23')).toBeVisible()
+      expect(primitives[0].queryShadowByText('something:')).toBeVisible()
+      expect(primitives[0].queryShadowByText('23')).toBeVisible()
 
-      expect(primitives[1].queryByShadowText('something:')).toBeVisible()
-      expect(primitives[1].queryByShadowText('23')).toBeVisible()
-      expect(primitives[1].queryByShadowText('∑')).toBeVisible()
+      expect(primitives[1].queryShadowByText('something:')).toBeVisible()
+      expect(primitives[1].queryShadowByText('23')).toBeVisible()
+      expect(primitives[1].queryShadowByText('∑')).toBeVisible()
 
       primitives[1].mode = DisplayMode.display
-      await aTimeout(100)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      expect(primitives[1].queryByShadowText('∑')).toBeNull
+      await aTimeout()
+
+      assert.isNull(primitives[1].queryShadowByText('∑'))
+
+    })
+  })
+  describe('complex types', () => {
+    it('should show component errors when verbose is enabled', async () => {
+      const annotation = await fixture<Annotation>(html`
+        <fhir-shell verbose showerror>
+          <fhir-annotation ></fhir-annotation >
+        </fhir-shell >
+      `, new Annotation().tagName).first()
+
+      await aTimeout()
+
+      const collection = annotation.shadowedChildren()
+      expect(collection.length).toEqual(1)
+      const primitive = collection.item(0)! as Primitive
+      expect(primitive.queryShadowByText('the data or data-path property must be provided')).toBeVisible()
+
+      const shell: Shell = document.body.querySelector('fhir-shell')!
+      shell.showerror = false
+
+      await aTimeout()
+
+      assert.isEmpty(annotation.queryShadow({ select: 'fhir-error', expect: 0 }))
+      expect(annotation.queryShadowByText('No Data provided'))
+
+    })
+
+    it('should be empty when verbose is not enabled', async () => {
+      const annotation = await fixture<Annotation>(html`
+        <fhir-shell >
+          <fhir-annotation ></fhir-annotation >
+        </fhir-shell >
+      `, new Annotation().tagName).first()
+
+      await aTimeout()
+
+      assert.isEmpty(annotation.queryShadow({ select: '*', expect: 0 }))
+
+    })
+
+    it('should show different layout when mode changes', async () => {
+
+      const annotation = await fixture<Annotation>(html`
+        <fhir-shell mode="structure">
+          <fhir-annotation .data=${annotationData}></fhir-annotation >
+        </fhir-shell >
+      `, new Annotation().tagName).first()
+
+
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
+
+      const shell = document.body.querySelector<Shell>('fhir-shell')!
+      shell.mode = DisplayMode.structure_summary
+      await aTimeout()
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
+
+      shell.mode = DisplayMode.display
+      await aTimeout()
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
+
+      shell.mode = DisplayMode.display_summary
+      await aTimeout()
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
+
+      shell.mode = DisplayMode.debug
+      await aTimeout()
+      assert.ok(annotation.queryShadow({ select: 'fhir-debug', expect: 1 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 0 }))
 
 
     })
+    it('should show more when verbose is set on structure', async () => {
+
+      const annotation = await fixture<Annotation>(html`
+        <fhir-shell mode="structure">
+          <fhir-annotation .data=${annotationData}></fhir-annotation >
+        </fhir-shell >
+      `, new Annotation().tagName).first()
+
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
+
+      const shell = document.body.querySelector<Shell>('fhir-shell')!
+      shell.verbose = true
+      await aTimeout()
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 8 }))
+
+    })
+
+
+  })
+  describe('complex types', () => {
+    it('should show resource errors when verbose is enabled', async () => {
+      const medication = await fixture<Medication>(html`
+        <fhir-shell verbose showerror>
+          <fhir-medication ></fhir-medication >
+        </fhir-shell >
+      `, new Medication().tagName).first()
+
+      await aTimeout()
+
+      const collection = medication.shadowedChildren()
+
+      expect(collection.length).toEqual(1)
+      const primitive = collection.item(0)! as HTMLDivElement
+      expect(primitive.queryShadowByText('the data or data-path property must be provided')).toBeVisible()
+      const shell: Shell = document.body.querySelector('fhir-shell')!
+
+      shell.showerror = false
+      await aTimeout()
+
+      assert.isEmpty(medication.queryShadow({ select: 'fhir-error', expect: 0 }))
+
+      expect(medication.queryShadowByText('No Data provided'))
+
+    })
+
+    it('should be empty when not verbose', async () => {
+      const medication = await fixture<Medication>(html`
+        <fhir-shell >
+          <fhir-medication ></fhir-medication >
+        </fhir-shell >
+      `, new Medication().tagName).first()
+
+      await aTimeout()
+
+      assert.isEmpty(medication.queryShadow({ select: '*', expect: 0 }))
+
+    })
+
   })
 })

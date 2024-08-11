@@ -23,6 +23,7 @@ export class NotSupported extends LitElement {
   }
 
   protected render(): unknown {
+
     if (!this.variant && (this.label || this.description)) {
       return html`
         <fhir-primitive
@@ -35,43 +36,53 @@ export class NotSupported extends LitElement {
       `
     }
 
-    if (this.variant == 'no-impl') {
-      return html`
-        <fhir-primitive
-          .label="${this.label}"
-          .value="${this.description}"
-          errormessage="Not Implemented"
-          .type=${PrimitiveType.forced_error}
-        >
-        </fhir-primitive >
-      `
-    }
+    switch (this.variant) {
+      case 'no-data':
+        return html`
+          <fhir-primitive
+            label="error"
+            value="No data provided."
+            errormessage="the data or data-path property must be provided"
+            .type=${PrimitiveType.forced_error}
+          >
+          </fhir-primitive >
+        `
 
-    if (this.variant == 'no-sup') {
-      return html`
-        <fhir-primitive
-          .label="${this.label}"
-          .value="${this.description}"
-          errormessage="Not Supported"
-          .type=${PrimitiveType.forced_error}
-        >
-        </fhir-primitive >
-      `
-    }
+      case 'no-impl':
+        return html`
+          <fhir-primitive
+            .label="${this.label}"
+            .value="${this.description}"
+            errormessage="Not Implemented"
+            .type=${PrimitiveType.forced_error}
+          >
+          </fhir-primitive >
+        `
 
-    if (this.variant == 'stop') {
-      return html`
-        <fhir-primitive
-          .label="${this.label || 'error'}"
-          value="Rendering Stopped"
-          .errormessage=${this.error}
-          .type=${PrimitiveType.forced_error}
-        >
-        </fhir-primitive >
-      `
-    }
+      case 'no-sup':
+        return html`
+          <fhir-primitive
+            .label="${this.label}"
+            .value="${this.description}"
+            errormessage="Not Supported"
+            .type=${PrimitiveType.forced_error}
+          >
+          </fhir-primitive >
+        `
 
-    return html`
+      case 'stop':
+        return html`
+          <fhir-primitive
+            .label="${this.label || 'error'}"
+            value="Rendering Stopped"
+            .errormessage=${this.error}
+            .type=${PrimitiveType.forced_error}
+          >
+          </fhir-primitive >
+        `
+
+      default:
+        return html`
       <fhir-primitive
         label="error"
         value="Undefined reason"
@@ -79,8 +90,7 @@ export class NotSupported extends LitElement {
         .type=${PrimitiveType.forced_error}
       ></fhir-primitive >
       <slot ></slot >
-    `
-
-
+        `;
+    }
   }
 }

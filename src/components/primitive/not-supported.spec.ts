@@ -15,11 +15,11 @@ describe('fhir-not-supported', () => {
 
     expect(el).to.be.instanceof(NotSupported)
 
-    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
+    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent('error')
     expect(getComputedStyle(label).fontStyle).to.eq('italic')
 
-    const value = el.deepQuerySelector<HTMLDivElement>({ select: ['fhir-value', 'div'] })
+    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
     expect(value).toHaveTextContent('Undefined reason')
     expect(getComputedStyle(value).textDecorationStyle).toEqual('wavy')
 
@@ -35,13 +35,13 @@ describe('fhir-not-supported', () => {
 
     expect(el).to.be.instanceof(Shell)
 
-    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
+    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent('check:')
 
-    const value = el.deepQuerySelector<HTMLDivElement>({ select: ['fhir-value', 'div'] })
+    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
     expect(value).toHaveTextContent('desc')
 
-    const err = el.deepQuerySelector<PrimitiveError>({ select: ['fhir-error', 'div'] })
+    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
     expect(err).toHaveTextContent('custom error')
     const errCss = getComputedStyle(err)
     expect(errCss.fontStyle).to.eq('italic')
@@ -58,13 +58,13 @@ describe('fhir-not-supported', () => {
 
     expect(el).to.be.instanceof(Shell)
 
-    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
+    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent('')
 
-    const value = el.deepQuerySelector<HTMLDivElement>({ select: ['fhir-value', 'div'] })
+    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
     expect(value).toHaveTextContent('desc')
 
-    const err = el.deepQuerySelector<PrimitiveError>({ select: ['fhir-error', 'div'] })
+    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
     expect(err).toHaveTextContent('Not Implemented')
 
   })
@@ -79,13 +79,13 @@ describe('fhir-not-supported', () => {
 
     expect(el).to.be.instanceof(Shell)
 
-    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
+    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent('')
 
-    const value = el.deepQuerySelector<HTMLDivElement>({ select: ['fhir-value', 'div'] })
+    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
     expect(value).toHaveTextContent('desc')
 
-    const err = el.deepQuerySelector<PrimitiveError>({ select: ['fhir-error', 'div'] })
+    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
     expect(err).toHaveTextContent('Not Supported')
 
   })
@@ -100,13 +100,13 @@ describe('fhir-not-supported', () => {
 
     expect(el).to.be.instanceof(Shell)
 
-    const label = el.deepQuerySelector<HTMLLabelElement>({ select: 'label' })
+    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
     expect(label).toHaveTextContent('foo:')
 
-    const value = el.deepQuerySelector<HTMLDivElement>({ select: ['fhir-value', 'div'] })
+    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
     expect(value).toHaveTextContent('Rendering Stopped')
 
-    const err = el.deepQuerySelector<PrimitiveError>({ select: ['fhir-error', 'div'] })
+    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
     expect(err).toHaveTextContent('custom error desc')
 
   })
