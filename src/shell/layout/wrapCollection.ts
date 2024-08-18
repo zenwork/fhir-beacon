@@ -158,33 +158,50 @@ export function wrap<T>(key: string,
  * @param summaryMode
  * @return A TemplateResult object representing the wrapped lines, or any other value if an error occurs.
  */
-export function wrapLines(key: string,
-                          label: string,
-                          collection: string[],
-                          verbose: boolean,
-                          generator: { (data: string, label: string, key: string): TemplateResult },
-                          summary: boolean = true,
-                          summaryMode: boolean = false
+export function wrapLines<T>(key: string,
+                             label: string,
+                             collection: T[],
+                             verbose: boolean,
+                             generator: { (data: T, label: string, key: string): TemplateResult },
+                             summary: boolean = true,
+                             summaryMode: boolean = false
 ): TemplateResult {
   if (!summaryMode || summaryMode && summary) {
     const k = asReadable(key, 'lower')
 
-    if (hasSome(collection)) {
+    if (hasMany(collection)) {
       if (verbose) {
         label = k + (k ? '/' : '') + label
         return html`
-            <fhir-wrapper label="${label}" variant="primary" ?summary=${summary}>
-                ${map(collection, (data: string) => generator(data, label, key))}
+            <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+                ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
             </fhir-wrapper >
         `
       }
 
       return html`
-          <fhir-wrapper label="${label}" variant="primary" ?summary=${summary}>
-              ${map(collection, (data: string) => generator(data, label, key))}
+          <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+              ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
           </fhir-wrapper >
       `
     }
+    if (hasOnlyOne(collection)) {
+      if (verbose) {
+        label = k + (k ? '/' : '') + label
+        return html`
+
+            ${map(collection, (data: T) => generator(data, label, key))}
+
+        `
+      }
+
+      return html`
+
+          ${map(collection, (data: T) => generator(data, label, key))}
+
+      `
+    }
+
 
     if (verbose) {
       label = k + (k ? '/' : '') + label
