@@ -14,8 +14,10 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
   protected constructor(type: string) {
     super(type)
+    this.summary = true
     this.dataContextProvider = new ContextProviderController(this)
     this.addStructureTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
+    this.addDisplayTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
   }
 
   protected render(): TemplateResult | TemplateResult[] {

@@ -1,13 +1,33 @@
-import {FhirElementData}                                                                              from '../../../internal/base/fhir-data-element.data'
-import {BackboneElementData}                                                                          from '../../../internal/resource/backbone.data'
-import {DomainResourceData}                                                                           from '../../../internal/resource/domain-resource.data'
+import {FhirElementData} from '../../../internal/base/data/fhir-data-element.data'
+import {
+  BackboneElementData
+}                        from '../../../internal/resource/backbone.data'
+import {
+  DomainResourceData
+}                        from '../../../internal/resource/domain-resource.data'
 import {
   CodeableConceptData
-}                                                                                                     from '../../complex/codeable-concept/codeable-concept.data'
-import {IdentifierData}                                                                               from '../../complex/identifier/identifier.data'
-import {PeriodData}                                                                                   from '../../complex/period/period.data'
-import {Base64Binary, Code, DateTime, Decimal, FhirDate, FhirString, Integer, Integer64, PositiveInt} from '../../primitive/primitive.data'
-import {ReferenceData}                                                                                from '../../special/reference/reference.data'
+}                        from '../../complex/codeable-concept/codeable-concept.data'
+import {
+  IdentifierData
+}                        from '../../complex/identifier/identifier.data'
+import {
+  PeriodData
+}                        from '../../complex/period/period.data'
+import {
+  Base64Binary,
+  Code,
+  DateTime,
+  Decimal,
+  FhirDate,
+  FhirString,
+  Integer,
+  Integer64,
+  PositiveInt
+}                        from '../../primitive/primitive.data'
+import {
+  ReferenceData
+}                        from '../../special/reference/reference.data'
 
 export type HumanNameData = FhirElementData & {
   use?: Code

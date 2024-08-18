@@ -33,19 +33,20 @@ export class Reference extends BaseElement<ReferenceData> {
   // http://hl7.org/fhir/R5/datatypes.html#identifier
 
   protected renderDisplay(data: ReferenceData): TemplateResult | TemplateResult[] {
+
     return [
       html`
-
         ${choose(this.referenceType, [
               [
                 ReferenceType.contained,
                 () => html`
                   <fhir-primitive
-                    label='resource'
-                    value=${this.containedResource?.resourceType || 'contained'}
-                    summary
+                          key="${this.key}"
+                          label="${this.label}"
+                          value=${this.containedResource?.resourceType || 'contained'}
+                          summary
                   ></fhir-primitive >
-                  <fhir-wrapper label="loaded ref ${data.reference}">
+                  <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
                   ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
                   </fhir-wrapper >
 
@@ -119,6 +120,7 @@ export class Reference extends BaseElement<ReferenceData> {
 
 
   protected convertData(data: ReferenceData): ReferenceData {
+
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
     // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being able to request data that is in the
     // payload of the parent resource. Have to do this later with signals but when resolving the link call not here.

@@ -1,5 +1,5 @@
 // Todo: figure out when where Meta Data goes
-import {FhirElementData}             from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}             from '../../../internal/base/data/fhir-data-element.data'
 import {CodingData}                  from '../../complex/coding/coding.data'
 import {Canonical, Id, Instant, URI} from '../../primitive/primitive.data'
 

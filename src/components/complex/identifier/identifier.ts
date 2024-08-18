@@ -12,9 +12,9 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   protected renderDisplay(data: IdentifierData): TemplateResult {
     return html`
-      <fhir-primitive label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive >
-      <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
-      <fhir-period .data=${data.period} summary></fhir-period >
+        <fhir-primitive label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive >
+        <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
+        <fhir-period .data=${data.period} summary></fhir-period >
     `
   }
 

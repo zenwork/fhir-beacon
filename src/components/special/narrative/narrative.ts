@@ -22,7 +22,7 @@ export class Narrative extends BaseElement<NarrativeData> {
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (_changedProperties.has('data') && this.data !== NoDataSet) {
-      this.status = this.data.status
+      if (this.data?.status) this.status = this.data.status
     }
   }
 

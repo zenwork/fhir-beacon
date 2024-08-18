@@ -1,9 +1,9 @@
 import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
-import {FhirDataElement}                     from '../base/fhir-data-element'
-import {FhirElementData}                     from '../base/fhir-data-element.data'
-import {FhirPresentableElement}              from '../base/fhir-presentable-element'
+import {FhirDataElement}                     from '../base/data/fhir-data-element'
+import {FhirElementData}                     from '../base/data/fhir-data-element.data'
+import {FhirPresentableElement}              from '../base/presentable/fhir-presentable-element'
 import {contextData, displayConfigContext}   from './context'
 
 import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'

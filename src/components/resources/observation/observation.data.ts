@@ -1,4 +1,4 @@
-import {FhirElementData}                  from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}                  from '../../../internal/base/data/fhir-data-element.data'
 import {BackboneElementData}              from '../../../internal/resource/backbone.data'
 import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
 import {AnnotationData}                   from '../../complex/annotation/annotation.data'
@@ -9,7 +9,19 @@ import {QuantityData, SimpleQuantityData} from '../../complex/quantity/quantity.
 import {RangeData}                        from '../../complex/range/range.data'
 import {RatioData}                        from '../../complex/ratio/ratio.data'
 
-import {Canonical, Code, DateTime, Decimal, FhirString, Instant, Integer, Markdown, PositiveInt, Time, UnsignedInt} from '../../primitive/primitive.data'
+import {
+  Canonical,
+  Code,
+  DateTime,
+  Decimal,
+  FhirString,
+  Instant,
+  Integer,
+  Markdown,
+  PositiveInt,
+  Time,
+  UnsignedInt
+} from '../../primitive/primitive.data'
 
 import {ReferenceData}  from '../../special/reference/reference.data'
 import {AttachmentData} from '../patient/patient.data'

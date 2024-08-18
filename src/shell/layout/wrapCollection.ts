@@ -13,6 +13,76 @@ import {hasMany, hasOnlyOne, hasSome}  from './directives'
  * @param generator - The function to generate the content of each item in the wrapper.
  * @param summary - Whether to display a summary or detailed view of the items in the wrapper.
  *
+ * @param summaryMode
+ * @returns The wrapped collection as a TemplateResult or any other value.
+ */
+export function wrapBB<T>(key: string,
+                          pluralBase: string,
+                          collection: T[],
+                          verbose: boolean,
+                          generator: { (data: T, label: string, key: string): TemplateResult },
+                          summary: boolean = true,
+                          summaryMode: boolean = false
+): TemplateResult {
+  if (!summaryMode || summaryMode && summary) {
+    const k = asReadable(key, 'lower')
+    let plural = pluralize(pluralBase)
+    let label = pluralBase
+
+    if (hasMany(collection)) {
+      if (verbose) {
+        plural = k + (k ? '/' : '') + plural
+        return html`
+            <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+                ${map(collection,
+                      (data: T, index: number) => html`
+                          ${generator(data, pluralBase + show(index + 1), key)}
+                      `)}
+            </fhir-wrapper >
+        `
+      }
+
+      return html`
+          <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+              ${map(collection,
+                    (data: T, index: number) => html`
+                        ${generator(data, show(index + 1), key)}
+                    `)}
+          </fhir-wrapper >
+      `
+    }
+
+    if (hasOnlyOne(collection)) {
+      if (verbose) {
+        label = k + (k ? '/' : '') + label
+        return generator(collection[0], label, k)
+      }
+
+      return generator(collection[0], label, k)
+    }
+
+    if (verbose) {
+      label = k + (k ? '/' : '') + label
+      return html`
+          <fhir-wrapper label="${k} > ${label}">
+              <fhir-empty-list ></fhir-empty-list >
+          </fhir-wrapper >`
+    }
+  }
+  return html``
+}
+
+/**
+ * Wraps a collection of items with a `<fhir-wrapper>` component.
+ *
+ * @param key - The key to use for generating labels.
+ * @param pluralBase - The base string to pluralize for the label of the wrapper.
+ * @param collection - The collection of items to wrap.
+ * @param verbose - Whether to include detailed information in the wrapper.
+ * @param generator - The function to generate the content of each item in the wrapper.
+ * @param summary - Whether to display a summary or detailed view of the items in the wrapper.
+ *
+ * @param summaryMode
  * @returns The wrapped collection as a TemplateResult or any other value.
  */
 export function wrap<T>(key: string,
@@ -20,21 +90,39 @@ export function wrap<T>(key: string,
                         collection: T[],
                         verbose: boolean,
                         generator: { (data: T, label: string, key: string): TemplateResult },
-                        summary: boolean = true
-): TemplateResult | any {
-  const k = asReadable(key, 'lower')
-  let plural = pluralize(pluralBase)
-  let label = pluralBase
+                        summary: boolean = true,
+                        summaryMode: boolean = false
+): TemplateResult {
+  if (!summaryMode || summaryMode && summary) {
+    const k = asReadable(key, 'lower')
+    let plural = pluralize(pluralBase)
+    let label = pluralBase
 
-  if (hasMany(collection)) {
-    if (verbose) {
-      plural = k + (k ? '/' : '') + plural
+    if (hasMany(collection)) {
+      if (verbose) {
+        plural = k + (k ? '/' : '') + plural
+        return html`
+            <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+                ${map(collection,
+                      (data: T, index: number) => html`
+                          <fhir-wrapper
+                                  label="${label} ${show(index + 1)}"
+                                  variant="primary"
+                                  ?summary=${summary}
+                          >
+                              ${generator(data, pluralBase, key)}
+                          </fhir-wrapper >
+                      `)}
+            </fhir-wrapper >
+        `
+      }
+
       return html`
           <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
               ${map(collection,
                     (data: T, index: number) => html`
                         <fhir-wrapper
-                                label="${label} ${show(index + 1)}"
+                                label="${show(index + 1)}"
                                 variant="primary"
                                 ?summary=${summary}
                         >
@@ -45,39 +133,15 @@ export function wrap<T>(key: string,
       `
     }
 
-    return html`
-        <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
-            ${map(collection,
-                  (data: T, index: number) => html`
-                      <fhir-wrapper
-                              label="${show(index + 1)}"
-                              variant="primary"
-                              ?summary=${summary}
-                      >
-                          ${generator(data, pluralBase, key)}
-                      </fhir-wrapper >
-                  `)}
-        </fhir-wrapper >
-    `
-  }
+    if (hasOnlyOne(collection)) {
+      if (verbose) {
+        label = k + (k ? '/' : '') + label
+        return generator(collection[0], label, k)
+      }
 
-  if (hasOnlyOne(collection)) {
-    if (verbose) {
-      label = k + (k ? '/' : '') + label
       return generator(collection[0], label, k)
     }
-
-    return generator(collection[0], label, k)
   }
-
-  if (verbose) {
-    label = k + (k ? '/' : '') + label
-    return html`
-        <fhir-wrapper label="${k} > ${label}">
-            <fhir-empty-list ></fhir-empty-list >
-        </fhir-wrapper >`
-  }
-
   return html``
 }
 
@@ -91,42 +155,62 @@ export function wrap<T>(key: string,
  * @param generator - A function to generate a TemplateResult based on the provided data, label, and key.
  * @param summary - An optional boolean value indicating whether to display the summary or not.
  *
+ * @param summaryMode
  * @return A TemplateResult object representing the wrapped lines, or any other value if an error occurs.
  */
-export function wrapLines(key: string,
-                          label: string,
-                          collection: string[],
-                          verbose: boolean,
-                          generator: { (data: string, label: string, key: string): TemplateResult },
-                          summary: boolean = true
-): TemplateResult | any {
-  const k = asReadable(key, 'lower')
+export function wrapLines<T>(key: string,
+                             label: string,
+                             collection: T[],
+                             verbose: boolean,
+                             generator: { (data: T, label: string, key: string): TemplateResult },
+                             summary: boolean = true,
+                             summaryMode: boolean = false
+): TemplateResult {
+  if (!summaryMode || summaryMode && summary) {
+    const k = asReadable(key, 'lower')
 
-  if (hasSome(collection)) {
-    if (verbose) {
-      label = k + (k ? '/' : '') + label
+    if (hasMany(collection)) {
+      if (verbose) {
+        label = k + (k ? '/' : '') + label
+        return html`
+            <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+                ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+            </fhir-wrapper >
+        `
+      }
+
       return html`
-          <fhir-wrapper label="${label}" variant="primary" ?summary=${summary}>
-              ${map(collection, (data: string) => generator(data, label, key))}
+          <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+              ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
           </fhir-wrapper >
       `
     }
+    if (hasOnlyOne(collection)) {
+      if (verbose) {
+        label = k + (k ? '/' : '') + label
+        return html`
 
-    return html`
-        <fhir-wrapper label="${label}" variant="primary" ?summary=${summary}>
-            ${map(collection, (data: string) => generator(data, label, key))}
-        </fhir-wrapper >
-    `
+            ${map(collection, (data: T) => generator(data, label, key))}
+
+        `
+      }
+
+      return html`
+
+          ${map(collection, (data: T) => generator(data, label, key))}
+
+      `
+    }
+
+
+    if (verbose) {
+      label = k + (k ? '/' : '') + label
+      return html`
+          <fhir-wrapper label="${k} > ${label}">
+              <fhir-empty-list ></fhir-empty-list >
+          </fhir-wrapper >`
+    }
   }
-
-  if (verbose) {
-    label = k + (k ? '/' : '') + label
-    return html`
-        <fhir-wrapper label="${k} > ${label}">
-            <fhir-empty-list ></fhir-empty-list >
-        </fhir-wrapper >`
-  }
-
   return html``
 }
 
@@ -139,50 +223,52 @@ export function wrapLines(key: string,
  * @param verbose
  * @param generator
  * @param summary
+ * @param summaryMode
  */
 export function strap<T>(key: string,
                          pluralBase: string,
                          collection: T[],
                          verbose: boolean,
                          generator: { (data: T, label: string, key: string): TemplateResult },
-                         summary: boolean = true
-): TemplateResult | any {
+                         summary: boolean = true,
+                         summaryMode: boolean = false
+): TemplateResult {
+  if (!summaryMode || summaryMode && summary) {
+    const plural = pluralize(pluralBase)
+    const label = pluralBase
+    const k = asReadable(key, 'lower')
 
-  const plural = pluralize(pluralBase)
-  const label = pluralBase
-  const k = asReadable(key, 'lower')
+    if (hasMany(collection)) {
+      if (verbose) {
+        return html`
+            <fhir-structure-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+                ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+            </fhir-structure-wrapper >
+        `
+      }
 
-  if (hasMany(collection)) {
-    if (verbose) {
       return html`
           <fhir-structure-wrapper label="${plural}" variant="primary" ?summary=${summary}>
-              ${map(collection, (data: T, index: number) => generator(
-                      data, label + ' ' + show(index + 1), key
-              ))}
+              ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
           </fhir-structure-wrapper >
       `
     }
 
-    return html`
-        <fhir-structure-wrapper label="${k}" variant="primary" ?summary=${summary}>
-            ${map(collection, (data: T, index: number) => generator(
-                    data, show(index + 1), key
-            ))}
-        </fhir-structure-wrapper >
-    `
-  }
+    if (hasOnlyOne(collection)) {
+      return html`
+          <fhir-structure-wrapper label="${k}" variant="primary" ?summary=${summary}>
+              ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
+          </fhir-structure-wrapper >
+      `
 
-  if (hasOnlyOne(collection)) {
-    return html` ${map(collection, (data: T, index: number) => generator(
-            data, show(index + 1), key
-    ))}`
-  }
+    }
 
-  if (verbose) {
-    return html`
-        <fhir-wrapper label="${k} > ${label}">
-            <fhir-empty-list ></fhir-empty-list >
-        </fhir-wrapper >`
+    if (verbose) {
+      return html`
+          <fhir-structure-wrapper label="${label}" ?hide=${summary}>
+              <fhir-empty-list ></fhir-empty-list >
+          </fhir-structure-wrapper >`
+    }
   }
 
   return html``
@@ -196,42 +282,44 @@ export function strap<T>(key: string,
  * @param verbose
  * @param generator
  * @param summary
+ * @param summaryMode
  */
 export function strapLines(key: string,
                            label: string,
                            collection: string[],
                            verbose: boolean,
                            generator: { (data: string, label: string, key: string): TemplateResult },
-                           summary: boolean = true
-): TemplateResult | any {
+                           summary: boolean = true,
+                           summaryMode: boolean = false
+): TemplateResult {
+  if (!summaryMode || summaryMode && summary) {
 
+    const k = asReadable(key, 'lower')
 
-  const k = asReadable(key, 'lower')
+    if (hasSome(collection)) {
+      if (verbose) {
+        return html`
+            <fhir-structure-wrapper label="${label}" variant="primary" ?summary=${summary}>
+                ${map(collection, (data: string, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+            </fhir-structure-wrapper >
+        `
+      }
 
-  if (hasSome(collection)) {
-    if (verbose) {
       return html`
           <fhir-structure-wrapper label="${label}" variant="primary" ?summary=${summary}>
-              ${map(collection, (data: string, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+              ${map(collection, (data: string, index: number) => generator(data, show(index + 1), key))}
           </fhir-structure-wrapper >
       `
     }
 
-    return html`
-        <fhir-structure-wrapper label="${label}" variant="primary" ?summary=${summary}>
-            ${map(collection, (data: string, index: number) => generator(data, show(index + 1), key))}
-        </fhir-structure-wrapper >
-    `
+
+    if (verbose) {
+      return html`
+          <fhir-wrapper label="${k} > ${label}">
+              <fhir-empty-list ></fhir-empty-list >
+          </fhir-wrapper >`
+    }
   }
-
-
-  if (verbose) {
-    return html`
-        <fhir-wrapper label="${k} > ${label}">
-            <fhir-empty-list ></fhir-empty-list >
-        </fhir-wrapper >`
-  }
-
   return html``
 }
 

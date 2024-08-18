@@ -1,4 +1,4 @@
-import {FhirElementData}                from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}                from '../../../internal/base/data/fhir-data-element.data'
 import {DateTime, FhirString, Markdown} from '../../primitive/primitive.data'
 import {ReferenceData}                  from '../../special/reference/reference.data'
 

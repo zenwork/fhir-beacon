@@ -1,6 +1,6 @@
 import {html, TemplateResult}              from 'lit'
-import {FhirElementData, ValidationErrors} from './fhir-data-element.data'
-import {FhirPresentableElement}            from './fhir-presentable-element'
+import {FhirElementData, ValidationErrors} from './data/fhir-data-element.data'
+import {FhirPresentableElement}            from './presentable/fhir-presentable-element'
 
 
 /**

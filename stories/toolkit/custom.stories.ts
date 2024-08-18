@@ -144,8 +144,8 @@ const meta: Meta<ShellArgs> = {
                 <sl-icon name="capsule-pill"></sl-icon >
                 <fhir-primitive value-path="$.code.coding[0].display"></fhir-primitive >
               </h4 >
-              <fhir-codeable-concept label="dose" data-path="$.doseForm" mode="display"></fhir-codeable-concept >
-              <fhir-primitive label="lot" value-path="$.batch.lotNumber" mode="display"></fhir-primitive >
+                <fhir-codeable-concept key="dose" data-path="$.doseForm" mode="display"></fhir-codeable-concept >
+                <fhir-primitive key="lot" value-path="$.batch.lotNumber" mode="display"></fhir-primitive >
               <div class='footer' slot="footer">
                 <custom-lit-element label="manufacturer" data-path="$.contained[0].name"></custom-lit-element >
                 <custom-element ></custom-element >

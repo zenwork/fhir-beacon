@@ -1,4 +1,4 @@
-import {URI} from '../../components/primitive/primitive.data'
+import {URI} from '../../../components/primitive/primitive.data'
 
 
 /**
@@ -9,8 +9,8 @@ import {URI} from '../../components/primitive/primitive.data'
  * which is set to the string value 'FHIR::BEACON::NULL::OBJECT'.
  *
  * The NoDataSet value is immutable and cannot be modified once created.
- * It can be used to indicate the absence or unavailability of valid FHIR data. It is meant to be used as a default value to differentiate between default
- * emptiness and user-set emptiness.
+ * It can be used to indicate the absence or unavailability of valid FHIR data. It is meant to be used as a default
+ * value to differentiate between default emptiness and user-set emptiness.
  *
  * @type {FhirElementData}
  * @const
