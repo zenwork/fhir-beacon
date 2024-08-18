@@ -34,8 +34,8 @@ class FixtureResult<T extends HTMLElement> {
 }
 
 /**
- * Asynchronously renders the provided template within a div element and returns an array of elements that extend LitElement for testing purposes. This is
- * designed to work with Vitest in browser testing.
+ * Asynchronously renders the provided template within a div element and returns an array of elements that extend
+ * LitElement for testing purposes. This is designed to work with Vitest in browser testing.
  *
  * @template T - The type of elements that extend LitElement.
  * @param {TemplateResult} template - The template to be rendered.
@@ -44,10 +44,9 @@ class FixtureResult<T extends HTMLElement> {
  * @throws {IllegalStateError} - If the element with the generated id is not found.
  */
 export function fixture<T extends LitElement>(template: TemplateResult, tagname?: string): FixtureResult<T> {
-
-  const id = `test-${((Math.random() * 100000).toFixed(0))}`
+  const id = `test-${(Math.random() * 100000).toFixed(0)}`
   const wrappedTemplate = html`
-    <div id="${id}">${template}</div >`
+      <div id="${id}">${template}</div >`
 
   render(wrappedTemplate, document.body)
   const wrapper: Element | null = document.body.querySelector(`#${id}`)
@@ -55,9 +54,10 @@ export function fixture<T extends LitElement>(template: TemplateResult, tagname?
   if (wrapper) {
     // store for eventual cleanup
     elements.push(wrapper)
-    const reactiveElements: T[] = getDerivedChildren(wrapper.children, tagname)
+    const reactiveElements: T[] = getDerivedChildren(wrapper.children, tagname?.toUpperCase())
 
-    return new FixtureResult<T>(reactiveElements.map(e => e.updateComplete), reactiveElements as unknown as T[])
+    return new FixtureResult<T>(reactiveElements.map((e) => e.updateComplete),
+                                reactiveElements as unknown as T[])
   }
 
   throw new IllegalStateError(`element with id=${id} not found`)
@@ -73,22 +73,19 @@ export function fixture<T extends LitElement>(template: TemplateResult, tagname?
 function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type?: string): T[] {
   const derivedChildren: T[] = []
 
-  Array
-    .from(elements)
-    .forEach(element => {
-      if (element instanceof HTMLElement) {
-
-        function search(node: Node) {
-          if (node instanceof LitElement && (!type || node.tagName === type)) {
-            derivedChildren.push(node as T)
-          }
-
-          node.childNodes.forEach(search)
+  Array.from(elements).forEach((element) => {
+    if (element instanceof HTMLElement) {
+      function search(node: Node) {
+        if (node instanceof LitElement && (!type || node.tagName === type)) {
+          derivedChildren.push(node as T)
         }
 
-        search(element)
+        node.childNodes.forEach(search)
       }
-    })
+
+      search(element)
+    }
+  })
 
   return derivedChildren
 }
@@ -99,7 +96,7 @@ function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type
  * @returns {void}
  */
 export function fixtureCleanUp() {
-  elements.forEach(element => element.remove())
+  elements.forEach((element) => element.remove())
 }
 
 /**

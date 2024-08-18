@@ -59,6 +59,7 @@
         "custom-element-jet-brains-integration": "^1.4.4",
         "dotenv": "^16.4.5",
         "eslint": "^9.6.0",
+        "eslint-config-prettier": "^9.1.0",
         "globals": "^15.8.0",
         "html-format": "^1.1.7",
         "lit-html": "^3.1.4",

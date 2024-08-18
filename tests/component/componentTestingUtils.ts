@@ -10,7 +10,8 @@ export const BeaconAssert = {
       quantity: {
         whenSimple: function simple(
           quantity: Quantity, label: string,
-          { id, variation, value, unit, system, code }: QuantitySimple) {
+          { id, variation, value, unit, system, code }: QuantitySimple
+        ) {
 
           expect(quantity.queryShadow<PrimitiveLabel[]>({ select: 'label', expect: 7 })[0]).toHaveTextContent(label)
 

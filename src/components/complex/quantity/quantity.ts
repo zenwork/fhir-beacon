@@ -5,12 +5,15 @@ import {BaseElement, ValidationErrors}                        from '../../../int
 import {renderError}                                          from '../../../shell/layout/renderError'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
-import {asQuantityComparator}                                 from '../../primitive/type-presenters/asQuantityComparator'
+import {
+  asQuantityComparator
+}                                                             from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.data'
 import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
 
 
-// TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity :-(
+// TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity
+// :-(
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
@@ -42,7 +45,10 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       `
     }
 
-    return renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'quantity', 'must be Quantity or Simple Quantity')
+
+    return renderError(this.getDisplayConfig().showerror,
+                       this.getDisplayConfig().verbose,
+                       'quantity', 'must be Quantity or Simple Quantity')
   }
 
   protected renderStructure(data: QuantityData | SimpleQuantityData): TemplateResult {
@@ -68,7 +74,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       `
     }
 
-    return renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'quantity', 'must be Quantity or Simple Quantity')
+    return renderError(
+      this.getDisplayConfig().showerror,
+      this.getDisplayConfig().verbose,
+      'quantity',
+      'must be Quantity or Simple Quantity'
+    )
 
   }
 

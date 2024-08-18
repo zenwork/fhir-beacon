@@ -1,7 +1,6 @@
 import {defineProject} from 'vitest/config'
 
-export default defineProject(
-  {
+export default defineProject({
     esbuild: false,
     test: {
       globals: false,

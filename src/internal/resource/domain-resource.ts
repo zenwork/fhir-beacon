@@ -12,30 +12,33 @@ import {Resource} from './resource'
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
-  @provide({context: containedDataContext})
+  @provide({ context: containedDataContext })
   declare contained: ResourceData[]
 
 
   protected constructor(type: string) {
     super(type)
-    this.addStructureTemplateGenerator('domain-resource', (data: T) => { return this.renderDomainResourceStructure(data) })
+    this.addStructureTemplateGenerator('domain-resource',
+                                       (data: T) => { return this.renderDomainResourceStructure(data) })
   }
 
   protected render(): TemplateResult {
-    // const data = this.convertData(this.data)
     if (!this.verbose && !this.showerror && !this.convertedData) return html``
     return html`
-      <div part="domain-resource">${choose(this.mode,
-            [
-              [DisplayMode.narrative, () => this.renderNarrative(this.data)],
-              [
-                DisplayMode.combined,
-                () => html`
-                  <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
-              ]
-            ],
-          () => super.render())}
-      </div >`
+        <div part="domain-resource">
+            ${choose(
+                    this.mode,
+                    [
+                        [DisplayMode.narrative, () => this.renderNarrative(this.data)],
+                        [
+                            DisplayMode.combined,
+                            () => html`
+                                <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
+                        ]
+                    ],
+                    () => super.render()
+            )}
+        </div >`
 
   }
 
@@ -43,8 +46,8 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     if (data.text) {
       return html`
           <fhir-wrapper .label=${this.type}>
-              <fhir-narrative .data=${data.text}></fhir-narrative>
-          </fhir-wrapper>`
+              <fhir-narrative .data=${data.text}></fhir-narrative >
+          </fhir-wrapper >`
     }
     return html``
   }
@@ -59,23 +62,23 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   protected renderDomainResourceStructure(data: T): TemplateResult | TemplateResult[] {
     return [
       html`
-        <fhir-narrative label="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
+          <fhir-narrative label="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
       `,
       html`
-        ${(this.data.contained) ? html`
-        <fhir-structure-wrapper label="contained" ?forceclose=${true}>
-          ${this.renderStructureContained()}
-        </fhir-structure-wrapper >
-      ` : nothing}
-        ${(!this.data.contained && this.verbose) ? html`
-        <fhir-structure-wrapper label="contained" ?forceclose=${true}>
-          <fhir-empty-list ></fhir-empty-list >
-        </fhir-structure-wrapper >` : nothing}
+          ${(this.data.contained) ? html`
+              <fhir-structure-wrapper label="contained" ?forceclose=${true}>
+                  ${this.renderStructureContained()}
+              </fhir-structure-wrapper >
+          ` : nothing}
+          ${(!this.data.contained && this.verbose) ? html`
+              <fhir-structure-wrapper label="contained" ?forceclose=${true}>
+                  <fhir-empty-list ></fhir-empty-list >
+              </fhir-structure-wrapper >` : nothing}
       `,
       html`
-        <fhir-primitive label="extension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
-        <fhir-primitive label="modifierExtension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
-    `
+          <fhir-primitive label="extension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
+          <fhir-primitive label="modifierExtension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
+      `
     ]
   }
 

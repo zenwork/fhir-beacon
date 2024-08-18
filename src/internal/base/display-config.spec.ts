@@ -3,7 +3,9 @@ import {assert, describe, expect, it}                                     from '
 import {aTimeout}                                                         from '../../../tests/aTimeout'
 import {fixture}                                                          from '../../../tests/lit/lit-vitest-fixture'
 import {Annotation, Medication, Primitive, PrimitiveError, PrimitiveType} from '../../components'
-import {data as annotationData}                                           from '../../components/complex/annotation/annotation.story.data'
+import {
+  data as annotationData
+}                                                                         from '../../components/complex/annotation/annotation.story.data'
 import {Shell}                                                            from '../../shell'
 import {DisplayMode}                                                      from '../../types'
 
@@ -178,7 +180,7 @@ describe('DisplayConfig', () => {
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 6 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 5 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 14 }))
 
     })

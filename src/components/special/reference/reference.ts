@@ -45,7 +45,9 @@ export class Reference extends BaseElement<ReferenceData> {
                     value=${this.containedResource?.resourceType || 'contained'}
                     summary
                   ></fhir-primitive >
+                  <fhir-wrapper label="loaded ref ${data.reference}">
                   ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
+                  </fhir-wrapper >
 
                 `
               ],
@@ -91,8 +93,7 @@ export class Reference extends BaseElement<ReferenceData> {
                       : nothing
               ]
 
-            ]
-        )
+        ])
         }
       `
     ]
