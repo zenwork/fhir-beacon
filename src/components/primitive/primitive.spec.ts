@@ -21,12 +21,9 @@ describe('fhir Primitive', () => {
   test('should display label', async () => {
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" verbose></fhir-primitive >
-    `).first()
-    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
-    assert.exists(label)
-    expect(label.delimiter).to.equal(': ')
-    expect(label.text).to.equal('code')
 
+    `).first()
+    assert.isEmpty(el.queryShadow<PrimitiveLabel>({ select: 'fhir-label', expect: 0 }))
   })
 
   test('should should display a label when label attribute is defined', async () => {

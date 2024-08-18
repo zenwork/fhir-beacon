@@ -6,6 +6,7 @@ import {contextData, displayConfigContext, FhirDataContext}             from '..
 import {textHostStyles}                                                 from '../../styles'
 import {DisplayConfig, DisplayMode}                                     from '../../types'
 import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
+import {mustRender}                                                     from '../mustRender'
 import {DateTime}                                                       from './primitive.data'
 import {
   toBase64,
@@ -117,6 +118,11 @@ export class Primitive extends LitElement {
   @state()
   private presentableValue: unknown = ''
 
+  /**
+   *
+   * @param _changedProperties
+   * @protected
+   */
   protected willUpdate(_changedProperties: PropertyValues) {
 
 
@@ -134,7 +140,7 @@ export class Primitive extends LitElement {
 
       try {
         this.value = this.contextData.getAt(this.valuePath)
-        console.log('looking up', this.valuePath, this.value)
+        // console.log('looking up', this.valuePath, this.value)
       } catch {
         console.log(`unable to retrieve value-path: ${this.valuePath}`)
         this.value = `unable to retrieve value-path: ${this.valuePath}`
@@ -170,16 +176,28 @@ export class Primitive extends LitElement {
     }
   }
 
+  /**
+   *
+   * @protected
+   */
   protected render(): unknown {
-    if (!this.value && !this.verbose) return html``
-    if ((this.summary && this.summaryMode()) || !this.summaryMode()) {
-      return this.error ? this.renderError() : this.renderValid()
+    if (!mustRender(this.value, this.mode, this.verbose, this.summaryMode(), this.summary)
+        && !this.valuePath
+        && this.mode !== DisplayMode.override) {
+      return html``
     }
-    return html``
+
+    return this.error ? this.renderError() : this.renderValid()
+
   }
 
+
+  /**
+   *
+   * @private
+   */
   // TODO: should be able to put link on value OR on context
-  private renderValid = (): TemplateResult => {
+  private renderValid(): TemplateResult {
     const elements: any[] = []
 
     if (this.getLabel()) elements.push(html`
@@ -209,6 +227,9 @@ export class Primitive extends LitElement {
         <fhir-primitive-wrapper > ${elements}</fhir-primitive-wrapper >` : html``
   }
 
+  /**
+   *
+   */
   private getLabel = () => {
     let label = this.key
     if (this.label) label = this.label
@@ -216,6 +237,9 @@ export class Primitive extends LitElement {
     return asReadable(label, 'lower')
   }
 
+  /**
+   *
+   */
   private renderError = (): TemplateResult => {
     return !isBlank(this.value) || this.verbose
            ? html`
@@ -228,6 +252,11 @@ export class Primitive extends LitElement {
            : html``
   }
 
+  /**
+   *
+   * @param fn
+   * @param original
+   */
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     const parsedValue = valueOrError(fn, original)
 
@@ -242,6 +271,11 @@ export class Primitive extends LitElement {
     }
   }
 
+  /**
+   *
+   * @param val
+   * @private
+   */
   private present(val: unknown): unknown {
     choose(this.type, [
       [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
@@ -252,6 +286,10 @@ export class Primitive extends LitElement {
     return val
   }
 
+  /**
+   *
+   * @private
+   */
   private summaryMode() {
     return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }

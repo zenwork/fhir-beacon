@@ -21,7 +21,9 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                  data.coding,
                  this.verbose,
                  (data, label) => html`
-                     <fhir-coding .label=${label} .data=${data} summary></fhir-coding >`
+                     <fhir-coding key="coding" .label=${label} .data=${data} summary></fhir-coding >`,
+                 true,
+                 this.summaryMode()
           )}
       `
     }
@@ -36,12 +38,14 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   protected renderStructure(data: CodeableConceptData): TemplateResult[] {
     return [
-      strap(this.key,
+      strap('coding',
             'coding',
             data.coding,
             this.verbose,
-            (code, index) => html`
-                <fhir-coding label="coding ${index}" .data=${code} summary></fhir-coding >`
+            (code, label) => html`
+                <fhir-coding key="coding" label="${label}" .data=${code} summary></fhir-coding >`,
+            true,
+            this.summaryMode()
       ),
       html`
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive > `

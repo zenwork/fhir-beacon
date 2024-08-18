@@ -1,4 +1,4 @@
-import {FhirElementData} from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData} from '../../../internal/base/data/fhir-data-element.data'
 import {IdentifierData}  from '../../complex/identifier/identifier.data'
 import {URI}             from '../../primitive/primitive.data'
 

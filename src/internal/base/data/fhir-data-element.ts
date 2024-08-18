@@ -1,7 +1,7 @@
 import {LitElement, PropertyValues}                   from 'lit'
 import {property, state}                              from 'lit/decorators.js'
-import {DataContextConsumerController}                from '../contexts/context-consumer-controller'
-import {FhirDataContext}                              from '../contexts/FhirContextData'
+import {DataContextConsumerController}                from '../../contexts/context-consumer-controller'
+import {FhirDataContext}                              from '../../contexts/FhirContextData'
 import {FhirElementData, NoDataSet, ValidationErrors} from './fhir-data-element.data'
 
 /**

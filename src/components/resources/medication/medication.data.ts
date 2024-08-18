@@ -1,4 +1,4 @@
-import {FhirElementData}          from '../../../internal/base/fhir-data-element.data'
+import {BackboneElementData}      from '../../../internal'
 import {DomainResourceData}       from '../../../internal/resource/domain-resource.data'
 import {CodeableConceptData}      from '../../complex/codeable-concept/codeable-concept.data'
 import {IdentifierData}           from '../../complex/identifier/identifier.data'
@@ -7,7 +7,7 @@ import {Code, DateTime}           from '../../primitive/primitive.data'
 import {ReferenceData}            from '../../special/reference/reference.data'
 import {MedicationIngredientData} from './medication-ingredient.data'
 
-type MedicationBatchData = FhirElementData & {
+export type MedicationBatchData = BackboneElementData & {
   lotNumber?: string
   expirationDate?: DateTime
 }
@@ -15,7 +15,7 @@ export type MedicationData = DomainResourceData & {
   identifier: IdentifierData[]
   code?: CodeableConceptData
   status?: Code
-  marketingAuthorisationHolder?: ReferenceData
+  marketingAuthorizationHolder?: ReferenceData
   doseForm?: CodeableConceptData
   totalVolume?: QuantityData
   ingredient?: MedicationIngredientData[]

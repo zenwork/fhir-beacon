@@ -3,6 +3,7 @@
 export * from './complex/'
 export * from './foundation/'
 export * from './metadata/'
+export * from './mustRender'
 export * from './primitive/'
 export * from './resources/'
 export * from './special/'

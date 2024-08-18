@@ -18,9 +18,11 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
   protected constructor(type: string) {
     super(type)
+
     this.addStructureTemplateGenerator('domain-resource',
                                        (data: T) => { return this.renderDomainResourceStructure(data) })
   }
+
 
   protected render(): TemplateResult {
     if (!this.verbose && !this.showerror && !this.convertedData) return html``
@@ -29,7 +31,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
             ${choose(
                     this.mode,
                     [
-                        [DisplayMode.narrative, () => this.renderNarrative(this.data)],
+                        [DisplayMode.narrative, () => this.renderNarrativeMode(this.data)],
                         [
                             DisplayMode.combined,
                             () => html`
@@ -42,7 +44,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
   }
 
-  protected renderNarrative(data: T): TemplateResult {
+  protected renderNarrativeMode(data: T): TemplateResult {
     if (data.text) {
       return html`
           <fhir-wrapper .label=${this.type}>
@@ -62,15 +64,15 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   protected renderDomainResourceStructure(data: T): TemplateResult | TemplateResult[] {
     return [
       html`
-          <fhir-narrative label="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
+          <fhir-narrative key="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
       `,
       html`
-          ${(this.data.contained) ? html`
+          ${(this.data.contained && !this.summaryMode()) ? html`
               <fhir-structure-wrapper label="contained" ?forceclose=${true}>
                   ${this.renderStructureContained()}
               </fhir-structure-wrapper >
           ` : nothing}
-          ${(!this.data.contained && this.verbose) ? html`
+          ${(!this.data.contained && this.verbose && !this.summaryMode()) ? html`
               <fhir-structure-wrapper label="contained" ?forceclose=${true}>
                   <fhir-empty-list ></fhir-empty-list >
               </fhir-structure-wrapper >` : nothing}

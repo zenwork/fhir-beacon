@@ -1,11 +1,15 @@
-import {FhirElementData}     from '../../../internal/base/fhir-data-element.data'
+import {FhirElementData}     from '../../../internal/base/data/fhir-data-element.data'
 import {BackboneElementData} from '../../../internal/resource/backbone.data'
 import {ResourceData}        from '../../../internal/resource/domain-resource.data'
 
 import {CodingData}                                                               from '../../complex/coding/coding.data'
-import {IdentifierData}                                                           from '../../complex/identifier/identifier.data'
+import {
+  IdentifierData
+}                                                                                 from '../../complex/identifier/identifier.data'
 import {Base64Binary, Code, Decimal, FhirString, Instant, Link, UnsignedInt, URI} from '../../primitive/primitive.data'
-import {ReferenceData}                                                            from '../../special/reference/reference.data'
+import {
+  ReferenceData
+}                                                                                 from '../../special/reference/reference.data'
 
 
 export type BundleData = FhirElementData & {
