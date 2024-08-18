@@ -118,6 +118,30 @@ export class Primitive extends LitElement {
   private presentableValue: unknown = ''
 
   protected willUpdate(_changedProperties: PropertyValues) {
+
+
+    if (this.displayConfig) {
+      this.mode = this.displayConfig.mode
+      this.verbose = this.displayConfig.verbose
+      this.showerror = this.displayConfig.showerror
+    }
+
+    // override value with valuePath
+    if (_changedProperties.has('valuePath') && this.contextData) {
+      if (this.value && this.valuePath) {
+        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
+      }
+
+      try {
+        this.value = this.contextData.getAt(this.valuePath)
+        console.log('looking up', this.valuePath, this.value)
+      } catch {
+        console.log(`unable to retrieve value-path: ${this.valuePath}`)
+        this.value = `unable to retrieve value-path: ${this.valuePath}`
+        this.type = PrimitiveType.forced_error
+      }
+    }
+
     const watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
     if (watchedHaveChanged && !isBlank(this.value) && this.type) {
       choose(this.type, [
@@ -144,33 +168,9 @@ export class Primitive extends LitElement {
         [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
       ])
     }
-
-    if (this.displayConfig) {
-      this.mode = this.displayConfig.mode
-      this.verbose = this.displayConfig.verbose
-      this.showerror = this.displayConfig.showerror
-    }
-
-    // override value with valuePath
-    if (_changedProperties.has('valuePath') && this.contextData) {
-      if (this.value && this.valuePath) {
-        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
-      }
-
-      try {
-        this.value = this.contextData.getAt(this.valuePath)
-      } catch {
-        console.log(`unable to retrieve value-path: ${this.valuePath}`)
-        this.value = `unable to retrieve value-path: ${this.valuePath}`
-        this.type = PrimitiveType.forced_error
-      }
-    }
   }
 
   protected render(): unknown {
-    console.log(
-      this.getLabel(), ':', this.value, this.verbose
-    )
     if (!this.value && !this.verbose) return html``
     if ((this.summary && this.summaryMode()) || !this.summaryMode()) {
       return this.error ? this.renderError() : this.renderValid()

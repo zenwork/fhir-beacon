@@ -35,8 +35,10 @@ export class DataContextConsumerController<T extends FhirElementData> implements
       {
         context: contextData,
         subscribe: true,
-        callback: (data: FhirDataContext) => {
-          host.dataContext = data
+        callback: (dataCtx: FhirDataContext) => {
+          if (dataCtx && host.dataContext.data !== dataCtx.data) {
+            host.dataContext = dataCtx
+          }
         }
       })
 
