@@ -8,8 +8,25 @@ import {DisplayConfig, DisplayMode}                                     from '..
 import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
 import {DateTime}                                                       from './primitive.data'
 import {
-  toBase64, toBoolean, toCode, toDate, toDatetime, toDecimal, toError, toFhirString, toId, toInstant, toInteger, toInteger64, toLink, toMarkdown, toPositiveInt,
-  toType, toUnsignedInt, toUri, toUrl
+  toBase64,
+  toBoolean,
+  toCode,
+  toDate,
+  toDatetime,
+  toDecimal,
+  toError,
+  toFhirString,
+  toId,
+  toInstant,
+  toInteger,
+  toInteger64,
+  toLink,
+  toMarkdown,
+  toPositiveInt,
+  toType,
+  toUnsignedInt,
+  toUri,
+  toUrl
 }                                                                       from './type-converters'
 
 import {PrimitiveType, valueOrError} from './type-converters/type-converters'
@@ -23,7 +40,6 @@ import {asDateTime, asReadable}      from './type-presenters'
 //TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible primitive.
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
-
   static styles = [
     textHostStyles,
     css`
@@ -31,7 +47,7 @@ export class Primitive extends LitElement {
         user-select: text;
       }
       sl-badge {
-        padding-left: var(--sl-spacing-x-small)
+        padding-left: var(--sl-spacing-x-small);
       }
 
       sl-badge::part(base) {
@@ -41,7 +57,7 @@ export class Primitive extends LitElement {
         font-weight: var(--sl-font-weight-normal);
         font-style: italic;
       }
-    `
+    `,
   ]
 
   @consume({ context: displayConfigContext, subscribe: true })
@@ -49,6 +65,9 @@ export class Primitive extends LitElement {
 
   @consume({ context: contextData, subscribe: true })
   declare contextData: FhirDataContext
+
+  @property({ reflect: true })
+  declare key: string
 
   @property({ reflect: true })
   declare label: string
@@ -98,8 +117,31 @@ export class Primitive extends LitElement {
   @state()
   private presentableValue: unknown = ''
 
-
   protected willUpdate(_changedProperties: PropertyValues) {
+
+
+    if (this.displayConfig) {
+      this.mode = this.displayConfig.mode
+      this.verbose = this.displayConfig.verbose
+      this.showerror = this.displayConfig.showerror
+    }
+
+    // override value with valuePath
+    if (_changedProperties.has('valuePath') && this.contextData) {
+      if (this.value && this.valuePath) {
+        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
+      }
+
+      try {
+        this.value = this.contextData.getAt(this.valuePath)
+        console.log('looking up', this.valuePath, this.value)
+      } catch {
+        console.log(`unable to retrieve value-path: ${this.valuePath}`)
+        this.value = `unable to retrieve value-path: ${this.valuePath}`
+        this.type = PrimitiveType.forced_error
+      }
+    }
+
     const watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
     if (watchedHaveChanged && !isBlank(this.value) && this.type) {
       choose(this.type, [
@@ -124,35 +166,13 @@ export class Primitive extends LitElement {
         [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
         [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
         [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
-
       ])
-    }
-
-    if (this.displayConfig) {
-      this.mode = this.displayConfig.mode
-      this.verbose = this.displayConfig.verbose
-      this.showerror = this.displayConfig.showerror
-    }
-
-    // override value with valuePath
-    if (_changedProperties.has('valuePath') && this.contextData) {
-      if (this.value && this.valuePath) {
-        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
-      }
-
-      try {
-        this.value = this.contextData.getAt(this.valuePath)
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (_) {
-        console.log(`unable to retrieve value-path: ${this.valuePath}`)
-        this.value = `unable to retrieve value-path: ${this.valuePath}`
-        this.type = PrimitiveType.forced_error
-      }
     }
   }
 
   protected render(): unknown {
-    if ((this.summary && this.summaryMode()) || (!this.summaryMode())) {
+    if (!this.value && !this.verbose) return html``
+    if ((this.summary && this.summaryMode()) || !this.summaryMode()) {
       return this.error ? this.renderError() : this.renderValid()
     }
     return html``
@@ -162,46 +182,49 @@ export class Primitive extends LitElement {
   private renderValid = (): TemplateResult => {
     const elements: any[] = []
 
-    if (this.label) elements.push(html`
-      <fhir-label text=${this.label} delimiter=${this.delimiter}></fhir-label >&nbsp`)
+    if (this.getLabel()) elements.push(html`
+        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label >&nbsp`)
 
-    if (this.value) elements.push(html`
-      <fhir-value
-        text=${this.showProvided ? this.value : this.presentableValue}
-        link=${this.link}
-        .variant=${this.variant}
-      >
-        <span slot="before"><slot name="before"></slot ></span >
-        <span slot="after"><slot name="after"></slot ></span >
-      </fhir-value >`)
+    if (this.value)
+      elements.push(html`
+          <fhir-value text=${this.showProvided
+                             ? this.value
+                             : this.presentableValue} link=${this.link} .variant=${this.variant}
+          >
+              <span slot="before"><slot name="before"></slot ></span >
+              <span slot="after"><slot name="after"></slot ></span >
+          </fhir-value >`)
 
-    if (this.context) elements.push(html`
-      <fhir-context
-        .text=${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose ? this.type : ''}
-      ></fhir-context >`)
+    if (this.context && this.verbose)
+      elements.push(html`
+          <fhir-context .text="${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose
+                                                                                                  ? this.type
+                                                                                                  : ''}"
+          ></fhir-context >`)
 
     if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
-      <sl-badge pill>&sum;</sl-badge >`)
+        <sl-badge pill>&sum;</sl-badge >`)
 
-    return elements.length > 1 || this.value || this.verbose
-           ? html`
-        <fhir-primitive-wrapper >
-          ${elements}
-        </fhir-primitive-wrapper >`
-           : html``
+    return elements.length > 1 || this.value || this.verbose ? html`
+        <fhir-primitive-wrapper > ${elements}</fhir-primitive-wrapper >` : html``
+  }
+
+  private getLabel = () => {
+    let label = this.key
+    if (this.label) label = this.label
+
+    return asReadable(label, 'lower')
   }
 
   private renderError = (): TemplateResult => {
     return !isBlank(this.value) || this.verbose
            ? html`
-          <fhir-primitive-wrapper >
-            <fhir-label .text=${this.label} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
-            <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-            ${this.showerror
-              ? html`
-                <fhir-error text=${this.errormessage ?? this.presentableValue}></fhir-error >`
-              : nothing}
-          </fhir-primitive-wrapper >`
+                <fhir-primitive-wrapper >
+                    <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
+                    <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
+                    ${this.showerror ? html`
+                        <fhir-error text=${this.errormessage ?? this.presentableValue}></fhir-error >` : nothing}
+                </fhir-primitive-wrapper >`
            : html``
   }
 
@@ -220,13 +243,11 @@ export class Primitive extends LitElement {
   }
 
   private present(val: unknown): unknown {
-
     choose(this.type, [
-      [PrimitiveType.datetime, () => val = asDateTime(val as DateTime)],
-      [PrimitiveType.instant, () => val = asDateTime(val as DateTime)],
-      [PrimitiveType.uri_type, () => val = asReadable(val as string)]
+      [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
+      [PrimitiveType.instant, () => (val = asDateTime(val as DateTime))],
+      [PrimitiveType.uri_type, () => (val = asReadable(val as string))]
       // [PrimitiveType.base64, () => val = asWrapped(val as string,100)],
-
     ])
     return val
   }

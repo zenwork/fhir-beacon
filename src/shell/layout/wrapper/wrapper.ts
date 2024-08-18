@@ -104,7 +104,7 @@ export class Wrapper extends LitElement {
     if (this.displayConfig) {
       this.open = this.displayConfig.open
       this.mode = this.displayConfig.mode
-      this.hide = !this.displayConfig.verbose
+      // this.hide = !this.displayConfig.verbose
     }
   }
 

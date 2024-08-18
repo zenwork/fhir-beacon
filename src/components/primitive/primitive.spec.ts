@@ -43,7 +43,7 @@ describe('fhir Primitive', () => {
 
   })
 
-  test('should should display a label, a value, and a context', async () => {
+  test('should should display a label, a value', async () => {
 
     const el = await fixture<Primitive>(html`
       <fhir-primitive label="code" value="abc" context="important"></fhir-primitive >
@@ -55,8 +55,19 @@ describe('fhir Primitive', () => {
     const value = el.queryShadow<PrimitiveValue>({ select: 'fhir-value' })
     expect(value.text).to.equal('abc')
 
+    assert.ok(el.queryShadow<HTMLSpanElement>({ select: 'fhir-context', expect: 0 }))
+
+  })
+
+  test('should should display context only when verbose', async () => {
+
+    const el = await fixture<Primitive>(html`
+      <fhir-primitive label="code" value="abc" context="important" verbose></fhir-primitive >
+    `).first()
+
+
     const span = el.queryShadow<HTMLSpanElement>({ select: ['fhir-context', 'span'] })
-    expect(span.textContent).to.equal('(important)')
+    expect(span.textContent).to.equal('(important - none)')
 
   })
 

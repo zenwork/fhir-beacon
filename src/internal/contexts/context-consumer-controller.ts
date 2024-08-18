@@ -2,30 +2,30 @@ import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
 import {FhirDataElement}                     from '../base/fhir-data-element'
-import {FhirDataElementData}                 from '../base/fhir-data-element.data'
+import {FhirElementData}                     from '../base/fhir-data-element.data'
 import {FhirPresentableElement}              from '../base/fhir-presentable-element'
 import {contextData, displayConfigContext}   from './context'
 
 import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'
 
-//TODO: adding this context root to the document.body is a bit of a hack and may or may not work when there are multiple shells in one document.
+//TODO: adding this context root to the document.body is a bit of a hack and may or may not work when there are
+// multiple shells in one document.
 (function init() {
   // console.debug('adding a context root to the body')
   new ContextRoot().attach(document.body)
 })()
 
 /**
- * The DataContextConsumerController class is a controller that allows a custom element to consume data from a data context.
+ * The DataContextConsumerController class is a controller that allows a custom element to consume data from a data
+ * context.
  *
  * @typeparam {T extends FhirDataElementData} - The type of data to consume from the data context.
  * @implements {ReactiveController}
  */
-export class DataContextConsumerController<T extends FhirDataElementData> implements ReactiveController {
+export class DataContextConsumerController<T extends FhirElementData> implements ReactiveController {
 
-  private host: FhirDataElement<T> & ReactiveElement
 
   constructor(host: FhirDataElement<T> & ReactiveElement) {
-    this.host = host
     host.addController(this)
 
     host.dataContext = new FhirDataContextImpl()
@@ -35,11 +35,12 @@ export class DataContextConsumerController<T extends FhirDataElementData> implem
       {
         context: contextData,
         subscribe: true,
-        callback: (data: FhirDataContext) => {
-          host.dataContext = data
+        callback: (dataCtx: FhirDataContext) => {
+          if (dataCtx && host.dataContext.data !== dataCtx.data) {
+            host.dataContext = dataCtx
+          }
         }
-      }
-    )
+      })
 
   }
 
@@ -52,18 +53,17 @@ export class DataContextConsumerController<T extends FhirDataElementData> implem
  * for a given host element. It subscribes to changes in the displayConfigContext and updates the host element
  * accordingly.
  *
- * This class implements the ReactiveController interface and can be added to a host element using the addController method.
+ * This class implements the ReactiveController interface and can be added to a host element using the addController
+ * method.
  *
  * @template T - The type of FhirDataElementData that the host element extends
  *
- * @param {FhirPresentableElement<T> & ReactiveElement} host - The host element that will be updated based on the display configuration context
+ * @param {FhirPresentableElement<T> & ReactiveElement} host - The host element that will be updated based on the
+ *   display configuration context
  */
-export class DisplayContextConsumerController<T extends FhirDataElementData> implements ReactiveController {
-  private host: FhirPresentableElement<T> & ReactiveElement
-  private isOverridden: boolean = false
+export class DisplayContextConsumerController<T extends FhirElementData> implements ReactiveController {
 
   constructor(host: FhirPresentableElement<T> & ReactiveElement) {
-    this.host = host
     host.addController(this)
 
     new ContextConsumer(host,
@@ -84,8 +84,7 @@ export class DisplayContextConsumerController<T extends FhirDataElementData> imp
           }
 
         }
-      }
-    )
+      })
   }
 
   public hostConnected(): void {

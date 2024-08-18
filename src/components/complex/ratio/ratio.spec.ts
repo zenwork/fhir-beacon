@@ -55,7 +55,9 @@ describe('Ratio', () => {
 
     ratio.queryShadow({ select: 'fhir-value', expect: 3 })
 
-    const elements = await findAllByShadowText(ratio, anyMatcher('103.5', 'US$', '/', 'day'))
+    const elements = await findAllByShadowText(ratio, anyMatcher(
+      '103.5', 'US$', '/', 'day'
+    ))
     expect(elements[1]).toHaveTextContent('103.5')
     expect(elements[0]).toHaveTextContent('US$')
     expect(elements[2]).toHaveTextContent('/')
@@ -89,13 +91,15 @@ describe('Ratio', () => {
     BeaconAssert.hasLabelsAndValues.for.quantity.whenSimple(
       quantities[0],
       'numerator',
-      { id: null, variation: 'simple', value: '1', unit: null, system: null, code: null })
+      { id: null, variation: 'simple', value: '1', unit: null, system: null, code: null }
+    )
 
     // denominator
     BeaconAssert.hasLabelsAndValues.for.quantity.whenSimple(
       quantities[1],
       'denominator',
-      { id: null, variation: 'simple', value: '128', unit: null, system: null, code: null })
+      { id: null, variation: 'simple', value: '128', unit: null, system: null, code: null }
+    )
 
   })
 })

@@ -3,7 +3,9 @@ import {assert, describe, expect, it}                                     from '
 import {aTimeout}                                                         from '../../../tests/aTimeout'
 import {fixture}                                                          from '../../../tests/lit/lit-vitest-fixture'
 import {Annotation, Medication, Primitive, PrimitiveError, PrimitiveType} from '../../components'
-import {data as annotationData}                                           from '../../components/complex/annotation/annotation.story.data'
+import {
+  data as annotationData
+}                                                                         from '../../components/complex/annotation/annotation.story.data'
 import {Shell}                                                            from '../../shell'
 import {DisplayMode}                                                      from '../../types'
 
@@ -50,7 +52,7 @@ describe('DisplayConfig', () => {
         ></fhir-primitive >
       `).all()
 
-      expect(primitives[0].queryShadowByText('(week)')).toBeVisible()
+      assert.ok(primitives[0].queryShadow({ select: 'fhir-context', expect: 0 }))
       expect(primitives[1].queryShadowByText('(week - positiveInt)')).toBeVisible()
 
       primitives[0].verbose = true
@@ -172,19 +174,20 @@ describe('DisplayConfig', () => {
         </fhir-shell >
       `, new Annotation().tagName).first()
 
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 8 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 5 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 14 }))
 
     })
 
 
   })
-  describe('complex types', () => {
+  describe('resource types', () => {
     it('should show resource errors when verbose is enabled', async () => {
       const medication = await fixture<Medication>(html`
         <fhir-shell verbose showerror>

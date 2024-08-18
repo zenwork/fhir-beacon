@@ -14,10 +14,12 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
 
   protected renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.getDisplayConfig().showerror,
+    let substance: TemplateResult = renderError(
+      this.getDisplayConfig().showerror,
       this.getDisplayConfig().verbose,
       'ingredient',
-      'substance[x] choice not found')
+      'substance[x] choice not found'
+    )
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -31,14 +33,20 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
       `
     }
 
-    return html` ${substance}
-    <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio > `
+    return html`
+      <fhir-wrapper .label=${this.label}>
+        ${substance}
+        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+      </fhir-wrapper >
+    `
   }
 
   protected renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
-    let substance: TemplateResult = renderError(this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
-                                                                                                                                  + ' found')
+    let substance: TemplateResult = renderError(
+      this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
+                                                                                        + ' found'
+    )
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`

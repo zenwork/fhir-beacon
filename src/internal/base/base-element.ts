@@ -1,6 +1,6 @@
-import {html, TemplateResult}                  from 'lit'
-import {FhirDataElementData, ValidationErrors} from './fhir-data-element.data'
-import {FhirPresentableElement}                from './fhir-presentable-element'
+import {html, TemplateResult}              from 'lit'
+import {FhirElementData, ValidationErrors} from './fhir-data-element.data'
+import {FhirPresentableElement}            from './fhir-presentable-element'
 
 
 /**
@@ -9,12 +9,7 @@ import {FhirPresentableElement}                from './fhir-presentable-element'
  * @param {string} type - The type of the instance being created. Should be one of the canonical FHIR names
  * @typeparam T - The type of data associated with the base element.
  */
-export class BaseElement<T extends FhirDataElementData> extends FhirPresentableElement<T> {
-
-  constructor(type: string) {
-    super(type)
-  }
-
+export class BaseElement<T extends FhirElementData> extends FhirPresentableElement<T> {
   /**
    * Converts the given data to the specified type.
    *
@@ -26,14 +21,16 @@ export class BaseElement<T extends FhirDataElementData> extends FhirPresentableE
    *   does not make sense and might need to be reconsidered to better support data conversion to other types.
    *
    * TODO: should be renamed to something like `prepare`.
-   * TODO: providing T and returning T does not make sense. Something needs to be better designed to support converting of data to other types.
+   * TODO: providing T and returning T does not make sense. Something needs to be better designed to support converting
+   *   of data to other types.
    */
   protected convertData(data: T): T {
     return data as T
   }
 
   /**
-   * validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`. it is recommended to call
+   * validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.
+   * it is recommended to call
    * `super.validate(T)` as well.
    * @param data data to validate
    * @return errors found
@@ -45,7 +42,8 @@ export class BaseElement<T extends FhirDataElementData> extends FhirPresentableE
   }
 
   /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
+   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
+   * contribute templateGenerators instead.
    * @param data
    */
   protected renderDisplay(data: T): TemplateResult | TemplateResult[] {
@@ -53,7 +51,8 @@ export class BaseElement<T extends FhirDataElementData> extends FhirPresentableE
   }
 
   /**
-   * Convenience method implemented by fhir model elements and resources. Internal and abstract classes should contribute templateGenerators instead.
+   * Convenience method implemented by fhir model elements and resources. Internal and abstract classes should
+   * contribute templateGenerators instead.
    * @param data
    */
   protected renderStructure(data: T): TemplateResult | TemplateResult[] {

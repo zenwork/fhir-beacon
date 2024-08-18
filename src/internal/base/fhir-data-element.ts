@@ -1,21 +1,24 @@
-import {LitElement, PropertyValues}                     from 'lit'
-import {property, state}                                from 'lit/decorators.js'
-import {DataContextConsumerController, FhirDataContext} from '../contexts'
-import {FhirDataElementData, ValidationErrors}          from './fhir-data-element.data'
+import {LitElement, PropertyValues}                   from 'lit'
+import {property, state}                              from 'lit/decorators.js'
+import {DataContextConsumerController}                from '../contexts/context-consumer-controller'
+import {FhirDataContext}                              from '../contexts/FhirContextData'
+import {FhirElementData, NoDataSet, ValidationErrors} from './fhir-data-element.data'
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
  *
  * @template T - The type of the base element data.
  */
-export abstract class FhirDataElement<T extends FhirDataElementData> extends LitElement {
-
+export abstract class FhirDataElement<T extends FhirElementData> extends LitElement {
   @property({ reflect: false })
   public declare readonly type: string
 
+  @property({ reflect: true })
+  public key: string = ''
+
   // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({ type: Object, attribute: 'data' })
-  public declare data: T
+  public data: T = NoDataSet as T
 
   @property({ type: String, attribute: 'data-path' })
   public declare dataPath: string
@@ -34,6 +37,14 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
     new DataContextConsumerController(this)
   }
 
+  public attributeChangedCallback(
+    name: string, _old: string | null, value: string | null
+  ) {
+    super.attributeChangedCallback(
+      name, _old, value
+    )
+  }
+
   /**
    * Validate data to find complex errors not covered by primitive types. Push errors to `this.errors`. it is
    * recommended to call `super.validate(T)` have higher level error validations computed.
@@ -44,7 +55,7 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
    * @return errors found
    * @protected
    */
-  protected abstract validate(data: T): ValidationErrors
+  protected abstract validate(data: T): ValidationErrors;
 
   /**
    * implements `convertData()` to modify data before handing it to.
@@ -53,16 +64,11 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
    * @return The converted data.
    *
    * TODO: should be renamed to something like `prepare`.
-   * TODO: providing T and returning T does not make sense. Something needs to be better designed to support converting of data to other types.
-   * TODO: something is needed to store complex errors that depend on multiple prop validation. Maybe should be in a separate method.
+   * TODO: providing T and returning T does not make sense. Something needs to be better designed to support converting
+   *   of data to other types. TODO: something is needed to store complex errors that depend on multiple prop
+   *   validation. Maybe should be in a separate method.
    */
-  protected abstract convertData(data: T): T
-
-
-  public attributeChangedCallback(name: string, _old: string | null, value: string | null) {
-    super.attributeChangedCallback(name, _old, value)
-
-  }
+  protected abstract convertData(data: T): T;
 
   /**
    * Updates the component's state based on the changed properties.
@@ -80,13 +86,10 @@ export abstract class FhirDataElement<T extends FhirDataElementData> extends Lit
     }
 
     // validate anc convert data set as a property or set through context
-    if (_changedProperties.has('data')) {
+    if (_changedProperties.has('data') && this.data && this.data !== NoDataSet) {
       const validationErrors = this.validate(this.data)
       this.errors.push(...validationErrors)
       this.convertedData = this.convertData(this.data)
-
     }
-
   }
-
 }

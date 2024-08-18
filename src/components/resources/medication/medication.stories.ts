@@ -283,6 +283,22 @@ export const FrontPageDemo: Story = {
               code: 'mL'
             }
           }
+        }, {
+          item: {
+            concept: {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '387253001',
+                  display: 'Salicylic Acid (substance)'
+                }
+              ]
+            }
+          },
+          strengthRatio: {
+            numerator: { value: 5, system: 'http://unitsofmeasure.org', code: 'g' },
+            denominator: { value: 100, system: 'http://unitsofmeasure.org', code: 'g' }
+          }
         }
       ],
       batch: {

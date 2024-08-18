@@ -4,28 +4,22 @@ import tseslint from 'typescript-eslint'
 
 export default [
     {
-        ignores:[
-            '**/dist/*',
-            '**/coverage/*',
-            '**/node_modules/*',
-            '**/html/*',
-            '**/storybook-static/*'
-        ]
+        ignores:['**/dist/*', '**/coverage/*', '**/node_modules/*', '**/html/*', '**/storybook-static/*']
     },
     {
-        files:['src/**/*.ts',
-               'stories/**/*.ts',
-               'tests/**/*.ts',
-               'demo-code/**/*.ts',
-               '.storybook/**'
-        ]
+        files:['src/**/*.ts', 'stories/**/*.ts', 'tests/**/*.ts', 'demo-code/**/*.ts', '.storybook/**']
     },
     {languageOptions:{globals:globals.browser}},
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
     {
         rules:{
-            '@typescript-eslint/no-explicit-any':'off'
+            'prettier/prettier':'off',
+            '@typescript-eslint/no-explicit-any':'off',
+            semi:['error', 'never'],
+            'newline-per-chained-call':'off',
+            'function-paren-newline':'off',
+            indent:'off'
         }
     }
 ]

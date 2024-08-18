@@ -18,11 +18,11 @@ export class Coding extends BaseElement<CodingData> {
   override renderDisplay(data: CodingData): TemplateResult {
     return html`
       <fhir-primitive
-          .label=${this.label}
+        .label=${this.label}
         .value=${Coding.computeDisplay(data)}
-          .context=${data.display ? data.code : undefined}
+        .context=${data.display ? data.code : undefined}
         .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
-          summary
+        summary
       ></fhir-primitive >
     `
   }

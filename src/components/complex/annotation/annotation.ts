@@ -32,8 +32,7 @@ export class Annotation extends BaseElement<AnnotationData> {
           html: (d: any) => html`
             <fhir-primitive label="author" .value=${d} summary></fhir-primitive >`
         }
-      ]
-    )
+      ])
 
     return html`
       ${author}

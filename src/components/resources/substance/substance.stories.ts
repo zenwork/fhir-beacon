@@ -1,8 +1,10 @@
-import {StoryObj} from '@storybook/web-components'
+import {Meta, StoryObj}  from '@storybook/web-components'
+import {html}            from 'lit'
+import {createShellMeta} from '../../../../stories/storybook-utils'
+import {ShellArgs}       from '../../../../stories/wrapInShell'
 
 
 const title = 'Components/Resources/Medication/Substance'
-const component = 'fhir-substance'
 const data = {
   resourceType: 'Substance',
   id: 'f205',
@@ -156,28 +158,17 @@ const data_f204 = {
   }
 }
 
-const meta = {
+const meta: Meta<ShellArgs> = {
   title,
-  component,
-  argTypes: {
-    mode: {
-      options: ['display', 'structure', 'combined'],
-      control: {type: 'radio'}
-    },
-    showerror: {
-      options: [true, false],
-      control: {type: 'radio'}
-    },
-    verbose: {
-      options: [true, false],
-      control: {type: 'radio'}
-    }
-  }
+  subcomponents: { 'fhir-substance': 'fhir-substance' },
+  ...createShellMeta((args: ShellArgs) => html`
+    <fhir-substance .data="${args.data}" .mode=${args.mode} .verbose=${args.verbose} .showerror=${args.showerror} .open=${args.open}></fhir-substance >
+  `)
+} as Meta<ShellArgs>
 
-}
+
 export default meta
-
-type Story = StoryObj;
+type Story = StoryObj<ShellArgs>;
 
 export const Display_f204: Story = {
   args: {

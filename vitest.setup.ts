@@ -41,8 +41,7 @@ Element.prototype.queryShadow =
 
       const found = results ? results.length : '0'
       const paths = results.map(hostOf).join('\n')
-      throw new BeaconTestError(
-        `deepQuerySelectorAll: unexpected number of elements found.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
+      throw new BeaconTestError(`deepQuerySelectorAll: unexpected number of elements found for: ${select}.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
     }
 
     throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
@@ -68,10 +67,16 @@ Element.prototype.logShadow = function (): void {
   try {
     let shadow = ''
     if (this.shadowRoot) {
-      shadow = format(this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? '', ' '.repeat(4), 60)
+      shadow = format(
+        this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? '',
+        ' '.repeat(4),
+        60
+      )
       shadow = shadow ?? this.shadowRoot.textContent
     }
-    const light = format(this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n'), ' '.repeat(4), 60)
+    const light = format(
+      this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n'), ' '.repeat(4), 60
+    )
     const tag = this.tagName.toLowerCase()
     const outerHTML = this.outerHTML
     const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
@@ -92,9 +97,6 @@ Element.prototype.queryShadowByText = function <T extends Element>(text: string)
 }
 
 
-
-
-
 function pad(input: string) {
   // Split the input string into an array of lines
   const lines = input.split('\n')
@@ -103,9 +105,7 @@ function pad(input: string) {
   const paddedLines = lines.map(line => '    ' + line)
 
   // Join the padded lines back into a single string
-  const output = paddedLines.join('\n')
-
-  return output
+  return paddedLines.join('\n')
 }
 
 
