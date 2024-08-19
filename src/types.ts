@@ -1,5 +1,4 @@
 export enum DisplayMode {
-  combined = 'combined',
   debug = 'debug',
   display = 'display',
   display_summary = 'display_summary',

@@ -116,7 +116,6 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
     if (this.mode) {
       return html`${choose(this.mode,
                            [
-                             [DisplayMode.combined, () => this.renderCombinedWrapper()],
                              [DisplayMode.display, () => this.shouldRenderDisplay()],
                              [DisplayMode.display_summary, () => this.shouldRenderDisplay()],
                              [DisplayMode.narrative, () => this.shouldRenderDisplay()],
@@ -224,19 +223,6 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
     return html``
   }
 
-  private renderCombinedWrapper() {
-    return this.convertedData
-           ? html`
-                <fhir-shell .mode=${DisplayMode.display} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                    ${this.shouldRenderDisplay()}
-                </fhir-shell >
-                <hr style="color: var(--sl-color-primary-100); margin-top: var(--sl-spacing-small);margin-bottom: var(--sl-spacing-large)" />
-                <fhir-shell .mode=${DisplayMode.structure} ?showerror=${this.showerror} ?verbose=${this.verbose} ?open=${this.open}>
-                    ${this.shouldRenderStructure()}
-                </fhir-shell >
-      `
-           : html``
-  }
 
   private renderGroup(data: T, group: 'structure' | 'display'): TemplateResult | TemplateResult[] {
     return [

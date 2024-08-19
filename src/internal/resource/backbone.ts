@@ -18,7 +18,6 @@ export abstract class Backbone<D extends BackboneElementData> extends BaseElemen
   protected render(): TemplateResult | TemplateResult[] {
     if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary)) {
       switch (this.mode) {
-        case DisplayMode.combined:
         case DisplayMode.debug:
         case DisplayMode.narrative:
         case DisplayMode.override:
