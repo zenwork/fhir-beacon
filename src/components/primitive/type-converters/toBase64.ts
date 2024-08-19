@@ -1,7 +1,8 @@
 import {Base64Binary, FhirString} from '../primitive.data'
 import {toPrimitive}              from './type-converters'
 
-export const toBase64: toPrimitive<unknown, FhirString> = (value: unknown): Base64Binary => {
+export const toBase64: toPrimitive<unknown, FhirString> = (value: unknown,
+                                                           maxLength: number = 1048576): Base64Binary => {
   if (typeof value !== 'string') {
     throw new Error('Input must be a base64 encoded string')
   }
@@ -13,7 +14,7 @@ export const toBase64: toPrimitive<unknown, FhirString> = (value: unknown): Base
   }
 
   // Assuming you have some implementation based limit to the size they support.
-  const MAX_LENGTH = 1048576 // Your own specified limit
+  const MAX_LENGTH = maxLength // Your own specified limit
 
   if (value.length > MAX_LENGTH) {
     throw new Error(`Binary size should not exceed ${MAX_LENGTH}`)

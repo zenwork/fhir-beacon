@@ -16,7 +16,7 @@ export const toUrl: toPrimitive<string, URL> = (url: string): URL => {
 
   const absoluteUrlRegex = new RegExp('^(?:[a-z]+:)?//', 'i')
   if (!absoluteUrlRegex.test(url)) {
-    throw new TypeError(`URL can not be relative`)
+    throw new TypeError(`URL must be valid`)
   }
 
   throw new TypeError(`URL must be valid`)
