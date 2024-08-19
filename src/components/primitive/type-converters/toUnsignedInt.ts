@@ -7,7 +7,7 @@ export const toUnsignedInt: toPrimitive<unknown, UnsignedInt> = (value: unknown)
     throw new Error('Input must be a non-negative integer within the range 0 to 2,147,483,647')
   }
 
-  const regex = /^[0]|([1-9][0-9]*)$/
+  const regex = /^(0|([1-9][0-9]*))$/
 
   if (!regex.test(String(value))) {
     throw new Error('Invalid integer')

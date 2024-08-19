@@ -110,7 +110,7 @@ describe('Quantity', () => {
 
     // check error message is displayed
     const error = elements[2].queryShadow({ select: 'fhir-error' })
-    expect(error).toHaveAttribute('text', 'TypeError: decimal must be a valid number')
+    expect(error).toHaveAttribute('text', 'TypeError: decimal must be a valid number: abc')
 
   })
 

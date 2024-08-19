@@ -82,7 +82,7 @@ describe('fhir Primitive', () => {
     expect(value!.text).to.equal('abc')
 
     const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
-    expect(div.textContent).to.equal('TypeError: decimal must be a valid number')
+    expect(div.textContent).to.equal('TypeError: decimal must be a valid number: abc')
 
   })
 })
