@@ -5,7 +5,7 @@ const meta = {
   component: 'fhir-narrative',
   argTypes: {
     mode: {
-      options: ['display', 'structure', 'combined'],
+      options: ['display', 'structure'],
       control: {type: 'radio'},
     },
     verbose: {

@@ -31,12 +31,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
             ${choose(
                     this.mode,
                     [
-                        [DisplayMode.narrative, () => this.renderNarrativeMode(this.data)],
-                        [
-                            DisplayMode.combined,
-                            () => html`
-                                <fhir-not-supported description="combined mode is not supported on resources... probably should be removed"></fhir-not-supported >`
-                        ]
+                        [DisplayMode.narrative, () => this.renderNarrativeMode(this.data)]
                     ],
                     () => super.render()
             )}
