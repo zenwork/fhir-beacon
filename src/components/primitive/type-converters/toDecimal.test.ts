@@ -8,7 +8,8 @@ describe('toDecimal', () => {
       '0.0001',
       '-123.456',
       '3.14159265358979323',
-      '1e3'
+      '1e3',
+      '100'
     ]
 
     validDecimals.forEach(decimalString => {
@@ -26,7 +27,7 @@ describe('toDecimal', () => {
   })
 
   it('should throw TypeError if decimal has more than 18 digits or more than one decimal point', () => {
-    const invalidDecimals = ['1234567890123456789.1', '123.456.789']
+    const invalidDecimals = ['1234567890123456789.1', '123.456.789', '']
 
     invalidDecimals.forEach(decimalString => {
       expect(() => toDecimal(decimalString)).toThrow(TypeError)
@@ -45,7 +46,7 @@ describe('toDecimal', () => {
 
 describe('isDecimal', () => {
   it('should return true for valid decimal numbers', () => {
-    const validDecimals = [123.456, 0.0001, -123.456, 1e3]
+    const validDecimals = [123.456, 0.0001, -123.456, 1e3, 100]
 
     validDecimals.forEach(decimal => {
       expect(isDecimal(decimal)).toBe(true)

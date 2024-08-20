@@ -12,11 +12,12 @@ const regex = /^-?\d+(\.\d+)?([eE][+-]?\d+)?$/
  */
 export const toDecimal: toPrimitive<string, Decimal> = function (decimal: string) {
 
+  if (!decimal) throw new TypeError(`decimal must be a valid number: ${decimal}`)
   if (!regex.test(decimal)) throw new TypeError(`decimal must be a valid number: ${decimal}`)
   if (isNaN(Number.parseFloat(decimal))) throw new TypeError(`decimal must be a valid number: ${decimal}`)
 
   // Split the number into base and exponent
-  const parts = decimal.split(/[eE]/)
+  const parts = String(decimal).split(/[eE]/)
   const basePart = parts[0]
   const exponentPart = parts[1] ? parseInt(parts[1], 10) : 0
 
