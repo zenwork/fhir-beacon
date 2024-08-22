@@ -13,43 +13,41 @@ import {FhirDataElement}                        from '../data/fhir-data-element'
 import {FhirElementData, NoDataSet}             from '../data/fhir-data-element.data'
 import {Generators}                             from './fhir-presentable-element.data'
 import {componentStyles}                        from './fhir-presentable-element.styles'
+import {Lockable, LockableRegistry, Lockables}  from './LockableVariable'
 
 export abstract class FhirPresentableElement<T extends FhirElementData> extends FhirDataElement<T> {
   static styles = [hostStyles, componentStyles]
+
+  @LockableRegistry()
+  declare registry: Lockables
 
   @property({ reflect: true })
   public label: string = ''
 
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  @Lockable()
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
+  @Lockable()
+  public open: boolean = false
 
   @property({ type: Boolean, reflect: true })
   public forceclose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare verbose: boolean
+  @Lockable()
+  public verbose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  @Lockable()
+  public showerror: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare summary: boolean
-
-  /**
-   * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode
-   * certain FHIR datatypes go into a theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In
-   * reality, they would never point to each other but if expanding on all possible values this could happen
-   *
-   * @type {boolean}
-   */
-    // protected recursionGuard: boolean = false
+  public summary: boolean = false
 
   @state()
   protected templateGenerators: Generators<T> = { structure: {}, display: {} }
-
 
   protected constructor(type: string) {
     super(type)
@@ -262,4 +260,12 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
     return html``
   }
+
+  public attributeChangedCallback(name: string, _old: string | null, value: string | null) {
+    if (name === 'mode') { console.log('\nunlock', this.type, name, _old, value)}
+    this.registry.unlock(name)
+    super.attributeChangedCallback(name, _old, value)
+  }
+
+
 }

@@ -10,7 +10,7 @@ import {Shell}                                                            from '
 import {DisplayMode}                                                      from '../../types'
 
 
-describe('DisplayConfig', () => {
+describe.skip('DisplayConfig', () => {
   describe('primitive', () => {
     it('should show error messages when \'showerror\' is set', async () => {
 

@@ -12,13 +12,13 @@ export class Shell extends LitElement {
   public mode: DisplayMode = DisplayMode.display
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
+  public open: boolean = false
 
   @property({type: Boolean, reflect: true})
-  declare verbose: boolean
+  public verbose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  public showerror: boolean = false
 
   protected display = new ContextProvider(this, {context: displayConfigContext})
 
