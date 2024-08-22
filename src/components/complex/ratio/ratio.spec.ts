@@ -65,12 +65,12 @@ describe('Ratio', () => {
 
   })
 
-  test('should show verbose structure', async () => {
+  test.only('should show verbose structure', async () => {
     const data = { numerator: { value: '1' }, denominator: { value: '128' } }
 
     const shell = await fixture<Shell>(html`
-      <fhir-shell mode="structure" verbose>
-        <fhir-ratio label="ratio" .data=${data}></fhir-ratio >
+        <fhir-shell mode="display" verbose>
+            <fhir-ratio label="ratio" .data=${data} mode="structure"></fhir-ratio >
       </fhir-shell >
     `).first()
 

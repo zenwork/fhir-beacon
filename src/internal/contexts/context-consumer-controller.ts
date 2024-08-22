@@ -72,6 +72,7 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
         subscribe: true,
         callback: (config: DisplayConfig) => {
           if (config) {
+            // console.log('context', config)
             // never propagate override because there is an external template providing the rendering
             // TODO: this is not the best way to solve this
             if (config.mode !== DisplayMode.override) {

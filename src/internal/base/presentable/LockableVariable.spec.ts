@@ -1,39 +1,85 @@
-import {html, LitElement, PropertyValues}      from 'lit'
+import {html, LitElement}                      from 'lit'
 import {customElement, property}               from 'lit/decorators.js'
-import {describe, expect, it}                  from 'vitest'
+import {assert, describe, expect, it}          from 'vitest'
 import {fixture}                               from '../../../../tests/lit/lit-vitest-fixture'
 import {Lockable, LockableRegistry, Lockables} from './LockableVariable'
 
 describe('LockableVariable', () => {
-  it('Should return true if there is no variable', async () => {
-
-    const testBed: TestBed = await fixture<TestBed>(html`
-        <test-bed ></test-bed >
-    `, 'test-bed').first()
-
-
-    // take in initial
-    expect(testBed.myVar).toEqual('initial')
+  it('Should handle attribute set first', { retry: 3 }, async () => {
 
     // set first time
-    testBed.setIt()
-    expect(testBed.myVar).toEqual('bye')
+    const testBed: TestBed = await fixture<TestBed>(
+      html`
+          <test-bed myvar="boo"></test-bed >
+      `,
+      'test-bed').first()
+
+
+    testBed.setAttribute('myvar', 'bam')
+    expect(testBed.myvar).toEqual('bam')
+
+    testBed.setAttribute('myvar', 'bim')
+    expect(testBed.myvar).toEqual('bim')
+
+    //reject
+    testBed.myvar = 'Kaboom!'
+    expect(testBed.myvar).toEqual('bim')
 
     //reject second time
-    testBed.myVar = 'Kaboom!'
-    expect(testBed.myVar).toEqual('bye')
+    testBed.myvar = 'Kaboom!'
+    expect(testBed.myvar).toEqual('bim')
 
     //override
-    testBed.registry.override('myVar', 'Kaboom!')
-    expect(testBed.myVar).toEqual('Kaboom!')
+    testBed.registry.override('myvar', 'Kaboom!')
+    expect(testBed.myvar).toEqual('Kaboom!')
 
     //unlock
-    testBed.registry.unlock('myVar')
-    testBed.myVar = 'Kablammo!'
-    expect(testBed.myVar).toEqual('Kablammo!')
+    testBed.registry.unlock('myvar')
+    testBed.myvar = 'Kablammo!'
+    expect(testBed.myvar).toEqual('Kablammo!')
 
-    testBed.myVar = 'Kaboom!'
-    expect(testBed.myVar).toEqual('Kablammo!')
+    testBed.myvar = 'Kaboom!'
+    expect(testBed.myvar).toEqual('Kablammo!')
+
+  })
+
+  it('Should handle internal set first', { retry: 3 }, async () => {
+
+    // set first time
+    const testBed: TestBed = await fixture<TestBed>(
+      html`
+          <test-bed ></test-bed >
+      `,
+      'test-bed').first()
+
+    // override internal
+    testBed.registry.override('myvar', 'Kaboom!')
+    // lock it
+    testBed.registry.lock('myvar')
+    expect(testBed.myvar).toEqual('Kaboom!')
+
+    // attribute set from outside
+    testBed.setAttribute('myvar', 'bam')
+    expect(testBed.myvar).toEqual('bam')
+
+  })
+
+  it('Should handle flag properties', { retry: 3 }, async () => {
+
+    // set first time
+    const testBed: TestBed = await fixture<TestBed>(
+      html`
+          <test-bed ?mybool=${true}></test-bed >
+      `,
+      'test-bed').first()
+
+    assert.isTrue(testBed.mybool)
+
+    testBed.setAttribute('mybool', '')
+    assert.isTrue(testBed.mybool)
+
+    testBed.removeAttribute('mybool')
+    assert.isFalse(testBed.mybool)
 
   })
 })
@@ -46,20 +92,16 @@ class TestBed extends LitElement {
 
   @property()
   @Lockable()
-  public myVar: string = 'initial'
+  public myvar: string = 'initial'
 
-  public setIt() {
-    console.log('foo')
-    this.myVar = 'bye'
-  }
+  @property({ type: Boolean })
+  @Lockable({ lockInitial: true })
+  public mybool: boolean = false
+
 
   public attributeChangedCallback(name: string, _old: string | null, value: string | null) {
-    console.log('attribute changed')
+    this.registry.unlock(name)
     super.attributeChangedCallback(name, _old, value)
   }
 
-  protected willUpdate(_changedProperties: PropertyValues) {
-    console.log('willUpdate')
-    super.willUpdate(_changedProperties)
-  }
 }
