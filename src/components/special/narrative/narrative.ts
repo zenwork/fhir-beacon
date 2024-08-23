@@ -22,11 +22,13 @@ export class Narrative extends BaseElement<NarrativeData> {
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (_changedProperties.has('data') && this.data !== NoDataSet) {
+      console.log('updated narrative')
       if (this.data?.status) this.status = this.data.status
     }
   }
 
   protected renderDisplay(data: NarrativeData): TemplateResult {
+    console.log('display')
     return html`
       <div part="narrative">${unsafeHTML(data.div)}</div>
     `

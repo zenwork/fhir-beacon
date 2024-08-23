@@ -35,7 +35,7 @@ export function mustRender(value: unknown | null | undefined,
 }
 
 function isDisplay(mode: DisplayMode) {
-  return mode == DisplayMode.display || mode == DisplayMode.display_summary
+  return mode == DisplayMode.display || mode == DisplayMode.display_summary || mode == DisplayMode.narrative
 }
 
 function isStructure(mode: DisplayMode) {

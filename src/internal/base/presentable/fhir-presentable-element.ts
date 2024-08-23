@@ -171,19 +171,19 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   }
 
   private shouldRenderDisplay() {
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
+    if (mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
 
-      if (!this.convertedData) return html``
+      if (!this.extendedData) return html``
 
-      return html` ${this.renderDisplay(this.convertedData)} `
+      return html` ${this.renderDisplay(this.extendedData)} `
     }
     return html``
   }
 
   private shouldRenderStructure() {
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
+    if (mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
 
-      if (this.convertedData || this.verboseRequestedAndAllowed()) {
+      if (this.extendedData || this.verboseRequestedAndAllowed()) {
         return this.wrapStructure()
       }
 
@@ -203,20 +203,20 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
   private wrapStructure() {
     //console.log(this.type, this.key, this.mode, this.verbose, this.summaryMode(), this.summary)
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
+    if (mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
       return html`
           <fhir-structure-wrapper
                   .label=${this.getLabel()}
-                  .resourceId=${this.convertedData?.id ?? ''}
+                  .resourceId=${this.extendedData?.id ?? ''}
                   .fhirType=${asReadable(this.type)}
                   ?forceclose=${this.forceclose}
                   ?summary=${this.summary}
           >
               <div class="frontmatter">
-                  ${this.convertedData ? this.renderGroup(this.convertedData, 'structure') : nothing}
+                  ${this.extendedData ? this.renderGroup(this.extendedData, 'structure') : nothing}
               </div >
 
-              ${this.renderStructure(this.convertedData ?? ({} as T))}
+              ${this.renderStructure(this.extendedData ?? ({} as T))}
           </fhir-structure-wrapper >
       `
     }

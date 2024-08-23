@@ -1,10 +1,10 @@
-import {consume}                       from '@lit/context'
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement, state}          from 'lit/decorators.js'
-import {choose}                        from 'lit/directives/choose.js'
-import {otherwise, when}               from '../../.././utilities/when'
-import {BaseElement}                   from '../../../internal'
-import {containedDataContext}          from '../../../internal/contexts/context'
+import {consume}                         from '@lit/context'
+import {html, nothing, TemplateResult}   from 'lit'
+import {customElement, state}            from 'lit/decorators.js'
+import {choose}                          from 'lit/directives/choose.js'
+import {otherwise, when}                 from '../../.././utilities/when'
+import {BaseElement, FhirDataDecoration} from '../../../internal'
+import {containedDataContext}            from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -119,7 +119,7 @@ export class Reference extends BaseElement<ReferenceData> {
   }
 
 
-  protected convertData(data: ReferenceData): ReferenceData {
+  protected extend(data: ReferenceData): ReferenceData & FhirDataDecoration {
 
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
     // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being able to request data that is in the

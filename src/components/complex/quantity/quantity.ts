@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {BaseElement, ValidationErrors}                        from '../../../internal'
+import {BaseElement, FhirDataDecoration, ValidationErrors}    from '../../../internal'
 import {renderError}                                          from '../../../shell/layout/renderError'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
@@ -83,7 +83,16 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   }
 
-  protected convertData(data: QuantityData): QuantityData {
+  protected validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
+    const errors = super.validate(data)
+    if (!hasAllOrNone(data, ['code', 'system'])) {
+      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
+    }
+
+    return errors
+  }
+
+  protected extend(data: QuantityData): (QuantityData & FhirDataDecoration) | (SimpleQuantityData & FhirDataDecoration) {
     // rule: sqty-1
     if (data.comparator) {
       // convert html encoded strings such as &gt;
@@ -126,14 +135,4 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     return data
   }
 
-  protected validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
-    const errors = super.validate(data)
-    if (!hasAllOrNone(data, ['code', 'system'])) {
-      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
-    }
-
-
-    return errors
-
-  }
 }

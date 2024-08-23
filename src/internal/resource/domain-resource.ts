@@ -25,7 +25,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
 
   protected render(): TemplateResult {
-    if (!this.verbose && !this.showerror && !this.convertedData) return html``
+    if (!this.verbose && !this.showerror && !this.extendedData) return html`boo!`
     return html`
         <div part="domain-resource">
             ${choose(
@@ -41,6 +41,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
 
   protected renderNarrativeMode(data: T): TemplateResult {
     if (data.text) {
+      console.log('narrative mode', data.text)
       return html`
           <fhir-wrapper .label=${this.type}>
               <fhir-narrative .data=${data.text}></fhir-narrative >

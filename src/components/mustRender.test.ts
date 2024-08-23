@@ -12,6 +12,10 @@ describe('MustRender', () => {
   })
 
   it('should pass with no data but verbose in structure mode', () => {
+    assert.isTrue(mustRender('a', DisplayMode.narrative, true), 'data, narrative, verbose')
+  })
+
+  it('should pass with no data but verbose in structure mode', () => {
     assert.isTrue(mustRender(undefined, DisplayMode.structure, true), 'no data, structure, verbose')
   })
 
