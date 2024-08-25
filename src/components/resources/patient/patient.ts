@@ -14,7 +14,7 @@ export class Patient extends DomainResource<PatientData> {
     super('Patient')
   }
 
-  protected renderDisplay(data: PatientData): TemplateResult | TemplateResult[] {
+  public renderDisplay(data: PatientData): TemplateResult | TemplateResult[] {
     return html`
         ${(wrapc('names', data.name, this.verbose, (i, x) => html`
         <fhir-human-name label="name${x}" .data=${i} summary></fhir-human-name >
@@ -35,7 +35,7 @@ export class Patient extends DomainResource<PatientData> {
   }
 
   //TODO: how do we handle choices [x] in the strucutred view
-  protected renderStructure(data: PatientData): TemplateResult | TemplateResult[] {
+  public renderStructure(data: PatientData): TemplateResult | TemplateResult[] {
     return html`
         ${(wraps('identifiers', data.identifier, this.verbose, (i, x) => html`
             <fhir-identifier label='identifier${x}' .data=${i} summary></fhir-identifier >`))}

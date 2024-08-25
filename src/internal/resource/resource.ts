@@ -1,51 +1,32 @@
-import {html, PropertyValues, TemplateResult} from 'lit'
-import {property}                             from 'lit/decorators.js'
-import {PrimitiveType}                        from '../../components/primitive/type-converters/type-converters'
-import {DisplayMode}                          from '../../types'
-import {BaseElement}                          from '../base'
-import {ContextProviderController}            from '../contexts'
-import {ResourceData}                         from './domain-resource.data'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {html, TemplateResult}       from 'lit'
+import {property}                   from 'lit/decorators.js'
+import {PrimitiveType}              from '../../components/primitive/type-converters/type-converters'
+import {DisplayConfig, DisplayMode} from '../../types'
+import {BaseElement, Decorated}     from '../base'
+import {ContextProviderController}  from '../contexts'
+import {ResourceData}               from './domain-resource.data'
 
 export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
   @property({ type: String, reflect: true, attribute: 'override-template' })
   declare overrideTemplate: string
-  private dataContextProvider: ContextProviderController<T, Resource<T>>
 
   protected constructor(type: string) {
     super(type)
     this.summary = true
-    this.dataContextProvider = new ContextProviderController(this)
-    this.addStructureTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
-    this.addDisplayTemplateGenerator('resource', (data: T) => this.renderResourceStructure(data))
+    new ContextProviderController<T, Resource<T>>(this)
+    this.templateGenerators.structure.header.push(this.renderResourceStructure)
   }
 
-  protected render(): TemplateResult | TemplateResult[] {
-    if (this.overrideTemplate && this.mode === DisplayMode.override) {
-      return this.renderTemplate()
-    } else {
-      return super.render()
+  public override(): boolean {
+    if (this.overrideTemplate) {
+      this.mode = DisplayMode.override
     }
+    return !!this.overrideTemplate && this.mode === DisplayMode.override
   }
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
-    if (_changedProperties.has('overrideTemplate') || _changedProperties.has('mode')) {
-      if (this.overrideTemplate) {
-        this.mode = DisplayMode.override
-      }
-    }
-  }
-
-  private renderResourceStructure(data: T): TemplateResult | TemplateResult[] {
-    return html`
-      <fhir-meta label="meta" .data=${data.meta} ?forceclose=${true} summary></fhir-meta >
-      <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri} summary></fhir-primitive >
-      <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
-    `
-  }
-
-  private renderTemplate(): TemplateResult {
+  public renderOverride(): TemplateResult[] {
     if (this.shadowRoot) {
       const templateElement = document.getElementById(this.overrideTemplate) as HTMLTemplateElement | null
       if (templateElement && templateElement.content) {
@@ -57,6 +38,18 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
       }
     }
     this.requestUpdate()
-    return html``
+    return [html``]
+
   }
+
+  private renderResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
+    return [
+      html`
+          <fhir-meta label="meta" .data=${data.meta} ?forceclose=${true} summary></fhir-meta >
+          <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri} summary></fhir-primitive >
+          <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
+      `
+    ]
+  }
+
 }

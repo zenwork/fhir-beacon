@@ -12,7 +12,7 @@ export class Substance extends DomainResource<SubstanceData> {
     super('Substance')
   }
 
-  protected renderDisplay(data: SubstanceData): TemplateResult {
+  public renderDisplay(data: SubstanceData): TemplateResult {
     return html`
         <fhir-primitive label="description" .value=${data.description} .context="id:${data.id}" summary></fhir-primitive >
         <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier >
@@ -40,7 +40,7 @@ export class Substance extends DomainResource<SubstanceData> {
     `
   }
 
-  protected renderStructure(data: SubstanceData): TemplateResult {
+  public renderStructure(data: SubstanceData): TemplateResult {
     return html`
         <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier >
         <fhir-primitive label="instance" value=${data.instance} summary></fhir-primitive >

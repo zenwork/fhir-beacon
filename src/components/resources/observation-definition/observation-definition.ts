@@ -10,11 +10,11 @@ export class ObservationDefinition extends DomainResource<ObservationDefinitionD
     super('ObservationDefinition')
   }
 
-  protected renderDisplay(): TemplateResult | TemplateResult[] {
+  public renderDisplay(): TemplateResult | TemplateResult[] {
     return html``
   }
 
-  protected renderStructure(): TemplateResult | TemplateResult[] {
+  public renderStructure(): TemplateResult | TemplateResult[] {
     return html``
   }
 

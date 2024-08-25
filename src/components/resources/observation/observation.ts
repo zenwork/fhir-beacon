@@ -1,6 +1,6 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {DomainResource}       from '../../../internal'
+import {TemplateResult}              from 'lit'
+import {customElement}               from 'lit/decorators.js'
+import {DomainResource, EmptyResult} from '../../../internal'
 
 import {ObservationData} from './observation.data'
 
@@ -11,12 +11,12 @@ export class Observation extends DomainResource<ObservationData> {
     super('Observation')
   }
 
-  protected renderDisplay(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderDisplay(): TemplateResult[] {
+    return EmptyResult
   }
 
-  protected renderStructure(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderStructure(): TemplateResult[] {
+    return EmptyResult
   }
 
 }

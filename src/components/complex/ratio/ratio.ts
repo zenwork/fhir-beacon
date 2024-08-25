@@ -1,7 +1,7 @@
-import {css, html, TemplateResult} from 'lit'
-import {customElement}             from 'lit/decorators.js'
-import {BaseElement}               from '../../../internal/base'
-import {DisplayMode}               from '../../../types'
+import {css, html, TemplateResult}  from 'lit'
+import {customElement}              from 'lit/decorators.js'
+import {BaseElement, EmptyResult}   from '../../../internal/base'
+import {DisplayConfig, DisplayMode} from '../../../types'
 
 import {RatioData} from './ratio.data'
 
@@ -26,10 +26,10 @@ export class Ratio extends BaseElement<RatioData> {
     super('Ratio')
   }
 
-  protected renderDisplay(data: RatioData): TemplateResult | TemplateResult[] {
+  public renderDisplay(config: DisplayConfig, data: RatioData): TemplateResult[] {
 
     if (this.mode == DisplayMode.display_summary && !this.summary) {
-      return html``
+      return EmptyResult
     }
 
     let denominator: TemplateResult
@@ -41,23 +41,26 @@ export class Ratio extends BaseElement<RatioData> {
           <fhir-quantity .data=${data.denominator} summary></fhir-quantity >`
     }
 
-    return html`
-        <fhir-primitive-wrapper part="base">
-            <fhir-label text="${this.getLabel()}"></fhir-label >&nbsp;
-            <fhir-quantity .data=${data.numerator}></fhir-quantity >
-            <fhir-value text="&nbsp;/&nbsp;"></fhir-value >
-            ${denominator}
-        </fhir-primitive-wrapper >
-    `
+    return [
+      html`
+          <fhir-primitive-wrapper part="base">
+              <fhir-label text="${this.getLabel()}"></fhir-label >&nbsp;
+              <fhir-quantity .data=${data.numerator}></fhir-quantity >
+              <fhir-value text="&nbsp;/&nbsp;"></fhir-value >
+              ${denominator}
+          </fhir-primitive-wrapper >
+      `
+    ]
 
 
   }
 
-  protected renderStructure(data: RatioData): TemplateResult | TemplateResult[] {
-
-    return html`
-        <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >
-        <fhir-quantity label="denominator" .data=${data.denominator} summary></fhir-quantity >
-    `
+  public renderStructure(config: DisplayConfig, data: RatioData): TemplateResult[] {
+    return [
+      html`
+          <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >
+          <fhir-quantity label="denominator" .data=${data.denominator} summary></fhir-quantity >
+      `
+    ]
   }
 }

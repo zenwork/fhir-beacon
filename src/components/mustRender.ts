@@ -16,12 +16,12 @@ export function mustRender(value: unknown | null | undefined,
                            summaryMode: boolean = false,
                            summary: boolean = false): boolean {
 
-  if (isDisplay(mode) && isPresent(value) && shouldREnder(summary, summaryMode)) {
+  if (isDisplay(mode) && isPresent(value) && shouldRender(summary, summaryMode)) {
     return true
   }
 
   if (isStructure(mode)) {
-    if (isPresent(value) && shouldREnder(summary, summaryMode)) {
+    if (isPresent(value) && shouldRender(summary, summaryMode)) {
       return true
     }
 
@@ -35,14 +35,17 @@ export function mustRender(value: unknown | null | undefined,
 }
 
 function isDisplay(mode: DisplayMode) {
-  return mode == DisplayMode.display || mode == DisplayMode.display_summary || mode == DisplayMode.narrative
+  return mode == DisplayMode.display
+         || mode == DisplayMode.display_summary
+         || mode == DisplayMode.narrative
+         || mode == DisplayMode.debug
 }
 
 function isStructure(mode: DisplayMode) {
   return mode == DisplayMode.structure || mode == DisplayMode.structure_summary
 }
 
-function shouldREnder(summary: boolean, summaryMode: boolean) {
+function shouldRender(summary: boolean, summaryMode: boolean) {
   return (summary && summaryMode) || !summaryMode
 }
 

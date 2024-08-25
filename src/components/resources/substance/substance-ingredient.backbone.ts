@@ -12,7 +12,7 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
     super('Ingredient')
   }
 
-  protected renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
     let substance: TemplateResult = renderError(
       this.getDisplayConfig().showerror,
@@ -23,25 +23,25 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
-        <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept >
+          <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept >
       `
     }
 
     if (isSubstanceIngredientReference(data)) {
       substance = html`
-        <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference >
+          <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference >
       `
     }
 
     return html`
-      <fhir-wrapper .label=${this.label}>
-        ${substance}
-        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
-      </fhir-wrapper >
+        <fhir-wrapper .label=${this.label}>
+            ${substance}
+            <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+        </fhir-wrapper >
     `
   }
 
-  protected renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
 
     let substance: TemplateResult = renderError(
       this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
@@ -50,17 +50,17 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
-        <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept > `
+          <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept > `
     }
 
     if (isSubstanceIngredientReference(data)) {
       substance = html`
-        <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference > `
+          <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference > `
     }
 
     return html`
-      ${substance}
-      <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+        ${substance}
+        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
     `
   }
 }

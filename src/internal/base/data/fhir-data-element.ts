@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {LitElement, PropertyValues}                   from 'lit'
 import {property, state}                              from 'lit/decorators.js'
 import {DataContextConsumerController}                from '../../contexts/context-consumer-controller'
 import {FhirDataContext}                              from '../../contexts/FhirContextData'
+import {DataElement, Decorated}                       from './data-element'
 import {FhirElementData, NoDataSet, ValidationErrors} from './fhir-data-element.data'
-
-export type FhirDataDecoration = { [key: string | number | symbol]: any }
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
  *
  * @template T - The type of the base element data.
  */
-export abstract class FhirDataElement<T extends FhirElementData> extends LitElement {
+export abstract class FhirDataElement<T extends FhirElementData> extends LitElement implements DataElement<T> {
 
   /**
    * The key the element is known as in its parent data strucuture
@@ -21,12 +21,18 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    */
   @property({ reflect: true })
   public key: string = ''
+
   /**
    * Element data
    */
-  // TODO: might be better to use data-fhir and comply with the data-* standard. see: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
+    // TODO: might be better to use data-fhir and comply with the data-* standard. see:
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({ type: Object, attribute: 'data' })
   public data: T = NoDataSet as T
+
+  @property({ type: String, attribute: 'data-path' })
+  public declare dataPath: string
+
   /**
    * FHIR type.
    *
@@ -34,6 +40,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    */
   @state()
   protected declare readonly type: string
+
   //------------------------------------------------//
   /**
    * The extendedData variable is used to store additional data of type T and an empty object type {}.
@@ -42,7 +49,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @type {T & {} | null}
    */
   @state()
-  protected extendedData: T & FhirDataDecoration | null = null
+  declare protected extendedData: Decorated<T>
 
   //------------------------------------------------//
   /**
@@ -64,10 +71,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    *
    * @type {ValidationErrors} An array of objects representing validation errors.
    */
-  #errors: ValidationErrors = []
-
-  @property({ type: String, attribute: 'data-path' })
-  public declare dataPath: string
+  protected errors: ValidationErrors = []
 
   @state()
   private declare dataContext: FhirDataContext
@@ -90,14 +94,16 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    *
    * @return - This method does not return any value.
    */
-  protected abstract willReady(): void
+  public prepare() {
+    this.extendedData = {} as Decorated<T>
+  }
 
   /**
    * Determines whether fetching data is necessary. Override to fetch data from somewhere else.
    *
    * @return {boolean} Returns true if fetch should happen.
    */
-  protected shouldFetch(): boolean {
+  public shouldFetch(changes: PropertyValues): boolean {
     return !!this.dataContext && !!this.dataPath
   }
 
@@ -107,7 +113,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @param dataPath - The path to the data to be retrieved.
    * @return The retrieved data.
    */
-  protected fetch(dataPath: string): T {
+  public fetch(dataPath: string): T {
     if (this.dataContext?.data) {
       return this.dataContext.getAt<T>(dataPath)
     }
@@ -126,7 +132,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @return errors found
    * @protected
    */
-  protected abstract validate(data: T, fetched: boolean): ValidationErrors;
+  public abstract validate(data: T, fetched: boolean): ValidationErrors;
 
   /**
    * implements `convertData()` to modify data before handing it to.
@@ -141,7 +147,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    *   of data to other types. TODO: something is needed to store complex errors that depend on multiple prop
    *   validation. Maybe should be in a separate method.
    */
-  protected abstract extend(data: T, errors: ValidationErrors, fetched: boolean): T & FhirDataDecoration;
+  public abstract decorate(data: T, errors: ValidationErrors, fetched: boolean): Decorated<T>;
 
   /**
    * This method is a protected abstract method that is used to signal that the provided data is ready.
@@ -150,7 +156,15 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @param decoratedData - The decorated data that is ready, which includes additional properties defined as keys with
    *   type 'string', 'number', or 'symbol'.
    */
-  protected abstract ready(providedData: T, decoratedData: T & FhirDataDecoration | null): void
+  public abstract isPrepared(providedData: T, decoratedData: Decorated<T>): void
+
+  public shouldPrepare() {
+    return this.data && this.data !== NoDataSet
+  }
+
+  // protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+  //   return !!this.data || !!this.dataPath
+  // }
 
   /**
    * Updates the component's state based on the changed properties.
@@ -162,31 +176,28 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   protected willUpdate(changes: PropertyValues): void {
     super.willUpdate(changes)
 
-
-    if (changes.has('dataPath') && this.shouldFetch()) {
+    if (changes.has('dataPath') && this.shouldFetch(changes)) {
       this.data = this.fetch(this.dataPath)
       this.#fetched = true
     }
 
-    if (changes.has('data') && this.dataDefined()) {
-      this.willReady()
+    if (changes.has('data') && this.shouldPrepare()) {
+      this.prepare()
       const validationErrors = this.validate(this.data, this.#fetched)
-      this.#errors.push(...validationErrors)
-      this.extendedData = this.extend(this.data, this.#errors, this.#fetched)
-      this.ready(this.data, this.extendedData)
+      this.errors.push(...validationErrors)
+      this.extendedData = this.decorate(this.data, this.errors, this.#fetched)
+      this.isPrepared(this.data, this.extendedData)
     }
 
-  }
-
-  private dataDefined() {
-    return this.data && this.data !== NoDataSet
   }
 
 }
 
 export class BeaconDataError implements Error {
   name: string = 'BeaconDataError'
+
   message: string
+
   stack?: string | undefined
 
   constructor(msg: string) {

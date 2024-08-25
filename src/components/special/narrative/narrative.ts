@@ -2,6 +2,7 @@ import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
 import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
 import {BaseElement, NoDataSet}               from '../../../internal'
+import {DisplayConfig}                        from '../../../types'
 
 import {NarrativeData} from './narrative.data'
 
@@ -26,18 +27,22 @@ export class Narrative extends BaseElement<NarrativeData> {
     }
   }
 
-  protected renderDisplay(data: NarrativeData): TemplateResult {
-    return html`
-      <div part="narrative">${unsafeHTML(data.div)}</div>
-    `
+  public renderNarrative(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+    return [
+      html`
+          <div part="narrative">${unsafeHTML(data.div)}</div >
+      `
+    ]
   }
 
-  protected renderStructure(data: NarrativeData): TemplateResult {
-    return html`
-        <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
-        <fhir-structure-wrapper label="div" forceclose>
-          <fhir-primitive .value=${data.div}></fhir-primitive >
-        </fhir-structure-wrapper >
-    `
+  public renderStructure(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+    return [
+      html`
+          <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
+          <fhir-structure-wrapper label="div" forceclose>
+              <fhir-primitive .value=${data.div}></fhir-primitive >
+          </fhir-structure-wrapper >
+      `
+    ]
   }
 }

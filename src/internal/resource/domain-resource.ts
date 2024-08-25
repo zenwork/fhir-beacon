@@ -1,63 +1,38 @@
-import {provide}                                       from '@lit/context'
-import {html, nothing, PropertyValues, TemplateResult} from 'lit'
-import {choose}                                        from 'lit/directives/choose.js'
-import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
-import {DisplayMode}                                   from '../../types'
-import {containedDataContext}                          from '../contexts/context'
-import {DomainResourceData, ResourceData}              from './domain-resource.data'
-import {renderResourceComponent}                       from './renderResourceComponent'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {html, nothing, TemplateResult}    from 'lit'
+import {PrimitiveType}                    from '../../components/primitive/type-converters/type-converters'
+import {DisplayConfig}                    from '../../types'
+import {Decorated, ValidationErrors}      from '../base'
+import {DomainResourceData, ResourceData} from './domain-resource.data'
+import {renderResourceComponent}          from './renderResourceComponent'
 
 import {Resource} from './resource'
 
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
-  @provide({ context: containedDataContext })
-  declare contained: ResourceData[]
-
-
-  protected constructor(type: string) {
-    super(type)
-
-    this.addStructureTemplateGenerator('domain-resource',
-                                       (data: T) => { return this.renderDomainResourceStructure(data) })
+  protected constructor(name: string) {
+    super(name)
+    this.templateGenerators.structure.header.push(this.renderDomainResourceStructure)
   }
 
-
-  protected render(): TemplateResult {
-    if (!this.verbose && !this.showerror && !this.extendedData) return html`boo!`
-    return html`
-        <div part="domain-resource">
-            ${choose(
-                    this.mode,
-                    [
-                        [DisplayMode.narrative, () => this.renderNarrativeMode(this.data)]
-                    ],
-                    () => super.render()
-            )}
-        </div >`
-
-  }
-
-  protected renderNarrativeMode(data: T): TemplateResult {
+  public renderNarrative(config: DisplayConfig,
+                         data: Decorated<T>,
+                         errors: ValidationErrors): TemplateResult[] {
     if (data.text) {
-      console.log('narrative mode', data.text)
-      return html`
-          <fhir-wrapper .label=${this.type}>
-              <fhir-narrative .data=${data.text}></fhir-narrative >
-          </fhir-wrapper >`
+      return [
+        html`
+            <fhir-wrapper .label=${this.type}>
+                <fhir-narrative .data=${data.text}></fhir-narrative >
+            </fhir-wrapper >`
+      ]
     }
-    return html``
+
+    return [html``]
   }
 
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (_changedProperties.has('data')) {
-      this.contained = this.data?.contained || []
-    }
-  }
 
-  protected renderDomainResourceStructure(data: T): TemplateResult | TemplateResult[] {
+  protected renderDomainResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
           <fhir-narrative key="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
