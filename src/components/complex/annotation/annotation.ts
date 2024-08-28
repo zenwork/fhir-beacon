@@ -20,6 +20,7 @@ export class Annotation extends BaseElement<AnnotationData> {
     if (data.authorString && data.authorReference) {
       errors.push({ id: this.type + '::author[x]', err: 'can only have one of authorString or authorReference' })
     }
+
     return errors
   }
 

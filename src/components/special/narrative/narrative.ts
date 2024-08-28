@@ -20,19 +20,21 @@ export class Narrative extends BaseElement<NarrativeData> {
     return this
   }
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
-    if (_changedProperties.has('data') && this.data !== NoDataSet) {
-      if (this.data?.status) this.status = this.data.status
-    }
-  }
-
   public renderNarrative(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+    console.log('narrative')
     return [
       html`
           <div part="narrative">${unsafeHTML(data.div)}</div >
       `
     ]
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    console.log('updated', this.data)
+    if (_changedProperties.has('data') && this.data !== NoDataSet) {
+      if (this.data?.status) this.status = this.data.status
+    }
   }
 
   public renderStructure(config: DisplayConfig, data: NarrativeData): TemplateResult[] {

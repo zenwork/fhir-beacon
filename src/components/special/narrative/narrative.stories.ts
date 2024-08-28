@@ -5,7 +5,7 @@ const meta = {
   component: 'fhir-narrative',
   argTypes: {
     mode: {
-      options: ['display', 'structure'],
+      options: ['display', 'structure', 'narrative'],
       control: {type: 'radio'},
     },
     verbose: {
@@ -30,15 +30,16 @@ const narativeData = {
 export const NarrativeWithoutFormatting: Story = {
   args: {
     data: narativeData,
-    mode: 'display',
+    mode: 'narrative',
     showerror: false,
     verbose: false
   }
 }
+
 export const NarrativeUsingCssPartsFormatting: Story = {
   args: {
     data: narativeData,
-    mode: 'display',
+    mode: 'narrative',
     showerror: false,
     id: 'formatted',
     verbose: false,
@@ -46,7 +47,3 @@ export const NarrativeUsingCssPartsFormatting: Story = {
   }
 
 }
-
-/*
-
- */

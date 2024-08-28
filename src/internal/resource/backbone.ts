@@ -1,4 +1,4 @@
-import {html}                                from 'lit'
+import {html, PropertyValues}                from 'lit'
 import {DisplayConfig}                       from '../../types'
 import {BaseElement, Decorated, EmptyResult} from '../base'
 import {BackboneElementData}                 from './backbone.data'
@@ -6,6 +6,12 @@ import {BackboneElementData}                 from './backbone.data'
 export abstract class Backbone<D extends BackboneElementData> extends BaseElement<D> {
   protected constructor(type: string) {
     super(type)
+
+
+  }
+
+  protected willUpdate(changes: PropertyValues): void {
+    super.willUpdate(changes)
 
     // TODO: this case needs to be fixed somehow... should not be in the constructor
     const result = [
@@ -18,8 +24,11 @@ export abstract class Backbone<D extends BackboneElementData> extends BaseElemen
           </fhir-not-supported > `
     ]
 
-    this.templateGenerators.structure.header
-      = (config: DisplayConfig, data: Decorated<D>) => (data.modifierExtension || config.verbose) ? result : EmptyResult
+    this.templateGenerators.structure.header.push(
+      (config: DisplayConfig, data: Decorated<D>) => {
+        return (data.modifierExtension || config.verbose)
+               ? result
+               : EmptyResult
+      })
   }
-
 }

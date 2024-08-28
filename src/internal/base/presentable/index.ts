@@ -2,4 +2,3 @@
 
 export * from './fhir-presentable-element.data'
 export * from './fhir-presentable-element'
-export * from './presentable-element'

@@ -50,5 +50,5 @@ function shouldRender(summary: boolean, summaryMode: boolean) {
 }
 
 function isPresent(value: unknown) {
-  return value
+  return !!value
 }

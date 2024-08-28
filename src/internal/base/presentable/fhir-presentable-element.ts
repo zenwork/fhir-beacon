@@ -1,28 +1,29 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, PropertyValues, TemplateResult}                      from 'lit'
-import {property}                                                           from 'lit/decorators.js'
-import {mustRender}                                                         from '../../../components/mustRender'
+import {html, nothing, PropertyValues, TemplateResult}                 from 'lit'
+import {property}                                                      from 'lit/decorators.js'
+import {mustRender}                                                    from '../../../components/mustRender'
 import {
   PrimitiveType
-}                                                                           from '../../../components/primitive/type-converters'
+}                                                                      from '../../../components/primitive/type-converters'
 import {
   asReadable
-}                                                                           from '../../../components/primitive/type-presenters/asReadable'
-import {hasSome}                                                            from '../../../shell/layout/directives'
-import {hostStyles}                                                         from '../../../styles'
-import {DisplayConfig, DisplayMode}                                         from '../../../types'
-import {hasSameAncestor, toBaseElementModeEnum}                             from '../../../utilities'
-import {
-  DisplayContextConsumerController
-}                                                                           from '../../contexts/context-consumer-controller'
-import {Decorated, FhirDataElement, FhirElementData, ValidationErrors}      from '../data'
-import {EmptyResult, Generators, GenKey, NullGenerators, TemplateGenerator} from './fhir-presentable-element.data'
-import {componentStyles}                                                    from './fhir-presentable-element.styles'
-import {PresentableElement}                                                 from './presentable-element'
+}                                                                      from '../../../components/primitive/type-presenters/asReadable'
+import {hasSome}                                                       from '../../../shell/layout/directives'
+import {hostStyles}                                                    from '../../../styles'
+import {DisplayConfig, DisplayMode}                                    from '../../../types'
+import {hasSameAncestor, toBaseElementModeEnum}                        from '../../../utilities'
+import {DisplayContextConsumerController}                              from '../../contexts/context-consumer-controller'
+import {FhirDataElement, FhirElementData, NoDataSet, ValidationErrors} from '../data'
+import {Decorated}                                                     from '../Decorated'
+import {Rendering}                                                     from '../Rendering'
+import {Templating}                                                    from '../Templating'
+import {EmptyResult, Generators, NullGenerators}                       from './fhir-presentable-element.data'
+import {componentStyles}                                               from './fhir-presentable-element.styles'
 
 
-export abstract class FhirPresentableElement<T extends FhirElementData> extends FhirDataElement<T>
-  implements PresentableElement<T> {
+export abstract class FhirPresentableElement<D extends FhirElementData> extends FhirDataElement<D>
+  implements Rendering<D>, Templating<D> {
+
   static styles = [hostStyles, componentStyles]
 
   @property({ reflect: true })
@@ -46,7 +47,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
 
-  protected templateGenerators: Generators<T> = NullGenerators()
+  protected templateGenerators: Generators<D> = NullGenerators()
 
   protected constructor(type: string) {
     super(type)
@@ -62,21 +63,12 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
     return { open: this.open, verbose: this.verbose, mode: this.mode, showerror: this.showerror }
   }
 
-  /**
-   * add a rendering generator
-   * @param name
-   * @param generator
-   */
-  public addStructureTemplateGenerator(name: GenKey, generator: TemplateGenerator<T>) {
-    this.templateGenerators.structure[name].push(generator)
-  }
-
   public canRender(): boolean {
     return mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || !!this.dataPath
   }
 
   public abstract willRender(displayConfig: DisplayConfig,
-                             extendedData: Decorated<T> | null,
+                             extendedData: Decorated<D> | null,
                              changes: PropertyValues): void
 
   public override() {
@@ -84,45 +76,26 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   }
 
   public renderOverride(displayConfig: DisplayConfig,
-                        data: T,
+                        data: D,
                         errors: ValidationErrors): TemplateResult[] {
     return EmptyResult
   }
 
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param config
-   * @param data
-   * @param errors
-   */
-  public abstract renderDisplay(config: DisplayConfig,
-                                data: Decorated<T>,
-                                errors: ValidationErrors): TemplateResult[]
+
+  public abstract renderDisplay(config: DisplayConfig, data: Decorated<D>, errors: ValidationErrors): TemplateResult[]
 
   public abstract renderNarrative(displayConfig: DisplayConfig,
-                                  data: Decorated<T>,
+                                  data: Decorated<D>,
                                   errors: ValidationErrors): TemplateResult[]
 
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param config
-   * @param data
-   * @param errors
-   */
-  public abstract renderStructure(config: DisplayConfig,
-                                  data: Decorated<T>,
-                                  errors: ValidationErrors): TemplateResult[]
+
+  public abstract renderStructure(config: DisplayConfig, data: Decorated<D>, errors: ValidationErrors): TemplateResult[]
 
   public abstract hasRendered(displayConfig: DisplayConfig,
-                              extendedData: Decorated<T> | null,
+                              extendedData: Decorated<D> | null,
                               haveChanged: PropertyValues): void
 
-  /**
-   *
-   * @private
-   */
+
   protected summaryMode() {
     return !!this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
   }
@@ -196,14 +169,19 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
       }
     }
 
+    if (!this.extendedData || this.extendedData === NoDataSet) {
+      this.extendedData = {} as unknown as Decorated<D>
+    }
   }
 
-  /**
-   * Rendering method for all elements
-   * @protected
-   */
   protected render(): TemplateResult | TemplateResult[] {
     const templates: TemplateResult[] = [html``]
+
+    if (this.errors.some(e => e.id === 'DISPLAY_NOTHING')) {
+      // SHOW THAT WE HAVE NO DATA
+      return html`
+          <fhir-not-supported variant="no-data"></fhir-not-supported >`
+    }
 
     switch (this.mode) {
       case DisplayMode.debug:
@@ -293,7 +271,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
    * @param data
    * @protected
    */
-  private renderBaseElement(_: DisplayConfig, data: Decorated<T>): TemplateResult[] {
+  private renderBaseElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
 
       return [
@@ -314,7 +292,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
    * Render formatted JSON data for debugging purposes
    * @protected
    */
-  private renderDebug(_: DisplayConfig, data: Decorated<T>): TemplateResult[] {
+  private renderDebug(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
 
     if (data || this.verboseRequestedAndAllowed()) {
       return [

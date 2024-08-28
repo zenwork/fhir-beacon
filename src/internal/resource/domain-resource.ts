@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, TemplateResult}    from 'lit'
-import {PrimitiveType}                    from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig}                    from '../../types'
-import {Decorated, ValidationErrors}      from '../base'
-import {DomainResourceData, ResourceData} from './domain-resource.data'
-import {renderResourceComponent}          from './renderResourceComponent'
-
-import {Resource} from './resource'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
+import {DisplayConfig}                                 from '../../types'
+import {Decorated, NoDataSet, ValidationErrors}        from '../base'
+import {DomainResourceData, ResourceData}              from './domain-resource.data'
+import {renderResourceComponent}                       from './renderResourceComponent'
+import {Resource}                                      from './resource'
 
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
   protected constructor(name: string) {
     super(name)
-    this.templateGenerators.structure.header.push(this.renderDomainResourceStructure)
   }
 
   public renderNarrative(config: DisplayConfig,
@@ -31,6 +29,14 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     return [html``]
   }
 
+
+  protected willUpdate(changes: PropertyValues): void {
+    super.willUpdate(changes)
+    this.templateGenerators.structure.header.push(this.renderDomainResourceStructure)
+    if (this.verbose && (!this.data || this.data === NoDataSet)) {
+      this.errors.push({ id: 'DISPLAY_NOTHING', err: 'no data provided' })
+    }
+  }
 
   protected renderDomainResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [

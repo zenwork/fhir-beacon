@@ -1,7 +1,8 @@
 import {html, TemplateResult}              from 'lit'
 import {DisplayConfig}                     from '../../../types'
 import {FhirElementData, ValidationErrors} from '../data'
-import {Decorated}                         from '../data/data-element'
+
+import {Decorated} from '../Decorated'
 
 export type GenKey = 'header' | 'body' | 'footer'
 
@@ -18,7 +19,7 @@ export type Generators<T extends FhirElementData> = {
   error: GeneratorGroup<T>,
 }
 
-export const EmptyResult = [html``]
+export const EmptyResult = [html``] as TemplateResult<any>[]
 
 export function NullGeneratorGroup() {
   return {

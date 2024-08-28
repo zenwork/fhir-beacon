@@ -1,11 +1,10 @@
- 
-import {html, TemplateResult}              from 'lit'
-import {property}                          from 'lit/decorators.js'
-import {PrimitiveType}                     from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig, DisplayMode}        from '../../types'
-import {BaseElement, Decorated, NoDataSet} from '../base'
-import {ContextProviderController}         from '../contexts'
-import {ResourceData}                      from './domain-resource.data'
+import {html, PropertyValues, TemplateResult} from 'lit'
+import {property}                             from 'lit/decorators.js'
+import {PrimitiveType}                        from '../../components/primitive/type-converters/type-converters'
+import {DisplayConfig, DisplayMode}           from '../../types'
+import {BaseElement, Decorated, NoDataSet}    from '../base'
+import {ContextProviderController}            from '../contexts'
+import {ResourceData}                         from './domain-resource.data'
 
 export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
@@ -16,7 +15,6 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
     super(type)
     this.summary = true
     new ContextProviderController<T, Resource<T>>(this)
-    this.templateGenerators.structure.header.push(this.renderResourceStructure)
   }
 
   public override(): boolean {
@@ -40,6 +38,12 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
     this.requestUpdate()
     return [html``]
 
+  }
+
+
+  protected willUpdate(changes: PropertyValues): void {
+    super.willUpdate(changes)
+    this.templateGenerators.structure.header.push(this.renderResourceStructure)
   }
 
   private renderResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {

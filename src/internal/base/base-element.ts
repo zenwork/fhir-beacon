@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {PropertyValues, TemplateResult}    from 'lit'
 import {DisplayConfig}                     from '../../types'
-import {Decorated}                         from './data/data-element'
 import {FhirElementData, ValidationErrors} from './data/fhir-data-element.data'
-import {EmptyResult}                       from './presentable'
-import {FhirPresentableElement}            from './presentable/fhir-presentable-element'
+
+import {Decorated}              from './Decorated'
+import {EmptyResult}            from './presentable'
+import {FhirPresentableElement} from './presentable/fhir-presentable-element'
 
 /**
  * Represents a base element in the FHIR data model. This is the class to extend when creating components.
