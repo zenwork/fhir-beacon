@@ -1,7 +1,7 @@
 import {html, TemplateResult}                                         from 'lit'
 import {customElement}                                                from 'lit/decorators.js'
 import {BaseElement}                                                  from '../../../internal/base'
-import {renderError}                                                  from '../../../shell/layout/renderError'
+import {DisplayConfig}                                                from '../../../types'
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
 
@@ -12,14 +12,14 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
     super('Ingredient')
   }
 
-  public renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderDisplay(config: DisplayConfig,
+                       data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult[] {
 
-    let substance: TemplateResult = renderError(
-      this.getDisplayConfig().showerror,
-      this.getDisplayConfig().verbose,
-      'ingredient',
-      'substance[x] choice not found'
-    )
+    let substance: TemplateResult = html`
+        <fhir-not-supported
+                label="ingredient"
+                description="substance[x] choice not found"
+        ></fhir-not-supported >`
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -33,20 +33,24 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
       `
     }
 
-    return html`
+    return [
+      html`
         <fhir-wrapper .label=${this.label}>
             ${substance}
             <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
         </fhir-wrapper >
-    `
+      `
+    ]
   }
 
-  public renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderStructure(config: DisplayConfig,
+                         data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult[] {
 
-    let substance: TemplateResult = renderError(
-      this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
-                                                                                        + ' found'
-    )
+    let substance: TemplateResult = html`
+        <fhir-not-supported
+                label="ingredient"
+                description="substance[x] choice not found"
+        ></fhir-not-supported >`
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
@@ -58,9 +62,11 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
           <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference > `
     }
 
-    return html`
+    return [
+      html`
         ${substance}
         <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
-    `
+      `
+    ]
   }
 }

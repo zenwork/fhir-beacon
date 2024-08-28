@@ -1,6 +1,7 @@
-import {html}                     from 'lit'
-import {BaseElement, EmptyResult} from '../base'
-import {BackboneElementData}      from './backbone.data'
+import {html}                                from 'lit'
+import {DisplayConfig}                       from '../../types'
+import {BaseElement, Decorated, EmptyResult} from '../base'
+import {BackboneElementData}                 from './backbone.data'
 
 export abstract class Backbone<D extends BackboneElementData> extends BaseElement<D> {
   protected constructor(type: string) {
@@ -18,7 +19,7 @@ export abstract class Backbone<D extends BackboneElementData> extends BaseElemen
     ]
 
     this.templateGenerators.structure.header
-      = (config, data) => (data.modifierExtension || config.verbose) ? result : EmptyResult
+      = (config: DisplayConfig, data: Decorated<D>) => (data.modifierExtension || config.verbose) ? result : EmptyResult
   }
 
 }

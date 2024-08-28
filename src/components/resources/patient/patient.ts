@@ -3,6 +3,7 @@ import {customElement}        from 'lit/decorators.js'
 import {DomainResource}       from '../../../internal'
 
 import {wrapc, wraps}      from '../../../shell/layout/wrapCollection'
+import {DisplayConfig}     from '../../../types'
 import {isDeceasedBoolean} from '../../complex/quantity/quantity.type-guards'
 import {PrimitiveType}     from '../../primitive/type-converters/type-converters'
 import {PatientData}       from './patient.data'
@@ -14,38 +15,41 @@ export class Patient extends DomainResource<PatientData> {
     super('Patient')
   }
 
-  public renderDisplay(data: PatientData): TemplateResult | TemplateResult[] {
-    return html`
-        ${(wrapc('names', data.name, this.verbose, (i, x) => html`
+  public renderDisplay(config: DisplayConfig, data: PatientData): TemplateResult[] {
+    return [
+      html`
+          ${(wrapc('names', data.name, config.verbose, (i, x) => html`
         <fhir-human-name label="name${x}" .data=${i} summary></fhir-human-name >
         `))}
 
-        ${(wrapc('identifiers', data.identifier, this.verbose, (i, x) => html`
+          ${(wrapc('identifiers', data.identifier, config.verbose, (i, x) => html`
             <fhir-identifier label='identifier${x}' .data=${i} summary></fhir-identifier >`))}
       <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive >
 
-        ${(wrapc('telecoms', data.telecom, this.verbose, (t, x) => html`
+          ${(wrapc('telecoms', data.telecom, config.verbose, (t, x) => html`
         <fhir-contact-point label="telecom${x}" .data=${t} summary></fhir-contact-point >
         `))}
 
-        ${wrapc('addresses', data.address, this.verbose, (a, x) => html`
+          ${wrapc('addresses', data.address, config.verbose, (a, x) => html`
         <fhir-address label="address${x}" .data=${a} summary></fhir-address summary >
         `)}
-    `
+      `
+    ]
   }
 
   //TODO: how do we handle choices [x] in the strucutred view
-  public renderStructure(data: PatientData): TemplateResult | TemplateResult[] {
-    return html`
-        ${(wraps('identifiers', data.identifier, this.verbose, (i, x) => html`
+  public renderStructure(config: DisplayConfig, data: PatientData): TemplateResult[] {
+    return [
+      html`
+          ${(wraps('identifiers', data.identifier, config.verbose, (i, x) => html`
             <fhir-identifier label='identifier${x}' .data=${i} summary></fhir-identifier >`))}
         <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive >
 
-        ${(wraps('names', data.name, this.verbose, (i, x) => html`
+          ${(wraps('names', data.name, config.verbose, (i, x) => html`
             <fhir-human-name label="name${x}" .data=${i} summary></fhir-human-name >
         `))}
 
-        ${(wraps('telecoms', data.telecom, this.verbose, (t, x) => html`
+          ${(wraps('telecoms', data.telecom, config.verbose, (t, x) => html`
             <fhir-contact-point label="telecom${x}" .data=${t} summary></fhir-contact-point >
         `))}
         <fhir-primitive label="gender" .value=${data.gender} .type=${PrimitiveType.code} summary></fhir-primitive >
@@ -58,11 +62,12 @@ export class Patient extends DomainResource<PatientData> {
                     <fhir-primitive label="deceasedDateTime" .value=${data.deceased} .type=${PrimitiveType.datetime} summary></fhir-primitive >`
         }
 
-        ${wraps('addresses', data.address, this.verbose, (a, x) => html`
+          ${wraps('addresses', data.address, config.verbose, (a, x) => html`
                     <fhir-address label="address${x}" .data=${a} summary></fhir-address >
                 `
         )}
-    `
+      `
+    ]
   }
 
 

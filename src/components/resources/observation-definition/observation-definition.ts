@@ -1,5 +1,6 @@
-import {html, TemplateResult}      from 'lit'
+import {TemplateResult}            from 'lit'
 import {customElement}             from 'lit/decorators.js'
+import {EmptyResult}               from '../../../internal'
 import {DomainResource}            from '../../../internal/resource/domain-resource'
 import {ObservationDefinitionData} from './observation-definition.data'
 
@@ -10,12 +11,12 @@ export class ObservationDefinition extends DomainResource<ObservationDefinitionD
     super('ObservationDefinition')
   }
 
-  public renderDisplay(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderDisplay(): TemplateResult[] {
+    return EmptyResult
   }
 
-  public renderStructure(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderStructure(): TemplateResult[] {
+    return EmptyResult
   }
 
 }

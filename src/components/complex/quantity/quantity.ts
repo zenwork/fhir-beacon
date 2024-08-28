@@ -2,7 +2,6 @@ import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
 import {BaseElement, Decorated, ValidationErrors}             from '../../../internal'
-import {renderError}                                          from '../../../shell/layout/renderError'
 import {DisplayConfig}                                        from '../../../types'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
@@ -52,10 +51,13 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       ]
     }
 
-
-    return renderError(config.showerror,
-                       config.verbose,
-                       'quantity', 'must be Quantity or Simple Quantity')
+    return [
+      html`
+          <fhir-not-supported
+                  label="quantity"
+                  description="must be Quantity or Simple Quantity"
+          ></fhir-not-supported >`
+    ]
   }
 
   public renderStructure(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
@@ -85,12 +87,13 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       ]
     }
 
-    return renderError(
-      config.showerror,
-      config.verbose,
-      'quantity',
-      'must be Quantity or Simple Quantity'
-    )
+    return [
+      html`
+          <fhir-not-supported
+                  label="quantity"
+                  description="must be Quantity or Simple Quantity"
+          ></fhir-not-supported >`
+    ]
 
   }
 

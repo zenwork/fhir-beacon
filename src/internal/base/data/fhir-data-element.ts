@@ -71,7 +71,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    *
    * @type {ValidationErrors} An array of objects representing validation errors.
    */
-  protected errors: ValidationErrors = []
+  public errors: ValidationErrors = []
 
   @state()
   public declare dataContext: FhirDataContext
@@ -89,8 +89,6 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
 
   /**
    * Determines whether the given data is ready to be processed.
-   *
-   * @param data - The data to be checked.
    *
    * @return - This method does not return any value.
    */

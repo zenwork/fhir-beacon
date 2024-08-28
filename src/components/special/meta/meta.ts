@@ -2,6 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {BaseElement}                   from '../../../internal'
+import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {MetaData}                      from './meta.data'
 
@@ -10,8 +11,9 @@ export class Meta extends BaseElement<MetaData> {
 
   constructor() {super('Meta')}
 
-  public renderDisplay(data: MetaData): TemplateResult | TemplateResult[] {
-    return html`
+  public renderDisplay(config: DisplayConfig, data: MetaData): TemplateResult[] {
+    return [
+      html`
         <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive >
         <fhir-primitive label="lastUpdated" type=${PrimitiveType.instant} .value=${data.lastUpdated} summary></fhir-primitive >
         <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive >
@@ -36,12 +38,14 @@ export class Meta extends BaseElement<MetaData> {
           `)}
         </fhir-wrapper >
       ` : nothing}
-    `
+      `
+    ]
   }
 
 
-  public renderStructure(data: MetaData): TemplateResult | TemplateResult[] {
-    return html`
+  public renderStructure(config: DisplayConfig, data: MetaData): TemplateResult[] {
+    return [
+      html`
         <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive >
         <fhir-primitive label="lastUpdated" type=${PrimitiveType.instant} .value=${data.lastUpdated} summary></fhir-primitive >
         <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive >
@@ -66,6 +70,7 @@ export class Meta extends BaseElement<MetaData> {
           `)}
         </fhir-structure-wrapper >
       ` : nothing}
-    `
+      `
+    ]
   }
 }
