@@ -140,7 +140,6 @@ export class Primitive extends LitElement {
 
       try {
         this.value = this.contextData.getAt(this.valuePath)
-        // console.log('looking up', this.valuePath, this.value)
       } catch {
         console.log(`unable to retrieve value-path: ${this.valuePath}`)
         this.value = `unable to retrieve value-path: ${this.valuePath}`

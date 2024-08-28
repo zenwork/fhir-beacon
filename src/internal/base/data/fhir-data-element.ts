@@ -74,7 +74,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   protected errors: ValidationErrors = []
 
   @state()
-  private declare dataContext: FhirDataContext
+  public declare dataContext: FhirDataContext
 
   //------------------------------------------------//
   #fetched: boolean = false

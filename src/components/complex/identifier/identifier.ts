@@ -22,14 +22,17 @@ export class Identifier extends BaseElement<IdentifierData> {
   }
 
   public renderStructure(config: DisplayConfig, data: Decorated<IdentifierData>): TemplateResult[] {
-    return [
-      html`
-          <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use} summary></fhir-primitive >
-          <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
-          <fhir-primitive label="system" type=${PrimitiveType.uri} .value=${data.system} summary></fhir-primitive >
-          <fhir-primitive label="value" .value=${data.value} summary></fhir-primitive >
-          <fhir-period label="period" .data=${data.period} summary></fhir-period >
-          <fhir-reference label="assigner" .data=${data.assigner} summary></fhir-reference > `
-    ]
+    if (data) {
+      return [
+        html`
+            <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use} summary></fhir-primitive >
+            <fhir-codeable-concept label="type" .data=${data.type} summary></fhir-codeable-concept >
+            <fhir-primitive label="system" type=${PrimitiveType.uri} .value=${data.system} summary></fhir-primitive >
+            <fhir-primitive label="value" .value=${data.value} summary></fhir-primitive >
+            <fhir-period label="period" .data=${data.period} summary></fhir-period >
+            <fhir-reference label="assigner" .data=${data.assigner} summary></fhir-reference > `
+      ]
+    }
+    return [html``]
   }
 }

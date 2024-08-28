@@ -54,3 +54,21 @@ export const Structure: Story = {
     open: true
   }
 }
+
+export const Foo: Story = {
+  args: {
+    data: {
+      "authorReference": {
+        "reference": "Patient/example"
+      },
+
+      "time": "2022-02-08T10:18:14.034+10:00",
+      "text": "I don't think that this is true, or what I said, and it should be corrected"
+    },
+
+    mode: "display_summary",
+    showerror: true,
+    verbose: true,
+    open: true
+  }
+}

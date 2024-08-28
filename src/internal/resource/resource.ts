@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, TemplateResult}       from 'lit'
-import {property}                   from 'lit/decorators.js'
-import {PrimitiveType}              from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig, DisplayMode} from '../../types'
-import {BaseElement, Decorated}     from '../base'
-import {ContextProviderController}  from '../contexts'
-import {ResourceData}               from './domain-resource.data'
+ 
+import {html, TemplateResult}              from 'lit'
+import {property}                          from 'lit/decorators.js'
+import {PrimitiveType}                     from '../../components/primitive/type-converters/type-converters'
+import {DisplayConfig, DisplayMode}        from '../../types'
+import {BaseElement, Decorated, NoDataSet} from '../base'
+import {ContextProviderController}         from '../contexts'
+import {ResourceData}                      from './domain-resource.data'
 
 export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
@@ -50,6 +50,25 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
           <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
       `
     ]
+  }
+
+
+  protected render(): TemplateResult | TemplateResult[] {
+    if (this.verbose) {
+      if (!this.extendedData && this.extendedData !== NoDataSet) {
+        return this.renderNoData()
+      }
+    }
+    return super.render()
+  }
+
+  private renderNoData(): TemplateResult[] {
+    return [
+      html`
+          <fhir-not-supported variant='no-data'></fhir-not-supported >
+      `
+    ]
+
   }
 
 }

@@ -3,6 +3,7 @@ import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {DomainResource}                from '../../../internal/resource/domain-resource'
 import {wrap}                          from '../../../shell'
+import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {SubstanceData}                 from './substance.data'
 
@@ -12,8 +13,9 @@ export class Substance extends DomainResource<SubstanceData> {
     super('Substance')
   }
 
-  public renderDisplay(data: SubstanceData): TemplateResult {
-    return html`
+  public renderDisplay(config: DisplayConfig, data: SubstanceData): TemplateResult[] {
+    return [
+      html`
         <fhir-primitive label="description" .value=${data.description} .context="id:${data.id}" summary></fhir-primitive >
         <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier >
         <fhir-primitive label="instance or kind" value=${data.instance ? 'instance' : 'kind'} summary></fhir-primitive >
@@ -37,11 +39,13 @@ export class Substance extends DomainResource<SubstanceData> {
                            .label=${'ingredient' + idx}
                            .data=${ing} summary
                    ></fhir-substance-ingredient > `)}
-    `
+      `
+    ]
   }
 
-  public renderStructure(data: SubstanceData): TemplateResult {
-    return html`
+  public renderStructure(config: DisplayConfig, data: SubstanceData): TemplateResult[] {
+    return [
+      html`
         <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier >
         <fhir-primitive label="instance" value=${data.instance} summary></fhir-primitive >
         <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive >
@@ -76,6 +80,7 @@ export class Substance extends DomainResource<SubstanceData> {
                     </fhir-structure-wrapper >
                 `
           : nothing}
-    `
+      `
+    ]
   }
 }

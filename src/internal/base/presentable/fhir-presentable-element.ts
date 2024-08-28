@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {html, nothing, PropertyValues, TemplateResult}                      from 'lit'
-import {property, state}                                                    from 'lit/decorators.js'
+import {property}                                                           from 'lit/decorators.js'
 import {mustRender}                                                         from '../../../components/mustRender'
 import {
   PrimitiveType
@@ -32,21 +32,20 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
+  public open: boolean = false
 
   @property({ type: Boolean, reflect: true })
   public forceclose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare verbose: boolean
+  public verbose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  public showerror: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare summary: boolean
+  public summary: boolean = false
 
-  @state()
   protected templateGenerators: Generators<T> = NullGenerators()
 
   protected constructor(type: string) {
@@ -57,7 +56,6 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
     // consume display configuration provided by a context providing element
     new DisplayContextConsumerController(this)
-    this.templateGenerators.structure.header.push(this.renderBaseElement)
   }
 
   public getDisplayConfig(): DisplayConfig {
@@ -126,7 +124,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
    * @private
    */
   protected summaryMode() {
-    return this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
+    return !!this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
   }
 
   protected getLabel() {
@@ -150,7 +148,8 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
     if (this.canRender()) {
       this.willRender(this.getDisplayConfig(), this.extendedData, changes)
-
+      this.templateGenerators = NullGenerators()
+      this.templateGenerators.structure.header.push(this.renderBaseElement)
       if (this.override()) {
         this.templateGenerators.override.body.push(this.renderOverride)
       } else {
@@ -277,6 +276,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
         break
 
     }
+
     return templates
   }
 
@@ -304,7 +304,7 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
                         <fhir-primitive label="extension" context="not implemented" .type=${PrimitiveType.none}></fhir-primitive >`
               : nothing}
         `
-    ]
+      ]
     }
 
     return EmptyResult

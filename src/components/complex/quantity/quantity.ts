@@ -103,7 +103,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     return errors
   }
 
-  public extend(data: QuantityData): Decorated<QuantityData> | Decorated<SimpleQuantityData> {
+  public decorate(data: QuantityData): Decorated<QuantityData> | Decorated<SimpleQuantityData> {
     // rule: sqty-1
     if (data.comparator) {
       // convert html encoded strings such as &gt;
