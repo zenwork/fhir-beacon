@@ -1,62 +1,44 @@
-import {provide}                                       from '@lit/context'
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
-import {choose}                                        from 'lit/directives/choose.js'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
-import {DisplayMode}                                   from '../../types'
-import {containedDataContext}                          from '../contexts/context'
+import {DisplayConfig}                                 from '../../types'
+import {Decorated, NoDataSet, ValidationErrors}        from '../base'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'
-
-import {Resource} from './resource'
+import {Resource}                                      from './Resource'
 
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
 
-  @provide({ context: containedDataContext })
-  declare contained: ResourceData[]
-
-
-  protected constructor(type: string) {
-    super(type)
-
-    this.addStructureTemplateGenerator('domain-resource',
-                                       (data: T) => { return this.renderDomainResourceStructure(data) })
+  protected constructor(name: string) {
+    super(name)
   }
 
-
-  protected render(): TemplateResult {
-    if (!this.verbose && !this.showerror && !this.convertedData) return html``
-    return html`
-        <div part="domain-resource">
-            ${choose(
-                    this.mode,
-                    [
-                        [DisplayMode.narrative, () => this.renderNarrativeMode(this.data)]
-                    ],
-                    () => super.render()
-            )}
-        </div >`
-
-  }
-
-  protected renderNarrativeMode(data: T): TemplateResult {
+  public renderNarrative(config: DisplayConfig,
+                         data: Decorated<T>,
+                         errors: ValidationErrors): TemplateResult[] {
     if (data.text) {
-      return html`
-          <fhir-wrapper .label=${this.type}>
-              <fhir-narrative .data=${data.text}></fhir-narrative >
-          </fhir-wrapper >`
+      return [
+        html`
+            <fhir-wrapper .label=${this.type}>
+                <fhir-narrative .data=${data.text}></fhir-narrative >
+            </fhir-wrapper >`
+      ]
     }
-    return html``
+
+    return [html``]
   }
 
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (_changedProperties.has('data')) {
-      this.contained = this.data?.contained || []
+
+  protected willUpdate(changes: PropertyValues): void {
+    super.willUpdate(changes)
+    this.templateGenerators.structure.header.push(this.renderDomainResourceStructure)
+    if (this.verbose && (!this.data || this.data === NoDataSet)) {
+      this.errors.push({ id: 'DISPLAY_NOTHING', err: 'no data provided' })
     }
   }
 
-  protected renderDomainResourceStructure(data: T): TemplateResult | TemplateResult[] {
+  protected renderDomainResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
           <fhir-narrative key="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >

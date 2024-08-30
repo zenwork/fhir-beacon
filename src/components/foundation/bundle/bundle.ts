@@ -1,9 +1,10 @@
 import {html, nothing, TemplateResult}                  from 'lit'
 import {customElement}                                  from 'lit/decorators.js'
-import {BaseElement}                                    from '../../../internal'
+import {BaseElement, Decorated}                         from '../../../internal'
 import {renderResourceComponent}                        from '../../../internal/resource/renderResourceComponent'
 import {hasSome, isDefined}                             from '../../../shell/layout/directives'
 import {renderBackboneCollection, renderSingleBackbone} from '../../../shell/layout/renderBackboneCollection'
+import {DisplayConfig}                                  from '../../../types'
 import {PrimitiveType}                                  from '../../primitive/type-converters/type-converters'
 import {BundleData}                                     from './bundle.data'
 
@@ -16,25 +17,26 @@ export class Bundle extends BaseElement<BundleData> {
   }
 
 
-  protected renderDisplay(data: BundleData): TemplateResult | TemplateResult[] {
-    return html`
-      <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
-      <fhir-primitive label="type" .value=${data.type} .type=${PrimitiveType.code}></fhir-primitive >
-      <fhir-primitive label="total" .value=${data.total} .type=${PrimitiveType.unsigned_int}></fhir-primitive >
-      ${hasSome(data.link, this.verbose) ? renderBackboneCollection(
-              'links', 'link', data.link,
-        (item) => html`
+  public renderDisplay(config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
+    return [
+      html`
+          <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
+          <fhir-primitive label="type" .value=${data.type} .type=${PrimitiveType.code}></fhir-primitive >
+          <fhir-primitive label="total" .value=${data.total} .type=${PrimitiveType.unsigned_int}></fhir-primitive >
+          ${hasSome(data.link, this.verbose) ? renderBackboneCollection(
+                  'links', 'link', data.link,
+                  (item) => html`
           <fhir-primitive label="relation" .value=${item.relation} .type=${PrimitiveType.code}></fhir-primitive >
           <fhir-primitive label="url" .value=${item.url} .type=${PrimitiveType.uri}></fhir-primitive >
         `,
-              this.verbose
-      ) : nothing}
-      ${hasSome(data.entry, this.verbose) ? renderBackboneCollection(
-              'entries', 'entry', data.entry,
-        (entry) => {
-          const verbose = this.verbose
-          const noIndex = null
-          return html`
+                  this.verbose
+          ) : nothing}
+          ${hasSome(data.entry, this.verbose) ? renderBackboneCollection(
+                  'entries', 'entry', data.entry,
+                  (entry) => {
+                      const verbose = this.verbose
+                      const noIndex = null
+                      return html`
               ${hasSome(entry.link, verbose) ? renderBackboneCollection(
                       'links', noIndex, entry.link, (item) => html`
               <fhir-primitive label="link" .value=${item} .type=${PrimitiveType.link}></fhir-primitive >
@@ -42,38 +44,38 @@ export class Bundle extends BaseElement<BundleData> {
               ) : nothing}
             ${renderResourceComponent(entry.resource, this.getDisplayConfig())}
           `
-        },
-        this.verbose
-      ) : nothing}
-      <fhir-signature label="signature" .data=${data.signature}></fhir-signature >
-      ${renderResourceComponent(data.issues, this.getDisplayConfig())}
-
-
-    `
+                  },
+                  this.verbose
+          ) : nothing}
+          <fhir-signature label="signature" .data=${data.signature}></fhir-signature >
+          ${renderResourceComponent(data.issues, this.getDisplayConfig())}
+      `
+    ]
 
   }
 
-  protected renderStructure(data: BundleData): TemplateResult | TemplateResult[] {
-    return html`
-      <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
-      <fhir-primitive label="type" .value=${data.type} .type=${PrimitiveType.code}></fhir-primitive >
-      <fhir-primitive label="timestamp" .value=${data.timestamp} .type=${PrimitiveType.instant}></fhir-primitive >
-      <fhir-primitive label="total" .value=${data.total} .type=${PrimitiveType.unsigned_int}></fhir-primitive >
-      ${hasSome(data.link, this.verbose) ? renderBackboneCollection(
-              'links', 'link', data.link,
-        (item) => html`
+  public renderStructure(config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
+    return [
+      html`
+          <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
+          <fhir-primitive label="type" .value=${data.type} .type=${PrimitiveType.code}></fhir-primitive >
+          <fhir-primitive label="timestamp" .value=${data.timestamp} .type=${PrimitiveType.instant}></fhir-primitive >
+          <fhir-primitive label="total" .value=${data.total} .type=${PrimitiveType.unsigned_int}></fhir-primitive >
+          ${hasSome(data.link, this.verbose) ? renderBackboneCollection(
+                  'links', 'link', data.link,
+                  (item) => html`
           <fhir-primitive label="relation" .value=${item.relation} .type=${PrimitiveType.code}></fhir-primitive >
           <fhir-primitive label="url" .value=${item.url} .type=${PrimitiveType.uri}></fhir-primitive >
         `,
-              this.verbose
-      ) : nothing}
-      ${hasSome(data.entry, this.verbose) ? renderBackboneCollection(
-              'entries', 'entry', data.entry,
-        (entry) => {
-          const displayConfig = this.getDisplayConfig()
-          const verbose = displayConfig.verbose
-          const noIndex = null
-          return html`
+                  this.verbose
+          ) : nothing}
+          ${hasSome(data.entry, this.verbose) ? renderBackboneCollection(
+                  'entries', 'entry', data.entry,
+                  (entry) => {
+                      const displayConfig = this.getDisplayConfig()
+                      const verbose = displayConfig.verbose
+                      const noIndex = null
+                      return html`
               ${hasSome(entry.link, verbose) ? renderBackboneCollection(
                       'links', noIndex, entry.link, (item) => html`
               <fhir-primitive label="link" .value=${item} .type=${PrimitiveType.link}></fhir-primitive >
@@ -83,7 +85,7 @@ export class Bundle extends BaseElement<BundleData> {
             ${renderResourceComponent(entry.resource, displayConfig)}
               ${isDefined(entry.search) ? renderSingleBackbone(
                       'search', noIndex, verbose,
-              html`
+                      html`
                 <fhir-primitive label="mode" .value=${entry.search?.mode} .type=${PrimitiveType.code}></fhir-primitive >
                 <fhir-primitive
                   label="score" .value=${entry.search?.score}
@@ -93,7 +95,7 @@ export class Bundle extends BaseElement<BundleData> {
               ) : nothing}
               ${isDefined(entry.request) ? renderSingleBackbone(
                       'request', noIndex, verbose,
-              html`
+                      html`
                 <fhir-primitive
                   label="method" .value=${entry.request?.method}
                   .type=${PrimitiveType.code}
@@ -133,14 +135,13 @@ export class Bundle extends BaseElement<BundleData> {
                       `
               ) : nothing}
           `
-        },
-        this.verbose
-      ) : nothing}
-      <fhir-signature label="signature" .data=${data.signature}></fhir-signature >
-      ${renderResourceComponent(data.issues, this.getDisplayConfig())}
+                  },
+                  this.verbose
+          ) : nothing}
+          <fhir-signature label="signature" .data=${data.signature}></fhir-signature >
+          ${renderResourceComponent(data.issues, this.getDisplayConfig())}
 
-    `
+      `
+    ]
   }
-
-
 }

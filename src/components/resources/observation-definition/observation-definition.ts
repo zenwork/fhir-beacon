@@ -1,6 +1,7 @@
-import {html, TemplateResult}      from 'lit'
+import {TemplateResult}            from 'lit'
 import {customElement}             from 'lit/decorators.js'
-import {DomainResource}            from '../../../internal/resource/domain-resource'
+import {EmptyResult}               from '../../../internal'
+import {DomainResource}            from '../../../internal/resource/DomainResource'
 import {ObservationDefinitionData} from './observation-definition.data'
 
 @customElement('fhir-observation-definition')
@@ -10,12 +11,12 @@ export class ObservationDefinition extends DomainResource<ObservationDefinitionD
     super('ObservationDefinition')
   }
 
-  protected renderDisplay(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderDisplay(): TemplateResult[] {
+    return EmptyResult
   }
 
-  protected renderStructure(): TemplateResult | TemplateResult[] {
-    return html``
+  public renderStructure(): TemplateResult[] {
+    return EmptyResult
   }
 
 }

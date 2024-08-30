@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
-import {DisplayMode}          from '../../types'
-import {BaseElement}          from './base-element'
+import {DisplayMode}          from '../../../types'
+import {BaseElement}          from '../../BaseElement'
 
 type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 
@@ -8,8 +8,10 @@ type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
  * Renders values when only on-of the provided choices should be rendered
  *
  * @param {BaseElement} contextElement - The base element providing context state.
- * @param {Choice[]} choices - An array of choices containing data to evaluate and template to conditionally render for that data.
- * @returns {TemplateResult | TemplateResult[]} - The rendered template result or an array of rendered template results.
+ * @param {Choice[]} choices - An array of choices containing data to evaluate and template to conditionally render for
+ *   that data.
+ * @returns {TemplateResult | TemplateResult[]} - The rendered template result or an array of rendered template
+ *   results.
  */
 export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Choice<C>[]): TemplateResult | TemplateResult[] {
 

@@ -1,9 +1,11 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../../internal/base'
-import {strap, wrap}          from '../../../shell'
-import {PrimitiveType}        from '../../primitive/type-converters/type-converters'
-import {HumanNameData}        from '../../resources/patient/patient.data'
+import {html, TemplateResult}   from 'lit'
+import {customElement}          from 'lit/decorators.js'
+import {BaseElement}            from '../../../internal'
+import {Decorated, EmptyResult} from '../../../internal/base'
+import {strap, wrap}            from '../../../shell'
+import {DisplayConfig}          from '../../../types'
+import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
+import {HumanNameData}          from '../../resources/patient/patient.data'
 
 @customElement('fhir-human-name')
 export class HumanName extends BaseElement<HumanNameData> {
@@ -11,15 +13,16 @@ export class HumanName extends BaseElement<HumanNameData> {
     super('HumanName')
   }
 
-  protected renderDisplay(data: HumanNameData): TemplateResult | TemplateResult[] {
+  public renderDisplay(config: DisplayConfig, data: Decorated<HumanNameData>): TemplateResult[] {
     if (data.given && data.family) {
-      return html`
-          ${this.verbose
+      return [
+        html`
+            ${config.verbose
             ? wrap(
                           '',
                           'given name',
                           data.given,
-                          this.verbose,
+                          config.verbose,
                           (g,
                            i) => html`
                               <fhir-primitive label=${i} .value=${g} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`
@@ -28,19 +31,23 @@ export class HumanName extends BaseElement<HumanNameData> {
                       <fhir-primitive label="given name" .value=${data.given.join(' ')} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`}
 
           <fhir-primitive label="family name" .value=${data.family} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-      `
+        `
+      ]
     }
 
     if (data.text) {
-      return html`
-          <fhir-primitive label="full name" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive > `
+      return [
+        html`
+            <fhir-primitive label="full name" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive > `
+      ]
     }
 
-    return html``
+    return EmptyResult
   }
 
-  protected renderStructure(data: HumanNameData): TemplateResult | TemplateResult[] {
-    return html`
+  public renderStructure(config: DisplayConfig, data: Decorated<HumanNameData>): TemplateResult[] {
+    return [
+      html`
         <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive >
         <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
         <fhir-primitive label="family" .value=${data.family} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
@@ -53,6 +60,7 @@ export class HumanName extends BaseElement<HumanNameData> {
                  i) => html`
                     <fhir-primitive label=${i} .value=${g} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`
         )}
-    `
+      `
+    ]
   }
 }

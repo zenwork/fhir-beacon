@@ -29,7 +29,7 @@ export class DataContextConsumerController<T extends FhirElementData> implements
     host.addController(this)
 
     host.dataContext = new FhirDataContextImpl()
-    host.dataContext.data = {}
+    host.dataContext.data = {} as FhirElementData
 
     new ContextConsumer(host,
       {

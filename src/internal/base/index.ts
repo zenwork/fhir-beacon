@@ -1,6 +1,9 @@
 // created by autobarrel, do not modify directly
 
-export * from './base-element'
+export * from './DataHandling'
+export * from './Decorated'
+export * from './Rendering'
+export * from './Templating'
 export * from './data/'
-export * from './oneOf'
+export * from './util/oneOf'
 export * from './presentable/'

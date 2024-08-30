@@ -5,8 +5,10 @@ export const toInteger64: toPrimitive<unknown, Integer64> = (value: unknown): In
 
   if (typeof value === 'string') {
     let bigint: bigint | null = null
+
     try {
       bigint = BigInt(value)
+      // eslint-disable-next-line
     } catch (_) {
       // do nothing
     }

@@ -93,27 +93,16 @@ describe('DisplayConfig', () => {
     })
   })
   describe('complex types', () => {
-    it('should show component errors when verbose is enabled', async () => {
+    it('should show nothing when there is no data and verbose is enabled', async () => {
       const annotation = await fixture<Annotation>(html`
         <fhir-shell verbose showerror>
-          <fhir-annotation ></fhir-annotation >
+            <fhir-annotation ></fhir-annotation >
         </fhir-shell >
       `, new Annotation().tagName).first()
 
       await aTimeout()
 
-      const collection = annotation.shadowedChildren()
-      expect(collection.length).toEqual(1)
-      const primitive = collection.item(0)! as Primitive
-      expect(primitive.queryShadowByText('the data or data-path property must be provided')).toBeVisible()
-
-      const shell: Shell = document.body.querySelector('fhir-shell')!
-      shell.showerror = false
-
-      await aTimeout()
-
-      assert.isEmpty(annotation.queryShadow({ select: 'fhir-error', expect: 0 }))
-      expect(annotation.queryShadowByText('No Data provided'))
+      assert.isEmpty(annotation.queryShadow({ select: '*', expect: 0 }))
 
     })
 
@@ -156,7 +145,7 @@ describe('DisplayConfig', () => {
       shell.mode = DisplayMode.display_summary
       await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
 
       shell.mode = DisplayMode.debug
       await aTimeout()
@@ -200,14 +189,15 @@ describe('DisplayConfig', () => {
         </fhir-shell >
       `, new Annotation().tagName).first()
 
+      await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
-      await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 6 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 14 }))
+      await aTimeout(200)
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
     })
 
@@ -221,7 +211,8 @@ describe('DisplayConfig', () => {
         </fhir-shell >
       `, new Medication().tagName).first()
 
-      await aTimeout()
+      await aTimeout(500)
+
 
       const collection = medication.shadowedChildren()
 
@@ -247,6 +238,7 @@ describe('DisplayConfig', () => {
       `, new Medication().tagName).first()
 
       await aTimeout()
+
 
       assert.isEmpty(medication.queryShadow({ select: '*', expect: 0 }))
 

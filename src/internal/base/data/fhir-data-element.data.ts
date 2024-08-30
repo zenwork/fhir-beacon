@@ -15,7 +15,7 @@ import {URI} from '../../../components/primitive/primitive.data'
  * @type {FhirElementData}
  * @const
  */
-export const NoDataSet: FhirElementData = Object.freeze({ id: 'FHIR::BEACON::NULL::OBJECT' })
+export const NoDataSet: FhirElementData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
 /**
  * Represents a data structure that holds the information of a FHIR element.

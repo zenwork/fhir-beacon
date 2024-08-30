@@ -7,15 +7,19 @@ describe('MustRender', () => {
     assert.isFalse(mustRender(undefined), 'default with no data')
   })
 
-  it('should pass with no data and default', () => {
+  it('should pass with data and default', () => {
     assert.isTrue(mustRender('a'), 'default with data')
   })
 
-  it('should pass with no data but verbose in structure mode', () => {
+  it('should pass with data, verbose, and in narrative mode', () => {
+    assert.isTrue(mustRender('a', DisplayMode.narrative, true), 'data, narrative, verbose')
+  })
+
+  it('should pass with no data, verbose, and in structure mode', () => {
     assert.isTrue(mustRender(undefined, DisplayMode.structure, true), 'no data, structure, verbose')
   })
 
-  it('should fail with no data but verbose in structure mode', () => {
+  it('should fail with no data, verbose, and in structure mode', () => {
     assert.isFalse(mustRender(undefined, DisplayMode.structure, false), 'no data, structure, not verbose')
   })
 })

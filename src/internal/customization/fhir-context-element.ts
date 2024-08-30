@@ -1,7 +1,7 @@
 import {consume}                                            from '@lit/context'
 import {html, LitElement, PropertyValueMap, TemplateResult} from 'lit'
 import {property, state}                                    from 'lit/decorators.js'
-import {contextData, FhirDataContext}                       from './index'
+import {contextData, FhirDataContext}                       from '../index'
 
 
 export abstract class FhirContextElement extends LitElement {
@@ -19,7 +19,8 @@ export abstract class FhirContextElement extends LitElement {
   declare dataPath: null | string
 
   /**
-   * value retrieved from context for `dataPath` property, based on the `data-path` attribute or as a constructor argument.
+   * value retrieved from context for `dataPath` property, based on the `data-path` attribute or as a constructor
+   * argument.
    * @private
    */
   @state()

@@ -1,7 +1,7 @@
 import {html, TemplateResult}                                         from 'lit'
 import {customElement}                                                from 'lit/decorators.js'
-import {BaseElement}                                                  from '../../../internal/base'
-import {renderError}                                                  from '../../../shell/layout/renderError'
+import {BaseElement}                                                  from '../../../internal'
+import {DisplayConfig}                                                from '../../../types'
 import {SubstanceIngredientData, SubstanceIngredientReferenceData}    from './substance-ingredient.data'
 import {isSubstanceIngredientConcept, isSubstanceIngredientReference} from './substance-ingredient.type-guard'
 
@@ -12,55 +12,61 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
     super('Ingredient')
   }
 
-  protected renderDisplay(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderDisplay(config: DisplayConfig,
+                       data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult[] {
 
-    let substance: TemplateResult = renderError(
-      this.getDisplayConfig().showerror,
-      this.getDisplayConfig().verbose,
-      'ingredient',
-      'substance[x] choice not found'
-    )
+    let substance: TemplateResult = html`
+        <fhir-not-supported
+                label="ingredient"
+                description="substance[x] choice not found"
+        ></fhir-not-supported >`
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
-        <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept >
+          <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept >
       `
     }
 
     if (isSubstanceIngredientReference(data)) {
       substance = html`
-        <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference >
+          <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference >
       `
     }
 
-    return html`
-      <fhir-wrapper .label=${this.label}>
-        ${substance}
-        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
-      </fhir-wrapper >
-    `
+    return [
+      html`
+        <fhir-wrapper .label=${this.label}>
+            ${substance}
+            <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+        </fhir-wrapper >
+      `
+    ]
   }
 
-  protected renderStructure(data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult | TemplateResult[] {
+  public renderStructure(config: DisplayConfig,
+                         data: SubstanceIngredientData | SubstanceIngredientReferenceData): TemplateResult[] {
 
-    let substance: TemplateResult = renderError(
-      this.getDisplayConfig().showerror, this.getDisplayConfig().verbose, 'ingredient', 'substance[x] choice not'
-                                                                                        + ' found'
-    )
+    let substance: TemplateResult = html`
+        <fhir-not-supported
+                label="ingredient"
+                description="substance[x] choice not found"
+        ></fhir-not-supported >`
 
     if (isSubstanceIngredientConcept(data)) {
       substance = html`
-        <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept > `
+          <fhir-codeable-concept label="substance" .data=${data.substanceCodeableConcept}></fhir-codeable-concept > `
     }
 
     if (isSubstanceIngredientReference(data)) {
       substance = html`
-        <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference > `
+          <fhir-reference label="substance" .data=${data.substanceReference}></fhir-reference > `
     }
 
-    return html`
-      ${substance}
-      <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
-    `
+    return [
+      html`
+        ${substance}
+        <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
+      `
+    ]
   }
 }

@@ -1,20 +1,27 @@
-import {html, nothing, TemplateResult}          from 'lit'
-import {property, state}                        from 'lit/decorators.js'
-import {choose}                                 from 'lit/directives/choose.js'
-import {mustRender}                             from '../../../components/mustRender'
-import {PrimitiveType}                          from '../../../components/primitive/type-converters'
-import {asReadable}                             from '../../../components/primitive/type-presenters/asReadable'
-import {hasSome}                                from '../../../shell/layout/directives'
-import {hostStyles}                             from '../../../styles'
-import {DisplayConfig, DisplayMode}             from '../../../types'
-import {hasSameAncestor, toBaseElementModeEnum} from '../../../utilities'
-import {DisplayContextConsumerController}       from '../../contexts/context-consumer-controller'
-import {FhirDataElement}                        from '../data/fhir-data-element'
-import {FhirElementData, NoDataSet}             from '../data/fhir-data-element.data'
-import {Generators}                             from './fhir-presentable-element.data'
-import {componentStyles}                        from './fhir-presentable-element.styles'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {html, nothing, PropertyValues, TemplateResult}      from 'lit'
+import {property}                                           from 'lit/decorators.js'
+import {mustRender}                                         from '../../../components/mustRender'
+import {PrimitiveType}                                      from '../../../components/primitive/type-converters'
+import {
+  asReadable
+}                                                           from '../../../components/primitive/type-presenters/asReadable'
+import {hasSome}                                            from '../../../shell/layout/directives'
+import {hostStyles}                                         from '../../../styles'
+import {DisplayConfig, DisplayMode}                         from '../../../types'
+import {hasSameAncestor, toBaseElementModeEnum}             from '../../../utilities'
+import {DisplayContextConsumerController}                   from '../../contexts/context-consumer-controller'
+import {FhirDataElement, FhirElementData, ValidationErrors} from '../data'
+import {Decorated}                                          from '../Decorated'
+import {Rendering}                                          from '../Rendering'
+import {Templating}                                         from '../Templating'
+import {EmptyResult, Generators, NullGenerators}            from './fhir-presentable-element.data'
+import {componentStyles}                                    from './fhir-presentable-element.styles'
 
-export abstract class FhirPresentableElement<T extends FhirElementData> extends FhirDataElement<T> {
+
+export abstract class FhirPresentableElement<D extends FhirElementData> extends FhirDataElement<D>
+  implements Rendering<D>, Templating<D> {
+
   static styles = [hostStyles, componentStyles]
 
   @property({ reflect: true })
@@ -24,32 +31,21 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
+  public open: boolean = false
 
   @property({ type: Boolean, reflect: true })
   public forceclose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare verbose: boolean
+  public verbose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  public showerror: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare summary: boolean
+  public summary: boolean = false
 
-  /**
-   * A boolean variable used to indicate whether recursion is being guarded against. When displaying in verbose mode
-   * certain FHIR datatypes go into a theoretical infinite recursion (ex: Reference -> Identifier -> Reference). In
-   * reality, they would never point to each other but if expanding on all possible values this could happen
-   *
-   * @type {boolean}
-   */
-    // protected recursionGuard: boolean = false
-
-  @state()
-  protected templateGenerators: Generators<T> = { structure: {}, display: {} }
-
+  protected templateGenerators: Generators<D> = NullGenerators()
 
   protected constructor(type: string) {
     super(type)
@@ -59,79 +55,50 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
     // consume display configuration provided by a context providing element
     new DisplayContextConsumerController(this)
-    this.addStructureTemplateGenerator('base-element', (data: T) => this.renderBaseElement(data))
   }
 
   public getDisplayConfig(): DisplayConfig {
     return { open: this.open, verbose: this.verbose, mode: this.mode, showerror: this.showerror }
   }
 
-  /**
-   * add a rendering generator
-   * @param name
-   * @param generator
-   */
-  public addStructureTemplateGenerator(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
-    this.templateGenerators.structure[name] = generator
+  public mustRender(): boolean {
+    return mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || !!this.dataPath
   }
 
-  /**
-   * add a rendering generator
-   * @param name
-   * @param generator
-   */
-  public addDisplayTemplateGenerator(name: string, generator: (data: T) => TemplateResult | TemplateResult[]) {
-    this.templateGenerators.display[name] = generator
+  public abstract willRender(displayConfig: DisplayConfig,
+                             extendedData: Decorated<D> | null,
+                             changes: PropertyValues): void
+
+  public override() {
+    return false
   }
 
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param data
-   */
-  protected abstract renderDisplay(data: T): TemplateResult | TemplateResult[];
-
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param data
-   */
-  protected abstract renderStructure(data: T): TemplateResult | TemplateResult[];
-
-  /**
-   * Empty default implementation. Implement this method when the template is identical in all modes
-   * @param data
-   * @protected
-   */
-  protected abstract renderAll(data: T): TemplateResult | TemplateResult[];
-
-  /**
-   * Rendering method for all elements
-   * @protected
-   */
-  protected render(): TemplateResult | TemplateResult[] {
-    if (this.verbose && this.data === NoDataSet) return html`
-        <fhir-not-supported .label=${this.label} variant="no-data"></fhir-not-supported >`
-
-    if (this.mode) {
-      return html`${choose(this.mode,
-                           [
-                             [DisplayMode.display, () => this.shouldRenderDisplay()],
-                             [DisplayMode.display_summary, () => this.shouldRenderDisplay()],
-                             [DisplayMode.narrative, () => this.shouldRenderDisplay()],
-                             [DisplayMode.structure, () => this.shouldRenderStructure()],
-                             [DisplayMode.structure_summary, () => this.shouldRenderStructure()],
-                             [DisplayMode.debug, () => this.renderDebug()]
-                           ],
-                           () => html`
-                               <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error >`
-      )}`
-    }
-
-    return html``
+  public renderOverride(displayConfig: DisplayConfig,
+                        data: D,
+                        errors: ValidationErrors): TemplateResult[] {
+    return EmptyResult
   }
 
-  protected getLabel = () => {
+
+  public abstract renderDisplay(config: DisplayConfig, data: Decorated<D>, errors: ValidationErrors): TemplateResult[]
+
+  public abstract renderNarrative(displayConfig: DisplayConfig,
+                                  data: Decorated<D>,
+                                  errors: ValidationErrors): TemplateResult[]
+
+
+  public abstract renderStructure(config: DisplayConfig, data: Decorated<D>, errors: ValidationErrors): TemplateResult[]
+
+  public abstract hasRendered(displayConfig: DisplayConfig,
+                              extendedData: Decorated<D> | null,
+                              haveChanged: PropertyValues): void
+
+
+  protected summaryMode() {
+    return !!this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
+  }
+
+  protected getLabel() {
     let label = this.type
 
     if (this.key && !this.label) {
@@ -147,89 +114,195 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
     return label
   }
 
+  protected willUpdate(changes: PropertyValues) {
+    super.willUpdate(changes)
+
+    if (this.mustRender()) {
+      this.willRender(this.getDisplayConfig(), this.extendedData, changes)
+      this.templateGenerators = NullGenerators()
+      this.templateGenerators.structure.header.push(this.renderBaseElement)
+      if (this.override()) {
+        this.templateGenerators.override.body.push(this.renderOverride)
+      } else {
+
+        if (this.mode) {
+          switch (this.mode) {
+            case DisplayMode.debug:
+              this.templateGenerators.debug.body.push(this.renderDebug)
+              break
+            case DisplayMode.display:
+            case DisplayMode.display_summary:
+              this.templateGenerators.display.body.push(this.renderDisplay)
+              break
+            case DisplayMode.narrative:
+              this.templateGenerators.display.body.push(this.renderNarrative)
+              break
+            case DisplayMode.override:
+              // do nothing
+              break
+            case DisplayMode.structure:
+            case DisplayMode.structure_summary:
+              // stop rendering in verbose mode due to theoretically infinite models.
+              // ex: Identifier -> Reference -> Identifier -> and so on!
+              if (this.verboseRequestedAndNotAllowed()) {
+                this.templateGenerators.structure.body.push(() => [
+                  html`
+                      <fhir-not-supported
+                              variant="stop"
+                              label=${this.label}
+                              error="If rendered, '${this.label}' would render recursively for ever due to the fhir model definition."
+                      ></fhir-not-supported >`
+                ])
+              } else {
+                this.templateGenerators.structure.body.push(this.renderStructure)
+              }
+              break
+            default:
+              this.templateGenerators.error.body.push(() => [
+                html`
+                    <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error >`
+              ])
+          }
+        }
+      }
+    }
+  }
+
+  protected render(): TemplateResult | TemplateResult[] {
+    const templates: TemplateResult[] = [html``]
+
+    if (this.errors.some(e => e.id === 'DISPLAY_NOTHING')) {
+      // SHOW THAT WE HAVE NO DATA
+      return html`
+          <fhir-not-supported variant="no-data"></fhir-not-supported >`
+    }
+
+    if (this.stopRender()) return templates
+
+    switch (this.mode) {
+      case DisplayMode.debug:
+        templates.push(...this
+          .templateGenerators
+          .debug.body
+          .map(g => g.call(this,
+                           this.getDisplayConfig(),
+                           this.extendedData,
+                           this.errors)
+          ).flat())
+        break
+      case DisplayMode.display:
+      case DisplayMode.display_summary:
+        templates.push(...this
+          .templateGenerators
+          .display.header
+          .map(g => g.call(this, this.getDisplayConfig(),
+                           this.extendedData,
+                           this.errors)).flat())
+      // eslint-disable-next-line no-fallthrough
+      case DisplayMode.narrative:
+        templates.push(...this
+          .templateGenerators
+          .display.body
+          .map(g => g.call(this, this.getDisplayConfig(),
+                           this.extendedData,
+                           this.errors)).flat())
+        break
+      case DisplayMode.override:
+        templates.push(...this
+          .templateGenerators
+          .override.body
+          .map(g => g.call(this, this.getDisplayConfig(),
+                           this.extendedData,
+                           this.errors)).flat())
+        break
+      case DisplayMode.structure:
+      case DisplayMode.structure_summary:
+        if (mustRender(this.data, this.mode, this.verbose, this.summaryMode(), this.summary)) {
+          templates.push(html`
+              <fhir-structure-wrapper
+                      .label=${this.getLabel()}
+                      .resourceId=${this.extendedData?.id ?? ''}
+                      .fhirType=${asReadable(this.type)}
+                      ?forceclose=${this.forceclose}
+                      ?summary=${this.summary}
+              >
+                  <div class="frontmatter">
+                      ${this.templateGenerators.structure
+                            .header.map(g => g.call(this, this.getDisplayConfig(),
+                                                    this.extendedData,
+                                                    this.errors)).flat()}
+                  </div >
+
+                  ${this.templateGenerators.structure
+                        .body.map(g => g.call(this,
+                                              this.getDisplayConfig(),
+                                              this.extendedData,
+                                              this.errors)).flat()}
+              </fhir-structure-wrapper >
+          `)
+        }
+        break
+
+    }
+
+
+    return templates
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (this.mustRender()) {
+      this.hasRendered(this.getDisplayConfig(), this.extendedData, _changedProperties)
+    }
+  }
+
+  private stopRender() {
+    return !this.extendedData
+  }
+
   /**
    * Overridable method reserved for internal use. Do not call super in this method
+   * @param config
    * @param data
    * @protected
    */
-  protected renderBaseElement(data: T): TemplateResult | TemplateResult[] {
-    return html`
-        <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive >
-        ${hasSome(data.extension)
-          ? html`
-                    <fhir-primitive label="extension" context="not implemented" .type=${PrimitiveType.none}></fhir-primitive >`
-          : nothing}
-    `
+  private renderBaseElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+    if (data) {
+
+      return [
+        html`
+            <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive >
+            ${hasSome(data.extension)
+              ? html`
+                        <fhir-primitive label="extension" context="not implemented" .type=${PrimitiveType.none}></fhir-primitive >`
+              : nothing}
+        `
+      ]
+    }
+
+    return EmptyResult
   }
 
   /**
-   *
-   * @private
+   * Render formatted JSON data for debugging purposes
+   * @protected
    */
-  protected summaryMode() {
-    return this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
-  }
+  private renderDebug(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
 
-  private shouldRenderDisplay() {
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
-
-      if (!this.convertedData) return html``
-
-      return html` ${this.renderDisplay(this.convertedData)} `
+    if (data || this.verboseRequestedAndAllowed()) {
+      return [
+        html`
+            <article part="element">
+                <header part="label">${this.getLabel()}</header >
+                <section part="value">
+                    <fhir-debug .data=${data}></fhir-debug >
+                </section >
+            </article >
+        `
+      ]
     }
-    return html``
-  }
 
-  private shouldRenderStructure() {
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
-
-      if (this.convertedData || this.verboseRequestedAndAllowed()) {
-        return this.wrapStructure()
-      }
-
-      // stop rendering in verbose mode due to theoretically infinite models.
-      // ex: Identifier -> Reference -> Identifier -> and so on!
-      if (this.verboseRequestedAndNotAllowed()) {
-        return html`
-            <fhir-not-supported
-                    variant="stop"
-                    label=${this.label}
-                    error="If rendered, '${this.label}' would render recursively for ever due to the fhir model definition."
-            ></fhir-not-supported >`
-      }
-    }
-    return html``
-  }
-
-  private wrapStructure() {
-    //console.log(this.type, this.key, this.mode, this.verbose, this.summaryMode(), this.summary)
-    if (mustRender(this.convertedData, this.mode, this.verbose, this.summaryMode(), this.summary) || this.dataPath) {
-      return html`
-          <fhir-structure-wrapper
-                  .label=${this.getLabel()}
-                  .resourceId=${this.convertedData?.id ?? ''}
-                  .fhirType=${asReadable(this.type)}
-                  ?forceclose=${this.forceclose}
-                  ?summary=${this.summary}
-          >
-              <div class="frontmatter">
-                  ${this.convertedData ? this.renderGroup(this.convertedData, 'structure') : nothing}
-              </div >
-
-              ${this.renderStructure(this.convertedData ?? ({} as T))}
-          </fhir-structure-wrapper >
-      `
-    }
-    return html``
-  }
-
-
-  private renderGroup(data: T, group: 'structure' | 'display'): TemplateResult | TemplateResult[] {
-    return [
-      ...Object.values(this.templateGenerators[group])
-               .map((gen) => gen(data))
-               .flat()
-    ]
+    return EmptyResult
   }
 
   private verboseRequestedAndAllowed() {
@@ -242,24 +315,5 @@ export abstract class FhirPresentableElement<T extends FhirElementData> extends 
 
   private hasIdenticalAncestor(child: HTMLElement | null) {
     return hasSameAncestor(child)
-  }
-
-  /**
-   * Render formatted JSON data for debugging purposes
-   * @protected
-   */
-  private renderDebug(): TemplateResult {
-    if (this.data || this.verboseRequestedAndAllowed()) {
-      return html`
-          <article part="element">
-              <header part="label">${this.getLabel()}</header >
-              <section part="value">
-                  <fhir-debug .data=${this.data}></fhir-debug >
-              </section >
-          </article >
-      `
-    }
-
-    return html``
   }
 }

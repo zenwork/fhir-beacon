@@ -1,5 +1,6 @@
 import {html}                 from 'lit'
 import {describe, expect, it} from 'vitest'
+import {aTimeout}             from '../../../tests/aTimeout'
 import {fixture}              from '../../../tests/lit/lit-vitest-fixture'
 import {Shell}                from '../../shell'
 import {NotSupported}         from './not-supported'
@@ -12,6 +13,8 @@ describe('fhir-not-supported', () => {
     const el = await fixture<NotSupported>(html`
       <fhir-not-supported ></fhir-not-supported >
     `).first()
+
+    await aTimeout(200)
 
     expect(el).to.be.instanceof(NotSupported)
 

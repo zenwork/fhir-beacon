@@ -1,5 +1,6 @@
 import {defineWorkspace} from 'vitest/config'
 
+
 export default defineWorkspace([
   {
     test: {
@@ -17,7 +18,7 @@ export default defineWorkspace([
       include: ['src/**/*.spec.ts'],
       browser: {
         enabled: true,
-
+        headless: !!process.env.HEADLESS,
         name: 'chromium',
         screenshotFailures: true,
         providerOptions: { debugger: true },

@@ -1,11 +1,11 @@
 export * from './src/types'
 
 /* Core Stuff */
-export * from './src/internal/base/base-element'
+export * from './src/internal/BaseElement'
 export * from './src/internal'
 
 /* Customization API */
-export * from './src/internal/fhir-context-element'
+export * from './src/internal/customization/fhir-context-element'
 
 /* Layout and Presentation */
 export * from './src/shell'

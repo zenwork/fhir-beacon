@@ -3,11 +3,12 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement, state}          from 'lit/decorators.js'
 import {choose}                        from 'lit/directives/choose.js'
 import {otherwise, when}               from '../../.././utilities/when'
-import {BaseElement}                   from '../../../internal'
+import {BaseElement, Decorated}        from '../../../internal'
 import {containedDataContext}          from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
+import {DisplayConfig}           from '../../../types'
 import {PrimitiveType}           from '../../primitive/type-converters/type-converters'
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
@@ -32,98 +33,102 @@ export class Reference extends BaseElement<ReferenceData> {
   //TODO: need to figure out how to add all special rules and corner cases for references. see:
   // http://hl7.org/fhir/R5/datatypes.html#identifier
 
-  protected renderDisplay(data: ReferenceData): TemplateResult | TemplateResult[] {
+  public renderDisplay(config: DisplayConfig, data: ReferenceData): TemplateResult[] {
 
     return [
       html`
-        ${choose(this.referenceType, [
+          ${choose(this.referenceType, [
               [
-                ReferenceType.contained,
-                () => html`
-                  <fhir-primitive
-                          key="${this.key}"
-                          label="${this.label}"
-                          value=${this.containedResource?.resourceType || 'contained'}
-                          summary
-                  ></fhir-primitive >
-                  <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
-                  ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
-                  </fhir-wrapper >
+                  ReferenceType.contained,
+                  () => html`
+                      <fhir-primitive
+                              key="${this.key}"
+                              label="${this.label}"
+                              value=${this.containedResource?.resourceType || 'contained'}
+                              summary
+                      ></fhir-primitive >
+                      <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
+                          ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
+                      </fhir-wrapper >
 
-                `
-              ],
-          [
-            ReferenceType.display,
-                () => html`
-                  <fhir-primitive
-                      label=${data.type ? asReadable(data.type.toString()) : 'reference'}
-                      .value=${data.display}
-                      .link=${data.reference}
-                      summary
-                  ></fhir-primitive>`
+                  `
               ],
               [
-                ReferenceType.reference,
-                () => html`
-                  <fhir-primitive
-                      label=${data.type ? asReadable(data.type.toString()) : 'reference'}
-                      .value=${data.display ? data.display : data.reference}
-                      .link=${data.reference}
-                      summary
-                  ></fhir-primitive>`
+                  ReferenceType.display,
+                  () => html`
+                      <fhir-primitive
+                              label=${data.type ? asReadable(data.type.toString()) : 'reference'}
+                              .value=${data.display}
+                              .link=${data.reference}
+                              summary
+                      ></fhir-primitive >`
               ],
               [
-                ReferenceType.identifier,
-                () => html`
-                  <fhir-identifier
-                      label="identifier"
-                      .data=${data.identifier}
-                      summary
-                  ></fhir-identifier>`
+                  ReferenceType.reference,
+                  () => html`
+                      <fhir-primitive
+                              label=${data.type ? asReadable(data.type.toString()) : 'reference'}
+                              .value=${data.display ? data.display : data.reference}
+                              .link=${data.reference}
+                              summary
+                      ></fhir-primitive >`
               ],
               [
-                ReferenceType.extension,
-                () => html`
-                  <fhir-not-supported description="unable to render reference of type ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
+                  ReferenceType.identifier,
+                  () => html`
+                      <fhir-identifier
+                              label="identifier"
+                              .data=${data.identifier}
+                              summary
+                      ></fhir-identifier >`
               ],
               [
-                ReferenceType.unknown,
-                () => this.data
-                      ? html`
-                    <fhir-not-supported description="unable to render reference of type ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
-                      : nothing
+                  ReferenceType.extension,
+                  () => html`
+                      <fhir-not-supported description="unable to render reference of type ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
+              ],
+              [
+                  ReferenceType.unknown,
+                  () => this.data
+                        ? html`
+                              <fhir-not-supported description="unable to render reference of type ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
+                        : nothing
               ]
 
-        ])
-        }
+          ])
+          }
       `
     ]
   }
 
 
   /**
+   * @param config
    * @param data
    * @protected
    */
-  protected renderStructure(data: ReferenceData): TemplateResult | TemplateResult[] {
-    return html`
-      <fhir-primitive label="reference" .value=${data.reference} summary></fhir-primitive >
-      <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
-      <fhir-identifier
-          label="identifier"
-          .data=${data.identifier}
-          summary
-      ></fhir-identifier>
-      <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
-    `
+  public renderStructure(config: DisplayConfig, data: ReferenceData): TemplateResult[] {
+    return [
+      html`
+          <fhir-primitive label="reference" .value=${data.reference} summary></fhir-primitive >
+          <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
+          <fhir-identifier
+                  label="identifier"
+                  .data=${data.identifier}
+                  summary
+          ></fhir-identifier >
+          <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
+      `
+    ]
   }
 
 
-  protected convertData(data: ReferenceData): ReferenceData {
+  public decorate(data: ReferenceData): Decorated<ReferenceData> {
 
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
-    // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being able to request data that is in the
-    // payload of the parent resource. Have to do this later with signals but when resolving the link call not here.
+    // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being
+    // able to request data that is in the payload of the parent resource. Have to do this later with signals but when
+    // resolving the link call not here.
     const isContainedRef = data?.reference?.startsWith('#')
     const containedDataExists = this.contained.length > 0
 
@@ -135,7 +140,8 @@ export class Reference extends BaseElement<ReferenceData> {
       this.referenceType = ReferenceType.contained
     }
     if (this.referenceType == ReferenceType.unknown) {
-      //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).
+      //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is
+      // provided).
       this.referenceType = when<ReferenceData, ReferenceType>(data)(
         [d => !!d.extension, () => ReferenceType.extension],
         [d => !!d.reference, () => ReferenceType.reference],

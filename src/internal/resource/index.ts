@@ -1,8 +1,8 @@
 // created by autobarrel, do not modify directly
 
 export * from './backbone.data'
-export * from './backbone'
+export * from './Backbone'
 export * from './domain-resource.data'
-export * from './domain-resource'
+export * from './DomainResource'
 export * from './renderResourceComponent'
-export * from './resource'
+export * from './Resource'

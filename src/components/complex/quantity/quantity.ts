@@ -1,8 +1,8 @@
 import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {BaseElement, ValidationErrors}                        from '../../../internal'
-import {renderError}                                          from '../../../shell/layout/renderError'
+import {BaseElement, Decorated, ValidationErrors}             from '../../../internal'
+import {DisplayConfig}                                        from '../../../types'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
 import {
@@ -22,68 +22,91 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
   constructor() {super('Quantity')}
 
 
-  protected renderDisplay(data: QuantityData | SimpleQuantityData): TemplateResult {
+  public renderDisplay(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
 
     const displayValue: undefined | string | number = data.value
     const type: string = 'decimal'
     const after = data.unit || data.code
 
     if (isQuantity(data)) {
-      return html`
-        <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
-          <span slot="before">${data.comparator ? asQuantityComparator(data.comparator).display.toLowerCase() : nothing}&nbsp;</span >
-          <span slot="after">&nbsp;${after}</span >
-        </fhir-primitive >
-      `
+      return [
+        html`
+            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+                <span slot="before">${data.comparator
+                                      ? asQuantityComparator(data.comparator).display.toLowerCase()
+                                      : nothing}&nbsp;</span >
+                <span slot="after">&nbsp;${after}</span >
+            </fhir-primitive >
+        `
+      ]
     }
 
     if (isSimpleQuantity(data)) {
-      return html`
-        <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
-          <span slot="after">&nbsp;${after} </span >
-        </fhir-primitive >
-      `
+      return [
+        html`
+            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+                <span slot="after">&nbsp;${after} </span >
+            </fhir-primitive >
+        `
+      ]
     }
 
-
-    return renderError(this.getDisplayConfig().showerror,
-                       this.getDisplayConfig().verbose,
-                       'quantity', 'must be Quantity or Simple Quantity')
+    return [
+      html`
+          <fhir-not-supported
+                  label="quantity"
+                  description="must be Quantity or Simple Quantity"
+          ></fhir-not-supported >`
+    ]
   }
 
-  protected renderStructure(data: QuantityData | SimpleQuantityData): TemplateResult {
+  public renderStructure(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
 
     if (isQuantity(data)) {
-      return html`
-        <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
-        <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
-        <fhir-primitive label="comparator" .value=${data.comparator} type="code" summary></fhir-primitive >
-        <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
-        <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
-        <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
-      `
+      return [
+        html`
+            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
+            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
+            <fhir-primitive label="comparator" .value=${data.comparator} type="code" summary></fhir-primitive >
+            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
+            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
+            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
+        `
+      ]
     }
 
     if (isSimpleQuantity(data)) {
-      return html`
-        <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
-        <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
-        <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
-        <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
-        <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
-      `
+      return [
+        html`
+            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
+            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
+            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
+            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
+            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
+        `
+      ]
     }
 
-    return renderError(
-      this.getDisplayConfig().showerror,
-      this.getDisplayConfig().verbose,
-      'quantity',
-      'must be Quantity or Simple Quantity'
-    )
+    return [
+      html`
+          <fhir-not-supported
+                  label="quantity"
+                  description="must be Quantity or Simple Quantity"
+          ></fhir-not-supported >`
+    ]
 
   }
 
-  protected convertData(data: QuantityData): QuantityData {
+  public validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
+    const errors = super.validate(data)
+    if (!hasAllOrNone(data, ['code', 'system'])) {
+      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
+    }
+
+    return errors
+  }
+
+  public decorate(data: QuantityData): Decorated<QuantityData> | Decorated<SimpleQuantityData> {
     // rule: sqty-1
     if (data.comparator) {
       // convert html encoded strings such as &gt;
@@ -126,14 +149,4 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     return data
   }
 
-  protected validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
-    const errors = super.validate(data)
-    if (!hasAllOrNone(data, ['code', 'system'])) {
-      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
-    }
-
-
-    return errors
-
-  }
 }
