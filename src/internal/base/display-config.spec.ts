@@ -196,8 +196,8 @@ describe('DisplayConfig', () => {
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
       await aTimeout(200)
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 7 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 18 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
     })
 

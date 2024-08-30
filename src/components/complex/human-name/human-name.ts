@@ -1,10 +1,11 @@
-import {html, TemplateResult}                from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {BaseElement, Decorated, EmptyResult} from '../../../internal/base'
-import {strap, wrap}                         from '../../../shell'
-import {DisplayConfig}                       from '../../../types'
-import {PrimitiveType}                       from '../../primitive/type-converters/type-converters'
-import {HumanNameData}                       from '../../resources/patient/patient.data'
+import {html, TemplateResult}   from 'lit'
+import {customElement}          from 'lit/decorators.js'
+import {BaseElement}            from '../../../internal'
+import {Decorated, EmptyResult} from '../../../internal/base'
+import {strap, wrap}            from '../../../shell'
+import {DisplayConfig}          from '../../../types'
+import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
+import {HumanNameData}          from '../../resources/patient/patient.data'
 
 @customElement('fhir-human-name')
 export class HumanName extends BaseElement<HumanNameData> {

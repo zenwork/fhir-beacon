@@ -1,7 +1,7 @@
 import {ContextProvider}                     from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
-import {BaseElement}                         from '../base/base-element'
 import {FhirElementData}                     from '../base/data/fhir-data-element.data'
+import {BaseElement}                         from '../BaseElement'
 
 import {contextData, displayConfigContext} from './context'
 import {FhirDataContextImpl}               from './FhirContextData'

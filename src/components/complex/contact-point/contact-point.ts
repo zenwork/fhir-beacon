@@ -1,9 +1,10 @@
-import {html, TemplateResult}   from 'lit'
-import {customElement}          from 'lit/decorators.js'
-import {BaseElement, Decorated} from '../../../internal/base'
-import {DisplayConfig}          from '../../../types'
-import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
-import {ContactPointData}       from '../../resources/patient/patient.data'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
+import {BaseElement}          from '../../../internal'
+import {Decorated}            from '../../../internal/base'
+import {DisplayConfig}        from '../../../types'
+import {PrimitiveType}        from '../../primitive/type-converters/type-converters'
+import {ContactPointData}     from '../../resources/patient/patient.data'
 
 @customElement('fhir-contact-point')
 export class ContactPoint extends BaseElement<ContactPointData> {

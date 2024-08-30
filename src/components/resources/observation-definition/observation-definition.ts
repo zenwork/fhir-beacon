@@ -1,7 +1,7 @@
 import {TemplateResult}            from 'lit'
 import {customElement}             from 'lit/decorators.js'
 import {EmptyResult}               from '../../../internal'
-import {DomainResource}            from '../../../internal/resource/domain-resource'
+import {DomainResource}            from '../../../internal/resource/DomainResource'
 import {ObservationDefinitionData} from './observation-definition.data'
 
 @customElement('fhir-observation-definition')

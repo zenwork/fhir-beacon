@@ -1,6 +1,6 @@
 import {html, TemplateResult}     from 'lit'
 import {customElement}            from 'lit/decorators.js'
-import {Backbone}                 from '../../../internal/resource/backbone'
+import {Backbone}                 from '../../../internal/resource/Backbone'
 import {DisplayConfig}            from '../../../types'
 import {PrimitiveType}            from '../../primitive'
 import {MedicationIngredientData} from './medication-ingredient.data'

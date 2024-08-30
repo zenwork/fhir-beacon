@@ -1,6 +1,7 @@
-import {TemplateResult}                               from 'lit'
-import {DisplayConfig}                                from '../../types'
-import {Decorated, FhirElementData, ValidationErrors} from './data'
+import {TemplateResult}                    from 'lit'
+import {DisplayConfig}                     from '../../types'
+import {FhirElementData, ValidationErrors} from './data'
+import {Decorated}                         from './Decorated'
 
 /**
  * The Templating interface provides methods for rendering different types of templates for a given

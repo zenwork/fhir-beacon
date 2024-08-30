@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
-import {DomainResource}                from '../../../internal/resource/domain-resource'
+import {DomainResource}                from '../../../internal/resource/DomainResource'
 import {wrap}                          from '../../../shell'
 import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'

@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, PropertyValues, TemplateResult}                 from 'lit'
-import {property}                                                      from 'lit/decorators.js'
-import {mustRender}                                                    from '../../../components/mustRender'
-import {
-  PrimitiveType
-}                                                                      from '../../../components/primitive/type-converters'
+import {html, nothing, PropertyValues, TemplateResult}      from 'lit'
+import {property}                                           from 'lit/decorators.js'
+import {mustRender}                                         from '../../../components/mustRender'
+import {PrimitiveType}                                      from '../../../components/primitive/type-converters'
 import {
   asReadable
-}                                                                      from '../../../components/primitive/type-presenters/asReadable'
-import {hasSome}                                                       from '../../../shell/layout/directives'
-import {hostStyles}                                                    from '../../../styles'
-import {DisplayConfig, DisplayMode}                                    from '../../../types'
-import {hasSameAncestor, toBaseElementModeEnum}                        from '../../../utilities'
-import {DisplayContextConsumerController}                              from '../../contexts/context-consumer-controller'
-import {FhirDataElement, FhirElementData, NoDataSet, ValidationErrors} from '../data'
-import {Decorated}                                                     from '../Decorated'
-import {Rendering}                                                     from '../Rendering'
-import {Templating}                                                    from '../Templating'
-import {EmptyResult, Generators, NullGenerators}                       from './fhir-presentable-element.data'
-import {componentStyles}                                               from './fhir-presentable-element.styles'
+}                                                           from '../../../components/primitive/type-presenters/asReadable'
+import {hasSome}                                            from '../../../shell/layout/directives'
+import {hostStyles}                                         from '../../../styles'
+import {DisplayConfig, DisplayMode}                         from '../../../types'
+import {hasSameAncestor, toBaseElementModeEnum}             from '../../../utilities'
+import {DisplayContextConsumerController}                   from '../../contexts/context-consumer-controller'
+import {FhirDataElement, FhirElementData, ValidationErrors} from '../data'
+import {Decorated}                                          from '../Decorated'
+import {Rendering}                                          from '../Rendering'
+import {Templating}                                         from '../Templating'
+import {EmptyResult, Generators, NullGenerators}            from './fhir-presentable-element.data'
+import {componentStyles}                                    from './fhir-presentable-element.styles'
 
 
 export abstract class FhirPresentableElement<D extends FhirElementData> extends FhirDataElement<D>
@@ -63,7 +61,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     return { open: this.open, verbose: this.verbose, mode: this.mode, showerror: this.showerror }
   }
 
-  public canRender(): boolean {
+  public mustRender(): boolean {
     return mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || !!this.dataPath
   }
 
@@ -119,7 +117,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   protected willUpdate(changes: PropertyValues) {
     super.willUpdate(changes)
 
-    if (this.canRender()) {
+    if (this.mustRender()) {
       this.willRender(this.getDisplayConfig(), this.extendedData, changes)
       this.templateGenerators = NullGenerators()
       this.templateGenerators.structure.header.push(this.renderBaseElement)
@@ -168,10 +166,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
         }
       }
     }
-
-    if (!this.extendedData || this.extendedData === NoDataSet) {
-      this.extendedData = {} as unknown as Decorated<D>
-    }
   }
 
   protected render(): TemplateResult | TemplateResult[] {
@@ -182,6 +176,8 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       return html`
           <fhir-not-supported variant="no-data"></fhir-not-supported >`
     }
+
+    if (this.stopRender()) return templates
 
     switch (this.mode) {
       case DisplayMode.debug:
@@ -202,13 +198,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           .map(g => g.call(this, this.getDisplayConfig(),
                            this.extendedData,
                            this.errors)).flat())
-        templates.push(...this
-          .templateGenerators
-          .display.body
-          .map(g => g.call(this, this.getDisplayConfig(),
-                           this.extendedData,
-                           this.errors)).flat())
-        break
+      // eslint-disable-next-line no-fallthrough
       case DisplayMode.narrative:
         templates.push(...this
           .templateGenerators
@@ -255,19 +245,24 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
     }
 
+
     return templates
   }
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
-    if (this.canRender()) {
+    if (this.mustRender()) {
       this.hasRendered(this.getDisplayConfig(), this.extendedData, _changedProperties)
     }
   }
 
+  private stopRender() {
+    return !this.extendedData
+  }
+
   /**
    * Overridable method reserved for internal use. Do not call super in this method
-   * @param _
+   * @param config
    * @param data
    * @protected
    */

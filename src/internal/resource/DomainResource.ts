@@ -5,7 +5,7 @@ import {DisplayConfig}                                 from '../../types'
 import {Decorated, NoDataSet, ValidationErrors}        from '../base'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'
-import {Resource}                                      from './resource'
+import {Resource}                                      from './Resource'
 
 
 export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {

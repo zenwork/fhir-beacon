@@ -1,6 +1,7 @@
 // created by autobarrel, do not modify directly
 
+export * from './BaseElement'
 export * from './base/'
 export * from './contexts/'
-export * from './fhir-context-element'
-export * from './resource/'
+export * from './customization'
+export * from './resource'

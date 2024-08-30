@@ -2,7 +2,7 @@
 import {html, TemplateResult}                                      from 'lit'
 import {customElement}                                             from 'lit/decorators.js'
 import {BaseElement, Decorated, ValidationError, ValidationErrors} from '../../../internal'
-import {oneOf}                                                     from '../../../internal/base/oneOf'
+import {oneOf}                                                     from '../../../internal/base/util/oneOf'
 import {DisplayConfig}                                             from '../../../types'
 import {
   PrimitiveType

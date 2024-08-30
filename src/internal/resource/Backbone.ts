@@ -1,7 +1,8 @@
-import {html, PropertyValues}                from 'lit'
-import {DisplayConfig}                       from '../../types'
-import {BaseElement, Decorated, EmptyResult} from '../base'
-import {BackboneElementData}                 from './backbone.data'
+import {html, PropertyValues}   from 'lit'
+import {DisplayConfig}          from '../../types'
+import {Decorated, EmptyResult} from '../base'
+import {BaseElement}            from '../BaseElement'
+import {BackboneElementData}    from './backbone.data'
 
 export abstract class Backbone<D extends BackboneElementData> extends BaseElement<D> {
   protected constructor(type: string) {

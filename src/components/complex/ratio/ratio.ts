@@ -1,6 +1,7 @@
 import {css, html, TemplateResult}  from 'lit'
 import {customElement}              from 'lit/decorators.js'
-import {BaseElement, EmptyResult}   from '../../../internal/base'
+import {BaseElement}                from '../../../internal'
+import {EmptyResult}                from '../../../internal/base'
 import {DisplayConfig, DisplayMode} from '../../../types'
 
 import {RatioData} from './ratio.data'
@@ -19,7 +20,7 @@ export class Ratio extends BaseElement<RatioData> {
       fhir-quantity::part(base) {
         padding: 0;
       }
-    `,
+    `
   ]
 
   constructor() {

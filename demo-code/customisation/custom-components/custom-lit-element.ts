@@ -1,6 +1,6 @@
 import {html, TemplateResult}    from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {FhirContextElement}      from '../../../src/internal/fhir-context-element'
+import {FhirContextElement}      from '../../../src/internal/customization/fhir-context-element'
 
 
 /**
