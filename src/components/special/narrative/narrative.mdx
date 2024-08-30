@@ -18,8 +18,12 @@ the `fhir-narrative` component uses light-DOM so allows css formatting of the co
 TODO: There may be a case for a shadow-DOM and light-DOM version to support cases when we don't want unpredicatable
 narrative html to inherit styles.
 
-### without any formatting
-<Canvas of={Stories.NarrativeWithoutFormatting}/>
+### In display mode
+<Canvas of={Stories.DisplayMode} />
 
-### formatted
-<Canvas of={Stories.NarrativeUsingCssPartsFormatting}/>
+
+### In structure mode
+<Canvas of={Stories.StructureMode} />
+
+### In narrative mode with custom formatting
+<Canvas of={Stories.NarrativeModeWithStyling} />

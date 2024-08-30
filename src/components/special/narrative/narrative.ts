@@ -9,19 +9,14 @@ import {NarrativeData} from './narrative.data'
 @customElement('fhir-narrative')
 export class Narrative extends BaseElement<NarrativeData> {
 
+  @property({ reflect: true })
+  declare status: string
+
   constructor() {
     super('Narrative')
   }
 
-  @property({reflect: true})
-  declare status: string
-
-  protected createRenderRoot() {
-    return this
-  }
-
   public renderNarrative(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
-    console.log('narrative')
     return [
       html`
           <div part="narrative">${unsafeHTML(data.div)}</div >
@@ -29,12 +24,14 @@ export class Narrative extends BaseElement<NarrativeData> {
     ]
   }
 
-  protected updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties)
-    console.log('updated', this.data)
-    if (_changedProperties.has('data') && this.data !== NoDataSet) {
-      if (this.data?.status) this.status = this.data.status
-    }
+  public renderDisplay(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+    return [
+      html`
+          <fhir-wrapper label="${config.verbose ? `summary (status:${data.status})` : 'summary'}" variant='primary'>
+              <div part="narrative">${unsafeHTML(data.div)}</div >
+          </fhir-wrapper >
+      `
+    ]
   }
 
   public renderStructure(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
@@ -46,5 +43,16 @@ export class Narrative extends BaseElement<NarrativeData> {
           </fhir-structure-wrapper >
       `
     ]
+  }
+
+  protected createRenderRoot() {
+    return this
+  }
+
+  protected updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+    if (_changedProperties.has('data') && this.data !== NoDataSet) {
+      if (this.data?.status) this.status = this.data.status
+    }
   }
 }

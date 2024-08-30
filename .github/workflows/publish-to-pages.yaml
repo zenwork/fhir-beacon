@@ -62,6 +62,10 @@ jobs:
             -   name: Deploy to GitHub Pages
                 id: deployment
                 uses: actions/deploy-pages@v4
+                with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  branch: gh-pages
+                  folder: ./path-to-your-built-site
 
             -   name: Store test results
                 uses: actions/upload-artifact@v2
