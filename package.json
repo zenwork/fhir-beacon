@@ -20,7 +20,7 @@
         "vite::build": "vite build",
         "vite::dev": "vite",
         "vite::preview": "vite preview",
-        "vitest": "vitest run",
+        "vitest": "HEADLESS=true vitest run",
         "vitest::debug": "vitest watch",
         "vitest::dev": "NODE_ENV=production HEADLESS=true vitest watch --mode production "
     },
