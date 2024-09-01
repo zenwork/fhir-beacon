@@ -133,6 +133,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     }
 
     if (changes.has('data') && this.shouldPrepare()) {
+      this.errors = []
       this.prepare()
       const validationErrors = this.validate(this.data, this.#fetched)
       this.errors.push(...validationErrors)

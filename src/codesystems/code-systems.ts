@@ -1,3 +1,5 @@
+import {CodeSystemAddressTypes}       from './CodeSystem-address-type'
+import {CodeSystemAddressUse}         from './CodeSystem-address-use'
 import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
 import {CodeSystemQuantityComparator} from './CodeSystem-quantity-comparator'
 import {ValueSetAgeUnits}             from './ValueSet-age-units'
@@ -13,6 +15,8 @@ export type FhirType = { code: string, kind: string, abstract: boolean, definiti
 export type ValueSet = { lvl?: number, source?: string, code?: string, display?: string, definition?: string, comment?: string }
 
 export const FhirTypes: FhirType[] = extract(CodeSystemFhirTypes.concept, [])
+export const FhirAddressTypes: FhirType[] = extract(CodeSystemAddressTypes.concept, [])
+export const FhirAddressUse: FhirType[] = extract(CodeSystemAddressUse.concept, [])
 export const FhirDistances: ValueSet[] = extractValueSet(ValueSetDistanceUnits)
 export const FhirAges: ValueSet[] = extractValueSet(ValueSetAgeUnits)
 export const FhirDuration: ValueSet[] = extractValueSet(ValueSetDurationUnits)

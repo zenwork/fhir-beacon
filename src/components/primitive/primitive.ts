@@ -15,7 +15,6 @@ import {
   toDate,
   toDatetime,
   toDecimal,
-  toError,
   toFhirString,
   toId,
   toInstant,
@@ -38,7 +37,8 @@ import {asDateTime, asReadable}      from './type-presenters'
  *
  * @customElement
  */
-//TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible primitive.
+//TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible
+// primitive.
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
   static styles = [
@@ -47,6 +47,7 @@ export class Primitive extends LitElement {
       :host {
         user-select: text;
       }
+
       sl-badge {
         padding-left: var(--sl-spacing-x-small);
       }
@@ -58,7 +59,7 @@ export class Primitive extends LitElement {
         font-weight: var(--sl-font-weight-normal);
         font-style: italic;
       }
-    `,
+    `
   ]
 
   @consume({ context: displayConfigContext, subscribe: true })
@@ -115,16 +116,22 @@ export class Primitive extends LitElement {
 
   @state()
   private error: boolean = false
+
   @state()
   private presentableValue: unknown = ''
 
+  @state()
+  private presentableError: string = ''
+
+  @state()
+  private presentableTypeError: string = ''
+
   /**
    *
-   * @param _changedProperties
+   * @param changed
    * @protected
    */
-  protected willUpdate(_changedProperties: PropertyValues) {
-
+  protected willUpdate(changed: PropertyValues) {
 
     if (this.displayConfig) {
       this.mode = this.displayConfig.mode
@@ -133,7 +140,7 @@ export class Primitive extends LitElement {
     }
 
     // override value with valuePath
-    if (_changedProperties.has('valuePath') && this.contextData) {
+    if (changed.has('valuePath') && this.contextData) {
       if (this.value && this.valuePath) {
         console.warn('primitive: valuePath is overriding value attribute. Do not set both')
       }
@@ -147,31 +154,38 @@ export class Primitive extends LitElement {
       }
     }
 
-    const watchedHaveChanged = _changedProperties.has('value') || _changedProperties.has('type')
-    if (watchedHaveChanged && !isBlank(this.value) && this.type) {
-      choose(this.type, [
-        [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
-        [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
-        [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
-        [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
-        [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
-        [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
-        [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
-        [PrimitiveType.forced_error, () => this.validOrError(toError, this.value)],
-        [PrimitiveType.id, () => this.validOrError(toId, this.value)],
-        [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)],
-        [PrimitiveType.integer, () => this.validOrError(toInteger, this.value)],
-        [PrimitiveType.integer64, () => this.validOrError(toInteger64, this.value)],
-        [PrimitiveType.link, () => this.validOrError(toLink, this.value)],
-        [PrimitiveType.markdown, () => this.validOrError(toMarkdown, this.value)],
-        [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
-        [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
-        [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
-        [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
-        [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
-        [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
-      ])
+    const watchedHaveChanged = changed.has('value') || changed.has('type')
+    if (watchedHaveChanged) {
+      if (!isBlank(this.value) && this.type) {
+        choose(this.type, [
+          [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
+          [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
+          [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
+          [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
+          [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
+          [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
+          [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
+          [PrimitiveType.forced_error, () => (this.presentableValue = this.value) && (this.error = true)],
+          [PrimitiveType.id, () => this.validOrError(toId, this.value)],
+          [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)],
+          [PrimitiveType.integer, () => this.validOrError(toInteger, this.value)],
+          [PrimitiveType.integer64, () => this.validOrError(toInteger64, this.value)],
+          [PrimitiveType.link, () => this.validOrError(toLink, this.value)],
+          [PrimitiveType.markdown, () => this.validOrError(toMarkdown, this.value)],
+          [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
+          [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
+          [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
+          [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
+          [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
+          [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
+          [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
+        ])
+      }
+    }
+
+    if (changed.has('errormessage')) {
+      this.presentableError = this.errormessage
+      this.error = true
     }
   }
 
@@ -246,7 +260,8 @@ export class Primitive extends LitElement {
                     <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
                     <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
                     ${this.showerror ? html`
-                        <fhir-error text=${this.errormessage ?? this.presentableValue}></fhir-error >` : nothing}
+                                         <fhir-error text=${this.presentableTypeError + this.presentableError}></fhir-error >`
+                                     : nothing}
                 </fhir-primitive-wrapper >`
            : html``
   }
@@ -265,7 +280,7 @@ export class Primitive extends LitElement {
     }
 
     if (parsedValue.err) {
-      this.presentableValue = parsedValue.err
+      this.presentableTypeError = parsedValue.err
       this.error = true
     }
   }

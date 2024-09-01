@@ -2,7 +2,7 @@
 import {html, TemplateResult}                                      from 'lit'
 import {customElement}                                             from 'lit/decorators.js'
 import {BaseElement, Decorated, ValidationError, ValidationErrors} from '../../../internal'
-import {oneOf}                                                     from '../../../internal/base/util/oneOf'
+import {oneOrError}                                                from '../../../internal/base/util/oneOrError'
 import {DisplayConfig}                                             from '../../../types'
 import {
   PrimitiveType
@@ -38,8 +38,8 @@ export class Annotation extends BaseElement<AnnotationData> {
   }
 
   protected renderAll(data: Decorated<AnnotationData>): TemplateResult[] {
-    const author = oneOf(this,
-                         [
+    const author = oneOrError(this,
+                              [
                            {
                              data: data.authorReference,
                              html: (d: any) => html`

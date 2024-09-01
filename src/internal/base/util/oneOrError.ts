@@ -12,8 +12,11 @@ type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
  *   that data.
  * @returns {TemplateResult | TemplateResult[]} - The rendered template result or an array of rendered template
  *   results.
+ *
+ *   TODO: This condition should be checked during validation check and an error should be registered
  */
-export function oneOf<C extends BaseElement<any>>(contextElement: C, choices: Choice<C>[]): TemplateResult | TemplateResult[] {
+export function oneOrError<C extends BaseElement<any>>(contextElement: C,
+                                                       choices: Choice<C>[]): TemplateResult | TemplateResult[] {
 
   const templateResults: TemplateResult[] = []
   // add template if data is present

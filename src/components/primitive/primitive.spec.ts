@@ -85,4 +85,18 @@ describe('fhir Primitive', () => {
     expect(div.textContent).to.equal('TypeError: decimal must be a valid number: abc')
 
   })
+
+  test('should display an error when a validation error is passed', async () => {
+
+    const el = await fixture<Primitive>(html`
+        <fhir-primitive label="code" value="10" type="decimal" errormessage="should be less than 10" showerror></fhir-primitive >
+    `).first()
+
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
+    expect(label!.text).to.equal('code')
+
+    const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
+    expect(div.textContent).to.equal('should be less than 10')
+
+  })
 })
