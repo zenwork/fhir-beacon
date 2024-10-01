@@ -2,9 +2,9 @@ import {consume}                       from '@lit/context'
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement, state}          from 'lit/decorators.js'
 import {choose}                        from 'lit/directives/choose.js'
-import {otherwise, when}               from '../../.././utilities/when'
-import {BaseElement, Decorated}        from '../../../internal'
-import {containedDataContext}          from '../../../internal/contexts/context'
+import {otherwise, when}                     from '../../.././utilities/when'
+import {BaseElement, Decorated, Validations} from '../../../internal'
+import {containedDataContext}                from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -12,6 +12,15 @@ import {DisplayConfig}           from '../../../types'
 import {PrimitiveType}           from '../../primitive/type-converters/type-converters'
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
+
+enum ReferenceType {
+  unknown = 'unknown',
+  reference = 'reference',
+  identifier = 'identifier',
+  display = 'display',
+  extension = 'extension',
+  contained = 'contained'
+}
 
 @customElement('fhir-reference')
 export class Reference extends BaseElement<ReferenceData> {
@@ -123,7 +132,8 @@ export class Reference extends BaseElement<ReferenceData> {
   }
 
 
-  public decorate(data: ReferenceData): Decorated<ReferenceData> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public decorate(data: Decorated<ReferenceData>, validations: Validations) {
 
     //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
     // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being
@@ -151,15 +161,6 @@ export class Reference extends BaseElement<ReferenceData> {
       )
     }
 
-    return data
-  }
-}
 
-enum ReferenceType {
-  unknown = 'unknown',
-  reference = 'reference',
-  identifier = 'identifier',
-  display = 'display',
-  extension = 'extension',
-  contained = 'contained'
+  }
 }

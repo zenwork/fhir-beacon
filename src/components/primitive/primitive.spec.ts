@@ -99,4 +99,19 @@ describe('fhir Primitive', () => {
     expect(div.textContent).to.equal('should be less than 10')
 
   })
+
+  test('should display an error when a validation error is passed and type validation fails', async () => {
+
+    const el = await fixture<Primitive>(html`
+        <fhir-primitive label="code" value="10.5" type="integer" errormessage="must be less than 10" showerror></fhir-primitive >
+    `).first()
+
+    const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
+    expect(label!.text).to.equal('code')
+
+    const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
+    expect(div.textContent).to.equal('Error: Input must be a non-negative integer within the range 1 to'
+                                     + ' 2,147,483,647 | must be less than 10')
+
+  })
 })

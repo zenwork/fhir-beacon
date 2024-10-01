@@ -18,7 +18,7 @@ describe('DisplayConfig', () => {
         <fhir-primitive label="something" value='abc' type="decimal" ?showerror=${true}></fhir-primitive >
       `).first()
 
-      await aTimeout(300)
+      await aTimeout(200)
 
       const element = primitive.queryShadowByText('TypeError: decimal must be a valid number: abc')
       expect(element).toBeVisible()
@@ -102,7 +102,11 @@ describe('DisplayConfig', () => {
 
       await aTimeout()
 
-      assert.isEmpty(annotation.queryShadow({ select: '*', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: '*', expect: 14 }))
+      /* eslint-disable @typescript-eslint/no-unused-expressions   */
+      expect(annotation.queryShadowByText('error:')).toBeVisible
+      expect(annotation.queryShadowByText('No data provided')).toBeVisible
+      expect(annotation.queryShadowByText('the data or data-path property must be provided')).toBeVisible
 
     })
 
@@ -196,8 +200,8 @@ describe('DisplayConfig', () => {
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
       await aTimeout(200)
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 7 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 18 }))
 
     })
 

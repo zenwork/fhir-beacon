@@ -184,8 +184,11 @@ export class Primitive extends LitElement {
     }
 
     if (changed.has('errormessage')) {
-      this.presentableError = this.errormessage
-      this.error = true
+      if (!isBlank(this.errormessage)) {
+        this.presentableError = this.errormessage
+        this.error = true
+      }
+
     }
   }
 
@@ -254,14 +257,17 @@ export class Primitive extends LitElement {
    *
    */
   private renderError = (): TemplateResult => {
+    const errors = []
+    if (this.presentableTypeError) errors.push(this.presentableTypeError)
+    if (this.presentableError) errors.push(this.presentableError)
+
     return !isBlank(this.value) || this.verbose
            ? html`
                 <fhir-primitive-wrapper >
                     <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
                     <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
                     ${this.showerror ? html`
-                                         <fhir-error text=${this.presentableTypeError + this.presentableError}></fhir-error >`
-                                     : nothing}
+                        <fhir-error text=${errors.join(' | ')}></fhir-error >` : nothing}
                 </fhir-primitive-wrapper >`
            : html``
   }

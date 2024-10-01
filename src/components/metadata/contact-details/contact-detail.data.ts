@@ -1,4 +1,4 @@
-import {FhirElementData}  from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {FhirString}       from '../../primitive/primitive.data'
 import {ContactPointData} from '../../resources/patient/patient.data'
 

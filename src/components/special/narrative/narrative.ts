@@ -1,8 +1,8 @@
 import {html, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property}              from 'lit/decorators.js'
-import {unsafeHTML}                           from 'lit/directives/unsafe-html.js'
-import {BaseElement, NoDataSet}               from '../../../internal'
-import {DisplayConfig}                        from '../../../types'
+import {unsafeHTML}             from 'lit/directives/unsafe-html.js'
+import {BaseElement, NoDataSet} from '../../../internal'
+import {DisplayConfig}          from '../../../types'
 
 import {NarrativeData} from './narrative.data'
 

@@ -34,7 +34,7 @@ describe('Address', () => {
 
   it('renders error when type is invalid', async () => {
     const modifiedData: AddressData = { ...data }
-    modifiedData.type = 'some other place'
+    modifiedData.type = 'someOtherType'
     const address = await fixture<Address>(html`
         <fhir-shell showerror>
             <fhir-address .data=${modifiedData}></fhir-address >

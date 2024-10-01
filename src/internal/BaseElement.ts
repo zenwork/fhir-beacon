@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {PropertyValues, TemplateResult}    from 'lit'
-import {DisplayConfig}                     from '../types'
-import {FhirElementData, ValidationErrors} from './base/data/fhir-data-element.data'
+import {PropertyValues, TemplateResult} from 'lit'
+import {DisplayConfig}                  from '../types'
 
-import {Decorated}              from './base/Decorated'
-import {EmptyResult}            from './base/presentable'
-import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'
+import {Decorated, FhirElementData, Validations} from './base/Decorated'
+import {EmptyResult, FhirPresentableElement}     from './base/presentable'
+
+// import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'
 
 /**
  * Represents a base element in the FHIR data model. This is the class to extend when creating components.
@@ -13,7 +13,7 @@ import {FhirPresentableElement} from './base/presentable/fhir-presentable-elemen
  * @param {string} type - The type of the instance being created. Should be one of the canonical FHIR names
  * @typeparam T - The type of data associated with the base element.
  */
-export class BaseElement<T extends FhirElementData> extends FhirPresentableElement<T> {
+export class BaseElement<D extends FhirElementData> extends FhirPresentableElement<D> {
 
 
   /**
@@ -21,23 +21,25 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    * it is recommended to call
    * `super.validate(T)` as well.
    * @param data data to validate
+   * @param fetched
+   * @param validations
    * @return errors found
    * @protected
    */
-  public validate(data: T): ValidationErrors {
-    return this.errors
+  public validate(data: D, validations: Validations, fetched: boolean): void {
+    // override to add validations
   }
 
   /**
    * Override to extend the given data with some useful context
    *
    * @param data - The data to be converted.
-   * @param errors
+   * @param validations
    * @param fetched
    * @return The converted data of the same type as the input data.
    */
-  public decorate(data: T, errors: ValidationErrors, fetched: boolean): Decorated<T> {
-    return data as Decorated<T>
+  public decorate(data: Decorated<D>, validations: Validations, fetched: boolean): void {
+
   }
 
   /**
@@ -57,7 +59,7 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    *   // Perform specific logic here when the data is ready
    * }
    */
-  public isPrepared(providedData: T, decoratedData: Decorated<T>): void {
+  public isPrepared(providedData: D, decoratedData: Decorated<D>): void {
     // override to add logic
   }
 
@@ -71,7 +73,7 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    * @return {void} - This method does not return anything.
    */
   public willRender(config: DisplayConfig,
-                    data: Decorated<T> | null,
+                    data: Decorated<D> | null,
                     changes: PropertyValues): void {
     // override to add logic
   }
@@ -81,11 +83,11 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    * contribute templateGenerators instead.
    * @param config
    * @param data
-   * @param errors
+   * @param validations
    */
   public renderDisplay(config: DisplayConfig,
-                       data: Decorated<T>,
-                       errors: ValidationErrors): TemplateResult[] {
+                       data: Decorated<D>,
+                       validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -93,12 +95,12 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    *
    * @param config
    * @param data
-   * @param errors
+   * @param validations
    * @protected
    */
   public renderNarrative(config: DisplayConfig,
-                         data: Decorated<T>,
-                         errors: ValidationErrors): TemplateResult[] {
+                         data: Decorated<D>,
+                         validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -107,11 +109,11 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    * contribute templateGenerators instead.
    * @param config
    * @param data
-   * @param errors
+   * @param validations
    */
   public renderStructure(config: DisplayConfig,
-                         data: Decorated<T>,
-                         errors: ValidationErrors): TemplateResult[] {
+                         data: Decorated<D>,
+                         validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -130,7 +132,7 @@ export class BaseElement<T extends FhirElementData> extends FhirPresentableEleme
    *
    */
   public hasRendered(config: DisplayConfig,
-                     data: Decorated<T> | null,
+                     data: Decorated<D> | null,
                      haveChanged: PropertyValues): void {
     // override to add logic
   }

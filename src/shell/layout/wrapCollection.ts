@@ -1,7 +1,8 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {map}                           from 'lit/directives/map.js'
-import {asReadable}                    from '../../components'
+
 import {hasMany, hasOnlyOne, hasSome}  from './directives'
+import {asReadable} from '../../components/primitive/type-presenters/asReadable'
 
 /**
  * Wraps a collection of items with a `<fhir-wrapper>` component.

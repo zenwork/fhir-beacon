@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {BaseElement, Decorated, ValidationErrors}             from '../../../internal'
+import {BaseElement, Decorated, Validations} from '../../../internal'
 import {DisplayConfig}                                        from '../../../types'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
@@ -27,7 +27,6 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     const displayValue: undefined | string | number = data.value
     const type: string = 'decimal'
     const after = data.unit || data.code
-
     if (isQuantity(data)) {
       return [
         html`
@@ -97,13 +96,17 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   }
 
-  public validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
-    const errors = super.validate(data)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, fetched: boolean) {
+
     if (!hasAllOrNone(data, ['code', 'system'])) {
-      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
+      validations.addErr({
+                           key: this.type + '::qty-3',
+                           err: `${this.type}: code and system should be set or none of the two`
+                         })
     }
 
-    return errors
+
   }
 
   public decorate(data: QuantityData): Decorated<QuantityData> | Decorated<SimpleQuantityData> {
@@ -145,8 +148,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         && FhirAges.find(a => data.code === a.code && data.system === a.source)) {
       this.variation = QuantityVariations.age
     }
-
-    return data
+    return data as Decorated<QuantityData> | Decorated<SimpleQuantityData>
   }
 
 }

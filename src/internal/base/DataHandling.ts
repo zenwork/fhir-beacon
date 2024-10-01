@@ -1,6 +1,5 @@
-import {PropertyValues}                    from 'lit'
-import {FhirElementData, ValidationErrors} from './data/fhir-data-element.data'
-import {Decorated}                         from './Decorated'
+import {PropertyValues}                          from 'lit'
+import {Decorated, FhirElementData, Validations} from './Decorated'
 
 export interface DataHandling<D extends FhirElementData> {
   /**
@@ -9,7 +8,7 @@ export interface DataHandling<D extends FhirElementData> {
    * @description
    * Called before all data preparation steps are executed
    */
-  prepare(): void
+  prepare(): Decorated<D>
 
   /**
    * Determines whether fetching data is necessary. Override to fetch data from somewhere else.
@@ -43,20 +42,21 @@ export interface DataHandling<D extends FhirElementData> {
    * @param {D} data - The data to be validated.
    * @param {boolean} fetched - Flag indicating whether the data was fetched in the `fetch()` call.
    *
+   * @param validations
    * @return {ValidationErrors} - The validation errors, if any.
    */
-  validate(data: D, fetched: boolean): ValidationErrors;
+  validate(data: D, validations: Validations, fetched: boolean): void
 
   /**
    * implements `convertData()` to modify data before handing rendering. Add data values locally relevant for
    * rendering is probably better than replacing raw data.
    *
    * @param {D} data - The data to be decorated.
-   * @param {ValidationErrors} errors - The validation errors to be included in the decoration.
+   * @param validations
    * @param {boolean} fetched - Indicates whether the data was fetched.
    * @return {Decorated<D>} - The decorated data object.
    */
-  decorate(data: D, errors: ValidationErrors, fetched: boolean): Decorated<D>;
+  decorate(data: Decorated<D>, validations: Validations, fetched: boolean): void
 
   /**
    * Hook called after all data preparation steps have completed

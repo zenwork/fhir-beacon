@@ -1,4 +1,4 @@
-import {FhirElementData}     from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {BackboneElementData} from '../../../internal/resource/backbone.data'
 import {ResourceData}        from '../../../internal/resource/domain-resource.data'
 
@@ -12,31 +12,9 @@ import {
 }                                                                                 from '../../special/reference/reference.data'
 
 
-export type BundleData = FhirElementData & {
-
-  identifier?: IdentifierData,
-  type: Code,
-  timestamp?: Instant,
-  total?: UnsignedInt,
-  link: BundleLinkBackbone[]
-  entry: BundleEntryBackbone[]
-  signature?: SignatureData
-  issues?: ResourceData
-}
-
 export type BundleLinkBackbone = BackboneElementData & {
   relation: Code
   url: URI
-}
-
-export type BundleEntryBackbone = BackboneElementData & {
-  link: Link[]
-  fullUrl?: URI
-  resource?: ResourceData
-  search?: BundleEntrySearchBackbone
-  request?: BundleEntryRequestBackbone
-  response?: BundleEntryResponseBackbone
-
 }
 
 export type BundleEntrySearchBackbone = BackboneElementData & {
@@ -61,6 +39,16 @@ export type BundleEntryResponseBackbone = BackboneElementData & {
   outcome?: ResourceData
 }
 
+export type BundleEntryBackbone = BackboneElementData & {
+  link: Link[]
+  fullUrl?: URI
+  resource?: ResourceData
+  search?: BundleEntrySearchBackbone
+  request?: BundleEntryRequestBackbone
+  response?: BundleEntryResponseBackbone
+
+}
+
 export type SignatureData = FhirElementData & {
   type: CodingData[]
   when?: Instant
@@ -69,4 +57,16 @@ export type SignatureData = FhirElementData & {
   targetFormat?: Code
   sigFormat?: Code
   data?: Base64Binary
+}
+
+export type BundleData = FhirElementData & {
+
+  identifier?: IdentifierData,
+  type: Code,
+  timestamp?: Instant,
+  total?: UnsignedInt,
+  link: BundleLinkBackbone[]
+  entry: BundleEntryBackbone[]
+  signature?: SignatureData
+  issues?: ResourceData
 }

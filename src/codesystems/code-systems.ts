@@ -1,10 +1,12 @@
 import {CodeSystemAddressTypes}       from './CodeSystem-address-type'
 import {CodeSystemAddressUse}         from './CodeSystem-address-use'
 import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
+import {CodeSystemIdentifierUse}      from './CodeSystem-identifier-use'
 import {CodeSystemQuantityComparator} from './CodeSystem-quantity-comparator'
 import {ValueSetAgeUnits}             from './ValueSet-age-units'
 import {ValueSetDistanceUnits}        from './ValueSet-distance-units'
 import {ValueSetDurationUnits}        from './ValueSet-duration-units'
+import {ValueSetIdentifierType}       from './ValueSet-identifier-type'
 
 export {CodeSystemQuantityComparator as Comparators}
 export {CodeSystemFhirTypes}
@@ -17,9 +19,12 @@ export type ValueSet = { lvl?: number, source?: string, code?: string, display?:
 export const FhirTypes: FhirType[] = extract(CodeSystemFhirTypes.concept, [])
 export const FhirAddressTypes: FhirType[] = extract(CodeSystemAddressTypes.concept, [])
 export const FhirAddressUse: FhirType[] = extract(CodeSystemAddressUse.concept, [])
+export const FhirIdentifierUse: FhirType[] = extract(CodeSystemIdentifierUse.concept, [])
+
 export const FhirDistances: ValueSet[] = extractValueSet(ValueSetDistanceUnits)
 export const FhirAges: ValueSet[] = extractValueSet(ValueSetAgeUnits)
 export const FhirDuration: ValueSet[] = extractValueSet(ValueSetDurationUnits)
+export const FhirIdentifierType: ValueSet[] = extractValueSet(ValueSetIdentifierType)
 
 function extract(concepts: any[], types: FhirType[]) {
   const extracted = concepts.map((c: any) => {

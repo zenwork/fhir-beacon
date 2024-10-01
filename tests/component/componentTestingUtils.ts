@@ -4,6 +4,15 @@ import {Primitive, PrimitiveLabel} from '../../src/components/primitive'
 import {testPrimitive}             from './testPrimitive'
 
 
+type QuantitySimple = {
+  id: string | null | undefined,
+  variation: string | null | undefined,
+  value: string | null | undefined,
+  unit: string | null | undefined,
+  system: string | null | undefined,
+  code: string | null | undefined
+}
+
 export const BeaconAssert = {
   hasLabelsAndValues: {
     for: {
@@ -28,13 +37,4 @@ export const BeaconAssert = {
       }
     }
   }
-}
-
-type QuantitySimple = {
-  id: string | null | undefined,
-  variation: string | null | undefined,
-  value: string | null | undefined,
-  unit: string | null | undefined,
-  system: string | null | undefined,
-  code: string | null | undefined
 }

@@ -19,7 +19,8 @@ export default [
             semi:['error', 'never'],
             'newline-per-chained-call':'off',
             'function-paren-newline':'off',
-            indent:'off'
+            indent:'off',
+            'no-use-before-define':['error', {'functions':false, 'classes':true}]
         }
     }
 ]

@@ -1,4 +1,4 @@
-import {FhirElementData}     from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {CodeableConceptData} from '../../complex/codeable-concept/codeable-concept.data'
 import {CodingData}          from '../../complex/coding/coding.data'
 import {QuantityData}        from '../../complex/quantity/quantity.data'

@@ -1,4 +1,4 @@
-import {FhirElementData}                  from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {BackboneElementData}              from '../../../internal/resource/backbone.data'
 import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
 import {AnnotationData}                   from '../../complex/annotation/annotation.data'

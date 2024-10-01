@@ -8,6 +8,7 @@ import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
 export class Ratio extends BaseElement<RatioData> {
+  //TODO: remove these styles
   static styles = [
     css`
       fhir-primitive-wrapper {

@@ -1,6 +1,7 @@
 import {StoryObj}               from '@storybook/web-components'
 import {html}                   from 'lit'
 import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
+import {data, data1, data2}     from './identifier.story.data'
 
 
 const render = wrapInShell((args) => html`
@@ -24,14 +25,7 @@ type Story = StoryObj<ShellArgs>;
 
 export const PatientIdentifier: Story = {
   args: {
-    data: {
-      use: 'official',
-      system: 'http://www.acmehosp.com/patients',
-      value: '44552',
-      period: {
-        start: '2003-05-03'
-      }
-    },
+    data: data,
     mode: 'display',
     showerror: false,
     verbose: false,
@@ -41,11 +35,7 @@ export const PatientIdentifier: Story = {
 }
 export const HospitalPatientIdentifier: Story = {
   args: {
-    data: {
-      use: 'official',
-      system: 'urn:oid:2.16.840.1.113883.16.4.3.2.5',
-      value: '123'
-    },
+    data: data1,
     mode: 'structure',
     showerror: false,
     verbose: false,
@@ -56,16 +46,7 @@ export const HospitalPatientIdentifier: Story = {
 
 export const Example3: Story = {
   args: {
-    data: {
-      use: 'official',
-      type: { text: 'BSN' },
-      system: 'urn:oid:2.16.840.1.113883.2.4.6.3',
-      value: '123456789',
-      period: {
-        start: '2003-05-03',
-        end: '2024-12-31'
-      }
-    },
+    data: data2,
     mode: 'display',
     showerror: false,
     verbose: false,

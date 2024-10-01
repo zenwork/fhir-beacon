@@ -1,6 +1,7 @@
 import {html, TemplateResult} from 'lit'
 import {DisplayMode}          from '../../../types'
 import {BaseElement}          from '../../BaseElement'
+import {errors}               from '../Decorated'
 
 type Choice<C> = { data: any, html: (data: any, context: C) => TemplateResult }
 
@@ -33,21 +34,26 @@ export function oneOrError<C extends BaseElement<any>>(contextElement: C,
 
   // return all results and error messages if showerror is set
   if (contextElement.showerror) {
-    const matchingError = contextElement.errors.find(e => e.id.match(/.*author\[x].*!/))
-    if (contextElement.mode === DisplayMode.structure || contextElement.mode === DisplayMode.structure_summary) {
+    const key: string | undefined = Object.keys(contextElement.extendedData[errors])
+                                          .find(k => k.match(/.*author\[x].*!/))
+    if (key) {
+      const matchingError = contextElement.extendedData[errors][key]
+      if (contextElement.mode === DisplayMode.structure || contextElement.mode === DisplayMode.structure_summary) {
+        return html`
+            <fhir-structure-wrapper .label=${key ?? 'unknown error id'} variant='validation-error'>
+                ${templateResults}
+                ${html`
+                    <fhir-error text="${matchingError ?? 'unknown error'}"></fhir-error >`}
+            </fhir-structure-wrapper >`
+      }
+
       return html`
-        <fhir-structure-wrapper .label=${matchingError?.id ?? 'unknown error id'} variant='validation-error'>
-          ${templateResults}
-          ${html`<fhir-error text="${matchingError?.err ?? 'unknown error'}" ></fhir-error >`}
-        </fhir-structure-wrapper >`
+          <fhir-wrapper .label=${key ?? 'unknown error id'} variant='validation-error'>
+              ${templateResults}
+              ${html`
+                  <fhir-error text="${matchingError ?? 'unknown error'}"></fhir-error >`}
+          </fhir-wrapper >`
     }
-    /*
-     */
-    return html`
-      <fhir-wrapper .label=${matchingError?.id ?? 'unknown error id'} variant='validation-error'>
-        ${templateResults}
-        ${html`<fhir-error text="${matchingError?.err ?? 'unknown error'}" ></fhir-error >`}
-      </fhir-wrapper >`
   }
 
   // otherwise return all results

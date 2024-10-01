@@ -3,5 +3,5 @@ import {toUrl}       from './toUrl'
 import {toPrimitive} from './type-converters'
 
 export const toUri: toPrimitive<string, URI> = (uri: string): URI => {
-  return toUrl(uri) as URL
+  return toUrl(uri).toString() as URI
 }

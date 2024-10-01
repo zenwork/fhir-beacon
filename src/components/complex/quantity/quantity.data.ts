@@ -1,4 +1,4 @@
-import {FhirElementData}    from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {Code, Decimal, URI} from '../../primitive/primitive.data'
 
 //TODO: Rule: If a code for the unit is present, the system SHALL also be present. see:
