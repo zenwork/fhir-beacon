@@ -2,13 +2,13 @@ import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
 
-import {FhirDataElement}                     from '../base/data/fhir-data-element'
-import {FhirPresentableElement}              from '../base/presentable/fhir-presentable-element'
+import {FhirDataElement}        from '../base/data/fhir-data-element'
+import {FhirElementData}        from '../base/Decorated'
+import {FhirPresentableElement} from '../base/presentable/fhir-presentable-element'
+import {contextData, displayConfigContext} from './context'
 
 
 import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'
-import {contextData, displayConfigContext} from './context'
-import {FhirElementData}                   from '../base/Decorated'
 
 //TODO: adding this context root to the document.body is a bit of a hack and may or may not work when there are
 // multiple shells in one document.

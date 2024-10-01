@@ -1,5 +1,5 @@
-import {PropertyValues}  from 'lit'
-import {DisplayConfig}   from '../../types'
+import {PropertyValues} from 'lit'
+import {DisplayConfig}  from '../../types'
 
 import {Decorated, FhirElementData} from './Decorated'
 

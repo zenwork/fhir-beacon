@@ -1,8 +1,8 @@
 import {consume}                                            from '@lit/context'
 import {html, LitElement, PropertyValueMap, TemplateResult} from 'lit'
 import {property, state}                                    from 'lit/decorators.js'
-import {FhirDataContext} from '../contexts/FhirContextData'
 import {contextData}     from '../contexts/context'
+import {FhirDataContext} from '../contexts/FhirContextData'
 
 
 export abstract class FhirContextElement extends LitElement {
