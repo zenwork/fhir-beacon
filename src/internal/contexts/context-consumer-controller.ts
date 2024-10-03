@@ -2,10 +2,10 @@ import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
 
-import {FhirDataElement}        from '../base/data/fhir-data-element'
-import {FhirElementData}        from '../base/Decorated'
-import {FhirPresentableElement} from '../base/presentable/fhir-presentable-element'
-import {contextData, displayConfigContext} from './context'
+import {FhirDataElement}                   from '../base/data/fhir-data-element'
+import {FhirElementData}                   from '../base/Decorated'
+import {FhirPresentableElement}            from '../base/presentable/fhir-presentable-element'
+import {dataContext, displayConfigContext} from './context'
 
 
 import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'
@@ -35,7 +35,7 @@ export class DataContextConsumerController<T extends FhirElementData> implements
 
     new ContextConsumer(host,
                         {
-                          context: contextData,
+                          context: dataContext,
                           subscribe: true,
                           callback: (dataCtx: FhirDataContext) => {
                             if (dataCtx && host.dataContext.data !== dataCtx.data) {

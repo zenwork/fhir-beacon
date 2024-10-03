@@ -5,7 +5,7 @@ import {choose}                        from 'lit/directives/choose.js'
 import {otherwise, when}               from '../../.././utilities/when'
 import {BaseElement, Validations}      from '../../../internal'
 
-import {containedDataContext} from '../../../internal/contexts/context'
+import {containedResourcesContext} from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -27,7 +27,7 @@ enum ReferenceType {
 export class Reference extends BaseElement<ReferenceData> {
 
   @state()
-  @consume({ context: containedDataContext, subscribe: true })
+  @consume({ context: containedResourcesContext, subscribe: true })
   private containedData: ResourceData[] = []
 
   @state()

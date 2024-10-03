@@ -120,15 +120,14 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
  * @type {FhirElementData}
  * @const
  */
-//TODO: change NoDataSet to NoDataObject
-export const NoDataSet: FhirElementData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
+export const NoDataObject: FhirElementData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
 export function decorated<T extends FhirElementData>(data?: T): Decorated<T> {
-  const d: any = data !== NoDataSet ? data : {}
+  const d: any = data !== NoDataObject ? data : {}
   return {
     ...d,
     [errors]: {},
     //TODO: hide is not the right metadata... it's the likely wanted behaviour
-    [meta]: { hide: data === NoDataSet }
+    [meta]: { hide: data === NoDataObject }
   } as Decorated<T>
 }

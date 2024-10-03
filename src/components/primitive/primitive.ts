@@ -1,9 +1,9 @@
 import {consume}                                                        from '@lit/context'
 import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                                 from 'lit/decorators.js'
-import {choose}                                                         from 'lit/directives/choose.js'
-import {contextData, displayConfigContext, FhirDataContext}             from '../../internal/contexts'
-import {textHostStyles}                                                 from '../../styles'
+import {choose}                                             from 'lit/directives/choose.js'
+import {dataContext, displayConfigContext, FhirDataContext} from '../../internal/contexts'
+import {textHostStyles}                                     from '../../styles'
 import {DisplayConfig, DisplayMode}                                     from '../../types'
 import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
 import {mustRender}                                                     from '../mustRender'
@@ -65,7 +65,7 @@ export class Primitive extends LitElement {
   @consume({ context: displayConfigContext, subscribe: true })
   declare displayConfig: DisplayConfig
 
-  @consume({ context: contextData, subscribe: true })
+  @consume({ context: dataContext, subscribe: true })
   declare contextData: FhirDataContext
 
   @property({ reflect: true })

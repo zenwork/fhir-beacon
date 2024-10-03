@@ -1,7 +1,7 @@
 import {consume}                                            from '@lit/context'
 import {html, LitElement, PropertyValueMap, TemplateResult} from 'lit'
 import {property, state}                                    from 'lit/decorators.js'
-import {contextData}     from '../contexts/context'
+import {dataContext}     from '../contexts/context'
 import {FhirDataContext} from '../contexts/FhirContextData'
 
 
@@ -10,7 +10,7 @@ export abstract class FhirContextElement extends LitElement {
   /**
    * Request data context from parent element
    */
-  @consume({ context: contextData, subscribe: true })
+  @consume({ context: dataContext, subscribe: true })
   declare context: FhirDataContext
 
   /**

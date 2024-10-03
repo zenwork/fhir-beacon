@@ -1,5 +1,5 @@
-import {meta, NoDataSet} from '../internal/base/Decorated'
-import {DisplayMode}     from '../types'
+import {meta, NoDataObject} from '../internal/base/Decorated'
+import {DisplayMode}        from '../types'
 
 /**
  * Determines if a value should be rendered based on the provided context parameters.
@@ -51,7 +51,7 @@ function shouldRender(summary: boolean, summaryMode: boolean) {
 }
 
 function isPresent(value: any) {
-  if (value === NoDataSet) return false
+  if (value === NoDataObject) return false
 
   if (value && value[meta] && value[meta].hide) {
     return value[meta].hide !== true

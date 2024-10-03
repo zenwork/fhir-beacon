@@ -1,34 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, PropertyValues, TemplateResult}                             from 'lit'
-import {property}                                                                  from 'lit/decorators.js'
-import {mustRender}                                                                from '../../../components/mustRender'
+import {html, nothing, PropertyValues, TemplateResult}                                from 'lit'
+import {property}                                                                     from 'lit/decorators.js'
+import {
+  mustRender
+}                                                                                     from '../../../components/mustRender'
 import {
   PrimitiveType
-}                                                                                  from '../../../components/primitive/type-converters'
+}                                                                                     from '../../../components/primitive/type-converters'
 import {
   asReadable
-}                                                                                  from '../../../components/primitive/type-presenters/asReadable'
+}                                                                                     from '../../../components/primitive/type-presenters/asReadable'
 import {
   hasSome
-}                                                                                  from '../../../shell/layout/directives'
-import {hostStyles}                                                                from '../../../styles'
-import {DisplayConfig, DisplayMode}                                                from '../../../types'
-import {hasSameAncestor, toBaseElementModeEnum}                                    from '../../../utilities'
+}                                                                                     from '../../../shell/layout/directives'
+import {hostStyles}                                                                   from '../../../styles'
+import {DisplayConfig, DisplayMode}                                                   from '../../../types'
+import {hasSameAncestor, toBaseElementModeEnum}                                       from '../../../utilities'
 import {
   DisplayContextConsumerController
-}                                                                                  from '../../contexts/context-consumer-controller'
-import {FhirDataElement}                                                           from '../data/fhir-data-element'
-import {Decorated, FhirElementData, meta, NoDataSet, Validations, ValidationsImpl} from '../Decorated'
-import {Rendering}                                                                 from '../Rendering'
-import {Templating}                                                                from '../Templating'
+}                                                                                     from '../../contexts/context-consumer-controller'
+import {FhirDataElement}                                                              from '../data/fhir-data-element'
+import {Decorated, FhirElementData, meta, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
+import {Rendering}                                                                    from '../Rendering'
+import {Templating}                                                                   from '../Templating'
 import {
   EmptyResult,
   Generators,
   NullGenerators
-}                                                                                  from './fhir-presentable-element.data'
+}                                                                                     from './fhir-presentable-element.data'
 import {
   componentStyles
-}                                                                                  from './fhir-presentable-element.styles'
+}                                                                                     from './fhir-presentable-element.styles'
 
 
 export abstract class FhirPresentableElement<D extends FhirElementData> extends FhirDataElement<D>
@@ -191,7 +193,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   protected render(): TemplateResult | TemplateResult[] {
     const templates: TemplateResult[] = [html``]
 
-    if (!this.extendedData[meta].hide && this.data === NoDataSet) {
+    if (!this.extendedData[meta].hide && this.data === NoDataObject) {
       // SHOW THAT WE HAVE NO DATA
       return html`
           <fhir-not-supported variant="no-data"></fhir-not-supported >`
@@ -282,11 +284,10 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
   /**
    * Overridable method reserved for internal use. Do not call super in this method
-   * @param config
    * @param data
    * @protected
    */
-  private renderBaseElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+  private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
 
       return [
@@ -307,7 +308,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
    * Render formatted JSON data for debugging purposes
    * @protected
    */
-  private renderDebug(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+  private renderDebug(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
 
     if (data || this.verboseRequestedAndAllowed()) {
       return [

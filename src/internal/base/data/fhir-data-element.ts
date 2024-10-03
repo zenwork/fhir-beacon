@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {LitElement, PropertyValues}                                                             from 'lit'
-import {property, state}                                                                        from 'lit/decorators.js'
-import {DataContextConsumerController, FhirDataContext}                                         from '../../contexts'
-import {DataHandling}                                                                           from '../DataHandling'
-import {decorated, Decorated, Errors, FhirElementData, NoDataSet, Validations, ValidationsImpl} from '../Decorated'
+import {LitElement, PropertyValues}                                                                from 'lit'
+import {
+  property,
+  state
+}                                                                                                  from 'lit/decorators.js'
+import {DataContextConsumerController, FhirDataContext}                                            from '../../contexts'
+import {
+  DataHandling
+}                                                                                                  from '../DataHandling'
+import {decorated, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
 
 
 export class BeaconDataError implements Error {
@@ -41,7 +46,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     // TODO: might be better to use data-fhir and comply with the data-* standard. see:
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({ type: Object, attribute: 'data' })
-  public data: T = NoDataSet as T
+  public data: T = NoDataObject as T
 
   @property({ type: String, attribute: 'data-path' })
   public declare dataPath: string
@@ -98,7 +103,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   protected constructor(type: string) {
     super()
     this.type = type
-    this.data = NoDataSet as T
+    this.data = NoDataObject as T
     this.extendedData = decorated(this.data)
     new DataContextConsumerController(this)
   }
@@ -126,7 +131,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   public abstract isPrepared(providedData: T, decoratedData: Decorated<T>): void
 
   public shouldPrepare() {
-    return this.data && this.data !== NoDataSet
+    return this.data && this.data !== NoDataObject
   }
 
   /**
@@ -153,7 +158,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
       this.extendedData = this.prepare()
       const validations = new ValidationsImpl(this.extendedData)
       this.validate(this.extendedData, validations, this.#fetched)
-      if (this.data !== NoDataSet) this.decorate(this.extendedData as Decorated<T>, validations, this.#fetched)
+      if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>, validations, this.#fetched)
       this.isPrepared(this.data, this.extendedData)
     }
 
