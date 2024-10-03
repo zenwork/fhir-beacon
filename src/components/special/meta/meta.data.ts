@@ -1,4 +1,3 @@
-// Todo: figure out when where Meta Data goes
 import {FhirElementData} from '../../../internal'
 import {CodingData}      from '../../complex/coding/coding.data'
 import {Canonical, Id, Instant, URI} from '../../primitive/primitive.data'

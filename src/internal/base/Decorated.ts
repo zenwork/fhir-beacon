@@ -63,6 +63,8 @@ export type ValidationErrors = { [key: string]: string }
 export interface Validations {
   errFor(key: string): string | undefined
   addErr(err: { parent?: string[], key: string, err: string }): void
+  remErr(key: string): void
+
 }
 
 /**
@@ -97,6 +99,10 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
       })
     }
 
+  }
+
+  public remErr(key: string): void {
+    delete this.data[errors][key]
   }
 }
 

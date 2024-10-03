@@ -100,7 +100,7 @@ export const Unknown: Story = {
       type: 'Practitioner'
     },
     mode: 'display',
-    showerror: false
+    showerror: true
   },
   render
 }
@@ -112,6 +112,18 @@ export const Structure: Story = {
     showerror: false,
     verbose: true,
     open: true
+  },
+  render
+}
+
+export const WithMissingContained: Story = {
+  args: {
+    data: {
+      reference: '#1234',
+      type: 'Patient'
+    },
+    mode: 'display',
+    showerror: true
   },
   render
 }
