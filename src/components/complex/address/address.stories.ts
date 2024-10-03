@@ -19,13 +19,13 @@ const meta: Meta<ShellArgs> = {
   render: ({
              data,
              mode: mode = 'display',
-             verbose: verbose = false,
-             showerror: showerror = false,
-             open: open = false,
-             summary: summary = true
+             verbose: verbose,
+             showerror: showerror,
+             open: open,
+             summary: summary
            }: ShellArgs) =>
     html`
-      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
+        <fhir-shell .mode=${mode} ?verbose=${verbose} ?showerror=${showerror} ?open=${open}>
         <fhir-address .data=${data} ?summary=${summary}}></fhir-address >
       </fhir-shell >
     `
@@ -37,11 +37,7 @@ type Story = StoryObj<ShellArgs>;
 
 export const Display: Story = {
   args: {
-    data,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true
+    data
   }
 }
 

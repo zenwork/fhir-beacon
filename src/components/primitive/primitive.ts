@@ -93,13 +93,13 @@ export class Primitive extends LitElement {
   public type: PrimitiveType = PrimitiveType.none
 
   @property({ type: Boolean, reflect: true })
-  declare showProvided: boolean
+  public showProvided: boolean = false
 
   @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  public showerror: boolean = false
 
   // override error message only shown if type validation fails
   @property({ type: String, reflect: true })
@@ -109,10 +109,10 @@ export class Primitive extends LitElement {
   declare variant: string
 
   @property({ type: Boolean, reflect: true })
-  declare verbose: boolean
+  public verbose: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare summary: boolean
+  public summary: boolean = false
 
   @state()
   private error: boolean = false

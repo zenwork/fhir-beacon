@@ -1,6 +1,6 @@
-import {Meta, StoryObj} from '@storybook/web-components'
-import {html}           from 'lit'
-import {ShellArgs}      from '../../../../stories/wrapInShell'
+import {Meta, StoryObj}         from '@storybook/web-components'
+import {html}                   from 'lit'
+import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
 
 type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
 
@@ -8,24 +8,16 @@ const meta: Meta<CustomArgs> = {
   title: 'Components/Datatypes/Complex Type/Codeable Concept',
   component: 'fhir-shell',
   argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    mode: {
+      options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'],
+      control: { type: 'inline-radio' }
+    },
     verbose: { options: [false, true], control: { type: 'boolean' } },
     showerror: { options: [false, true], control: { type: 'boolean' } },
     open: { options: [false, true], control: { type: 'boolean' } }
   },
-  render: ({
-             data,
-             mode: mode = 'display',
-             verbose: verbose = false,
-             showerror: showerror = false,
-             open: open = false,
-             summary: summary = true
-           }: ShellArgs) =>
-    html`
-      <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-        <fhir-codeable-concept .data=${data} ?summary=${summary}}></fhir-codeable-concept >
-      </fhir-shell >
-    `
+  render: wrapInShell((args: ShellArgs) => html`
+      <fhir-codeable-concept .data=${args.data} ?summary=${args.summary}}></fhir-codeable-concept >`)
 
 }
 

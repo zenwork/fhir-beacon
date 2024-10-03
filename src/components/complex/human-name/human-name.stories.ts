@@ -27,11 +27,7 @@ type Story = StoryObj<ShellArgs>;
 
 export const Display: Story = {
   args: {
-    data,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true
+    data
   },
   render
 
@@ -39,11 +35,7 @@ export const Display: Story = {
 
 export const Display2: Story = {
   args: {
-    data: data3,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true
+    data: data3
   },
   render
 
@@ -54,8 +46,7 @@ export const Structure: Story = {
     data,
     mode: 'structure',
     showerror: true,
-    verbose: true,
-    open: true
+    verbose: true
   },
   render
 }

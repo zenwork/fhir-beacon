@@ -17,32 +17,31 @@ import {componentStyles}                            from './wrapper-styles'
 @customElement('fhir-wrapper')
 export class Wrapper extends LitElement {
 
-  @consume({context: displayConfigContext, subscribe: true})
-  protected displayConfig: DisplayConfig = defaultDisplayConfig
-
   static styles = [hostStyles, componentStyles]
 
-  @property({type: String})
+  @property({ type: String })
   label: string = ''
 
-  @property({type: String})
+  @property({ type: String })
   fhirType: string = ''
 
   @property()
   variant: 'primary' | 'secondary' | 'validation-error' | 'none' = 'none'
 
-  @property({type: Boolean, reflect: true})
-  hide: boolean = false
+  @property({ type: Boolean, reflect: true })
+  public hide: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
+  public open: boolean = false
 
   @property({ type: DisplayMode, reflect: true, converter: toBaseElementModeEnum })
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
-  declare summary: boolean
+  public summary: boolean = false
 
+  @consume({ context: displayConfigContext, subscribe: true })
+  protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   protected render(): unknown {
     if (!this.summaryMode() || (this.summary && this.summaryMode())) {
@@ -53,14 +52,23 @@ export class Wrapper extends LitElement {
       const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
 
       return html`
-        <div class='base ${classMap(borderClasses)}'>
-          ${label}
-          <slot class="${classMap({ content: !this.hide })}"></slot >
-        </div >
+          <div class='base ${classMap(borderClasses)}'>
+              ${label}
+              <slot class="${classMap({ content: !this.hide })}"></slot >
+          </div >
       `
     }
 
     return html``
+  }
+
+  protected willUpdate(_changedProperties: PropertyValues) {
+    super.willUpdate(_changedProperties)
+    if (this.displayConfig) {
+      this.open = this.displayConfig.open
+      this.mode = this.displayConfig.mode
+      // this.hide = !this.displayConfig.verbose
+    }
   }
 
   private generateLabel = () => {
@@ -73,38 +81,29 @@ export class Wrapper extends LitElement {
 
     if (!this.hide && this.label && this.fhirType) {
       return html`
-        <sl-tooltip content="${this.fhirType}" placement="left">
-          <div id="label">
-            <label class=${classMap(classes)}>${this.label}</label >
-            <span id="arrow">&#x21B4;</span >
-          </div >
-        </sl-tooltip >
+          <sl-tooltip content="${this.fhirType}" placement="left">
+              <div id="label">
+                  <label class=${classMap(classes)}>${this.label}</label >
+                  <span id="arrow">&#x21B4;</span >
+              </div >
+          </sl-tooltip >
       `
     } else if (!this.hide && this.label) {
       return html`
-        <div id="label">
-          <label class=${classMap(classes)}>${this.label}</label >
-          <span id="arrow">&#x21B4;</span >
-        </div >
+          <div id="label">
+              <label class=${classMap(classes)}>${this.label}</label >
+              <span id="arrow">&#x21B4;</span >
+          </div >
       `
     } else if (!this.hide && this.fhirType) {
       return html`
-        <div id="label">
-          <label class=${classMap(classes)}>${this.fhirType}</label >
-          <span id="arrow">&#x21B4;</span >
-        </div >
+          <div id="label">
+              <label class=${classMap(classes)}>${this.fhirType}</label >
+              <span id="arrow">&#x21B4;</span >
+          </div >
       `
     } else {
       return html``
-    }
-  }
-
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (this.displayConfig) {
-      this.open = this.displayConfig.open
-      this.mode = this.displayConfig.mode
-      // this.hide = !this.displayConfig.verbose
     }
   }
 

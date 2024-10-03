@@ -8,24 +8,24 @@ import {toBaseElementModeEnum}      from '../utilities'
 @customElement('fhir-shell')
 export class Shell extends LitElement {
 
-  @property({ type: DisplayMode, converter: toBaseElementModeEnum })
+  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
   public mode: DisplayMode = DisplayMode.display
 
   @property({ type: Boolean, reflect: true })
-  declare open: boolean
-
-  @property({type: Boolean, reflect: true})
-  declare verbose: boolean
+  public open: boolean = false
 
   @property({ type: Boolean, reflect: true })
-  declare showerror: boolean
+  public verbose: boolean = false
 
-  protected display = new ContextProvider(this, {context: displayConfigContext})
+  @property({ type: Boolean, reflect: true })
+  public showerror: boolean = false
+
+  protected display = new ContextProvider(this, { context: displayConfigContext })
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (_changedProperties.has('mode')) {
-      this.display.setValue({...this.display.value, mode: this.mode})
+      this.display.setValue({ ...this.display.value, mode: this.mode })
     }
 
     if (_changedProperties.has('showerror')) {
@@ -33,11 +33,11 @@ export class Shell extends LitElement {
     }
 
     if (_changedProperties.has('verbose')) {
-      this.display.setValue({...this.display.value, verbose: this.verbose})
+      this.display.setValue({ ...this.display.value, verbose: this.verbose })
     }
 
     if (_changedProperties.has('open')) {
-      this.display.setValue({...this.display.value, open: this.open})
+      this.display.setValue({ ...this.display.value, open: this.open })
     }
   }
 
