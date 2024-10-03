@@ -80,7 +80,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
   constructor(decorated: Decorated<D>) {this.data = decorated}
 
   public errFor(key: string): string | undefined {
-    const error = this.data[errors][key]
+    const error: unknown = this.data[errors][key]
     if (typeof error === 'string') return error
     return undefined
   }
