@@ -1,4 +1,4 @@
-import {css, html, TemplateResult}  from 'lit'
+import {html, TemplateResult} from 'lit'
 import {customElement}              from 'lit/decorators.js'
 import {BaseElement}                from '../../../internal'
 import {EmptyResult}                from '../../../internal/base'
@@ -8,27 +8,12 @@ import {RatioData} from './ratio.data'
 
 @customElement('fhir-ratio')
 export class Ratio extends BaseElement<RatioData> {
-  //TODO: remove these styles
-  static styles = [
-    css`
-      fhir-primitive-wrapper {
-        display: flex;
-        list-style-type: none;
-        padding-top: var(--sl-spacing-x-small);
-        padding-bottom: var(--sl-spacing-x-small);
-      }
-
-      fhir-quantity::part(base) {
-        padding: 0;
-      }
-    `
-  ]
 
   constructor() {
     super('Ratio')
   }
 
-  public renderDisplay(config: DisplayConfig, data: RatioData): TemplateResult[] {
+  public renderDisplay(_: DisplayConfig, data: RatioData): TemplateResult[] {
 
     if (this.mode == DisplayMode.display_summary && !this.summary) {
       return EmptyResult
@@ -53,11 +38,9 @@ export class Ratio extends BaseElement<RatioData> {
           </fhir-primitive-wrapper >
       `
     ]
-
-
   }
 
-  public renderStructure(config: DisplayConfig, data: RatioData): TemplateResult[] {
+  public renderStructure(_: DisplayConfig, data: RatioData): TemplateResult[] {
     return [
       html`
           <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >

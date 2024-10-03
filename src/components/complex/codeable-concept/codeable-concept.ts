@@ -11,9 +11,6 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     super('CodeableConcept')
   }
 
-  //TODO: review how to deal with fall-back situation. Is this a correct interpretation. We probably need some
-  // extensive testing TODO: display summary is problematic because it does not represent the spec correctly sometimes
-  // if layout is modified
   public renderDisplay(config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
 
     return [

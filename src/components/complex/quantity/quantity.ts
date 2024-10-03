@@ -12,8 +12,6 @@ import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.d
 import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
 
 
-// TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity
-// :-(
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 

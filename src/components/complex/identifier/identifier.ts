@@ -12,7 +12,6 @@ import {IdentifierData}                    from './identifier.data'
 @customElement('fhir-identifier')
 export class Identifier extends BaseElement<IdentifierData> {
 
-  //TODO: this still needs some work. There are a lot of corner cases
   constructor() {super('Identifier')}
 
   public renderDisplay(config: DisplayConfig,
