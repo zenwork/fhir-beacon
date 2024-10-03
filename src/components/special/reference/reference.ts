@@ -155,7 +155,8 @@ export class Reference extends BaseElement<ReferenceData> {
     if (this.referenceType == ReferenceType.unknown) {
       //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is
       // provided).
-      this.referenceType = when<ReferenceData, ReferenceType>(data)(
+      this.referenceType = when<ReferenceData, ReferenceType>(
+        data,
         [d => !!d.extension, () => ReferenceType.extension],
         [d => !!d.reference, () => ReferenceType.reference],
         [d => !!d.identifier, () => ReferenceType.identifier],

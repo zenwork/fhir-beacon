@@ -1,8 +1,8 @@
+// TODO: loading everything for now... should not do this once proper separation of import trees
 import './index'
 import format                                from 'html-format'
 import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
 import {beforeAll}                           from 'vitest'
-// TODO: loading everything for now... should not do this once proper separation of import trees
 import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
 import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
 import {Query}                               from './tests/types/global'
