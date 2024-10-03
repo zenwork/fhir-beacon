@@ -1,7 +1,7 @@
-import {FhirElementData} from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {CodingData}      from '../coding/coding.data'
 
 export type CodeableConceptData = FhirElementData & {
-  coding: CodingData[]
+  coding?: CodingData[]
   text?: string
 }

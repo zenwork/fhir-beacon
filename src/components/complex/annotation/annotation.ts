@@ -1,56 +1,54 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, TemplateResult}                                      from 'lit'
-import {customElement}                                             from 'lit/decorators.js'
-import {BaseElement, Decorated, ValidationError, ValidationErrors} from '../../../internal'
-import {oneOf}                                                     from '../../../internal/base/util/oneOf'
-import {DisplayConfig}                                             from '../../../types'
-import {
-  PrimitiveType
-}                                                                  from '../../primitive/type-converters/type-converters'
-import {AnnotationData}                                            from './annotation.data'
+import {html, TemplateResult}                from 'lit'
+import {customElement}                       from 'lit/decorators.js'
+import {BaseElement, Decorated, Validations} from '../../../internal'
+import {oneOrError}                          from '../../../internal/base/util/oneOrError'
+import {DisplayConfig}                       from '../../../types'
+import {PrimitiveType}                       from '../../primitive/type-converters/type-converters'
+import {AnnotationData}                      from './annotation.data'
 
 @customElement('fhir-annotation')
 export class Annotation extends BaseElement<AnnotationData> {
 
   constructor() {super('Annotation')}
 
-  public validate(data: AnnotationData): ValidationErrors {
-    const errors: ValidationError[] = super.validate(data)
+  public validate(data: AnnotationData, validations: Validations): void {
 
     if (data.authorString && data.authorReference) {
-      errors.push({ id: this.type + '::author[x]', err: 'can only have one of authorString or authorReference' })
+      validations.addErr({
+                           key: this.type + '::author[x]',
+                           err: 'can only have one of authorString or authorReference'
+                         })
     }
-
-    return errors
   }
 
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<AnnotationData>,
-                       errors: ValidationErrors): TemplateResult[] {
+                       validations: Validations): TemplateResult[] {
     return this.renderAll(data)
   }
 
 
   public renderStructure(config: DisplayConfig,
                          data: Decorated<AnnotationData>,
-                         errors: ValidationErrors): TemplateResult[] {
+                         validations: Validations): TemplateResult[] {
     return this.renderAll(data)
   }
 
   protected renderAll(data: Decorated<AnnotationData>): TemplateResult[] {
-    const author = oneOf(this,
-                         [
-                           {
-                             data: data.authorReference,
-                             html: (d: any) => html`
-                                 <fhir-reference label="author" .data=${d} summary></fhir-reference >`
-                           },
-                           {
-                             data: data.authorString,
-                             html: (d: any) => html`
-                                 <fhir-primitive label="author" .value=${d} summary></fhir-primitive >`
-                           }
-                         ])
+    const author = oneOrError(this,
+                              [
+                                {
+                                  data: data.authorReference,
+                                  html: (d: any) => html`
+                                      <fhir-reference label="author" .data=${d} summary></fhir-reference >`
+                                },
+                                {
+                                  data: data.authorString,
+                                  html: (d: any) => html`
+                                      <fhir-primitive label="author" .value=${d} summary></fhir-primitive >`
+                                }
+                              ])
 
     return [
       html`

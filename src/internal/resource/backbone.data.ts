@@ -1,4 +1,4 @@
-import {Extension, FhirElementData} from '../base/data/fhir-data-element.data'
+import {Extension, FhirElementData} from '../base'
 
 export type BackboneElementData = FhirElementData & {
   modifierExtension: Extension[]

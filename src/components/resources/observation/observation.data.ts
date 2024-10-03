@@ -1,4 +1,4 @@
-import {FhirElementData}                  from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {BackboneElementData}              from '../../../internal/resource/backbone.data'
 import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
 import {AnnotationData}                   from '../../complex/annotation/annotation.data'
@@ -119,7 +119,7 @@ export type ObservationData = DomainResourceData & {
   subject?: ReferenceData
   focus?: ReferenceData[]
   encounter?: ReferenceData
-  effective: EffectiveDateTime | EffectivePeriod | EffectiveTiming | EffectiveInstant
+  effective?: EffectiveDateTime | EffectivePeriod | EffectiveTiming | EffectiveInstant
   issued?: Instant
   performer?: ReferenceData[]
   value?: ValueQuantityData | ValueCodeableConceptData | ValueFhirString | ValueBoolean | ValueInteger | ValueRange | ValueRatioData | ValueSampledData | ValueTime | ValueDateTime | ValuePeriodData | ValueAttachmentData | ValueReferenceData

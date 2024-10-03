@@ -1,17 +1,20 @@
 import {ContextProvider}                     from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
-import {FhirElementData}                     from '../base/data/fhir-data-element.data'
+import {FhirElementData} from '../base'
 import {BaseElement}                         from '../BaseElement'
 
-import {contextData, displayConfigContext} from './context'
-import {FhirDataContextImpl}               from './FhirContextData'
+import {containedResourcesContext, dataContext, displayConfigContext} from './context'
+import {FhirDataContextImpl}                                          from './FhirContextData'
 
 //TODO: maybe shoudl be split into two separate controllers
 export class ContextProviderController<T extends FhirElementData, B extends BaseElement<T>> implements ReactiveController {
 
   private host: B
   private displayCtx: ContextProvider<typeof displayConfigContext>
-  private dataCtx: ContextProvider<typeof contextData>
+
+  private dataCtx: ContextProvider<typeof dataContext>
+
+  private containedCtx: ContextProvider<typeof containedResourcesContext>
 
   constructor(host: B) {
 
@@ -20,7 +23,8 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
 
     const reactive = host as unknown as ReactiveElement
     this.displayCtx = new ContextProvider(reactive, { context: displayConfigContext })
-    this.dataCtx = new ContextProvider(reactive, { context: contextData })
+    this.dataCtx = new ContextProvider(reactive, { context: dataContext })
+    this.containedCtx = new ContextProvider(reactive, { context: containedResourcesContext })
   }
 
   hostUpdated() {
@@ -31,6 +35,9 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
       const context = new FhirDataContextImpl()
       context.data = data
       this.dataCtx.setValue(context)
+      if ((data as any).contained) {
+        this.containedCtx.setValue((data as any).contained)
+      }
     }
 
     const mode = this.host.mode

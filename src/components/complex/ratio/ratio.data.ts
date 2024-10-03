@@ -1,4 +1,4 @@
-import {FhirElementData}                  from '../../../internal/base/data/fhir-data-element.data'
+import {FhirElementData} from '../../../internal'
 import {QuantityData, SimpleQuantityData} from '../quantity/quantity.data'
 
 export type RatioData = FhirElementData & {

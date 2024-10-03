@@ -3,8 +3,9 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement, state}          from 'lit/decorators.js'
 import {choose}                        from 'lit/directives/choose.js'
 import {otherwise, when}               from '../../.././utilities/when'
-import {BaseElement, Decorated}        from '../../../internal'
-import {containedDataContext}          from '../../../internal/contexts/context'
+import {BaseElement, Validations}      from '../../../internal'
+
+import {containedResourcesContext} from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -13,28 +14,31 @@ import {PrimitiveType}           from '../../primitive/type-converters/type-conv
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
 
+enum ReferenceType {
+  unknown = 'unknown',
+  reference = 'reference',
+  identifier = 'identifier',
+  display = 'display',
+  extension = 'extension',
+  contained = 'contained'
+}
+
 @customElement('fhir-reference')
 export class Reference extends BaseElement<ReferenceData> {
 
-  @consume({context: containedDataContext, subscribe: true})
-  private contained: ResourceData[] = []
+  @state()
+  @consume({ context: containedResourcesContext, subscribe: true })
+  private containedData: ResourceData[] = []
 
   @state()
-  private containedResource: ResourceData | undefined
+  private mappedResource: ResourceData | undefined
 
   @state()
   private referenceType: ReferenceType = ReferenceType.unknown
 
   constructor() {super('Reference')}
 
-
-//TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the key this is
-  // assigned to rather than defining the `type` property
-  //TODO: need to figure out how to add all special rules and corner cases for references. see:
-  // http://hl7.org/fhir/R5/datatypes.html#identifier
-
-  public renderDisplay(config: DisplayConfig, data: ReferenceData): TemplateResult[] {
-
+  public renderDisplay(config: DisplayConfig, data: ReferenceData, validation: Validations): TemplateResult[] {
     return [
       html`
           ${choose(this.referenceType, [
@@ -44,11 +48,11 @@ export class Reference extends BaseElement<ReferenceData> {
                       <fhir-primitive
                               key="${this.key}"
                               label="${this.label}"
-                              value=${this.containedResource?.resourceType || 'contained'}
+                              value=${this.mappedResource?.resourceType || 'contained'}
                               summary
                       ></fhir-primitive >
                       <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
-                          ${renderResourceComponent(this.containedResource, this.getDisplayConfig())}
+                          ${renderResourceComponent(this.mappedResource, this.getDisplayConfig())}
                       </fhir-wrapper >
 
                   `
@@ -60,6 +64,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display}
                               .link=${data.reference}
+                              .errormessage=${validation.errFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -70,6 +75,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display ? data.display : data.reference}
                               .link=${data.reference}
+                              .errormessage=${validation.errFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -85,13 +91,26 @@ export class Reference extends BaseElement<ReferenceData> {
               [
                   ReferenceType.extension,
                   () => html`
-                      <fhir-not-supported description="unable to render reference of type ${ReferenceType.extension}" variant="no-impl"></fhir-not-supported >`
+                      <fhir-primitive
+                              label=${data.type ? asReadable(data.type.toString()) : 'reference'}
+                              .value=${data.display || data.display || data.reference || 'undefined'}
+                              .link=${data.reference}
+                              .errormessage=${validation.errFor('*')}
+                              summary
+                      ></fhir-primitive >`
               ],
               [
                   ReferenceType.unknown,
                   () => this.data
                         ? html`
-                              <fhir-not-supported description="unable to render reference of type ${ReferenceType.unknown}" variant="no-impl"></fhir-not-supported >`
+                              <fhir-primitive
+                                      label=${data.type ? asReadable(data.type.toString()) : 'reference'}
+                                      .value=${data.display || data.display || data.reference || 'undefined'}
+                                      .link=${data.reference}
+                                      .errormessage=${validation.errFor('*')}
+                                      summary
+                              ></fhir-primitive >
+                          `
                         : nothing
               ]
 
@@ -105,12 +124,13 @@ export class Reference extends BaseElement<ReferenceData> {
   /**
    * @param config
    * @param data
+   * @param validations
    * @protected
    */
-  public renderStructure(config: DisplayConfig, data: ReferenceData): TemplateResult[] {
+  public renderStructure(config: DisplayConfig, data: ReferenceData, validations: Validations): TemplateResult[] {
     return [
       html`
-          <fhir-primitive label="reference" .value=${data.reference} summary></fhir-primitive >
+          <fhir-primitive label="reference" .value=${data.reference} .errormessage=${validations.errFor('reference')} summary></fhir-primitive >
           <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
           <fhir-identifier
                   label="identifier"
@@ -122,44 +142,62 @@ export class Reference extends BaseElement<ReferenceData> {
     ]
   }
 
+  public validate(data: ReferenceData, validations: Validations, fetched: boolean) {
+    super.validate(data, validations, fetched)
 
-  public decorate(data: ReferenceData): Decorated<ReferenceData> {
+    let isContainedRef: boolean = false
 
-    //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
-    // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being
-    // able to request data that is in the payload of the parent resource. Have to do this later with signals but when
-    // resolving the link call not here.
-    const isContainedRef = data?.reference?.startsWith('#')
-    const containedDataExists = this.contained.length > 0
+    if (this.data && this.data.reference) {
+      isContainedRef = this.data.reference.startsWith('#')
 
-    if (isContainedRef && containedDataExists) {
-      this.containedResource = this.contained.find(r => '#' + r.id === data.reference)
+      if (isContainedRef) this.referenceType = ReferenceType.contained
+
+      if (this.containedData.length > 0) {
+        const containedDataExists = this.containedData.length > 0
+
+        if (isContainedRef && containedDataExists) {
+          this.mappedResource = this.containedData.find(r => '#' + r.id === this.data.reference)
+
+          if (this.mappedResource) {
+            validations.remErr('*')
+          }
+        }
+
+      } else {
+        if (this.referenceType === ReferenceType.contained && !this.mappedResource) {
+          validations.addErr({
+                               key: '*',
+                               err: 'ref-1: Does not have a contained resource when reference starts with #'
+                             })
+          this.referenceType = ReferenceType.unknown
+        }
+      }
+
     }
 
-    if (this.containedResource) {
-      this.referenceType = ReferenceType.contained
-    }
     if (this.referenceType == ReferenceType.unknown) {
-      //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is
-      // provided).
-      this.referenceType = when<ReferenceData, ReferenceType>(data)(
-        [d => !!d.extension, () => ReferenceType.extension],
-        [d => !!d.reference, () => ReferenceType.reference],
-        [d => !!d.identifier, () => ReferenceType.identifier],
-        [d => !!d.display, () => ReferenceType.display],
-        otherwise(() => ReferenceType.unknown)
+      this.referenceType = when<ReferenceData, ReferenceType>(
+        data,
+        [d => !!d.extension, ReferenceType.extension],
+        [d => !!d.reference, ReferenceType.reference],
+        [d => !!d.identifier, ReferenceType.identifier],
+        [d => !!d.display, ReferenceType.display],
+        otherwise(() => {
+          validations.addErr({
+                               key: '*',
+                               err: 'Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).'
+                             })
+          return ReferenceType.unknown
+        })
       )
     }
 
-    return data
+    if (this.referenceType == ReferenceType.extension) {
+      validations.addErr({
+                           key: '*',
+                           err: 'Support for reference extensions is not implemented yet.'
+                         })
+    }
   }
-}
 
-enum ReferenceType {
-  unknown = 'unknown',
-  reference = 'reference',
-  identifier = 'identifier',
-  display = 'display',
-  extension = 'extension',
-  contained = 'contained'
 }

@@ -48,10 +48,7 @@ type Story = StoryObj<CustomArgs>;
 export const Headache: Story = {
   args: {
     data,
-    mode: 'display',
-    verbose: false,
     showerror: true,
-    open: true
   },
   render
 }
@@ -59,10 +56,8 @@ export const Headache: Story = {
 export const HeadacheVerbose: Story = {
   args: {
     data,
-    mode: 'display',
     verbose: true,
-    showerror: true,
-    open: true
+    showerror: true
   },
   render
 }
@@ -72,8 +67,7 @@ export const Structure: Story = {
     data: data,
     mode: 'structure',
     verbose: true,
-    showerror: true,
-    open: true
+    showerror: true
   },
   render
 }

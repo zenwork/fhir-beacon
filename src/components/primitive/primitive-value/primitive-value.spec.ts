@@ -1,5 +1,7 @@
+import {userEvent} from '@vitest/browser/context'
 import {html}                   from 'lit'
 import {describe, expect, test} from 'vitest'
+import {aTimeout}  from '../../../../tests/aTimeout'
 import {dimmensions}            from '../../../../tests/dimensions'
 
 import {fixture} from '../../../../tests/lit/lit-vitest-fixture'
@@ -88,9 +90,10 @@ describe('fhir primitive value', () => {
 
     await el.updateComplete
 
-    const div = el.queryShadow<HTMLDivElement>({ select: 'div' })
-    expect(div)
-      .toHaveTextContent(text)
+    let div = el.queryShadow<HTMLDivElement>({ select: 'div' })
+    expect(div).toHaveTextContent(text)
+    await userEvent.unhover(div)
+    await aTimeout(500)
 
     if (div) {
 
@@ -103,20 +106,20 @@ describe('fhir primitive value', () => {
       expect.fail('shadow root content not found')
     }
 
-    // TODO: next minor release might work better.
-    // waiting for https://github.com/vitest-dev/vitest/pull/6175
-    // await userEvent.hover(div)
 
-    // await el.updateComplete
+    await userEvent.hover(div)
+    await aTimeout(1000)
 
-    // if (target) {
-    //   const { h, w } = dimmensions(target, 'rem')
-    //
-    //   expect(h).to.equal(12)
-    //   expect(w).to.equal(30)
-    // } else {
-    //   expect.fail('shadow root content not found')
-    // }
+    div = el.queryShadow<HTMLDivElement>({ select: 'div' })
+
+    if (div) {
+      const { h, w } = dimmensions(div, 'rem')
+
+      expect(h).to.equal(12)
+      expect(w).to.equal(30)
+    } else {
+      expect.fail('shadow root content not found')
+    }
 
 
   })

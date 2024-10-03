@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult}                        from 'lit'
 import {customElement}                                        from 'lit/decorators.js'
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {BaseElement, Decorated, ValidationErrors}             from '../../../internal'
+import {BaseElement, Decorated, Validations} from '../../../internal'
 import {DisplayConfig}                                        from '../../../types'
 import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                        from '../../../utilities/isWhole'
@@ -12,8 +12,6 @@ import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.d
 import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
 
 
-// TODO: this simple quanity rule is not handled very well. There are a bunch more rules that need handling in quantity
-// :-(
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
@@ -27,7 +25,6 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     const displayValue: undefined | string | number = data.value
     const type: string = 'decimal'
     const after = data.unit || data.code
-
     if (isQuantity(data)) {
       return [
         html`
@@ -97,13 +94,17 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   }
 
-  public validate(data: QuantityData | SimpleQuantityData): ValidationErrors {
-    const errors = super.validate(data)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, fetched: boolean) {
+
     if (!hasAllOrNone(data, ['code', 'system'])) {
-      errors.push({ id: this.type + '::qty-3', err: `${this.type}: code and system should be set or none of the two` })
+      validations.addErr({
+                           key: this.type + '::qty-3',
+                           err: `${this.type}: code and system should be set or none of the two`
+                         })
     }
 
-    return errors
+
   }
 
   public decorate(data: QuantityData): Decorated<QuantityData> | Decorated<SimpleQuantityData> {
@@ -131,7 +132,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       this.variation = QuantityVariations.count
     }
 
-    // TODO: There is no guaranteed way to distinguish between a duration and an age. I this a bug or a feature?
+    // TODO: There is no guaranteed way to distinguish between a duration and an age. Is this a bug or a feature?
     // rule: drt-1
     if ((!data.value || data.code)
         && FhirDuration.find(d => data.code === d.code && data.system === d.source)
@@ -145,8 +146,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         && FhirAges.find(a => data.code === a.code && data.system === a.source)) {
       this.variation = QuantityVariations.age
     }
-
-    return data
+    return data as Decorated<QuantityData> | Decorated<SimpleQuantityData>
   }
 
 }

@@ -1,10 +1,12 @@
 import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
-import {FhirDataElement}                     from '../base/data/fhir-data-element'
-import {FhirElementData}                     from '../base/data/fhir-data-element.data'
-import {FhirPresentableElement}              from '../base/presentable/fhir-presentable-element'
-import {contextData, displayConfigContext}   from './context'
+
+import {FhirDataElement}                   from '../base/data/fhir-data-element'
+import {FhirElementData}                   from '../base/Decorated'
+import {FhirPresentableElement}            from '../base/presentable/fhir-presentable-element'
+import {dataContext, displayConfigContext} from './context'
+
 
 import {FhirDataContext, FhirDataContextImpl} from './FhirContextData'
 
@@ -32,15 +34,15 @@ export class DataContextConsumerController<T extends FhirElementData> implements
     host.dataContext.data = {} as FhirElementData
 
     new ContextConsumer(host,
-      {
-        context: contextData,
-        subscribe: true,
-        callback: (dataCtx: FhirDataContext) => {
-          if (dataCtx && host.dataContext.data !== dataCtx.data) {
-            host.dataContext = dataCtx
-          }
-        }
-      })
+                        {
+                          context: dataContext,
+                          subscribe: true,
+                          callback: (dataCtx: FhirDataContext) => {
+                            if (dataCtx && host.dataContext.data !== dataCtx.data) {
+                              host.dataContext = dataCtx
+                            }
+                          }
+                        })
 
   }
 
@@ -67,24 +69,24 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
     host.addController(this)
 
     new ContextConsumer(host,
-      {
-        context: displayConfigContext,
-        subscribe: true,
-        callback: (config: DisplayConfig) => {
-          if (config) {
-            // never propagate override because there is an external template providing the rendering
-            // TODO: this is not the best way to solve this
-            if (config.mode !== DisplayMode.override) {
-              if (config.mode !== undefined) host.mode = config.mode
-            }
+                        {
+                          context: displayConfigContext,
+                          subscribe: true,
+                          callback: (config: DisplayConfig) => {
+                            if (config) {
+                              // never propagate override because there is an external template providing the rendering
+                              // TODO: this is not the best way to solve this
+                              if (config.mode !== DisplayMode.override) {
+                                if (config.mode !== undefined) host.mode = config.mode
+                              }
 
-            if (config.showerror !== undefined) host.showerror = config.showerror
-            if (config.open !== undefined) host.open = config.open
-            if (config.verbose !== undefined) host.verbose = config.verbose
-          }
+                              if (config.showerror !== undefined) host.showerror = config.showerror
+                              if (config.open !== undefined) host.open = config.open
+                              if (config.verbose !== undefined) host.verbose = config.verbose
+                            }
 
-        }
-      })
+                          }
+                        })
   }
 
   public hostConnected(): void {

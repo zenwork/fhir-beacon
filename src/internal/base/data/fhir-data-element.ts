@@ -1,11 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {LitElement, PropertyValues}                   from 'lit'
-import {property, state}                              from 'lit/decorators.js'
-import {DataContextConsumerController}                from '../../contexts/context-consumer-controller'
-import {FhirDataContext}                              from '../../contexts/FhirContextData'
-import {DataHandling}                                 from '../DataHandling'
-import {Decorated}                                    from '../Decorated'
-import {FhirElementData, NoDataSet, ValidationErrors} from './fhir-data-element.data'
+import {LitElement, PropertyValues}                                                                from 'lit'
+import {
+  property,
+  state
+}                                                                                                  from 'lit/decorators.js'
+import {DataContextConsumerController, FhirDataContext}                                            from '../../contexts'
+import {
+  DataHandling
+}                                                                                                  from '../DataHandling'
+import {decorated, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
+
+
+export class BeaconDataError implements Error {
+  name: string = 'BeaconDataError'
+
+  message: string
+
+  stack?: string | undefined
+
+  constructor(msg: string) {
+    this.message = msg
+  }
+
+}
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
@@ -29,18 +46,10 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     // TODO: might be better to use data-fhir and comply with the data-* standard. see:
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*
   @property({ type: Object, attribute: 'data' })
-  public data: T = NoDataSet as T
+  public data: T = NoDataObject as T
 
   @property({ type: String, attribute: 'data-path' })
   public declare dataPath: string
-
-  /**
-   * FHIR type.
-   *
-   * @typedef {string} MyString
-   */
-  @state()
-  protected declare readonly type: string
 
   //------------------------------------------------//
   /**
@@ -50,7 +59,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @type {T & {} | null}
    */
   @state()
-  declare protected extendedData: Decorated<T>
+  public extendedData: Decorated<T> = decorated()
 
   //------------------------------------------------//
   /**
@@ -72,10 +81,19 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    *
    * @type {ValidationErrors} An array of objects representing validation errors.
    */
-  public errors: ValidationErrors = []
+  @property({ reflect: false })
+  public errors: Errors = {}
 
   @state()
   public declare dataContext: FhirDataContext
+
+  /**
+   * FHIR type.
+   *
+   * @type {string} MyString
+   */
+  @state()
+  protected declare readonly type: string
 
   //------------------------------------------------//
   #fetched: boolean = false
@@ -85,13 +103,18 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   protected constructor(type: string) {
     super()
     this.type = type
+    this.data = NoDataObject as T
+    this.extendedData = decorated(this.data)
     new DataContextConsumerController(this)
   }
 
+  public prepare() {
+    return decorated(this.data)
+  }
 
-  public prepare() {this.extendedData = {} as Decorated<T>}
-
-  public shouldFetch(changes: PropertyValues): boolean {return !!this.dataContext && !!this.dataPath}
+  public shouldFetch(changes: PropertyValues): boolean {
+    return !!this.dataContext && !!this.dataPath
+  }
 
   public fetch(dataPath: string): T {
     if (this.dataContext?.data) {
@@ -101,21 +124,15 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     throw new BeaconDataError(`unable to fetch data for: ${dataPath}`)
   }
 
-  public abstract validate(data: T, fetched: boolean): ValidationErrors;
+  public abstract validate(data: T, validations: Validations, fetched: boolean): void
 
-
-  public abstract decorate(data: T, errors: ValidationErrors, fetched: boolean): Decorated<T>;
-
+  public abstract decorate(data: Decorated<T>, validations: Validations, fetched: boolean): void
 
   public abstract isPrepared(providedData: T, decoratedData: Decorated<T>): void
 
   public shouldPrepare() {
-    return this.data && this.data !== NoDataSet
+    return this.data && this.data !== NoDataObject
   }
-
-  // protected shouldUpdate(_changedProperties: PropertyValues): boolean {
-  //   return !!this.data || !!this.dataPath
-  // }
 
   /**
    * Updates the component's state based on the changed properties.
@@ -127,32 +144,24 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
   protected willUpdate(changes: PropertyValues): void {
     super.willUpdate(changes)
 
+    if (changes.has('errors')) {
+      // if (this.type === 'CodeableConcept') console.log(this.key, this.type, this.errors)
+      // if (this.type === 'Coding') console.log('coding')
+    }
+
     if (changes.has('dataPath') && this.shouldFetch(changes)) {
       this.data = this.fetch(this.dataPath)
       this.#fetched = true
     }
 
     if (changes.has('data') && this.shouldPrepare()) {
-      this.prepare()
-      const validationErrors = this.validate(this.data, this.#fetched)
-      this.errors.push(...validationErrors)
-      this.extendedData = this.decorate(this.data, this.errors, this.#fetched)
+      this.extendedData = this.prepare()
+      const validations = new ValidationsImpl(this.extendedData)
+      this.validate(this.extendedData, validations, this.#fetched)
+      if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>, validations, this.#fetched)
       this.isPrepared(this.data, this.extendedData)
     }
 
-  }
-
-}
-
-export class BeaconDataError implements Error {
-  name: string = 'BeaconDataError'
-
-  message: string
-
-  stack?: string | undefined
-
-  constructor(msg: string) {
-    this.message = msg
   }
 
 }

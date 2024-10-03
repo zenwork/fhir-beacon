@@ -68,7 +68,7 @@ jobs:
                   folder: ./path-to-your-built-site
 
             -   name: Store test results
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v4
                 with:
                     name: junit-test-results
                     path: ./results/*.xml

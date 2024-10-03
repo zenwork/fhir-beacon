@@ -1,11 +1,26 @@
+// TODO: loading everything for now... should not do this once proper separation of import trees
 import './index'
 import format                                from 'html-format'
 import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
 import {beforeAll}                           from 'vitest'
-// TODO: loading everything for now... should not do this once proper separation of import trees
 import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
 import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
 import {Query}                               from './tests/types/global'
+
+/**
+ * Represents an error that occurs during the execution of a Beacon Test.
+ *
+ * @class
+ * @extends Error
+ *
+ * @param {string} message - The error message.
+ */
+export class BeaconTestError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'BeaconTestError'
+  }
+}
 
 Element.prototype.queryShadow =
   function <T extends Element | Element[]>({ select, expect = 1 }: Query): T {
@@ -47,10 +62,11 @@ Element.prototype.queryShadow =
     throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
 
   }
+
+
 Element.prototype.shadowedChildren = function (): HTMLCollection {
   return this.shadowRoot ? this.shadowRoot.children : new HTMLCollection()
 }
-
 
 Element.prototype.queryShadowDefaultSlot = function (): Node[] {
   return queryDefaultSlot(this as HTMLElement)
@@ -59,10 +75,10 @@ Element.prototype.queryShadowDefaultSlot = function (): Node[] {
 Element.prototype.queryShadowNamedSlot = function (slotName: string): Element[] {
   return querySlot(this as HTMLElement, slotName)
 }
-
 const doubleSpace = / {2}/g
 const litComments = /<!--.*-->/gm
 const doubleSpaced = /\n\s+\n/gm
+
 Element.prototype.logShadow = function (): void {
   try {
     let shadow = ''
@@ -92,6 +108,7 @@ Element.prototype.logShadow = function (): void {
   } catch (e) { console.log(e) }
 }
 
+
 Element.prototype.queryShadowByText = function <T extends Element>(text: string): T | null {
   return shadowQueries.queryByShadowText(this as HTMLElement, text) as T | null
 }
@@ -107,7 +124,6 @@ function pad(input: string) {
   // Join the padded lines back into a single string
   return paddedLines.join('\n')
 }
-
 
 beforeAll(() => {
   document.head.innerHTML = `
@@ -224,18 +240,3 @@ beforeAll(() => {
 </style>
   `
 })
-
-/**
- * Represents an error that occurs during the execution of a Beacon Test.
- *
- * @class
- * @extends Error
- *
- * @param {string} message - The error message.
- */
-export class BeaconTestError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = 'BeaconTestError'
-  }
-}

@@ -1,6 +1,21 @@
 import {html, LitElement, render, TemplateResult} from 'lit'
 import {aTimeout}                                 from '../aTimeout'
 
+/**
+ * Represents an error that is thrown when the current state is invalid or unexpected.
+ *
+ * @class
+ * @extends Error
+ *
+ * @param {string} message - The error message.
+ */
+export class IllegalStateError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'IllegalStateError'
+  }
+}
+
 export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
 
 const elements: any[] = []
@@ -97,19 +112,4 @@ function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type
  */
 export function fixtureCleanUp() {
   elements.forEach((element) => element.remove())
-}
-
-/**
- * Represents an error that is thrown when the current state is invalid or unexpected.
- *
- * @class
- * @extends Error
- *
- * @param {string} message - The error message.
- */
-export class IllegalStateError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = 'IllegalStateError'
-  }
 }

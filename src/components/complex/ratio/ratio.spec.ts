@@ -25,8 +25,8 @@ describe('Ratio', () => {
     await ratio.updateComplete
     const quantities = ratio.queryShadow<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
 
-    expect(quantities[0].data).toEqual({ value: '1' })
-    expect(quantities[1].data).toEqual({ value: '128' })
+    expect(quantities[0].data).to.include({ value: '1' })
+    expect(quantities[1].data).to.include({ value: '128' })
 
   })
 

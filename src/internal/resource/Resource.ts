@@ -2,7 +2,7 @@ import {html, PropertyValues, TemplateResult} from 'lit'
 import {property}                             from 'lit/decorators.js'
 import {PrimitiveType}                        from '../../components/primitive/type-converters/type-converters'
 import {DisplayConfig, DisplayMode}           from '../../types'
-import {Decorated, NoDataSet}                 from '../base'
+import {Decorated, meta} from '../base'
 import {BaseElement}                          from '../BaseElement'
 import {ContextProviderController}            from '../contexts'
 import {ResourceData}                         from './domain-resource.data'
@@ -47,6 +47,15 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
     this.templateGenerators.structure.header.push(this.renderResourceStructure)
   }
 
+  protected render(): TemplateResult | TemplateResult[] {
+    if (this.verbose) {
+      if (this.extendedData[meta].hide) {
+        return this.renderNoData()
+      }
+    }
+    return super.render()
+  }
+
   private renderResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
@@ -55,16 +64,6 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
           <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
       `
     ]
-  }
-
-
-  protected render(): TemplateResult | TemplateResult[] {
-    if (this.verbose) {
-      if (!this.extendedData && this.extendedData !== NoDataSet) {
-        return this.renderNoData()
-      }
-    }
-    return super.render()
   }
 
   private renderNoData(): TemplateResult[] {

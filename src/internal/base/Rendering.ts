@@ -1,8 +1,7 @@
-import {PropertyValues}  from 'lit'
-import {DisplayConfig}   from '../../types'
-import {FhirElementData} from './data'
+import {PropertyValues} from 'lit'
+import {DisplayConfig}  from '../../types'
 
-import {Decorated} from './Decorated'
+import {Decorated, FhirElementData} from './Decorated'
 
 /**
  * Represents an element that can be presented in a user interface.
@@ -26,7 +25,7 @@ export interface Rendering<T extends FhirElementData> {
    * Invoked before rendering will occur.
    *
    * @param {DisplayConfig} displayConfig - The configuration settings that define display properties.
-   * @param {Decorated<T>} extendedData - An object containing decorated data that may affect rendering.
+   * @param {Decorated} extendedData - An object containing decorated data that may affect rendering.
    * @param {PropertyValues} changes - A map of properties and their respective changes.
    * @return {void}
    */
