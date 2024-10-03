@@ -95,7 +95,6 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
         root[p] = { '_root': '' }
         root = root[p]
       })
-      console.log('err tree', this.data[errors])
     }
 
   }

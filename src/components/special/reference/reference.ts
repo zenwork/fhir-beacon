@@ -1,10 +1,10 @@
-import {consume}                       from '@lit/context'
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement, state}          from 'lit/decorators.js'
-import {choose}                        from 'lit/directives/choose.js'
-import {otherwise, when}                     from '../../.././utilities/when'
-import {BaseElement, Decorated, Validations} from '../../../internal'
-import {containedDataContext}                from '../../../internal/contexts/context'
+import {consume}                                       from '@lit/context'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, state}                          from 'lit/decorators.js'
+import {choose}                                        from 'lit/directives/choose.js'
+import {otherwise, when}                               from '../../.././utilities/when'
+import {BaseElement, Decorated, Validations}           from '../../../internal'
+import {containedDataContext}                          from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
@@ -25,7 +25,8 @@ enum ReferenceType {
 @customElement('fhir-reference')
 export class Reference extends BaseElement<ReferenceData> {
 
-  @consume({context: containedDataContext, subscribe: true})
+  @state()
+  @consume({ context: containedDataContext, subscribe: true })
   private contained: ResourceData[] = []
 
   @state()
@@ -37,7 +38,8 @@ export class Reference extends BaseElement<ReferenceData> {
   constructor() {super('Reference')}
 
 
-//TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the key this is
+//TODO: I think an extra attribute to describe the reference of what is needed here as a lot of examples rely on the
+// key this is
   // assigned to rather than defining the `type` property
   //TODO: need to figure out how to add all special rules and corner cases for references. see:
   // http://hl7.org/fhir/R5/datatypes.html#identifier
@@ -149,6 +151,7 @@ export class Reference extends BaseElement<ReferenceData> {
     if (this.containedResource) {
       this.referenceType = ReferenceType.contained
     }
+
     if (this.referenceType == ReferenceType.unknown) {
       //Rule Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is
       // provided).
@@ -160,7 +163,26 @@ export class Reference extends BaseElement<ReferenceData> {
         otherwise(() => ReferenceType.unknown)
       )
     }
+  }
 
 
+  protected willUpdate(changes: PropertyValues) {
+    if (this.contained && this.data) {
+      //TODO: Rule Ref-1: SHALL have a contained resource if a local reference is provided. see:
+      // https://www.hl7.org/fhir/R5/domainresource-definitions.html#DomainResource.contained TODO: This requires being
+      // able to request data that is in the payload of the parent resource. Have to do this later with signals but when
+      // resolving the link call not here.
+      const isContainedRef = this.data?.reference?.startsWith('#')
+      const containedDataExists = this.contained.length > 0
+
+      if (isContainedRef && containedDataExists) {
+        this.containedResource = this.contained.find(r => '#' + r.id === this.data.reference)
+      }
+
+      if (this.containedResource) {
+        this.referenceType = ReferenceType.contained
+      }
+    }
+    super.willUpdate(changes)
   }
 }

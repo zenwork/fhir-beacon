@@ -3,8 +3,8 @@ import {ReactiveController, ReactiveElement} from 'lit'
 import {FhirElementData} from '../base'
 import {BaseElement}                         from '../BaseElement'
 
-import {contextData, displayConfigContext} from './context'
-import {FhirDataContextImpl}               from './FhirContextData'
+import {containedDataContext, contextData, displayConfigContext} from './context'
+import {FhirDataContextImpl}                                     from './FhirContextData'
 
 //TODO: maybe shoudl be split into two separate controllers
 export class ContextProviderController<T extends FhirElementData, B extends BaseElement<T>> implements ReactiveController {
@@ -12,6 +12,8 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
   private host: B
   private displayCtx: ContextProvider<typeof displayConfigContext>
   private dataCtx: ContextProvider<typeof contextData>
+
+  private containedCtx: ContextProvider<typeof containedDataContext>
 
   constructor(host: B) {
 
@@ -21,6 +23,7 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
     const reactive = host as unknown as ReactiveElement
     this.displayCtx = new ContextProvider(reactive, { context: displayConfigContext })
     this.dataCtx = new ContextProvider(reactive, { context: contextData })
+    this.containedCtx = new ContextProvider(reactive, { context: containedDataContext })
   }
 
   hostUpdated() {
@@ -31,6 +34,9 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
       const context = new FhirDataContextImpl()
       context.data = data
       this.dataCtx.setValue(context)
+      if ((data as any).contained) {
+        this.containedCtx.setValue((data as any).contained)
+      }
     }
 
     const mode = this.host.mode
