@@ -54,7 +54,7 @@ export class Wrapper extends LitElement {
       return html`
           <div class='base ${classMap(borderClasses)}'>
               ${this.hidelabel ? nothing : this.generateLabel()}
-              <slot class="${classMap({ content: !this.hideLabel })}"></slot >
+              <slot class="${classMap({ content: !this.hidelabel })}"></slot >
           </div >
       `
     }
