@@ -62,6 +62,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   @property({ type: Boolean, reflect: true })
   public summaryonly: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public headless: boolean = false
+
   protected templateGenerators: Generators<D> = NullGenerators()
 
   protected constructor(type: string) {
@@ -240,7 +243,25 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
         break
       case DisplayMode.structure:
         if (mustRender(this.data, this.mode, this.verbose, this.summaryonly, this.summary)) {
-          templates.push(html`
+
+          if (this.headless) {
+            templates.push(html`
+                <div class="frontmatter">
+                    ${this.templateGenerators.structure
+                          .header.map(g => g.call(this, this.getDisplayConfig(),
+                                                  this.extendedData,
+                                                  new ValidationsImpl(this.extendedData))).flat()}
+                </div >
+
+                ${this.templateGenerators.structure
+                      .body.map(g => g.call(this,
+                                            this.getDisplayConfig(),
+                                            this.extendedData,
+                                            new ValidationsImpl(this.extendedData))).flat()}
+            `)
+          } else {
+
+            templates.push(html`
               <fhir-structure-wrapper
                       .label=${this.getLabel()}
                       .resourceId=${this.extendedData?.id ?? ''}
@@ -262,6 +283,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                               new ValidationsImpl(this.extendedData))).flat()}
               </fhir-structure-wrapper >
           `)
+          }
         }
         break
 

@@ -15,7 +15,7 @@ export class MedicationIngredientBackbone extends Backbone<MedicationIngredientD
   public renderDisplay(config: DisplayConfig, data: MedicationIngredientData): TemplateResult[] {
     return [
       html`
-          <fhir-wrapper label="${this.getLabel()}" variant="primary" ?summary=${this.summary}>
+          <fhir-wrapper label="${this.getLabel()}" variant="primary" ?summary=${this.summary} ?hidelabel=${this.headless}>
               <fhir-codeable-reference key="${this.key}/item" .data=${data.item}></fhir-codeable-reference >
               <fhir-primitive key="${this.key}/isActive" .type=${PrimitiveType.none} .value=${data.isActive}></fhir-primitive >
               <fhir-ratio key="${this.key}/strengthRatio" label="strength" .data=${data.strengthRatio}></fhir-ratio >

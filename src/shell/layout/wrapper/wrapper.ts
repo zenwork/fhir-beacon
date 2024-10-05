@@ -1,5 +1,5 @@
 import {consume}                                    from '@lit/context'
-import {html, LitElement, PropertyValues}           from 'lit'
+import {html, LitElement, nothing, PropertyValues} from 'lit'
 import {customElement, property}                    from 'lit/decorators.js'
 import {classMap}                                   from 'lit/directives/class-map.js'
 import {defaultDisplayConfig, displayConfigContext} from '../../../internal'
@@ -29,7 +29,7 @@ export class Wrapper extends LitElement {
   variant: 'primary' | 'secondary' | 'validation-error' | 'none' = 'none'
 
   @property({ type: Boolean, reflect: true })
-  public hide: boolean = false
+  public hidelabel: boolean = false
 
   @property({ type: Boolean, reflect: true })
   public open: boolean = false
@@ -49,15 +49,12 @@ export class Wrapper extends LitElement {
   protected render(): unknown {
     if (!this.summaryonly || (this.summary && this.summaryonly)) {
 
-
-      const label = this.generateLabel()
-
       const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
 
       return html`
           <div class='base ${classMap(borderClasses)}'>
-              ${label}
-              <slot class="${classMap({ content: !this.hide })}"></slot >
+              ${this.hidelabel ? nothing : this.generateLabel()}
+              <slot class="${classMap({ content: !this.hideLabel })}"></slot >
           </div >
       `
     }
@@ -70,7 +67,6 @@ export class Wrapper extends LitElement {
     if (this.displayConfig) {
       this.open = this.displayConfig.open
       this.mode = this.displayConfig.mode
-      // this.hide = !this.displayConfig.verbose
     }
   }
 
@@ -82,7 +78,7 @@ export class Wrapper extends LitElement {
       'validation-error': this.variant === 'validation-error'
     }
 
-    if (!this.hide && this.label && this.fhirType) {
+    if (this.label && this.fhirType) {
       return html`
           <sl-tooltip content="${this.fhirType}" placement="left">
               <div id="label">
@@ -91,22 +87,20 @@ export class Wrapper extends LitElement {
               </div >
           </sl-tooltip >
       `
-    } else if (!this.hide && this.label) {
+    } else if (this.label) {
       return html`
           <div id="label">
               <label class=${classMap(classes)}>${this.label}</label >
               <span id="arrow">&#x21B4;</span >
           </div >
       `
-    } else if (!this.hide && this.fhirType) {
+    } else if (this.fhirType) {
       return html`
           <div id="label">
               <label class=${classMap(classes)}>${this.fhirType}</label >
               <span id="arrow">&#x21B4;</span >
           </div >
       `
-    } else {
-      return html``
     }
   }
 
