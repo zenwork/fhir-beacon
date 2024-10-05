@@ -20,6 +20,9 @@ export class Shell extends LitElement {
   @property({ type: Boolean, reflect: true })
   public showerror: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public summaryonly: boolean = false
+
   protected display = new ContextProvider(this, { context: displayConfigContext })
 
   protected updated(_changedProperties: PropertyValues) {
@@ -38,6 +41,10 @@ export class Shell extends LitElement {
 
     if (_changedProperties.has('open')) {
       this.display.setValue({ ...this.display.value, open: this.open })
+    }
+
+    if (_changedProperties.has('summaryonly')) {
+      this.display.setValue({ ...this.display.value, summaryonly: this.summaryonly })
     }
   }
 

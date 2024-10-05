@@ -1,9 +1,9 @@
 import {Meta, StoryObj} from '@storybook/web-components'
 
 import {html}      from 'lit'
-import {ShellArgs} from '../../stories/wrapInShell'
 import '../../demo-code/customisation/custom-components/custom-lit-element'
 import '../../demo-code/customisation/custom-components/custom-element.js'
+import {ShellArgs} from '../storybook-utils'
 
 
 const path = 'Toolkit/Customisation/Custom Element'

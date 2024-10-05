@@ -56,7 +56,7 @@ export class Medication extends DomainResource<MedicationData> {
                   config.verbose,
                   (data, label, key) => html`
                       <fhir-medication-ingredient key="${key}" .data=${data} label="${label}"></fhir-medication-ingredient > `,
-                  false, this.summaryMode())}
+                  false, this.summaryonly)}
 
           <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch >
           <fhir-reference key="definition" .data=${data.definition}></fhir-reference >

@@ -8,8 +8,9 @@ const meta = {
   title: path,
   component: elementName,
   argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
+    mode: { options: ['display', 'structure', 'debug'], control: { type: 'inline-radio' } },
     verbose: { options: [false, true], control: { type: 'boolean' } },
+    summary: { options: [false, true], control: { type: 'boolean' } },
     showerror: { options: [false, true], control: { type: 'boolean' } },
     open: { options: [false, true], control: { type: 'boolean' } }
   }

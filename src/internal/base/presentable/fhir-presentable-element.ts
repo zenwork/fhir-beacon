@@ -59,6 +59,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public summaryonly: boolean = false
+
   protected templateGenerators: Generators<D> = NullGenerators()
 
   protected constructor(type: string) {
@@ -72,11 +75,17 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   }
 
   public getDisplayConfig(): DisplayConfig {
-    return { open: this.open, verbose: this.verbose, mode: this.mode, showerror: this.showerror }
+    return {
+      open: this.open,
+      verbose: this.verbose,
+      mode: this.mode,
+      showerror: this.showerror,
+      summaryonly: this.summaryonly
+    }
   }
 
   public mustRender(): boolean {
-    return mustRender(this.extendedData, this.mode, this.verbose, this.summaryMode(), this.summary) || !!this.dataPath
+    return mustRender(this.extendedData, this.mode, this.verbose, this.summaryonly, this.summary) || !!this.dataPath
   }
 
   public abstract willRender(displayConfig: DisplayConfig,
@@ -111,11 +120,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                               extendedData: Decorated<D> | null,
                               haveChanged: PropertyValues): void
 
-
-  protected summaryMode() {
-    return !!this.mode && (this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary)
-  }
-
   protected getLabel() {
     let label = this.type
 
@@ -125,7 +129,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       label = this.label
     }
 
-    if (this.mode != DisplayMode.display && this.mode != DisplayMode.display_summary) {
+    if (this.mode != DisplayMode.display) {
       label = asReadable(label, 'lower')
     }
 
@@ -153,7 +157,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
               this.templateGenerators.debug.body.push(this.renderDebug)
               break
             case DisplayMode.display:
-            case DisplayMode.display_summary:
               this.templateGenerators.display.body.push(this.renderDisplay)
               break
             case DisplayMode.narrative:
@@ -163,7 +166,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
               // do nothing
               break
             case DisplayMode.structure:
-            case DisplayMode.structure_summary:
               // stop rendering in verbose mode due to theoretically infinite models.
               // ex: Identifier -> Reference -> Identifier -> and so on!
               if (this.verboseRequestedAndNotAllowed()) {
@@ -213,7 +215,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           ).flat())
         break
       case DisplayMode.display:
-      case DisplayMode.display_summary:
         templates.push(...this
           .templateGenerators
           .display.header
@@ -238,8 +239,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                            new ValidationsImpl(this.extendedData))).flat())
         break
       case DisplayMode.structure:
-      case DisplayMode.structure_summary:
-        if (mustRender(this.data, this.mode, this.verbose, this.summaryMode(), this.summary)) {
+        if (mustRender(this.data, this.mode, this.verbose, this.summaryonly, this.summary)) {
           templates.push(html`
               <fhir-structure-wrapper
                       .label=${this.getLabel()}
@@ -282,14 +282,8 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     return !this.extendedData
   }
 
-  /**
-   * Overridable method reserved for internal use. Do not call super in this method
-   * @param data
-   * @protected
-   */
   private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
-
       return [
         html`
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive >

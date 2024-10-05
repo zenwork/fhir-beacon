@@ -22,7 +22,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                       (data, label) => html`
                           <fhir-coding key="coding" .label=${label} .data=${data} summary></fhir-coding >`,
                       true,
-                      this.summaryMode()
+                      this.summaryonly
           )}
 
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive >`
@@ -39,7 +39,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
             (code, label) => html`
                 <fhir-coding key="coding" label="${label}" .errors=${data[errors]} .data=${code} summary></fhir-coding >`,
             true,
-            this.summaryMode()
+            this.summaryonly
       ),
       html`
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive > `

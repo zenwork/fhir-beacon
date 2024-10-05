@@ -1,24 +1,17 @@
-import {StoryObj}               from '@storybook/web-components'
-import {html}                   from 'lit'
-import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
-import {data, data3}            from './human-name.story.data'
+import {StoryObj}                         from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
+import {data, data3}                      from './human-name.story.data'
 
 
 const path = 'Components/Datatypes/Complex Type/Human Name'
 const elementName = 'fhir-human-name'
 
-const render = wrapInShell(({ data }) => html`
-  <fhir-human-name .data=${data} summary></fhir-human-name >`)
-
 const meta = {
   title: path,
   component: elementName,
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-human-name .data=${args.data} summary></fhir-human-name >`)
 }
 
 export default meta
@@ -28,17 +21,13 @@ type Story = StoryObj<ShellArgs>;
 export const Display: Story = {
   args: {
     data
-  },
-  render
-
+  }
 }
 
 export const Display2: Story = {
   args: {
     data: data3
-  },
-  render
-
+  }
 }
 
 export const Structure: Story = {
@@ -47,6 +36,5 @@ export const Structure: Story = {
     mode: 'structure',
     showerror: true,
     verbose: true
-  },
-  render
+  }
 }

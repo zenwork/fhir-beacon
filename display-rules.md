@@ -6,6 +6,9 @@ Mode vs. Verbose Matrix
 
 ### Which Properties to Display?
 
+[//]: # (TODO: This table is not up to date)
+NOTE: This table is not up to date. Summary has been split into a separate flag
+
 |         | display                                        | display summary                                                     | structure                                      | structure summary                                                  |
 |---------|------------------------------------------------|---------------------------------------------------------------------|------------------------------------------------|--------------------------------------------------------------------|
 | normal  | - with data<br/> - format for human-redability | - with data required in summary<br/> - format for human-readability | - with data<br/>- format in tree structure     | - with data required in summary<br/>- formatted in tree structure  |   

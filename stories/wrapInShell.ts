@@ -1,9 +1,13 @@
 import {html, TemplateResult} from 'lit'
 import {ifDefined} from 'lit-html/directives/if-defined.js'
+import {ShellArgs} from './storybook-utils'
 
 
-export type ShellArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean, summary?: boolean };
-
+/**
+ *
+ * @param fn
+ * @deprecated
+ */
 export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
 
   return (args: ShellArgs) => {
@@ -13,6 +17,7 @@ export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
                 ?showerror=${args.showerror}
                 ?verbose=${args.verbose}
                 ?open=${args.open ?? true}
+                ?summaryonly=${args.summaryonly}
         >
             ${fn(args)}
         </fhir-shell >`

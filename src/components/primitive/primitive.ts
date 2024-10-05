@@ -114,6 +114,9 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public summaryonly: boolean = false
+
   @state()
   private error: boolean = false
 
@@ -137,6 +140,7 @@ export class Primitive extends LitElement {
       this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
+      this.summaryonly = this.displayConfig.summaryonly
     }
 
     // override value with valuePath
@@ -188,7 +192,6 @@ export class Primitive extends LitElement {
         this.presentableError = this.errormessage
         this.error = true
       }
-
     }
   }
 
@@ -197,7 +200,7 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected render(): unknown {
-    if (!mustRender(this.value, this.mode, this.verbose, this.summaryMode(), this.summary)
+    if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary)
         && !this.valuePath
         && this.mode !== DisplayMode.override) {
       return html``
@@ -306,13 +309,6 @@ export class Primitive extends LitElement {
     return val
   }
 
-  /**
-   *
-   * @private
-   */
-  private summaryMode() {
-    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
-  }
 }
 
 /**

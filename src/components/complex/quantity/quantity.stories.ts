@@ -1,20 +1,13 @@
-import {StoryObj}               from '@storybook/web-components'
-import {html}                   from 'lit'
-import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
+import {StoryObj}                         from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
 
-
-const render = wrapInShell((args) => html`
-    <fhir-quantity .data=${args.data}></fhir-quantity>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Quantity',
   component: 'fhir-quantity',
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-quantity .data=${args.data} summary></fhir-quantity >`)
 
 }
 
@@ -31,8 +24,7 @@ export const DisplayableTime: Story = {
     },
     mode: 'display',
     showerror: false
-  },
-  render
+  }
 }
 
 export const AmountOfPrescribedMedicine: Story = {
@@ -46,8 +38,7 @@ export const AmountOfPrescribedMedicine: Story = {
     },
     mode: 'display',
     showerror: false
-  },
-  render
+  }
 }
 
 export const AmountOfPrescribedMedicine2: Story = {
@@ -60,8 +51,7 @@ export const AmountOfPrescribedMedicine2: Story = {
     },
     mode: 'display',
     showerror: false
-  },
-  render
+  }
 }
 
 export const Money: Story = {
@@ -74,8 +64,7 @@ export const Money: Story = {
     },
     mode: 'display',
     showerror: false
-  },
-  render
+  }
 }
 
 export const Simple: Story = {
@@ -85,8 +74,7 @@ export const Simple: Story = {
     },
     mode: 'display',
     showerror: false
-  },
-  render
+  }
 }
 
 export const ShowStructWithErrors: Story = {
@@ -100,8 +88,7 @@ export const ShowStructWithErrors: Story = {
     mode: 'structure',
     showerror: true,
     open: true
-  },
-  render
+  }
 }
 
 export const Distance: Story = {
@@ -115,8 +102,7 @@ export const Distance: Story = {
     mode: 'structure',
     showerror: true,
     open: true
-  },
-  render
+  }
 }
 export const Age: Story = {
   args: {
@@ -129,8 +115,7 @@ export const Age: Story = {
     mode: 'structure',
     showerror: true,
     open: true
-  },
-  render
+  }
 }
 
 export const Duration: Story = {
@@ -144,8 +129,7 @@ export const Duration: Story = {
     mode: 'structure',
     showerror: true,
     open: true
-  },
-  render
+  }
 }
 
 export const Count: Story = {
@@ -157,6 +141,5 @@ export const Count: Story = {
     mode: 'structure',
     showerror: true,
     open: true
-  },
-  render
+  }
 }

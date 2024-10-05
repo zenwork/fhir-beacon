@@ -1,8 +1,8 @@
 import {html, TemplateResult} from 'lit'
-import {customElement}              from 'lit/decorators.js'
-import {BaseElement}                from '../../../internal'
-import {EmptyResult}                from '../../../internal/base'
-import {DisplayConfig, DisplayMode} from '../../../types'
+import {customElement} from 'lit/decorators.js'
+import {BaseElement}   from '../../../internal'
+import {EmptyResult}   from '../../../internal/base'
+import {DisplayConfig} from '../../../types'
 
 import {RatioData} from './ratio.data'
 
@@ -15,7 +15,7 @@ export class Ratio extends BaseElement<RatioData> {
 
   public renderDisplay(_: DisplayConfig, data: RatioData): TemplateResult[] {
 
-    if (this.mode == DisplayMode.display_summary && !this.summary) {
+    if (this.summaryonly && !this.summary) {
       return EmptyResult
     }
 

@@ -38,7 +38,7 @@ export function oneOrError<C extends BaseElement<any>>(contextElement: C,
                                           .find(k => k.match(/.*author\[x].*!/))
     if (key) {
       const matchingError = contextElement.extendedData[errors][key]
-      if (contextElement.mode === DisplayMode.structure || contextElement.mode === DisplayMode.structure_summary) {
+      if (contextElement.mode === DisplayMode.structure) {
         return html`
             <fhir-structure-wrapper .label=${key ?? 'unknown error id'} variant='validation-error'>
                 ${templateResults}

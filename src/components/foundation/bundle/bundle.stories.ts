@@ -1,4 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
+import {argtypes} from '../../../../stories/storybook-utils'
 import {data}     from './bundle.story.data'
 
 
@@ -8,12 +9,7 @@ const elementName = 'fhir-bundle'
 const meta = {
   title: path,
   component: elementName,
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...argtypes()
 }
 
 export default meta
