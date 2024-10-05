@@ -44,8 +44,9 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
     const showerror = this.host.showerror
     const verbose = this.host.verbose
     const open = this.host.open
+    const summaryonly = this.host.summaryonly
 
-    this.displayCtx.setValue({ ...this.displayCtx.value, mode, showerror, verbose, open })
+    this.displayCtx.setValue({ ...this.displayCtx.value, mode, showerror, verbose, open, summaryonly })
 
 
   }

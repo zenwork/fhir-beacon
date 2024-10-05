@@ -1,20 +1,13 @@
-import {StoryObj}               from '@storybook/web-components'
-import {html}                   from 'lit'
-import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
+import {StoryObj}                         from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
 
-
-const render = wrapInShell((args) => html`
-    <fhir-ratio .data=${args.data}></fhir-ratio>`)
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Ratio',
   component: 'fhir-ratio',
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-ratio .data=${args.data}></fhir-ratio >`)
 
 }
 
@@ -35,8 +28,7 @@ export const SimpleRatio: Story = {
     showerror: false,
     verbose: false,
     open: true
-  },
-  render
+  }
 }
 
 export const UnitCost: Story = {
@@ -59,6 +51,5 @@ export const UnitCost: Story = {
     showerror: false,
     verbose: false,
     open: true
-  },
-  render
+  }
 }

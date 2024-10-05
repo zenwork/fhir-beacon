@@ -47,12 +47,12 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
           <fhir-narrative key="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
       `,
       html`
-          ${(this.data.contained && !this.summaryMode()) ? html`
+          ${(this.data.contained && !this.summaryonly) ? html`
               <fhir-structure-wrapper label="contained" ?forceclose=${true}>
                   ${this.renderStructureContained()}
               </fhir-structure-wrapper >
           ` : nothing}
-          ${(!this.data.contained && this.verbose && !this.summaryMode()) ? html`
+          ${(!this.data.contained && this.verbose && !this.summaryonly) ? html`
               <fhir-structure-wrapper label="contained" ?forceclose=${true}>
                   <fhir-empty-list ></fhir-empty-list >
               </fhir-structure-wrapper >` : nothing}

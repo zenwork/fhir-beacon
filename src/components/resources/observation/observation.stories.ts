@@ -1,6 +1,6 @@
-import {StoryObj}   from '@storybook/web-components'
-import {createMeta} from '../../../../stories/storybook-utils'
-import {data}       from './observation.story.data'
+import {StoryObj} from '@storybook/web-components'
+import {argtypes} from '../../../../stories/storybook-utils'
+import {data}     from './observation.story.data'
 
 const path = 'Components/Resources/Observation/Observation'
 const elementName = 'fhir-observation'
@@ -8,7 +8,7 @@ const elementName = 'fhir-observation'
 const meta = {
   title: path,
   component: elementName,
-  ...createMeta()
+  ...argtypes()
 }
 
 export default meta

@@ -13,4 +13,10 @@ export const displayConfigContext = createContext<DisplayConfig>(displayConfigKe
 export const dataContext = createContext<FhirDataContext>(dataKey)
 
 
-export const defaultDisplayConfig = { mode: DisplayMode.display, showerror: true, verbose: false, open: true }
+export const defaultDisplayConfig = {
+  mode: DisplayMode.display,
+  showerror: true,
+  verbose: false,
+  open: true,
+  summaryonly: false
+}

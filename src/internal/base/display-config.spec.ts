@@ -127,7 +127,7 @@ describe('DisplayConfig', () => {
 
       const annotation = await fixture<Annotation>(html`
         <fhir-shell mode="structure">
-            <fhir-annotation .data=${annotationData}></fhir-annotation >
+            <fhir-annotation .data=${annotationData} summary></fhir-annotation >
         </fhir-shell >
       `, new Annotation().tagName).first()
 
@@ -136,17 +136,19 @@ describe('DisplayConfig', () => {
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
-      shell.mode = DisplayMode.structure_summary
+      shell.mode = DisplayMode.structure
+      shell.summaryonly = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 0 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       shell.mode = DisplayMode.display
+      shell.summaryonly = false
       await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
 
-      shell.mode = DisplayMode.display_summary
+      shell.summaryonly = true
       await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
@@ -172,12 +174,13 @@ describe('DisplayConfig', () => {
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
-      shell.mode = DisplayMode.structure_summary
+      shell.summaryonly = true
       await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
-      shell.mode = DisplayMode.display_summary
+      shell.mode = DisplayMode.display
+      shell.summaryonly = true
       await aTimeout()
       assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 0 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))

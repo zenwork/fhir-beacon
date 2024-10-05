@@ -45,10 +45,11 @@ export class StructureWrapper extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  private summaryonly: boolean = false
+
   @property({ type: Boolean, reflect: true, converter: toBaseElementModeEnum })
   private mode: DisplayMode = DisplayMode.structure
-
-
 
   protected render(): unknown {
       let open = false
@@ -90,10 +91,6 @@ export class StructureWrapper extends LitElement {
       this.open = this.displayConfig.open
       this.mode = this.displayConfig.mode
     }
-  }
-
-  private summaryMode() {
-    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
   }
 
 }

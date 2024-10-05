@@ -1,23 +1,14 @@
-import {StoryObj}               from '@storybook/web-components'
-import {html}                   from 'lit'
-import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
-import {data, data1, data2}     from './identifier.story.data'
-
-
-const render = wrapInShell((args) => html`
-  <fhir-identifier .data=${args.data} ?summary=${args.summary}></fhir-identifier >`)
+import {StoryObj}                         from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
+import {data, data1, data2}               from './identifier.story.data'
 
 const meta = {
   title: 'Components/Datatypes/Complex Type/Identifier',
   component: 'fhir-shell',
   subcomponents: ['fhir-identifier'],
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
-
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-identifier .data=${args.data} summary></fhir-identifier >`)
 }
 
 export default meta
@@ -30,8 +21,7 @@ export const PatientIdentifier: Story = {
     showerror: false,
     verbose: false,
     open: true
-  },
-  render
+  }
 }
 export const HospitalPatientIdentifier: Story = {
   args: {
@@ -40,8 +30,7 @@ export const HospitalPatientIdentifier: Story = {
     showerror: false,
     verbose: false,
     open: true
-  },
-  render
+  }
 }
 
 export const Example3: Story = {
@@ -51,6 +40,5 @@ export const Example3: Story = {
     showerror: false,
     verbose: false,
     open: true
-  },
-  render
+  }
 }

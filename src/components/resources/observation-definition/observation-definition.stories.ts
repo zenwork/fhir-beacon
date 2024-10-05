@@ -1,11 +1,11 @@
-import {StoryObj}   from '@storybook/web-components'
-import {createMeta} from '../../../../stories/storybook-utils'
-import {data}       from './observation-definition.story.data'
+import {StoryObj} from '@storybook/web-components'
+import {argtypes} from '../../../../stories/storybook-utils'
+import {data}     from './observation-definition.story.data'
 
 const meta = {
   title: 'Components/Resources/Observation/ObservationDefinition',
   component: 'fhir-observation-definition',
-  ...createMeta()
+  ...argtypes()
 }
 
 export default meta

@@ -1,28 +1,19 @@
-import {Meta, StoryObj}         from '@storybook/web-components'
-import {html}                   from 'lit'
-import {ShellArgs, wrapInShell} from '../../../../stories/wrapInShell'
+import {Meta, StoryObj}                   from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
 
-type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
-
-const meta: Meta<CustomArgs> = {
+const meta: Meta<ShellArgs> = {
   title: 'Components/Datatypes/Complex Type/Codeable Concept',
   component: 'fhir-shell',
-  argTypes: {
-    mode: {
-      options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'],
-      control: { type: 'inline-radio' }
-    },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  },
-  render: wrapInShell((args: ShellArgs) => html`
-      <fhir-codeable-concept .data=${args.data} ?summary=${args.summary}}></fhir-codeable-concept >`)
+  subcomponents: { codeableConcept: 'fhir-codeable-concept' },
+  ...renderTemplateInShell(
+    (args: ShellArgs) => html`
+        <fhir-codeable-concept .data=${args.data} summary></fhir-codeable-concept >`)
 
 }
 
 export default meta
-type Story = StoryObj<CustomArgs>;
+type Story = StoryObj<ShellArgs>;
 
 export const SimpleHeadacheCode: Story = {
   args: {

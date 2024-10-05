@@ -27,12 +27,16 @@ describe('Identifier', () => {
     expect(identifier).toBeInTheDocument()
     assert.ok(identifier.queryShadow({ select: 'fhir-error', expect: 1 }))
   })
+
+  //TODO: figure out the correct type rule before removing skip
   it.skip('should display one error when type is not correct', async () => {
 
     const modifiedData: IdentifierData = { ...data2 }
+    modifiedData.type = { coding: [{ code: 'FOOOBAR' }] }
     const identifier = await fixture<Identifier>(html`
         <fhir-shell mode="structure" showerror>
-            <fhir-identifier .data=${modifiedData}></fhir-identifier >`, 'fhir-identifier').first()
+            <fhir-identifier .data=${modifiedData}></fhir-identifier >
+        </fhir-shell >`, 'fhir-identifier').first()
 
     expect(identifier).toBeInTheDocument()
     assert.ok(identifier.queryShadow({ select: 'fhir-error', expect: 1 }))

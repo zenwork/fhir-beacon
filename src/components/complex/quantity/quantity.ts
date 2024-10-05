@@ -28,7 +28,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     if (isQuantity(data)) {
       return [
         html`
-            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 <span slot="before">${data.comparator
                                       ? asQuantityComparator(data.comparator).display.toLowerCase()
                                       : nothing}&nbsp;</span >
@@ -41,7 +41,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     if (isSimpleQuantity(data)) {
       return [
         html`
-            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type}>
+            <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 <span slot="after">&nbsp;${after} </span >
             </fhir-primitive >
         `

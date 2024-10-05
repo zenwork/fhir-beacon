@@ -1,33 +1,18 @@
-import {StoryObj} from '@storybook/web-components'
+import {StoryObj}                         from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
+import {data}                             from './contact-point.story.data'
 
 
 const path = 'Components/Datatypes/Complex Type/Contact Point'
 const elementName = 'fhir-contact-point'
-const data = {
-  extension: [
-    {
-      url: 'http://hl7.org/fhir/StructureDefinition/iso21090-TEL-address',
-      valueUri: 'tel:+15556755745'
-    }
-  ],
-  system: 'phone',
-  value: '(555) 675 5745',
-  use: 'home',
-  period: {
-    start: '2022-07-01',
-    end: '2024-07-01'
-  }
-}
 
 const meta = {
   title: path,
   component: elementName,
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-contact-point .data=${args.data} summary />`
+  )
 }
 
 export default meta

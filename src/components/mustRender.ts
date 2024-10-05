@@ -37,17 +37,16 @@ export function mustRender(value: unknown | null | undefined,
 
 function isDisplay(mode: DisplayMode) {
   return mode == DisplayMode.display
-         || mode == DisplayMode.display_summary
          || mode == DisplayMode.narrative
          || mode == DisplayMode.debug
 }
 
 function isStructure(mode: DisplayMode) {
-  return mode == DisplayMode.structure || mode == DisplayMode.structure_summary
+  return mode == DisplayMode.structure
 }
 
-function shouldRender(summary: boolean, summaryMode: boolean) {
-  return (summary && summaryMode) || !summaryMode
+function shouldRender(summaryTaggedValue: boolean, summaryMode: boolean) {
+  return (summaryTaggedValue && summaryMode) || !summaryMode
 }
 
 function isPresent(value: any) {

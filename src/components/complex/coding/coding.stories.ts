@@ -1,41 +1,39 @@
-import {Meta, StoryObj} from '@storybook/web-components'
-import {html}           from 'lit'
+import {Meta, StoryObj}                   from '@storybook/web-components'
+import {html}                             from 'lit'
+import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
 
-type CustomArgs = { data: object, mode?: string, verbose?: boolean, showerror?: boolean, open?: boolean };
+type CustomArgs = {
+  data: object,
+  mode?: string,
+  verbose?: boolean,
+  showerror?: boolean,
+  open?: boolean,
+  summaryonly?: boolean
+};
 
 const meta: Meta<CustomArgs> = {
   title: 'Components/Datatypes/Complex Type/Coding',
   component: 'fhir-shell',
-  argTypes: {
-    mode: { options: ['display', 'display_summary', 'structure', 'structure_summary', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  },
-  render: ({data, mode: mode = 'display', verbose: verbose = false, showerror: showerror = false, open: open = false}: CustomArgs) => html`
-    <fhir-shell .mode=${mode} .verbose=${verbose} .showerror=${showerror} .open=${open}>
-      <fhir-coding .data=${data} summary></fhir-coding >
-    </fhir-shell >
-  `
-
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-coding .data=${args.data} summary></fhir-coding >`)
 }
 
 export default meta
 type Story = StoryObj<CustomArgs>;
 
 export const DisplayableValue: Story = {
-  args:{
-    data:{
+  args: {
+    data: {
       system: 'http://hl7.org/fhir/sid/icd-10',
       code: 'G44.1',
       display: 'Vascular headache, not elsewhere classified'
     }
   }
-  }
+}
 
 export const NoDisplayableValue: Story = {
-  args:{
-    data:{
+  args: {
+    data: {
       system: 'http://hl7.org/fhir/sid/icd-10',
       code: 'G44.1'
     }

@@ -1,11 +1,15 @@
 export enum DisplayMode {
   debug = 'debug',
   display = 'display',
-  display_summary = 'display_summary',
   narrative = 'narrative',
   override = 'override',
-  structure = 'structure',
-  structure_summary = 'structure_summary',
+  structure = 'structure'
 }
 
-export type DisplayConfig = { mode: DisplayMode, showerror: boolean, verbose: boolean, open: boolean }
+export type DisplayConfig = {
+  mode: DisplayMode,
+  summaryonly: boolean,
+  showerror: boolean,
+  verbose: boolean,
+  open: boolean
+}

@@ -40,11 +40,14 @@ export class Wrapper extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public summaryonly: boolean = false
+
   @consume({ context: displayConfigContext, subscribe: true })
   protected displayConfig: DisplayConfig = defaultDisplayConfig
 
   protected render(): unknown {
-    if (!this.summaryMode() || (this.summary && this.summaryMode())) {
+    if (!this.summaryonly || (this.summary && this.summaryonly)) {
 
 
       const label = this.generateLabel()
@@ -106,10 +109,5 @@ export class Wrapper extends LitElement {
       return html``
     }
   }
-
-  private summaryMode() {
-    return this.mode === DisplayMode.display_summary || this.mode === DisplayMode.structure_summary
-  }
-
 
 }

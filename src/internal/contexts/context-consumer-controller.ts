@@ -83,6 +83,7 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
                               if (config.showerror !== undefined) host.showerror = config.showerror
                               if (config.open !== undefined) host.open = config.open
                               if (config.verbose !== undefined) host.verbose = config.verbose
+                              if (config.summaryonly !== undefined) host.summaryonly = config.summaryonly
                             }
 
                           }
