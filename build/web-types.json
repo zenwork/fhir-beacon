@@ -108,6 +108,10 @@
             {
               "name": "trialuse",
               "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
             }
           ],
           "events": [],
@@ -132,7 +136,8 @@
               { "name": "summary", "type": "boolean" },
               { "name": "summaryonly", "type": "boolean" },
               { "name": "translate", "type": "boolean" },
-              { "name": "trialuse", "type": "boolean" }
+              { "name": "trialuse", "type": "boolean" },
+              { "name": "required", "type": "boolean" }
             ],
             "events": []
           }

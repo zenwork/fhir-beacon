@@ -123,6 +123,9 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   public trialuse: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public required: boolean = false
+
   @state()
   private error: boolean = false
 
@@ -163,7 +166,7 @@ export class Primitive extends LitElement {
       }
     }
 
-    const watchedHaveChanged = changed.has('value') || changed.has('type')
+    const watchedHaveChanged = changed.has('value') || changed.has('type') || changed.has('required')
     if (watchedHaveChanged) {
       if (!isBlank(this.value) && this.type) {
         choose(this.type, [
@@ -190,6 +193,12 @@ export class Primitive extends LitElement {
           [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
         ])
       }
+
+    }
+
+    if (isBlank(this.value) && this.required) {
+      this.presentableError = 'Error: this property is required'
+      this.error = true
     }
 
     if (changed.has('errormessage')) {
@@ -206,7 +215,7 @@ export class Primitive extends LitElement {
    */
   protected render(): unknown {
 
-    if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary)
+    if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
         && !this.valuePath
         && this.mode !== DisplayMode.override) {
       return html``
@@ -226,7 +235,7 @@ export class Primitive extends LitElement {
     const elements: any[] = []
 
     if (this.getLabel()) elements.push(html`
-        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label >&nbsp`)
+        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label>&nbsp`)
 
     if (!isBlank(this.value))
       elements.push(html`
@@ -234,22 +243,22 @@ export class Primitive extends LitElement {
                              ? this.value
                              : this.presentableValue} link=${this.link} .variant=${this.variant}
           >
-              <span slot="before"><slot name="before"></slot ></span >
-              <span slot="after"><slot name="after"></slot ></span >
-          </fhir-value >`)
+              <span slot="before"><slot name="before"></slot></span>
+              <span slot="after"><slot name="after"></slot></span>
+          </fhir-value>`)
 
     if (this.context && this.verbose)
       elements.push(html`
           <fhir-context .text="${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose
                                                                                                   ? this.type
                                                                                                   : ''}"
-          ></fhir-context >`)
+          ></fhir-context>`)
 
     if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
-        <sl-badge pill>&sum;</sl-badge >`)
+        <sl-badge pill>&sum;</sl-badge>`)
 
     return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
-        <fhir-primitive-wrapper > ${elements}</fhir-primitive-wrapper >` : html``
+        <fhir-primitive-wrapper> ${elements}</fhir-primitive-wrapper>` : html``
   }
 
   /**
@@ -270,14 +279,19 @@ export class Primitive extends LitElement {
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
 
-    return !isBlank(this.value) || this.verbose
+    return !isBlank(this.value) || this.verbose || this.required
            ? html`
-                <fhir-primitive-wrapper >
-                    <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
-                    <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-                    ${this.showerror ? html`
-                        <fhir-error text=${errors.join(' | ')}></fhir-error >` : nothing}
-                </fhir-primitive-wrapper >`
+                <fhir-primitive-wrapper>
+                    <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label>&nbsp;
+                    <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value>
+                                                                                                                  ${this.showerror
+                                                                                                                    ? html`
+                                                                                                                              <fhir-error
+                                                                                                                                      text=${errors.join(
+                                                                                                                                              ' | ')}
+                                                                                                                              ></fhir-error>`
+                                                                                                                    : nothing}
+                </fhir-primitive-wrapper>`
            : html``
   }
 

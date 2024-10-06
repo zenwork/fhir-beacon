@@ -125,6 +125,26 @@ describe('fhir Primitive', () => {
                                        + ' 2,147,483,647 | must be less than 10')
 
     })
+
+    test('should display an error value is missing but is required', async () => {
+
+      const el = await fixture<Primitive>(html`
+          <fhir-primitive key="required"
+                          label="required"
+                          mode="structure"
+                          .value=${null}
+                          showerror
+                          required
+          ></fhir-primitive>
+      `).first()
+
+      const label = el.queryShadow<PrimitiveLabel>({ select: 'fhir-label' })
+      expect(label!.text).to.equal('required')
+
+      const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
+      expect(div.textContent).to.equal('Error: this property is required')
+
+    })
   })
 
   describe('types', () => {

@@ -48,8 +48,8 @@ export type AddressData = FhirElementData & {
 }
 
 
-export type PatientContactBackbone = BackboneElementData & {
-  relationship?: CodeableConceptData
+export type PatientContactData = BackboneElementData & {
+  relationship: CodeableConceptData[]
   name?: HumanNameData
   telecom: ContactPointData[]
   address?: AddressData
@@ -58,12 +58,12 @@ export type PatientContactBackbone = BackboneElementData & {
   period?: PeriodData
 }
 
-export type PatientCommunicationBackbone = BackboneElementData & {
+export type PatientCommunicationData = BackboneElementData & {
   language?: CodeableConceptData
   preferred?: boolean
 }
 
-export type PatientLinkBackbone = BackboneElementData & {
+export type PatientLinkData = BackboneElementData & {
   other: ReferenceData
   type: Code
 }
@@ -82,10 +82,10 @@ export type PatientData = DomainResourceData & {
   multipleBirthBoolean?: boolean
   multipleBirthInteger?: Integer
   photo?: AttachmentData
-  contact?: PatientContactBackbone
-  communication?: PatientCommunicationBackbone[]
+  contact: PatientContactData[]
+  communication: PatientCommunicationData[]
   generalPractitioner: ReferenceData[]
   managingOrganisation?: ReferenceData
-  link: PatientLinkBackbone[]
+  link: PatientLinkData[]
 
 }

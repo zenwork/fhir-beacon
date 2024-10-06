@@ -58,6 +58,62 @@ export class Patient extends DomainResource<PatientData> {
                  this.summary,
                  this.summaryonly
           )}
+          <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
+          ${wrap('contacts',
+                 'contact',
+                 data.contact,
+                 config.verbose,
+                 (data, label, key) => html`
+                     <fhir-patient-contact key=${key}
+                                           label=${label}
+                                           .data=${data}
+                                           summary
+                     ></fhir-patient-contact summary> `,
+                 this.summary,
+                 this.summaryonly
+          )}
+          ${wrap('communications',
+                 'communication',
+                 data.contact,
+                 config.verbose,
+                 (data, label, key) => html`
+                     <fhir-patient-communication key=${key}
+                                                 label=${label}
+                                                 .data=${data}
+                                                 summary
+                     ></fhir-patient-communication summary> `,
+                 this.summary,
+                 this.summaryonly
+          )}
+          ${wrap('generalPractitioners',
+                 'generalPractitioner',
+                 data.generalPractitioner,
+                 config.verbose,
+                 (data, label, key) => html`
+                     <fhir-reference key=${key}
+                                     label=${label}
+                                     .data=${data}
+                     ></fhir-reference> `,
+                 this.summary,
+                 this.summaryonly
+          )}
+          <fhir-reference key="managingOrganisation"
+                          label="managingOrganisation"
+                          .data=${data.managingOrganisation}
+                          summary
+          ></fhir-reference>
+          ${wrap('links',
+                 'link',
+                 data.link,
+                 config.verbose,
+                 (data, label, key) => html`
+                     <fhir-patient-link key=${key}
+                                        label=${label}
+                                        .data=${data}
+                     ></fhir-patient-link> `,
+                 this.summary,
+                 this.summaryonly
+          )}
       `
     ]
   }
@@ -174,6 +230,63 @@ export class Patient extends DomainResource<PatientData> {
                              `
                          }
                      ])}
+
+          <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
+          ${strap('contact',
+                  'contact',
+                  data.contact,
+                  config.verbose,
+                  (data, label, key) => html`
+                      <fhir-patient-contact key=${key}
+                                            label=${label}
+                                            .data=${data}
+                      ></fhir-patient-contact> `,
+                  this.summary,
+                  this.summaryonly
+          )}
+          ${strap('communication',
+                  'communication',
+                  data.communication,
+                  config.verbose,
+                  (data, label, key) => html`
+                      <fhir-patient-communication key=${key}
+                                                  label=${label}
+                                                  .data=${data}
+
+                      ></fhir-patient-communication> `,
+                  this.summary,
+                  this.summaryonly
+          )}
+          ${strap('generalPractitioner',
+                  'generalPractitioner',
+                  data.generalPractitioner,
+                  config.verbose,
+                  (data, label, key) => html`
+                      <fhir-reference key=${key}
+                                      label=${label}
+                                      .data=${data}
+                      ></fhir-reference> `,
+                  this.summary,
+                  this.summaryonly
+          )}
+          <fhir-reference key="managingOrganisation"
+                          label="managingOrganisation"
+                          .data=${data.managingOrganisation}
+                          summary
+          ></fhir-reference>
+          ${strap('link',
+                  'link',
+                  data.link,
+                  config.verbose,
+                  (data, label, key) => html`
+                      <fhir-patient-link key=${key}
+                                         label=${label}
+                                         .data=${data}
+                      ></fhir-patient-link> `,
+                  this.summary,
+                  this.summaryonly
+          )}
+
       `
     ]
 
