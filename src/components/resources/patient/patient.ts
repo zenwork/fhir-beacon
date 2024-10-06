@@ -161,17 +161,18 @@ export class Patient extends DomainResource<PatientData> {
                                                  .errormessage=${e}
                                  ></fhir-primitive>
                              `
-                         }, {
-                         data: data.multipleBirthInteger,
-                         html: (d, n, e) => html`
-                             <fhir-primitive key='multipleBirthInteger'
-                                             label=${n}
-                                             .value=${d}
-                                             .type=${integer}
-                                             .errormessage=${e}
-                             ></fhir-primitive>
-                         `
-                     }
+                         },
+                         {
+                             data: data.multipleBirthInteger,
+                             html: (d, n, e) => html`
+                                 <fhir-primitive key='multipleBirthInteger'
+                                                 label=${n}
+                                                 .value=${d}
+                                                 .type=${integer}
+                                                 .errormessage=${e}
+                                 ></fhir-primitive>
+                             `
+                         }
                      ])}
       `
     ]

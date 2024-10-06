@@ -117,6 +117,12 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summaryonly: boolean = false
 
+  @property({ type: Boolean, reflect: true })
+  public translate: boolean = false
+
+  @property({ type: Boolean, reflect: true })
+  public trialuse: boolean = false
+
   @state()
   private error: boolean = false
 

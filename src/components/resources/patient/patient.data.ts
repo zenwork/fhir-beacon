@@ -1,33 +1,16 @@
-import {FhirElementData} from '../../../internal'
-import {
-  BackboneElementData
-}                        from '../../../internal/resource/backbone.data'
+import {FhirElementData}                                            from '../../../internal'
+import {BackboneElementData}                                        from '../../../internal/resource/backbone.data'
 import {
   DomainResourceData
-}                        from '../../../internal/resource/domain-resource.data'
+}                                                                   from '../../../internal/resource/domain-resource.data'
+import {AttachmentData}                                             from '../../complex'
 import {
   CodeableConceptData
-}                        from '../../complex/codeable-concept/codeable-concept.data'
-import {
-  IdentifierData
-}                        from '../../complex/identifier/identifier.data'
-import {
-  PeriodData
-}                        from '../../complex/period/period.data'
-import {
-  Base64Binary,
-  Code,
-  DateTime,
-  Decimal,
-  FhirDate,
-  FhirString,
-  Integer,
-  Integer64,
-  PositiveInt
-}                        from '../../primitive/primitive.data'
-import {
-  ReferenceData
-}                        from '../../special/reference/reference.data'
+}                                                                   from '../../complex/codeable-concept/codeable-concept.data'
+import {IdentifierData}                                             from '../../complex/identifier/identifier.data'
+import {PeriodData}                                                 from '../../complex/period/period.data'
+import {Code, DateTime, FhirDate, FhirString, Integer, PositiveInt} from '../../primitive/primitive.data'
+import {ReferenceData}                                              from '../../special/reference/reference.data'
 
 export type HumanNameData = FhirElementData & {
   use?: Code
@@ -64,24 +47,6 @@ export type AddressData = FhirElementData & {
   period?: PeriodData
 }
 
-export type MultipleBirthBoolean = boolean
-export type MultipleBirthInteger = Integer
-
-export type AttachmentData = FhirElementData & {
-  contentType?: Code
-  language?: Code
-  data?: Base64Binary
-  url?: URL
-  size?: Integer64
-  hash?: Base64Binary
-  title?: FhirString
-  creation?: DateTime
-  height?: PositiveInt
-  width?: PositiveInt
-  frames?: PositiveInt
-  duration?: Decimal
-  pages?: PositiveInt
-}
 
 export type PatientContactBackbone = BackboneElementData & {
   relationship?: CodeableConceptData
