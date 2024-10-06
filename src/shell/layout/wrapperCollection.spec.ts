@@ -1,8 +1,8 @@
 import {html}                 from 'lit'
 import {describe, expect, it} from 'vitest'
 import {fixture}              from '../../../tests/lit/lit-vitest-fixture'
-import {wrap}                 from './wrapCollection'
 import {Wrapper}              from './wrapper'
+import {wrap} from './wrapper/wrap'
 
 describe('wrapperCollection', () => {
   it('renders correctly', async () => {

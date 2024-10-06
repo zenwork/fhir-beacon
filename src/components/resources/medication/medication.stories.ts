@@ -80,6 +80,7 @@ export const FrontPageDemo: Story = {
             ?showerror=${args.showerror}
             ?verbose=${args.verbose}
             ?open=${args.open}
+            headless
     >
     </fhir-medication >
     `

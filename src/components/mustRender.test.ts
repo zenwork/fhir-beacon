@@ -22,4 +22,10 @@ describe('MustRender', () => {
   it('should fail with no data, verbose, and in structure mode', () => {
     assert.isFalse(mustRender(undefined, DisplayMode.structure, false), 'no data, structure, not verbose')
   })
+  it('should pass with false', () => {
+    assert.isTrue(mustRender(false), 'no data, structure, not verbose')
+  })
+  it('should pass with true', () => {
+    assert.isTrue(mustRender(true), 'no data, structure, not verbose')
+  })
 })

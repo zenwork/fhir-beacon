@@ -1,8 +1,8 @@
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
-import {Decorated, DomainResource}     from '../../../internal'
-import {strap, wrapBB}                 from '../../../shell'
-import {DisplayConfig}                 from '../../../types'
+import {Decorated, DomainResource} from '../../../internal'
+import {strap, wrap}               from '../../../shell'
+import {DisplayConfig}             from '../../../types'
 import {PrimitiveType}                 from '../../primitive'
 import {MedicationData}                from './medication.data'
 
@@ -23,14 +23,15 @@ export class Medication extends DomainResource<MedicationData> {
           <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity >
 
           ${data.ingredient
-            ? wrapBB('ingredient',
+            ? wrap('ingredients',
                      'ingredient',
                      data.ingredient,
                      config.verbose,
-                     (data, label, key) => html`
-                         <fhir-medication-ingredient key="${key}" .data=${data} label="${label}"></fhir-medication-ingredient >
+                   (d, label, key) => html`
+                       <fhir-medication-ingredient key="${key}" .data=${d} label=${label} headless></fhir-medication-ingredient >
                      `,
-                     false
+                   false,
+                   this.summaryonly
                   )
             : nothing}
 

@@ -2,6 +2,7 @@
 
 export * from './address/'
 export * from './annotation/'
+export * from './attachment/'
 export * from './codeable-concept/'
 export * from './codeable-reference/'
 export * from './coding/'

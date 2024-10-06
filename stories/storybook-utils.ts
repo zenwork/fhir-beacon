@@ -13,6 +13,11 @@ export type ShellArgs = {
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 const argTypes: Partial<ArgTypes<ShellArgs>> = {
+  data: {
+    table: {
+      disable: true
+    }
+  },
   mode: {
     description: 'display mode',
     options: ['display', 'structure', 'debug'],
