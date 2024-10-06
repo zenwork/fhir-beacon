@@ -1,5 +1,6 @@
 import {meta, NoDataObject} from '../internal/base/Decorated'
 import {DisplayMode}        from '../types'
+import {isBlank} from '../utilities'
 
 /**
  * Determines if a value should be rendered based on the provided context parameters.
@@ -56,5 +57,5 @@ function isPresent(value: any) {
     return value[meta].hide !== true
   }
 
-  return !!value
+  return !isBlank(value)
 }

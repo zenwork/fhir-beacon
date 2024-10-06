@@ -1291,6 +1291,31 @@
               }
           },
           {
+              "name": "fhir-label",
+              "description": "\n---\n",
+              "doc-url": "",
+              "attributes": [
+                  {"name": "text", "value": {"type": "string"}},
+                  {"name": "variant", "value": {"type": "string"}},
+                  {
+                      "name": "delimiter",
+                      "value": {"type": "string", "default": "':'"}
+                  },
+                  {"name": "for", "value": {"type": "string"}}
+              ],
+              "events": [],
+              "js": {
+                  "properties": [
+                      {"name": "text", "type": "string"},
+                      {"name": "variant", "type": "string"},
+                      {"name": "delimiter", "type": "string"},
+                      {"name": "for", "type": "string"},
+                      {"name": "assignedElements", "type": "Array<HTMLElement>"}
+                  ],
+                  "events": []
+              }
+          },
+          {
               "name": "fhir-value",
               "description": "\n---\n",
               "doc-url": "",
@@ -1317,31 +1342,6 @@
               }
           },
           {
-              "name": "fhir-label",
-              "description": "\n---\n",
-              "doc-url": "",
-              "attributes": [
-                  {"name": "text", "value": {"type": "string"}},
-                  {"name": "variant", "value": {"type": "string"}},
-                  {
-                      "name": "delimiter",
-                      "value": {"type": "string", "default": "':'"}
-                  },
-                  {"name": "for", "value": {"type": "string"}}
-              ],
-              "events": [],
-              "js": {
-                  "properties": [
-                      {"name": "text", "type": "string"},
-                      {"name": "variant", "type": "string"},
-                      {"name": "delimiter", "type": "string"},
-                      {"name": "for", "type": "string"},
-                      {"name": "assignedElements", "type": "Array<HTMLElement>"}
-                  ],
-                  "events": []
-              }
-          },
-          {
               "name": "fhir-primitive-wrapper",
               "description": "\n---\n",
               "doc-url": "",
@@ -1350,10 +1350,11 @@
               "js": {"properties": [], "events": []}
           },
           {
-              "name": "fhir-medication-batch",
-              "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
+              "name": "fhir-observation",
+              "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
               "doc-url": "",
               "attributes": [
+                  {"name": "override-template", "value": {"type": "string"}},
                   {"name": "label", "value": {"type": "string", "default": "''"}},
                   {"name": "mode", "value": {"type": "DisplayMode"}},
                   {
@@ -1404,13 +1405,14 @@
               "events": [],
               "js": {
                   "properties": [
+                      {"name": "overrideTemplate", "type": "string"},
+                      {"name": "summary", "type": "boolean"},
                       {"name": "label", "type": "string"},
                       {"name": "mode", "type": "DisplayMode"},
                       {"name": "open", "type": "boolean"},
                       {"name": "forceclose", "type": "boolean"},
                       {"name": "verbose", "type": "boolean"},
                       {"name": "showerror", "type": "boolean"},
-                      {"name": "summary", "type": "boolean"},
                       {"name": "summaryonly", "type": "boolean"},
                       {"name": "headless", "type": "boolean"},
                       {
@@ -1436,8 +1438,8 @@
               }
         },
           {
-              "name": "fhir-medication-ingredient",
-              "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
+              "name": "fhir-medication-batch",
+              "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
           "doc-url": "",
           "attributes": [
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -1522,11 +1524,10 @@
           }
         },
         {
-            "name": "fhir-medication",
-            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
+            "name": "fhir-medication-ingredient",
+            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
           "doc-url": "",
           "attributes": [
-              {"name": "override-template", "value": {"type": "string"}},
             { "name": "label", "value": { "type": "string", "default": "''" } },
             { "name": "mode", "value": { "type": "DisplayMode" } },
             {
@@ -1577,14 +1578,13 @@
           "events": [],
           "js": {
             "properties": [
-                {"name": "overrideTemplate", "type": "string"},
-                {"name": "summary", "type": "boolean"},
               { "name": "label", "type": "string" },
               { "name": "mode", "type": "DisplayMode" },
               { "name": "open", "type": "boolean" },
               { "name": "forceclose", "type": "boolean" },
               { "name": "verbose", "type": "boolean" },
               { "name": "showerror", "type": "boolean" },
+                {"name": "summary", "type": "boolean"},
                 {"name": "summaryonly", "type": "boolean"},
                 {"name": "headless", "type": "boolean"},
               {
@@ -1610,8 +1610,8 @@
           }
         },
         {
-            "name": "fhir-observation",
-            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
+            "name": "fhir-medication",
+            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
           "doc-url": "",
           "attributes": [
             { "name": "override-template", "value": { "type": "string" } },
@@ -1787,7 +1787,7 @@
         },
         {
           "name": "fhir-patient",
-            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _PatientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _PatientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
+            "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _PatientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _PatientData_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _PatientData_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n",
           "doc-url": "",
           "attributes": [
             { "name": "override-template", "value": { "type": "string" } },

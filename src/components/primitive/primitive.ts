@@ -135,7 +135,6 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected willUpdate(changed: PropertyValues) {
-
     if (this.displayConfig) {
       this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
@@ -145,7 +144,7 @@ export class Primitive extends LitElement {
 
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
-      if (this.value && this.valuePath) {
+      if (!isBlank(this.value) && this.valuePath) {
         console.warn('primitive: valuePath is overriding value attribute. Do not set both')
       }
 
@@ -200,6 +199,7 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected render(): unknown {
+
     if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary)
         && !this.valuePath
         && this.mode !== DisplayMode.override) {
@@ -222,7 +222,7 @@ export class Primitive extends LitElement {
     if (this.getLabel()) elements.push(html`
         <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label >&nbsp`)
 
-    if (this.value)
+    if (!isBlank(this.value))
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
@@ -242,7 +242,7 @@ export class Primitive extends LitElement {
     if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
         <sl-badge pill>&sum;</sl-badge >`)
 
-    return elements.length > 1 || this.value || this.verbose ? html`
+    return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
         <fhir-primitive-wrapper > ${elements}</fhir-primitive-wrapper >` : html``
   }
 
@@ -303,8 +303,8 @@ export class Primitive extends LitElement {
     choose(this.type, [
       [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
       [PrimitiveType.instant, () => (val = asDateTime(val as DateTime))],
-      [PrimitiveType.uri_type, () => (val = asReadable(val as string))]
-      // [PrimitiveType.base64, () => val = asWrapped(val as string,100)],
+      [PrimitiveType.uri_type, () => (val = asReadable(val as string))],
+      [PrimitiveType.uri_type, () => (val = String(val))]
     ])
     return val
   }

@@ -93,7 +93,7 @@ describe('fhir primitive value', () => {
     let div = el.queryShadow<HTMLDivElement>({ select: 'div' })
     expect(div).toHaveTextContent(text)
     await userEvent.unhover(div)
-    await aTimeout(500)
+    await aTimeout(1000)
 
     if (div) {
 

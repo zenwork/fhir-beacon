@@ -78,12 +78,14 @@ export class Wrapper extends LitElement {
       'validation-error': this.variant === 'validation-error'
     }
 
+    const arrow = this.variant === 'validation-error' ? nothing : html`<span id="arrow">&#x21B4;</span>`
+
     if (this.label && this.fhirType) {
       return html`
           <sl-tooltip content="${this.fhirType}" placement="left">
               <div id="label">
                   <label class=${classMap(classes)}>${this.label}</label >
-                  <span id="arrow">&#x21B4;</span >
+                  ${arrow}
               </div >
           </sl-tooltip >
       `
@@ -91,14 +93,14 @@ export class Wrapper extends LitElement {
       return html`
           <div id="label">
               <label class=${classMap(classes)}>${this.label}</label >
-              <span id="arrow">&#x21B4;</span >
+              ${arrow}
           </div >
       `
     } else if (this.fhirType) {
       return html`
           <div id="label">
               <label class=${classMap(classes)}>${this.fhirType}</label >
-              <span id="arrow">&#x21B4;</span >
+              ${arrow}
           </div >
       `
     }

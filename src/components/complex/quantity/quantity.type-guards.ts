@@ -16,7 +16,7 @@ export function isSimpleQuantity(quantity: QuantityData | SimpleQuantityData): q
 }
 
 
-export function isDeceasedBoolean(val: unknown): val is DeceasedBoolean {
+export function isBoolean(val: unknown): val is DeceasedBoolean {
   return typeof val === 'boolean'
 }
 
