@@ -129,35 +129,38 @@ export class Patient extends DomainResource<PatientData> {
     return [
       html`
           ${(strap(
-                  'identifier',
-                  'identifier',
-                  data.identifier,
-                  config.verbose,
-                  (data, label, key) => html`
+                  {
+                      key: 'identifier',
+                      pluralBase: 'identifier',
+                      collection: data.identifier,
+                      generator: (data, label, key) => html`
                       <fhir-identifier key=${key} label=${label} .data=${data} summary></fhir-identifier>`,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           ))}
           <fhir-primitive label="active" .value=${data.active} .type=${boolean} summary></fhir-primitive>
 
-          ${(strap('name',
-                   'name',
-                   data.name,
-                   config.verbose,
-                   (data, label, key) => html`
+          ${(strap({
+                       key: 'name',
+                       pluralBase: 'name',
+                       collection: data.name,
+                       generator: (data, label, key) => html`
                        <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name>`,
-                   this.summary,
-                   this.summaryonly
+                       summary: this.summary,
+                       config: this.getDisplayConfig()
+                   }
           ))}
 
-          ${(strap('telecom',
-                   'telecom',
-                   data.telecom,
-                   config.verbose,
-                   (data, label, key) => html`
+          ${(strap({
+                       key: 'telecom',
+                       pluralBase: 'telecom',
+                       collection: data.telecom,
+                       generator: (data, label, key) => html`
                        <fhir-contact-point key=${key} label="${label}" .data=${data} summary></fhir-contact-point> `,
-                   this.summary,
-                   this.summaryonly
+                       summary: this.summary,
+                       config: this.getDisplayConfig()
+                   }
           ))}
           <fhir-primitive label="gender" .value=${data.gender} .type=${code} summary></fhir-primitive>
           <fhir-primitive label="birthDate"
@@ -196,14 +199,15 @@ export class Patient extends DomainResource<PatientData> {
                      ])
           }
 
-          ${strap('address',
-                  'address',
-                  data.address,
-                  config.verbose,
-                  (data, label, key) => html`
+          ${strap({
+                      key: 'address',
+                      pluralBase: 'address',
+                      collection: data.address,
+                      generator: (data, label, key) => html`
                       <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           )}
           <fhir-codeable-concept key="maritalStatus" .data=${data.maritalStatus}></fhir-codeable-concept>
 
@@ -236,59 +240,63 @@ export class Patient extends DomainResource<PatientData> {
                      ])}
 
           <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
-          ${strap('contact',
-                  'contact',
-                  data.contact,
-                  config.verbose,
-                  (data, label, key) => html`
+          ${strap({
+                      key: 'contact',
+                      pluralBase: 'contact',
+                      collection: data.contact,
+                      generator: (data, label, key) => html`
                       <fhir-patient-contact key=${key}
                                             label=${label}
                                             .data=${data}
                       ></fhir-patient-contact> `,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           )}
-          ${strap('communication',
-                  'communication',
-                  data.communication,
-                  config.verbose,
-                  (data, label, key) => html`
+          ${strap({
+                      key: 'communication',
+                      pluralBase: 'communication',
+                      collection: data.communication,
+                      generator: (data, label, key) => html`
                       <fhir-patient-communication key=${key}
                                                   label=${label}
                                                   .data=${data}
 
                       ></fhir-patient-communication> `,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           )}
-          ${strap('generalPractitioner',
-                  'generalPractitioner',
-                  data.generalPractitioner,
-                  config.verbose,
-                  (data, label, key) => html`
+          ${strap({
+                      key: 'generalPractitioner',
+                      pluralBase: 'generalPractitioner',
+                      collection: data.generalPractitioner,
+                      generator: (data, label, key) => html`
                       <fhir-reference key=${key}
                                       label=${label}
                                       .data=${data}
                       ></fhir-reference> `,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           )}
           <fhir-reference key="managingOrganisation"
                           label="managingOrganisation"
                           .data=${data.managingOrganization}
                           summary
           ></fhir-reference>
-          ${strap('link',
-                  'link',
-                  data.link,
-                  config.verbose,
-                  (data, label, key) => html`
+          ${strap({
+                      key: 'link',
+                      pluralBase: 'link',
+                      collection: data.link,
+                      generator: (data, label, key) => html`
                       <fhir-patient-link key=${key}
                                          label=${label}
                                          .data=${data}
                       ></fhir-patient-link> `,
-                  this.summary,
-                  this.summaryonly
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
           )}
 
       `

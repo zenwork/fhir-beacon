@@ -29,14 +29,14 @@ export function strapLines(key: string,
     if (hasSome(collection)) {
       if (verbose) {
         return html`
-            <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary}>
+            <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
                 ${map(collection, (data: string, index: number) => generator(data, label + ' ' + show(index + 1), key))}
             </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary}>
+          <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
               ${map(collection, (data: string, index: number) => generator(data, show(index + 1), key))}
           </fhir-wrapper-2>
       `
@@ -45,7 +45,7 @@ export function strapLines(key: string,
 
     if (verbose) {
       return html`
-          <fhir-wrapper-2 label="${k} > ${label}">
+          <fhir-wrapper-2 label="${k} > ${label}" ?summaryonly=${summaryMode}>
               <fhir-empty-list ></fhir-empty-list >
           </fhir-wrapper-2>`
     }

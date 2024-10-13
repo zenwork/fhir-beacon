@@ -15,28 +15,35 @@ export class Medication extends DomainResource<MedicationData> {
   public renderDisplay(config: DisplayConfig, data: Decorated<MedicationData>): TemplateResult[] {
     return [
       html`
-          <fhir-identifier key="identifier" .data=${data.identifier} summary></fhir-identifier >
-          <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept >
-          <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive >
-          <fhir-reference key="marketingAuthorizationHolder" .data=${data.marketingAuthorizationHolder} summary></fhir-reference >
-          <fhir-codeable-concept key="doseForm" .data=${data.doseForm}></fhir-codeable-concept >
-          <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity >
+          <fhir-identifier key="identifier" .data=${data.identifier} summary></fhir-identifier>
+          <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
+          <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive>
+          <fhir-reference key="marketingAuthorizationHolder"
+                          .data=${data.marketingAuthorizationHolder}
+                          summary
+          ></fhir-reference>
+          <fhir-codeable-concept key="doseForm" .data=${data.doseForm}></fhir-codeable-concept>
+          <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity>
 
           ${data.ingredient
             ? wrap('ingredients',
-                     'ingredient',
-                     data.ingredient,
-                     config.verbose,
+                   'ingredient',
+                   data.ingredient,
+                   config.verbose,
                    (d, label, key) => html`
-                       <fhir-medication-ingredient key="${key}" .data=${d} label=${label} headless></fhir-medication-ingredient >
-                     `,
+                       <fhir-medication-ingredient key="${key}"
+                                                   .data=${d}
+                                                   label=${label}
+                                                   headless
+                       ></fhir-medication-ingredient>
+                   `,
                    false,
                    this.summaryonly
                   )
             : nothing}
 
-          <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch >
-          <fhir-reference label="definition" .data=${data.definition}></fhir-reference >
+          <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch>
+          <fhir-reference label="definition" .data=${data.definition}></fhir-reference>
       `
     ]
   }
@@ -44,23 +51,31 @@ export class Medication extends DomainResource<MedicationData> {
   public renderStructure(config: DisplayConfig, data: Decorated<MedicationData>): TemplateResult[] {
     return [
       html`
-          <fhir-identifier key="identifier" .data=${data.identifier} summary></fhir-identifier >
-          <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept >
-          <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive >
-          <fhir-reference key="marketingAuthorizationHolder" .data=${data.marketingAuthorizationHolder} summary></fhir-reference >
-          <fhir-codeable-concept key="doseForm" .data=${data.doseForm}></fhir-codeable-concept >
-          <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity >
+          <fhir-identifier key="identifier" .data=${data.identifier} summary></fhir-identifier>
+          <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
+          <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive>
+          <fhir-reference key="marketingAuthorizationHolder"
+                          .data=${data.marketingAuthorizationHolder}
+                          summary
+          ></fhir-reference>
+          <fhir-codeable-concept key="doseForm" .data=${data.doseForm}></fhir-codeable-concept>
+          <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity>
 
-          ${strap('ingredient',
-                  'ingredient',
-                  data.ingredient!,
-                  config.verbose,
-                  (data, label, key) => html`
-                      <fhir-medication-ingredient key="${key}" .data=${data} label="${label}"></fhir-medication-ingredient > `,
-                  false, this.summaryonly)}
+          ${strap({
+                      key: 'ingredient',
+                      pluralBase: 'ingredient',
+                      collection: data.ingredient!,
+                      generator: (data, label, key) => html`
+                          <fhir-medication-ingredient key="${key}"
+                                                      .data=${data}
+                                                      label="${label}"
+                          ></fhir-medication-ingredient> `,
+                      summary: false,
+                      config: this.getDisplayConfig()
+                  })}
 
-          <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch >
-          <fhir-reference key="definition" .data=${data.definition}></fhir-reference >
+          <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch>
+          <fhir-reference key="definition" .data=${data.definition}></fhir-reference>
       `
     ]
   }

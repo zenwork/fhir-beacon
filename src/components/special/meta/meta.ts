@@ -72,7 +72,11 @@ export class Meta extends BaseElement<MetaData> {
           <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive>
 
           ${data.profile ? html`
-              <fhir-wrapper-2 label="profiles" variant="details" summary>
+              <fhir-wrapper-2 label="profiles"
+                              variant="details"
+                              summary
+                              ?summaryonly=${this.getDisplayConfig().summaryonly}
+              >
                   ${map(data.profile, p => html`
                       <fhir-primitive label="profile"
                                       type=${PrimitiveType.canonical}
@@ -83,20 +87,25 @@ export class Meta extends BaseElement<MetaData> {
               </fhir-wrapper-2>
           ` : nothing}
           ${data.security ? html`
-              <fhir-wrapper-2 label="security" variant="details" summary>
+              <fhir-wrapper-2 label="security"
+                              variant="details"
+                              summary
+                              ?summaryonly=${this.getDisplayConfig().summaryonly}
+              >
                   ${map(data.security, s => html`
                       <fhir-coding label="security" .data=${s} summary></fhir-coding>
                   `)}
               </fhir-wrapper-2>
           ` : nothing}
-          ${strap('tag',
-                  'tag',
-                  data.tag,
-                  this.verbose,
-                  (d, l, k) => html`
+          ${strap({
+                      key: 'tag',
+                      pluralBase: 'tag',
+                      collection: data.tag,
+                      generator: (d, l, k) => html`
                       <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
-                  this.summary,
-                  this.summaryonly)}
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  })}
 
       `
     ]

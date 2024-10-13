@@ -18,19 +18,31 @@ export class HumanName extends BaseElement<HumanNameData> {
       return [
         html`
             ${config.verbose
-            ? wrap(
-                          '',
-                          'given name',
-                          data.given,
-                          config.verbose,
-                          (g,
-                           i) => html`
-                              <fhir-primitive label=${i} .value=${g} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`
-                  )
-            : html`
-                      <fhir-primitive label="given name" .value=${data.given.join(' ')} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`}
+              ? wrap(
+                            '',
+                            'given name',
+                            data.given,
+                            config.verbose,
+                            (g,
+                             i) => html`
+                                <fhir-primitive label=${i}
+                                                .value=${g}
+                                                .type=${PrimitiveType.fhir_string}
+                                                summary
+                                ></fhir-primitive>`
+                    )
+              : html`
+                        <fhir-primitive label="given name"
+                                        .value=${data.given.join(' ')}
+                                        .type=${PrimitiveType.fhir_string}
+                                        summary
+                        ></fhir-primitive>`}
 
-          <fhir-primitive label="family name" .value=${data.family} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+            <fhir-primitive label="family name"
+                            .value=${data.family}
+                            .type=${PrimitiveType.fhir_string}
+                            summary
+            ></fhir-primitive>
         `
       ]
     }
@@ -38,7 +50,11 @@ export class HumanName extends BaseElement<HumanNameData> {
     if (data.text) {
       return [
         html`
-            <fhir-primitive label="full name" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive > `
+            <fhir-primitive label="full name"
+                            .value=${data.text}
+                            .type=${PrimitiveType.fhir_string}
+                            summary
+            ></fhir-primitive> `
       ]
     }
 
@@ -48,18 +64,28 @@ export class HumanName extends BaseElement<HumanNameData> {
   public renderStructure(config: DisplayConfig, data: Decorated<HumanNameData>): TemplateResult[] {
     return [
       html`
-        <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive >
-        <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-        <fhir-primitive label="family" .value=${data.family} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-        ${strap(
-                this.key,
-                'given',
-                data.given,
-                this.verbose,
-                (g,
-                 i) => html`
-                    <fhir-primitive label=${i} .value=${g} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >`
-        )}
+          <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive>
+          <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive>
+          <fhir-primitive label="family"
+                          .value=${data.family}
+                          .type=${PrimitiveType.fhir_string}
+                          summary
+          ></fhir-primitive>
+          ${strap(
+                  {
+                      key: this.key,
+                      pluralBase: 'given',
+                      collection: data.given,
+                      generator: (g, i) => html`
+                          <fhir-primitive label=${i}
+                                          .value=${g}
+                                          .type=${PrimitiveType.fhir_string}
+                                          summary
+                          ></fhir-primitive>`,
+                      summary: this.summary,
+                      config: config
+                  }
+          )}
       `
     ]
   }

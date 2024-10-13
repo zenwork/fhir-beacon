@@ -15,6 +15,7 @@ import {pluralize}            from '../pluralize'
  * @param summary - Whether to display a summary or detailed view of the items in the wrapper.
  *
  * @param summaryMode
+ * @param force
  * @returns The wrapped collection as a TemplateResult or any other value.
  */
 export function wrap<T>(key: string,
@@ -35,7 +36,7 @@ export function wrap<T>(key: string,
       if (verbose) {
         plural = k + (k ? '/' : '') + plural
         return html`
-            <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
+            <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${summaryMode}>
                 ${map(collection,
                       (data: T) => html`
                               ${generator(data, pluralBase, key)}
@@ -45,7 +46,7 @@ export function wrap<T>(key: string,
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
+          <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${summaryMode}>
               ${map(collection,
                     (data: T) => html`
 
@@ -58,14 +59,14 @@ export function wrap<T>(key: string,
     if (hasOnlyOne(collection) && force) {
       if (verbose) {
         return html`
-            <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
+            <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${summaryMode}>
                 ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
             </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
+          <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${summaryMode}>
               ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
           </fhir-wrapper-2>
       `

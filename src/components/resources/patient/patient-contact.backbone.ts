@@ -52,25 +52,27 @@ export class PatientContactBackbone extends Backbone<PatientContactData> {
     return [
       html`
           ${
-                  strap('relationship',
-                        'relationship',
-                        data.relationship,
-                        config.verbose,
-                        (d, l, k) => html`
+                  strap({
+                            key: 'relationship',
+                            pluralBase: 'relationship',
+                            collection: data.relationship,
+                            generator: (d, l, k) => html`
                             <fhir-codeable-concept key=${k} label=${l} .data=${d}></fhir-codeable-concept>`,
-                        this.summary,
-                        config.summaryonly)
+                            summary: this.summary,
+                            config: this.getDisplayConfig()
+                        })
           }
           <fhir-human-name key="name" label="name" .data=${data.name}></fhir-human-name>
           ${
-                  strap('telecom',
-                        'telecom',
-                        data.telecom,
-                        config.verbose,
-                        (d, l, k) => html`
+                  strap({
+                            key: 'telecom',
+                            pluralBase: 'telecom',
+                            collection: data.telecom,
+                            generator: (d, l, k) => html`
                             <fhir-contact-point key=${k} label=${l} .data=${d}></fhir-contact-point>`,
-                        this.summary,
-                        config.summaryonly)
+                            summary: this.summary,
+                            config: this.getDisplayConfig()
+                        })
           }
 
           <fhir-address key="address" label="address" .data=${data.address}></fhir-address>

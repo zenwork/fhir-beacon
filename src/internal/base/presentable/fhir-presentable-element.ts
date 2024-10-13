@@ -237,6 +237,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
               <fhir-wrapper-2
                       .label=${this.getLabel()}
                       ?summary=${this.summary}
+                      ?summaryonly=${this.getDisplayConfig().summaryonly}
               >
 
                   ${this.templateGenerators
@@ -302,6 +303,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                 ?open=${this.open}
                                 ?badge-summary=${this.summary}
                                 ?summary=${this.summary}
+                                ?summaryonly=${this.getDisplayConfig().summaryonly}
                 >
                     <div class="frontmatter">
                         ${this.templateGenerators.structure

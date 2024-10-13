@@ -38,7 +38,11 @@ export function choiceOf<C extends BaseElement<any>>(contextElement: C,
   // return all results and error messages if showerror is set
   if (contextElement.showerror && templateResults.length > 1) {
     return html`
-        <fhir-wrapper-2 .label= ${'too many values'} variant='error'>
+        <fhir-wrapper-2 .label=
+                        ${'too many values'}
+                        variant='error'
+                        ?summaryonly=${contextElement.summaryonly}
+        >
             ${templateResults}
             ${html`
                 <fhir-error text="${'only one of the above should be present'}"></fhir-error>`}
