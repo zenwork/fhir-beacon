@@ -26,19 +26,19 @@ export class Medication extends DomainResource<MedicationData> {
           <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity>
 
           ${data.ingredient
-            ? wrap('ingredients',
-                   'ingredient',
-                   data.ingredient,
-                   config.verbose,
-                   (d, label, key) => html`
+            ? wrap({
+                       key: 'ingredients',
+                       pluralBase: 'ingredient',
+                       collection: data.ingredient,
+                       generator: (d, label, key) => html`
                        <fhir-medication-ingredient key="${key}"
                                                    .data=${d}
                                                    label=${label}
-                                                   headless
                        ></fhir-medication-ingredient>
                    `,
-                   false,
-                   this.summaryonly
+                       summary: false,
+                       config
+                   }
                   )
             : nothing}
 

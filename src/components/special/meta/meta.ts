@@ -23,37 +23,40 @@ export class Meta extends BaseElement<MetaData> {
           ></fhir-primitive>
           <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive>
 
-          ${wrap('profile',
-                 'profile',
-                 data.profile,
-                 this.verbose,
-                 (d, l, k) => html`
+          ${wrap({
+                     key: 'profile',
+                     pluralBase: 'profile',
+                     collection: data.profile,
+                     generator: (d, l, k) => html`
                      <fhir-primitive key=${k}
                                      label=${l}
                                      type=${PrimitiveType.canonical}
                                      .value=${d}
                                      summary
                      ></fhir-primitive>`,
-                 this.summary,
-                 this.summaryonly)}
+                     summary: this.summary,
+                     config
+                 })}
 
-          ${wrap('security',
-                 'security',
-                 data.security,
-                 this.verbose,
-                 (d, l, k) => html`
+          ${wrap({
+                     key: 'security',
+                     pluralBase: 'security',
+                     collection: data.security,
+                     generator: (d, l, k) => html`
                      <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
-                 this.summary,
-                 this.summaryonly)}
+                     summary: this.summary,
+                     config
+                 })}
 
-          ${wrap('tag',
-                 'tag',
-                 data.tag,
-                 this.verbose,
-                 (d, l, k) => html`
+          ${wrap({
+                     key: 'tag',
+                     pluralBase: 'tag',
+                     collection: data.tag,
+                     generator: (d, l, k) => html`
                      <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
-                 this.summary,
-                 this.summaryonly)}
+                     summary: this.summary,
+                     config
+                 })}
 
       `
     ]

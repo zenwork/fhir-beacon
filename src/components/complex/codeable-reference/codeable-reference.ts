@@ -13,7 +13,7 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
   public renderDisplay(config: DisplayConfig, data: CodeableReferenceData): TemplateResult[] {
     return [
       html`
-          <fhir-codeable-concept key="${this.key}/concept" .data=${data.concept} summary></fhir-codeable-concept >
+          <fhir-codeable-concept key="concept" .data=${data.concept} summary></fhir-codeable-concept>
           <fhir-reference key="reference" .data=${data.reference} summary></fhir-reference >
       `
     ]

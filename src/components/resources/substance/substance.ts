@@ -27,29 +27,33 @@ export class Substance extends DomainResource<SubstanceData> {
                           summary
           ></fhir-primitive>
           <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive>
-          ${wrap('',
-                 'category',
-                 data.category,
-                 this.verbose,
-                 (c, idx, context) => html`
-                     <fhir-codeable-concept .context=${context}
-                                            label="substance"
-                                            .data=${c}
-                                            summary
-                     ></fhir-codeable-concept> `)}
+          ${wrap({
+                     key: '',
+                     pluralBase: 'category',
+                     collection: data.category,
+                     generator: (c, idx, context) => html`
+                         <fhir-codeable-concept .context=${context}
+                                                label="substance"
+                                                .data=${c}
+                                                summary
+                         ></fhir-codeable-concept> `,
+                     config
+                 })}
           <fhir-codeable-reference key="code" label="code" .data=${data.code} summary></fhir-codeable-reference>
           <fhir-primitive label="expiry" value=${data.expiry} summary></fhir-primitive>
           <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity>
-          ${wrap('',
-                 'ingredient',
-                 data.ingredient,
-                 this.verbose,
-                 (ing, idx, ctx) => html`
-                     <fhir-substance-ingredient
-                             .key=${ctx}
-                             .label=${'ingredient' + idx}
-                             .data=${ing} summary
-                     ></fhir-substance-ingredient> `)}
+          ${wrap({
+                     key: '',
+                     pluralBase: 'ingredient',
+                     collection: data.ingredient,
+                     generator: (ing, idx, ctx) => html`
+                         <fhir-substance-ingredient
+                                 .key=${ctx}
+                                 .label=${'ingredient' + idx}
+                                 .data=${ing} summary
+                         ></fhir-substance-ingredient> `,
+                     config
+                 })}
       `
     ]
   }

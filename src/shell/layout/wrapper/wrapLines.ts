@@ -31,7 +31,7 @@ export function wrapLines<T>(key: string,
 
     if (hasMany(collection)) {
       if (verbose) {
-        label = k + (k ? '/' : '') + label
+        // label = k + (k ? '/' : '') + label
         return html`
             <fhir-wrapper-2 label="${pluralize(label)}" ?summary=${summary} ?summaryonly=${summaryMode}>
                 ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
@@ -47,7 +47,7 @@ export function wrapLines<T>(key: string,
     }
     if (hasOnlyOne(collection)) {
       if (verbose) {
-        label = k + (k ? '/' : '') + label
+        // label = k + (k ? '/' : '') + label
         return html`
 
             ${map(collection, (data: T) => generator(data, label, key))}
@@ -64,7 +64,7 @@ export function wrapLines<T>(key: string,
 
 
     if (verbose) {
-      label = k + (k ? '/' : '') + label
+      // label = k + (k ? '/' : '') + label
       return html`
           <fhir-wrapper-2 label="${k} > ${label}" ?summaryonly=${summaryMode}>
               <fhir-empty-list ></fhir-empty-list >

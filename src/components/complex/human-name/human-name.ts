@@ -19,17 +19,19 @@ export class HumanName extends BaseElement<HumanNameData> {
         html`
             ${config.verbose
               ? wrap(
-                            '',
-                            'given name',
-                            data.given,
-                            config.verbose,
-                            (g,
-                             i) => html`
+                            {
+                                key: '',
+                                pluralBase: 'given name',
+                                collection: data.given,
+                                generator: (g,
+                                            i) => html`
                                 <fhir-primitive label=${i}
                                                 .value=${g}
                                                 .type=${PrimitiveType.fhir_string}
                                                 summary
-                                ></fhir-primitive>`
+                                ></fhir-primitive>`,
+                                config
+                            }
                     )
               : html`
                         <fhir-primitive label="given name"

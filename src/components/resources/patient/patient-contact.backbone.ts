@@ -17,25 +17,27 @@ export class PatientContactBackbone extends Backbone<PatientContactData> {
     return [
       html`
           ${
-                  wrap('relationships',
-                       'relationship',
-                       data.relationship,
-                       config.verbose,
-                       (d, l, k) => html`
+                  wrap({
+                           key: 'relationships',
+                           pluralBase: 'relationship',
+                           collection: data.relationship,
+                           generator: (d, l, k) => html`
                            <fhir-codeable-concept key=${k} label=${l} .data=${d}></fhir-codeable-concept>`,
-                       this.summary,
-                       config.summaryonly)
+                           summary: this.summary,
+                           config
+                       })
           }
           <fhir-human-name key="name" label="name" .data=${data.name}></fhir-human-name>
           ${
-                  wrap('telecoms',
-                       'telecom',
-                       data.telecom,
-                       config.verbose,
-                       (d, l, k) => html`
+                  wrap({
+                           key: 'telecoms',
+                           pluralBase: 'telecom',
+                           collection: data.telecom,
+                           generator: (d, l, k) => html`
                            <fhir-contact-point key=${k} label=${l} .data=${d}></fhir-contact-point>`,
-                       this.summary,
-                       config.summaryonly)
+                           summary: this.summary,
+                           config
+                       })
           }
 
           <fhir-address key="address" label="address" .data=${data.address}></fhir-address>

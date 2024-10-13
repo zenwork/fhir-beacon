@@ -1,39 +1,82 @@
 import {html}                 from 'lit'
 import {describe, expect, it} from 'vitest'
 import {fixture}              from '../../../tests/lit/lit-vitest-fixture'
+import {DisplayMode} from '../../types'
 import {Wrapper}              from './wrapper'
-import {wrap} from './wrapper/wrap'
+import {wrap}        from './wrapper/wrap'
 
 describe('wrapperCollection', () => {
   it.skip('renders correctly', async () => {
     const el = await fixture<Wrapper>(html`
 
-        <h1 >multiple</h1 >
-        <h2 >normal</h2 >
+        <h1>multiple</h1>
+        <h2>normal</h2>
         ${wrap(
-                'characterSet', 'letter', ['a', 'b', 'c'], false, (
-                        data, label, key
-                ) => html`${label}: ${data} (${key})`
+                {
+                    key: 'characterSet',
+                    pluralBase: 'letter',
+                    collection: ['a', 'b', 'c'],
+                    generator: (data, label, key) => html`${label}: ${data} (${key})`,
+                    config: {
+                        mode: DisplayMode.display,
+                        summaryonly: false,
+                        showerror: false,
+                        verbose: false,
+                        open: false
+                    }
+                }
         )}
-        <h2 >verbose</h2 >
+        <h2>verbose</h2>
         ${wrap(
-                'characterSet', 'letter', ['a', 'b', 'c'], true, (
-                        data, label, key
-                ) => html`${label}: ${data} (${key})`
+                {
+                    key: 'characterSet',
+                    pluralBase: 'letter',
+                    collection: ['a', 'b', 'c'],
+                    generator: (data, label, key) => html`${label}: ${data} (${key})`,
+                    config: {
+                        mode: DisplayMode.display,
+                        summaryonly: false,
+                        showerror: false,
+                        verbose: true,
+                        open: false
+                    }
+                }
         )}
 
-        <h1 >single</h1 >
-        <h2 >normal</h2 >
+        <h1>single</h1>
+        <h2>normal</h2>
         ${wrap(
-                'characterSet', 'letter', ['a'], false, (
-                        data, label, key
-                ) => html`${label}: ${data} (${key})`
+                {
+                    key: 'characterSet',
+                    pluralBase: 'letter',
+                    collection: ['a'],
+                    generator: (data, label, key) => html`${label}: ${data} (${key})`,
+                    config: {
+                        mode: DisplayMode.display,
+                        summaryonly: false,
+                        showerror: false,
+                        verbose: false,
+                        open: false
+                    }
+                }
         )}
-        <h2 >verbose</h2 >
+        <h2>verbose</h2>
         ${wrap(
-                'characterSet', 'letter', ['a'], true, (
-                        data, label, key
-                ) => html`${label}: ${data} (${key})`
+                {
+                    key: 'characterSet',
+                    pluralBase: 'letter',
+                    collection: ['a'],
+                    generator: (
+                            data, label, key
+                    ) => html`${label}: ${data} (${key})`,
+                    config: {
+                        mode: DisplayMode.display,
+                        summaryonly: false,
+                        showerror: false,
+                        verbose: true,
+                        open: false
+                    }
+                }
         )}
 
     `, 'fhir-wrapper').first()
