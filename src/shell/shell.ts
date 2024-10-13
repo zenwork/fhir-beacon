@@ -3,12 +3,12 @@ import {LitElement, PropertyValues} from 'lit'
 import {customElement, property}    from 'lit/decorators.js'
 import {displayConfigContext}       from '../internal'
 import {DisplayMode}                from '../types'
-import {toBaseElementModeEnum}      from '../utilities'
+import {toDisplayMode} from '../utilities'
 
 @customElement('fhir-shell')
 export class Shell extends LitElement {
 
-  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   public mode: DisplayMode = DisplayMode.display
 
   @property({ type: Boolean, reflect: true })

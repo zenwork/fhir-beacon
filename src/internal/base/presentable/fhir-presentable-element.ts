@@ -15,7 +15,7 @@ import {
 }                                                                                     from '../../../shell/layout/directives'
 import {hostStyles}                                                                   from '../../../styles'
 import {DisplayConfig, DisplayMode}                                                   from '../../../types'
-import {hasSameAncestor, toBaseElementModeEnum}                                       from '../../../utilities'
+import {hasSameAncestor, isBlank, toDisplayMode} from '../../../utilities'
 import {
   DisplayContextConsumerController
 }                                                                                     from '../../contexts/context-consumer-controller'
@@ -41,7 +41,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   @property({ reflect: true })
   public label: string = ''
 
-  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
@@ -153,7 +153,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       if (this.override()) {
         this.templateGenerators.override.body.push(this.renderOverride)
       } else {
-
+        // console.log(this.type, this.extendedData)
         if (this.mode) {
           switch (this.mode) {
             case DisplayMode.debug:
@@ -178,7 +178,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                               variant="stop"
                               label=${this.label}
                               error="If rendered, '${this.label}' would render recursively for ever due to the fhir model definition."
-                      ></fhir-not-supported >`
+                      ></fhir-not-supported>`
                 ])
               } else {
                 this.templateGenerators.structure.body.push(this.renderStructure)
@@ -187,7 +187,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             default:
               this.templateGenerators.error.body.push(() => [
                 html`
-                    <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error >`
+                    <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error>`
               ])
           }
         }
@@ -201,10 +201,10 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     if (!this.extendedData[meta].hide && this.data === NoDataObject) {
       // SHOW THAT WE HAVE NO DATA
       return html`
-          <fhir-not-supported variant="no-data"></fhir-not-supported >`
+          <fhir-not-supported variant="no-data"></fhir-not-supported>`
     }
 
-    if (this.stopRender()) return templates
+    if (this.extendedData[meta].hide && !this.verbose) return templates
 
     switch (this.mode) {
       case DisplayMode.debug:
@@ -218,14 +218,50 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           ).flat())
         break
       case DisplayMode.display:
+        if (this.headless || isBlank(this.data)) {
+
+          templates.push(...this
+            .templateGenerators
+            .display.header
+            .map(g => g.call(this, this.getDisplayConfig(),
+                             this.extendedData,
+                             new ValidationsImpl(this.extendedData))).flat())
+          templates.push(...this
+            .templateGenerators
+            .display.body
+            .map(g => g.call(this, this.getDisplayConfig(),
+                             this.extendedData,
+                             new ValidationsImpl(this.extendedData))).flat())
+        } else {
+          templates.push(html`
+              <fhir-wrapper
+                      .label=${this.getLabel()}
+                      .fhirType=${asReadable(this.type)}
+                      ?summary=${this.summary}
+              >
+
+                  ${this.templateGenerators
+                        .display.header
+                        .map(g => g.call(this, this.getDisplayConfig(),
+                                         this.extendedData,
+                                         new ValidationsImpl(this.extendedData))).flat()}
+
+                  ${this.templateGenerators.display
+                        .body.map(g => g.call(this,
+                                              this.getDisplayConfig(),
+                                              this.extendedData,
+                                              new ValidationsImpl(this.extendedData))).flat()}
+              </fhir-wrapper>
+          `)
+        }
+        break
+      case DisplayMode.narrative:
         templates.push(...this
           .templateGenerators
           .display.header
           .map(g => g.call(this, this.getDisplayConfig(),
                            this.extendedData,
                            new ValidationsImpl(this.extendedData))).flat())
-      // eslint-disable-next-line no-fallthrough
-      case DisplayMode.narrative:
         templates.push(...this
           .templateGenerators
           .display.body
@@ -251,7 +287,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                           .header.map(g => g.call(this, this.getDisplayConfig(),
                                                   this.extendedData,
                                                   new ValidationsImpl(this.extendedData))).flat()}
-                </div >
+                </div>
 
                 ${this.templateGenerators.structure
                       .body.map(g => g.call(this,
@@ -262,27 +298,27 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           } else {
 
             templates.push(html`
-              <fhir-structure-wrapper
-                      .label=${this.getLabel()}
-                      .resourceId=${this.extendedData?.id ?? ''}
-                      .fhirType=${asReadable(this.type)}
-                      ?forceclose=${this.forceclose}
-                      ?summary=${this.summary}
-              >
-                  <div class="frontmatter">
-                      ${this.templateGenerators.structure
-                            .header.map(g => g.call(this, this.getDisplayConfig(),
-                                                    this.extendedData,
-                                                    new ValidationsImpl(this.extendedData))).flat()}
-                  </div >
+                <fhir-structure-wrapper
+                        .label=${this.getLabel()}
+                        .resourceId=${this.extendedData?.id ?? ''}
+                        .fhirType=${asReadable(this.type)}
+                        ?forceclose=${this.forceclose}
+                        ?summary=${this.summary}
+                >
+                    <div class="frontmatter">
+                        ${this.templateGenerators.structure
+                              .header.map(g => g.call(this, this.getDisplayConfig(),
+                                                      this.extendedData,
+                                                      new ValidationsImpl(this.extendedData))).flat()}
+                    </div>
 
-                  ${this.templateGenerators.structure
-                        .body.map(g => g.call(this,
-                                              this.getDisplayConfig(),
-                                              this.extendedData,
-                                              new ValidationsImpl(this.extendedData))).flat()}
-              </fhir-structure-wrapper >
-          `)
+                    ${this.templateGenerators.structure
+                          .body.map(g => g.call(this,
+                                                this.getDisplayConfig(),
+                                                this.extendedData,
+                                                new ValidationsImpl(this.extendedData))).flat()}
+                </fhir-structure-wrapper>
+            `)
           }
         }
         break
@@ -301,17 +337,20 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   }
 
   private stopRender() {
-    return !this.extendedData
+    return this.extendedData[meta].hide && !this.verbose
   }
 
   private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
       return [
         html`
-            <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive >
+            <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
             ${hasSome(data.extension)
               ? html`
-                        <fhir-primitive label="extension" context="not implemented" .type=${PrimitiveType.none}></fhir-primitive >`
+                        <fhir-primitive label="extension"
+                                        context="not implemented"
+                                        .type=${PrimitiveType.none}
+                        ></fhir-primitive>`
               : nothing}
         `
       ]
@@ -330,11 +369,11 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       return [
         html`
             <article part="element">
-                <header part="label">${this.getLabel()}</header >
+                <header part="label">${this.getLabel()}</header>
                 <section part="value">
-                    <fhir-debug .data=${data}></fhir-debug >
-                </section >
-            </article >
+                    <fhir-debug .data=${data}></fhir-debug>
+                </section>
+            </article>
         `
       ]
     }

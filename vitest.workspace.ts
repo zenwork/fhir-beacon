@@ -1,5 +1,7 @@
 import {defineWorkspace} from 'vitest/config'
 
+const headless = !!process.env.HEADLESS && process.env.HEADLESS === 'true'
+console.log('headless: ', headless)
 
 export default defineWorkspace([
   {
@@ -18,7 +20,7 @@ export default defineWorkspace([
       include: ['src/**/*.spec.ts'],
       browser: {
         enabled: true,
-        headless: !!process.env.HEADLESS,
+        headless: headless,
         name: 'chromium',
         screenshotFailures: true,
         providerOptions: { debugger: true },

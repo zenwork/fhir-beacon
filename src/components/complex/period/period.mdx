@@ -1,0 +1,18 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './period.stories'
+
+<Meta of={Stories}/>
+
+# Period
+
+FHIR spec description in a couple of lines
+
+reference:
+* [ FHIR Reference (R5)](http://hl7.org/fhir/datatypes.html#period)
+
+
+<Canvas of={Stories.Display}/>
+<Canvas of={Stories.Start}/>
+<Canvas of={Stories.End}/>
+<Canvas of={Stories.Structure}/>

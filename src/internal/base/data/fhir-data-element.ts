@@ -6,23 +6,13 @@ import {
 }                                                                                                  from 'lit/decorators.js'
 import {DataContextConsumerController, FhirDataContext}                                            from '../../contexts'
 import {
+  BeaconDataError
+}                                                                                                  from '../../errors/beacon-data-error'
+import {
   DataHandling
 }                                                                                                  from '../DataHandling'
 import {decorated, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
 
-
-export class BeaconDataError implements Error {
-  name: string = 'BeaconDataError'
-
-  message: string
-
-  stack?: string | undefined
-
-  constructor(msg: string) {
-    this.message = msg
-  }
-
-}
 
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.

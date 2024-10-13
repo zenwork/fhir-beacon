@@ -5,7 +5,7 @@ import {classMap}                                   from 'lit/directives/class-m
 import {defaultDisplayConfig, displayConfigContext} from '../../../internal/contexts'
 import {hostStyles}                                 from '../../../styles'
 import {DisplayConfig, DisplayMode}                 from '../../../types'
-import {toBaseElementModeEnum}                      from '../../../utilities'
+import {toDisplayMode} from '../../../utilities'
 import {componentStyles}                            from './structure-wrapper.styles'
 
 /**
@@ -48,7 +48,7 @@ export class StructureWrapper extends LitElement {
   @property({ type: Boolean, reflect: true })
   private summaryonly: boolean = false
 
-  @property({ type: Boolean, reflect: true, converter: toBaseElementModeEnum })
+  @property({ type: Boolean, reflect: true, converter: toDisplayMode })
   private mode: DisplayMode = DisplayMode.structure
 
   protected render(): unknown {

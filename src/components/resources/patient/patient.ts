@@ -16,9 +16,10 @@ export class Patient extends DomainResource<PatientData> {
   }
 
   public renderDisplay(config: DisplayConfig, data: PatientData): TemplateResult[] {
+    console.log(data.managingOrganization)
     return [
       html`
-          ${(wrap('names',
+          ${(wrap('name',
                   'name',
                   data.name,
                   config.verbose,
@@ -28,7 +29,7 @@ export class Patient extends DomainResource<PatientData> {
                   this.summaryonly)
           )}
 
-          ${(wrap('identifiers',
+          ${(wrap('identifier',
                   'identifier',
                   data.identifier,
                   config.verbose,
@@ -39,7 +40,7 @@ export class Patient extends DomainResource<PatientData> {
           ))}
           <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive>
 
-          ${(wrap('telecoms',
+          ${(wrap('telecom',
                   'telecom',
                   data.telecom,
                   config.verbose,
@@ -49,17 +50,18 @@ export class Patient extends DomainResource<PatientData> {
                   this.summaryonly
           ))}
 
-          ${wrap('addresses',
+          ${wrap('address',
                  'address',
                  data.address,
                  config.verbose,
                  (data, label, key) => html`
-                     <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address summary> `,
+                     <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
                  this.summary,
-                 this.summaryonly
+                 this.summaryonly,
+                 true
           )}
           <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
-          ${wrap('contacts',
+          ${wrap('contact',
                  'contact',
                  data.contact,
                  config.verbose,
@@ -70,11 +72,12 @@ export class Patient extends DomainResource<PatientData> {
                                            summary
                      ></fhir-patient-contact summary> `,
                  this.summary,
-                 this.summaryonly
+                 this.summaryonly,
+                 true
           )}
-          ${wrap('communications',
+          ${wrap('communication',
                  'communication',
-                 data.contact,
+                 data.communication,
                  config.verbose,
                  (data, label, key) => html`
                      <fhir-patient-communication key=${key}
@@ -83,9 +86,10 @@ export class Patient extends DomainResource<PatientData> {
                                                  summary
                      ></fhir-patient-communication summary> `,
                  this.summary,
-                 this.summaryonly
+                 this.summaryonly,
+                 true
           )}
-          ${wrap('generalPractitioners',
+          ${wrap('generalPractitioner',
                  'generalPractitioner',
                  data.generalPractitioner,
                  config.verbose,
@@ -97,12 +101,12 @@ export class Patient extends DomainResource<PatientData> {
                  this.summary,
                  this.summaryonly
           )}
-          <fhir-reference key="managingOrganisation"
-                          label="managingOrganisation"
-                          .data=${data.managingOrganisation}
+          <fhir-reference key="managingOrganization"
+                          label="managingOrganization"
+                          .data=${data.managingOrganization}
                           summary
           ></fhir-reference>
-          ${wrap('links',
+          ${wrap('link',
                  'link',
                  data.link,
                  config.verbose,
@@ -271,7 +275,7 @@ export class Patient extends DomainResource<PatientData> {
           )}
           <fhir-reference key="managingOrganisation"
                           label="managingOrganisation"
-                          .data=${data.managingOrganisation}
+                          .data=${data.managingOrganization}
                           summary
           ></fhir-reference>
           ${strap('link',

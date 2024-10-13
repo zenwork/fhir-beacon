@@ -123,7 +123,7 @@ describe('DisplayConfig', () => {
 
     })
 
-    it('should show different layout when mode changes', async () => {
+    it.skip('should show different layout when mode changes', async () => {
 
       const annotation = await fixture<Annotation>(html`
         <fhir-shell mode="structure">

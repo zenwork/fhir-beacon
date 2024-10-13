@@ -4,9 +4,9 @@ import {customElement, property}                    from 'lit/decorators.js'
 import {classMap}                                   from 'lit/directives/class-map.js'
 import {defaultDisplayConfig, displayConfigContext} from '../../../internal'
 import {hostStyles}                                 from '../../../styles'
-import {DisplayConfig, DisplayMode}                 from '../../../types'
-import {toBaseElementModeEnum}                      from '../../../utilities'
-import {componentStyles}                            from './wrapper-styles'
+import {DisplayConfig, DisplayMode}                from '../../../types'
+import {toDisplayMode}                             from '../../../utilities'
+import {componentStyles}                           from './wrapper-styles'
 
 
 /**
@@ -34,7 +34,7 @@ export class Wrapper extends LitElement {
   @property({ type: Boolean, reflect: true })
   public open: boolean = false
 
-  @property({ type: DisplayMode, reflect: true, converter: toBaseElementModeEnum })
+  @property({ type: DisplayMode, reflect: true, converter: toDisplayMode })
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
@@ -54,7 +54,9 @@ export class Wrapper extends LitElement {
       return html`
           <div class='base ${classMap(borderClasses)}'>
               ${this.hidelabel ? nothing : this.generateLabel()}
+              <div id="list">
               <slot class="${classMap({ content: !this.hidelabel })}"></slot >
+              </div>
           </div >
       `
     }

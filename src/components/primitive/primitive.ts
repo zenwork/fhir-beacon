@@ -4,9 +4,9 @@ import {customElement, property, state}                                 from 'li
 import {choose}                                             from 'lit/directives/choose.js'
 import {dataContext, displayConfigContext, FhirDataContext} from '../../internal/contexts'
 import {textHostStyles}                                     from '../../styles'
-import {DisplayConfig, DisplayMode}                                     from '../../types'
-import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
-import {mustRender}                                                     from '../mustRender'
+import {DisplayConfig, DisplayMode}                         from '../../types'
+import {isBlank, toDisplayMode}                             from '../../utilities'
+import {mustRender}                                         from '../mustRender'
 import {DateTime}                                                       from './primitive.data'
 import {
   toBase64,
@@ -95,7 +95,7 @@ export class Primitive extends LitElement {
   @property({ type: Boolean, reflect: true })
   public showProvided: boolean = false
 
-  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })

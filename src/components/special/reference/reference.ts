@@ -152,7 +152,7 @@ export class Reference extends BaseElement<ReferenceData> {
 
       if (isContainedRef) this.referenceType = ReferenceType.contained
 
-      if (this.containedData.length > 0) {
+      if (this.containedData && this.containedData.length > 0) {
         const containedDataExists = this.containedData.length > 0
 
         if (isContainedRef && containedDataExists) {

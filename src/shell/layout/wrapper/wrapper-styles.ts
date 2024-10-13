@@ -4,7 +4,7 @@ export const componentStyles = css`
 
   .base {
     background: none;
-    padding: 0 0 0 0.3rem;
+    padding: 0 0 0 0;
   }
 
   label {
@@ -13,6 +13,9 @@ export const componentStyles = css`
     font-style: oblique;
   }
 
+  #list {
+    /*padding: 0 0 0 var(--sl-spacing-x-small);*/
+  }
 
   #arrow {
     color: var(--sl-color-gray-300);

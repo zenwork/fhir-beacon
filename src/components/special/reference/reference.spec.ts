@@ -26,4 +26,23 @@ describe('Reference', () => {
     expect(err).toHaveTextContent('ref-1: Does not have a contained resource when reference starts with #')
 
   })
+
+  it('should pass when only reference and display is present', async () => {
+
+    const data = { reference: 'Organization/f201', display: 'AUMC' }
+
+    const el = await fixture<Reference>(html`
+        <fhir-shell showerror>
+            <fhir-reference .data=${data}></fhir-reference>
+        </fhir-shell>
+    `, 'fhir-reference').first()
+
+    await aTimeout()
+
+    const value: HTMLElement = el.queryShadow({ select: ['fhir-value', 'div'] })
+    expect(value).toContainHTML('<a href="Organization/f201"')
+    expect(value).toHaveTextContent('AUMC')
+
+
+  })
 })

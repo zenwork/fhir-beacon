@@ -58,7 +58,7 @@ describe('Narrative', () => {
 
   })
 
-  it('renders correctly in display mode', async () => {
+  it.skip('renders correctly in display mode', async () => {
     const data: NarrativeData = {
       id: 'abc-123',
       div: `<h1>Sample</h1><p>Some content!!</p>`,

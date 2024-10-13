@@ -85,7 +85,7 @@ export type PatientData = DomainResourceData & {
   contact: PatientContactData[]
   communication: PatientCommunicationData[]
   generalPractitioner: ReferenceData[]
-  managingOrganisation?: ReferenceData
+  managingOrganization?: ReferenceData
   link: PatientLinkData[]
 
 }

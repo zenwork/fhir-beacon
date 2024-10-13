@@ -3,7 +3,6 @@ import {map}                  from 'lit/directives/map.js'
 import {asReadable}           from '../../../components'
 import {hasMany, hasOnlyOne}  from '../directives'
 import {pluralize}            from '../pluralize'
-import {show}                 from '../show'
 
 /**
  * Wraps a collection of items with a `<fhir-wrapper>` component.
@@ -24,7 +23,8 @@ export function wrap<T>(key: string,
                         verbose: boolean,
                         generator: { (data: T, label: string, key: string): TemplateResult },
                         summary: boolean = true,
-                        summaryMode: boolean = false
+                        summaryMode: boolean = false,
+                        force: boolean = false
 ): TemplateResult {
   if (!summaryMode || summaryMode && summary) {
     const k = asReadable(key, 'lower')
@@ -37,32 +37,37 @@ export function wrap<T>(key: string,
         return html`
             <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
                 ${map(collection,
-                      (data: T, index: number) => html`
-                          <fhir-wrapper
-                                  label="${label} ${show(index + 1)}"
-                                  variant="primary"
-                                  ?summary=${summary}
-                          >
+                      (data: T) => html`
                               ${generator(data, pluralBase, key)}
-                          </fhir-wrapper >
                       `)}
-            </fhir-wrapper >
+            </fhir-wrapper>
         `
       }
 
       return html`
           <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
               ${map(collection,
-                    (data: T, index: number) => html`
-                        <fhir-wrapper
-                                label="${show(index + 1)}"
-                                variant="primary"
-                                ?summary=${summary}
-                        >
-                            ${generator(data, pluralBase, key)}
-                        </fhir-wrapper >
+                    (data: T) => html`
+
+                        ${generator(data, pluralBase, key)}
                     `)}
-          </fhir-wrapper >
+          </fhir-wrapper>
+      `
+    }
+
+    if (hasOnlyOne(collection) && force) {
+      if (verbose) {
+        return html`
+            <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+                ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
+            </fhir-wrapper>
+        `
+      }
+
+      return html`
+          <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+              ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
+          </fhir-wrapper>
       `
     }
 
@@ -75,5 +80,7 @@ export function wrap<T>(key: string,
       return generator(collection[0], label, k)
     }
   }
+
+
   return html``
 }

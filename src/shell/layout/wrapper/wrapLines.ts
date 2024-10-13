@@ -41,7 +41,7 @@ export function wrapLines<T>(key: string,
 
       return html`
           <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
-              ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+              ${map(collection, (data: T) => generator(data, '', key))}
           </fhir-wrapper >
       `
     }

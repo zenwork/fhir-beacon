@@ -3,3 +3,4 @@
 export * from './wrap'
 export * from './wrapLines'
 export * from './wrapper'
+export * from './wrapper2'
