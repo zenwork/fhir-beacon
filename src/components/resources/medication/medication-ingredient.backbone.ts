@@ -18,8 +18,9 @@ export class MedicationIngredientBackbone extends Backbone<MedicationIngredientD
     return [
       html`
           <fhir-wrapper-2 label="${this.getLabel()}"
-                        ?summary=${this.summary}
-                        ?hidelabel=${this.headless}
+                          ?summary=${this.summary}
+                          ?headless=${this.headless}
+                          ?open=${this.open}
           >
               <fhir-codeable-reference key="${this.key}/item" .data=${data.item}></fhir-codeable-reference>
               <fhir-primitive key="${this.key}/isActive" .type=${none} .value=${data.isActive}></fhir-primitive>

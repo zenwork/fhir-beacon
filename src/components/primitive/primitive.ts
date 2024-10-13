@@ -48,6 +48,15 @@ export class Primitive extends LitElement {
         user-select: text;
       }
 
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        align-items: baseline;
+        padding: 0;
+        margin: 0;
+      }
+
       sl-badge {
         padding-left: var(--sl-spacing-x-small);
       }
@@ -255,10 +264,10 @@ export class Primitive extends LitElement {
           ></fhir-context>`)
 
     if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
-        <sl-badge pill>&sum;</sl-badge>`)
+        <fhir-badge-group badge-summary></fhir-badge-group>`)
 
     return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
-        <fhir-primitive-wrapper> ${elements}</fhir-primitive-wrapper>` : html``
+        <li> ${elements}</li>` : html``
   }
 
   /**
@@ -281,17 +290,25 @@ export class Primitive extends LitElement {
 
     return !isBlank(this.value) || this.verbose || this.required
            ? html`
-                <fhir-primitive-wrapper>
-                    <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label>&nbsp;
-                    <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value>
-                                                                                                                  ${this.showerror
-                                                                                                                    ? html`
-                                                                                                                              <fhir-error
-                                                                                                                                      text=${errors.join(
-                                                                                                                                              ' | ')}
-                                                                                                                              ></fhir-error>`
-                                                                                                                    : nothing}
-                </fhir-primitive-wrapper>`
+                <li>
+                    <fhir-label
+                            text=${this.getLabel()}
+                            delimiter=${this.delimiter}
+                            variant="error"
+                    ></fhir-label>&nbsp;
+                    <fhir-value
+                            text=${this.value}
+                            link=${this.link}
+                            variant="error"
+                    ></fhir-value>
+                                  ${this.showerror
+                                    ? html`
+                                              <fhir-error
+                                                      text=${errors.join(
+                                                              ' | ')}
+                                              ></fhir-error>`
+                                    : nothing}
+                </li>`
            : html``
   }
 

@@ -14,14 +14,16 @@ import {show}                 from '../show'
  * @param generator
  * @param summary
  * @param summaryMode
+ * @param open
  */
-export function strap<T>(key: string,
-                         pluralBase: string,
-                         collection: T[],
-                         verbose: boolean,
-                         generator: { (data: T, label: string, key: string): TemplateResult },
-                         summary: boolean = true,
-                         summaryMode: boolean = false
+export function strap<T extends Record<any, any>>(key: string,
+                                                  pluralBase: string,
+                                                  collection: T[],
+                                                  verbose: boolean,
+                                                  generator: { (data: T, label: string, key: string): TemplateResult },
+                                                  summary: boolean = true,
+                                                  summaryMode: boolean = false,
+                                                  open: boolean = false
 ): TemplateResult {
   if (!summaryMode || summaryMode && summary) {
     const plural = pluralize(pluralBase)
@@ -31,14 +33,14 @@ export function strap<T>(key: string,
     if (hasMany(collection)) {
       if (verbose) {
         return html`
-            <fhir-wrapper-2 label="${plural}" variant="details" ?summary=${summary}>
+            <fhir-wrapper-2 label="${plural}" variant="details" ?summary=${summary} ?open=${open}>
                 ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
             </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}" variant="details" ?summary=${summary}>
+          <fhir-wrapper-2 label="${plural}" variant="details" ?summary=${summary} ?open=${open}>
               ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
           </fhir-wrapper-2>
       `
@@ -46,7 +48,7 @@ export function strap<T>(key: string,
 
     if (hasOnlyOne(collection)) {
       return html`
-          <fhir-wrapper-2 label="${k}" variant="details" ?summary=${summary}>
+          <fhir-wrapper-2 label="${k}" variant="details" ?summary=${summary} ?open=${open}>
               ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
           </fhir-wrapper-2>
       `
@@ -55,8 +57,8 @@ export function strap<T>(key: string,
 
     if (verbose) {
       return html`
-          <fhir-wrapper-2 label="${label}" ?hide=${summary}>
-              <fhir-empty-list ></fhir-empty-list >
+          <fhir-wrapper-2 label="${label}" ?headless=${summary} ?open=${open}>
+              <fhir-empty-list></fhir-empty-list>
           </fhir-wrapper-2>`
     }
   }

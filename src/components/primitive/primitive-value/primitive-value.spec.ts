@@ -66,11 +66,10 @@ describe('fhir primitive value', () => {
       </fhir-value >
     `).first()
 
-
     const before = el.queryShadowNamedSlot('before')[0]
     expect(before).toHaveTextContent(`over`)
 
-    expect.element(el.renderRoot as Element).toHaveTextContent('100')
+    expect(el.shadowRoot).toHaveTextContent('100')
 
     const after = el.queryShadowNamedSlot('after')[0]
     expect(after).toHaveTextContent(`percent`)

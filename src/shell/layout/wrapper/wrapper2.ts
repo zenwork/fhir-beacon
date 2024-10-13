@@ -23,6 +23,9 @@ export class Wrapper2 extends LitElement {
   @property({ type: String })
   public label: string = ''
 
+  @property({ type: Boolean })
+  public headless: boolean = false
+
   @property({ type: String, attribute: 'badge-resource' })
   public badgeResource: string = ''
 
@@ -50,19 +53,19 @@ export class Wrapper2 extends LitElement {
       let content: TemplateResult
 
       const arrow = this.variant === 'details' ? nothing : html`<span id="arrow">&#x21B4;</span>`
-      const label = this.label
+      const label = (this.label && !this.headless)
                     ? html`<label for="${this.key}"
                                   class=${classMap({ 'variant-error-label': (this.variant === 'error') })}
               >${this.label}${arrow}</label>`
-                    : arrow
+                    : nothing
 
       switch (this.variant) {
         case 'none':
           content = html`
               ${label}
-              <div id=${this.key} class="items">
+              <ol id=${this.key} class="items">
                   <slot id="${this.key}"></slot>
-              </div>
+              </ol>
           `
           break
         case 'details': {
@@ -80,9 +83,9 @@ export class Wrapper2 extends LitElement {
           content = html`
               <sl-details class="custom-icons" ?open=${this.open}>
                   ${summary}
-                  <div id=${this.key} class="details_items">
+                  <ol id=${this.key} class="details_items">
                       <slot></slot>
-                  </div>
+                  </ol>
               </sl-details>
           `
           break
@@ -100,9 +103,9 @@ export class Wrapper2 extends LitElement {
       }
 
       return html`
-          <div id="wrapped" part="wrapped">
+          <section id="wrapped" part="wrapped">
               ${content}
-          </div>
+          </section>
       `
     }
 

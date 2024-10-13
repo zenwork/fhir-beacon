@@ -51,7 +51,7 @@ export class Substance extends DomainResource<SubstanceData> {
         <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive >
         ${data.category || this.verbose
           ? html`
-                    <fhir-wrapper-2 label="categories" variant="details" ?hide=${data.category?.length > 1}>
+                    <fhir-wrapper-2 label="categories" variant="details" ?headless=${data.category?.length > 1}>
                         ${data.category
                           ? map(data.category, (c) => {
                                     return html`

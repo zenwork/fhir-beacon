@@ -10,7 +10,7 @@ describe('Wrapper2', () => {
         <fhir-wrapper-2></fhir-wrapper-2>
     `).first()
 
-    const wrapped = el.queryShadow({ select: 'div', expect: 1 })
+    const wrapped = el.queryShadow({ select: 'ol', expect: 1 })
     expect(wrapped).toHaveTextContent('')
 
   })
@@ -37,7 +37,7 @@ describe('Wrapper2', () => {
   it('should display different in structure mode', async () => {
 
     const el = await fixture<Wrapper2>(html`
-        <fhir-wrapper-2 mode="structure" label='foobar'>
+        <fhir-wrapper-2 variant="details" label='foobar'>
             <div>a</div>
         </fhir-wrapper-2>
     `).first()

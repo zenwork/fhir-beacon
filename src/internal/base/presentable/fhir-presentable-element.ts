@@ -236,8 +236,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           templates.push(html`
               <fhir-wrapper-2
                       .label=${this.getLabel()}
-                      badge-resource=${asReadable(this.type)}
-                      ?badge-summary=${this.summary}
+                      ?summary=${this.summary}
               >
 
                   ${this.templateGenerators
@@ -296,13 +295,14 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                             new ValidationsImpl(this.extendedData))).flat()}
             `)
           } else {
-
+            console.log(this.type, this.open)
             templates.push(html`
                 <fhir-wrapper-2 variant="details"
                                 label=${this.getLabel()}
                                 badge-resource=${asReadable(this.type)}
                                 ?open=${this.open}
                                 ?badge-summary=${this.summary}
+                                ?summary=${this.summary}
                 >
                     <div class="frontmatter">
                         ${this.templateGenerators.structure
