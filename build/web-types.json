@@ -2819,8 +2819,11 @@
           "doc-url": "",
           "attributes": [
             {
-              "name": "details",
-              "value": { "type": "boolean", "default": "false" }
+              "name": "variant",
+              "value": {
+                "type": "'none' | 'details' | 'error'",
+                "default": "'none'"
+              }
             },
             {
               "name": "key",
@@ -2842,18 +2845,28 @@
             {
               "name": "open",
               "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
             }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "details", "type": "boolean" },
+              { "name": "variant", "type": "'none' | 'details' | 'error'" },
               { "name": "key", "type": "string" },
               { "name": "label", "type": "string" },
               { "name": "badgeResource", "type": "string" },
               { "name": "badgeSummary", "type": "boolean" },
               { "name": "badgeConstraint", "type": "boolean" },
-              { "name": "open", "type": "boolean" }
+              { "name": "open", "type": "boolean" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" }
             ],
             "events": []
           }

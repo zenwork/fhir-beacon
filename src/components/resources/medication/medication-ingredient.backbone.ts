@@ -17,8 +17,7 @@ export class MedicationIngredientBackbone extends Backbone<MedicationIngredientD
   public renderDisplay(config: DisplayConfig, data: MedicationIngredientData): TemplateResult[] {
     return [
       html`
-          <fhir-wrapper label="${this.getLabel()}"
-                        variant="primary"
+          <fhir-wrapper-2 label="${this.getLabel()}"
                         ?summary=${this.summary}
                         ?hidelabel=${this.headless}
           >
@@ -33,7 +32,7 @@ export class MedicationIngredientBackbone extends Backbone<MedicationIngredientD
                              label="strength"
                              .data=${data.strengthQuantity}
               ></fhir-quantity>
-          </fhir-wrapper>
+          </fhir-wrapper-2>
       `
     ]
   }

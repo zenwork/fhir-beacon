@@ -7,7 +7,7 @@ export type MetaData = FhirElementData & {
   lastUpdated?: Instant
   source?: URI
   profile: Canonical[]
-  security?: CodingData[],
-  tag?: CodingData[]
+  security: CodingData[],
+  tag: CodingData[]
 
 }

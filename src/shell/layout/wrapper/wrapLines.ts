@@ -33,16 +33,16 @@ export function wrapLines<T>(key: string,
       if (verbose) {
         label = k + (k ? '/' : '') + label
         return html`
-            <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+            <fhir-wrapper-2 label="${pluralize(label)}" ?summary=${summary}>
                 ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
-            </fhir-wrapper >
+            </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper label="${pluralize(label)}" variant="primary" ?summary=${summary}>
+          <fhir-wrapper-2 label="${pluralize(label)}" ?summary=${summary}>
               ${map(collection, (data: T) => generator(data, '', key))}
-          </fhir-wrapper >
+          </fhir-wrapper-2>
       `
     }
     if (hasOnlyOne(collection)) {
@@ -66,9 +66,9 @@ export function wrapLines<T>(key: string,
     if (verbose) {
       label = k + (k ? '/' : '') + label
       return html`
-          <fhir-wrapper label="${k} > ${label}">
+          <fhir-wrapper-2 label="${k} > ${label}">
               <fhir-empty-list ></fhir-empty-list >
-          </fhir-wrapper >`
+          </fhir-wrapper-2>`
     }
   }
   return html``

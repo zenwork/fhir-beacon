@@ -35,39 +35,39 @@ export function wrap<T>(key: string,
       if (verbose) {
         plural = k + (k ? '/' : '') + plural
         return html`
-            <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+            <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
                 ${map(collection,
                       (data: T) => html`
                               ${generator(data, pluralBase, key)}
                       `)}
-            </fhir-wrapper>
+            </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+          <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
               ${map(collection,
                     (data: T) => html`
 
                         ${generator(data, pluralBase, key)}
                     `)}
-          </fhir-wrapper>
+          </fhir-wrapper-2>
       `
     }
 
     if (hasOnlyOne(collection) && force) {
       if (verbose) {
         return html`
-            <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+            <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
                 ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-            </fhir-wrapper>
+            </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-wrapper label="${plural}" variant="primary" ?summary=${summary}>
+          <fhir-wrapper-2 label="${plural}" ?summary=${summary}>
               ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-          </fhir-wrapper>
+          </fhir-wrapper-2>
       `
     }
 

@@ -51,9 +51,9 @@ export class Reference extends BaseElement<ReferenceData> {
                               value=${this.mappedResource?.resourceType || 'contained'}
                               summary
                       ></fhir-primitive >
-                      <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
+                      <fhir-wrapper-2 label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
                           ${renderResourceComponent(this.mappedResource, this.getDisplayConfig())}
-                      </fhir-wrapper >
+                      </fhir-wrapper-2>
 
                   `
               ],

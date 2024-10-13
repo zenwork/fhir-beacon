@@ -51,7 +51,7 @@ export class Substance extends DomainResource<SubstanceData> {
         <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive >
         ${data.category || this.verbose
           ? html`
-                    <fhir-structure-wrapper label="categories" ?hide=${data.category?.length > 1}>
+                    <fhir-wrapper-2 label="categories" variant="details" ?hide=${data.category?.length > 1}>
                         ${data.category
                           ? map(data.category, (c) => {
                                     return html`
@@ -59,7 +59,7 @@ export class Substance extends DomainResource<SubstanceData> {
                                 })
                           : html`
                                     <fhir-empty-list ></fhir-empty-list >`}
-                    </fhir-structure-wrapper >
+                    </fhir-wrapper-2>
                 `
           : nothing}
         <fhir-codeable-reference label="code" .data=${data.code} summary></fhir-codeable-reference >
@@ -68,7 +68,7 @@ export class Substance extends DomainResource<SubstanceData> {
         <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity >
         ${data.ingredient || this.verbose
           ? html`
-                    <fhir-structure-wrapper label="ingredients" ?open=${this.open} summary>
+                    <fhir-wrapper-2 label="ingredients" ?open=${this.open} summary>
                         ${data.ingredient
                           ? map(data.ingredient, (ing) => html`
                                     <fhir-substance-ingredient
@@ -77,7 +77,7 @@ export class Substance extends DomainResource<SubstanceData> {
                                     ></fhir-substance-ingredient > `)
                           : html`
                                     <fhir-empty-list ></fhir-empty-list >`}
-                    </fhir-structure-wrapper >
+                    </fhir-wrapper-2>
                 `
           : nothing}
       `

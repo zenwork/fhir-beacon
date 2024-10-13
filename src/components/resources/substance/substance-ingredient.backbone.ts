@@ -35,10 +35,10 @@ export class SubstanceIngredientBackbone extends BaseElement<SubstanceIngredient
 
     return [
       html`
-        <fhir-wrapper .label=${this.label}>
+          <fhir-wrapper-2 .label=${this.label}>
             ${substance}
             <fhir-ratio label="quantity" .data=${data.quantity}></fhir-ratio >
-        </fhir-wrapper >
+          </fhir-wrapper-2>
       `
     ]
   }

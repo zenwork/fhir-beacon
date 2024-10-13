@@ -1,6 +1,7 @@
 import {FhirElementData} from '../../../internal'
 import {BackboneElementData}              from '../../../internal/resource/backbone.data'
 import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
+import {AttachmentData}  from '../../complex'
 import {AnnotationData}                   from '../../complex/annotation/annotation.data'
 import {CodeableConceptData}              from '../../complex/codeable-concept/codeable-concept.data'
 import {IdentifierData}                   from '../../complex/identifier/identifier.data'
@@ -23,8 +24,7 @@ import {
   UnsignedInt
 } from '../../primitive/primitive.data'
 
-import {ReferenceData}  from '../../special/reference/reference.data'
-import {AttachmentData} from '../patient/patient.data'
+import {ReferenceData} from '../../special/reference/reference.data'
 
 
 type BoundDuration = QuantityData //TODO: should be constrained to a duration: https://www.hl7.org/fhir/datatypes.html#Duration

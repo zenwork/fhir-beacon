@@ -234,10 +234,10 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                              new ValidationsImpl(this.extendedData))).flat())
         } else {
           templates.push(html`
-              <fhir-wrapper
+              <fhir-wrapper-2
                       .label=${this.getLabel()}
-                      .fhirType=${asReadable(this.type)}
-                      ?summary=${this.summary}
+                      badge-resource=${asReadable(this.type)}
+                      ?badge-summary=${this.summary}
               >
 
                   ${this.templateGenerators
@@ -251,7 +251,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                               this.getDisplayConfig(),
                                               this.extendedData,
                                               new ValidationsImpl(this.extendedData))).flat()}
-              </fhir-wrapper>
+              </fhir-wrapper-2>
           `)
         }
         break
@@ -298,12 +298,11 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           } else {
 
             templates.push(html`
-                <fhir-structure-wrapper
-                        .label=${this.getLabel()}
-                        .resourceId=${this.extendedData?.id ?? ''}
-                        .fhirType=${asReadable(this.type)}
-                        ?forceclose=${this.forceclose}
-                        ?summary=${this.summary}
+                <fhir-wrapper-2 variant="details"
+                                label=${this.getLabel()}
+                                badge-resource=${asReadable(this.type)}
+                                ?open=${this.open}
+                                ?badge-summary=${this.summary}
                 >
                     <div class="frontmatter">
                         ${this.templateGenerators.structure
@@ -317,7 +316,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                                 this.getDisplayConfig(),
                                                 this.extendedData,
                                                 new ValidationsImpl(this.extendedData))).flat()}
-                </fhir-structure-wrapper>
+                </fhir-wrapper-2>
             `)
           }
         }

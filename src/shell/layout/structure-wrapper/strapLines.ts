@@ -29,25 +29,25 @@ export function strapLines(key: string,
     if (hasSome(collection)) {
       if (verbose) {
         return html`
-            <fhir-structure-wrapper label="${label}" variant="primary" ?summary=${summary}>
+            <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary}>
                 ${map(collection, (data: string, index: number) => generator(data, label + ' ' + show(index + 1), key))}
-            </fhir-structure-wrapper >
+            </fhir-wrapper-2>
         `
       }
 
       return html`
-          <fhir-structure-wrapper label="${label}" variant="primary" ?summary=${summary}>
+          <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary}>
               ${map(collection, (data: string, index: number) => generator(data, show(index + 1), key))}
-          </fhir-structure-wrapper >
+          </fhir-wrapper-2>
       `
     }
 
 
     if (verbose) {
       return html`
-          <fhir-wrapper label="${k} > ${label}">
+          <fhir-wrapper-2 label="${k} > ${label}">
               <fhir-empty-list ></fhir-empty-list >
-          </fhir-wrapper >`
+          </fhir-wrapper-2>`
     }
   }
   return html``

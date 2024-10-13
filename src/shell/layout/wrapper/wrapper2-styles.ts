@@ -10,7 +10,8 @@ export const componentStyles = css`
 
 
   label {
-    font-weight: bold;
+    font-style: italic;
+    font-weight: 500;
     color: var(--sl-color-primary-700);
     margin-right: 0.5rem;
   }
@@ -71,6 +72,21 @@ export const componentStyles = css`
   sl-details.custom-icons::part(summary-icon) {
     /* Disable the expand/collapse animation */
     rotate: none;
+  }
+
+  .variant-error-label {
+    color: var(--sl-color-neutral-50);
+    font-weight: normal;
+    background-color: var(--sl-color-red-300);
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  .variant-error {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--sl-color-red-100);
+    border-radius: 0.5rem;
   }
 
 
