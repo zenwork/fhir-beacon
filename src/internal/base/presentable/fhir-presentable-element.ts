@@ -295,7 +295,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                             new ValidationsImpl(this.extendedData))).flat()}
             `)
           } else {
-            console.log(this.type, this.open)
             templates.push(html`
                 <fhir-wrapper-2 variant="details"
                                 label=${this.getLabel()}
