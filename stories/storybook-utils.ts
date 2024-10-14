@@ -9,6 +9,7 @@ export type ShellArgs = {
   showerror?: boolean,
   open?: boolean,
   summaryonly?: boolean
+  headless?: boolean,
 }
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -63,6 +64,16 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
   },
   showerror: {
     description: 'display detailed error messages',
+    options: [false, true], control: { type: 'boolean' },
+    defaultValue: false,
+    table: {
+      type: { summary: 'boolean' },
+      // @ts-ignore
+      defaultValue: { summary: false }
+    }
+  },
+  headless: {
+    description: 'do not display the element header',
     options: [false, true], control: { type: 'boolean' },
     defaultValue: false,
     table: {

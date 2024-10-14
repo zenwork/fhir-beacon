@@ -7,7 +7,7 @@ const meta = {
   title: 'Components/Datatypes/Complex Type/Ratio',
   component: 'fhir-ratio',
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-ratio .data=${args.data}></fhir-ratio >`)
+      <fhir-ratio .data=${args.data} summary ?headless=${args.headless}></fhir-ratio>`)
 
 }
 
@@ -27,7 +27,8 @@ export const SimpleRatio: Story = {
     mode: 'display',
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 
@@ -50,6 +51,7 @@ export const UnitCost: Story = {
     mode: 'display',
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }

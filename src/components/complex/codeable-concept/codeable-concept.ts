@@ -20,12 +20,11 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                       'coding',
                       data.coding ?? [],
                       this.verbose,
-                      (data, label) => html`
-                          <fhir-coding key="coding" .label=${label} .data=${data} summary></fhir-coding>`,
+                      (data, label, key) => html`
+                          <fhir-coding key=${key} .label=${label} .data=${data} summary headless></fhir-coding>`,
                       true,
                       this.summaryonly
           )}
-
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`
     ]
 

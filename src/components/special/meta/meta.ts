@@ -53,7 +53,12 @@ export class Meta extends BaseElement<MetaData> {
                      pluralBase: 'tag',
                      collection: data.tag,
                      generator: (d, l, k) => html`
-                     <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
+                         <fhir-coding key=${k}
+                                      label=${l}
+                                      .data=${d}
+                                      summary
+                                      ?headless=${data.tag.length === 1}
+                         ></fhir-coding> `,
                      summary: this.summary,
                      config
                  })}

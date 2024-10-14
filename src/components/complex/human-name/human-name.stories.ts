@@ -11,7 +11,7 @@ const meta = {
   title: path,
   component: elementName,
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-human-name .data=${args.data} summary></fhir-human-name >`)
+      <fhir-human-name .data=${args.data} summary ?headless=${args.headless}></fhir-human-name>`)
 }
 
 export default meta
@@ -20,13 +20,15 @@ type Story = StoryObj<ShellArgs>;
 
 export const Display: Story = {
   args: {
-    data
+    data,
+    headless: true
   }
 }
 
 export const Display2: Story = {
   args: {
-    data: data3
+    data: data3,
+    headless: true
   }
 }
 

@@ -15,11 +15,11 @@ const meta: Meta<CustomArgs> = {
   title: 'Components/Datatypes/Complex Type/Coding',
   component: 'fhir-shell',
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-coding .data=${args.data} summary></fhir-coding >`)
+      <fhir-coding .data=${args.data} summary ?headless=${args.headless}></fhir-coding>`)
 }
 
 export default meta
-type Story = StoryObj<CustomArgs>;
+type Story = StoryObj<ShellArgs>;
 
 export const DisplayableValue: Story = {
   args: {
@@ -27,7 +27,8 @@ export const DisplayableValue: Story = {
       system: 'http://hl7.org/fhir/sid/icd-10',
       code: 'G44.1',
       display: 'Vascular headache, not elsewhere classified'
-    }
+    },
+    headless: true
   }
 }
 
@@ -36,7 +37,8 @@ export const NoDisplayableValue: Story = {
     data: {
       system: 'http://hl7.org/fhir/sid/icd-10',
       code: 'G44.1'
-    }
+    },
+    headless: true
   }
 }
 

@@ -8,7 +8,7 @@ const meta = {
   component: 'fhir-shell',
   subcomponents: ['fhir-identifier'],
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-identifier .data=${args.data} summary></fhir-identifier >`)
+      <fhir-identifier .data=${args.data} summary ?headless=${args.headless}></fhir-identifier>`)
 }
 
 export default meta
@@ -20,7 +20,8 @@ export const PatientIdentifier: Story = {
     mode: 'display',
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 export const HospitalPatientIdentifier: Story = {

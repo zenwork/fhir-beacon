@@ -19,7 +19,7 @@ type Choice<C> = { data: any, html: (data: any, name: string, error: string | un
 export function choiceOf<C extends BaseElement<any>>(contextElement: C,
                                                      name: string,
                                                      error: string | undefined,
-                                                     choices: Choice<C>[]): TemplateResult | TemplateResult[] {
+                                                     choices: Choice<C>[]): TemplateResult[] {
 
   const templateResults: TemplateResult[] = []
 
@@ -32,12 +32,13 @@ export function choiceOf<C extends BaseElement<any>>(contextElement: C,
 
   // return result if only one choice is present
   if (templateResults.length === 1) {
-    return templateResults[0]
+    return templateResults
   }
 
   // return all results and error messages if showerror is set
   if (contextElement.showerror && templateResults.length > 1) {
-    return html`
+    return [
+      html`
         <fhir-wrapper-2 .label=
                         ${'too many values'}
                         variant='error'
@@ -47,6 +48,7 @@ export function choiceOf<C extends BaseElement<any>>(contextElement: C,
             ${html`
                 <fhir-error text="${'only one of the above should be present'}"></fhir-error>`}
         </fhir-wrapper-2>`
+    ]
   }
 
   // otherwise return all results

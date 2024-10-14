@@ -12,7 +12,10 @@ export const data = {
       }
     ],
     text: 'general headache'
-  },
+  }
+}
+
+export const data2 = {
   reference: {
     reference: '/Observation/id1234',
     type: 'Observation',

@@ -8,7 +8,11 @@ const meta: Meta<ShellArgs> = {
   subcomponents: { codeableConcept: 'fhir-codeable-concept' },
   ...renderTemplateInShell(
     (args: ShellArgs) => html`
-        <fhir-codeable-concept .data=${args.data} summary></fhir-codeable-concept >`)
+        <fhir-codeable-concept label="codeable concept"
+                               .data=${args.data}
+                               summary
+                               ?headless=${args.headless}
+        ></fhir-codeable-concept>`)
 
 }
 
@@ -30,7 +34,8 @@ export const SimpleHeadacheCode: Story = {
         }
       ],
       text: 'general headache'
-    }
+    },
+    headless: true
   }
 }
 

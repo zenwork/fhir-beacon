@@ -51,9 +51,9 @@ export function wrap<T>({
       return html`
           <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
               ${map(collection,
-                    (data: T) => html`
+                    (data: T, idx) => html`
 
-                        ${generator(data, pluralBase, key)}
+                        ${generator(data, `${idx + 1}`, key)}
                     `)}
           </fhir-wrapper-2>
       `
@@ -62,16 +62,16 @@ export function wrap<T>({
     if (hasOnlyOne(collection)) {
       if (config.verbose) {
         return html`
-            <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
-                ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-            </fhir-wrapper-2>
+
+            ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
+
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
-              ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-          </fhir-wrapper-2>
+
+          ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
+
       `
     }
 

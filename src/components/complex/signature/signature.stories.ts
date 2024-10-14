@@ -13,7 +13,7 @@ const meta: Meta<ShellArgs> = {
   component: elementName,
   subcomponents,
   ...renderTemplateInShell((args) => html`
-      <fhir-signature .data=${args.data} summary></fhir-signature >`)
+      <fhir-signature .data=${args.data} summary ?headless=${args.headless}></fhir-signature>`)
 }
 
 export default meta
@@ -25,7 +25,8 @@ export const Display: Story = {
     mode: 'display',
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 

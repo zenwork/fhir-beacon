@@ -19,15 +19,16 @@ export class Medication extends DomainResource<MedicationData> {
           <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
           <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive>
           <fhir-reference key="marketingAuthorizationHolder"
+                          label="marketing authorization holder"
                           .data=${data.marketingAuthorizationHolder}
                           summary
           ></fhir-reference>
-          <fhir-codeable-concept key="doseForm" .data=${data.doseForm}></fhir-codeable-concept>
-          <fhir-quantity key="totalVolume" .data=${data.totalVolume} summary></fhir-quantity>
+          <fhir-codeable-concept key="doseForm" label="dose form" .data=${data.doseForm}></fhir-codeable-concept>
+          <fhir-quantity key="totalVolume" label="total volume" .data=${data.totalVolume} summary></fhir-quantity>
 
           ${data.ingredient
             ? wrap({
-                       key: 'ingredients',
+                       key: 'ingredient',
                        pluralBase: 'ingredient',
                        collection: data.ingredient,
                        generator: (d, label, key) => html`
