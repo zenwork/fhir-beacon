@@ -1,80 +1,80 @@
 name: CI
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - '*'
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
 
 permissions:
-    contents: read
-    pages: write
-    id-token: write
-    checks: write
+  contents: read
+  pages: write
+  id-token: write
+  checks: write
 
 jobs:
-    publish:
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-latest
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
 
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            -   name: Instasll Deps (Cached)
-                uses: actions/setup-node@v4
-                with:
-                    node-version: 21
-                    cache: 'npm'
-            -   run: npm ci
+      - name: Install Deps (Cached)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+          cache: 'npm'
+      - run: npm ci
 
-            -   name: Use playwright binaries cache
-                uses: actions/cache@v3
-                id: playwright-cache
-                with:
-                    path: |
-                        ~/.cache/ms-playwright
-                    key: ${{ runner.os }}-playwright-latest
+      - name: Use playwright binaries cache
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-latest
 
-            -   if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
-                name: Install playwright browsers
-                run: npx playwright install --with-deps
+      - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
+        name: Install playwright browsers
+        run: npx playwright install --with-deps
 
-            -   name: Run tests
-                run: npm run vitest
+      - name: Run tests
+        run: npm run vitest
 
-            -   name: Publish
-                run: npm run publish
+      - name: Publish
+        run: npm run publish
 
-            -   name: Setup Pages
-                uses: actions/configure-pages@v5
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-            -   name: Upload artifact
-                uses: actions/upload-pages-artifact@v3
-                with:
-                    # Upload entire repository
-                    path: './storybook-static'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: './storybook-static'
 
-            -   name: Deploy to GitHub Pages
-                id: deployment
-                uses: actions/deploy-pages@v4
-                with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  branch: gh-pages
-                  folder: ./path-to-your-built-site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: ./path-to-your-built-site
 
-            -   name: Store test results
-                uses: actions/upload-artifact@v4
-                with:
-                    name: junit-test-results
-                    path: ./results/*.xml
+      - name: Store test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-test-results
+          path: ./results/*.xml
 
-            -   name: Publish test results
-                uses: mikepenz/action-junit-report@v3.1.0
-                with:
-                    github_token: ${{ secrets.GITHUB_TOKEN }}
-                    report_paths: '**/results/*.xml'
+      - name: Publish test results
+        uses: mikepenz/action-junit-report@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_paths: '**/results/*.xml'
