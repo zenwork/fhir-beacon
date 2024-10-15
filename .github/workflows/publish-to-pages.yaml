@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
-      - run: cd ./packages/library && npm ci
+      - run: npm ci --prefix packages/library
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
@@ -48,10 +48,10 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npm run vitest
+        run: npm run vitest --prefix packages/library
 
       - name: Publish
-        run: npm run publish
+        run: npm run publish --prefix packages/library
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
