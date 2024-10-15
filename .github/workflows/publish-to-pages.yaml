@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
-      - run: npm ci
+      - run: cd ./packages/library && npm ci
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
