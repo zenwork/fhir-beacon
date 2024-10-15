@@ -14,6 +14,10 @@ permissions:
   id-token: write
   checks: write
 
+defaults:
+  run:
+    working-directory: ./packages/library
+
 jobs:
   publish:
     environment:
@@ -31,7 +35,6 @@ jobs:
           node-version: 21
           cache: 'npm'
       - run: npm ci
-        working-directory: ./packages/library
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
@@ -44,15 +47,12 @@ jobs:
       - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
         name: Install playwright browsers
         run: npx playwright install --with-deps
-        working-directory: ./packages/library
 
       - name: Run tests
         run: npm run vitest
-        working-directory: ./packages/library
 
       - name: Publish
         run: npm run publish
-        working-directory: ./packages/library
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: junit-test-results
-          path: ./results/*.xml
+          path: ./packages/library/results/*.xml
 
       - name: Publish test results
         uses: mikepenz/action-junit-report@v4
