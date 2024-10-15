@@ -31,6 +31,7 @@ jobs:
           node-version: 21
           cache: 'npm'
       - run: npm ci
+        working-directory: ./packages/library
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
@@ -67,8 +68,6 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: ./path-to-your-built-site
 
       - name: Store test results
         uses: actions/upload-artifact@v4
