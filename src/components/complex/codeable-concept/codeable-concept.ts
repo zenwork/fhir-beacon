@@ -1,7 +1,7 @@
 import {html, TemplateResult}           from 'lit'
 import {customElement}                  from 'lit/decorators.js'
 import {BaseElement, Decorated, errors} from '../../../internal'
-import {strap}     from '../../../shell/layout/structure-wrapper/strap'
+import {strap}     from '../../../shell/layout/wrapper/strap'
 import {wrapLines} from '../../../shell/layout/wrapper/wrapLines'
 import {DisplayConfig}                  from '../../../types'
 import {CodeableConceptData}            from './codeable-concept.data'

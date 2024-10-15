@@ -23,9 +23,9 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     if (data.text) {
       return [
         html`
-            <fhir-wrapper-2 label=${this.type} ?summaryonly=${this.getDisplayConfig().summaryonly}>
+            <fhir-wrapper label=${this.type} ?summaryonly=${this.getDisplayConfig().summaryonly}>
                 <fhir-narrative .data=${data.text}></fhir-narrative >
-            </fhir-wrapper-2>`
+            </fhir-wrapper>`
       ]
     }
 
@@ -48,14 +48,14 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
       `,
       html`
           ${(this.data.contained && !this.summaryonly) ? html`
-              <fhir-wrapper-2 label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
+              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
                   ${this.renderStructureContained()}
-              </fhir-wrapper-2>
+              </fhir-wrapper>
           ` : nothing}
           ${(!this.data.contained && this.verbose && !this.summaryonly) ? html`
-              <fhir-wrapper-2 label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
+              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
                   <fhir-empty-list ></fhir-empty-list >
-              </fhir-wrapper-2>` : nothing}
+              </fhir-wrapper>` : nothing}
       `,
       html`
           <fhir-primitive label="extension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >

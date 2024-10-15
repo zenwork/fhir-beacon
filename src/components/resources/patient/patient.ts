@@ -1,7 +1,7 @@
 import {html, TemplateResult}                                  from 'lit'
 import {customElement}                                         from 'lit/decorators.js'
 import {choiceOf, choiceValidate, DomainResource, Validations} from '../../../internal'
-import {strap}                                                 from '../../../shell/layout/structure-wrapper/strap'
+import {strap} from '../../../shell/layout/wrapper/strap'
 import {wrap}                                                  from '../../../shell/layout/wrapper/wrap'
 
 import {DisplayConfig} from '../../../types'

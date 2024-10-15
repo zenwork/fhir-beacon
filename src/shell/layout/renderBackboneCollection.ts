@@ -15,11 +15,11 @@ export function renderSingleBackbone(itemLabel: null | string,
                                      verbose: boolean,
                                      template: TemplateResult) {
   return html`
-      <fhir-wrapper-2 label="${itemLabel} ${idx ? '[' + (idx + 1) + ']' : ''}"
+      <fhir-wrapper label="${itemLabel} ${idx ? '[' + (idx + 1) + ']' : ''}"
                       ?headless=${!itemLabel && !verbose}
       >
           ${template}
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
 
@@ -46,7 +46,7 @@ export function renderBackboneCollection<T>(
 
   if (collection || verbose) {
     return html`
-        <fhir-wrapper-2 label="${groupLabel}" ?headless=${!collection || collection.length <= 1}>
+        <fhir-wrapper label="${groupLabel}" ?headless=${!collection || collection.length <= 1}>
             ${hasSome(collection)
               ? map(collection, (i, idx) => renderSingleBackbone(
                             itemLabel, idx, verbose, templateGenerator(i, idx)
@@ -54,7 +54,7 @@ export function renderBackboneCollection<T>(
               : html`
                         <fhir-empty-list></fhir-empty-list>`
             }
-        </fhir-wrapper-2>
+        </fhir-wrapper>
     `
   }
 

@@ -1,7 +1,7 @@
 import {html, TemplateResult} from 'lit'
-import {map}                  from 'lit/directives/map.js'
-import {hasSome}              from '../directives'
-import {show}                 from '../show'
+import {map}     from 'lit/directives/map.js'
+import {hasSome} from '../directives'
+import {show}    from '../show'
 
 /**
  * Wrap a collection with the structured wrapper only when there is more than one entry
@@ -26,25 +26,25 @@ export function strapLines(key: string,
     if (hasSome(collection)) {
       if (verbose) {
         return html`
-            <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
+            <fhir-wrapper label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
                 ${map(collection, (data: string, index: number) => generator(data, label + ' ' + show(index + 1), key))}
-            </fhir-wrapper-2>
+            </fhir-wrapper>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
+          <fhir-wrapper label="${label}" variant="details" ?summary=${summary} ?summaryonly=${summaryMode}>
               ${map(collection, (data: string, index: number) => generator(data, show(index + 1), key))}
-          </fhir-wrapper-2>
+          </fhir-wrapper>
       `
     }
 
 
     if (verbose) {
       return html`
-          <fhir-wrapper-2 label="${label}" ?summaryonly=${summaryMode}>
+          <fhir-wrapper label="${label}" ?summaryonly=${summaryMode}>
               <fhir-empty-list ></fhir-empty-list >
-          </fhir-wrapper-2>`
+          </fhir-wrapper>`
     }
   }
   return html``

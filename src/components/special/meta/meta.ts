@@ -28,12 +28,12 @@ export class Meta extends BaseElement<MetaData> {
                      pluralBase: 'profile',
                      collection: data.profile,
                      generator: (d, l, k) => html`
-                     <fhir-primitive key=${k}
-                                     label=${l}
-                                     type=${PrimitiveType.canonical}
-                                     .value=${d}
-                                     summary
-                     ></fhir-primitive>`,
+                         <fhir-primitive key=${k}
+                                         label=${l}
+                                         type=${PrimitiveType.canonical}
+                                         .value=${d}
+                                         summary
+                         ></fhir-primitive>`,
                      summary: this.summary,
                      config
                  })}
@@ -43,7 +43,7 @@ export class Meta extends BaseElement<MetaData> {
                      pluralBase: 'security',
                      collection: data.security,
                      generator: (d, l, k) => html`
-                     <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
+                         <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
                      summary: this.summary,
                      config
                  })}
@@ -80,7 +80,7 @@ export class Meta extends BaseElement<MetaData> {
           <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive>
 
           ${data.profile ? html`
-              <fhir-wrapper-2 label="profiles"
+              <fhir-wrapper label="profiles"
                               variant="details"
                               summary
                               ?summaryonly=${this.getDisplayConfig().summaryonly}
@@ -92,10 +92,10 @@ export class Meta extends BaseElement<MetaData> {
                                       summary
                       ></fhir-primitive>
                   `)}
-              </fhir-wrapper-2>
+              </fhir-wrapper>
           ` : nothing}
           ${data.security ? html`
-              <fhir-wrapper-2 label="security"
+              <fhir-wrapper label="security"
                               variant="details"
                               summary
                               ?summaryonly=${this.getDisplayConfig().summaryonly}
@@ -103,14 +103,14 @@ export class Meta extends BaseElement<MetaData> {
                   ${map(data.security, s => html`
                       <fhir-coding label="security" .data=${s} summary></fhir-coding>
                   `)}
-              </fhir-wrapper-2>
+              </fhir-wrapper>
           ` : nothing}
           ${strap({
                       key: 'tag',
                       pluralBase: 'tag',
                       collection: data.tag,
                       generator: (d, l, k) => html`
-                      <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
+                          <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
                       summary: this.summary,
                       config: this.getDisplayConfig()
                   })}

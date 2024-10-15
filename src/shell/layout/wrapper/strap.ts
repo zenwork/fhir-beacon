@@ -41,48 +41,48 @@ export function strap<T>({
     if (hasMany(collection)) {
       if (config.verbose) {
         return html`
-            <fhir-wrapper-2 label="${plural}"
+            <fhir-wrapper label="${plural}"
                             variant="details"
                             ?summary=${summary}
                             ?open=${config.open}
                             ?summaryonly=${config.summaryonly}
             >
                 ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
-            </fhir-wrapper-2>
+            </fhir-wrapper>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}"
+          <fhir-wrapper label="${plural}"
                           variant="details"
                           ?summary=${summary}
                           ?open=${config.open}
                           ?summaryonly=${config.summaryonly}
           >
               ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
-          </fhir-wrapper-2>
+          </fhir-wrapper>
       `
     }
 
     if (hasOnlyOne(collection)) {
       return html`
-          <fhir-wrapper-2 label="${k}"
+          <fhir-wrapper label="${k}"
                           variant="details"
                           ?summary=${summary}
                           ?open=${config.open}
                           ?summaryonly=${config.summaryonly}
           >
               ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
-          </fhir-wrapper-2>
+          </fhir-wrapper>
       `
 
     }
 
     if (config.verbose && config.mode === DisplayMode.structure) {
       return html`
-          <fhir-wrapper-2 label="${label}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
+          <fhir-wrapper label="${label}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
               ${generator(null as unknown as T, '*', key)}
-          </fhir-wrapper-2>`
+          </fhir-wrapper>`
     }
   }
 

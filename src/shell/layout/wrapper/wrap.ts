@@ -39,22 +39,22 @@ export function wrap<T>({
     if (hasMany(collection)) {
       if (config.verbose) {
         return html`
-            <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
+            <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
                 ${map(collection,
                       (data: T) => html`
                           ${generator(data, pluralBase, key)}
                       `)}
-            </fhir-wrapper-2>
+            </fhir-wrapper>
         `
       }
 
       return html`
-          <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
+          <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
               ${map(collection,
                     (data: T, idx) => html`
                         ${generator(data, `${idx + 1}`, key)}
                     `)}
-          </fhir-wrapper-2>
+          </fhir-wrapper>
       `
     }
 
@@ -68,9 +68,9 @@ export function wrap<T>({
 
     if (config.verbose && config.mode === DisplayMode.display) {
       return html`
-          <fhir-wrapper-2 label="${pluralBase}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
+          <fhir-wrapper label="${pluralBase}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
               <fhir-empty-list></fhir-empty-list>
-          </fhir-wrapper-2>`
+          </fhir-wrapper>`
     }
 
   }

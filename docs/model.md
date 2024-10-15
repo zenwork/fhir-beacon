@@ -31,11 +31,11 @@ classDiagram
 
 ```html
 
-<fhir-wrapper-2>
+<fhir-wrapper>
     <fhir-primitive ></fhir-primitive >
     <fhir-primitive ></fhir-primitive >
     <fhir-primitive ></fhir-primitive >
-</fhir-wrapper-2>
+</fhir-wrapper>
 
 ```
 

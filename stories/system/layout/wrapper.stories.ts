@@ -8,70 +8,76 @@ const meta = {
 export default meta
 type Story = StoryObj;
 
-export const Wrapper2Empty: Story = {
+export const WrapperEmpty: Story = {
   render: () => html`
-      <fhir-wrapper-2>
+      <fhir-wrapper>
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-          <fhir-wrapper-2>
+          <fhir-wrapper>
               <fhir-primitive label="title" value="Dr."></fhir-primitive>
               <fhir-primitive label="first name" value="Jack"></fhir-primitive>
               <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-          </fhir-wrapper-2>
-      </fhir-wrapper-2>
+          </fhir-wrapper>
+      </fhir-wrapper>
   `
 }
 
-export const Wrapper2: Story = {
+export const WrapperWithLabel: Story = {
   render: () => html`
-      <fhir-wrapper-2 label="name">
+      <fhir-wrapper label="name">
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
-export const Wrapper2Structure: Story = {
+export const WrapperStructure: Story = {
   render: () => html`
-      <fhir-wrapper-2 key="name" label='name' details badge-resource='Human Name' badge-summary badge-constraint>
+      <fhir-wrapper key="name"
+                    label="name"
+                    variant="details"
+                    badge-resource='Human Name'
+                    badge-summary
+                    badge-constraint
+      >
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
 
 export const WrapperNoLabel: Story = {
   render: () => html`
       <fhir-primitive label="gender" value="male"></fhir-primitive>
-      <fhir-wrapper-2>
+      <fhir-wrapper>
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
 
 export const Wrapper: Story = {
   render: () => html`
       <fhir-primitive label="gender" value="male"></fhir-primitive>
-      <fhir-wrapper-2 label="Name" fhirType="HumanName">
+      <fhir-wrapper label="Name">
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
 
 export const WrapperType: Story = {
   render: () => html`
       <fhir-primitive label="gender" value="male"></fhir-primitive>
-      <fhir-wrapper-2 label="Human Name">
+      <fhir-wrapper label="Human Name">
           <fhir-primitive label="title" value="Dr."></fhir-primitive>
           <fhir-primitive label="first name" value="Jack"></fhir-primitive>
           <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }
 
@@ -89,13 +95,13 @@ export const NoWrapper: Story = {
 
 export const StructureWrapper: Story = {
   render: () => html`
-      <fhir-wrapper-2 label="Contact" badge-resource="Practitioner" variant="details">
+      <fhir-wrapper label="Contact" badge-resource="Practitioner" variant="details">
           <fhir-primitive label="gender" value="male"></fhir-primitive>
-          <fhir-wrapper-2 label="Name" badge-resource="Human Name" variant="details">
+          <fhir-wrapper label="Name" badge-resource="Human Name" variant="details">
               <fhir-primitive label="title" value="Dr."></fhir-primitive>
               <fhir-primitive label="first name" value="Jack"></fhir-primitive>
               <fhir-primitive label="last name" value="Smith"></fhir-primitive>
-          </fhir-wrapper-2>
-      </fhir-wrapper-2>
+          </fhir-wrapper>
+      </fhir-wrapper>
   `
 }

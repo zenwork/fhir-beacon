@@ -10,10 +10,10 @@ type Story = StoryObj;
 
 export const LabelElement: Story = {
   render: () => html`
-      <fhir-wrapper-2>
+      <fhir-wrapper>
       <fhir-primitive label="Doctor" value="Alice Nixon" link="/practitioner/1234"></fhir-primitive >
       <fhir-primitive label="Doctor" delimiter=" - " value="Jenny Nixon"></fhir-primitive >
       <fhir-primitive label="link" value="1234" type="url" ?showerror=${true}></fhir-primitive >
-      </fhir-wrapper-2>
+      </fhir-wrapper>
   `
 }

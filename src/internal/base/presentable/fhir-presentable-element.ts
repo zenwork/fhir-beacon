@@ -236,7 +236,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                              new ValidationsImpl(this.extendedData))).flat())
         } else {
           templates.push(html`
-              <fhir-wrapper-2
+              <fhir-wrapper
                       .label=${this.getLabel()}
                       ?summary=${this.summary}
                       ?summaryonly=${this.getDisplayConfig().summaryonly}
@@ -253,7 +253,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                               this.getDisplayConfig(),
                                               this.extendedData,
                                               new ValidationsImpl(this.extendedData))).flat()}
-              </fhir-wrapper-2>
+              </fhir-wrapper>
           `)
         }
         break
@@ -299,7 +299,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             `)
           } else {
             templates.push(html`
-                <fhir-wrapper-2 variant="details"
+                <fhir-wrapper variant="details"
                                 label=${this.getLabel()}
                                 badge-resource=${asReadable(this.type)}
                                 ?open=${this.open}
@@ -320,7 +320,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                                 this.getDisplayConfig(),
                                                 this.extendedData,
                                                 new ValidationsImpl(this.extendedData))).flat()}
-                </fhir-wrapper-2>
+                </fhir-wrapper>
             `)
           }
         }

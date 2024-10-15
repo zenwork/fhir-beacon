@@ -53,7 +53,7 @@ describe('Narrative', () => {
       'fhir-narrative').first()
 
 
-    assert.ok(narrative.queryShadow({ select: 'fhir-wrapper-2', expect: 2 }))
+    assert.ok(narrative.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
     assert.ok(narrative.queryShadow({ select: 'fhir-primitive', expect: 3 }))
 
   })

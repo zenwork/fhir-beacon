@@ -66,7 +66,7 @@ export class Substance extends DomainResource<SubstanceData> {
           <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive>
           ${data.category || this.verbose
             ? html`
-                      <fhir-wrapper-2 variant="details"
+                      <fhir-wrapper variant="details"
                                       label="categories"
                                       ?headless=${data.category?.length > 1}
                                       ?summaryonly=${this.getDisplayConfig().summaryonly}
@@ -82,7 +82,7 @@ export class Substance extends DomainResource<SubstanceData> {
                                   })
                             : html`
                                       <fhir-empty-list></fhir-empty-list>`}
-                      </fhir-wrapper-2>
+                      </fhir-wrapper>
                   `
             : nothing}
           <fhir-codeable-reference label="code" .data=${data.code} summary></fhir-codeable-reference>
@@ -91,7 +91,7 @@ export class Substance extends DomainResource<SubstanceData> {
           <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity>
           ${data.ingredient || this.verbose
             ? html`
-                      <fhir-wrapper-2 label="ingredients"
+                      <fhir-wrapper label="ingredients"
                                       ?open=${this.open}
                                       summary
                                       ?summaryonly=${this.getDisplayConfig().summaryonly}
@@ -104,7 +104,7 @@ export class Substance extends DomainResource<SubstanceData> {
                                       ></fhir-substance-ingredient> `)
                             : html`
                                       <fhir-empty-list></fhir-empty-list>`}
-                      </fhir-wrapper-2>
+                      </fhir-wrapper>
                   `
             : nothing}
       `
