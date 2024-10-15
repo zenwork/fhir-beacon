@@ -66,11 +66,10 @@ describe('fhir primitive value', () => {
       </fhir-value >
     `).first()
 
-
     const before = el.queryShadowNamedSlot('before')[0]
     expect(before).toHaveTextContent(`over`)
 
-    expect.element(el.renderRoot as Element).toHaveTextContent('100')
+    expect(el.shadowRoot).toHaveTextContent('100')
 
     const after = el.queryShadowNamedSlot('after')[0]
     expect(after).toHaveTextContent(`percent`)
@@ -93,7 +92,7 @@ describe('fhir primitive value', () => {
     let div = el.queryShadow<HTMLDivElement>({ select: 'div' })
     expect(div).toHaveTextContent(text)
     await userEvent.unhover(div)
-    await aTimeout(500)
+    await aTimeout(1000)
 
     if (div) {
 

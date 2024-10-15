@@ -9,7 +9,7 @@ const meta = {
   component: 'fhir-meta',
   ...renderTemplateInShell(
     (args: ShellArgs) => html`
-        <fhir-meta .data=${args.data} summary></fhir-meta >`)
+        <fhir-meta .data=${args.data} summary ?headless=${args.headless}></fhir-meta>`)
 
 }
 
@@ -23,7 +23,8 @@ export const Display: Story = {
     mode: 'display',
     showerror: true,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 
@@ -43,7 +44,8 @@ export const Data: Story = {
     mode: 'display',
     showerror: true,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 
@@ -53,7 +55,8 @@ export const Data3: Story = {
     mode: 'display',
     showerror: true,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 
@@ -63,6 +66,7 @@ export const Data4: Story = {
     mode: 'display',
     showerror: true,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }

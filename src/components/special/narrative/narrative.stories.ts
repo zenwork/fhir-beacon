@@ -41,7 +41,8 @@ export const StructureMode: Story = {
     data: narativeData,
     mode: 'structure',
     showerror: false,
-    verbose: false
+    verbose: false,
+    open: true
   }
 }
 

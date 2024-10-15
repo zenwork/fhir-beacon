@@ -48,7 +48,7 @@ describe('fhir-not-supported', () => {
     expect(err).toHaveTextContent('custom error')
     const errCss = getComputedStyle(err)
     expect(errCss.fontStyle).to.eq('italic')
-    expect(errCss.backgroundColor).to.eq('rgb(254, 202, 202)')
+    expect(errCss.backgroundColor).to.eq('rgb(252, 165, 165)')
   })
 
   it('Should display not implemented variant', async () => {

@@ -27,9 +27,11 @@ export class Narrative extends BaseElement<NarrativeData> {
   public renderDisplay(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
     return [
       html`
-          <fhir-wrapper label="${config.verbose ? `summary (status:${data.status})` : 'summary'}" variant='primary'>
+          <fhir-wrapper label="${config.verbose ? `summary (status:${data.status})` : 'summary'}"
+                          ?summaryonly=${this.getDisplayConfig().summaryonly}
+          >
               <div part="narrative">${unsafeHTML(data.div)}</div >
-          </fhir-wrapper >
+          </fhir-wrapper>
       `
     ]
   }
@@ -38,9 +40,9 @@ export class Narrative extends BaseElement<NarrativeData> {
     return [
       html`
           <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
-          <fhir-structure-wrapper label="div" forceclose>
+          <fhir-wrapper label="div" variant="details" ?summaryonly=${this.getDisplayConfig().summaryonly}>
               <fhir-primitive .value=${data.div}></fhir-primitive >
-          </fhir-structure-wrapper >
+          </fhir-wrapper>
       `
     ]
   }

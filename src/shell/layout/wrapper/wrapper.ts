@@ -1,41 +1,45 @@
-import {consume}                                    from '@lit/context'
-import {html, LitElement, PropertyValues}           from 'lit'
-import {customElement, property}                    from 'lit/decorators.js'
-import {classMap}                                   from 'lit/directives/class-map.js'
-import {defaultDisplayConfig, displayConfigContext} from '../../../internal'
-import {hostStyles}                                 from '../../../styles'
-import {DisplayConfig, DisplayMode}                 from '../../../types'
-import {toBaseElementModeEnum}                      from '../../../utilities'
-import {componentStyles}                            from './wrapper-styles'
+import {html, LitElement, nothing, TemplateResult} from 'lit'
+import {customElement, property, query}            from 'lit/decorators.js'
+import {classMap}                                  from 'lit/directives/class-map.js'
+import {EmptyResult}                               from '../../../internal'
+import {hostStyles}                                from '../../../styles'
+import {isDefined}                                 from '../directives'
+import {componentStyles}                           from './wrapper-styles'
+
+export {SlDetails} from '@shoelace-style/shoelace'
 
 
-/**
- * Custom element for wrapping primitive content.
- * @element fhir-wrapper
- * @slot wrapper
- */
 @customElement('fhir-wrapper')
 export class Wrapper extends LitElement {
 
   static styles = [hostStyles, componentStyles]
 
   @property({ type: String })
-  label: string = ''
+  public variant: 'none' | 'details' | 'error' = 'none'
 
   @property({ type: String })
-  fhirType: string = ''
+  public key: string = 'items'
 
-  @property()
-  variant: 'primary' | 'secondary' | 'validation-error' | 'none' = 'none'
+  @property({ type: String })
+  public label: string = ''
 
-  @property({ type: Boolean, reflect: true })
-  public hide: boolean = false
+  @property({ type: Boolean })
+  public headless: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: String, attribute: 'badge-resource' })
+  public badgeResource: string = ''
+
+  @property({ type: Boolean, attribute: 'badge-summary' })
+  public badgeSummary: boolean = false
+
+  @property({ type: Boolean, attribute: 'badge-constraint' })
+  public badgeConstraint: boolean = false
+
+  @property({ type: Boolean, attribute: 'badge-required' })
+  public badgeRequired: boolean = false
+
+  @property({ type: Boolean })
   public open: boolean = false
-
-  @property({ type: DisplayMode, reflect: true, converter: toBaseElementModeEnum })
-  declare mode: DisplayMode
 
   @property({ type: Boolean, reflect: true })
   public summary: boolean = false
@@ -43,71 +47,72 @@ export class Wrapper extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summaryonly: boolean = false
 
-  @consume({ context: displayConfigContext, subscribe: true })
-  protected displayConfig: DisplayConfig = defaultDisplayConfig
+  @query('key')
+  declare private content
 
-  protected render(): unknown {
+
+  protected render(): TemplateResult | TemplateResult[] {
     if (!this.summaryonly || (this.summary && this.summaryonly)) {
+      let content: TemplateResult
 
+      const arrow = this.variant === 'details' ? nothing : html`<span id="arrow">&#x21B4;</span>`
+      const label = (this.label && !this.headless)
+                    ? html`<label for="${this.key}"
+                                  class=${classMap({ 'variant-error-label': (this.variant === 'error') })}
+              >${this.label}${arrow}</label>`
+                    : nothing
 
-      const label = this.generateLabel()
-
-      const borderClasses = { 'validation-error-border': this.variant === 'validation-error' }
-
-      return html`
-          <div class='base ${classMap(borderClasses)}'>
+      switch (this.variant) {
+        case 'none':
+          content = html`
               ${label}
-              <slot class="${classMap({ content: !this.hide })}"></slot >
-          </div >
-      `
-    }
+              <ol id=${this.key} class="items">
+                  <slot id="${this.key}"></slot>
+              </ol>
+          `
+          break
+        case 'details': {
+          const summary = html`
+              <div slot="summary">
+                  ${label}
+                  <fhir-badge-group resource=${isDefined(this.badgeResource)}
+                                    ?summary=${this.badgeSummary}
+                                    ?constraint=${this.badgeConstraint}
+                                    ?required=${this.badgeRequired}
+                  ></fhir-badge-group>
+              </div>
+              <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
+              <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
+          `
+          content = html`
+              <sl-details class="custom-icons" ?open=${this.open}>
+                  ${summary}
+                  <ol id=${this.key} class="details_items">
+                      <slot></slot>
+                  </ol>
+              </sl-details>
+          `
+          break
+        }
+        case 'error':
+          content = html`
+              <div class="variant-error">
+                  ${label}
+                  <div id='error' class="items">
+                      <slot id="${this.key}"></slot>
+                  </div>
+              </div>
+          `
+          break
+      }
 
-    return html``
-  }
-
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (this.displayConfig) {
-      this.open = this.displayConfig.open
-      this.mode = this.displayConfig.mode
-      // this.hide = !this.displayConfig.verbose
-    }
-  }
-
-  private generateLabel = () => {
-
-    const classes = {
-      primary: this.variant === 'primary',
-      secondary: this.variant === 'secondary',
-      'validation-error': this.variant === 'validation-error'
-    }
-
-    if (!this.hide && this.label && this.fhirType) {
       return html`
-          <sl-tooltip content="${this.fhirType}" placement="left">
-              <div id="label">
-                  <label class=${classMap(classes)}>${this.label}</label >
-                  <span id="arrow">&#x21B4;</span >
-              </div >
-          </sl-tooltip >
+          <section id="wrapped" part="wrapped">
+              ${content}
+          </section>
       `
-    } else if (!this.hide && this.label) {
-      return html`
-          <div id="label">
-              <label class=${classMap(classes)}>${this.label}</label >
-              <span id="arrow">&#x21B4;</span >
-          </div >
-      `
-    } else if (!this.hide && this.fhirType) {
-      return html`
-          <div id="label">
-              <label class=${classMap(classes)}>${this.fhirType}</label >
-              <span id="arrow">&#x21B4;</span >
-          </div >
-      `
-    } else {
-      return html``
     }
-  }
 
+    return EmptyResult
+  }
 }

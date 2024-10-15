@@ -1,13 +1,15 @@
 import {Meta, StoryObj}                    from '@storybook/web-components'
 import {html}                              from 'lit'
-import {argtypes, ShellArgs}               from '../../../../stories/storybook-utils'
+import {renderTemplateInShell, ShellArgs}  from '../../../../stories/storybook-utils'
 import {data_310, data_319, frontPageData} from './medication.story.data'
 
 
 const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
-  ...argtypes()
+  ...renderTemplateInShell((args: ShellArgs) => html`
+      <fhir-medication .data=${args.data}></fhir-medication>
+  `)
 }
 
 export default meta
@@ -69,19 +71,21 @@ export const FrontPageDemo: Story = {
     summaryonly: false,
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   },
   render: (args: ShellArgs) =>
-    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3 >
+    html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3>
     <fhir-medication
-      .data=${args.data}
-      .mode=${args.mode}
+            .data=${args.data}
+            .mode=${args.mode}
             ?summaryonly=${args.summaryonly}
             ?showerror=${args.showerror}
             ?verbose=${args.verbose}
             ?open=${args.open}
+            ?headless=${args.headless}
     >
-    </fhir-medication >
+    </fhir-medication>
     `
 
 }

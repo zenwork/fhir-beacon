@@ -17,6 +17,7 @@ export class IllegalStateError extends Error {
 }
 
 export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
+export const emptySlotLitShadow = /^<!---->\n\s+<slot><\/slot>$/
 
 const elements: any[] = []
 
@@ -29,18 +30,27 @@ class FixtureResult<T extends HTMLElement> {
     this.reactiveElements = reactiveElements
   }
 
+  /**
+   * @return all LitElements found
+   */
   async all() {
     await Promise.all(this.promises)
     await aTimeout(100)
     return this.reactiveElements
   }
 
+  /**
+   * @return first LitElement found
+   */
   async first() {
     await Promise.all(this.promises)
     await aTimeout(100)
     return this.reactiveElements[0]
   }
 
+  /**
+   * @return nth LitElement in list of found elements
+   */
   async at(index: number) {
     await Promise.all(this.promises)
     await aTimeout(100)

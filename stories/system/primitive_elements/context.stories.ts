@@ -10,9 +10,9 @@ type Story = StoryObj;
 
 export const ContextElement: Story = {
   render: () => html`
-    <fhir-wrapper >
+      <fhir-wrapper>
       <fhir-context text="some context"></fhir-value>
-    </fhir-wrapper >
+      </fhir-wrapper>
   `
 
 }

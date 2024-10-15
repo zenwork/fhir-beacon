@@ -25,14 +25,14 @@ export class Ratio extends BaseElement<RatioData> {
           <fhir-value text="${data.denominator.unit || data.denominator.code}"></fhir-value >`
     } else {
       denominator = html`
-          <fhir-quantity .data=${data.denominator} summary></fhir-quantity >`
+          <fhir-quantity .data=${data.denominator} headless summary></fhir-quantity>`
     }
 
     return [
       html`
           <fhir-primitive-wrapper part="base">
-              <fhir-label text="${this.getLabel()}"></fhir-label >&nbsp;
-              <fhir-quantity .data=${data.numerator}></fhir-quantity >
+              <fhir-label text="${this.getLabel()}"></fhir-label>&nbsp;
+              <fhir-quantity .data=${data.numerator} headless summary></fhir-quantity>
               <fhir-value text="&nbsp;/&nbsp;"></fhir-value >
               ${denominator}
           </fhir-primitive-wrapper >

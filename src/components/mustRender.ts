@@ -1,5 +1,6 @@
 import {meta, NoDataObject} from '../internal/base/Decorated'
 import {DisplayMode}        from '../types'
+import {isBlank} from '../utilities'
 
 /**
  * Determines if a value should be rendered based on the provided context parameters.
@@ -9,13 +10,17 @@ import {DisplayMode}        from '../types'
  * @param verbose - Specifies if verbose rendering is required. Optional. Defaults to `false` if not provided.
  * @param summaryMode - Specifies if summary mode is enabled. Optional. Defaults to `false` if not provided.
  * @param summary - Specifies if summary rendering is required. Optional. Defaults to `false` if not provided.
+ * @param required
  * @returns True if the value should be rendered, otherwise false.
  */
 export function mustRender(value: unknown | null | undefined,
                            mode: DisplayMode = DisplayMode.display,
                            verbose: boolean = false,
                            summaryMode: boolean = false,
-                           summary: boolean = false): boolean {
+                           summary: boolean = false,
+                           required: boolean = false): boolean {
+
+  if (required) return true
 
   if (isDisplay(mode) && isPresent(value) && shouldRender(summary, summaryMode)) {
     return true
@@ -56,5 +61,5 @@ function isPresent(value: any) {
     return value[meta].hide !== true
   }
 
-  return !!value
+  return !isBlank(value)
 }

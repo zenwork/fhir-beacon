@@ -1,7 +1,7 @@
 import {Meta, StoryObj}                   from '@storybook/web-components'
 import {html}                             from 'lit'
 import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
-import {data}                             from './codeableReference.story.data'
+import {data, data2} from './codeableReference.story.data'
 
 
 const title = 'components/Datatypes/Complex Type/Codeable Reference'
@@ -10,7 +10,7 @@ const meta: Meta<ShellArgs> = {
   title,
   component: 'fhir-shell',
   ...renderTemplateInShell((args) => html`
-      <fhir-codeable-reference .data=${args.data} summary></fhir-codeable-reference >`)
+      <fhir-codeable-reference .data=${args.data} summary headless></fhir-codeable-reference>`)
 
 }
 
@@ -26,8 +26,7 @@ export const Headache: Story = {
 
 export const HeadacheVerbose: Story = {
   args: {
-    data,
-    verbose: true,
+    data: data2,
     showerror: true
   }
 }

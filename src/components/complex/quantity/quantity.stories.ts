@@ -7,7 +7,7 @@ const meta = {
   title: 'Components/Datatypes/Complex Type/Quantity',
   component: 'fhir-quantity',
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-quantity .data=${args.data} summary></fhir-quantity >`)
+      <fhir-quantity .data=${args.data} summary ?headless=${args.headless}></fhir-quantity>`)
 
 }
 
@@ -23,7 +23,8 @@ export const DisplayableTime: Story = {
       code: 's'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -37,7 +38,8 @@ export const AmountOfPrescribedMedicine: Story = {
       code: 'ug'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -50,7 +52,8 @@ export const AmountOfPrescribedMedicine2: Story = {
       code: '385049006'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -63,7 +66,8 @@ export const Money: Story = {
       code: 'USD'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -73,7 +77,8 @@ export const Simple: Story = {
       value: '1'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 

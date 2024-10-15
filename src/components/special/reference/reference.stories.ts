@@ -7,7 +7,7 @@ const meta = {
   title: 'Components/Datatypes/Special Type/Reference',
   component: 'fhir-reference',
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-reference .data=${args.data} summary></fhir-reference >`)
+      <fhir-reference .data=${args.data} summary ?headless=${args.headless}></fhir-reference>`)
 }
 
 export default meta
@@ -23,7 +23,8 @@ export const DisplayAndTypeAndReference: Story = {
   args: {
     data: patientData,
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -33,7 +34,8 @@ export const Reference: Story = {
       reference: 'http://fhir.hl7.org/svc/StructureDefinition/c8973a22-2b5b-4e76-9c66-00639c99e61b'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -44,7 +46,8 @@ export const ReferenceAndType: Story = {
       type: 'StructureDefinition'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -54,7 +57,8 @@ export const Display: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -65,7 +69,8 @@ export const DisplayAndType: Story = {
       display: 'Dr. John Q. Public'
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -79,7 +84,8 @@ export const Identifier: Story = {
         }
     },
     mode: 'display',
-    showerror: false
+    showerror: false,
+    headless: true
   }
 }
 
@@ -89,7 +95,8 @@ export const Unknown: Story = {
       type: 'Practitioner'
     },
     mode: 'display',
-    showerror: true
+    showerror: true,
+    headless: true
   }
 }
 
@@ -110,7 +117,8 @@ export const WithMissingContained: Story = {
       type: 'Patient'
     },
     mode: 'display',
-    showerror: true
+    showerror: true,
+    headless: true
   }
 }
 
@@ -124,6 +132,8 @@ export const WithExtension: Story = {
         }
       ], ...patientData
     },
-    mode: 'display', showerror: true
+    mode: 'display',
+    showerror: true,
+    headless: true
   }
 }

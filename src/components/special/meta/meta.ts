@@ -2,6 +2,7 @@ import {html, nothing, TemplateResult} from 'lit'
 import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {BaseElement}                   from '../../../internal'
+import {strap, wrap} from '../../../shell'
 import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {MetaData}                      from './meta.data'
@@ -14,30 +15,54 @@ export class Meta extends BaseElement<MetaData> {
   public renderDisplay(config: DisplayConfig, data: MetaData): TemplateResult[] {
     return [
       html`
-        <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive >
-        <fhir-primitive label="lastUpdated" type=${PrimitiveType.instant} .value=${data.lastUpdated} summary></fhir-primitive >
-        <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive >
-        ${data.profile ? html`
-        <fhir-wrapper label="profiles" variant="primary" ?hide=${data.profile.length <= 1}>
-          ${map(data.profile, p => html`
-            <fhir-primitive label="profile" type=${PrimitiveType.canonical} .value=${p} summary></fhir-primitive >
-          `)}
-        </fhir-wrapper >
-      ` : nothing}
-        ${data.security ? html`
-        <fhir-wrapper label="security" variant="primary" ?hide=${data.security.length <= 1}>
-          ${map(data.security, s => html`
-            <fhir-coding label="security" .data=${s} summary></fhir-coding >
-          `)}
-        </fhir-wrapper >
-      ` : nothing}
-        ${data.tag ? html`
-        <fhir-wrapper label="tags" variant="primary" ?hide=${data.tag.length <= 1}=>
-          ${map(data.tag, t => html`
-            <fhir-coding label="tag" .data=${t} summary></fhir-coding >
-          `)}
-        </fhir-wrapper >
-      ` : nothing}
+          <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive>
+          <fhir-primitive label="lastUpdated"
+                          type=${PrimitiveType.instant}
+                          .value=${data.lastUpdated}
+                          summary
+          ></fhir-primitive>
+          <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive>
+
+          ${wrap({
+                     key: 'profile',
+                     pluralBase: 'profile',
+                     collection: data.profile,
+                     generator: (d, l, k) => html`
+                         <fhir-primitive key=${k}
+                                         label=${l}
+                                         type=${PrimitiveType.canonical}
+                                         .value=${d}
+                                         summary
+                         ></fhir-primitive>`,
+                     summary: this.summary,
+                     config
+                 })}
+
+          ${wrap({
+                     key: 'security',
+                     pluralBase: 'security',
+                     collection: data.security,
+                     generator: (d, l, k) => html`
+                         <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
+                     summary: this.summary,
+                     config
+                 })}
+
+          ${wrap({
+                     key: 'tag',
+                     pluralBase: 'tag',
+                     collection: data.tag,
+                     generator: (d, l, k) => html`
+                         <fhir-coding key=${k}
+                                      label=${l}
+                                      .data=${d}
+                                      summary
+                                      ?headless=${data.tag.length === 1}
+                         ></fhir-coding> `,
+                     summary: this.summary,
+                     config
+                 })}
+
       `
     ]
   }
@@ -46,30 +71,50 @@ export class Meta extends BaseElement<MetaData> {
   public renderStructure(config: DisplayConfig, data: MetaData): TemplateResult[] {
     return [
       html`
-        <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive >
-        <fhir-primitive label="lastUpdated" type=${PrimitiveType.instant} .value=${data.lastUpdated} summary></fhir-primitive >
-        <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive >
-        ${data.profile ? html`
-        <fhir-structure-wrapper label="profiles" summary>
-          ${map(data.profile, p => html`
-            <fhir-primitive label="profile" type=${PrimitiveType.canonical} .value=${p} summary></fhir-primitive >
-          `)}
-        </fhir-structure-wrapper >
-      ` : nothing}
-        ${data.security ? html`
-        <fhir-structure-wrapper label="security" summary>
-          ${map(data.security, s => html`
-            <fhir-coding label="security" .data=${s} summary></fhir-coding >
-          `)}
-        </fhir-structure-wrapper >
-      ` : nothing}
-        ${data.tag ? html`
-        <fhir-structure-wrapper label="tags" summary>
-          ${map(data.tag, t => html`
-            <fhir-coding label="tag" .data=${t} summary></fhir-coding >
-          `)}
-        </fhir-structure-wrapper >
-      ` : nothing}
+          <fhir-primitive label="versionId" type=${PrimitiveType.id} .value=${data.versionId} summary></fhir-primitive>
+          <fhir-primitive label="lastUpdated"
+                          type=${PrimitiveType.instant}
+                          .value=${data.lastUpdated}
+                          summary
+          ></fhir-primitive>
+          <fhir-primitive label="source" type=${PrimitiveType.uri} .value=${data.source} summary></fhir-primitive>
+
+          ${data.profile ? html`
+              <fhir-wrapper label="profiles"
+                              variant="details"
+                              summary
+                              ?summaryonly=${this.getDisplayConfig().summaryonly}
+              >
+                  ${map(data.profile, p => html`
+                      <fhir-primitive label="profile"
+                                      type=${PrimitiveType.canonical}
+                                      .value=${p}
+                                      summary
+                      ></fhir-primitive>
+                  `)}
+              </fhir-wrapper>
+          ` : nothing}
+          ${data.security ? html`
+              <fhir-wrapper label="security"
+                              variant="details"
+                              summary
+                              ?summaryonly=${this.getDisplayConfig().summaryonly}
+              >
+                  ${map(data.security, s => html`
+                      <fhir-coding label="security" .data=${s} summary></fhir-coding>
+                  `)}
+              </fhir-wrapper>
+          ` : nothing}
+          ${strap({
+                      key: 'tag',
+                      pluralBase: 'tag',
+                      collection: data.tag,
+                      generator: (d, l, k) => html`
+                          <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  })}
+
       `
     ]
   }

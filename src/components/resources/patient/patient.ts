@@ -1,12 +1,12 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {DomainResource}       from '../../../internal'
+import {html, TemplateResult}                                  from 'lit'
+import {customElement}                                         from 'lit/decorators.js'
+import {choiceOf, choiceValidate, DomainResource, Validations} from '../../../internal'
+import {strap} from '../../../shell/layout/wrapper/strap'
+import {wrap}                                                  from '../../../shell/layout/wrapper/wrap'
 
-import {wrapc, wraps}      from '../../../shell/layout/wrapCollection'
-import {DisplayConfig}     from '../../../types'
-import {isDeceasedBoolean} from '../../complex/quantity/quantity.type-guards'
-import {PrimitiveType}     from '../../primitive/type-converters/type-converters'
-import {PatientData}       from './patient.data'
+import {DisplayConfig} from '../../../types'
+import {PrimitiveType} from '../../primitive/type-converters/type-converters'
+import {PatientData}   from './patient.data'
 
 @customElement('fhir-patient')
 export class Patient extends DomainResource<PatientData> {
@@ -16,59 +16,304 @@ export class Patient extends DomainResource<PatientData> {
   }
 
   public renderDisplay(config: DisplayConfig, data: PatientData): TemplateResult[] {
+    console.log(data.managingOrganization)
     return [
       html`
-          ${(wrapc('names', data.name, config.verbose, (i, x) => html`
-        <fhir-human-name label="name${x}" .data=${i} summary></fhir-human-name >
-        `))}
+          ${(wrap({
+                      key: 'name',
+                      pluralBase: 'name',
+                      collection: data.name,
+                      generator: (data, label, key) => html`
+                      <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name> `,
+                      summary: this.summary,
+                      config
+                  })
+          )}
 
-          ${(wrapc('identifiers', data.identifier, config.verbose, (i, x) => html`
-            <fhir-identifier label='identifier${x}' .data=${i} summary></fhir-identifier >`))}
-      <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive >
+          ${(wrap({
+                      key: 'identifier',
+                      pluralBase: 'identifier',
+                      collection: data.identifier,
+                      generator: (data, label, key) => html`
+                      <fhir-identifier key=${key} label='${label}' .data=${data} summary></fhir-identifier>`,
+                      summary: this.summary,
+                      config
+                  }
+          ))}
+          <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive>
 
-          ${(wrapc('telecoms', data.telecom, config.verbose, (t, x) => html`
-        <fhir-contact-point label="telecom${x}" .data=${t} summary></fhir-contact-point >
-        `))}
+          ${(wrap({
+                      key: 'telecom',
+                      pluralBase: 'telecom',
+                      collection: data.telecom,
+                      generator: (data, label, key) => html`
+                      <fhir-contact-point key=${key} label=${label} .data=${data} summary></fhir-contact-point>`,
+                      summary: this.summary,
+                      config
+                  }
+          ))}
 
-          ${wrapc('addresses', data.address, config.verbose, (a, x) => html`
-        <fhir-address label="address${x}" .data=${a} summary></fhir-address summary >
-        `)}
+          ${wrap({
+                     key: 'address',
+                     pluralBase: 'address',
+                     collection: data.address,
+                     generator: (data, label, key) => html`
+                     <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
+                     summary: this.summary,
+                     config
+                 }
+          )}
+          <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
+          ${wrap({
+                     key: 'contact',
+                     pluralBase: 'contact',
+                     collection: data.contact,
+                     generator: (data, label, key) => html`
+                     <fhir-patient-contact key=${key}
+                                           label=${label}
+                                           .data=${data}
+                                           summary
+                     ></fhir-patient-contact summary> `,
+                     summary: this.summary,
+                     config
+                 }
+          )}
+          ${wrap({
+                     key: 'communication',
+                     pluralBase: 'communication',
+                     collection: data.communication,
+                     generator: (data, label, key) => html`
+                     <fhir-patient-communication key=${key}
+                                                 label=${label}
+                                                 .data=${data}
+                                                 summary
+                     ></fhir-patient-communication summary> `,
+                     summary: this.summary,
+                     config
+                 }
+          )}
+          ${wrap({
+                     key: 'generalPractitioner',
+                     pluralBase: 'generalPractitioner',
+                     collection: data.generalPractitioner,
+                     generator: (data, label, key) => html`
+                     <fhir-reference key=${key}
+                                     label=${label}
+                                     .data=${data}
+                     ></fhir-reference> `,
+                     summary: this.summary,
+                     config
+                 }
+          )}
+          <fhir-reference key="managingOrganization"
+                          label="managingOrganization"
+                          .data=${data.managingOrganization}
+                          summary
+          ></fhir-reference>
+          ${wrap({
+                     key: 'link',
+                     pluralBase: 'link',
+                     collection: data.link,
+                     generator: (data, label, key) => html`
+                     <fhir-patient-link key=${key}
+                                        label=${label}
+                                        .data=${data}
+                     ></fhir-patient-link> `,
+                     summary: this.summary,
+                     config
+                 }
+          )}
       `
     ]
   }
 
-  //TODO: how do we handle choices [x] in the strucutred view
-  public renderStructure(config: DisplayConfig, data: PatientData): TemplateResult[] {
+
+  public renderStructure(config: DisplayConfig, data: PatientData, validations: Validations): TemplateResult[] {
+    const { code, datetime, date, boolean, integer } = PrimitiveType
+
     return [
       html`
-          ${(wraps('identifiers', data.identifier, config.verbose, (i, x) => html`
-            <fhir-identifier label='identifier${x}' .data=${i} summary></fhir-identifier >`))}
-        <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive >
+          ${(strap(
+                  {
+                      key: 'identifier',
+                      pluralBase: 'identifier',
+                      collection: data.identifier,
+                      generator: (data, label, key) => html`
+                      <fhir-identifier key=${key} label=${label} .data=${data} summary></fhir-identifier>`,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          ))}
+          <fhir-primitive label="active" .value=${data.active} .type=${boolean} summary></fhir-primitive>
 
-          ${(wraps('names', data.name, config.verbose, (i, x) => html`
-            <fhir-human-name label="name${x}" .data=${i} summary></fhir-human-name >
-        `))}
+          ${(strap({
+                       key: 'name',
+                       pluralBase: 'name',
+                       collection: data.name,
+                       generator: (data, label, key) => html`
+                       <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name>`,
+                       summary: this.summary,
+                       config: this.getDisplayConfig()
+                   }
+          ))}
 
-          ${(wraps('telecoms', data.telecom, config.verbose, (t, x) => html`
-            <fhir-contact-point label="telecom${x}" .data=${t} summary></fhir-contact-point >
-        `))}
-        <fhir-primitive label="gender" .value=${data.gender} .type=${PrimitiveType.code} summary></fhir-primitive >
-        <fhir-primitive label="birthDate" .value=${data.birthDate} .type=${PrimitiveType.date} summary></fhir-primitive >
+          ${(strap({
+                       key: 'telecom',
+                       pluralBase: 'telecom',
+                       collection: data.telecom,
+                       generator: (data, label, key) => html`
+                       <fhir-contact-point key=${key} label="${label}" .data=${data} summary></fhir-contact-point> `,
+                       summary: this.summary,
+                       config: this.getDisplayConfig()
+                   }
+          ))}
+          <fhir-primitive label="gender" .value=${data.gender} .type=${code} summary></fhir-primitive>
+          <fhir-primitive label="birthDate"
+                          .value=${data.birthDate}
+                          .type=${date}
+                          summary
+          ></fhir-primitive>
+          ${choiceOf(this,
+                     'deceased[x]',
+                     validations.errFor('deceased[x]'),
+                     [
+                         {
+                             data: data.deceasedBoolean,
+                             html: (d, n, e) => {
+                                 console.log('deceasedBoolean', d)
+                                 return html`
+                                     <fhir-primitive key="deceasedBoolean"
+                                                     label=${n}
+                                                     .value=${d}
+                                                     .type=${boolean}
+                                                     .errormessage=${e}
+                                                     summary
+                                     ></fhir-primitive>`
+                             }
+                         }, {
+                         data: data.deceasedDateTime,
+                         html: (d, n, e) => html`
+                             <fhir-primitive key="deceasedDateTime"
+                                             label=${n}
+                                             .value=${d}
+                                             .type=${datetime}
+                                             .errormessage=${e}
+                                             summary
+                             ></fhir-primitive>`
+                     }
+                     ])
+          }
 
-        ${isDeceasedBoolean(data.deceased)
-          ? html`
-                    <fhir-primitive label="deceasedBoolean" .value=${data.deceased} .type=${PrimitiveType.boolean} summary></fhir-primitive >`
-          : html`
-                    <fhir-primitive label="deceasedDateTime" .value=${data.deceased} .type=${PrimitiveType.datetime} summary></fhir-primitive >`
-        }
+          ${strap({
+                      key: 'address',
+                      pluralBase: 'address',
+                      collection: data.address,
+                      generator: (data, label, key) => html`
+                      <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          )}
+          <fhir-codeable-concept key="maritalStatus" .data=${data.maritalStatus}></fhir-codeable-concept>
 
-          ${wraps('addresses', data.address, config.verbose, (a, x) => html`
-                    <fhir-address label="address${x}" .data=${a} summary></fhir-address >
-                `
-        )}
+          ${choiceOf(this,
+                     'multipleBirth[x]',
+                     validations.errFor('multipleBirth[x]'),
+                     [
+                         {
+                             data: data.multipleBirthBoolean,
+                             html: (d, n, e) => html`
+                                 <fhir-primitive key='multipleBirthBoolean'
+                                                 label=${n}
+                                                 .value=${d}
+                                                 .type=${boolean}
+                                                 .errormessage=${e}
+                                 ></fhir-primitive>
+                             `
+                         },
+                         {
+                             data: data.multipleBirthInteger,
+                             html: (d, n, e) => html`
+                                 <fhir-primitive key='multipleBirthInteger'
+                                                 label=${n}
+                                                 .value=${d}
+                                                 .type=${integer}
+                                                 .errormessage=${e}
+                                 ></fhir-primitive>
+                             `
+                         }
+                     ])}
+
+          <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
+          ${strap({
+                      key: 'contact',
+                      pluralBase: 'contact',
+                      collection: data.contact,
+                      generator: (data, label, key) => html`
+                      <fhir-patient-contact key=${key}
+                                            label=${label}
+                                            .data=${data}
+                      ></fhir-patient-contact> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          )}
+          ${strap({
+                      key: 'communication',
+                      pluralBase: 'communication',
+                      collection: data.communication,
+                      generator: (data, label, key) => html`
+                      <fhir-patient-communication key=${key}
+                                                  label=${label}
+                                                  .data=${data}
+                      ></fhir-patient-communication> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          )}
+          ${strap({
+                      key: 'generalPractitioner',
+                      pluralBase: 'generalPractitioner',
+                      collection: data.generalPractitioner,
+                      generator: (data, label, key) => html`
+                      <fhir-reference key=${key}
+                                      label=${label}
+                                      .data=${data}
+                      ></fhir-reference> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          )}
+          <fhir-reference key="managingOrganisation"
+                          label="managingOrganisation"
+                          .data=${data.managingOrganization}
+                          summary
+          ></fhir-reference>
+          ${strap({
+                      key: 'link',
+                      pluralBase: 'link',
+                      collection: data.link,
+                      generator: (data, label, key) => html`
+                      <fhir-patient-link key=${key}
+                                         label=${label}
+                                         .data=${data}
+                      ></fhir-patient-link> `,
+                      summary: this.summary,
+                      config: this.getDisplayConfig()
+                  }
+          )}
+
       `
     ]
+
   }
 
 
+  public validate(data: PatientData, validations: Validations, fetched: boolean) {
+    super.validate(data, validations, fetched)
+
+    choiceValidate(data, validations, 'deceased[x]', ['deceasedBoolean', 'deceasedDateTime'])
+    choiceValidate(data, validations, 'multipleBirth[x]', ['multipleBirthBoolean', 'multipleBirthInteger'])
+
+  }
 }

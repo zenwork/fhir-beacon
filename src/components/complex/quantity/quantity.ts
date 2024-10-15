@@ -42,7 +42,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
-                <span slot="after">&nbsp;${after} </span >
+                <span slot="after">&nbsp;${after} </span>
             </fhir-primitive >
         `
       ]

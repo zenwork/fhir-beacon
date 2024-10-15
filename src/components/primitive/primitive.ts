@@ -4,9 +4,9 @@ import {customElement, property, state}                                 from 'li
 import {choose}                                             from 'lit/directives/choose.js'
 import {dataContext, displayConfigContext, FhirDataContext} from '../../internal/contexts'
 import {textHostStyles}                                     from '../../styles'
-import {DisplayConfig, DisplayMode}                                     from '../../types'
-import {isBlank, toBaseElementModeEnum}                                 from '../../utilities'
-import {mustRender}                                                     from '../mustRender'
+import {DisplayConfig, DisplayMode}                         from '../../types'
+import {isBlank, toDisplayMode}                             from '../../utilities'
+import {mustRender}                                         from '../mustRender'
 import {DateTime}                                                       from './primitive.data'
 import {
   toBase64,
@@ -48,6 +48,15 @@ export class Primitive extends LitElement {
         user-select: text;
       }
 
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        align-items: baseline;
+        padding: 0;
+        margin: 0;
+      }
+
       sl-badge {
         padding-left: var(--sl-spacing-x-small);
       }
@@ -62,60 +71,69 @@ export class Primitive extends LitElement {
     `
   ]
 
-  @consume({ context: displayConfigContext, subscribe: true })
+  @consume({ context: displayConfigContext })
   declare displayConfig: DisplayConfig
 
   @consume({ context: dataContext, subscribe: true })
   declare contextData: FhirDataContext
 
-  @property({ reflect: true })
+  @property()
   declare key: string
 
   @property({ reflect: true })
   declare label: string
 
-  @property({ reflect: true })
+  @property()
   public delimiter: string = ': '
 
   @property({ reflect: true })
   declare value: string
 
-  @property({ attribute: 'value-path', reflect: true })
+  @property({ attribute: 'value-path' })
   declare valuePath: string
 
-  @property({ reflect: true })
+  @property()
   declare link: string
 
-  @property({ reflect: true })
+  @property()
   declare context: string
 
-  @property({ type: PrimitiveType, converter: convertToPrimitiveType, reflect: true })
+  @property({ type: PrimitiveType, converter: convertToPrimitiveType })
   public type: PrimitiveType = PrimitiveType.none
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public showProvided: boolean = false
 
-  @property({ type: DisplayMode, converter: toBaseElementModeEnum, reflect: true })
+  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public showerror: boolean = false
 
   // override error message only shown if type validation fails
   @property({ type: String, reflect: true })
   declare errormessage: string
 
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   declare variant: string
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public verbose: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public summary: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public summaryonly: boolean = false
+
+  @property({ type: Boolean })
+  public translate: boolean = false
+
+  @property({ type: Boolean })
+  public trialuse: boolean = false
+
+  @property({ type: Boolean })
+  public required: boolean = false
 
   @state()
   private error: boolean = false
@@ -135,17 +153,16 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected willUpdate(changed: PropertyValues) {
-
+    super.willUpdate(changed)
     if (this.displayConfig) {
       this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
       this.summaryonly = this.displayConfig.summaryonly
     }
-
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
-      if (this.value && this.valuePath) {
+      if (!isBlank(this.value) && this.valuePath) {
         console.warn('primitive: valuePath is overriding value attribute. Do not set both')
       }
 
@@ -158,7 +175,7 @@ export class Primitive extends LitElement {
       }
     }
 
-    const watchedHaveChanged = changed.has('value') || changed.has('type')
+    const watchedHaveChanged = changed.has('value') || changed.has('type') || changed.has('required')
     if (watchedHaveChanged) {
       if (!isBlank(this.value) && this.type) {
         choose(this.type, [
@@ -187,6 +204,11 @@ export class Primitive extends LitElement {
       }
     }
 
+    if (isBlank(this.value) && this.required && !this.verbose) {
+      this.presentableError = 'Error: this property is required'
+      this.error = true
+    }
+
     if (changed.has('errormessage')) {
       if (!isBlank(this.errormessage)) {
         this.presentableError = this.errormessage
@@ -200,7 +222,8 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected render(): unknown {
-    if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary)
+
+    if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
         && !this.valuePath
         && this.mode !== DisplayMode.override) {
       return html``
@@ -220,35 +243,32 @@ export class Primitive extends LitElement {
     const elements: any[] = []
 
     if (this.getLabel()) elements.push(html`
-        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label >&nbsp`)
+        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label>&nbsp`)
 
-    if (this.value)
+    if (!isBlank(this.value))
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
                              : this.presentableValue} link=${this.link} .variant=${this.variant}
           >
-              <span slot="before"><slot name="before"></slot ></span >
-              <span slot="after"><slot name="after"></slot ></span >
-          </fhir-value >`)
+              <span slot="before"><slot name="before"></slot></span>
+              <span slot="after"><slot name="after"></slot></span>
+          </fhir-value>`)
 
     if (this.context && this.verbose)
       elements.push(html`
           <fhir-context .text="${this.context ?? ''}${this.context && this.verbose ? ' - ' : ''}${this.verbose
                                                                                                   ? this.type
                                                                                                   : ''}"
-          ></fhir-context >`)
+          ></fhir-context>`)
 
-    if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
-        <sl-badge pill>&sum;</sl-badge >`)
+    if (this.mode === DisplayMode.structure) elements.push(html`
+        <fhir-badge-group ?required=${this.required} ?summary=${this.summary}></fhir-badge-group>`)
 
-    return elements.length > 1 || this.value || this.verbose ? html`
-        <fhir-primitive-wrapper > ${elements}</fhir-primitive-wrapper >` : html``
+    return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
+        <li> ${elements}</li>` : html``
   }
 
-  /**
-   *
-   */
   private getLabel = () => {
     let label = this.key
     if (this.label) label = this.label
@@ -256,22 +276,36 @@ export class Primitive extends LitElement {
     return asReadable(label, 'lower')
   }
 
-  /**
-   *
-   */
   private renderError = (): TemplateResult => {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
 
-    return !isBlank(this.value) || this.verbose
-           ? html`
-                <fhir-primitive-wrapper >
-                    <fhir-label .text=${this.getLabel()} delimiter=${this.delimiter} variant="error"></fhir-label >&nbsp;
-                    <fhir-value .text=${this.value} link=${this.link} variant="error"></fhir-value >
-                    ${this.showerror ? html`
-                        <fhir-error text=${errors.join(' | ')}></fhir-error >` : nothing}
-                </fhir-primitive-wrapper >`
+    return !isBlank(this.value) || this.verbose || this.required
+           ? html` ${this.showerror}
+                <li>
+                    <fhir-label
+                            text=${this.getLabel()}
+                            delimiter=${this.delimiter}
+                            variant="error"
+                    ></fhir-label>&nbsp;
+                    <fhir-value
+                            text=${this.value}
+                            link=${this.link}
+                            variant="error"
+                    ></fhir-value>
+                                  ${this.mode === DisplayMode.structure
+                                    ? html`
+                                              <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
+                                              ></fhir-badge-group>` : nothing}
+                                  ${this.showerror
+                                    ? html`
+                                              <fhir-error
+                                                      text=${errors.join(
+                                                              ' | ')}
+                                              ></fhir-error>`
+                                    : nothing}
+                </li>`
            : html``
   }
 
@@ -303,8 +337,8 @@ export class Primitive extends LitElement {
     choose(this.type, [
       [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
       [PrimitiveType.instant, () => (val = asDateTime(val as DateTime))],
-      [PrimitiveType.uri_type, () => (val = asReadable(val as string))]
-      // [PrimitiveType.base64, () => val = asWrapped(val as string,100)],
+      [PrimitiveType.uri_type, () => (val = asReadable(val as string))],
+      [PrimitiveType.uri_type, () => (val = String(val))]
     ])
     return val
   }

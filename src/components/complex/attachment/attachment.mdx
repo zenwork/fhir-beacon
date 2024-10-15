@@ -1,0 +1,19 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './attachment.stories'
+
+<Meta of={Stories}/>
+
+# Attachment
+
+FHIR spec description in a couple of lines
+
+reference:
+* [ FHIR Reference (R5)](http://hl7.org/fhir/datatypes.html#attachment)
+
+
+<Canvas of={Stories.Display}/>
+
+<Canvas of={Stories.Display2}/>
+
+<Canvas of={Stories.Structure}/>

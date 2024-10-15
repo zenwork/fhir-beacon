@@ -51,9 +51,11 @@ export class Reference extends BaseElement<ReferenceData> {
                               value=${this.mappedResource?.resourceType || 'contained'}
                               summary
                       ></fhir-primitive >
-                      <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}">
+                      <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}"
+                                      ?summaryonly=${this.getDisplayConfig().summaryonly}
+                      >
                           ${renderResourceComponent(this.mappedResource, this.getDisplayConfig())}
-                      </fhir-wrapper >
+                      </fhir-wrapper>
 
                   `
               ],
@@ -152,7 +154,7 @@ export class Reference extends BaseElement<ReferenceData> {
 
       if (isContainedRef) this.referenceType = ReferenceType.contained
 
-      if (this.containedData.length > 0) {
+      if (this.containedData && this.containedData.length > 0) {
         const containedDataExists = this.containedData.length > 0
 
         if (isContainedRef && containedDataExists) {

@@ -1,7 +1,8 @@
 import {html, TemplateResult}           from 'lit'
 import {customElement}                  from 'lit/decorators.js'
 import {BaseElement, Decorated, errors} from '../../../internal'
-import {strap, wrapLines}               from '../../../shell/layout/wrapCollection'
+import {strap}     from '../../../shell/layout/wrapper/strap'
+import {wrapLines} from '../../../shell/layout/wrapper/wrapLines'
 import {DisplayConfig}                  from '../../../types'
 import {CodeableConceptData}            from './codeable-concept.data'
 
@@ -19,30 +20,35 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                       'coding',
                       data.coding ?? [],
                       this.verbose,
-                      (data, label) => html`
-                          <fhir-coding key="coding" .label=${label} .data=${data} summary></fhir-coding >`,
+                      (data, label, key) => html`
+                          <fhir-coding key=${key} .label=${label} .data=${data} summary headless></fhir-coding>`,
                       true,
                       this.summaryonly
           )}
-
-          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive >`
+          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`
     ]
 
   }
 
   public renderStructure(config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
     return [
-      strap('coding',
-            'coding',
-            data.coding ?? [],
-            this.verbose,
-            (code, label) => html`
-                <fhir-coding key="coding" label="${label}" .errors=${data[errors]} .data=${code} summary></fhir-coding >`,
-            true,
-            this.summaryonly
+      strap({
+              key: 'coding',
+              pluralBase: 'coding',
+              collection: data.coding ?? [],
+              generator: (code, label) => html`
+                  <fhir-coding key="coding"
+                               label="${label}"
+                               .errors=${data[errors]}
+                               .data=${code}
+                               summary
+                  ></fhir-coding>`,
+              summary: true,
+              config: this.getDisplayConfig()
+            }
       ),
       html`
-          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive > `
+          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive> `
     ]
   }
 }

@@ -11,8 +11,10 @@ export type Code = string
 
 /**
  * Marker type to distinguish a URL object that has passed the FHIR URI requirements
+ * TODO: rename to Uri
  */
 export type URI = string
+export type Url = string
 
 /**
  * Represents a decimal number with maximum of 18 digits.

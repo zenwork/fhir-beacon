@@ -11,7 +11,7 @@ const meta = {
   title: path,
   component: elementName,
   ...renderTemplateInShell((args: ShellArgs) => html`
-      <fhir-contact-point .data=${args.data} summary />`
+      <fhir-contact-point .data=${args.data} summary ?headless=${args.headless}></fhir-contact-point>`
   )
 }
 
@@ -24,7 +24,8 @@ export const Display: Story = {
     mode: 'display',
     showerror: false,
     verbose: false,
-    open: true
+    open: true,
+    headless: true
   }
 }
 

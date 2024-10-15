@@ -42,11 +42,11 @@ export class Address extends BaseElement<AddressData> {
           ></fhir-primitive >
           ${hasSome(data.line, this.verbose)
             ? wrapLines('',
-                        'street',
+                        'line',
                         data.line,
                         config.verbose,
-                        (l) => html`
-                            <fhir-primitive .value=${l} .type=${PrimitiveType.fhir_string} summary>
+                        (d, l, k) => html`
+                            <fhir-primitive key=${k} label=${l} .value=${d} .type=${PrimitiveType.fhir_string} summary>
                                 <span slot="after">,</span >
                             </fhir-primitive >
                         `

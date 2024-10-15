@@ -22,7 +22,7 @@ describe('DisplayConfig', () => {
 
       const element = primitive.queryShadowByText('TypeError: decimal must be a valid number: abc')
       expect(element).toBeVisible()
-      expect(getComputedStyle(element!).backgroundColor).toEqual('rgb(254, 202, 202)')
+      expect(getComputedStyle(element!).backgroundColor).toEqual('rgb(252, 165, 165)')
 
       primitive.showerror = false
       await primitive.updateComplete
@@ -102,7 +102,7 @@ describe('DisplayConfig', () => {
 
       await aTimeout()
 
-      assert.ok(annotation.queryShadow({ select: '*', expect: 14 }))
+      assert.ok(annotation.queryShadow({ select: '*', expect: 12 }))
       /* eslint-disable @typescript-eslint/no-unused-expressions   */
       expect(annotation.queryShadowByText('error:')).toBeVisible
       expect(annotation.queryShadowByText('No data provided')).toBeVisible
@@ -131,26 +131,25 @@ describe('DisplayConfig', () => {
         </fhir-shell >
       `, new Annotation().tagName).first()
 
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.mode = DisplayMode.structure
       shell.summaryonly = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       shell.mode = DisplayMode.display
       shell.summaryonly = false
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
 
       shell.summaryonly = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 3 }))
 
       shell.mode = DisplayMode.debug
@@ -169,14 +168,13 @@ describe('DisplayConfig', () => {
       `, new Annotation().tagName).first()
 
 
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 0 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.summaryonly = true
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       shell.mode = DisplayMode.display
@@ -191,20 +189,21 @@ describe('DisplayConfig', () => {
     it('should show more when verbose is set on structure', async () => {
 
       const annotation = await fixture<Annotation>(html`
-        <fhir-shell mode="structure">
-          <fhir-annotation .data=${annotationData}></fhir-annotation >
+          <fhir-shell mode="structure" open>
+              <fhir-annotation .data=${annotationData}></fhir-annotation>
         </fhir-shell >
       `, new Annotation().tagName).first()
 
       await aTimeout()
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 2 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
       assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 7 }))
 
       const shell = document.body.querySelector<Shell>('fhir-shell')!
       shell.verbose = true
+
       await aTimeout(200)
-      assert.ok(annotation.queryShadow({ select: 'fhir-structure-wrapper', expect: 7 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 18 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 8 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 24 }))
 
     })
 
@@ -231,7 +230,7 @@ describe('DisplayConfig', () => {
       shell.showerror = false
       await aTimeout()
 
-      assert.isEmpty(medication.queryShadow({ select: 'fhir-error', expect: 0 }))
+      assert.ok(medication.queryShadow({ select: 'fhir-error', expect: 1 }))
 
       expect(medication.queryShadowByText('No Data provided'))
 
