@@ -1,10 +1,10 @@
-import {html, TemplateResult} from 'lit'
-import {map}                  from 'lit/directives/map.js'
-import {asReadable}           from '../../../components'
-import {DisplayConfig} from '../../../types'
-import {hasMany, hasOnlyOne}  from '../directives'
-import {pluralize}            from '../pluralize'
-import {show}                 from '../show'
+import {html, TemplateResult}       from 'lit'
+import {map}                        from 'lit/directives/map.js'
+import {asReadable}                 from '../../../components'
+import {DisplayConfig, DisplayMode} from '../../../types'
+import {hasMany, hasOnlyOne}        from '../directives'
+import {pluralize}                  from '../pluralize'
+import {show}                       from '../show'
 
 type WrapperConfig<T> = {
   key: string,
@@ -78,10 +78,10 @@ export function strap<T>({
 
     }
 
-    if (config.verbose) {
+    if (config.verbose && config.mode === DisplayMode.structure) {
       return html`
-          <fhir-wrapper-2 label="${label}" ?headless=${summary} ?open=${config.open} ?summaryonly=${config.summaryonly}>
-              <fhir-empty-list></fhir-empty-list>
+          <fhir-wrapper-2 label="${label}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
+              ${generator(null as unknown as T, '*', key)}
           </fhir-wrapper-2>`
     }
   }

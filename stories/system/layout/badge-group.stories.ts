@@ -10,24 +10,30 @@ type Story = StoryObj;
 
 export const BadgeGroup1: Story = {
   render: () => html`
-      <fhir-badge-group badge-resource='Human Name' badge-summary badge-constraint></fhir-badge-group>
+      <fhir-badge-group resource='Human Name' summary constraint required></fhir-badge-group>
   `
 }
 
 export const BadgeGroup2: Story = {
   render: () => html`
-      <fhir-badge-group badge-resource='Human Name'></fhir-badge-group>
+      <fhir-badge-group resource='Human Name'></fhir-badge-group>
   `
 }
 
 export const BadgeGroup3: Story = {
   render: () => html`
-      <fhir-badge-group badge-summary></fhir-badge-group>
+      <fhir-badge-group summary></fhir-badge-group>
   `
 }
 
 export const BadgeGroup4: Story = {
   render: () => html`
-      <fhir-badge-group badge-constraint></fhir-badge-group>
+      <fhir-badge-group constraint></fhir-badge-group>
+  `
+}
+
+export const BadgeGroup5: Story = {
+  render: () => html`
+      <fhir-badge-group required></fhir-badge-group>
   `
 }

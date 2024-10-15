@@ -1,8 +1,8 @@
-import {html, TemplateResult} from 'lit'
-import {map}                 from 'lit/directives/map.js'
-import {DisplayConfig}       from '../../../types'
-import {hasMany, hasOnlyOne} from '../directives'
-import {pluralize}            from '../pluralize'
+import {html, TemplateResult}       from 'lit'
+import {map}                        from 'lit/directives/map.js'
+import {DisplayConfig, DisplayMode} from '../../../types'
+import {hasMany, hasOnlyOne}        from '../directives'
+import {pluralize}                  from '../pluralize'
 
 type WrapConfig<T> = {
   key: string,
@@ -52,7 +52,6 @@ export function wrap<T>({
           <fhir-wrapper-2 label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
               ${map(collection,
                     (data: T, idx) => html`
-
                         ${generator(data, `${idx + 1}`, key)}
                     `)}
           </fhir-wrapper-2>
@@ -61,18 +60,17 @@ export function wrap<T>({
 
     if (hasOnlyOne(collection)) {
       if (config.verbose) {
-        return html`
-
-            ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-
-        `
+        return html` ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}`
       }
 
+      return html` ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)} `
+    }
+
+    if (config.verbose && config.mode === DisplayMode.display) {
       return html`
-
-          ${map(collection, (data: T) => html` ${generator(data, pluralBase, key)} `)}
-
-      `
+          <fhir-wrapper-2 label="${pluralBase}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
+              <fhir-empty-list></fhir-empty-list>
+          </fhir-wrapper-2>`
     }
 
   }

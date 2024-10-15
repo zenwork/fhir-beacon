@@ -266,7 +266,6 @@ export class Patient extends DomainResource<PatientData> {
                       <fhir-patient-communication key=${key}
                                                   label=${label}
                                                   .data=${data}
-
                       ></fhir-patient-communication> `,
                       summary: this.summary,
                       config: this.getDisplayConfig()

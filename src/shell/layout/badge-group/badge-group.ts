@@ -9,14 +9,18 @@ import {badgeTemplates, BadgeType}                  from './badgeTemplates'
 export class BadgeGroup extends LitElement {
   static styles = [hostStyles, componentStyles]
 
-  @property({ type: String, attribute: 'badge-resource' })
-  public badgeResource: string = ''
+  @property({ type: String })
+  public resource: string = ''
 
-  @property({ type: Boolean, attribute: 'badge-summary' })
-  public badgeSummary: boolean = false
+  @property({ type: Boolean })
+  public summary: boolean = false
 
-  @property({ type: Boolean, attribute: 'badge-constraint' })
-  public badgeConstraint: boolean = false
+  @property({ type: Boolean })
+  public constraint: boolean = false
+
+
+  @property({ type: Boolean })
+  public required: boolean = false
 
   @state()
   declare public badges: { label: string, type: BadgeType }[]
@@ -25,19 +29,27 @@ export class BadgeGroup extends LitElement {
   protected willUpdate(changes: PropertyValues) {
     super.willUpdate(changes)
 
-    if (changes.has('badgeResource') || changes.has('badgeSummary') || changes.has('badgeConstraint')) {
+    if (changes.has('resource')
+        || changes.has('summary')
+        || changes.has('constraint')
+        || changes.has(
+        'required')) {
       this.badges = []
 
-      if (this.badgeSummary) {
+      if (this.summary) {
         this.badges.push({ label: '∑', type: BadgeType.summary })
       }
 
-      if (this.badgeConstraint) {
+      if (this.constraint) {
         this.badges.push({ label: 'C', type: BadgeType.constraint })
       }
 
-      if (!isBlank(this.badgeResource)) {
-        this.badges.push({ label: this.badgeResource, type: BadgeType.resource })
+      if (this.required) {
+        this.badges.push({ label: 'R', type: BadgeType.required })
+      }
+
+      if (!isBlank(this.resource)) {
+        this.badges.push({ label: this.resource, type: BadgeType.resource })
       }
     }
   }

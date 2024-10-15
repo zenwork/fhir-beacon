@@ -29,4 +29,6 @@ export class PatientLink extends Backbone<PatientLinkData> {
       `
     ]
   }
+
+
 }

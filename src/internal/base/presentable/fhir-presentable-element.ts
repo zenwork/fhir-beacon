@@ -38,31 +38,34 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
   static styles = [hostStyles, componentStyles]
 
-  @property({ reflect: true })
+  @property()
   public label: string = ''
 
-  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
+  @property({ type: DisplayMode, converter: toDisplayMode })
   declare mode: DisplayMode
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public open: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public forceclose: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public verbose: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public showerror: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public summary: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
+  public required: boolean = false
+
+  @property({ type: Boolean })
   public summaryonly: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public headless: boolean = false
 
   protected templateGenerators: Generators<D> = NullGenerators()
@@ -153,7 +156,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       if (this.override()) {
         this.templateGenerators.override.body.push(this.renderOverride)
       } else {
-        // console.log(this.type, this.extendedData)
         if (this.mode) {
           switch (this.mode) {
             case DisplayMode.debug:
@@ -302,6 +304,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                 badge-resource=${asReadable(this.type)}
                                 ?open=${this.open}
                                 ?badge-summary=${this.summary}
+                                ?badge-required=${this.required}
                                 ?summary=${this.summary}
                                 ?summaryonly=${this.getDisplayConfig().summaryonly}
                 >

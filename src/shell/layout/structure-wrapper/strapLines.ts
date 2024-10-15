@@ -1,6 +1,5 @@
 import {html, TemplateResult} from 'lit'
 import {map}                  from 'lit/directives/map.js'
-import {asReadable}           from '../../../components'
 import {hasSome}              from '../directives'
 import {show}                 from '../show'
 
@@ -24,8 +23,6 @@ export function strapLines(key: string,
 ): TemplateResult {
   if (!summaryMode || summaryMode && summary) {
 
-    const k = asReadable(key, 'lower')
-
     if (hasSome(collection)) {
       if (verbose) {
         return html`
@@ -45,7 +42,7 @@ export function strapLines(key: string,
 
     if (verbose) {
       return html`
-          <fhir-wrapper-2 label="${k} > ${label}" ?summaryonly=${summaryMode}>
+          <fhir-wrapper-2 label="${label}" ?summaryonly=${summaryMode}>
               <fhir-empty-list ></fhir-empty-list >
           </fhir-wrapper-2>`
     }

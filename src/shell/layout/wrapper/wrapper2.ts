@@ -35,6 +35,9 @@ export class Wrapper2 extends LitElement {
   @property({ type: Boolean, attribute: 'badge-constraint' })
   public badgeConstraint: boolean = false
 
+  @property({ type: Boolean, attribute: 'badge-required' })
+  public badgeRequired: boolean = false
+
   @property({ type: Boolean })
   public open: boolean = false
 
@@ -72,9 +75,10 @@ export class Wrapper2 extends LitElement {
           const summary = html`
               <div slot="summary">
                   ${label}
-                  <fhir-badge-group badge-resource=${isDefined(this.badgeResource)}
-                                    ?badge-summary=${this.badgeSummary}
-                                    ?badge-constraint=${this.badgeConstraint}
+                  <fhir-badge-group resource=${isDefined(this.badgeResource)}
+                                    ?summary=${this.badgeSummary}
+                                    ?constraint=${this.badgeConstraint}
+                                    ?required=${this.badgeRequired}
                   ></fhir-badge-group>
               </div>
               <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>

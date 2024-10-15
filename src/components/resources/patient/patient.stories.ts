@@ -1,4 +1,5 @@
 import {StoryObj} from '@storybook/web-components'
+import {argtypes} from '../../../../stories/storybook-utils'
 import {data}     from './patient.story.data'
 
 const path = 'Components/Resources/Patient/Patient'
@@ -7,13 +8,7 @@ const elementName = 'fhir-patient'
 const meta = {
   title: path,
   component: elementName,
-  argTypes: {
-    mode: { options: ['display', 'structure', 'debug'], control: { type: 'inline-radio' } },
-    verbose: { options: [false, true], control: { type: 'boolean' } },
-    summary: { options: [false, true], control: { type: 'boolean' } },
-    showerror: { options: [false, true], control: { type: 'boolean' } },
-    open: { options: [false, true], control: { type: 'boolean' } }
-  }
+  ...argtypes()
 }
 
 export default meta

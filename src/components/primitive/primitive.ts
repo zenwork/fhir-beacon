@@ -71,68 +71,68 @@ export class Primitive extends LitElement {
     `
   ]
 
-  @consume({ context: displayConfigContext, subscribe: true })
+  @consume({ context: displayConfigContext })
   declare displayConfig: DisplayConfig
 
   @consume({ context: dataContext, subscribe: true })
   declare contextData: FhirDataContext
 
-  @property({ reflect: true })
+  @property()
   declare key: string
 
   @property({ reflect: true })
   declare label: string
 
-  @property({ reflect: true })
+  @property()
   public delimiter: string = ': '
 
   @property({ reflect: true })
   declare value: string
 
-  @property({ attribute: 'value-path', reflect: true })
+  @property({ attribute: 'value-path' })
   declare valuePath: string
 
-  @property({ reflect: true })
+  @property()
   declare link: string
 
-  @property({ reflect: true })
+  @property()
   declare context: string
 
-  @property({ type: PrimitiveType, converter: convertToPrimitiveType, reflect: true })
+  @property({ type: PrimitiveType, converter: convertToPrimitiveType })
   public type: PrimitiveType = PrimitiveType.none
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public showProvided: boolean = false
 
   @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public showerror: boolean = false
 
   // override error message only shown if type validation fails
   @property({ type: String, reflect: true })
   declare errormessage: string
 
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   declare variant: string
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public verbose: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public summary: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public summaryonly: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public translate: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public trialuse: boolean = false
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   public required: boolean = false
 
   @state()
@@ -153,13 +153,13 @@ export class Primitive extends LitElement {
    * @protected
    */
   protected willUpdate(changed: PropertyValues) {
+    super.willUpdate(changed)
     if (this.displayConfig) {
       this.mode = this.displayConfig.mode
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
       this.summaryonly = this.displayConfig.summaryonly
     }
-
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
       if (!isBlank(this.value) && this.valuePath) {
@@ -202,10 +202,9 @@ export class Primitive extends LitElement {
           [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
         ])
       }
-
     }
 
-    if (isBlank(this.value) && this.required) {
+    if (isBlank(this.value) && this.required && !this.verbose) {
       this.presentableError = 'Error: this property is required'
       this.error = true
     }
@@ -263,16 +262,13 @@ export class Primitive extends LitElement {
                                                                                                   : ''}"
           ></fhir-context>`)
 
-    if (this.summary && this.mode == DisplayMode.structure) elements.push(html`
-        <fhir-badge-group badge-summary></fhir-badge-group>`)
+    if (this.mode === DisplayMode.structure) elements.push(html`
+        <fhir-badge-group ?required=${this.required} ?summary=${this.summary}></fhir-badge-group>`)
 
     return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
         <li> ${elements}</li>` : html``
   }
 
-  /**
-   *
-   */
   private getLabel = () => {
     let label = this.key
     if (this.label) label = this.label
@@ -280,16 +276,13 @@ export class Primitive extends LitElement {
     return asReadable(label, 'lower')
   }
 
-  /**
-   *
-   */
   private renderError = (): TemplateResult => {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
 
     return !isBlank(this.value) || this.verbose || this.required
-           ? html`
+           ? html` ${this.showerror}
                 <li>
                     <fhir-label
                             text=${this.getLabel()}
@@ -301,6 +294,10 @@ export class Primitive extends LitElement {
                             link=${this.link}
                             variant="error"
                     ></fhir-value>
+                                  ${this.mode === DisplayMode.structure
+                                    ? html`
+                                              <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
+                                              ></fhir-badge-group>` : nothing}
                                   ${this.showerror
                                     ? html`
                                               <fhir-error
