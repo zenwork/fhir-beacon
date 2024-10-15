@@ -43,12 +43,15 @@ jobs:
       - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
         name: Install playwright browsers
         run: npx playwright install --with-deps
+        working-directory: ./packages/library
 
       - name: Run tests
         run: npm run vitest
+        working-directory: ./packages/library
 
       - name: Publish
         run: npm run publish
+        working-directory: ./packages/library
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -57,7 +60,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './storybook-static'
+          path: './packages/library/storybook-static'
 
       - name: Deploy to GitHub Pages
         id: deployment

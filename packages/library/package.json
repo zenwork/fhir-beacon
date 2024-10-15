@@ -6,7 +6,7 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "autobarrel": "autobarrel --watch --config ./autobarrel.json",
+        "autobarrel": "autobarrel --watch --config autobarrel.json",
         "eslint": "eslint",
         "eslint::fix": "eslint --fix",
         "manifest::build": "cem analyze --config build/custom-elements-manifest.config.js",
