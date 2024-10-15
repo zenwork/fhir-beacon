@@ -14,16 +14,15 @@ permissions:
   id-token: write
   checks: write
 
-defaults:
-  run:
-    working-directory: ./packages/library
-
 jobs:
   publish:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/library
 
     steps:
       - name: Checkout
