@@ -30,6 +30,7 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
+          cache-dependency-path: packages/library/package-lock.json
       - run: npm ci
 
       - name: Use playwright binaries cache
@@ -45,7 +46,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npm run vitest
+        run: npm run vitest --prefix packages/library
 
       - name: Publish
         run: npm run publish
@@ -57,21 +58,19 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './storybook-static'
+          path: './packages/library/storybook-static'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: ./path-to-your-built-site
 
       - name: Store test results
         uses: actions/upload-artifact@v4
         with:
           name: junit-test-results
-          path: ./results/*.xml
+          path: ./packages/library/results/*.xml
 
       - name: Publish test results
         uses: mikepenz/action-junit-report@v4
