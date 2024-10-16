@@ -49,7 +49,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npm run vitest
+        run: npm run vitest --prefix packages/library
 
       - name: Publish
         run: npm run publish
