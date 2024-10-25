@@ -2,6 +2,7 @@ import {defineWorkspace} from 'vitest/config'
 
 const headless = !!process.env.HEADLESS && process.env.HEADLESS === 'true'
 console.log('headless: ', headless)
+console.log('cwd:', process.cwd())
 
 export default defineWorkspace([
   {
@@ -12,7 +13,7 @@ export default defineWorkspace([
     }
   },
   {
-    esbuild: false,
+
     test: {
       name: 'browser',
       globals: false,
@@ -29,7 +30,7 @@ export default defineWorkspace([
       },
       typecheck: {
         enabled: true,
-        tsconfig: './tsconfig.test.json'
+        tsconfig: './tsconfig.json'
       },
       testTimeout: 5000
     }

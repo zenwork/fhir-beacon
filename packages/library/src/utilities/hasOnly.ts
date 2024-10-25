@@ -1,6 +1,3 @@
-import is from '@sindresorhus/is'
-import undefined = is.undefined
-
 /**
  * Check if object has only one specific property defined. This is useful with some types that have no required
  * properties and require different display logic based on what is defined.
