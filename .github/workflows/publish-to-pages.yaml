@@ -30,6 +30,7 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
+          cache-dependency-path: packages/library/package-lock.json
       - run: |
           cd packages/library
           npm ci
