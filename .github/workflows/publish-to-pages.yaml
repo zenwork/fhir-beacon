@@ -52,7 +52,7 @@ jobs:
       - name: Run tests
         run: |
           cd packages/library
-          npm run vitest --prefix packages/library
+          npm run vitest 
 
       - name: Publish
         run: |
