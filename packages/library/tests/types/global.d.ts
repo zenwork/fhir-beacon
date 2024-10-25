@@ -24,9 +24,10 @@ declare global {
      *
      * Specify the return type if one specific subtype of HTMLElement is expected.
      *
-     * @param {Query} - The number of expected results(default to 1 if not specified) and CSS selector to match against. selector can be a single string or an
-     * array of selectors.
-     * @returns {HTMLElement} - The matched descendant elements, or null if no matches were found. returns an array or a single value if only one found.
+     * @param {Query} - The number of expected results(default to 1 if not specified) and CSS selector to match
+     *   against. selector can be a single string or an array of selectors.
+     * @returns {HTMLElement} - The matched descendant elements, or null if no matches were found. returns an array or
+     *   a single value if only one found.
      * @throws {BeaconTestError} - If no or an unexpected number of elements found .
      */
     queryShadow<T extends HTMLElement | HTMLElement[]>({ select, expect }: Query): T
