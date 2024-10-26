@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>app</title>
+
+    <base href="/"/>
+
+    <!-- This meta viewport ensures the webpage's dimensions change according to the device it's on. This is called Responsive Web Design.-->
+    <meta content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+          name="viewport"
+    />
+    <meta content="This is a app app" name="description"/>
+
+    <meta content="#181818" media="(prefers-color-scheme: dark)" name="theme-color"/>
+    <meta content="#f3f3f3" media="(prefers-color-scheme: light)" name="theme-color"/>
+
+    <!-- These meta tags are Apple-specific, and set the web application to run in full-screen mode with a black status bar. Learn more at https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="app" name="apple-mobile-web-app-title"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+
+    <!-- This tag is used by the app CLI to identify template projects. Don't remove if you are using the CLI. -->
+    <meta content="pwa-starter" name="pwa-starter-template-identity"/>
+
+    <!-- Imports an icon to represent the document. -->
+    <link href="/assets/icons/icon_24.png" rel="icon" type="image/png"/>
+
+    <!-- Imports the manifest to represent the web application. A web app must have a manifest to be a PWA. -->
+    <link href="manifest.json" rel="manifest"/>
+
+    <!-- light mode and dark mode CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/dist/themes/light.css" media="(prefers-color-scheme:light)"
+          rel="stylesheet"
+    >
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/dist/themes/dark.css" media="(prefers-color-scheme:dark)"
+          onload="document.documentElement.classList.add('sl-theme-dark');"
+          rel="stylesheet"
+    >
+
+    <script type="module">
+        import {setBasePath} from '@shoelace-style/shoelace/dist/utilities/base-path.js'
+
+        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/')
+    </script>
+
+    <script src="/src/app-index.ts" type="module"></script>
+</head>
+
+<body>
+    <!-- Our app-index web component. This component is defined in src/pages/app-index.ts-->
+    <app-index></app-index>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.onload = () => {
+                navigator.serviceWorker.register(
+                    '/sw.js'
+                )
+            }
+        }
+    </script>
+</body>
+
+</html>

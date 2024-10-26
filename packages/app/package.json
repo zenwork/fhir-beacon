@@ -1,0 +1,42 @@
+{
+    "name": "app",
+    "version": "0.0.1",
+    "description": "A starter kit for building PWAs!",
+    "main": "index.js",
+    "scripts": {
+        "dev-server": "vite --open",
+        "dev": "deno task dev-server",
+        "dev-task": "vite",
+        "deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
+        "build": "tsc && vite build",
+        "start": "deno run dev",
+        "start-remote": "vite --host"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@shoelace-style/shoelace": "^2.17.1",
+        "@thepassle/app-tools": "^0.9.12",
+        "lit": "^3.2.1",
+        "urlpattern-polyfill": "^10.0.0",
+        "workbox-build": "^7.1.1",
+        "workbox-core": "^7.1.0",
+        "workbox-precaching": "^7.1.0"
+    },
+    "devDependencies": {
+        "ts-lit-plugin": "^2.0.2",
+        "typescript": "^5.6.2",
+        "vite": "^5.4.8",
+        "vite-plugin-pwa": "^0.20.5"
+    },
+    "prettier": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "quoteProps": "consistent",
+        "trailingComma": "es5",
+        "endOfLine": "crlf",
+        "bracketSpacing": true
+    }
+}
