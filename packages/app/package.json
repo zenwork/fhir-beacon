@@ -4,8 +4,8 @@
     "description": "A starter kit for building PWAs!",
     "main": "index.js",
     "scripts": {
-        "dev-server": "vite --open",
-        "dev": "deno task dev-server",
+        "dev-server": "vite",
+        "dev": "deno run dev-server",
         "dev-task": "vite",
         "deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
         "build": "tsc && vite build",
@@ -17,7 +17,11 @@
     "dependencies": {
         "@shoelace-style/shoelace": "^2.17.1",
         "@thepassle/app-tools": "^0.9.12",
+        "@types/pouchdb-browser": "^6.1.5",
+        "events": "^3.3.0",
         "lit": "^3.2.1",
+        "@lit-labs/router": "^0.1.3",
+        "pouchdb-browser": "^9.0.0",
         "urlpattern-polyfill": "^10.0.0",
         "workbox-build": "^7.1.1",
         "workbox-core": "^7.1.0",

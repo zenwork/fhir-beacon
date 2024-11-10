@@ -28,4 +28,7 @@ describe('MustRender', () => {
   it('should pass with true', () => {
     assert.isTrue(mustRender(true), 'no data, structure, not verbose')
   })
+  it('should fail when summary=false and summaryonly=true', () => {
+    assert.isFalse(mustRender('foo', DisplayMode.structure, false, true, false), 'summary=false and summaryonly=true')
+  })
 })

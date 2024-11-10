@@ -1,4 +1,5 @@
-import {URI} from '../../components/primitive/primitive.data'
+import {URI}                              from '../../components/primitive/primitive.data'
+import {DomainResourceData, ResourceData} from '../resource'
 
 type ErrorKeys = '_root' | string
 export const errors = Symbol('errors')
@@ -17,6 +18,7 @@ export type Decoration = {
   [meta]: MetaDecoration
 
 }
+
 
 /**
  * Represents a data structure that holds the information of a FHIR element.
@@ -74,7 +76,7 @@ export interface Validations {
  *
  * @typeparam T - The base data object that extends `FhirElementData`.
  */
-export type Decorated<T extends FhirElementData> = T & Decoration
+export type Decorated<T extends FhirElementData | DomainResourceData> = T & Decoration
 
 export class ValidationsImpl<D extends FhirElementData> implements Validations {
   private readonly data: Decorated<D>
@@ -120,7 +122,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
  * @type {FhirElementData}
  * @const
  */
-export const NoDataObject: FhirElementData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
+export const NoDataObject: FhirElementData | ResourceData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
 export function decorated<T extends FhirElementData>(data?: T): Decorated<T> {
   const d: any = data !== NoDataObject ? data : {}

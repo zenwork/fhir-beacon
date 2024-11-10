@@ -1,73 +1,21 @@
-import {css, html, LitElement}   from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {resolveRouterPath}       from '../router'
+import {html, LitElement} from 'lit'
+import {customElement}    from 'lit/decorators.js'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 
 @customElement('app-header')
 export class AppHeader extends LitElement {
-  static styles = css`
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--app-color-primary);
-      color: white;
-      padding: 12px;
-      padding-top: 4px;
 
-      position: fixed;
-      left: env(titlebar-area-x, 0);
-      top: env(titlebar-area-y, 0);
-      height: env(titlebar-area-height, 30px);
-      width: env(titlebar-area-width, 100%);
-      -webkit-app-region: drag;
-    }
 
-    header h1 {
-      margin-top: 0;
-      margin-bottom: 0;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    nav a {
-      margin-left: 10px;
-    }
-
-    #back-button-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    @media (prefers-color-scheme: light) {
-      header {
-        color: black;
-      }
-
-      nav a {
-        color: initial;
-      }
-    }
-  `
-
-  @property({ type: String }) title = 'app'
-
-  @property({ type: Boolean }) enableBack: boolean = false
 
   render() {
     return html`
         <header>
-            <div id="back-button-block">
-                ${this.enableBack ? html`
-                    <sl-button size="small" href="${resolveRouterPath()}">
-                        Back
-                    </sl-button>` : null}
+            <h1>FHIR Beacon App</h1>
+            <sl-button size="small" href="/">Home</sl-button>
+            <sl-button size="small" href="/about">About</sl-button>
+            <sl-button size="small" href="/search">Search</sl-button>
 
-                <h1>${this.title}</h1>
-            </div>
         </header>
     `
   }

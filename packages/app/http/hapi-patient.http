@@ -1,0 +1,21 @@
+### GET patient
+http://hapi.fhir.org/baseR5/Patient?
+    name=John&
+    _count=1
+
+
+
+
+
+###
+GET http://hapi.fhir.org/baseR5/Observation/1120?_pretty=true
+
+
+> {%
+    client.global.set("ref", jsonPath(response.body, "$.subject.reference",))
+
+%}
+
+
+###
+GET http://hapi.fhir.org/baseR5/{{ref}}/$everything?_summary=true

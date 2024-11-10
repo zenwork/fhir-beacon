@@ -71,7 +71,7 @@ export class Primitive extends LitElement {
     `
   ]
 
-  @consume({ context: displayConfigContext })
+  @consume({ context: displayConfigContext, subscribe: true })
   declare displayConfig: DisplayConfig
 
   @consume({ context: dataContext, subscribe: true })
@@ -280,9 +280,8 @@ export class Primitive extends LitElement {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
-
     return !isBlank(this.value) || this.verbose || this.required
-           ? html` ${this.showerror}
+           ? html`
                 <li>
                     <fhir-label
                             text=${this.getLabel()}

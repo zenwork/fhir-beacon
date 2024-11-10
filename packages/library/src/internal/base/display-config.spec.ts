@@ -227,10 +227,12 @@ describe('DisplayConfig', () => {
       expect(primitive.queryShadowByText('the data or data-path property must be provided')).toBeVisible()
       const shell: Shell = document.body.querySelector('fhir-shell')!
 
+      assert.ok(medication.queryShadow({ select: 'fhir-error', expect: 1 }))
+
       shell.showerror = false
       await aTimeout()
 
-      assert.ok(medication.queryShadow({ select: 'fhir-error', expect: 1 }))
+      assert.ok(medication.queryShadow({ select: 'fhir-error', expect: 0 }))
 
       expect(medication.queryShadowByText('No Data provided'))
 

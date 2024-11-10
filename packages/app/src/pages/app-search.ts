@@ -4,15 +4,14 @@ import '@shoelace-style/shoelace/dist/components/card/card.js'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 
 
-@customElement('app-home')
+@customElement('app-search')
 export class AppHome extends LitElement {
-
 
 
   render() {
     return html`
         <main>
-            HOME
+            SEARCH
         </main>
     `
   }

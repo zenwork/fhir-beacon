@@ -91,6 +91,7 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
   }
 
   public hostConnected(): void {
+
   }
 
 }

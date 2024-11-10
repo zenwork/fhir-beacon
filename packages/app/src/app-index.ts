@@ -1,33 +1,41 @@
-import {css, LitElement} from 'lit'
-import {customElement}   from 'lit/decorators.js'
+import {Router}           from '@lit-labs/router'
+import {html, LitElement} from 'lit'
+import {customElement}    from 'lit/decorators.js'
 
 import './pages/app-home'
+import './pages/app-search'
+import './pages/app-about/app-about'
 import './components/header'
 import './styles/global.css'
-import {router}          from './router'
+
 
 @customElement('app-index')
 export class AppIndex extends LitElement {
-  static styles = css`
-    main {
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-bottom: 16px;
+  private routes: Router = new Router(this, [
+    {
+      path: '/',
+      render: () => html`
+          <app-home></app-home>`
+    },
+    {
+      path: '/search',
+      render: () => html`
+          <app-search></app-search>`
+    },
+    {
+      path: '/about',
+      render: () => html`
+          <p>
+              <app-about></app-about>
+          </p> `
     }
-  `
+  ])
 
-  firstUpdated() {
-    router.addEventListener('route-changed', () => {
-      if ('startViewTransition' in document) {
-        (document as any).startViewTransition(() => this.requestUpdate())
-      } else {
-        this.requestUpdate()
-      }
-    })
-  }
 
   render() {
-    // router config can be round in src/router.ts
-    return router.render()
+    return html`
+        <app-header></app-header>
+        ${this.routes.outlet()}
+    `
   }
 }

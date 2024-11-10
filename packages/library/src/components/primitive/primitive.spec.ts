@@ -145,6 +145,31 @@ describe('fhir Primitive', () => {
       expect(div.textContent).to.equal('Error: this property is required')
 
     })
+
+    test('should display summary flag correctly', async () => {
+
+      const all = await fixture<Primitive>(html`
+          <fhir-shell summaryonly>
+
+              <fhir-primitive label="required"
+                              mode="structure"
+                              .value= ${'show it'}
+                              summary
+              ></fhir-primitive>
+              <fhir-primitive label="not required"
+                              mode="structure"
+                              .value= ${'don\'t show it'}
+              ></fhir-primitive>
+          </fhir-shell>
+      `, 'fhir-primitive').all()
+
+      assert.ok(all[0].queryShadow<HTMLDivElement>({ select: 'fhir-label', expect: 1 }))
+      assert.ok(all[0].queryShadow<HTMLDivElement>({ select: 'fhir-value', expect: 1 }))
+
+      assert.ok(all[1].queryShadow<HTMLDivElement>({ select: 'fhir-label', expect: 0 }))
+      assert.ok(all[1].queryShadow<HTMLDivElement>({ select: 'fhir-value', expect: 0 }))
+
+    })
   })
 
   describe('types', () => {

@@ -16,27 +16,21 @@ export class Patient extends DomainResource<PatientData> {
   }
 
   public renderDisplay(config: DisplayConfig, data: PatientData): TemplateResult[] {
-    console.log(data.managingOrganization)
     return [
       html`
           ${(wrap({
                       key: 'name',
-                      pluralBase: 'name',
                       collection: data.name,
                       generator: (data, label, key) => html`
                       <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name> `,
-                      summary: this.summary,
                       config
                   })
           )}
 
           ${(wrap({
                       key: 'identifier',
-                      pluralBase: 'identifier',
                       collection: data.identifier,
-                      generator: (data, label, key) => html`
-                      <fhir-identifier key=${key} label='${label}' .data=${data} summary></fhir-identifier>`,
-                      summary: this.summary,
+                      generator: 'fhir-identifier',
                       config
                   }
           ))}
@@ -44,29 +38,24 @@ export class Patient extends DomainResource<PatientData> {
 
           ${(wrap({
                       key: 'telecom',
-                      pluralBase: 'telecom',
                       collection: data.telecom,
                       generator: (data, label, key) => html`
                       <fhir-contact-point key=${key} label=${label} .data=${data} summary></fhir-contact-point>`,
-                      summary: this.summary,
                       config
                   }
           ))}
 
           ${wrap({
                      key: 'address',
-                     pluralBase: 'address',
                      collection: data.address,
                      generator: (data, label, key) => html`
                      <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
-                     summary: this.summary,
                      config
                  }
           )}
           <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
           ${wrap({
                      key: 'contact',
-                     pluralBase: 'contact',
                      collection: data.contact,
                      generator: (data, label, key) => html`
                      <fhir-patient-contact key=${key}
@@ -74,13 +63,11 @@ export class Patient extends DomainResource<PatientData> {
                                            .data=${data}
                                            summary
                      ></fhir-patient-contact summary> `,
-                     summary: this.summary,
                      config
                  }
           )}
           ${wrap({
                      key: 'communication',
-                     pluralBase: 'communication',
                      collection: data.communication,
                      generator: (data, label, key) => html`
                      <fhir-patient-communication key=${key}
@@ -88,20 +75,13 @@ export class Patient extends DomainResource<PatientData> {
                                                  .data=${data}
                                                  summary
                      ></fhir-patient-communication summary> `,
-                     summary: this.summary,
                      config
                  }
           )}
           ${wrap({
                      key: 'generalPractitioner',
-                     pluralBase: 'generalPractitioner',
                      collection: data.generalPractitioner,
-                     generator: (data, label, key) => html`
-                     <fhir-reference key=${key}
-                                     label=${label}
-                                     .data=${data}
-                     ></fhir-reference> `,
-                     summary: this.summary,
+                     generator: 'fhir-reference',
                      config
                  }
           )}
@@ -136,35 +116,28 @@ export class Patient extends DomainResource<PatientData> {
           ${(strap(
                   {
                       key: 'identifier',
-                      pluralBase: 'identifier',
                       collection: data.identifier,
-                      generator: (data, label, key) => html`
-                      <fhir-identifier key=${key} label=${label} .data=${data} summary></fhir-identifier>`,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      generator: 'fhir-identifier',
+                      config
                   }
           ))}
           <fhir-primitive label="active" .value=${data.active} .type=${boolean} summary></fhir-primitive>
 
           ${(strap({
                        key: 'name',
-                       pluralBase: 'name',
                        collection: data.name,
                        generator: (data, label, key) => html`
                        <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name>`,
-                       summary: this.summary,
-                       config: this.getDisplayConfig()
+                       config
                    }
           ))}
 
           ${(strap({
                        key: 'telecom',
-                       pluralBase: 'telecom',
                        collection: data.telecom,
                        generator: (data, label, key) => html`
                        <fhir-contact-point key=${key} label="${label}" .data=${data} summary></fhir-contact-point> `,
-                       summary: this.summary,
-                       config: this.getDisplayConfig()
+                       config
                    }
           ))}
           <fhir-primitive label="gender" .value=${data.gender} .type=${code} summary></fhir-primitive>
@@ -206,12 +179,10 @@ export class Patient extends DomainResource<PatientData> {
 
           ${strap({
                       key: 'address',
-                      pluralBase: 'address',
                       collection: data.address,
                       generator: (data, label, key) => html`
                       <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      config
                   }
           )}
           <fhir-codeable-concept key="maritalStatus" .data=${data.maritalStatus}></fhir-codeable-concept>
@@ -247,41 +218,32 @@ export class Patient extends DomainResource<PatientData> {
           <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
           ${strap({
                       key: 'contact',
-                      pluralBase: 'contact',
                       collection: data.contact,
                       generator: (data, label, key) => html`
                       <fhir-patient-contact key=${key}
                                             label=${label}
                                             .data=${data}
                       ></fhir-patient-contact> `,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      config
                   }
           )}
           ${strap({
                       key: 'communication',
-                      pluralBase: 'communication',
                       collection: data.communication,
                       generator: (data, label, key) => html`
                       <fhir-patient-communication key=${key}
                                                   label=${label}
                                                   .data=${data}
                       ></fhir-patient-communication> `,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      config
                   }
           )}
           ${strap({
                       key: 'generalPractitioner',
                       pluralBase: 'generalPractitioner',
                       collection: data.generalPractitioner,
-                      generator: (data, label, key) => html`
-                      <fhir-reference key=${key}
-                                      label=${label}
-                                      .data=${data}
-                      ></fhir-reference> `,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      generator: 'fhir-reference',
+                      config
                   }
           )}
           <fhir-reference key="managingOrganisation"
@@ -291,15 +253,13 @@ export class Patient extends DomainResource<PatientData> {
           ></fhir-reference>
           ${strap({
                       key: 'link',
-                      pluralBase: 'link',
                       collection: data.link,
                       generator: (data, label, key) => html`
                       <fhir-patient-link key=${key}
                                          label=${label}
                                          .data=${data}
                       ></fhir-patient-link> `,
-                      summary: this.summary,
-                      config: this.getDisplayConfig()
+                      config
                   }
           )}
 

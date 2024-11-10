@@ -21,7 +21,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
   },
   mode: {
     description: 'display mode',
-    options: ['display', 'structure', 'debug'],
+    options: ['display', 'structure', 'narrative', 'debug'],
     control: { type: 'inline-radio' },
     defaultValue: 'display',
     table: {
@@ -75,11 +75,11 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
   headless: {
     description: 'do not display the element header',
     options: [false, true], control: { type: 'boolean' },
-    defaultValue: false,
+    defaultValue: true,
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
-      defaultValue: { summary: false }
+      defaultValue: { summary: true }
     }
   }
 }
@@ -93,7 +93,7 @@ export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
                 .mode=${ifDefined(args.mode)}
                 ?showerror=${args.showerror}
                 ?verbose=${args.verbose}
-                ?open=${args.open ?? true}
+                ?open=${args.open ?? false}
                 ?summaryonly=${args.summaryonly}
         >
             ${fn(args)}

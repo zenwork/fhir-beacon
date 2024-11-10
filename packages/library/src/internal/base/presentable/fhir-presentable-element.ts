@@ -80,6 +80,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     new DisplayContextConsumerController(this)
   }
 
+  /**
+   * @deprecated don't use this directly. Prefer config provided by method
+   */
   public getDisplayConfig(): DisplayConfig {
     return {
       open: this.open,
@@ -220,7 +223,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           ).flat())
         break
       case DisplayMode.display:
-        if (this.headless || isBlank(this.data)) {
+        if (this.headless) {
 
           templates.push(...this
             .templateGenerators
