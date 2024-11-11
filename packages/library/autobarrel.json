@@ -1,12 +1,12 @@
 {
-    "paths": ["./src/**", "./tests"],
-    "ignore": ["./src", "./components"],
+    "directory": ["./src", "./tests"],
+    
     "exclude": [
-        "**/*.story.data.ts",
-        "**/*.stories.ts",
-        "**/*.spec.ts",
-        "**/*.test.ts",
-        "**/*.styles.ts",
-        "**/*-styles.ts"
+        ".*\\.story\\.data\\.ts",
+        ".*\\.stories\\.ts",
+        ".*\\.spec\\.ts",
+        ".*\\.test\\.ts",
+        ".*\\.styles\\.ts",
+        ".*-styles\\.ts"
     ]
 }
