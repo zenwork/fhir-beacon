@@ -21,7 +21,7 @@ export const generators: { [key: string]: { (data: any, label: string, key: Gene
 }
 
 type WrapperConfig<T> = {
-  key: string,
+  key?: string,
   pluralBase?: string,
   collection: T[],
   generator: { (data: T, label: string, key: string): TemplateResult }
@@ -50,10 +50,14 @@ export function strap<T>({
                            config
                          }: WrapperConfig<T>
 ): TemplateResult {
+  if (!key && typeof generator === 'string') {
+    key = generator.substring(5)
+  }
+
   if (typeof generator === 'string') generator
     = generators[generator] as { (data: T, label: string, key: string): TemplateResult }
 
-  if (typeof generator === 'function') {
+  if (key && typeof generator === 'function') {
 
     if (!config.summaryonly || config.summaryonly && summary) {
       const plural = pluralize(pluralBase || key)

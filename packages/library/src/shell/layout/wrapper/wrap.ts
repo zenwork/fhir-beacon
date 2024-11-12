@@ -6,7 +6,7 @@ import {pluralize}                  from '../pluralize'
 import {Generators, generators} from './strap'
 
 type WrapConfig<T> = {
-  key: string,
+  key?: string,
   pluralBase?: string,
   collection: T[],
   generator: { (data: T, label: string, key: string): TemplateResult } | Generators,
@@ -34,10 +34,14 @@ export function wrap<T>({
                           config
                         }: WrapConfig<T>
 ): TemplateResult {
+  if (!key && typeof generator === 'string') {
+    key = generator.substring(5)
+  }
+
   if (typeof generator === 'string') generator
     = generators[generator] as { (data: T, label: string, key: string): TemplateResult }
 
-  if (typeof generator === 'function') {
+  if (key && typeof generator === 'function') {
 
     if (!config.summaryonly || config.summaryonly && summary) {
       const plural = pluralize(pluralBase || key)
@@ -47,8 +51,8 @@ export function wrap<T>({
           return html`
               <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
                   ${map(collection,
-                        (data: T) => html`
-                            ${generator(data, pluralBase || key, key)}
+                        (data: T, idx) => html`
+                            ${generator(data, `${pluralBase || key} ${idx + 1}`, key)}
                         `)}
               </fhir-wrapper>
           `
