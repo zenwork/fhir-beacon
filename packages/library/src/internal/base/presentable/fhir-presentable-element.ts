@@ -82,6 +82,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
   /**
    * @deprecated don't use this directly. Prefer config provided by method
+   * todo: make this method private
    */
   public getDisplayConfig(): DisplayConfig {
     return {
@@ -111,7 +112,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     return EmptyResult
   }
 
-
   public abstract renderDisplay(config: DisplayConfig,
                                 data: Decorated<D>,
                                 validations: Validations): TemplateResult[]
@@ -119,7 +119,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   public abstract renderNarrative(displayConfig: DisplayConfig,
                                   data: Decorated<D>,
                                   validations: Validations): TemplateResult[]
-
 
   public abstract renderStructure(config: DisplayConfig,
                                   data: Decorated<D>,
@@ -129,31 +128,17 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                               extendedData: Decorated<D> | null,
                               haveChanged: PropertyValues): void
 
-  protected getLabel() {
-    let label = this.type
-
-    if (this.key && !this.label) {
-      label = this.key
-    } else if (this.label) {
-      label = this.label
-    }
-
-    if (this.mode != DisplayMode.display) {
-      label = asReadable(label, 'lower')
-    }
-
-    return label
-  }
-
   protected willUpdate(changes: PropertyValues) {
     super.willUpdate(changes)
 
     if (this.verbose) {
       this.extendedData[meta].hide = false
+    } else if (!this.verbose && isBlank(this.data)) {
+      this.extendedData[meta].hide = true
     }
 
     if (this.mustRender()) {
-      this.willRender(this.getDisplayConfig(), this.extendedData, changes)
+      this.willRender(this.config(), this.extendedData, changes)
       this.templateGenerators = NullGenerators()
       this.templateGenerators.structure.header.push(this.renderBaseElement)
       if (this.override()) {
@@ -192,12 +177,28 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             default:
               this.templateGenerators.error.body.push(() => [
                 html`
-                    <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.getDisplayConfig())}"></fhir-error>`
+                    <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.config())}"></fhir-error>`
               ])
           }
         }
       }
     }
+  }
+
+  protected getLabel() {
+    let label = this.type
+
+    if (this.key && !this.label) {
+      label = this.key
+    } else if (this.label) {
+      label = this.label
+    }
+
+    if (this.mode != DisplayMode.display) {
+      label = asReadable(label, 'lower')
+    }
+
+    return label
   }
 
   protected render(): TemplateResult | TemplateResult[] {
@@ -217,7 +218,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           .templateGenerators
           .debug.body
           .map(g => g.call(this,
-                           this.getDisplayConfig(),
+                           this.config(),
                            this.extendedData,
                            new ValidationsImpl(this.extendedData))
           ).flat())
@@ -228,13 +229,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           templates.push(...this
             .templateGenerators
             .display.header
-            .map(g => g.call(this, this.getDisplayConfig(),
+            .map(g => g.call(this, this.config(),
                              this.extendedData,
                              new ValidationsImpl(this.extendedData))).flat())
           templates.push(...this
             .templateGenerators
             .display.body
-            .map(g => g.call(this, this.getDisplayConfig(),
+            .map(g => g.call(this, this.config(),
                              this.extendedData,
                              new ValidationsImpl(this.extendedData))).flat())
         } else {
@@ -242,18 +243,18 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
               <fhir-wrapper
                       .label=${this.getLabel()}
                       ?summary=${this.summary}
-                      ?summaryonly=${this.getDisplayConfig().summaryonly}
+                      ?summaryonly=${this.config().summaryonly}
               >
 
                   ${this.templateGenerators
                         .display.header
-                        .map(g => g.call(this, this.getDisplayConfig(),
+                        .map(g => g.call(this, this.config(),
                                          this.extendedData,
                                          new ValidationsImpl(this.extendedData))).flat()}
 
                   ${this.templateGenerators.display
                         .body.map(g => g.call(this,
-                                              this.getDisplayConfig(),
+                                              this.config(),
                                               this.extendedData,
                                               new ValidationsImpl(this.extendedData))).flat()}
               </fhir-wrapper>
@@ -264,13 +265,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
         templates.push(...this
           .templateGenerators
           .display.header
-          .map(g => g.call(this, this.getDisplayConfig(),
+          .map(g => g.call(this, this.config(),
                            this.extendedData,
                            new ValidationsImpl(this.extendedData))).flat())
         templates.push(...this
           .templateGenerators
           .display.body
-          .map(g => g.call(this, this.getDisplayConfig(),
+          .map(g => g.call(this, this.config(),
                            this.extendedData,
                            new ValidationsImpl(this.extendedData))).flat())
         break
@@ -278,7 +279,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
         templates.push(...this
           .templateGenerators
           .override.body
-          .map(g => g.call(this, this.getDisplayConfig(),
+          .map(g => g.call(this, this.config(),
                            this.extendedData,
                            new ValidationsImpl(this.extendedData))).flat())
         break
@@ -289,14 +290,14 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             templates.push(html`
                 <div class="frontmatter">
                     ${this.templateGenerators.structure
-                          .header.map(g => g.call(this, this.getDisplayConfig(),
+                          .header.map(g => g.call(this, this.config(),
                                                   this.extendedData,
                                                   new ValidationsImpl(this.extendedData))).flat()}
                 </div>
 
                 ${this.templateGenerators.structure
                       .body.map(g => g.call(this,
-                                            this.getDisplayConfig(),
+                                            this.config(),
                                             this.extendedData,
                                             new ValidationsImpl(this.extendedData))).flat()}
             `)
@@ -309,18 +310,18 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                 ?badge-summary=${this.summary}
                                 ?badge-required=${this.required}
                                 ?summary=${this.summary}
-                                ?summaryonly=${this.getDisplayConfig().summaryonly}
+                              ?summaryonly=${this.config().summaryonly}
                 >
                     <div class="frontmatter">
                         ${this.templateGenerators.structure
-                              .header.map(g => g.call(this, this.getDisplayConfig(),
+                              .header.map(g => g.call(this, this.config(),
                                                       this.extendedData,
                                                       new ValidationsImpl(this.extendedData))).flat()}
                     </div>
 
                     ${this.templateGenerators.structure
                           .body.map(g => g.call(this,
-                                                this.getDisplayConfig(),
+                                                this.config(),
                                                 this.extendedData,
                                                 new ValidationsImpl(this.extendedData))).flat()}
                 </fhir-wrapper>
@@ -338,7 +339,17 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (this.mustRender()) {
-      this.hasRendered(this.getDisplayConfig(), this.extendedData, _changedProperties)
+      this.hasRendered(this.config(), this.extendedData, _changedProperties)
+    }
+  }
+
+  private config(): DisplayConfig {
+    return {
+      open: this.open,
+      verbose: this.verbose,
+      mode: this.mode,
+      showerror: this.showerror,
+      summaryonly: this.summaryonly
     }
   }
 

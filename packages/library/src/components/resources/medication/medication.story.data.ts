@@ -222,3 +222,24 @@ export const frontPageData = {
     expirationDate: '2019.10-31'
   }
 }
+export const synthiaData = {
+  resourceType: 'Medication',
+  id: '757',
+  meta: {
+    versionId: '1',
+    lastUpdated: '2024-11-13T21:54:40.340+00:00',
+    source: '#G6HXMgWDzzplqVzu',
+    profile: ['http://hl7.org/fhir/us/core/StructureDefinition/us-core-medication']
+  },
+  code: {
+    coding: [
+      {
+        system: 'http://www.nlm.nih.gov/research/umls/rxnorm',
+        code: '1535362',
+        display: 'sodium fluoride 0.0272 MG/MG Oral Gel'
+      }
+    ],
+    text: 'sodium fluoride 0.0272 MG/MG Oral Gel'
+  },
+  status: 'active'
+}

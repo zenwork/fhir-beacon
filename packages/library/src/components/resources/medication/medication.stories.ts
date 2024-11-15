@@ -1,7 +1,7 @@
-import {Meta, StoryObj}                    from '@storybook/web-components'
-import {html}                              from 'lit'
-import {renderTemplateInShell, ShellArgs}  from '../../../../stories/storybook-utils'
-import {data_310, data_319, frontPageData} from './medication.story.data'
+import {Meta, StoryObj}                                 from '@storybook/web-components'
+import {html}                                           from 'lit'
+import {renderTemplateInShell, ShellArgs}               from '../../../../stories/storybook-utils'
+import {data_310, data_319, frontPageData, synthiaData} from './medication.story.data'
 
 
 const meta: Meta<ShellArgs> = {
@@ -56,7 +56,7 @@ export const Med0319Display: Story = {
 
 export const Med0319Structure: Story = {
   args: {
-    data: data_319,
+    data: synthiaData,
     mode: 'structure',
     showerror: true,
     verbose: false,

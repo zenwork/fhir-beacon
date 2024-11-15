@@ -1,6 +1,7 @@
-import {html, TemplateResult}           from 'lit'
-import {customElement}                  from 'lit/decorators.js'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
 import {BaseElement, Decorated, errors} from '../../../internal'
+import {isDefined}            from '../../../shell'
 import {strap}                          from '../../../shell/layout/wrapper/strap'
 import {wrapLines}                      from '../../../shell/layout/wrapper/wrapLines'
 import {DisplayConfig}                  from '../../../types'
@@ -15,8 +16,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
   public renderDisplay(config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
 
     return [
-      html`
-          ${wrapLines(this.key,
+      wrapLines(this.key,
                       'coding',
                       data.coding ?? [],
                       this.verbose,
@@ -24,7 +24,8 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                           <fhir-coding key=${key} .label=${label} .data=${data} summary headless></fhir-coding>`,
                       true,
                       this.summaryonly
-          )}
+      ),
+      (isDefined(data.coding) && !this.verbose) ? html`` : html`
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`
     ]
 
@@ -47,8 +48,8 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
               config: this.getDisplayConfig()
             }
       ),
-      html`
-          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive> `
+      (isDefined(data.coding) && !this.verbose) ? html`` : html`
+          <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`
     ]
   }
 }

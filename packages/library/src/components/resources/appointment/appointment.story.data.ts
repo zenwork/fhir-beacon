@@ -1,135 +1,136 @@
 export const data = {
-  'resourceType': 'Appointment',
-  'id': 'example',
-  'text': {
-    'status': 'generated',
-    'div': '<div xmlns="http://www.w3.org/1999/xhtml">Brian MRI results discussion</div>'
+  resourceType: 'Appointment',
+  id: 'example',
+  text: {
+    status: 'generated',
+    div: '<div xmlns="http://www.w3.org/1999/xhtml">Brian MRI results discussion</div>'
   },
-  'status': 'booked',
+  status: 'booked',
   'class': [
     {
-      'coding': [
+      coding: [
         {
-          'system': 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
-          'code': 'AMB',
-          'display': 'ambulatory'
+          system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+          code: 'AMB',
+          display: 'ambulatory'
         }
       ]
     }
   ],
-  'serviceCategory': [
+  serviceCategory: [
     {
-      'coding': [
+      coding: [
         {
-          'system': 'http://example.org/service-category',
-          'code': 'gp',
-          'display': 'General Practice'
+          system: 'http://example.org/service-category',
+          code: 'gp',
+          display: 'General Practice'
         }
       ]
     }
   ],
-  'serviceType': [
+  serviceType: [
     {
-      'concept': {
-        'coding': [
+      concept: {
+        coding: [
           {
-            'code': '52',
-            'display': 'General Discussion'
+            code: '52',
+            display: 'General Discussion'
           }
         ]
       }
     }
   ],
-  'specialty': [
+  specialty: [
     {
-      'coding': [
+      coding: [
         {
-          'system': 'http://snomed.info/sct',
-          'code': '394814009',
-          'display': 'General practice'
+          system: 'http://snomed.info/sct',
+          code: '394814009',
+          display: 'General practice'
         }
       ]
     }
   ],
-  'appointmentType': {
-    'coding': [
+  appointmentType: {
+    coding: [
       {
-        'system': 'http://terminology.hl7.org/CodeSystem/v2-0276',
-        'code': 'FOLLOWUP',
-        'display': 'A follow up visit from a previous appointment'
+        system: 'http://terminology.hl7.org/CodeSystem/v2-0276',
+        code: 'FOLLOWUP',
+        display: 'A follow up visit from a previous appointment'
       }
     ]
   },
-  'reason': [
+  reason: [
     {
-      'reference': {
-        'reference': 'Condition/example',
-        'display': 'Severe burn of left ear'
+      reference: {
+        reference: 'Condition/example',
+        display: 'Severe burn of left ear'
       }
     }
   ],
-  'description': 'Discussion on the results of your recent MRI',
-  'start': '2013-12-10T09:00:00Z',
-  'end': '2013-12-10T11:00:00Z',
-  'created': '2013-10-10',
-  'note': [
+  description: 'Discussion on the results of your recent MRI',
+  start: '2013-12-10T09:00:00Z',
+  end: '2013-12-10T11:00:00Z',
+  created: '2013-10-10',
+  note: [
     {
-      'text': 'Further expand on the results of the MRI and determine the next actions that may be appropriate.'
+      text: 'Further expand on the results of the MRI and determine the next actions that may be appropriate.'
     }
   ],
-  'patientInstruction': [
+  patientInstruction: [
     {
-      'concept': {
-        'text': 'Please avoid excessive travel (specifically flying) before this appointment'
+      concept: {
+        text: 'Please avoid excessive travel (specifically flying) before this appointment'
       }
     }
   ],
-  'basedOn': [
+  basedOn: [
     {
-      'reference': 'ServiceRequest/myringotomy'
+      reference: 'ServiceRequest/myringotomy'
     }
   ],
-  'subject': {
-    'reference': 'Patient/example',
-    'display': 'Peter James Chalmers'
+  subject: {
+    reference: 'Patient/example',
+    display: 'Peter James Chalmers'
   },
-  'participant': [
+  participant: [
     {
-      'actor': {
-        'reference': 'Patient/example',
-        'display': 'Peter James Chalmers'
+      actor: {
+        reference: 'Patient/example',
+        display: 'Peter James Chalmers'
       },
-      'required': true,
-      'status': 'accepted'
+      required: true,
+      status: 'accepted'
     },
     {
-      'type': [
+      type: [
         {
-          'coding': [
+          coding: [
             {
-              'system': 'http://terminology.hl7.org/CodeSystem/v3-ParticipationType',
-              'code': 'ATND'
+              system: 'http://terminology.hl7.org/CodeSystem/v3-ParticipationType',
+              code: 'ATND'
             }
           ]
         }
       ],
-      'actor': {
-        'reference': 'Practitioner/example',
-        'display': 'Dr Adam Careful'
+      actor: {
+        reference: 'Practitioner/example',
+        display: 'Dr Adam Careful'
       },
-      'required': true,
-      'status': 'accepted'
+      required: true,
+      status: 'accepted'
     },
     {
-      'actor': {
-        'reference': 'Location/1',
-        'display': 'South Wing, second floor'
+      actor: {
+        reference: 'Location/1',
+        display: 'South Wing, second floor'
       },
-      'required': true,
-      'status': 'accepted'
+      required: true,
+      status: 'accepted'
     }
   ]
 }
+
 export const data2 = {
   resourceType: 'Appointment',
   id: 'examplereq',

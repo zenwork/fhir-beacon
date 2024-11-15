@@ -9,6 +9,8 @@ import {AccountData}               from './account.data'
 @customElement('fhir-account')
 export class Account extends DomainResource<AccountData> {
 
+  constructor() {super('Account')}
+
   public renderDisplay(config: DisplayConfig, data: Decorated<AccountData>): TemplateResult[] {
     return [
       html`

@@ -1,6 +1,6 @@
-import {StoryObj} from '@storybook/web-components'
-import {argtypes}            from '../../../../stories/storybook-utils'
-import {aidboxPatient, data} from './patient.story.data'
+import {StoryObj}             from '@storybook/web-components'
+import {argtypes}             from '../../../../stories/storybook-utils'
+import {data, synthiaPatient} from './patient.story.data'
 
 const path = 'Components/Resources/Patient/Patient'
 const elementName = 'fhir-patient'
@@ -26,7 +26,7 @@ export const Display: Story = {
 
 export const Structure: Story = {
   args: {
-    data: aidboxPatient,
+    data: synthiaPatient,
     mode: 'structure',
     showerror: true,
     verbose: true,

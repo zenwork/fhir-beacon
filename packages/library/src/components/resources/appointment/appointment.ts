@@ -10,6 +10,7 @@ const { code, datetime, positiveInt, instant, fhir_string, boolean } = Primitive
 
 @customElement('fhir-appointment')
 export class Appointment extends DomainResource<AppointmentData> {
+
   constructor() {super('Appointment')}
 
   public renderDisplay(config: DisplayConfig, data: Decorated<AppointmentData>): TemplateResult[] {
