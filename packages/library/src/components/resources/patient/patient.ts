@@ -163,7 +163,8 @@ export class Patient extends DomainResource<PatientData> {
                                                      summary
                                      ></fhir-primitive>`
                              }
-                         }, {
+                         },
+                         {
                          data: data.deceasedDateTime,
                          html: (d, n, e) => html`
                              <fhir-primitive key="deceasedDateTime"

@@ -26,12 +26,18 @@ export const BeaconAssert = {
 
           const primitives = quantity.queryShadow<Primitive[]>({ select: 'fhir-primitive', expect: 6 })
 
-          testPrimitive(primitives[0], { key: 'id', value: id })
-          testPrimitive(primitives[1], { key: 'variation', value: variation })
-          testPrimitive(primitives[2], { key: 'value', value: value })
-          testPrimitive(primitives[3], { key: 'unit', value: unit })
-          testPrimitive(primitives[4], { key: 'system', value: system })
-          testPrimitive(primitives[5], { key: 'code', value: code })
+          testPrimitive(primitives[0],
+                        { key: 'id', value: id })
+          testPrimitive(primitives[1],
+                        { key: 'variation', value: variation })
+          testPrimitive(primitives[2],
+                        { key: 'value', value: value })
+          testPrimitive(primitives[3],
+                        { key: 'unit', value: unit })
+          testPrimitive(primitives[4],
+                        { key: 'system', value: system })
+          testPrimitive(primitives[5],
+                        { key: 'code', value: code })
 
         }
       }

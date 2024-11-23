@@ -22,9 +22,12 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
     host.addController(this)
 
     const reactive = host as unknown as ReactiveElement
-    this.displayCtx = new ContextProvider(reactive, { context: displayConfigContext })
-    this.dataCtx = new ContextProvider(reactive, { context: dataContext })
-    this.containedCtx = new ContextProvider(reactive, { context: containedResourcesContext })
+    this.displayCtx = new ContextProvider(reactive,
+                                          { context: displayConfigContext })
+    this.dataCtx = new ContextProvider(reactive,
+                                       { context: dataContext })
+    this.containedCtx = new ContextProvider(reactive,
+                                            { context: containedResourcesContext })
   }
 
   hostUpdated() {

@@ -68,6 +68,14 @@ export class Primitive extends LitElement {
         font-weight: var(--sl-font-weight-normal);
         font-style: italic;
       }
+
+      sl-input::part(form-control-label) {
+        font-size: 16px;
+      }
+
+      sl-input::part(input) {
+        font-size: 15px;
+      }
     `
   ]
 
@@ -106,6 +114,9 @@ export class Primitive extends LitElement {
 
   @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
+
+  @property({ type: Boolean })
+  public input: boolean = false
 
   @property({ type: Boolean })
   public showerror: boolean = false
@@ -178,6 +189,9 @@ export class Primitive extends LitElement {
     const watchedHaveChanged = changed.has('value') || changed.has('type') || changed.has('required')
     if (watchedHaveChanged) {
       if (!isBlank(this.value) && this.type) {
+        this.presentableValue = ''
+        this.presentableError = ''
+        this.presentableTypeError = ''
         choose(this.type, [
           [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
           [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
@@ -225,11 +239,16 @@ export class Primitive extends LitElement {
 
     if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
         && !this.valuePath
-        && this.mode !== DisplayMode.override) {
+        && this.mode !== DisplayMode.override
+        && !this.input) {
       return html``
     }
 
-    return this.error ? this.renderError() : this.renderValid()
+    return this.input
+           ? this.renderInput()
+           : this.error
+             ? this.renderError()
+             : this.renderValid()
 
   }
 
@@ -274,6 +293,34 @@ export class Primitive extends LitElement {
     if (this.label) label = this.label
 
     return asReadable(label, 'lower')
+  }
+
+  private renderInput(): TemplateResult {
+    const errors = []
+    if (this.presentableTypeError) errors.push(this.presentableTypeError)
+    if (this.presentableError) errors.push(this.presentableError)
+    return html`
+        <sl-input id=${this.key}
+                  value=${this.presentableValue}
+                  clearable
+                  @sl-change=${(e: InputEvent) => {
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-expect-error
+                      const value = e.target.value
+                      this.dispatchEvent(new CustomEvent('change',
+                                                         {
+                                                             bubbles: true,
+                                                             composed: true,
+                                                             detail: { value }
+                                                         }))
+                  }}
+                  size="small"
+        >
+            <fhir-label slot="label" text=${this.getLabel()}></fhir-label>
+            <fhir-error slot="help-text" text=${errors.join(' | ')}></fhir-error>
+
+        </sl-input>
+    `
   }
 
   private renderError = (): TemplateResult => {

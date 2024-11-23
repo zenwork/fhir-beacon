@@ -21,7 +21,10 @@ describe('toUnsignedInt', () => {
   })
 
   it('should throw an error for non-integer values', () => {
-    const invalidValues = ['string', {}, [], null, undefined]
+    const invalidValues = [
+      'string',
+      {}, [], null, undefined
+    ]
 
     for (const value of invalidValues) {
       expect(() => toUnsignedInt(value as unknown)).toThrow(

@@ -4,14 +4,14 @@ import '@shoelace-style/shoelace/dist/components/card/card.js'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 
 
-@customElement('app-search')
-export class AppHome extends LitElement {
+@customElement('app-book')
+export class AppBook extends LitElement {
 
 
   render() {
     return html`
         <main>
-            SEARCH
+            Booking System
         </main>
     `
   }

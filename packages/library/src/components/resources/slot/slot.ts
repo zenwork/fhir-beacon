@@ -1,17 +1,18 @@
-import {html, TemplateResult}      from 'lit'
-import {customElement}             from 'lit/decorators.js'
-import {Decorated, DomainResource} from '../../../internal'
-import {strap, wrap}               from '../../../shell'
-import {DisplayConfig}             from '../../../types'
-import {PrimitiveType}             from '../../primitive'
-import {SlotData}                  from './slot.data'
+import {html, TemplateResult}                   from 'lit'
+import {customElement}                          from 'lit/decorators.js'
+import {Decorated, DomainResource, Validations} from '../../../internal'
+import {strap, wrap}                            from '../../../shell'
+import {DisplayConfig}                          from '../../../types'
+import {PrimitiveType}                          from '../../primitive'
+import {SlotData}                               from './slot.data'
 
 
 @customElement('fhir-slot')
 export class Slot extends DomainResource<SlotData> {
   constructor() {super('Slot')}
 
-  public renderDisplay(config: DisplayConfig, data: Decorated<SlotData>): TemplateResult[] {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public renderDisplay(config: DisplayConfig, data: Decorated<SlotData>, validations: Validations): TemplateResult[] {
     return [
       html`
           ${wrap({

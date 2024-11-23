@@ -82,7 +82,8 @@ describe('Ratio', () => {
 
     // id
     const id = shell.queryShadow<Primitive[]>({ select: 'fhir-primitive', expect: 13 })
-    testPrimitive(id[0], { key: 'id', value: null })
+    testPrimitive(id[0],
+                  { key: 'id', value: null })
 
     const quantities = shell.queryShadow<Quantity[]>({ select: 'fhir-quantity', expect: 2 })
 

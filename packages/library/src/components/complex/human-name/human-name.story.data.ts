@@ -7,7 +7,8 @@ export const data =
         {
           url: 'http://hl7.org/fhir/StructureDefinition/humanname-own-prefix',
           valueString: 'von'
-        }, {
+        },
+        {
           url: 'http://hl7.org/fhir/StructureDefinition/humanname-own-name',
           valueString: 'Hochheim-Weilenfels'
         }

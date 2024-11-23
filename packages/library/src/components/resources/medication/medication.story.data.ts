@@ -199,7 +199,8 @@ export const frontPageData = {
           code: 'mL'
         }
       }
-    }, {
+    },
+    {
       item: {
         concept: {
           coding: [

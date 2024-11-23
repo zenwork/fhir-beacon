@@ -26,7 +26,8 @@ export const SimpleHeadacheCode: Story = {
         {
           system: 'http://hl7.org/fhir/sid/icd-10',
           code: 'R51'
-        }, {
+        },
+        {
           system: 'http://snomed.info/sct',
           code: '25064002',
           display: 'Headache',
@@ -46,7 +47,8 @@ export const Structure: Story = {
         {
           system: 'http://hl7.org/fhir/sid/icd-10',
           code: 'R51'
-        }, {
+        },
+        {
           system: 'http://snomed.info/sct',
           code: '25064002',
           display: 'Headache',

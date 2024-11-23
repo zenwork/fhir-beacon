@@ -391,12 +391,14 @@ export const synthiaPatient = {
             code: '1002-5',
             display: 'American Indian or Alaska Native'
           }
-        }, {
+        },
+        {
           url: 'text',
           valueString: 'American Indian or Alaska Native'
         }
       ]
-    }, {
+    },
+    {
       url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity',
       extension: [
         {
@@ -406,28 +408,34 @@ export const synthiaPatient = {
             code: '2186-5',
             display: 'Not Hispanic or Latino'
           }
-        }, {
+        },
+        {
           url: 'text',
           valueString: 'Not Hispanic or Latino'
         }
       ]
-    }, {
+    },
+    {
       url: 'http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName',
       valueString: 'Jonell764 Gerlach374'
-    }, {
+    },
+    {
       url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex',
       valueCode: 'M'
-    }, {
+    },
+    {
       url: 'http://hl7.org/fhir/StructureDefinition/patient-birthPlace',
       valueAddress: {
         city: 'Plymouth',
         state: 'Massachusetts',
         country: 'US'
       }
-    }, {
+    },
+    {
       url: 'http://synthetichealth.github.io/synthea/disability-adjusted-life-years',
       valueDecimal: 21.90583818492967
-    }, {
+    },
+    {
       url: 'http://synthetichealth.github.io/synthea/quality-adjusted-life-years',
       valueDecimal: 60.09416181507033
     }
@@ -436,7 +444,8 @@ export const synthiaPatient = {
     {
       system: 'https://github.com/synthetichealth/synthea',
       value: '47186a2c-8223-81e3-52dd-04fca1734b88'
-    }, {
+    },
+    {
       type: {
         coding: [
           {
@@ -449,7 +458,8 @@ export const synthiaPatient = {
       },
       system: 'http://hospital.smarthealthit.org',
       value: '47186a2c-8223-81e3-52dd-04fca1734b88'
-    }, {
+    },
+    {
       type: {
         coding: [
           {
@@ -462,7 +472,8 @@ export const synthiaPatient = {
       },
       system: 'http://hl7.org/fhir/sid/us-ssn',
       value: '999-15-8247'
-    }, {
+    },
+    {
       type: {
         coding: [
           {
@@ -475,7 +486,8 @@ export const synthiaPatient = {
       },
       system: 'urn:oid:2.16.840.1.113883.4.3.25',
       value: 'S99953724'
-    }, {
+    },
+    {
       type: {
         coding: [
           {
@@ -516,7 +528,8 @@ export const synthiaPatient = {
             {
               url: 'latitude',
               valueDecimal: 41.79717134698846
-            }, {
+            },
+            {
               url: 'longitude',
               valueDecimal: -71.01421343474313
             }

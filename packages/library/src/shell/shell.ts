@@ -23,7 +23,8 @@ export class Shell extends LitElement {
   @property({ type: Boolean, reflect: true })
   public summaryonly: boolean = false
 
-  protected display = new ContextProvider(this, { context: displayConfigContext })
+  protected display = new ContextProvider(this,
+                                          { context: displayConfigContext })
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)

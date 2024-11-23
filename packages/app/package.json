@@ -25,7 +25,8 @@
         "urlpattern-polyfill": "^10.0.0",
         "workbox-build": "^7.1.1",
         "workbox-core": "^7.1.0",
-        "workbox-precaching": "^7.1.0"
+        "workbox-precaching": "^7.1.0",
+        "fhir-beacon": "file:../library"
     },
     "devDependencies": {
         "ts-lit-plugin": "^2.0.2",

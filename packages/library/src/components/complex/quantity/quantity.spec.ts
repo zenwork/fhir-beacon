@@ -91,14 +91,20 @@ describe('Quantity', () => {
     expect(elements.length).toEqual(6)
 
     // valid properties
-    testPrimitive(elements[0], { key: 'id', value: null })
-    testPrimitive(elements[1], { key: 'variation', value: 'duration' })
-    testPrimitive(elements[2], { key: 'value', value: 'abc' })
-    testPrimitive(elements[3], { key: 'unit', value: 'sec' })
+    testPrimitive(elements[0],
+                  { key: 'id', value: null })
+    testPrimitive(elements[1],
+                  { key: 'variation', value: 'duration' })
+    testPrimitive(elements[2],
+                  { key: 'value', value: 'abc' })
+    testPrimitive(elements[3],
+                  { key: 'unit', value: 'sec' })
     expect(elements[3].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
-    testPrimitive(elements[4], { key: 'system', value: 'http://unitsofmeasure.org' })
+    testPrimitive(elements[4],
+                  { key: 'system', value: 'http://unitsofmeasure.org' })
     expect(elements[4].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
-    testPrimitive(elements[5], { key: 'code', value: 's' })
+    testPrimitive(elements[5],
+                  { key: 'code', value: 's' })
     expect(elements[5].queryShadow({ select: 'sl-badge' })).toHaveTextContent('∑')
 
     // invalid property

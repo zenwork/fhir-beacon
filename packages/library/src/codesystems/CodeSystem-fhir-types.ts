@@ -464,7 +464,8 @@ export const CodeSystemFhirTypes = {
                             "property": [{"code": "kind", "valueCode": "primitive"}]
                         }
                     ]
-                }, {
+                },
+              {
                     "code": "Resource",
                     "display": "Resource",
                     "definition": "This is the base resource type for everything.",

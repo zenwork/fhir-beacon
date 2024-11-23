@@ -15,7 +15,7 @@ export const componentStyles = css`
   .placeholder {
     color: var(--sl-color-gray-300);
     font-style: italic;
-    font-family: var(--sl-font-serif);
+    font-family: var(--sl-font-serif), serif;
   }
 
   .error {

@@ -20,7 +20,8 @@ export default [
             'newline-per-chained-call':'off',
             'function-paren-newline':'off',
             indent:'off',
-            'no-use-before-define':['error', {'functions':false, 'classes':true}]
+            'no-use-before-define':['error',
+                {'functions':false, 'classes':true}]
         }
     }
 ]
