@@ -3,7 +3,7 @@
  */
 
 export * from './DataHandling'
-export * from './Decorated'
+export * from './Decorate'
 export * from './Rendering'
 export * from './Templating'
 export * from './data/index'

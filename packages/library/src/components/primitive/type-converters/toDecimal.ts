@@ -29,6 +29,7 @@ export const toDecimal: toPrimitive<string, Decimal> = function (decimal: string
 
   if (totalDigits <= 18) {
     return Number.parseFloat(decimal) as Decimal
+    // return decimal
   }
 
   throw new TypeError(`decimal must be a valid number: ${decimal}`)

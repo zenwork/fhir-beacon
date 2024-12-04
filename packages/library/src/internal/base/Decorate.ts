@@ -1,5 +1,6 @@
 import {URI}                              from '../../components/primitive/primitive.data'
-import {DomainResourceData, ResourceData} from '../resource'
+import {DomainResourceData, ResourceData} from '../resource/domain-resource.data'
+
 
 type ErrorKeys = '_root' | string
 export const errors = Symbol('errors')
@@ -124,7 +125,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
  */
 export const NoDataObject: FhirElementData | ResourceData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
-export function decorated<T extends FhirElementData>(data?: T): Decorated<T> {
+export function decorate<T extends FhirElementData>(data?: T): Decorated<T> {
   const d: any = data !== NoDataObject ? data : {}
   return {
     ...d,

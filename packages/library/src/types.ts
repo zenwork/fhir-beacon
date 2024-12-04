@@ -11,5 +11,6 @@ export type DisplayConfig = {
   summaryonly: boolean,
   showerror: boolean,
   verbose: boolean,
-  open: boolean
+  open: boolean,
+  input: boolean
 }

@@ -13,8 +13,16 @@ export class MedicationBatchBackbone extends Backbone<MedicationBatchData> {
   public renderDisplay(config: DisplayConfig, data: MedicationBatchData): TemplateResult[] {
     return [
       html`
-              <fhir-primitive label="lot number" .value=${data.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive >
-              <fhir-primitive label="expiration date" .value=${data.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive >
+          <fhir-primitive key="lotNumber"
+                          label="lot number"
+                          .value=${data.lotNumber}
+                          .type=${PrimitiveType.fhir_string}
+          ></fhir-primitive>
+          <fhir-primitive key="expirationDate"
+                          label="expiration date"
+                          .value=${data.expirationDate}
+                          .type=${PrimitiveType.datetime}
+          ></fhir-primitive>
       `
     ]
   }

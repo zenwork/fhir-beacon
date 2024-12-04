@@ -3,7 +3,7 @@ import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
 
 import {FhirDataElement}                   from '../base/data/fhir-data-element'
-import {FhirElementData}                   from '../base/Decorated'
+import {FhirElementData} from '../base/Decorate'
 import {FhirPresentableElement}            from '../base/presentable/fhir-presentable-element'
 import {dataContext, displayConfigContext} from './context'
 
@@ -84,6 +84,7 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
                               if (config.open !== undefined) host.open = config.open
                               if (config.verbose !== undefined) host.verbose = config.verbose
                               if (config.summaryonly !== undefined) host.summaryonly = config.summaryonly
+                              if (config.input !== undefined) host.input = config.input
 
                               host.requestUpdate()
                             }

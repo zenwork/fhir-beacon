@@ -10,6 +10,7 @@ export type ShellArgs = {
   open?: boolean,
   summaryonly?: boolean
   headless?: boolean,
+  input?: boolean,
 }
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -37,7 +38,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
-      defaultValue: { summary: false }
+      defaultValue: false
     }
   },
   summaryonly: {
@@ -81,6 +82,16 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
       // @ts-ignore
       defaultValue: { summary: true }
     }
+  },
+  input: {
+    description: 'make editable',
+    options: [false, true], control: { type: 'boolean' },
+    defaultValue: true,
+    table: {
+      type: { summary: 'boolean' },
+      // @ts-ignore
+      defaultValue: { summary: true }
+    }
   }
 }
 
@@ -95,6 +106,7 @@ export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
                 ?verbose=${args.verbose}
                 ?open=${args.open ?? false}
                 ?summaryonly=${args.summaryonly}
+                ?input=${args.input}
         >
             ${fn(args)}
         </fhir-shell >`

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, PropertyValues, TemplateResult}                                from 'lit'
-import {property}                                                                     from 'lit/decorators.js'
-import {
-  mustRender
-}                                                                                     from '../../../components/mustRender'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {property}                                      from 'lit/decorators.js'
+
+
+import {mustRender}                                                                   from '../../../components/mustRender'
 import {
   PrimitiveType
-}                                                                                     from '../../../components/primitive/type-converters'
+}                                                                                     from '../../../components/primitive/type-converters/type-converters'
 import {
   asReadable
 }                                                                                     from '../../../components/primitive/type-presenters/asReadable'
@@ -20,7 +20,7 @@ import {
   DisplayContextConsumerController
 }                                                                                     from '../../contexts/context-consumer-controller'
 import {FhirDataElement}                                                              from '../data/fhir-data-element'
-import {Decorated, FhirElementData, meta, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
+import {Decorated, FhirElementData, meta, NoDataObject, Validations, ValidationsImpl} from '../Decorate'
 import {Rendering}                                                                    from '../Rendering'
 import {Templating}                                                                   from '../Templating'
 import {
@@ -68,6 +68,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   @property({ type: Boolean })
   public headless: boolean = false
 
+  @property({ type: Boolean })
+  public input: boolean = false
+
   protected templateGenerators: Generators<D> = NullGenerators()
 
   protected constructor(type: string) {
@@ -90,7 +93,8 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       verbose: this.verbose,
       mode: this.mode,
       showerror: this.showerror,
-      summaryonly: this.summaryonly
+      summaryonly: this.summaryonly,
+      input: this.input
     }
   }
 
@@ -116,6 +120,18 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                 data: Decorated<D>,
                                 validations: Validations): TemplateResult[]
 
+  /**
+   * Override this method to provide an alternate template when rendering editable display
+   * @param config
+   * @param data
+   * @param validations
+   */
+  public renderEditableDisplay(config: DisplayConfig,
+                               data: Decorated<D>,
+                               validations: Validations): TemplateResult[] {
+    return this.renderDisplay(config, data, validations)
+  }
+
   public abstract renderNarrative(displayConfig: DisplayConfig,
                                   data: Decorated<D>,
                                   validations: Validations): TemplateResult[]
@@ -130,7 +146,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
   protected willUpdate(changes: PropertyValues) {
     super.willUpdate(changes)
-
     if (this.verbose) {
       this.extendedData[meta].hide = false
     } else if (!this.verbose && isBlank(this.data)) {
@@ -150,7 +165,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
               this.templateGenerators.debug.body.push(this.renderDebug)
               break
             case DisplayMode.display:
-              this.templateGenerators.display.body.push(this.renderDisplay)
+              if (this.input) {
+                // rendering fork only if renderEditableDisplay() is overridden
+                this.templateGenerators.display.body.push(this.renderEditableDisplay)
+              } else {
+                this.templateGenerators.display.body.push(this.renderDisplay)
+              }
               break
             case DisplayMode.narrative:
               this.templateGenerators.display.body.push(this.renderNarrative)
@@ -203,7 +223,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
   protected render(): TemplateResult | TemplateResult[] {
     const templates: TemplateResult[] = [html``]
-
     if (!this.extendedData[meta].hide && this.data === NoDataObject) {
       // SHOW THAT WE HAVE NO DATA
       return html`
@@ -304,12 +323,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
           } else {
             templates.push(html`
                 <fhir-wrapper variant="details"
-                                label=${this.getLabel()}
-                                badge-resource=${asReadable(this.type)}
-                                ?open=${this.open}
-                                ?badge-summary=${this.summary}
-                                ?badge-required=${this.required}
-                                ?summary=${this.summary}
+                              label=${this.getLabel()}
+                              badge-resource=${asReadable(this.type)}
+                              ?open=${this.open}
+                              ?badge-summary=${this.summary}
+                              ?badge-required=${this.required}
+                              ?summary=${this.summary}
                               ?summaryonly=${this.config().summaryonly}
                 >
                     <div class="frontmatter">
@@ -349,13 +368,14 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       verbose: this.verbose,
       mode: this.mode,
       showerror: this.showerror,
-      summaryonly: this.summaryonly
+      summaryonly: this.summaryonly,
+      input: this.input
     }
   }
 
-  private stopRender() {
-    return this.extendedData[meta].hide && !this.verbose
-  }
+  // private stopRender() {
+  //   return this.extendedData[meta].hide && !this.verbose
+  // }
 
   private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {

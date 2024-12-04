@@ -1,4 +1,5 @@
 import {consume}                                                        from '@lit/context'
+import {SlInputEvent}          from '@shoelace-style/shoelace'
 import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                                 from 'lit/decorators.js'
 import {choose}                                                         from 'lit/directives/choose.js'
@@ -8,6 +9,8 @@ import {DisplayConfig, DisplayMode}                                     from '..
 import {isBlank, toDisplayMode}                                         from '../../utilities'
 import {mustRender}                                                     from '../mustRender'
 import {DateTime}                                                       from './primitive.data'
+import {PrimitiveInputEvent}   from './primitiveInputEvent'
+import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
 import {
   toBase64,
   toBoolean,
@@ -51,6 +54,7 @@ export class Primitive extends LitElement {
       li {
         display: flex;
         flex-wrap: wrap;
+        gap: 0;
         list-style-type: none;
         align-items: baseline;
         padding: 0;
@@ -170,6 +174,7 @@ export class Primitive extends LitElement {
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
       this.summaryonly = this.displayConfig.summaryonly
+      this.input = this.displayConfig.input
     }
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
@@ -218,6 +223,7 @@ export class Primitive extends LitElement {
       }
     }
 
+
     if (isBlank(this.value) && this.required && !this.verbose) {
       this.presentableError = 'Error: this property is required'
       this.error = true
@@ -230,6 +236,7 @@ export class Primitive extends LitElement {
       }
     }
   }
+
 
   /**
    *
@@ -262,7 +269,7 @@ export class Primitive extends LitElement {
     const elements: any[] = []
 
     if (this.getLabel()) elements.push(html`
-        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label>&nbsp`)
+        <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label>`)
 
     if (!isBlank(this.value))
       elements.push(html`
@@ -299,21 +306,13 @@ export class Primitive extends LitElement {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
+
     return html`
         <sl-input id=${this.key}
-                  value=${this.presentableValue}
+                  value=${this.value}
                   clearable
-                  @sl-change=${(e: InputEvent) => {
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-expect-error
-                      const value = e.target.value
-                      this.dispatchEvent(new CustomEvent('change',
-                                                         {
-                                                             bubbles: true,
-                                                             composed: true,
-                                                             detail: { value }
-                                                         }))
-                  }}
+                  @sl-input=${this.handleChange}
+
                   size="small"
         >
             <fhir-label slot="label" text=${this.getLabel()}></fhir-label>
@@ -322,6 +321,18 @@ export class Primitive extends LitElement {
         </sl-input>
     `
   }
+
+  private handleChange = (e: SlInputEvent) => {
+    const oldValue = this.value
+    const newValue = (e.target as HTMLInputElement).value
+    this.value = newValue
+    this.presentableValue = ''
+    this.error = false
+    this.errormessage = ''
+    this.dispatchEvent(new PrimitiveInputEvent(this.key, oldValue, newValue, this.type))
+
+  }
+
 
   private renderError = (): TemplateResult => {
     const errors = []
@@ -334,7 +345,7 @@ export class Primitive extends LitElement {
                             text=${this.getLabel()}
                             delimiter=${this.delimiter}
                             variant="error"
-                    ></fhir-label>&nbsp;
+                    ></fhir-label>
                     <fhir-value
                             text=${this.value}
                             link=${this.link}
@@ -371,6 +382,8 @@ export class Primitive extends LitElement {
     if (parsedValue.err) {
       this.presentableTypeError = parsedValue.err
       this.error = true
+      const event = new PrimitiveInvalidEvent(this.key, original, this.type, parsedValue.err || this.presentableError)
+      this.dispatchEvent(event)
     }
   }
 

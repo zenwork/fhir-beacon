@@ -1,5 +1,6 @@
-import {html, nothing, TemplateResult}                        from 'lit'
-import {customElement}                                        from 'lit/decorators.js'
+import {html, nothing, TemplateResult} from 'lit'
+import {customElement}                 from 'lit/decorators.js'
+
 import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
 import {BaseElement, Decorated, Validations}                  from '../../../internal'
 import {DisplayConfig}                                        from '../../../types'
@@ -29,10 +30,10 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
-                <span slot="before">${data.comparator
-                                      ? asQuantityComparator(data.comparator).display.toLowerCase()
-                                      : nothing}&nbsp;</span >
-                <span slot="after">&nbsp;${after}</span >
+                ${data.comparator ? html`<span slot="before"> ${asQuantityComparator(data.comparator)
+                        .display
+                        .toLowerCase()} </span>` : nothing}
+                ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive >
         `
       ]
@@ -42,7 +43,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
-                <span slot="after">&nbsp;${after} </span>
+                ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive >
         `
       ]
@@ -54,6 +55,22 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                   label="quantity"
                   description="must be Quantity or Simple Quantity"
           ></fhir-not-supported >`
+    ]
+  }
+
+
+  public renderEditableDisplay(_: DisplayConfig,
+                               data: Decorated<QuantityData | SimpleQuantityData>): TemplateResult[] {
+
+    return [
+      html`
+          <fhir-primitive key="variation" .value=${this.variation}></fhir-primitive>
+          <fhir-primitive key="value" .value=${data.value} type="decimal" summary></fhir-primitive>
+          <fhir-primitive key="comparator" .value=${data.comparator} type="code" summary></fhir-primitive>
+          <fhir-primitive key="unit" .value=${data.unit} summary></fhir-primitive>
+          <fhir-primitive key="system" .value=${data.system} type="uri" summary></fhir-primitive>
+          <fhir-primitive key="code" .value=${data.code} type="code" summary></fhir-primitive>
+      `
     ]
   }
 

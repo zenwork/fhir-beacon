@@ -2,8 +2,10 @@
 import {PropertyValues, TemplateResult} from 'lit'
 import {DisplayConfig}                  from '../types'
 
-import {Decorated, FhirElementData, Validations} from './base/Decorated'
-import {EmptyResult, FhirPresentableElement}     from './base/presentable'
+import {Decorated, FhirElementData, Validations} from './base/Decorate'
+import {FhirPresentableElement}                  from './base/presentable/fhir-presentable-element'
+import {EmptyResult}                             from './base/presentable/fhir-presentable-element.data'
+
 
 // import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'
 

@@ -1,6 +1,6 @@
 import {isBlank}            from '../../../utilities'
 import {DomainResourceData} from '../../resource'
-import {Validations}        from '../Decorated'
+import {Validations} from '../Decorate'
 
 /**
  * Validates that only one of the given keys in the data object is populated.

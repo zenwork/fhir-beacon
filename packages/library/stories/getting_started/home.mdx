@@ -4,10 +4,17 @@ import * as Stories from '../../src/components/resources/medication/medication.s
 
 <Meta title="Getting Started/Home" />
 
-<img src="images/logo.png" alt="logo" />
-
 FHIR Beacon
 ===========
+
+library for rendering, validating and editing FHIR data without a backend.
+
+### What is rendered
+Use these controls to dynamically modify what is being displayed:
+<Controls of={Stories.FrontPageDemo} exclude={'data'}/>
+
+The components contain all the FHIR logic needed to render the useful information and errors but also to enable insight.
+<Canvas of={Stories.FrontPageDemo} layout={'centered'} sourceState={'none'}/>
 
 * #### [FHIR](http://hl7.org/fhir/) UI components that do not require a backend 🏝️
 * #### Works with all frameworks 🖼️
@@ -36,13 +43,6 @@ frameworks like react and angular, server side rendered html like Next.js, Sprin
 </body>
 </html>
 ```
-
-### What is rendered
-Use these controls to dynamically modify what is being displayed:
-<Controls of={Stories.FrontPageDemo} exclude={'data'}/>
-
-The components contain all the FHIR logic needed to render the useful information and errors but also to enable insight.
-<Canvas of={Stories.FrontPageDemo} layout={'centered'} sourceState={'none'}/>
 
 What Problems Does `fhir-beacon` Solve?
 -----

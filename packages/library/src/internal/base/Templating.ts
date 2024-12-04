@@ -1,6 +1,6 @@
 import {TemplateResult}                          from 'lit'
 import {DisplayConfig}                           from '../../types'
-import {Decorated, FhirElementData, Validations} from './Decorated'
+import {Decorated, FhirElementData, Validations} from './Decorate'
 
 
 /**
@@ -8,22 +8,10 @@ import {Decorated, FhirElementData, Validations} from './Decorated'
  * Element. This interface is generic and expects the type parameter T to extend FhirElementData.
  */
 export interface Templating<T extends FhirElementData> {
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param config
-   * @param data
-   * @param validations
-   */
   renderDisplay(config: DisplayConfig, data: Decorated<T>, validations: Validations): TemplateResult[]
 
-  /**
-   * convenience method implemented by fhir model elements and resources. Internal and abstract classes should
-   * contribute templateGenerators instead.
-   * @param config
-   * @param data
-   * @param validations
-   */
+  renderEditableDisplay(config: DisplayConfig, data: Decorated<T>, validations: Validations): TemplateResult[]
+
   renderStructure(config: DisplayConfig, data: Decorated<T>, validations: Validations): TemplateResult[]
 
   /**

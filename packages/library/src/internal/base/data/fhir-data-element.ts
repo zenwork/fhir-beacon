@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {LitElement, PropertyValues}                                                                from 'lit'
+import {LitElement, PropertyValues}                                                               from 'lit'
 import {
   property,
   state
-}                                                                                                  from 'lit/decorators.js'
-import {DataContextConsumerController, FhirDataContext}                                            from '../../contexts'
+}                                                                                                 from 'lit/decorators.js'
+import {DataContextConsumerController, FhirDataContext}                                           from '../../contexts'
 import {
   BeaconDataError
-}                                                                                                  from '../../errors/beacon-data-error'
-import {
-  DataHandling
-}                                                                                                  from '../DataHandling'
-import {decorated, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorated'
+}                                                                                                 from '../../errors/beacon-data-error'
+import {DataHandling}                                                                             from '../DataHandling'
+import {decorate, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorate'
 
 
 /**
@@ -49,7 +47,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    * @type {T & {} | null}
    */
   @state()
-  public extendedData: Decorated<T> = decorated()
+  public extendedData: Decorated<T> = decorate()
 
   //------------------------------------------------//
   /**
@@ -94,12 +92,32 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     super()
     this.type = type
     this.data = NoDataObject as T
-    this.extendedData = decorated(this.data)
+    this.extendedData = decorate(this.data)
     new DataContextConsumerController(this)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    this.addEventListener('bkn-input', (e: PrimitiveInputEvent) => {
+      e.stopImmediatePropagation()
+
+      if (e.key && this.data) {
+        //TODO: this eventually needs to be overridable
+        (this.data as Record<string, any>)[e.key] = e.newValue
+        this.requestUpdate('data')
+      }
+    })
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    this.addEventListener('bkn-invalid', (e: PrimitiveInvalidEvent) => {
+      e.stopImmediatePropagation()
+      //TODO: bkn-input and bkn-invalid both get dispatched on an invlid update. I am not sure this si the best
+      // thing. Maybe only one should be fired each time
+    })
   }
 
   public prepare() {
-    return decorated(this.data)
+    return decorate(this.data)
   }
 
   public shouldFetch(changes: PropertyValues): boolean {
@@ -133,7 +151,6 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
    */
   protected willUpdate(changes: PropertyValues): void {
     super.willUpdate(changes)
-
     if (changes.has('errors')) {
       // if (this.type === 'CodeableConcept') console.log(this.key, this.type, this.errors)
       // if (this.type === 'Coding') console.log('coding')
@@ -143,6 +160,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
       this.data = this.fetch(this.dataPath)
       this.#fetched = true
     }
+
 
     if (changes.has('data') && this.shouldPrepare()) {
       this.extendedData = this.prepare()

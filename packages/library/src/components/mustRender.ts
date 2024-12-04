@@ -1,4 +1,4 @@
-import {meta, NoDataObject} from '../internal/base/Decorated'
+import {meta, NoDataObject} from '../internal/base/Decorate'
 import {DisplayMode}        from '../types'
 import {isBlank}            from '../utilities'
 

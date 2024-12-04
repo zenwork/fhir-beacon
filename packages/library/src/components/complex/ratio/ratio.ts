@@ -1,8 +1,7 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../../internal'
-import {EmptyResult}          from '../../../internal/base'
-import {DisplayConfig}        from '../../../types'
+import {css, html, TemplateResult} from 'lit'
+import {customElement}             from 'lit/decorators.js'
+import {BaseElement}               from '../../../internal'
+import {DisplayConfig}             from '../../../types'
 
 import {RatioData} from './ratio.data'
 
@@ -13,29 +12,27 @@ export class Ratio extends BaseElement<RatioData> {
     super('Ratio')
   }
 
+  static styles = [
+    css`
+      :host {
+        display: flex;
+        gap: 0;
+      }
+    `
+  ]
+
   public renderDisplay(_: DisplayConfig, data: RatioData): TemplateResult[] {
 
-    if (this.summaryonly && !this.summary) {
-      return EmptyResult
-    }
-
-    let denominator: TemplateResult
-    if (data.denominator?.value == 1 && (data.denominator.unit || data.denominator.code)) {
-      denominator = html`
-          <fhir-value text="${data.denominator.unit || data.denominator.code}"></fhir-value >`
-    } else {
-      denominator = html`
-          <fhir-quantity .data=${data.denominator} headless summary></fhir-quantity>`
-    }
-
     return [
+
       html`
-          <fhir-primitive-wrapper part="base">
-              <fhir-label text="${this.getLabel()}"></fhir-label>&nbsp;
-              <fhir-quantity .data=${data.numerator} headless summary></fhir-quantity>
-              <fhir-value text="&nbsp;/&nbsp;"></fhir-value >
-              ${denominator}
-          </fhir-primitive-wrapper >
+          <fhir-quantity key="numerator" .data=${data.numerator} summary headless></fhir-quantity>
+          <fhir-value text="/"></fhir-value>
+          <fhir-quantity key="denominator"
+                         .data=${data.denominator}
+                         summary
+                         headless
+          ></fhir-quantity>
       `
     ]
   }
@@ -43,8 +40,8 @@ export class Ratio extends BaseElement<RatioData> {
   public renderStructure(_: DisplayConfig, data: RatioData): TemplateResult[] {
     return [
       html`
-          <fhir-quantity label="numerator" .data=${data.numerator} summary></fhir-quantity >
-          <fhir-quantity label="denominator" .data=${data.denominator} summary></fhir-quantity >
+          <fhir-quantity key="numerator" label="numerator" .data=${data.numerator} summary></fhir-quantity>
+          <fhir-quantity key="denominator" label="denominator" .data=${data.denominator} summary></fhir-quantity>
       `
     ]
   }

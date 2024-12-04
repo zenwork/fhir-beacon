@@ -20,7 +20,7 @@ export class Identifier extends BaseElement<IdentifierData> {
 
     return [
       html`
-          <fhir-primitive label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive >
+          <fhir-primitive key="id" label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive>
           <fhir-codeable-concept label="type" .data=${data.type} .errors=${data[errors]} summary></fhir-codeable-concept >
           <fhir-period .data=${data.period} summary></fhir-period >
       `

@@ -72,7 +72,8 @@ export const FrontPageDemo: Story = {
     showerror: false,
     verbose: false,
     open: true,
-    headless: true
+    headless: true,
+    input: true
   },
   render: (args: ShellArgs) =>
     html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3>
@@ -84,6 +85,7 @@ export const FrontPageDemo: Story = {
             ?verbose=${args.verbose}
             ?open=${args.open}
             ?headless=${args.headless}
+            ?input=${args.input}
     >
     </fhir-medication>
     `

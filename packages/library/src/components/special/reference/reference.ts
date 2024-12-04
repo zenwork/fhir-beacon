@@ -45,16 +45,10 @@ export class Reference extends BaseElement<ReferenceData> {
               [
                   ReferenceType.contained,
                   () => html`
-                      <fhir-primitive
-                              key="${this.key}"
-                              label="${this.label}"
-                              value=${this.mappedResource?.resourceType || 'contained'}
-                              summary
-                      ></fhir-primitive >
-                      <fhir-wrapper label="${this.verbose ? 'loaded ref ' + data.reference : ''}"
-                                      ?summaryonly=${this.getDisplayConfig().summaryonly}
+                      <fhir-wrapper label="${this.verbose ? 'contained ref ' + data.reference : ''}"
+                                    ?summaryonly=${config.summaryonly}
                       >
-                          ${renderResourceComponent(this.mappedResource, this.getDisplayConfig())}
+                          ${renderResourceComponent(this.mappedResource, config)}
                       </fhir-wrapper>
 
                   `
