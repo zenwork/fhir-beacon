@@ -143,11 +143,11 @@ beforeAll(() => {
 >
 <link
     crossorigin="anonymous"
-    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/themes/light.css"
     rel="stylesheet"
     title="fhir-style"
 />
-<script src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace.js" type="module"></script >
+<script src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/shoelace.js" type="module"></script >
 
 <!--<link rel="stylesheet" href="path/to/your/styles.css" />-->
 <style>
