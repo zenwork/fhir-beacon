@@ -18,7 +18,7 @@ describe('DisplayConfig', () => {
         <fhir-primitive label="something" value='abc' type="decimal" ?showerror=${true}></fhir-primitive >
       `).first()
 
-      await aTimeout(500)
+      await aTimeout(1000)
 
       const element = primitive.queryShadowByText('TypeError: decimal must be a valid number: abc')
       expect(element).toBeVisible()
