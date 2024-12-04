@@ -29,7 +29,7 @@ describe('fhir primitive value', () => {
     `).first()
 
     const element = el.queryShadow({ select: 'div' }) as HTMLDivElement
-    expect.element(element).toHaveTextContent('hello')
+    await expect.element(element).toHaveTextContent('hello')
 
   })
 
@@ -40,7 +40,7 @@ describe('fhir primitive value', () => {
     `).first()
 
     const element = el.queryShadow({ select: 'a' }) as HTMLAnchorElement
-    expect.element(element).toHaveTextContent('hello')
+    await expect.element(element).toHaveTextContent('hello')
     expect(element.href).toEqual('https://google.com/')
 
   })
