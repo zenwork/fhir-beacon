@@ -101,8 +101,10 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
       e.stopImmediatePropagation()
 
       if (e.key && this.data) {
+        console.log(
+          `bkn-input: ${this.type} ${e.key} ${e.oldValue} ${e.newValue}`)
         //TODO: this eventually needs to be overridable
-        (this.data as Record<string, any>)[e.key] = e.newValue
+        this.handleEditableChange(this.data, e.key, e.oldValue, e.newValue)
         this.requestUpdate('data')
       }
     })
@@ -140,6 +142,10 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
 
   public shouldPrepare() {
     return this.data && this.data !== NoDataObject
+  }
+
+  protected handleEditableChange(data: T, key: string, oldValue: unknown, newValue: unknown) {
+    (data as Record<string, any>)[key] = newValue
   }
 
   /**

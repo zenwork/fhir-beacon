@@ -1,17 +1,19 @@
 import {consume}                                                        from '@lit/context'
-import {SlInputEvent}          from '@shoelace-style/shoelace'
+import {SlInputEvent}                                                   from '@shoelace-style/shoelace'
 import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                                 from 'lit/decorators.js'
 import {choose}                                                         from 'lit/directives/choose.js'
+import {Value}                                                          from '../../codesystems'
 import {dataContext, displayConfigContext, FhirDataContext}             from '../../internal/contexts'
 import {textHostStyles}                                                 from '../../styles'
 import {DisplayConfig, DisplayMode}                                     from '../../types'
 import {isBlank, toDisplayMode}                                         from '../../utilities'
 import {mustRender}                                                     from '../mustRender'
 import {DateTime}                                                       from './primitive.data'
-import {PrimitiveInputEvent}   from './primitiveInputEvent'
-import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
+import {PrimitiveInputEvent}                                            from './primitiveInputEvent'
+import {PrimitiveInvalidEvent}                                          from './primitiveInvalidEvent'
 import {
+  PrimitiveType,
   toBase64,
   toBoolean,
   toCode,
@@ -29,11 +31,10 @@ import {
   toType,
   toUnsignedInt,
   toUri,
-  toUrl
+  toUrl,
+  valueOrError
 }                                                                       from './type-converters'
-
-import {PrimitiveType, valueOrError} from './type-converters/type-converters'
-import {asDateTime, asReadable}      from './type-presenters'
+import {asDateTime, asReadable}                                         from './type-presenters'
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -44,6 +45,7 @@ import {asDateTime, asReadable}      from './type-presenters'
 // primitive.
 @customElement('fhir-primitive')
 export class Primitive extends LitElement {
+
   static styles = [
     textHostStyles,
     css`
@@ -80,6 +82,14 @@ export class Primitive extends LitElement {
       sl-input::part(input) {
         font-size: 15px;
       }
+
+      .code {
+        font-weight: bold
+      }
+
+      .display {
+        color: gray
+      }
     `
   ]
 
@@ -104,6 +114,9 @@ export class Primitive extends LitElement {
   @property({ attribute: 'value-path' })
   declare valuePath: string
 
+  @property({ type: Array })
+  declare choices: Value[]
+
   @property()
   declare link: string
 
@@ -118,9 +131,6 @@ export class Primitive extends LitElement {
 
   @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
   declare mode: DisplayMode
-
-  @property({ type: Boolean })
-  public input: boolean = false
 
   @property({ type: Boolean })
   public showerror: boolean = false
@@ -162,6 +172,17 @@ export class Primitive extends LitElement {
   @state()
   private presentableTypeError: string = ''
 
+  declare _input: boolean
+
+  @property({ type: Boolean })
+  public get input(): boolean {
+    return this._input ?? this.displayConfig?.input ?? false
+  }
+
+  public set input(value: boolean) {
+    this._input = value
+  }
+
   /**
    *
    * @param changed
@@ -174,7 +195,6 @@ export class Primitive extends LitElement {
       this.verbose = this.displayConfig.verbose
       this.showerror = this.displayConfig.showerror
       this.summaryonly = this.displayConfig.summaryonly
-      this.input = this.displayConfig.input
     }
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
@@ -307,12 +327,30 @@ export class Primitive extends LitElement {
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
 
+    if (this.choices) {
+      return html`
+          <fhir-system-choice
+                  id=${this.key}
+                  .value=${this.value}
+                  .valuesets=${this.choices.map(choice => ({ value: choice.code, label: choice.display }))}
+                  .codesystems=${Array.from(new Set(this.choices
+                                                        .map(choice => choice.system)))
+                                      .map(s => ({ value: s, display: s }))
+                  }
+                  label=${this.getLabel()}
+                  error=${errors.join(' | ')}
+                  @fhir-change=${this.handleChange}
+                  overridable
+          >
+          </fhir-system-choice>
+      `
+    }
+
     return html`
         <sl-input id=${this.key}
                   value=${this.value}
                   clearable
                   @sl-input=${this.handleChange}
-
                   size="small"
         >
             <fhir-label slot="label" text=${this.getLabel()}></fhir-label>
@@ -323,13 +361,23 @@ export class Primitive extends LitElement {
   }
 
   private handleChange = (e: SlInputEvent) => {
+
     const oldValue = this.value
-    const newValue = (e.target as HTMLInputElement).value
-    this.value = newValue
+
+    if (e.type === 'sl-input') {
+      this.value = (e.target as HTMLInputElement).value
+    }
+
+    if (e.type === 'fhir-change') {
+      this.value = e.detail.value
+    }
+
+    if (oldValue === this.value) return
+
     this.presentableValue = ''
     this.error = false
     this.errormessage = ''
-    this.dispatchEvent(new PrimitiveInputEvent(this.key, oldValue, newValue, this.type))
+    this.dispatchEvent(new PrimitiveInputEvent(this.key, oldValue, this.value, this.type))
 
   }
 
@@ -351,17 +399,17 @@ export class Primitive extends LitElement {
                             link=${this.link}
                             variant="error"
                     ></fhir-value>
-                                  ${this.mode === DisplayMode.structure
-                                    ? html`
-                                              <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
-                                              ></fhir-badge-group>` : nothing}
-                                  ${this.showerror
-                                    ? html`
-                                              <fhir-error
-                                                      text=${errors.join(
-                                                              ' | ')}
-                                              ></fhir-error>`
-                                    : nothing}
+                    ${this.mode === DisplayMode.structure
+                      ? html`
+                                <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
+                                ></fhir-badge-group>` : nothing}
+                    ${this.showerror
+                      ? html`
+                                <fhir-error
+                                        text=${errors.join(
+                                                ' | ')}
+                                ></fhir-error>`
+                      : nothing}
                 </li>`
            : html``
   }

@@ -1,17 +1,17 @@
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement}                 from 'lit/decorators.js'
-
-import {FhirAges, FhirDistances, FhirDuration}                from '../../../codesystems/code-systems'
-import {BaseElement, Decorated, Validations}                  from '../../../internal'
-import {DisplayConfig}                                        from '../../../types'
-import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
-import {isWholeNumber}                                        from '../../../utilities/isWhole'
+import {html, nothing, TemplateResult}                                    from 'lit'
+import {customElement}                                                    from 'lit/decorators.js'
+import {when}                                                             from 'lit/directives/when.js'
+import {FhirAges, FhirDistances, FhirDuration, systems, useSystem, Value} from '../../../codesystems/code-systems'
+import {BaseElement, Decorated, Validations}                              from '../../../internal'
+import {DisplayConfig}                                                    from '../../../types'
+import {hasAllOrNone}                                                     from '../../../utilities/hasAllOrNone'
+import {isWholeNumber}                                                    from '../../../utilities/isWhole'
 import {
-  asQuantityComparator
-}                                                             from '../../primitive/type-presenters/asQuantityComparator'
-import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.data'
-import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
-
+  asQuantityComparator,
+  quantityComparatorChoices
+}                                                                         from '../../primitive/type-presenters/asQuantityComparator'
+import {QuantityData, QuantityVariations, SimpleQuantityData}             from './quantity.data'
+import {isQuantity, isSimpleQuantity}                                     from './quantity.type-guards'
 
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
@@ -25,7 +25,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
     const displayValue: undefined | string | number = data.value
     const type: string = 'decimal'
-    const after = data.unit || data.code
+    const after = config.verbose ? data.unit + '(' + data.code + ')' : data.code
     if (isQuantity(data)) {
       return [
         html`
@@ -34,7 +34,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                         .display
                         .toLowerCase()} </span>` : nothing}
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
-            </fhir-primitive >
+            </fhir-primitive>
         `
       ]
     }
@@ -44,7 +44,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
-            </fhir-primitive >
+            </fhir-primitive>
         `
       ]
     }
@@ -54,22 +54,45 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
           <fhir-not-supported
                   label="quantity"
                   description="must be Quantity or Simple Quantity"
-          ></fhir-not-supported >`
+          ></fhir-not-supported>`
     ]
   }
 
-
   public renderEditableDisplay(_: DisplayConfig,
-                               data: Decorated<QuantityData | SimpleQuantityData>): TemplateResult[] {
+                               data: Decorated<QuantityData | SimpleQuantityData>,
+                               validations: Validations): TemplateResult[] {
+
+    const system = useSystem(data.system)
+    const sys = systems()
 
     return [
       html`
-          <fhir-primitive key="variation" .value=${this.variation}></fhir-primitive>
+          <fhir-primitive key="variation" .value=${this.variation} .input=${false}></fhir-primitive>
           <fhir-primitive key="value" .value=${data.value} type="decimal" summary></fhir-primitive>
-          <fhir-primitive key="comparator" .value=${data.comparator} type="code" summary></fhir-primitive>
-          <fhir-primitive key="unit" .value=${data.unit} summary></fhir-primitive>
-          <fhir-primitive key="system" .value=${data.system} type="uri" summary></fhir-primitive>
-          <fhir-primitive key="code" .value=${data.code} type="code" summary></fhir-primitive>
+          ${when(
+                  this.variation === 'simple',
+                  () => html``,
+                  () => html`
+                      <fhir-primitive key="comparator"
+                                      .value=${data.comparator}
+                                      type="code"
+                                      summary
+                                      .choices=${quantityComparatorChoices()}
+                      ></fhir-primitive>`
+          )}
+
+          <fhir-primitive key="system" .value=${data.system} type="uri" summary .choices=${sys}></fhir-primitive>
+          <fhir-primitive key="code"
+                          .value=${data.code}
+                          type="code"
+                          summary
+                          .choices=${system?.concepts}
+                          .errormessage=${validations.errFor('code')}
+          ></fhir-primitive>
+          <fhir-primitive key="unit"
+                          .value=${data.unit}
+                          summary
+          ></fhir-primitive>
       `
     ]
   }
@@ -79,12 +102,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     if (isQuantity(data)) {
       return [
         html`
-            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
-            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
-            <fhir-primitive label="comparator" .value=${data.comparator} type="code" summary></fhir-primitive >
-            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
-            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
-            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
+            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
+            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
+            <fhir-primitive label="comparator" .value=${data.comparator} type="code" summary></fhir-primitive>
+            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
+            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>
+            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive>
         `
       ]
     }
@@ -92,11 +115,11 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     if (isSimpleQuantity(data)) {
       return [
         html`
-            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive >
-            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive >
-            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive >
-            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive >
-            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive >
+            <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
+            <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
+            <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
+            <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>
+            <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive>
         `
       ]
     }
@@ -106,7 +129,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
           <fhir-not-supported
                   label="quantity"
                   description="must be Quantity or Simple Quantity"
-          ></fhir-not-supported >`
+          ></fhir-not-supported>`
     ]
 
   }
@@ -121,6 +144,13 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                          })
     }
 
+    const system = useSystem(data.system)
+    if (system && !system.concepts.find((v: Value) => v.code === data.code)) {
+      validations.addErr({
+                           key: 'code',
+                           err: `${this.type}: code ${data.code} is not valid for system: ${data.system}`
+                         })
+    }
 
   }
 
@@ -137,7 +167,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
     // rule: dis-1
     if (data.unit
-        && FhirDistances.find(d => data.code === d.code && data.system === d.source)) {
+        && FhirDistances.concepts.find(d => data.code === d.code && data.system === d.url)) {
       this.variation = QuantityVariations.distance
     }
 
@@ -152,7 +182,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     // TODO: There is no guaranteed way to distinguish between a duration and an age. Is this a bug or a feature?
     // rule: drt-1
     if ((!data.value || data.code)
-        && FhirDuration.find(d => data.code === d.code && data.system === d.source)
+        && FhirDuration.concepts.find(d => data.code === d.code && data.system === d.url)
         && isBlankOrUcum
     ) {
       this.variation = QuantityVariations.duration
@@ -160,10 +190,26 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
     // rule: age-1
     if (data.value && data.value > 0
-        && FhirAges.find(a => data.code === a.code && data.system === a.source)) {
+        && FhirAges.concepts.find(a => data.code === a.code && data.system === a.url)) {
       this.variation = QuantityVariations.age
     }
     return data as Decorated<QuantityData> | Decorated<SimpleQuantityData>
+  }
+
+  protected handleEditableChange(data: QuantityData | SimpleQuantityData,
+                                 key: string,
+                                 oldValue: unknown,
+                                 newValue: unknown) {
+
+    (data as Record<string, any>)[key] = newValue
+
+    if (key === 'code') {
+      const system = useSystem(data.system)
+      if (system) {
+        const concept = system.concepts.find((d) => d.code === newValue)
+        if (concept) data.unit = concept.display || concept.code
+      }
+    }
   }
 
 }

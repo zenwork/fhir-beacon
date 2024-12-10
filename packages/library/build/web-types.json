@@ -47,6 +47,14 @@
           }
         },
         {
+          "name": "fhir-empty-list",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [],
+          "events": [],
+          "js": { "properties": [], "events": [] }
+        },
+        {
           "name": "fhir-not-supported",
           "description": "\n---\n",
           "doc-url": "",
@@ -80,6 +88,7 @@
             },
             { "name": "value", "value": { "type": "string" } },
             { "name": "value-path", "value": { "type": "string" } },
+            { "name": "choices", "value": { "type": "Value[]" } },
             { "name": "link", "value": { "type": "string" } },
             { "name": "context", "value": { "type": "string" } },
             { "name": "type", "value": { "type": "PrimitiveType" } },
@@ -88,10 +97,6 @@
               "value": { "type": "boolean", "default": "false" }
             },
             { "name": "mode", "value": { "type": "DisplayMode" } },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
             {
               "name": "showerror",
               "value": { "type": "boolean", "default": "false" }
@@ -121,7 +126,8 @@
             {
               "name": "required",
               "value": { "type": "boolean", "default": "false" }
-            }
+            },
+            { "name": "input", "value": { "type": "boolean" } }
           ],
           "events": [],
           "js": {
@@ -133,12 +139,12 @@
               { "name": "delimiter", "type": "string" },
               { "name": "value", "type": "string" },
               { "name": "valuePath", "type": "string" },
+              { "name": "choices", "type": "Value[]" },
               { "name": "link", "type": "string" },
               { "name": "context", "type": "string" },
               { "name": "type", "type": "PrimitiveType" },
               { "name": "showProvided", "type": "boolean" },
               { "name": "mode", "type": "DisplayMode" },
-              { "name": "input", "type": "boolean" },
               { "name": "showerror", "type": "boolean" },
               { "name": "errormessage", "type": "string" },
               { "name": "variant", "type": "string" },
@@ -147,18 +153,12 @@
               { "name": "summaryonly", "type": "boolean" },
               { "name": "translate", "type": "boolean" },
               { "name": "trialuse", "type": "boolean" },
-              { "name": "required", "type": "boolean" }
+              { "name": "required", "type": "boolean" },
+              { "name": "_input", "type": "boolean" },
+              { "name": "input", "type": "boolean" }
             ],
             "events": []
           }
-        },
-        {
-          "name": "fhir-empty-list",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [],
-          "events": [],
-          "js": { "properties": [], "events": [] }
         },
         {
           "name": "fhir-debug",
@@ -170,6 +170,43 @@
           "events": [],
           "js": {
             "properties": [{ "name": "data", "type": "object" }],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-badge-group",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "resource",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "constraint",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "resource", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "constraint", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              {
+                "name": "badges",
+                "type": "{ label: string, type: BadgeType }[]"
+              }
+            ],
             "events": []
           }
         },
@@ -361,6 +398,74 @@
                 "type": "ValidationErrors"
               },
               { "name": "dataContext", "type": "FhirDataContext" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-wrapper",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "variant",
+              "value": {
+                "type": "'none' | 'details' | 'error'",
+                "default": "'none'"
+              }
+            },
+            {
+              "name": "key",
+              "value": { "type": "string", "default": "'items'" }
+            },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "badge-resource",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "badge-summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "badge-constraint",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "badge-required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "variant", "type": "'none' | 'details' | 'error'" },
+              { "name": "key", "type": "string" },
+              { "name": "label", "type": "string" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "badgeResource", "type": "string" },
+              { "name": "badgeSummary", "type": "boolean" },
+              { "name": "badgeConstraint", "type": "boolean" },
+              { "name": "badgeRequired", "type": "boolean" },
+              { "name": "open", "type": "boolean" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" }
             ],
             "events": []
           }
@@ -656,102 +761,6 @@
         {
           "name": "fhir-contact-point",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<ContactPointData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<ContactPointData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            {
-              "name": "open",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showerror",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summaryonly",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "mode", "type": "DisplayMode" },
-              { "name": "open", "type": "boolean" },
-              { "name": "forceclose", "type": "boolean" },
-              { "name": "verbose", "type": "boolean" },
-              { "name": "showerror", "type": "boolean" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "input", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-coding",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _CodingData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _CodingData_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
           "doc-url": "",
           "attributes": [
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -1518,6 +1527,102 @@
           }
         },
         {
+          "name": "fhir-coding",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _CodingData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _CodingData_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showerror",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "input",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "mode", "type": "DisplayMode" },
+              { "name": "open", "type": "boolean" },
+              { "name": "forceclose", "type": "boolean" },
+              { "name": "verbose", "type": "boolean" },
+              { "name": "showerror", "type": "boolean" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "input", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-bundle",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<BundleData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<BundleData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
           "doc-url": "",
@@ -1638,29 +1743,12 @@
           }
         },
         {
-          "name": "fhir-label",
+          "name": "fhir-primitive-wrapper",
           "description": "\n---\n",
           "doc-url": "",
-          "attributes": [
-            { "name": "text", "value": { "type": "string" } },
-            { "name": "variant", "value": { "type": "string" } },
-            {
-              "name": "delimiter",
-              "value": { "type": "string", "default": "':'" }
-            },
-            { "name": "for", "value": { "type": "string" } }
-          ],
+          "attributes": [],
           "events": [],
-          "js": {
-            "properties": [
-              { "name": "text", "type": "string" },
-              { "name": "variant", "type": "string" },
-              { "name": "delimiter", "type": "string" },
-              { "name": "for", "type": "string" },
-              { "name": "assignedElements", "type": "Array<HTMLElement>" }
-            ],
-            "events": []
-          }
+          "js": { "properties": [], "events": [] }
         },
         {
           "name": "fhir-value",
@@ -1687,14 +1775,6 @@
             ],
             "events": []
           }
-        },
-        {
-          "name": "fhir-primitive-wrapper",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [],
-          "events": [],
-          "js": { "properties": [], "events": [] }
         },
         {
           "name": "fhir-account",
@@ -1795,291 +1875,26 @@
           }
         },
         {
-          "name": "fhir-medication-batch",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
+          "name": "fhir-label",
+          "description": "\n---\n",
           "doc-url": "",
           "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
+            { "name": "text", "value": { "type": "string" } },
+            { "name": "variant", "value": { "type": "string" } },
             {
-              "name": "open",
-              "value": { "type": "boolean", "default": "false" }
+              "name": "delimiter",
+              "value": { "type": "string", "default": "':'" }
             },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showerror",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summaryonly",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            }
+            { "name": "for", "value": { "type": "string" } }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "mode", "type": "DisplayMode" },
-              { "name": "open", "type": "boolean" },
-              { "name": "forceclose", "type": "boolean" },
-              { "name": "verbose", "type": "boolean" },
-              { "name": "showerror", "type": "boolean" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "input", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-medication-ingredient",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            {
-              "name": "open",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showerror",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summaryonly",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "mode", "type": "DisplayMode" },
-              { "name": "open", "type": "boolean" },
-              { "name": "forceclose", "type": "boolean" },
-              { "name": "verbose", "type": "boolean" },
-              { "name": "showerror", "type": "boolean" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "input", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "override-template", "value": { "type": "string" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            {
-              "name": "open",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showerror",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summaryonly",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "overrideTemplate", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "label", "type": "string" },
-              { "name": "mode", "type": "DisplayMode" },
-              { "name": "open", "type": "boolean" },
-              { "name": "forceclose", "type": "boolean" },
-              { "name": "verbose", "type": "boolean" },
-              { "name": "showerror", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "input", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" }
+              { "name": "text", "type": "string" },
+              { "name": "variant", "type": "string" },
+              { "name": "delimiter", "type": "string" },
+              { "name": "for", "type": "string" },
+              { "name": "assignedElements", "type": "Array<HTMLElement>" }
             ],
             "events": []
           }
@@ -2567,6 +2382,296 @@
         {
           "name": "fhir-appointment",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<AppointmentData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<AppointmentData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "override-template", "value": { "type": "string" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showerror",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "input",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "overrideTemplate", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "label", "type": "string" },
+              { "name": "mode", "type": "DisplayMode" },
+              { "name": "open", "type": "boolean" },
+              { "name": "forceclose", "type": "boolean" },
+              { "name": "verbose", "type": "boolean" },
+              { "name": "showerror", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "input", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication-batch",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showerror",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "input",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "mode", "type": "DisplayMode" },
+              { "name": "open", "type": "boolean" },
+              { "name": "forceclose", "type": "boolean" },
+              { "name": "verbose", "type": "boolean" },
+              { "name": "showerror", "type": "boolean" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "input", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication-ingredient",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
+            {
+              "name": "open",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showerror",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "summaryonly",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "input",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "mode", "type": "DisplayMode" },
+              { "name": "open", "type": "boolean" },
+              { "name": "forceclose", "type": "boolean" },
+              { "name": "verbose", "type": "boolean" },
+              { "name": "showerror", "type": "boolean" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "input", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
           "doc-url": "",
           "attributes": [
             { "name": "override-template", "value": { "type": "string" } },
@@ -3537,102 +3642,6 @@
           }
         },
         {
-          "name": "fhir-meta",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MetaData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MetaData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            { "name": "mode", "value": { "type": "DisplayMode" } },
-            {
-              "name": "open",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "forceclose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "verbose",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "showerror",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "summaryonly",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "input",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "mode", "type": "DisplayMode" },
-              { "name": "open", "type": "boolean" },
-              { "name": "forceclose", "type": "boolean" },
-              { "name": "verbose", "type": "boolean" },
-              { "name": "showerror", "type": "boolean" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "input", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "fhir-narrative",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _NarrativeData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _NarrativeData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
           "doc-url": "",
@@ -3827,106 +3836,97 @@
           }
         },
         {
-          "name": "fhir-badge-group",
-          "description": "\n---\n",
+          "name": "fhir-meta",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MetaData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MetaData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n",
           "doc-url": "",
           "attributes": [
-            {
-              "name": "resource",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "constraint",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "resource", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "constraint", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              {
-                "name": "badges",
-                "type": "{ label: string, type: BadgeType }[]"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-wrapper",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "variant",
-              "value": {
-                "type": "'none' | 'details' | 'error'",
-                "default": "'none'"
-              }
-            },
-            {
-              "name": "key",
-              "value": { "type": "string", "default": "'items'" }
-            },
             { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "badge-resource",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "badge-summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "badge-constraint",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "badge-required",
-              "value": { "type": "boolean", "default": "false" }
-            },
+            { "name": "mode", "value": { "type": "DisplayMode" } },
             {
               "name": "open",
               "value": { "type": "boolean", "default": "false" }
             },
             {
+              "name": "forceclose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "verbose",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "showerror",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
               "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
               "value": { "type": "boolean", "default": "false" }
             },
             {
               "name": "summaryonly",
               "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "input",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
             }
           ],
           "events": [],
           "js": {
             "properties": [
-              { "name": "variant", "type": "'none' | 'details' | 'error'" },
-              { "name": "key", "type": "string" },
               { "name": "label", "type": "string" },
-              { "name": "headless", "type": "boolean" },
-              { "name": "badgeResource", "type": "string" },
-              { "name": "badgeSummary", "type": "boolean" },
-              { "name": "badgeConstraint", "type": "boolean" },
-              { "name": "badgeRequired", "type": "boolean" },
+              { "name": "mode", "type": "DisplayMode" },
               { "name": "open", "type": "boolean" },
+              { "name": "forceclose", "type": "boolean" },
+              { "name": "verbose", "type": "boolean" },
+              { "name": "showerror", "type": "boolean" },
               { "name": "summary", "type": "boolean" },
-              { "name": "summaryonly", "type": "boolean" }
+              { "name": "required", "type": "boolean" },
+              { "name": "summaryonly", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              { "name": "input", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" }
             ],
             "events": []
           }
