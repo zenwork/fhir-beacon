@@ -64,7 +64,7 @@ function extractValueSet(vs: any): ValueSet {
     url: vs.url,
     concepts: include.concept.map((c: any) => ({
       url: vs.url,
-      system: include.concept.system,
+      system: include.system,
       code: c.code,
       display: c.display || c.code
     }))

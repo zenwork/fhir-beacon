@@ -38,7 +38,7 @@ describe('Quantity', () => {
     const primitive = quantity.queryShadow<Primitive>({ select: 'fhir-primitive' })
     expect(primitive).toHaveAttribute('value', '25')
     expect(primitive).toHaveAttribute('label', 'quantity')
-    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('sec')
+    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('s')
 
   })
 
@@ -60,7 +60,7 @@ describe('Quantity', () => {
     expect(primitive).toHaveAttribute('value', '40000')
     expect(primitive).toHaveAttribute('value', '40000')
     expect(primitive.queryShadowNamedSlot('before')[0]).toHaveTextContent('greater than')
-    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('ug/L')
+    expect(primitive.queryShadowNamedSlot('after')[0]).toHaveTextContent('ug')
 
   })
 

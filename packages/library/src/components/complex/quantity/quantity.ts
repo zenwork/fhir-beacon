@@ -182,7 +182,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     // TODO: There is no guaranteed way to distinguish between a duration and an age. Is this a bug or a feature?
     // rule: drt-1
     if ((!data.value || data.code)
-        && FhirDuration.concepts.find(d => data.code === d.code && data.system === d.url)
+        && FhirDuration.concepts.find(d => data.code === d.code && data.system === d.system)
         && isBlankOrUcum
     ) {
       this.variation = QuantityVariations.duration

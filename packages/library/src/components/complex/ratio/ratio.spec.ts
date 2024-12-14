@@ -56,11 +56,13 @@ describe('Ratio', () => {
     ratio.queryShadow({ select: 'fhir-value', expect: 3 })
 
     const elements = await findAllByShadowText(ratio, anyMatcher(
-      '103.5', 'US$', '/', 'day'
+      '103.5', 'USD', '/', '1', 'day'
     ))
+
     expect(elements[1]).toHaveTextContent('103.5')
-    expect(elements[0]).toHaveTextContent('US$')
+    expect(elements[0]).toHaveTextContent('USD')
     expect(elements[2]).toHaveTextContent('/')
+    expect(elements[4]).toHaveTextContent('1')
     expect(elements[3]).toHaveTextContent('day')
 
   })
