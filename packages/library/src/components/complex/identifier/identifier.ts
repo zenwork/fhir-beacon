@@ -15,14 +15,19 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<IdentifierData>,
-                       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        
                        validations: Validations): TemplateResult[] {
 
     return [
       html`
           <fhir-primitive key="id" label="id" .value=${data.value} .context=${data.system} summary></fhir-primitive>
-          <fhir-codeable-concept label="type" .data=${data.type} .errors=${data[errors]} summary></fhir-codeable-concept >
-          <fhir-period .data=${data.period} summary></fhir-period >
+          <fhir-codeable-concept key="type"
+                                 label="type"
+                                 .data=${data.type}
+                                 .errors=${validations.errFor('type')}
+                                 summary
+          ></fhir-codeable-concept>
+          <fhir-period key="period" .data=${data.period} summary></fhir-period>
       `
     ]
   }

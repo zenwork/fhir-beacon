@@ -13,6 +13,7 @@ import {mustRender}                                    from '../mustRender'
 import {DateTime}                                      from './primitive.data'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
+import {PrimitiveValidEvent} from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
@@ -175,12 +176,16 @@ export class Primitive extends ConfigurableElement {
     if (isBlank(this.value) && this.required && !this.verbose) {
       this.presentableError = 'Error: this property is required'
       this.error = true
+      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, this.presentableError)
+      this.dispatchEvent(event)
     }
 
     if (changed.has('errormessage')) {
       if (!isBlank(this.errormessage)) {
         this.presentableError = this.errormessage
         this.error = true
+        const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, this.presentableError)
+        this.dispatchEvent(event)
       }
     }
   }
@@ -204,7 +209,6 @@ export class Primitive extends ConfigurableElement {
            : this.error
              ? this.renderError()
              : this.renderValid()
-
   }
 
 
@@ -261,14 +265,10 @@ export class Primitive extends ConfigurableElement {
                   id=${this.key}
                   .value=${this.value}
                   .valuesets=${this.choices.map(choice => ({ value: choice.code, label: choice.display }))}
-                  .codesystems=${Array.from(new Set(this.choices
-                                                        .map(choice => choice.system)))
-                                      .map(s => ({ value: s, display: s }))
-                  }
                   label=${this.getLabel()}
                   error=${errors.join(' | ')}
                   @fhir-change=${this.handleChange}
-                  overridable
+                  .overridable=${false}
           >
           </fhir-system-choice>
       `
@@ -353,6 +353,8 @@ export class Primitive extends ConfigurableElement {
     if (!isBlank(parsedValue.val)) {
       this.presentableValue = this.present(parsedValue.val)
       this.error = false
+      const event = new PrimitiveValidEvent(this.key, original, this.type)
+      this.dispatchEvent(event)
     }
 
     if (parsedValue.err) {

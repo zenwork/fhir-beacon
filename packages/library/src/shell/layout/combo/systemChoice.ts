@@ -53,7 +53,7 @@ export class SystemChoice extends LitElement {
   constructor() {
     super()
     this.addEventListener('sl-select', (evt: CustomEvent) => {
-      this.value = evt.detail.item.value
+      this.value = this.valuesets.filter(v => v.value === evt.detail.item.value)[0].value
       this.dispatchEvent(new CustomEvent('fhir-change',
                                          { bubbles: true, composed: true, detail: { value: this.value } }))
       evt.stopImmediatePropagation()
@@ -71,8 +71,13 @@ export class SystemChoice extends LitElement {
 
   //TODO: using the sl-icon instead of a button
   protected render(): unknown {
+    const mapping: { value: string; label: string }[] = this.valuesets.filter(v => v.value === this.value)
     return html`
-        <sl-input id=${this.id} value=${this.value} size="small" ?readonly=${!this.overridable}>
+        <sl-input id=${this.id}
+                  value=${mapping.length == 1 ? mapping[0].label : 'unknown'}
+                  size="small"
+                  .readonly=${!this.overridable}
+        >
             <fhir-label slot="label" text=${this.label}></fhir-label>
             <fhir-error slot="help-text" text=${this.error}></fhir-error>
             <sl-dropdown id="dd"

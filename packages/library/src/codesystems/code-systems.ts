@@ -4,6 +4,7 @@ import {CodeSystemAddressUse}         from './CodeSystem-address-use'
 import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
 import {CodeSystemIdentifierUse}      from './CodeSystem-identifier-use'
 import {CodeSystemQuantityComparator} from './CodeSystem-quantity-comparator'
+import {CodeSystemSlotStatus} from './Codesystem-slotstatus'
 import {ValueSetAgeUnits}             from './ValueSet-age-units'
 import {ValueSetDistanceUnits}        from './ValueSet-distance-units'
 import {ValueSetDurationUnits}        from './ValueSet-duration-units'
@@ -32,7 +33,8 @@ const codingSystems: ValueSet[] = [
   extractCodingSystem(CodeSystemQuantityComparator),
   extractCodingSystem(CodeSystemAddressTypes),
   extractCodingSystem(CodeSystemAddressUse),
-  extractCodingSystem(CodeSystemIdentifierUse)
+  extractCodingSystem(CodeSystemIdentifierUse),
+  extractCodingSystem(CodeSystemSlotStatus)
 ]
 
 export const FhirDistances = extractValueSet(ValueSetDistanceUnits)

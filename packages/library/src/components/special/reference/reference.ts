@@ -2,14 +2,15 @@ import {consume}                       from '@lit/context'
 import {html, nothing, TemplateResult} from 'lit'
 import {customElement, state}          from 'lit/decorators.js'
 import {choose}                        from 'lit/directives/choose.js'
-import {otherwise, when}               from '../../.././utilities/when'
-import {BaseElement, Validations}      from '../../../internal'
+import {otherwise, when}                     from '../../.././utilities/when'
+import {BaseElement, Decorated, Validations} from '../../../internal'
 
 import {containedResourcesContext} from '../../../internal/contexts/context'
 
 import {ResourceData}            from '../../../internal/resource/domain-resource.data'
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
 import {DisplayConfig}           from '../../../types'
+import {isBlank}                             from '../../../utilities'
 import {PrimitiveType}           from '../../primitive/type-converters/type-converters'
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
@@ -142,8 +143,40 @@ export class Reference extends BaseElement<ReferenceData> {
     ]
   }
 
+  public renderEditableDisplay(config: DisplayConfig,
+                               data: Decorated<ReferenceData>,
+                               validations: Validations): TemplateResult[] {
+    //TODO: need better way to pass complex errors. Error message can not be passed to identifier
+    return [
+      html`
+          <fhir-primitive key="reference"
+                          .value=${data.reference}
+                          .errormessage=${validations.errFor('*')}
+                          summary
+          ></fhir-primitive>
+          <fhir-primitive type=${PrimitiveType.uri_type}
+                          key="type"
+                          .value=${data.type}
+                          summary
+                          .input=${false}
+          ></fhir-primitive>
+          <fhir-identifier key="identifier"
+                           .data=${data.identifier}
+                           summary
+          ></fhir-identifier>
+          <fhir-primitive key="display"
+                          .value=${data.display}
+                          summary
+                          .errormessage=${validations.errFor('*')}
+          ></fhir-primitive>
+      `
+    ]
+  }
+
   public validate(data: ReferenceData, validations: Validations, fetched: boolean) {
     super.validate(data, validations, fetched)
+
+    this.referenceType = ReferenceType.unknown
 
     let isContainedRef: boolean = false
 
@@ -178,10 +211,10 @@ export class Reference extends BaseElement<ReferenceData> {
     if (this.referenceType == ReferenceType.unknown) {
       this.referenceType = when<ReferenceData, ReferenceType>(
         data,
-        [d => !!d.extension, ReferenceType.extension],
-        [d => !!d.reference, ReferenceType.reference],
-        [d => !!d.identifier, ReferenceType.identifier],
-        [d => !!d.display, ReferenceType.display],
+        [d => !isBlank(d.extension), ReferenceType.extension],
+        [d => !isBlank(d.reference), ReferenceType.reference],
+        [d => !isBlank(d.identifier), ReferenceType.identifier],
+        [d => !isBlank(d.display), ReferenceType.display],
         otherwise(() => {
           validations.addErr({
                                key: '*',
@@ -198,6 +231,8 @@ export class Reference extends BaseElement<ReferenceData> {
                            err: 'Support for reference extensions is not implemented yet.'
                          })
     }
+
+    this.requestUpdate()
   }
 
 }

@@ -97,6 +97,8 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
   //------------------------------------------------//
 
+  private invalids: Set<string> = new Set()
+
   protected constructor(type: string) {
     super()
     this.type = type
@@ -118,12 +120,20 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
     // @ts-expect-error
     this.addEventListener('bkn-invalid', (e: PrimitiveInvalidEvent) => {
       e.stopImmediatePropagation()
-      //TODO: bkn-input and bkn-invalid both get dispatched on an invlid update. I am not sure this si the best
-      // thing. Maybe only one should be fired each time
+      this.invalids.add(e.key)
+      // console.log(this.type, '-> added invalids', this.invalids)
+    })
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    this.addEventListener('bkn-valid', (e: PrimitiveValidEvent) => {
+      e.stopImmediatePropagation()
+      this.invalids.delete(e.key)
+      // console.log(this.type, 'removed invalids', this.invalids)
     })
   }
 
   public prepare() {
+    this.invalids.clear()
     return decorate(this.data)
   }
 
