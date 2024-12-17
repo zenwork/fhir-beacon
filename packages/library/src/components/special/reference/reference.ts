@@ -1,7 +1,7 @@
-import {consume}                       from '@lit/context'
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement, state}          from 'lit/decorators.js'
-import {choose}                        from 'lit/directives/choose.js'
+import {consume}                             from '@lit/context'
+import {html, nothing, TemplateResult}       from 'lit'
+import {customElement, state}                from 'lit/decorators.js'
+import {choose}                              from 'lit/directives/choose.js'
 import {otherwise, when}                     from '../../.././utilities/when'
 import {BaseElement, Decorated, Validations} from '../../../internal'
 

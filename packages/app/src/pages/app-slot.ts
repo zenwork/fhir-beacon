@@ -1,13 +1,6 @@
-import {
-  Code,
-  DomainResourceData,
-  Instant,
-  ReferenceData,
-  ResourceData,
-  SlotData
-}                             from 'fhir-beacon'
-import {html, LitElement}     from 'lit'
-import {customElement, state} from 'lit/decorators.js'
+import {Code, DomainResourceData, Instant, ReferenceData, ResourceData, SlotData} from 'fhir-beacon'
+import {html, LitElement}                                                         from 'lit'
+import {customElement, state}                                                     from 'lit/decorators.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import 'fhir-beacon'

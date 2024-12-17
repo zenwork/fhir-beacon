@@ -1,5 +1,5 @@
 import {consume}                                       from '@lit/context'
-import {SlInput, SlInputEvent}                         from '@shoelace-style/shoelace'
+import {SlInput, SlInputEvent, SlSwitch} from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -13,7 +13,7 @@ import {mustRender}                                    from '../mustRender'
 import {DateTime}                                      from './primitive.data'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
-import {PrimitiveValidEvent} from './primitiveValidEvent'
+import {PrimitiveValidEvent}             from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
@@ -259,6 +259,18 @@ export class Primitive extends ConfigurableElement {
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
 
+    if (this.type === PrimitiveType.boolean) {
+      return html`
+          <sl-switch
+                  id=${this.key}
+                  value=${this.value}
+                  @sl-change=${this.handleChange}
+          >${this.getLabel()}
+          </sl-switch>
+
+      `
+    }
+
     if (this.choices) {
       return html`
           <fhir-system-choice
@@ -288,15 +300,21 @@ export class Primitive extends ConfigurableElement {
     `
   }
 
-  private handleChange = (e: SlInputEvent) => {
-
+  private handleChange = (e: Event) => {
+    console.log(e)
     const oldValue = this.value
 
     if (e.type === 'sl-input') {
       this.value = (e.target as SlInput).value
     }
 
+    if (e.type === 'sl-change' && (e.target as SlSwitch).tagName === 'SL-SWITCH') {
+      this.value = (String(!this.value))
+    }
+
     if (e.type === 'fhir-change') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       this.value = e.detail.value
     }
 

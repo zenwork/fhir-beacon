@@ -37,6 +37,10 @@ export const componentStyles = css`
     font-size: 15px;
   }
 
+  sl-switch {
+    margin-bottom: 1rem;
+  }
+
   .code {
     font-weight: bold
   }

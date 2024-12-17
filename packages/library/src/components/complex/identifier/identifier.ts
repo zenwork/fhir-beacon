@@ -8,6 +8,8 @@ import {PrimitiveType}                               from '../../primitive/type-
 import {CodingData}                                  from '../coding'
 import {IdentifierData}                              from './identifier.data'
 
+
+
 @customElement('fhir-identifier')
 export class Identifier extends BaseElement<IdentifierData> {
 
@@ -15,7 +17,7 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<IdentifierData>,
-                        
+
                        validations: Validations): TemplateResult[] {
 
     return [
