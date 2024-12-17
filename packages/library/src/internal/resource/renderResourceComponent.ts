@@ -3,7 +3,11 @@ import {PrimitiveType}        from '../../components/primitive/type-converters/t
 import {DisplayConfig}        from '../../types'
 import {ResourceData}         from './domain-resource.data'
 
-export function renderResourceComponent(data: ResourceData | undefined, displayConfig: DisplayConfig): TemplateResult {
+
+
+export function renderResourceComponent(data: ResourceData | undefined,
+                                        displayConfig: DisplayConfig,
+                                        summary: boolean = false): TemplateResult {
   if (data && displayConfig) {
     switch (data.resourceType) {
       case 'Substance':
@@ -14,6 +18,7 @@ export function renderResourceComponent(data: ResourceData | undefined, displayC
               ?showerror=${displayConfig.showerror}
               ?verbose=${displayConfig.verbose}
               ?open=${displayConfig.open}
+              ?summary=${summary}
           ></fhir-substance >`
       case 'Medication':
         return html`
@@ -23,6 +28,7 @@ export function renderResourceComponent(data: ResourceData | undefined, displayC
               ?showerror=${displayConfig.showerror}
               ?verbose=${displayConfig.verbose}
               ?open=${displayConfig.open}
+              ?summary=${summary}
           ></fhir-medication >`
       case 'Patient':
         return html`
@@ -32,10 +38,15 @@ export function renderResourceComponent(data: ResourceData | undefined, displayC
               ?showerror=${displayConfig.showerror}
               ?verbose=${displayConfig.verbose}
               ?open=${displayConfig.open}
+              ?summary=${summary}
           ></fhir-patient >`
       default:
         return html`
-          <fhir-primitive label="resource" value="[${data.resourceType}] is not supported" .type=${PrimitiveType.none}></fhir-primitive >
+            <fhir-primitive label="resource"
+                            value="[${data.resourceType}] is not supported"
+                            .type=${PrimitiveType.none}
+                            ?summary=${summary}
+            ></fhir-primitive>
         `
 
     }

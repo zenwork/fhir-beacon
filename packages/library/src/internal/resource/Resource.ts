@@ -7,6 +7,8 @@ import {BaseElement}                          from '../BaseElement'
 import {ContextProviderController}            from '../contexts'
 import {ResourceData}                         from './domain-resource.data'
 
+
+
 export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
 
   @property({ type: String, reflect: true, attribute: 'override-template' })
@@ -59,7 +61,7 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
   private renderResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
-          <fhir-meta label="meta" .data=${data.meta} ?forceclose=${true} summary></fhir-meta >
+          <fhir-meta label="meta" .data=${data.meta} .open=${false} summary></fhir-meta>
           <fhir-primitive label="implicitRules" .value=${data.implicitRules} .type=${PrimitiveType.uri} summary></fhir-primitive >
           <fhir-primitive label="language" .value=${data.language} .type=${PrimitiveType.code}></fhir-primitive >
       `

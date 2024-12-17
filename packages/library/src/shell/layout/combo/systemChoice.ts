@@ -2,6 +2,8 @@ import {SlDropdown}              from '@shoelace-style/shoelace'
 import {css, html, LitElement}   from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
+
+
 @customElement('fhir-system-choice')
 export class SystemChoice extends LitElement {
   static styles = [
@@ -57,7 +59,8 @@ export class SystemChoice extends LitElement {
       evt.stopImmediatePropagation()
     })
 
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     this.addEventListener('fhir-system-choice', async (evt: CustomEvent) => {
       const dropdown = this.renderRoot.querySelector('#dd') as SlDropdown
       if (dropdown) await dropdown.show()

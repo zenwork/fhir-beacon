@@ -5,6 +5,8 @@ import {DisplayConfig}        from '../../../types'
 import {PrimitiveType}        from '../../primitive'
 import {MedicationBatchData}  from './medication.data'
 
+
+
 @customElement('fhir-medication-batch')
 export class MedicationBatchBackbone extends Backbone<MedicationBatchData> {
   constructor() {super('Batch')}
@@ -31,8 +33,11 @@ export class MedicationBatchBackbone extends Backbone<MedicationBatchData> {
   public renderStructure(config: DisplayConfig, data: MedicationBatchData): TemplateResult[] {
     return [
       html`
-          <fhir-primitive key="lotNumber" .value=${data.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive >
-          <fhir-primitive key="expirationDate" .value=${data.expirationDate} .type=${PrimitiveType.datetime}></fhir-primitive >
+          <fhir-primitive key="lotNumber" .value=${data.lotNumber} .type=${PrimitiveType.fhir_string}></fhir-primitive>
+          <fhir-primitive key="expirationDate"
+                          .value=${data.expirationDate}
+                          .type=${PrimitiveType.datetime}
+          ></fhir-primitive>
       `
     ]
   }

@@ -7,6 +7,7 @@ export enum DisplayMode {
 }
 
 export type DisplayConfig = {
+  source: 'unknown' | 'shell' | 'resource'
   mode: DisplayMode,
   summaryonly: boolean,
   showerror: boolean,

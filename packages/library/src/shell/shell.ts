@@ -5,6 +5,8 @@ import {displayConfigContext}       from '../internal'
 import {DisplayMode}                from '../types'
 import {toDisplayMode}              from '../utilities'
 
+
+
 @customElement('fhir-shell')
 export class Shell extends LitElement {
 
@@ -26,8 +28,18 @@ export class Shell extends LitElement {
   @property({ type: Boolean, reflect: true })
   public input: boolean = false
 
-  protected display = new ContextProvider(this,
-                                          { context: displayConfigContext })
+  protected display = new ContextProvider(this, {
+    context: displayConfigContext,
+    initialValue: {
+      source: 'shell',
+      mode: DisplayMode.display,
+      summaryonly: false,
+      showerror: false,
+      verbose: false,
+      open: false,
+      input: false
+    }
+  })
 
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
@@ -54,6 +66,7 @@ export class Shell extends LitElement {
     if (_changedProperties.has('input')) {
       this.display.setValue({ ...this.display.value, input: this.input })
     }
+
   }
 
   protected createRenderRoot() {

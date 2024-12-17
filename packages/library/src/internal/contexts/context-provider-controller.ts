@@ -22,12 +22,9 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
     host.addController(this)
 
     const reactive = host as unknown as ReactiveElement
-    this.displayCtx = new ContextProvider(reactive,
-                                          { context: displayConfigContext })
-    this.dataCtx = new ContextProvider(reactive,
-                                       { context: dataContext })
-    this.containedCtx = new ContextProvider(reactive,
-                                            { context: containedResourcesContext })
+    this.displayCtx = new ContextProvider(reactive, { context: displayConfigContext })
+    this.dataCtx = new ContextProvider(reactive, { context: dataContext })
+    this.containedCtx = new ContextProvider(reactive, { context: containedResourcesContext })
   }
 
   hostUpdated() {
@@ -43,6 +40,7 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
       }
     }
 
+    const source = 'resource'
     const mode = this.host.mode
     const showerror = this.host.showerror
     const verbose = this.host.verbose
@@ -50,7 +48,7 @@ export class ContextProviderController<T extends FhirElementData, B extends Base
     const summaryonly = this.host.summaryonly
     const input = this.host.input
 
-    this.displayCtx.setValue({ ...this.displayCtx.value, mode, showerror, verbose, open, summaryonly, input })
+    this.displayCtx.setValue({ ...this.displayCtx.value, source, mode, showerror, verbose, open, summaryonly, input })
 
 
   }

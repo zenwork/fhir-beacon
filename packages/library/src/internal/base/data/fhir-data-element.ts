@@ -1,15 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {LitElement, PropertyValues}                                                               from 'lit'
+import {PropertyValues} from 'lit'
 import {
   property,
   state
 }                                                                                                 from 'lit/decorators.js'
+import {
+  PrimitiveInputEvent,
+  PrimitiveInvalidEvent
+}                       from '../../../components/primitive'
 import {DataContextConsumerController, FhirDataContext}                                           from '../../contexts'
 import {
   BeaconDataError
 }                                                                                                 from '../../errors/beacon-data-error'
+import {
+  ConfigurableElement
+}                       from '../configurable/fhir-configurable-element'
 import {DataHandling}                                                                             from '../DataHandling'
 import {decorate, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorate'
+
 
 
 /**
@@ -17,7 +25,8 @@ import {decorate, Decorated, Errors, FhirElementData, NoDataObject, Validations,
  *
  * @template T - The type of the base element data.
  */
-export abstract class FhirDataElement<T extends FhirElementData> extends LitElement implements DataHandling<T> {
+export abstract class FhirDataElement<T extends FhirElementData> extends ConfigurableElement
+  implements DataHandling<T> {
 
   /**
    * The key the element is known as in its parent data strucuture
@@ -99,12 +108,8 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     // @ts-expect-error
     this.addEventListener('bkn-input', (e: PrimitiveInputEvent) => {
       e.stopImmediatePropagation()
-
       if (e.key && this.data) {
-        console.log(
-          `bkn-input: ${this.type} ${e.key} ${e.oldValue} ${e.newValue}`)
-        //TODO: this eventually needs to be overridable
-        this.handleEditableChange(this.data, e.key, e.oldValue, e.newValue)
+        this.edited(this.data, e.key, e.oldValue, e.newValue)
         this.requestUpdate('data')
       }
     })
@@ -144,7 +149,22 @@ export abstract class FhirDataElement<T extends FhirElementData> extends LitElem
     return this.data && this.data !== NoDataObject
   }
 
-  protected handleEditableChange(data: T, key: string, oldValue: unknown, newValue: unknown) {
+  /**
+   * This method is called on every {@link PrimitiveInputEvent} captured from children elements. Modify the data object
+   * at the corresponding key with the new value in the provided data structure.
+   *
+   * Do any other side effects required by overriding this method.
+   *
+   * The base implementation assigns values to the contained data object. If the key does not exist then the
+   * corresponding key is added.
+   *
+   * @param data contained data structure that can be edited
+   * @param key identity of changed data
+   * @param oldValue old value
+   * @param newValue new value
+   * @protected
+   */
+  protected edited(data: T, key: string, oldValue: unknown, newValue: unknown) {
     (data as Record<string, any>)[key] = newValue
   }
 

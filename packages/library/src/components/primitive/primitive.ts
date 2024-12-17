@@ -1,17 +1,19 @@
-import {consume}                                                        from '@lit/context'
-import {SlInputEvent}                                                   from '@shoelace-style/shoelace'
-import {css, html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit'
-import {customElement, property, state}                                 from 'lit/decorators.js'
-import {choose}                                                         from 'lit/directives/choose.js'
-import {Value}                                                          from '../../codesystems'
-import {dataContext, displayConfigContext, FhirDataContext}             from '../../internal/contexts'
-import {textHostStyles}                                                 from '../../styles'
-import {DisplayConfig, DisplayMode}                                     from '../../types'
-import {isBlank, toDisplayMode}                                         from '../../utilities'
-import {mustRender}                                                     from '../mustRender'
-import {DateTime}                                                       from './primitive.data'
-import {PrimitiveInputEvent}                                            from './primitiveInputEvent'
-import {PrimitiveInvalidEvent}                                          from './primitiveInvalidEvent'
+import {consume}                                       from '@lit/context'
+import {SlInput, SlInputEvent}                         from '@shoelace-style/shoelace'
+import {html, nothing, PropertyValues, TemplateResult} from 'lit'
+import {customElement, property, state}                from 'lit/decorators.js'
+import {choose}                                        from 'lit/directives/choose.js'
+import {Value}                                         from '../../codesystems'
+import {ConfigurableElement}                           from '../../internal/base/configurable/fhir-configurable-element'
+import {dataContext, FhirDataContext}                  from '../../internal/contexts'
+import {textHostStyles}                                from '../../styles'
+import {DisplayMode}                                   from '../../types'
+import {isBlank}                                       from '../../utilities'
+import {mustRender}                                    from '../mustRender'
+import {DateTime}                                      from './primitive.data'
+import {PrimitiveInputEvent}                           from './primitiveInputEvent'
+import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
+import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
   toBase64,
@@ -33,8 +35,10 @@ import {
   toUri,
   toUrl,
   valueOrError
-}                                                                       from './type-converters'
-import {asDateTime, asReadable}                                         from './type-presenters'
+}                                                      from './type-converters'
+import {asDateTime, asReadable}                        from './type-presenters'
+
+
 
 /**
  * Represents a custom element for displaying and parsing primitive values.
@@ -44,57 +48,9 @@ import {asDateTime, asReadable}                                         from './
 //TODO: rename to fhir-primitive. Maybe needs to be split into a lower level true primitive and a presentation-flexible
 // primitive.
 @customElement('fhir-primitive')
-export class Primitive extends LitElement {
+export class Primitive extends ConfigurableElement {
 
-  static styles = [
-    textHostStyles,
-    css`
-      :host {
-        user-select: text;
-      }
-
-      li {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0;
-        list-style-type: none;
-        align-items: baseline;
-        padding: 0;
-        margin: 0;
-      }
-
-      sl-badge {
-        padding-left: var(--sl-spacing-x-small);
-      }
-
-      sl-badge::part(base) {
-        color: var(--sl-color-gray-400);
-        background-color: var(--sl-color-gray-100);
-        border-color: var(--sl-color-gray-300);
-        font-weight: var(--sl-font-weight-normal);
-        font-style: italic;
-      }
-
-      sl-input::part(form-control-label) {
-        font-size: 16px;
-      }
-
-      sl-input::part(input) {
-        font-size: 15px;
-      }
-
-      .code {
-        font-weight: bold
-      }
-
-      .display {
-        color: gray
-      }
-    `
-  ]
-
-  @consume({ context: displayConfigContext, subscribe: true })
-  declare displayConfig: DisplayConfig
+  static styles = [textHostStyles, componentStyles]
 
   @consume({ context: dataContext, subscribe: true })
   declare contextData: FhirDataContext
@@ -129,13 +85,6 @@ export class Primitive extends LitElement {
   @property({ type: Boolean })
   public showProvided: boolean = false
 
-  @property({ type: DisplayMode, converter: toDisplayMode, reflect: true })
-  declare mode: DisplayMode
-
-  @property({ type: Boolean })
-  public showerror: boolean = false
-
-  // override error message only shown if type validation fails
   @property({ type: String, reflect: true })
   declare errormessage: string
 
@@ -143,13 +92,7 @@ export class Primitive extends LitElement {
   declare variant: string
 
   @property({ type: Boolean })
-  public verbose: boolean = false
-
-  @property({ type: Boolean })
   public summary: boolean = false
-
-  @property({ type: Boolean })
-  public summaryonly: boolean = false
 
   @property({ type: Boolean })
   public translate: boolean = false
@@ -172,16 +115,6 @@ export class Primitive extends LitElement {
   @state()
   private presentableTypeError: string = ''
 
-  declare _input: boolean
-
-  @property({ type: Boolean })
-  public get input(): boolean {
-    return this._input ?? this.displayConfig?.input ?? false
-  }
-
-  public set input(value: boolean) {
-    this._input = value
-  }
 
   /**
    *
@@ -190,12 +123,7 @@ export class Primitive extends LitElement {
    */
   protected willUpdate(changed: PropertyValues) {
     super.willUpdate(changed)
-    if (this.displayConfig) {
-      this.mode = this.displayConfig.mode
-      this.verbose = this.displayConfig.verbose
-      this.showerror = this.displayConfig.showerror
-      this.summaryonly = this.displayConfig.summaryonly
-    }
+
     // override value with valuePath
     if (changed.has('valuePath') && this.contextData) {
       if (!isBlank(this.value) && this.valuePath) {
@@ -365,7 +293,7 @@ export class Primitive extends LitElement {
     const oldValue = this.value
 
     if (e.type === 'sl-input') {
-      this.value = (e.target as HTMLInputElement).value
+      this.value = (e.target as SlInput).value
     }
 
     if (e.type === 'fhir-change') {

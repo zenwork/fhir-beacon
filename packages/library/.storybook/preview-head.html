@@ -119,4 +119,17 @@
   fhir-primitive, fhir-primitive-wrapper, fhir-label, fhir-value, fhir-context, fhir-error {
     display: inline;
   }
+
+
+  @media screen and (max-width: 600px) {
+    #root-inner {
+      width: 90vw;
+    }
+  }
+
+  @media screen and (min-width: 601px) {
+    #root-inner {
+      width: min(100vw - 200px, 40rem);
+    }
+  }
 </style>

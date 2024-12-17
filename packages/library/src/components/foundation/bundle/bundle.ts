@@ -9,6 +9,7 @@ import {PrimitiveType}                                  from '../../primitive/ty
 import {BundleData}                                     from './bundle.data'
 
 
+
 @customElement('fhir-bundle')
 export class Bundle extends BaseElement<BundleData> {
 
@@ -139,7 +140,7 @@ export class Bundle extends BaseElement<BundleData> {
                   this.verbose
           ) : nothing}
           <fhir-signature label="signature" .data=${data.signature}></fhir-signature >
-          ${renderResourceComponent(data.issues, this.getDisplayConfig())}
+          ${renderResourceComponent(data.issues, this.config())}
 
       `
     ]

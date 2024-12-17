@@ -14,6 +14,8 @@ import {PrimitiveType}           from '../../primitive/type-converters/type-conv
 import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
 
+
+
 enum ReferenceType {
   unknown = 'unknown',
   reference = 'reference',
@@ -39,6 +41,7 @@ export class Reference extends BaseElement<ReferenceData> {
   constructor() {super('Reference')}
 
   public renderDisplay(config: DisplayConfig, data: ReferenceData, validation: Validations): TemplateResult[] {
+    const summary: boolean = true
     return [
       html`
           ${choose(this.referenceType, [
@@ -46,9 +49,10 @@ export class Reference extends BaseElement<ReferenceData> {
                   ReferenceType.contained,
                   () => html`
                       <fhir-wrapper label="${this.verbose ? 'contained ref ' + data.reference : ''}"
+                                    summary
                                     ?summaryonly=${config.summaryonly}
                       >
-                          ${renderResourceComponent(this.mappedResource, config)}
+                          ${renderResourceComponent(this.mappedResource, config, summary)}
                       </fhir-wrapper>
 
                   `

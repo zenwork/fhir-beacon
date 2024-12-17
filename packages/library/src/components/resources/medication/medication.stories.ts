@@ -4,6 +4,7 @@ import {renderTemplateInShell, ShellArgs}               from '../../../../storie
 import {data_310, data_319, frontPageData, synthiaData} from './medication.story.data'
 
 
+
 const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
@@ -73,7 +74,7 @@ export const FrontPageDemo: Story = {
     verbose: false,
     open: true,
     headless: true,
-    input: true
+    input: false
   },
   render: (args: ShellArgs) =>
     html`<h3 style="color:var(--sl-color-primary-900); padding: 0;margin: 0">Medication</h3>

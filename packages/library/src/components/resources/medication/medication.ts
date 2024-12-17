@@ -6,6 +6,8 @@ import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive'
 import {MedicationData}                from './medication.data'
 
+
+
 @customElement('fhir-medication')
 export class Medication extends DomainResource<MedicationData> {
   constructor() {
@@ -23,7 +25,10 @@ export class Medication extends DomainResource<MedicationData> {
                           .data=${data.marketingAuthorizationHolder}
                           summary
           ></fhir-reference>
-          <fhir-codeable-concept key="doseForm" label="dose form" .data=${data.doseForm}></fhir-codeable-concept>
+          <fhir-codeable-concept key="doseForm"
+                                 label="dose form"
+                                 .data=${data.doseForm}
+          ></fhir-codeable-concept>
           <fhir-quantity key="totalVolume" label="total volume" .data=${data.totalVolume} summary></fhir-quantity>
 
           ${data.ingredient
@@ -32,11 +37,11 @@ export class Medication extends DomainResource<MedicationData> {
                        pluralBase: 'ingredient',
                        collection: data.ingredient,
                        generator: (d, label, key) => html`
-                       <fhir-medication-ingredient key="${key}"
-                                                   .data=${d}
-                                                   label=${label}
-                       ></fhir-medication-ingredient>
-                   `,
+                           <fhir-medication-ingredient key="${key}"
+                                                       .data=${d}
+                                                       label=${label}
+                           ></fhir-medication-ingredient>
+                       `,
                        summary: false,
                        config
                    }

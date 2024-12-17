@@ -3,6 +3,7 @@ import {customElement}                                                    from '
 import {when}                                                             from 'lit/directives/when.js'
 import {FhirAges, FhirDistances, FhirDuration, systems, useSystem, Value} from '../../../codesystems/code-systems'
 import {BaseElement, Decorated, Validations}                              from '../../../internal'
+import {hostStyles}      from '../../../styles'
 import {DisplayConfig}                                                    from '../../../types'
 import {hasAllOrNone}                                                     from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                                    from '../../../utilities/isWhole'
@@ -11,15 +12,17 @@ import {
   quantityComparatorChoices
 }                                                                         from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, QuantityVariations, SimpleQuantityData}             from './quantity.data'
+import {componentStyles} from './quantity.styles'
 import {isQuantity, isSimpleQuantity}                                     from './quantity.type-guards'
+
+
 
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
-  private variation: QuantityVariations = QuantityVariations.unknown
-
+  static styles = [hostStyles, componentStyles]
   constructor() {super('Quantity')}
-
+  private variation: QuantityVariations = QuantityVariations.unknown
 
   public renderDisplay(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
 
@@ -196,12 +199,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     return data as Decorated<QuantityData> | Decorated<SimpleQuantityData>
   }
 
-  protected handleEditableChange(data: QuantityData | SimpleQuantityData,
-                                 key: string,
-                                 oldValue: unknown,
-                                 newValue: unknown) {
+  protected edited(data: QuantityData | SimpleQuantityData,
+                   key: string,
+                   oldValue: unknown,
+                   newValue: unknown) {
 
-    (data as Record<string, any>)[key] = newValue
+    super.edited(data, key, oldValue, newValue)
 
     if (key === 'code') {
       const system = useSystem(data.system)

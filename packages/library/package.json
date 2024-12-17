@@ -36,7 +36,7 @@
     "devDependencies": {
         "@chromatic-com/storybook": "^3.2.2",
         "@custom-elements-manifest/analyzer": "^0.10.3",
-        "@eslint/js": "^9.16.0",
+        "@eslint/js": "^9.17.0",
         "@open-wc/semantic-dom-diff": "^0.20.1",
         "@storybook/addon-essentials": "^8.4.6",
         "@storybook/addon-links": "^8.4.6",
@@ -61,7 +61,7 @@
         "concurrently": "^9.1.0",
         "custom-element-jet-brains-integration": "^1.6.2",
         "dotenv": "^16.4.7",
-        "eslint": "^9.16.0",
+        "eslint": "^9.17.0",
         "eslint-config-prettier": "^9.1.0",
         "globals": "^15.11.0",
         "html-format": "^1.1.7",
@@ -73,7 +73,7 @@
         "shadow-dom-testing-library": "^1.11.3",
         "storybook": "^8.4.6",
         "ts-lit-plugin": "^2.0.2",
-        "typescript-eslint": "^8.8.1",
+        "typescript-eslint": "^8.18.1",
         "vite": "^6.0.2",
         "vitest": "^2.1.8"
     },

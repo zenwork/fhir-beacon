@@ -5,6 +5,8 @@ import {DisplayMode}          from '../../types'
 import {Wrapper}              from './wrapper'
 import {wrap}                 from './wrapper/wrap'
 
+
+
 describe('wrapperCollection', () => {
   it.skip('renders correctly', async () => {
     const el = await fixture<Wrapper>(html`
@@ -18,11 +20,13 @@ describe('wrapperCollection', () => {
                     collection: ['a', 'b', 'c'],
                     generator: (data, label, key) => html`${label}: ${data} (${key})`,
                     config: {
+                        source: 'unknown',
                         mode: DisplayMode.display,
                         summaryonly: false,
                         showerror: false,
                         verbose: false,
-                        open: false
+                        open: false,
+                        input: false
                     }
                 }
         )}
@@ -34,11 +38,13 @@ describe('wrapperCollection', () => {
                     collection: ['a', 'b', 'c'],
                     generator: (data, label, key) => html`${label}: ${data} (${key})`,
                     config: {
+                        source: 'unknown',
                         mode: DisplayMode.display,
                         summaryonly: false,
                         showerror: false,
                         verbose: true,
-                        open: false
+                        open: false,
+                        input: false
                     }
                 }
         )}
@@ -52,11 +58,13 @@ describe('wrapperCollection', () => {
                     collection: ['a'],
                     generator: (data, label, key) => html`${label}: ${data} (${key})`,
                     config: {
+                        source: 'unknown',
                         mode: DisplayMode.display,
                         summaryonly: false,
                         showerror: false,
                         verbose: false,
-                        open: false
+                        open: false,
+                        input: false
                     }
                 }
         )}
@@ -70,11 +78,13 @@ describe('wrapperCollection', () => {
                             data, label, key
                     ) => html`${label}: ${data} (${key})`,
                     config: {
+                        source: 'unknown',
                         mode: DisplayMode.display,
                         summaryonly: false,
                         showerror: false,
                         verbose: true,
-                        open: false
+                        open: false,
+                        input: false
                     }
                 }
         )}

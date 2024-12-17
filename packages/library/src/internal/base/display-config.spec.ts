@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import {html}                                                             from 'lit'
 import {assert, describe, expect, it}                                     from 'vitest'
 import {aTimeout}                                                         from '../../../tests/aTimeout'
@@ -8,6 +9,7 @@ import {
 }                                                                         from '../../components/complex/annotation/annotation.story.data'
 import {Shell}                                                            from '../../shell'
 import {DisplayMode}                                                      from '../../types'
+
 
 
 describe('DisplayConfig', () => {
@@ -28,7 +30,7 @@ describe('DisplayConfig', () => {
       primitive.showerror = false
       await primitive.updateComplete
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(element).not.toBeUndefined
       primitive.queryShadow<PrimitiveError>({ select: ['fhir-error'], expect: 0 })
 
@@ -104,7 +106,7 @@ describe('DisplayConfig', () => {
       await aTimeout()
 
       assert.ok(annotation.queryShadow({ select: '*', expect: 12 }))
-      /* eslint-disable @typescript-eslint/no-unused-expressions   */
+
       expect(annotation.queryShadowByText('error:')).toBeVisible
       expect(annotation.queryShadowByText('No data provided')).toBeVisible
       expect(annotation.queryShadowByText('the data or data-path property must be provided')).toBeVisible

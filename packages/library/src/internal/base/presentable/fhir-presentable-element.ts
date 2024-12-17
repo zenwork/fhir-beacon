@@ -15,10 +15,7 @@ import {
 }                                                                                     from '../../../shell/layout/directives'
 import {hostStyles}                                                                   from '../../../styles'
 import {DisplayConfig, DisplayMode}                                                   from '../../../types'
-import {hasSameAncestor, isBlank, toDisplayMode}                                      from '../../../utilities'
-import {
-  DisplayContextConsumerController
-}                                                                                     from '../../contexts/context-consumer-controller'
+import {hasSameAncestor, isBlank} from '../../../utilities'
 import {FhirDataElement}                                                              from '../data/fhir-data-element'
 import {Decorated, FhirElementData, meta, NoDataObject, Validations, ValidationsImpl} from '../Decorate'
 import {Rendering}                                                                    from '../Rendering'
@@ -33,6 +30,7 @@ import {
 }                                                                                     from './fhir-presentable-element.styles'
 
 
+
 export abstract class FhirPresentableElement<D extends FhirElementData> extends FhirDataElement<D>
   implements Rendering<D>, Templating<D> {
 
@@ -41,21 +39,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   @property()
   public label: string = ''
 
-  @property({ type: DisplayMode, converter: toDisplayMode })
-  declare mode: DisplayMode
-
-  @property({ type: Boolean })
-  public open: boolean = false
-
-  @property({ type: Boolean })
-  public forceclose: boolean = false
-
-  @property({ type: Boolean })
-  public verbose: boolean = false
-
-  @property({ type: Boolean })
-  public showerror: boolean = false
-
   @property({ type: Boolean })
   public summary: boolean = false
 
@@ -63,40 +46,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   public required: boolean = false
 
   @property({ type: Boolean })
-  public summaryonly: boolean = false
-
-  @property({ type: Boolean })
   public headless: boolean = false
 
-  @property({ type: Boolean })
-  public input: boolean = false
-
   protected templateGenerators: Generators<D> = NullGenerators()
-
-  protected constructor(type: string) {
-    super(type)
-
-    // TODO: setting default mode should be reviewed as part of https://github.com/zenwork/fhir-beacon/issues/9
-    this.mode = DisplayMode.display
-
-    // consume display configuration provided by a context providing element
-    new DisplayContextConsumerController(this)
-  }
-
-  /**
-   * @deprecated don't use this directly. Prefer config provided by method
-   * todo: make this method private
-   */
-  public getDisplayConfig(): DisplayConfig {
-    return {
-      open: this.open,
-      verbose: this.verbose,
-      mode: this.mode,
-      showerror: this.showerror,
-      summaryonly: this.summaryonly,
-      input: this.input
-    }
-  }
 
   public mustRender(): boolean {
     return mustRender(this.extendedData, this.mode, this.verbose, this.summaryonly, this.summary) || !!this.dataPath
@@ -351,7 +303,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
     }
 
-
     return templates
   }
 
@@ -361,21 +312,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       this.hasRendered(this.config(), this.extendedData, _changedProperties)
     }
   }
-
-  private config(): DisplayConfig {
-    return {
-      open: this.open,
-      verbose: this.verbose,
-      mode: this.mode,
-      showerror: this.showerror,
-      summaryonly: this.summaryonly,
-      input: this.input
-    }
-  }
-
-  // private stopRender() {
-  //   return this.extendedData[meta].hide && !this.verbose
-  // }
 
   private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
@@ -406,7 +342,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       return [
         html`
             <article part="element">
-                <header part="label">${this.getLabel()}</header>
+                ${this.headless ? nothing : html`<header part="label">${this.getLabel()}</header>`}
                 <section part="value">
                     <fhir-debug .data=${data}></fhir-debug>
                 </section>

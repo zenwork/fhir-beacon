@@ -2,6 +2,8 @@ import {ArgTypes, Meta}       from '@storybook/web-components'
 import {html, TemplateResult} from 'lit'
 import {ifDefined}            from 'lit-html/directives/if-defined.js'
 
+
+
 export type ShellArgs = {
   data: object,
   mode?: string,
@@ -35,6 +37,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     options: [false, true],
     control: { type: 'boolean' },
     defaultValue: false,
+    if: { arg: 'mode', neq: 'narrative' },
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
@@ -46,6 +49,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     options: [false, true],
     control: { type: 'boolean' },
     defaultValue: false,
+    if: { arg: 'mode', neq: 'narrative' },
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
@@ -67,6 +71,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     description: 'display detailed error messages',
     options: [false, true], control: { type: 'boolean' },
     defaultValue: false,
+    if: { arg: 'mode', neq: 'narrative' },
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
@@ -77,6 +82,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     description: 'do not display the element header',
     options: [false, true], control: { type: 'boolean' },
     defaultValue: true,
+    if: { arg: 'mode', neq: 'narrative' },
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
@@ -87,6 +93,7 @@ const argTypes: Partial<ArgTypes<ShellArgs>> = {
     description: 'make editable',
     options: [false, true], control: { type: 'boolean' },
     defaultValue: true,
+    if: { arg: 'mode', eq: 'display' },
     table: {
       type: { summary: 'boolean' },
       // @ts-ignore
@@ -104,7 +111,7 @@ export function wrapInShell(fn: (args: ShellArgs) => TemplateResult) {
                 .mode=${ifDefined(args.mode)}
                 ?showerror=${args.showerror}
                 ?verbose=${args.verbose}
-                ?open=${args.open ?? false}
+                ?open=${args.open ?? true}
                 ?summaryonly=${args.summaryonly}
                 ?input=${args.input}
         >

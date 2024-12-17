@@ -1,5 +1,7 @@
 import {defineWorkspace} from 'vitest/config'
 
+
+
 const headless = !!process.env.HEADLESS && process.env.HEADLESS === 'true'
 console.log('headless: ', headless)
 console.log('cwd:', process.cwd())
@@ -32,7 +34,9 @@ export default defineWorkspace([
         enabled: true,
         tsconfig: './tsconfig.json'
       },
-      testTimeout: 5000
+      testTimeout: 5000,
+      expect: { poll: { timeout: 500, interval: 5 } }
+
     }
   },
   {

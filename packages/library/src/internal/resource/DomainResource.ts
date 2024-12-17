@@ -8,6 +8,7 @@ import {renderResourceComponent}                       from './renderResourceCom
 import {Resource}                                      from './Resource'
 
 
+
 class Validations {
 }
 
@@ -23,7 +24,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     if (data.text) {
       return [
         html`
-            <fhir-wrapper label=${this.type} ?summaryonly=${this.getDisplayConfig().summaryonly}>
+            <fhir-wrapper label=${this.type} ?summaryonly=${this.summaryonly}>
                 <fhir-narrative .data=${data.text}></fhir-narrative >
             </fhir-wrapper>`
       ]
@@ -44,16 +45,16 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   protected renderDomainResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
-          <fhir-narrative key="text" .data=${data.text} ?forceclose=${true}></fhir-narrative >
+          <fhir-narrative key="text" .data=${data.text} .open=${false}></fhir-narrative>
       `,
       html`
           ${(this.data.contained && !this.summaryonly) ? html`
-              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
+              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.summaryonly}>
                   ${this.renderStructureContained()}
               </fhir-wrapper>
           ` : nothing}
           ${(!this.data.contained && this.verbose && !this.summaryonly) ? html`
-              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.getDisplayConfig().summaryonly}>
+              <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.summaryonly}>
                   <fhir-empty-list ></fhir-empty-list >
               </fhir-wrapper>` : nothing}
       `,
@@ -71,7 +72,7 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
   protected renderStructureContained(): TemplateResult[] {
     if (this.data?.contained) {
       return this.data.contained.map((c: ResourceData) => {
-        return renderResourceComponent(c, this.getDisplayConfig())
+        return renderResourceComponent(c, this.config(), this.summary)
       })
     }
     return []
