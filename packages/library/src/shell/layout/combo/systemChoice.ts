@@ -73,7 +73,7 @@ export class SystemChoice extends LitElement {
   protected render(): unknown {
     const mapping: { value: string; label: string }[] = this.valuesets.filter(v => v.value === this.value)
     return html`
-        <sl-input id=${this.id}
+        <sl-input name=${this.id}
                   value=${mapping.length == 1 ? mapping[0].label : 'unknown'}
                   size="small"
                   .readonly=${!this.overridable}

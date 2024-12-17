@@ -79,9 +79,8 @@ describe('Quantity', () => {
       </fhir-shell >
     `).first()
 
-    await aTimeout(100)
+    await aTimeout(300)
 
-    await quantity.updateComplete
     await quantity.updateComplete
 
     const header = quantity.queryShadow({ select: 'sl-details' })

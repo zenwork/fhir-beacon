@@ -26,7 +26,7 @@ export class AppBook extends LitElement {
             <h2>Create an Appointment Slot</h2>
             <form @submit=${(evt: SubmitEvent) => {
                 evt.preventDefault()
-                console.log('updated', this.data)
+
                 this.submitted = this.data
                 this.requestUpdate()
 
@@ -70,7 +70,7 @@ function createEmptySlot(): SlotData {
     appointmentType: [],
     schedule: { display: 'flo\'s schedule', type: 'Schedule', reference: 'Schedule/123' } as ReferenceData,
     status: 'free' as Code,
-    start: '2025-01-03T14:00:00-01:00' as Instant,
+    start: '2024-12-22T00:00:00.000Z' as Instant,
     end: '2025-01-03T14:00:00-01:00' as Instant
 
   }

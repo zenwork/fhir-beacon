@@ -17,7 +17,6 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<IdentifierData>,
-
                        validations: Validations): TemplateResult[] {
 
     return [

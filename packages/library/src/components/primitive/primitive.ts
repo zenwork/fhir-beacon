@@ -1,5 +1,5 @@
 import {consume}                                       from '@lit/context'
-import {SlInput, SlInputEvent, SlSwitch} from '@shoelace-style/shoelace'
+import {SlInput, SlSwitch}   from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -13,7 +13,7 @@ import {mustRender}                                    from '../mustRender'
 import {DateTime}                                      from './primitive.data'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
-import {PrimitiveValidEvent}             from './primitiveValidEvent'
+import {PrimitiveValidEvent} from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
@@ -271,6 +271,24 @@ export class Primitive extends ConfigurableElement {
       `
     }
 
+    //TODO: this only works for date only fields. Does not work for time component.
+    if (this.type === PrimitiveType.datetime || this.type === PrimitiveType.instant) {
+      return html`
+          <sl-input name=${this.key}
+                    .valueAsDate=${new Date(this.value)}
+                    clearable
+                    @sl-input=${this.handleChange}
+                    size="small"
+                    type="date"
+          >
+              <fhir-label slot="label" text=${this.getLabel()}></fhir-label>
+              <fhir-error slot="help-text" text=${errors.join(' | ')}></fhir-error>
+
+          </sl-input>
+
+      `
+    }
+
     if (this.choices) {
       return html`
           <fhir-system-choice
@@ -287,7 +305,7 @@ export class Primitive extends ConfigurableElement {
     }
 
     return html`
-        <sl-input id=${this.key}
+        <sl-input name=${this.key}
                   value=${this.value}
                   clearable
                   @sl-input=${this.handleChange}
@@ -305,7 +323,12 @@ export class Primitive extends ConfigurableElement {
     const oldValue = this.value
 
     if (e.type === 'sl-input') {
-      this.value = (e.target as SlInput).value
+      if (e.target instanceof SlInput && e.target.type === 'date') {
+        console.log('foo')
+        this.value = (e.target as SlInput).valueAsDate?.toISOString() ?? ''
+      } else {
+        this.value = (e.target as SlInput).value
+      }
     }
 
     if (e.type === 'sl-change' && (e.target as SlSwitch).tagName === 'SL-SWITCH') {
