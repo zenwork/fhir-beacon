@@ -3,6 +3,8 @@ import {customElement}         from 'lit/decorators.js'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 
+
+
 @customElement('app-header')
 export class AppHeader extends LitElement {
 
@@ -26,12 +28,13 @@ export class AppHeader extends LitElement {
   render() {
     return html`
         <header>
-            <h1>Appointments</h1>
+            <h1>App</h1>
             <sl-button size="small" href="/">Home</sl-button>
             <sl-button size="small" href="/slot">Slots</sl-button>
             <sl-button size="small" href="/book">Appointments</sl-button>
             <sl-button size="small" href="/query">Back-Office Query</sl-button>
             <sl-button size="small" href="/about">About</sl-button>
+            <sl-button size="small" href="/file">Files</sl-button>
         </header>
     `
   }

@@ -8,6 +8,7 @@ import {Primitive}               from '../../primitive'
 import {Quantity}                from './quantity'
 
 
+
 describe('Quantity', () => {
 
   test('should show no quantity in when no data is provided', async () => {

@@ -5,10 +5,12 @@ import {customElement}         from 'lit/decorators.js'
 import './pages/app-home'
 import './pages/app-slot'
 import './pages/app-book'
+import './pages/app-fs'
 import './pages/app-query'
 import './pages/app-about/app-about'
 import './styles/global.css'
 import './components'
+
 
 
 @customElement('app-index')
@@ -53,6 +55,13 @@ export class AppIndex extends LitElement {
       render: () => html`
           <p>
               <app-about></app-about>
+          </p> `
+    },
+    {
+      path: '/file',
+      render: () => html`
+          <p>
+              <app-fs></app-fs>
           </p> `
     }
   ])
