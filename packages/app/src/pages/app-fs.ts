@@ -52,6 +52,23 @@ export class AppBook extends LitElement {
                 if (!b.type) return -1
                 return a.type.localeCompare(b.type)
               })
+    let resource = html``
+    switch(this.type) {
+      case 'Medication':
+        resource= html`
+            <fhir-medication .data=${this.data} showerror></fhir-medication>`
+        break
+      case 'Patient':
+        resource= html`
+            <fhir-patient .data=${this.data} showerror></fhir-patient>`
+        break
+      default:
+        resource = html`
+            <div>${unsafeHTML(this.data?.text?.div)}</div>
+            <pre><code>${JSON.stringify(this.data, null, 2)}</code></pre>
+            <!-- <fhir-medication .data=${this.data} input showerror></fhir-medication> -->
+        `
+    }
 
     return html`
         <main>
@@ -80,10 +97,7 @@ export class AppBook extends LitElement {
             </sl-menu>
         </sl-dropdown>
 
-
-        <div>${unsafeHTML(this.data?.text?.div)}</div>
-        <pre><code>${JSON.stringify(this.data, null, 2)}</code></pre>
-        <!-- <fhir-medication .data=${this.data} input showerror></fhir-medication> -->
+        ${resource}
     `
   }
 
