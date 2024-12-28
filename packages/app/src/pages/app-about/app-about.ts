@@ -9,6 +9,8 @@ import {styles}                 from './about-styles'
 
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 
+
+
 @customElement('app-about')
 export class AppAbout extends LitElement {
   static styles = [
@@ -16,12 +18,13 @@ export class AppAbout extends LitElement {
     styles
   ]
 
+
   render() {
     return html`
         <main>
             <h2>About Page</h2>
 
-            <sl-card>
+            <wa-card>
                 <h2>Foo</h2>
 
                 <p>PWAs have access to many useful APIs in modern browsers! These
@@ -34,7 +37,7 @@ export class AppAbout extends LitElement {
                         href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/handle-files"
                 >these
                  docs</a> to learn more about the advanced features that you can use in your PWA</p>
-            </sl-card>
+            </wa-card>
         </main>
     `
   }

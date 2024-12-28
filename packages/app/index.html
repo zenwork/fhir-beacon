@@ -30,20 +30,19 @@
     <!-- Imports the manifest to represent the web application. A web app must have a manifest to be a PWA. -->
     <link href="manifest.json" rel="manifest"/>
 
+    <link href="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/styles/themes/default.css" rel="stylesheet" />
+    <script src="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/webawesome.loader.js" type="module"></script>
+
     <!-- light mode and dark mode CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/light.css" media="(prefers-color-scheme:light)"
-          rel="stylesheet"
-    >
-    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/dark.css" media="(prefers-color-scheme:dark)"
-          onload="document.documentElement.classList.add('sl-theme-dark');"
-          rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/light.css" media="(prefers-color-scheme:light)" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/dark.css" media="(prefers-color-scheme:dark)" onload="document.documentElement.classList.add('sl-theme-dark');" rel="stylesheet">
 
     <script type="module">
         import {setBasePath} from '@shoelace-style/shoelace/dist/utilities/base-path.js'
 
         setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/')
     </script>
+
     <script type="module">
         // Conditional ESM module loading (Node.js and browser)
         // @ts-ignore: Property 'UrlPattern' does not exist

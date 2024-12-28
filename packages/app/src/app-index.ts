@@ -5,11 +5,15 @@ import {customElement}         from 'lit/decorators.js'
 import './pages/app-home'
 import './pages/app-slot'
 import './pages/app-book'
-import './pages/app-fs'
+import './pages/fs/file-browser'
+import './pages/fs/file-chooser'
+import './pages/fs/file-viewer'
+import './pages/fs/directory_storage'
 import './pages/app-query'
 import './pages/app-about/app-about'
 import './styles/global.css'
 import './components'
+import {fileBrowser}           from './pages/fs/file-browser'
 
 
 
@@ -18,16 +22,21 @@ export class AppIndex extends LitElement {
   static styles = [
     css`
       :host {
-        display: block;
-        margin: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 1rem;
-        box-shadow: 0.7rem 0.7rem 0.8rem rgba(114, 114, 114, 0.5);
-        padding: 1rem;
-        height: 900px;
+        /*display: block;*/
+        /*margin: 1rem;*/
+        /*border: 1px solid #ccc;*/
+        /*border-radius: 1rem;*/
+        /*box-shadow: 0.7rem 0.7rem 0.8rem rgba(114, 114, 114, 0.5);*/
+        /*padding: 1rem;*/
+        /*height: 900px;*/
+      }
+      
+      wa-page::part(navigation) {
+       border-right: 10px solid #ccc;
       }
     `
   ]
+
 
   private routes: Router = new Router(this, [
     {
@@ -48,7 +57,7 @@ export class AppIndex extends LitElement {
     {
       path: '/query',
       render: () => html`
-          <app-query></app-query>`
+          <app-dir-storage></app-dir-storage>`
     },
     {
       path: '/about',
@@ -59,18 +68,29 @@ export class AppIndex extends LitElement {
     },
     {
       path: '/file',
-      render: () => html`
-          <p>
-              <app-fs></app-fs>
-          </p> `
+      render: () => fileBrowser()
     }
   ])
 
 
+  // render() {
+  //   return html`
+  //           <app-header slot="header"></app-header>
+  //           <div slot="navigation">${this.routes.outlet()}</div>
+  //
+  //   `
+  // }
   render() {
     return html`
-        <app-header></app-header>
-        ${this.routes.outlet()}
+        <wa-page class="wa-theme-default-dark">
+            <app-menu slot="header"></app-menu>
+            <app-header slot="subheader"></app-header>
+            ${this.routes.outlet()}
+        </wa-page>
+
     `
+  }
+  protected createRenderRoot() {
+    return this;
   }
 }

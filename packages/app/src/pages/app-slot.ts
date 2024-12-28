@@ -32,7 +32,7 @@ export class AppBook extends LitElement {
 
             }}
             >
-                <sl-switch @sl-change=${() => this.toggle = !this.toggle}>edit</sl-switch>
+                <wa-switch @wa-change=${() => this.toggle = !this.toggle}>edit</wa-switch>
                 <br/>
                 <br/>
                 <br/>
@@ -47,7 +47,7 @@ export class AppBook extends LitElement {
                 </fhir-slot>
                 <br/>
                 <br/>
-                <sl-button type='submit'>validate</sl-button>
+                <wa-button type='submit'>validate</wa-button>
             </form>
             <br/>
             <br/>
