@@ -33,8 +33,9 @@ export class FileChooser extends LitElement {
 
   render() {
 
-    const filteredFiles: FhirFiles = this.state.files.get().slice(this.page*100,(this.page*100)+100)
+    const filteredFiles: FhirFiles = this.state.files.get()
                                          .filter((f: any) => this.selectedType ? f.type === this.selectedType : true)
+                                         .slice(this.page*100,(this.page*100)+100)
 
     const prefTypes: string[] = this.state.preferredTypes.get()
     const types: string[] = this.state.types.get()
