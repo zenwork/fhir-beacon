@@ -1,8 +1,8 @@
 import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
-import {IDBPDatabase}              from 'idb'
-import {getValueFromJsonKey}       from '../file-chooser'
-import {clear, getDB, read, store} from './handle-store'
+import {IDBPDatabase}                   from 'idb'
+import {getValueFromJsonKey}            from '../file-chooser'
+import {clear, getDB, read, store}      from './handle-store'
 
 
 

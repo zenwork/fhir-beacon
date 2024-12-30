@@ -1,8 +1,8 @@
 import {SignalWatcher}                    from '@lit-labs/signals'
 import {html, LitElement, PropertyValues} from 'lit'
 import {customElement, property, state}   from 'lit/decorators.js'
-import {FhirElementData}            from '../../../../library/src/internal'
-import {FhirFile, FileBrowserState} from './state/file-browser-state'
+import {FhirElementData}                  from '../../../../library/src/internal'
+import {FhirFile, FileBrowserState}       from './state/file-browser-state'
 
 
 
