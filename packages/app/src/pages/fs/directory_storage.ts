@@ -21,6 +21,7 @@ export class DirectoryPersist extends LitElement {
     super.connectedCallback();
     this.restoreDirectoryHandle()
   }
+
   async selectDirectory() {
     try {
       // @ts-ignore

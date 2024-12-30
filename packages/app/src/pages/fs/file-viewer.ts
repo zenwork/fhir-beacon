@@ -1,8 +1,8 @@
 import {SignalWatcher}                    from '@lit-labs/signals'
 import {html, LitElement, PropertyValues} from 'lit'
 import {customElement, property, state}   from 'lit/decorators.js'
-import {FhirElementData}                  from '../../../../library/src/internal'
-import {FhirFile, FileBrowserState}       from './file-browser-state'
+import {FhirElementData}            from '../../../../library/src/internal'
+import {FhirFile, FileBrowserState} from './state/file-browser-state'
 
 
 
@@ -19,7 +19,6 @@ export class FileViewer extends SignalWatcher(LitElement) {
     super.willUpdate(changes)
     const file: FhirFile | null = this.state.selected.get()
     if (file) {
-      console.log(file)
       file.blob.text().then(text => {
         this.data = JSON.parse(text)
         this.requestUpdate('data')

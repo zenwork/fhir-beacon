@@ -1,6 +1,6 @@
 import {html}                      from '@lit-labs/signals'
 import '../../../../library/index'
-import {FileBrowserState, FSState} from './file-browser-state'
+import {FileBrowserState, FSState} from './state/file-browser-state'
 
 
 
