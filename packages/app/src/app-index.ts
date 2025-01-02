@@ -1,6 +1,7 @@
-import {Router}                from '@lit-labs/router'
-import {css, html, LitElement} from 'lit'
-import {customElement}         from 'lit/decorators.js'
+import {Router}           from '@lit-labs/router'
+import {html, LitElement} from 'lit'
+import {customElement}    from 'lit/decorators.js'
+import {fileBrowser}      from './pages/fs/file-browser'
 
 import './pages/app-home'
 import './pages/app-slot'
@@ -14,30 +15,11 @@ import './pages/app-query'
 import './pages/app-about/app-about'
 import './styles/global.css'
 import './components'
-import {fileBrowser}           from './pages/fs/file-browser'
 
 
 
 @customElement('app-index')
 export class AppIndex extends LitElement {
-  static styles = [
-    css`
-      :host {
-        /*display: block;*/
-        /*margin: 1rem;*/
-        /*border: 1px solid #ccc;*/
-        /*border-radius: 1rem;*/
-        /*box-shadow: 0.7rem 0.7rem 0.8rem rgba(114, 114, 114, 0.5);*/
-        /*padding: 1rem;*/
-        /*height: 900px;*/
-      }
-      
-      wa-page::part(navigation) {
-       border-right: 10px solid #ccc;
-      }
-    `
-  ]
-
 
   private routes: Router = new Router(this, [
     {
@@ -74,13 +56,6 @@ export class AppIndex extends LitElement {
   ])
 
 
-  // render() {
-  //   return html`
-  //           <app-header slot="header"></app-header>
-  //           <div slot="navigation">${this.routes.outlet()}</div>
-  //
-  //   `
-  // }
   render() {
     return html`
         <wa-page class="wa-theme-default-dark">
@@ -91,6 +66,7 @@ export class AppIndex extends LitElement {
 
     `
   }
+
   protected createRenderRoot() {
     return this;
   }
