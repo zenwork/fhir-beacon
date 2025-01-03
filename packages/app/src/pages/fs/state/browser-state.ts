@@ -1,30 +1,49 @@
 import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
 import {IDBPDatabase}                   from 'idb'
-import {getValueFromJsonKey}            from '../file-chooser'
-import {clear, getDB, read, store}      from './handle-store'
 
-import {SignalArray} from 'signal-utils/array';
+import {SignalArray}               from 'signal-utils/array'
+import {FhirElementData}           from '../../../../../library/src/internal'
+import {getValueFromJsonKey}       from '../local/local-chooser'
+import {clear, getDB, read, store} from './browser-store'
 
 
+
+export type FhirData = {
+  name: string,
+  type: string | null,
+  isMetaData: boolean,
+  data: Promise<FhirElementData>
+}
+
+export type FhirQuery = {
+  name: string,
+  query: string,
+  data: FhirData|null
+}
 
 export type FhirFile = {
-  file: string,
+  name: string,
   type: string | null,
   isMetaData:boolean,
-  blob: FileWithDirectoryAndFileHandle
+  data: FileWithDirectoryAndFileHandle
 }
 
 export type FhirFiles = FhirFile[]
 
 
-export class FileBrowserState {
+export class BrowserState {
 
-  public dir = new Signal.State<FileSystemDirectoryHandle | null>(null)
-  public files = new Signal.State<FhirFiles>([])
   public types = new Signal.State<string[]>([])
   public preferredTypes = new Signal.State<string[]>([])
-  public selected:SignalArray<FhirFile> = new SignalArray<FhirFile>([]);
+  public selected: SignalArray<FhirData> = new SignalArray<FhirData>([])
+  // local file-access state
+  public dir = new Signal.State<FileSystemDirectoryHandle | null>(null)
+  public files = new Signal.State<FhirFiles>([])
+
+  // remote server-access state
+  public queryCollection = new Signal.State<string | null>(null)
+  public queries = new Signal.State<FhirQuery[]>([])
 
   public loading = new Signal.State<boolean>(false)
 
@@ -36,23 +55,44 @@ export class FileBrowserState {
 
   }
 
-  async restore() {
+  async storeRemote() {
+    const handle: string | null = this.queryCollection.get()
+    const queries: FhirQuery[] = this.queries.get()
+    if (handle) {
+      await store('remoteHandle', handle, await this.getDb(), 'handles')
+      await store('remote-' + handle, queries, await this.getDb(), 'handles')
+    }
+  }
 
+
+  async restoreLocal() {
     try {
       const handle = await read<FileSystemDirectoryHandle>('dirHandle', await this.getDb(), 'handles')
       if (handle) {
         this.dir.set(handle)
-
         if (await this.verifyPermission(handle)) {
           await this.compute()
         }
-
       }
     } catch (error) {
       console.error('Failed to restore directory handle:', error)
     }
 
   }
+
+  async restoreRemote() {
+    try {
+      const handle = await read<string>('remoteHandle', await this.getDb(), 'handles')
+      const queries = await read<FhirQuery[]>('remote-' + handle, await this.getDb(), 'handles')
+      if (queries) {
+        this.queryCollection.set(handle)
+        this.queries.set(queries)
+      }
+    } catch (error) {
+      console.error('Failed to restore remote handle:', error)
+    }
+  }
+
 
   async clear() {
     await clear(await this.getDb(), 'handles')
@@ -72,11 +112,11 @@ export class FileBrowserState {
           .push(entry
                   .getFile()
                   .then(async (f) => ({
-                    file: f.name,
+                    name: f.name,
                     //TODO: very expensive. find some other way
                     type: getValueFromJsonKey('resourceType', await f.text()),
                     isMetaData: f.name.indexOf('example') === -1,
-                    blob: f
+                    data: f
                   })))
 
       }
@@ -131,4 +171,6 @@ export class FileBrowserState {
   private async getDb(): Promise<IDBPDatabase> {
     return await getDB('fileHandlesDB', 'handles')
   }
+
+
 }

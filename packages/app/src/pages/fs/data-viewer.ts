@@ -3,12 +3,12 @@ import {SlTab, SlTabGroup}                     from '@shoelace-style/shoelace'
 import {css, html, LitElement, TemplateResult} from 'lit'
 import {customElement, property, query, state} from 'lit/decorators.js'
 import {until}                                 from 'lit/directives/until.js'
-import {FhirFile, FileBrowserState}            from './state/file-browser-state'
+import {BrowserState, FhirData}                from './state/browser-state'
 
 
 
-@customElement('file-viewer')
-export class FileViewer extends SignalWatcher(LitElement) {
+@customElement('data-viewer')
+export class DataViewer extends SignalWatcher(LitElement) {
 
   static styles = [
 
@@ -34,8 +34,8 @@ export class FileViewer extends SignalWatcher(LitElement) {
     `
   ]
 
-  @property({ attribute: false, type: FileBrowserState })
-  declare state: FileBrowserState
+  @property({ attribute: false, type: BrowserState })
+  declare state: BrowserState
 
   @query('sl-tab-group')
   declare tabGroup: SlTabGroup
@@ -44,17 +44,15 @@ export class FileViewer extends SignalWatcher(LitElement) {
   private mode: string='display'
 
   protected render() {
-
+    console.log(this.state.selected)
     return html`
 
         <sl-tab-group @sl-close=${(event: any) => {
             if (this.tabGroup) {
                 const tab: SlTab | null = event.target as SlTab
                 if (tab) {
-
-                    const index = this.state.selected.findIndex(f => f.file === tab.panel)
+                    const index = this.state.selected.findIndex(f => f.name === tab.panel)
                     this.state.selected.splice(index, 1)
-
                 }
 
             }
@@ -73,14 +71,14 @@ export class FileViewer extends SignalWatcher(LitElement) {
 
                 return html`
                     <sl-tab slot="nav"
-                            panel="${file.file}"
+                            panel="${file.name}"
                             ?active=${files.length === index + 1}
                             closable
-                            data-id="${file.file}"
+                            data-id="${file.name}"
                     >
-                        ${file.file}
+                        ${file.name}
                     </sl-tab>
-                    <sl-tab-panel name="${file.file}" ?active=${files.length === index + 1} data-id="${file.file}">
+                    <sl-tab-panel name="${file.name}" ?active=${files.length === index + 1} data-id="${file.name}">
                         ${until(this.toResource(file), html`<span>Loading...</span>`)}
                     </sl-tab-panel>
                 `
@@ -90,33 +88,32 @@ export class FileViewer extends SignalWatcher(LitElement) {
     `
   }
 
-  private async toResource(file: FhirFile): Promise<TemplateResult> {
+  private async toResource(file: FhirData): Promise<TemplateResult> {
     let resource = html``
     const type: string | null | undefined = file.type
     if (type) {
-      let json = await this.toJson(file)
 
       switch (type) {
         case 'Medication':
           resource = html`
               ${this.addMode()}
 
-              <fhir-medication .data=${json} showerror headless .mode=${this.mode} open></fhir-medication>`
+              <fhir-medication .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-medication>`
           break
         case 'Patient':
           resource = html`
               ${this.addMode()}
-              <fhir-patient .data=${json} showerror headless .mode=${this.mode} open></fhir-patient>`
+              <fhir-patient .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-patient>`
           break
         case 'Appointment':
           resource = html`
               ${this.addMode()}
-              <fhir-appointment .data=${json} showerror headless .mode=${this.mode} open></fhir-appointment>`
+              <fhir-appointment .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-appointment>`
           break
         default:
           //TODO: create option to show summary
           resource = html`
-              <pre><code>${JSON.stringify(json, null, 2)}</code></pre>
+              <pre><code>${JSON.stringify(await file.data, null, 2)}</code></pre>
           `
       }
       return resource
@@ -124,9 +121,6 @@ export class FileViewer extends SignalWatcher(LitElement) {
     return Promise.resolve(resource)
   }
 
-  private async toJson(file: FhirFile): Promise<any> {
-    return file.blob.text().then(text => JSON.parse(text))
-  }
   private addMode(): TemplateResult {
     return html`
         <sl-radio-group label="Display Mode" name="a" value="${this.mode}" @sl-change=${(e:CustomEvent)=> {

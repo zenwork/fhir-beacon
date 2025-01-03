@@ -29,7 +29,6 @@ export class AppHeader extends LitElement {
     return html`
         <header>
             <h1>App</h1>
-            
         </header>
     `
   }

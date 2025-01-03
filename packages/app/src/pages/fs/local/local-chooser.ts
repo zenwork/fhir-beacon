@@ -1,16 +1,16 @@
-import {SignalWatcher} from '@lit-labs/signals'
-import {SlMenuItem}                     from '@shoelace-style/shoelace'
-import {css, html, LitElement, nothing} from 'lit'
-import {customElement, property, state} from 'lit/decorators.js'
-import {FhirFiles, FileBrowserState}    from './state/file-browser-state'
+import {SignalWatcher}                     from '@lit-labs/signals'
+import {SlMenuItem}                        from '@shoelace-style/shoelace'
+import {css, html, LitElement, nothing}    from 'lit'
+import {customElement, property, state}    from 'lit/decorators.js'
+import {BrowserState, FhirFile, FhirFiles} from '../state/browser-state'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
 
 
 
-@customElement('file-chooser')
-export class FileChooser extends SignalWatcher(LitElement) {
+@customElement('local-chooser')
+export class LocalChooser extends SignalWatcher(LitElement) {
 
   static styles = [
 
@@ -31,7 +31,7 @@ export class FileChooser extends SignalWatcher(LitElement) {
   ]
 
   @property({ attribute: false })
-  declare state: FileBrowserState
+  declare state: BrowserState
 
   @state()
   private selectedType: string = ''
@@ -90,8 +90,8 @@ export class FileChooser extends SignalWatcher(LitElement) {
         </div>
         <sl-menu @sl-select=${this.selectFile}>
             ${filteredFiles ? filteredFiles.map(b => html`
-                <sl-menu-item .value=${b} ?disabled=${this.state.selected.find(f => f.file === b.file)}>
-                    ${b.file}
+                <sl-menu-item .value=${b} ?disabled=${this.state.selected.find(f => f.name === b.name)}>
+                    ${b.name}
                 </sl-menu-item>`) : ''}
         </sl-menu>
 
@@ -100,7 +100,7 @@ export class FileChooser extends SignalWatcher(LitElement) {
   public connectedCallback(): void {
     super.connectedCallback()
     this.state.loading.set(true)
-    this.state.restore()
+    this.state.restoreLocal()
         .then(() => this.state.loading.set(false))
         .then(() => this.requestUpdate())
   }
@@ -108,20 +108,29 @@ export class FileChooser extends SignalWatcher(LitElement) {
     this.selectedType = (e.detail.item as SlMenuItem).value
     this.page = 0
   }
+
   private async selectFile(e: CustomEvent) {
-    const blob: any = (e.detail.item as SlMenuItem).value
-    this.state.selected.push(blob)
+    const blob = e.detail.item.value as FhirFile
+    this.state.selected.push({ ...blob, data: await this.toJson(blob) })
     this.requestUpdate('state')
   }
+
+  private async toJson(file: FhirFile): Promise<any> {
+    return file.data.text().then(text => JSON.parse(text))
+  }
+
   private isLoading(): boolean {
     return this.state.loading.get()
   }
+
   private previous() {
     if (this.page != 0) this.page--
   }
+
   private next() {
     if (this.state.files.get().length > (this.page + 1) * 100) this.page++
   }
+
   private openDir() {
     this.state.loading.set(true)
     // @ts-ignore

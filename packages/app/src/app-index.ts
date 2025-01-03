@@ -1,19 +1,17 @@
 import {Router}           from '@lit-labs/router'
 import {html, LitElement} from 'lit'
 import {customElement}    from 'lit/decorators.js'
-import {fileBrowser}      from './pages/fs/file-browser'
+import {remoteBrowser}    from './pages/fs/./remote/remote-browser'
 
 import './pages/app-home'
-import './pages/app-slot'
-import './pages/app-book'
-import './pages/fs/state/file-browser-state'
-import './pages/fs/file-browser'
-import './pages/fs/file-chooser'
-import './pages/fs/file-viewer'
+import './pages/fs/state/browser-state'
+import './pages/fs/local/local-chooser'
+import './pages/fs/remote/remote-chooser'
+import './pages/fs/data-viewer'
 import './pages/fs/directory_storage'
-import './pages/app-query'
 import './pages/app-about/app-about'
 import './styles/global.css'
+import {localBrowser}     from './pages/fs/local/local-browser'
 import './components'
 
 
@@ -28,30 +26,12 @@ export class AppIndex extends LitElement {
           <app-home></app-home>`
     },
     {
-      path: '/slot',
-      render: () => html`
-          <app-slot></app-slot>`
-    },
-    {
-      path: '/book',
-      render: () => html`
-          <app-book></app-book>`
-    },
-    {
-      path: '/query',
-      render: () => html`
-          <app-dir-storage></app-dir-storage>`
-    },
-    {
       path: '/file',
-      render: () => fileBrowser()
+      render: () => localBrowser()
     },
     {
-      path: '/about',
-      render: () => html`
-          <p>
-              <app-about></app-about>
-          </p> `
+      path: '/server',
+      render: () => remoteBrowser()
     }
   ])
 
