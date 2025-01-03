@@ -1,9 +1,9 @@
 import {SignalWatcher}                         from '@lit-labs/signals'
-import {SlTab, SlTabGroup}         from '@shoelace-style/shoelace'
+import {SlTab, SlTabGroup}                     from '@shoelace-style/shoelace'
 import {css, html, LitElement, TemplateResult} from 'lit'
-import {customElement, property, query} from 'lit/decorators.js'
+import {customElement, property, query, state} from 'lit/decorators.js'
 import {until}                                 from 'lit/directives/until.js'
-import {FhirFile, FileBrowserState} from './state/file-browser-state'
+import {FhirFile, FileBrowserState}            from './state/file-browser-state'
 
 
 
@@ -39,6 +39,9 @@ export class FileViewer extends SignalWatcher(LitElement) {
 
   @query('sl-tab-group')
   declare tabGroup: SlTabGroup
+
+  @state()
+  private mode: string='display'
 
   protected render() {
 
@@ -96,15 +99,19 @@ export class FileViewer extends SignalWatcher(LitElement) {
       switch (type) {
         case 'Medication':
           resource = html`
-              <fhir-medication .data=${json} showerror headless></fhir-medication>`
+              ${this.addMode()}
+
+              <fhir-medication .data=${json} showerror headless .mode=${this.mode} open></fhir-medication>`
           break
         case 'Patient':
           resource = html`
-              <fhir-patient .data=${json} showerror headless></fhir-patient>`
+              ${this.addMode()}
+              <fhir-patient .data=${json} showerror headless .mode=${this.mode} open></fhir-patient>`
           break
         case 'Appointment':
           resource = html`
-              <fhir-appointment .data=${json} showerror headless></fhir-appointment>`
+              ${this.addMode()}
+              <fhir-appointment .data=${json} showerror headless .mode=${this.mode} open></fhir-appointment>`
           break
         default:
           //TODO: create option to show summary
@@ -119,5 +126,20 @@ export class FileViewer extends SignalWatcher(LitElement) {
 
   private async toJson(file: FhirFile): Promise<any> {
     return file.blob.text().then(text => JSON.parse(text))
+  }
+  private addMode(): TemplateResult {
+    return html`
+        <sl-radio-group label="Display Mode" name="a" value="${this.mode}" @sl-change=${(e:CustomEvent)=> {
+            // @ts-ignore
+            this.mode = e.target?.value
+                   
+        }}>
+            <sl-radio-button value="display">display</sl-radio-button>
+            <sl-radio-button value="structure">structure</sl-radio-button>
+            <sl-radio-button value="narrative">narrative</sl-radio-button>
+            <sl-radio-button value="debug">debug</sl-radio-button>
+        </sl-radio-group>
+        <br>
+    `
   }
 }
