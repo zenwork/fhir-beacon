@@ -134,7 +134,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
 
   private execute(query: FhirQuery): Promise<FhirElementData> {
     console.log('querying:',query.query)
-    return Promise.resolve({id:'ID::NULLOBJECT'})
+    return Promise.resolve({id:`ID::NULLOBJECT+${query.name}`})
   }
 
 
