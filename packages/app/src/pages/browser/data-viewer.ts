@@ -110,6 +110,11 @@ export class DataViewer extends SignalWatcher(LitElement) {
               ${this.addMode()}
               <fhir-appointment .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-appointment>`
           break
+        case 'Slot':
+          resource = html`
+              ${this.addMode()}
+              <fhir-slot .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-slot>`
+          break
         default:
           //TODO: create option to show summary
           resource = html`

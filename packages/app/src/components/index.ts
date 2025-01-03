@@ -1,2 +1,1 @@
-import './header'
-import './menu'
+export * from './menu'

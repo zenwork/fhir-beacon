@@ -97,6 +97,7 @@ export class LocalChooser extends SignalWatcher(LitElement) {
 
     `
   }
+
   public connectedCallback(): void {
     super.connectedCallback()
     this.state.loading.set(true)
@@ -104,6 +105,7 @@ export class LocalChooser extends SignalWatcher(LitElement) {
         .then(() => this.state.loading.set(false))
         .then(() => this.requestUpdate())
   }
+
   private selectType(e: CustomEvent) {
     this.selectedType = (e.detail.item as SlMenuItem).value
     this.page = 0

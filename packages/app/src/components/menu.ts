@@ -15,10 +15,9 @@ export class Menu extends LitElement{
   render(){
      return html`
          <div>
-             
-         <sl-button size="small" variant="text" href="/" >home</sl-button>
-         <sl-button size="small" variant="text" href="/file">local</sl-button>
-         <sl-button size="small" variant="text" href="/server">remote</sl-button>
+             <sl-button size="small" variant="text" href="/">home</sl-button>
+             <sl-button size="small" variant="text" href="/file">local</sl-button>
+             <sl-button size="small" variant="text" href="/server">remote</sl-button>
          </div>
      `
    }

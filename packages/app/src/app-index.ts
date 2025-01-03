@@ -4,14 +4,15 @@ import {customElement}    from 'lit/decorators.js'
 import {remoteBrowser}    from './pages/browser/./remote/remote-browser'
 import {localBrowser}     from './pages/browser/local/local-browser'
 
-import './pages/app-home'
-import './pages/browser/state/browser-state'
-import './pages/browser/local/local-chooser'
-import './pages/browser/remote/remote-chooser'
-import './pages/browser/data-viewer'
-import './pages/app-about/app-about'
-import './styles/global.css'
-import './components'
+
+
+export * from './pages/app-home'
+export * from './pages/browser/state/browser-state'
+export * from './pages/browser/local/local-chooser'
+export * from './pages/browser/remote/remote-chooser'
+export * from './pages/browser/data-viewer'
+export * from './styles/global.css'
+export * from './components'
 
 
 
@@ -39,7 +40,6 @@ export class AppIndex extends LitElement {
     return html`
         <wa-page class="wa-theme-default-dark">
             <app-menu slot="header"></app-menu>
-<!--            <app-header slot="subheader"></app-header>-->
             ${this.routes.outlet()}
         </wa-page>
 

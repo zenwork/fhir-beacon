@@ -2,10 +2,10 @@ import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
 import {IDBPDatabase}                   from 'idb'
 
-import {SignalArray}               from 'signal-utils/array'
-import {FhirElementData}           from '../../../../../library/src/internal'
-import {getValueFromJsonKey}       from '../local/local-chooser'
-import {clear, getDB, read, store} from './browser-store'
+import {SignalArray}              from 'signal-utils/array'
+import {FhirElementData}          from '../../../../../library/src/internal'
+import {drop, getDB, read, store} from '../../../indexeddb'
+import {getValueFromJsonKey}      from '../local/local-chooser'
 
 
 
@@ -30,7 +30,6 @@ export type FhirFile = {
 }
 
 export type FhirFiles = FhirFile[]
-
 
 export class BrowserState {
 
@@ -107,7 +106,7 @@ export class BrowserState {
 
 
   async clear() {
-    await clear(await this.getDb(), 'handles')
+    await drop(await this.getDb(), 'handles')
     console.log(`Cleared storage`)
   }
 
@@ -157,7 +156,9 @@ export class BrowserState {
                                                            || t
                                                            === 'Patient'
                                                            || t
-                                                           === 'Appointment'))
+                                                           === 'Appointment'
+                                                           || t
+                                                           === 'Slot'))
 
       return this.store()
 
