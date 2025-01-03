@@ -13,6 +13,7 @@ export class AppHome extends LitElement {
     return html`
         <main>
             HOME
+            
         </main>
     `
   }

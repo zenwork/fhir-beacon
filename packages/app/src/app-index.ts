@@ -43,15 +43,15 @@ export class AppIndex extends LitElement {
           <app-dir-storage></app-dir-storage>`
     },
     {
+      path: '/file',
+      render: () => fileBrowser()
+    },
+    {
       path: '/about',
       render: () => html`
           <p>
               <app-about></app-about>
           </p> `
-    },
-    {
-      path: '/file',
-      render: () => fileBrowser()
     }
   ])
 
@@ -60,7 +60,7 @@ export class AppIndex extends LitElement {
     return html`
         <wa-page class="wa-theme-default-dark">
             <app-menu slot="header"></app-menu>
-            <app-header slot="subheader"></app-header>
+<!--            <app-header slot="subheader"></app-header>-->
             ${this.routes.outlet()}
         </wa-page>
 

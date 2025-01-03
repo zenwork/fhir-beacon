@@ -11,7 +11,7 @@
     <meta content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
           name="viewport"
     />
-    <meta content="This is a app app" name="description"/>
+    <meta content="This is a  app" name="description"/>
 
     <meta content="#181818" media="(prefers-color-scheme: dark)" name="theme-color"/>
     <meta content="#f3f3f3" media="(prefers-color-scheme: light)" name="theme-color"/>
@@ -33,14 +33,16 @@
     <link href="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/styles/themes/default.css" rel="stylesheet" />
     <script src="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/webawesome.loader.js" type="module"></script>
 
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+
+
     <!-- light mode and dark mode CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/light.css" media="(prefers-color-scheme:light)" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/dist/themes/dark.css" media="(prefers-color-scheme:dark)" onload="document.documentElement.classList.add('sl-theme-dark');" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/dist/themes/dark.css" media="(prefers-color-scheme:dark)" onload="document.documentElement.classList.add('sl-theme-dark');" rel="stylesheet">
 
     <script type="module">
         import {setBasePath} from '@shoelace-style/shoelace/dist/utilities/base-path.js'
 
-        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/')
+        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/')
     </script>
 
     <script type="module">

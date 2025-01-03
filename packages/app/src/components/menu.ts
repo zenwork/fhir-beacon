@@ -14,11 +14,11 @@ export class Menu extends LitElement{
   render(){
      return html`
          <sl-button size="small" variant="text" href="/" >Home</sl-button>
-         <sl-button size="small" variant="text" href="/slot">Slots</sl-button>
-         <sl-button size="small" variant="text" href="/book">Appointments</sl-button>
-         <sl-button size="small" variant="text" href="/query">Back-Office Query</sl-button>
-         <sl-button size="small" variant="text" href="/about">About</sl-button>
+<!--         <sl-button size="small" variant="text" href="/slot">Slots</sl-button>-->
+<!--         <sl-button size="small" variant="text" href="/book">Appointments</sl-button>-->
+<!--         <sl-button size="small" variant="text" href="/query">Back-Office Query</sl-button>-->
          <sl-button size="small" variant="text" href="/file">Files</sl-button>
+         <sl-button size="small" variant="text" href="/about">About</sl-button>
      `
    }
 }

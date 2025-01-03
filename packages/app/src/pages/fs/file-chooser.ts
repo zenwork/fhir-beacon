@@ -1,14 +1,16 @@
+import {SignalWatcher} from '@lit-labs/signals'
 import {SlMenuItem}                     from '@shoelace-style/shoelace'
 import {css, html, LitElement, nothing} from 'lit'
 import {customElement, property, state} from 'lit/decorators.js'
-import '@shoelace-style/shoelace/dist/components/button/button.js'
 import {FhirFiles, FileBrowserState}    from './state/file-browser-state'
+
+import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
 
 
 
 @customElement('file-chooser')
-export class FileChooser extends LitElement {
+export class FileChooser extends SignalWatcher(LitElement) {
 
   static styles = [
 
@@ -35,12 +37,12 @@ export class FileChooser extends LitElement {
   private selectedType: string = ''
 
   @state()
-  private page:number = 0
+  private page: number = 0
 
   render() {
     const filteredFiles: FhirFiles = this.state.files.get()
                                          .filter((f: any) => this.selectedType ? f.type === this.selectedType : true)
-                                         .slice(this.page*100,(this.page*100)+100)
+                                         .slice(this.page * 100, (this.page * 100) + 100)
     const fileTotal: number = this.selectedType ? filteredFiles.length : this.state.files.get().length
     const maxPages: number = Math.ceil(fileTotal / 100)
     const prefTypes: string[] = this.state.preferredTypes.get()
@@ -49,7 +51,9 @@ export class FileChooser extends LitElement {
     return html`
         <div style="display:flex; align-items:center">
             <sl-button-group>
-                <sl-button @click=${this.openDir} variant="text" style="min-width:6rem;"> ${fileTotal?fileTotal:'Select Dir'}</sl-button>
+                <sl-button @click=${this.openDir} variant="text" style="min-width:6rem;">
+                    ${fileTotal ? fileTotal : 'Select Dir'}
+                </sl-button>
                 <sl-dropdown>
                     <sl-button slot="trigger" caret variant="text">
                         <div>${this.selectedType || 'Select Type'}</div>
@@ -64,53 +68,35 @@ export class FileChooser extends LitElement {
                             <sl-menu-item value=${t}>${t}</sl-menu-item>`)}
                     </sl-menu>
                 </sl-dropdown>
-                <sl-button @click=${this.previous} 
-                           variant="text" 
-                           ?disabled=${this.page === 0 || maxPages === 0}>Prev
+                <sl-button @click=${this.previous}
+                           variant="text"
+                           ?disabled=${this.page === 0 || maxPages === 0}
+                >Prev
                 </sl-button>
                 <sl-button @click=${this.next}
                            variant="text"
-                           ?disabled=${this.page === (maxPages - 1) || maxPages === 0}>Next
+                           ?disabled=${this.page === (maxPages - 1) || maxPages === 0}
+                >Next
                 </sl-button>
                 ${this.isLoading()
                   ? html`
                             <sl-button loading variant="text" style="width:3rem;"></sl-button>`
                   : html`
-                            <sl-button variant="text" disabled style="width:3rem" >${this.page + 1}/${maxPages}</sl-button>`
+                            <sl-button variant="text" disabled style="width:3rem">${this.page + 1}/${maxPages}
+                            </sl-button>`
                 }
             </sl-button-group>
 
         </div>
         <sl-menu @sl-select=${this.selectFile}>
             ${filteredFiles ? filteredFiles.map(b => html`
-                <sl-menu-item .value=${b}>${b.file}</sl-menu-item>`) : ''}
+                <sl-menu-item .value=${b} ?disabled=${this.state.selected.find(f => f.file === b.file)}>
+                    ${b.file}
+                </sl-menu-item>`) : ''}
         </sl-menu>
 
     `
   }
-
-  private selectType(e: CustomEvent) {
-    this.state.selected.set(null)
-    this.selectedType = (e.detail.item as SlMenuItem).value
-    this.page = 0
-  }
-
-  private async selectFile(e: CustomEvent) {
-    const blob: any = (e.detail.item as SlMenuItem).value
-    this.state.selected.set(blob)
-  }
-
-  private isLoading(): boolean {
-    return this.state.loading.get()
-  }
-  private previous() {
-    if (this.page != 0) this.page--
-  }
-
-  private next() {
-    if (this.state.files.get().length > (this.page + 1) * 100) this.page++
-  }
-
   public connectedCallback(): void {
     super.connectedCallback()
     this.state.loading.set(true)
@@ -118,7 +104,24 @@ export class FileChooser extends LitElement {
         .then(() => this.state.loading.set(false))
         .then(() => this.requestUpdate())
   }
-
+  private selectType(e: CustomEvent) {
+    this.selectedType = (e.detail.item as SlMenuItem).value
+    this.page = 0
+  }
+  private async selectFile(e: CustomEvent) {
+    const blob: any = (e.detail.item as SlMenuItem).value
+    this.state.selected.push(blob)
+    this.requestUpdate('state')
+  }
+  private isLoading(): boolean {
+    return this.state.loading.get()
+  }
+  private previous() {
+    if (this.page != 0) this.page--
+  }
+  private next() {
+    if (this.state.files.get().length > (this.page + 1) * 100) this.page++
+  }
   private openDir() {
     this.state.loading.set(true)
     // @ts-ignore
@@ -133,7 +136,6 @@ export class FileChooser extends LitElement {
 
 
 }
-
 
 
 /**

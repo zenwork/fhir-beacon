@@ -7,7 +7,6 @@ import '@shoelace-style/shoelace/dist/components/button/button.js'
 @customElement('app-book')
 export class AppBook extends LitElement {
 
-
   render() {
     return html`
         <main>

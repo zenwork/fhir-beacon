@@ -4,6 +4,8 @@ import {IDBPDatabase}                   from 'idb'
 import {getValueFromJsonKey}            from '../file-chooser'
 import {clear, getDB, read, store}      from './handle-store'
 
+import {SignalArray} from 'signal-utils/array';
+
 
 
 export type FhirFile = {
@@ -22,7 +24,8 @@ export class FileBrowserState {
   public files = new Signal.State<FhirFiles>([])
   public types = new Signal.State<string[]>([])
   public preferredTypes = new Signal.State<string[]>([])
-  public selected = new Signal.State<FhirFile | null>(null)
+  public selected:SignalArray<FhirFile> = new SignalArray<FhirFile>([]);
+
   public loading = new Signal.State<boolean>(false)
 
   async store() {

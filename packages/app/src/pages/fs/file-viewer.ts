@@ -1,63 +1,123 @@
-import {SignalWatcher}                    from '@lit-labs/signals'
-import {html, LitElement, PropertyValues} from 'lit'
-import {customElement, property, state}   from 'lit/decorators.js'
-import {FhirElementData}                  from '../../../../library/src/internal'
-import {FhirFile, FileBrowserState}       from './state/file-browser-state'
+import {SignalWatcher}                         from '@lit-labs/signals'
+import {SlTab, SlTabGroup}         from '@shoelace-style/shoelace'
+import {css, html, LitElement, TemplateResult} from 'lit'
+import {customElement, property, query} from 'lit/decorators.js'
+import {until}                                 from 'lit/directives/until.js'
+import {FhirFile, FileBrowserState} from './state/file-browser-state'
 
 
 
 @customElement('file-viewer')
 export class FileViewer extends SignalWatcher(LitElement) {
 
+  static styles = [
+
+    css`
+      #sl-tab-1::part(base){
+        padding-left: 0;
+        padding-right: 0;
+        width: 2rem
+      }
+      .clear-tab sl-icon-button::part(base) {
+        width: 2rem;
+        color: red;
+      }
+      .clear-tab sl-icon-button::part(base) {
+        width: 2rem;
+        color: red;
+      }
+      
+      sl-tab-panel {
+        margin-left: 5rem;
+        margin-top: 5rem;
+      }
+    `
+  ]
+
   @property({ attribute: false, type: FileBrowserState })
   declare state: FileBrowserState
 
-  @state()
-  private data: FhirElementData | null = null
-
-  protected willUpdate(changes: PropertyValues): void {
-    super.willUpdate(changes)
-    const file: FhirFile | null = this.state.selected.get()
-    if (file) {
-      file.blob.text().then(text => {
-        this.data = JSON.parse(text)
-        this.requestUpdate('data')
-      })
-    }
-
-  }
+  @query('sl-tab-group')
+  declare tabGroup: SlTabGroup
 
   protected render() {
 
+    return html`
 
+        <sl-tab-group @sl-close=${(event: any) => {
+            if (this.tabGroup) {
+                const tab: SlTab | null = event.target as SlTab
+                if (tab) {
+
+                    const index = this.state.selected.findIndex(f => f.file === tab.panel)
+                    this.state.selected.splice(index, 1)
+
+                }
+
+            }
+        }}
+        >
+            <sl-tab slot="nav">
+                <div class="clear-tab"
+                ><sl-icon-button name="trash3-fill" @click=${() => {
+                    this.state.selected.splice(0, this.state.selected.length)
+                    this.requestUpdate()
+                }}></sl-icon-button>    
+                </div>
+            </sl-tab>
+
+            ${this.state.selected.map((file, index, files) => {
+
+                return html`
+                    <sl-tab slot="nav"
+                            panel="${file.file}"
+                            ?active=${files.length === index + 1}
+                            closable
+                            data-id="${file.file}"
+                    >
+                        ${file.file}
+                    </sl-tab>
+                    <sl-tab-panel name="${file.file}" ?active=${files.length === index + 1} data-id="${file.file}">
+                        ${until(this.toResource(file), html`<span>Loading...</span>`)}
+                    </sl-tab-panel>
+                `
+            })}
+
+        </sl-tab-group>
+    `
+  }
+
+  private async toResource(file: FhirFile): Promise<TemplateResult> {
     let resource = html``
-    const type: string | null | undefined = this.state.selected.get()?.type
+    const type: string | null | undefined = file.type
     if (type) {
+      let json = await this.toJson(file)
+
       switch (type) {
         case 'Medication':
           resource = html`
-              <fhir-medication .data=${this.data} showerror headless></fhir-medication>`
+              <fhir-medication .data=${json} showerror headless></fhir-medication>`
           break
         case 'Patient':
           resource = html`
-              <fhir-patient .data=${this.data} showerror headless></fhir-patient>`
+              <fhir-patient .data=${json} showerror headless></fhir-patient>`
           break
         case 'Appointment':
           resource = html`
-              <fhir-appointment .data=${this.data} showerror headless></fhir-appointment>`
+              <fhir-appointment .data=${json} showerror headless></fhir-appointment>`
           break
         default:
           //TODO: create option to show summary
           resource = html`
-              <pre><code>${JSON.stringify(this.data, null, 2)}</code></pre>
+              <pre><code>${JSON.stringify(json, null, 2)}</code></pre>
           `
       }
+      return resource
     }
+    return Promise.resolve(resource)
+  }
 
-
-    return html`
-        <h3>${this.state.selected.get()?.type}</h3>
-        ${resource} 
-    `
+  private async toJson(file: FhirFile): Promise<any> {
+    return file.blob.text().then(text => JSON.parse(text))
   }
 }
