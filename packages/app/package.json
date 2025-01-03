@@ -26,7 +26,8 @@
         "workbox-precaching": "^7.1.0",
         "fhir-beacon": "file:../library",
         "browser-fs-access": "^0.35.0",
-        "signal-utils": "^0.21.1"
+        "signal-utils": "^0.21.1",
+        "@dwelle/browser-fs-access": "^0.21.3"
     },
     "devDependencies": {
         "ts-lit-plugin": "^2.0.2",

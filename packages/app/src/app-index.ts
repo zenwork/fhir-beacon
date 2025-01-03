@@ -1,17 +1,16 @@
 import {Router}           from '@lit-labs/router'
 import {html, LitElement} from 'lit'
 import {customElement}    from 'lit/decorators.js'
-import {remoteBrowser}    from './pages/fs/./remote/remote-browser'
+import {remoteBrowser}    from './pages/browser/./remote/remote-browser'
+import {localBrowser}     from './pages/browser/local/local-browser'
 
 import './pages/app-home'
-import './pages/fs/state/browser-state'
-import './pages/fs/local/local-chooser'
-import './pages/fs/remote/remote-chooser'
-import './pages/fs/data-viewer'
-import './pages/fs/directory_storage'
+import './pages/browser/state/browser-state'
+import './pages/browser/local/local-chooser'
+import './pages/browser/remote/remote-chooser'
+import './pages/browser/data-viewer'
 import './pages/app-about/app-about'
 import './styles/global.css'
-import {localBrowser}     from './pages/fs/local/local-browser'
 import './components'
 
 

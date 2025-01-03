@@ -42,8 +42,9 @@ export class BrowserState {
   public files = new Signal.State<FhirFiles>([])
 
   // remote server-access state
-  public queryCollection = new Signal.State<string | null>(null)
-  public queries = new Signal.State<FhirQuery[]>([])
+  public collections = new Signal.State<string[]>([])
+  public currentCollectionName = new Signal.State<string | null>(null)
+  public currentCollection = new Signal.State<FhirQuery[]>([])
 
   public loading = new Signal.State<boolean>(false)
 
@@ -54,16 +55,6 @@ export class BrowserState {
     }
 
   }
-
-  async storeRemote() {
-    const handle: string | null = this.queryCollection.get()
-    const queries: FhirQuery[] = this.queries.get()
-    if (handle) {
-      await store('remoteHandle', handle, await this.getDb(), 'handles')
-      await store('remote-' + handle, queries, await this.getDb(), 'handles')
-    }
-  }
-
 
   async restoreLocal() {
     try {
@@ -80,13 +71,34 @@ export class BrowserState {
 
   }
 
+
+  async storeRemote() {
+    if (!this.collections.get().find(c => c === this.currentCollectionName.get())) {
+      this.collections.set([...this.collections.get(), this.currentCollectionName.get()!])
+    }
+
+    const collections: string[] = this.collections.get()
+    await store('remoteCollections', collections, await this.getDb(), 'handles')
+
+    const handle: string | null = this.currentCollectionName.get()
+    const queries: FhirQuery[] = this.currentCollection.get()
+    if (handle) {
+      await store('remoteHandle', handle, await this.getDb(), 'handles')
+      await store('remote-' + handle, queries, await this.getDb(), 'handles')
+    }
+  }
+
   async restoreRemote() {
     try {
+      const collections = await read<string[]>('remoteCollections', await this.getDb(), 'handles')
       const handle = await read<string>('remoteHandle', await this.getDb(), 'handles')
       const queries = await read<FhirQuery[]>('remote-' + handle, await this.getDb(), 'handles')
+      if (collections) {
+        this.collections.set(collections)
+      }
       if (queries) {
-        this.queryCollection.set(handle)
-        this.queries.set(queries)
+        this.currentCollectionName.set(handle)
+        this.currentCollection.set(queries)
       }
     } catch (error) {
       console.error('Failed to restore remote handle:', error)
@@ -150,7 +162,30 @@ export class BrowserState {
       return this.store()
 
     }
+
+
   }
+
+  async computeRemote() {
+    if (this.currentCollectionName.get()) {
+      const collection: string = this.currentCollectionName.get()!
+      const collections = await read<string[]>('remoteCollections', await this.getDb(), 'handles')
+      if (collections) {
+        this.collections.set(Array.from(new Set([...collections,collection])))
+      }
+
+      const queries = await read<FhirQuery[]>('remote-' + collection, await this.getDb(), 'handles')
+      if (queries) {
+        this.currentCollection.set(queries)
+      }
+
+      console.log(`Restored remote state:`,this.currentCollectionName.get(),this.currentCollection.get())
+
+    }
+
+
+  }
+
 
   async verifyPermission(handle: FileSystemHandle): Promise<boolean> {
     // Check for existing permissions
