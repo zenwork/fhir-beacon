@@ -1,12 +1,13 @@
 import {SignalWatcher}                              from '@lit-labs/signals'
 import {SlDialog, SlInput, SlMenuItem}              from '@shoelace-style/shoelace'
-import {css, html, LitElement, TemplateResult}      from 'lit'
-import {customElement, property, queryAsync, state} from 'lit/decorators.js'
 import {FhirElementData}                            from 'fhir-beacon/src/internal'
-import {BrowserState, FhirQuery}                    from '../state/browser-state'
+
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js'
+import {css, html, LitElement, TemplateResult}      from 'lit'
+import {customElement, property, queryAsync, state} from 'lit/decorators.js'
+import {BrowserState, FhirQuery}                    from '../../state/browser-state'
 
 
 
@@ -209,7 +210,6 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
   }
 
   private execute(query: FhirQuery): Promise<FhirElementData> {
-    console.log('querying:',query.query)
     return Promise.resolve({id:`ID::NULLOBJECT+${query.name}`})
   }
 

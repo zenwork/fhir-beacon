@@ -1,13 +1,19 @@
 import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
-import {FhirElementData} from 'fhir-beacon/src/internal'
+import {FhirElementData}                from 'fhir-beacon/src/internal'
 import {IDBPDatabase}                   from 'idb'
 
-import {FileSystemDirectoryHandle as PonyfillDirectoryHandle} from 'native-file-system-adapter'
+import {
+  FileSystemDirectoryHandle,
+  FileSystemDirectoryHandle as PonyfillDirectoryHandle,
+  FileSystemFileHandle,
+  getOriginPrivateDirectory,
+  showDirectoryPicker
+} from 'native-file-system-adapter'
 
 import {SignalArray}              from 'signal-utils/array'
-import {drop, getDB, read, store} from '../../../indexeddb'
-import {getValueFromJsonKey}      from '../local/local-chooser'
+import {drop, getDB, read, store} from '../indexeddb'
+import {getValueFromJsonKey}      from '../pages/util'
 
 
 
@@ -241,4 +247,68 @@ function isPonyfill(handle: FileSystemDirectoryHandle | PonyfillDirectoryHandle)
 
 function isFileHandle(handle: FileSystemFileHandle | any): handle is FileSystemFileHandle {
   return (handle as FileSystemFileHandle).kind === 'file'
+}
+/**
+ * Prompts the user to pick a directory and loads its files into an IndexedDB-backed directory.
+ */
+export async function promptAndLoadDirectoryIntoIndexedDB(): Promise<FileSystemDirectoryHandle> {
+  try {
+    // Prompt the user to pick a directory
+    const dirHandle = await showDirectoryPicker()
+
+    if (!dirHandle) {
+      console.log('No directory selected.')
+      throw new Error('No directory selected.')
+    }
+
+    // Get the IndexedDB-backed root directory
+    const indexedDBRoot = await getOriginPrivateDirectory()
+
+    // Load the selected directory contents into the IndexedDB directory
+    for await (const [name, handle] of dirHandle.entries()) {
+      if (handle instanceof FileSystemFileHandle) {
+        // If it's a file, read it and save it in IndexedDB
+        const file = await handle.getFile()
+        const indexedDBFileHandle = await indexedDBRoot.getFileHandle(file.name, { create: true })
+        const writable = await indexedDBFileHandle.createWritable()
+        await writable.write(file)
+        await writable.close()
+      } else if (handle instanceof FileSystemDirectoryHandle) {
+        // If it's a subdirectory, recursively handle it
+        const subDirHandle = await indexedDBRoot.getDirectoryHandle(name, { create: true })
+        await loadFilesIntoIndexedDBRecursive(handle, subDirHandle)
+      }
+    }
+
+    console.log('Directory successfully loaded into IndexedDB.')
+    return indexedDBRoot
+  } catch (error) {
+    console.error('Error during directory selection or loading:', error)
+    throw new Error('Error during directory selection or loading.', { cause: error })
+  }
+}
+/**
+ * Helper function to recursively traverse a directory and add subdirectories/files into IndexedDB.
+ * @param sourceDir - The source directory handle from the filesystem.
+ * @param targetDir - The target IndexedDB-based directory handle.
+ */
+export async function loadFilesIntoIndexedDBRecursive(
+  sourceDir: FileSystemDirectoryHandle,
+  targetDir: FileSystemDirectoryHandle
+): Promise<void> {
+  for await (const [name, handle] of sourceDir.entries()) {
+    if (handle instanceof FileSystemFileHandle) {
+      // If it's a file, read it and save it in IndexedDB
+      const file = await handle.getFile()
+      const targetFileHandle = await targetDir.getFileHandle(file.name, { create: true })
+      const writable = await targetFileHandle.createWritable()
+      await writable.write(file)
+      await writable.close()
+      console.log(`File "${file.name}" written to IndexedDB.`)
+    } else if (handle instanceof FileSystemDirectoryHandle) {
+      // If it's a subdirectory, create it and recurse
+      const subTargetDir = await targetDir.getDirectoryHandle(name, { create: true })
+      await loadFilesIntoIndexedDBRecursive(handle, subTargetDir)
+    }
+  }
 }

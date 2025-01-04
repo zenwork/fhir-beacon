@@ -1,11 +1,11 @@
 import {html}         from '@lit-labs/signals'
-import {BrowserState} from '../state/browser-state'
+import {BrowserState} from '../../state/browser-state'
+
 import 'fhir-beacon'
 
 
 
 export function remoteBrowser() {
-
 
   const appState = new BrowserState()
 

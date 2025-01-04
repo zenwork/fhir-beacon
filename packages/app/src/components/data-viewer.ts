@@ -3,7 +3,7 @@ import {SlTab, SlTabGroup}                     from '@shoelace-style/shoelace'
 import {css, html, LitElement, TemplateResult} from 'lit'
 import {customElement, property, query, state} from 'lit/decorators.js'
 import {until}                                 from 'lit/directives/until.js'
-import {BrowserState, FhirData}                from './state/browser-state'
+import {BrowserState, FhirData}                from '../state/browser-state'
 
 
 

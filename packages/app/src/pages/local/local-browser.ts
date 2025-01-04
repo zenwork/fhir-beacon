@@ -1,6 +1,5 @@
 import {html}         from '@lit-labs/signals'
-import {BrowserState} from '../state/browser-state'
-import 'fhir-beacon'
+import {BrowserState} from '../../state/browser-state'
 
 
 
