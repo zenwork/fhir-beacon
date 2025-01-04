@@ -1,4 +1,4 @@
-name: CD (APP)
+name: "[CD] - APP"
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy App
+    name: Deploy App (Deno Deploy)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,11 +34,15 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Install step
+      - name: Install Library
+        run: "npm install --verbose"
+        working-directory: ./packages/library
+
+      - name: Install App
         run: "npm install --verbose"
         working-directory: ./packages/app
 
-      - name: Build step
+      - name: Build App
         run: "pwd && npm run build --verbose"
         working-directory: ./packages/app
 
