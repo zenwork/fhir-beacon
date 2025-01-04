@@ -1,8 +1,24 @@
-import {SignalWatcher}                     from '@lit-labs/signals'
-import {SlMenuItem}                        from '@shoelace-style/shoelace'
-import {css, html, LitElement, nothing}    from 'lit'
-import {customElement, property, state}    from 'lit/decorators.js'
-import {BrowserState, FhirFile, FhirFiles} from '../state/browser-state'
+import {SignalWatcher}                  from '@lit-labs/signals'
+import {
+  SlMenuItem
+}                                       from '@shoelace-style/shoelace'
+import {css, html, LitElement, nothing} from 'lit'
+import {
+  customElement,
+  property,
+  state
+}                                       from 'lit/decorators.js'
+import {
+  FileSystemDirectoryHandle,
+  FileSystemFileHandle,
+  getOriginPrivateDirectory,
+  showDirectoryPicker
+}                                       from 'native-file-system-adapter'
+import {
+  BrowserState,
+  FhirFile,
+  FhirFiles
+}                                       from '../state/browser-state'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
@@ -16,14 +32,19 @@ export class LocalChooser extends SignalWatcher(LitElement) {
 
     css`
       :host {
-        width: 25rem;
+        width: 100%;
       }
 
       sl-button::part(base) {
         display: inline-block;
       }
 
+      sl-menu {
+        width: 96%
+      }
+      
       sl-menu-item::part(base) {
+        
         font-size: var(--sl-font-size-x-small);
         overflow-wrap: anywhere;
       }
@@ -133,16 +154,20 @@ export class LocalChooser extends SignalWatcher(LitElement) {
     if (this.state.files.get().length > (this.page + 1) * 100) this.page++
   }
 
-  private openDir() {
+  private async openDir() {
     this.state.loading.set(true)
-    // @ts-ignore
-    showDirectoryPicker()
-      .then((handle: FileSystemDirectoryHandle | null) => {
-        this.state.dir.set(handle)
-        this.state.compute()
-            .then(() => this.state.loading.set(false))
-            .then(() => this.requestUpdate())
-      })
+
+    if (isFileSystemAPISupported()) {
+      this.state.dir.set(await showDirectoryPicker())
+    } else {
+      this.state.dir.set(await promptAndLoadDirectoryIntoIndexedDB())
+    }
+
+    this.state.compute()
+        .then(() => this.state.loading.set(false))
+        .then(() => this.requestUpdate())
+
+
   }
 
 
@@ -160,4 +185,84 @@ export function getValueFromJsonKey(key: string, jsonText: string): string | nul
   const regExp = new RegExp(`"${key}"\\s*:\\s*"(.*?)"`)
   const match = jsonText.match(regExp)
   return match ? match[1] : null // Return the captured value or null if no match
+}
+
+
+/**
+ * Prompts the user to pick a directory and loads its files into an IndexedDB-backed directory.
+ */
+export async function promptAndLoadDirectoryIntoIndexedDB(): Promise<FileSystemDirectoryHandle> {
+  try {
+    // Prompt the user to pick a directory
+    const dirHandle = await showDirectoryPicker()
+
+    if (!dirHandle) {
+      console.log('No directory selected.')
+      throw new Error('No directory selected.')
+    }
+
+    // Get the IndexedDB-backed root directory
+    const indexedDBRoot = await getOriginPrivateDirectory()
+
+    // Load the selected directory contents into the IndexedDB directory
+    for await (const [name, handle] of dirHandle.entries()) {
+      if (handle instanceof FileSystemFileHandle) {
+        // If it's a file, read it and save it in IndexedDB
+        const file = await handle.getFile()
+        const indexedDBFileHandle = await indexedDBRoot.getFileHandle(file.name, { create: true })
+        const writable = await indexedDBFileHandle.createWritable()
+        await writable.write(file)
+        await writable.close()
+      } else if (handle instanceof FileSystemDirectoryHandle) {
+        // If it's a subdirectory, recursively handle it
+        const subDirHandle = await indexedDBRoot.getDirectoryHandle(name, { create: true })
+        await loadFilesIntoIndexedDBRecursive(handle, subDirHandle)
+      }
+    }
+
+    console.log('Directory successfully loaded into IndexedDB.')
+    return indexedDBRoot
+  } catch (error) {
+    console.error('Error during directory selection or loading:', error)
+    throw new Error('Error during directory selection or loading.', { cause: error })
+  }
+}
+
+/**
+ * Helper function to recursively traverse a directory and add subdirectories/files into IndexedDB.
+ * @param sourceDir - The source directory handle from the filesystem.
+ * @param targetDir - The target IndexedDB-based directory handle.
+ */
+async function loadFilesIntoIndexedDBRecursive(
+  sourceDir: FileSystemDirectoryHandle,
+  targetDir: FileSystemDirectoryHandle
+): Promise<void> {
+  for await (const [name, handle] of sourceDir.entries()) {
+    if (handle instanceof FileSystemFileHandle) {
+      // If it's a file, read it and save it in IndexedDB
+      const file = await handle.getFile()
+      const targetFileHandle = await targetDir.getFileHandle(file.name, { create: true })
+      const writable = await targetFileHandle.createWritable()
+      await writable.write(file)
+      await writable.close()
+      console.log(`File "${file.name}" written to IndexedDB.`)
+    } else if (handle instanceof FileSystemDirectoryHandle) {
+      // If it's a subdirectory, create it and recurse
+      const subTargetDir = await targetDir.getDirectoryHandle(name, { create: true })
+      await loadFilesIntoIndexedDBRecursive(handle, subTargetDir)
+    }
+  }
+}
+
+/**
+ * Checks if the File System Access API is available in the browser.
+ * @returns A boolean indicating the availability of the API.
+ */
+export function isFileSystemAPISupported(): boolean {
+  return (
+    'showDirectoryPicker' in window &&
+    'FileSystemHandle' in window &&
+    'FileSystemDirectoryHandle' in window &&
+    'FileSystemFileHandle' in window
+  );
 }

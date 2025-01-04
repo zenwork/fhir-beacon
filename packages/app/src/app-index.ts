@@ -1,6 +1,6 @@
-import {Router}           from '@lit-labs/router'
-import {html, LitElement} from 'lit'
-import {customElement}    from 'lit/decorators.js'
+import {Router}                from '@lit-labs/router'
+import {css, html, LitElement} from 'lit'
+import {customElement}         from 'lit/decorators.js'
 import {remoteBrowser}    from './pages/browser/./remote/remote-browser'
 import {localBrowser}     from './pages/browser/local/local-browser'
 
@@ -18,6 +18,13 @@ export * from './components'
 
 @customElement('app-index')
 export class AppIndex extends LitElement {
+
+  static styles = [css`
+    wa-page::part(header) {
+      padding:0
+    }
+    
+  `]
 
   private routes: Router = new Router(this, [
     {
@@ -39,7 +46,7 @@ export class AppIndex extends LitElement {
   render() {
     return html`
         <wa-page class="wa-theme-default-dark">
-            <app-menu slot="header"></app-menu>
+            <app-menu slot="header" style="padding: 0;"></app-menu>
             ${this.routes.outlet()}
         </wa-page>
 

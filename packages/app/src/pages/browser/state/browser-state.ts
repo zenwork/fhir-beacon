@@ -1,12 +1,18 @@
 import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
+import {FhirElementData} from 'fhir-beacon/src/internal'
 import {IDBPDatabase}                   from 'idb'
 
+import {FileSystemDirectoryHandle as PonyfillDirectoryHandle} from 'native-file-system-adapter'
+
 import {SignalArray}              from 'signal-utils/array'
-import {FhirElementData}          from 'fhir-beacon/src/internal'
 import {drop, getDB, read, store} from '../../../indexeddb'
 import {getValueFromJsonKey}      from '../local/local-chooser'
 
+
+
+export {FileSystemDirectoryHandle as PonyfillDirectoryHandle} from 'native-file-system-adapter'
+export {FileSystemFileHandle as PonyfillFileHandle}           from 'native-file-system-adapter'
 
 
 export type FhirData = {
@@ -37,7 +43,7 @@ export class BrowserState {
   public preferredTypes = new Signal.State<string[]>([])
   public selected: SignalArray<FhirData> = new SignalArray<FhirData>([])
   // local file-access state
-  public dir = new Signal.State<FileSystemDirectoryHandle | null>(null)
+  public dir = new Signal.State<FileSystemDirectoryHandle | PonyfillDirectoryHandle | null>(null)
   public files = new Signal.State<FhirFiles>([])
 
   // remote server-access state
@@ -48,7 +54,7 @@ export class BrowserState {
   public loading = new Signal.State<boolean>(false)
 
   async store() {
-    const handle: FileSystemDirectoryHandle | null = this.dir.get()
+    const handle: FileSystemDirectoryHandle | PonyfillDirectoryHandle | null = this.dir.get()
     if (handle) {
       await store('dirHandle', handle, await this.getDb(), 'handles')
     }
@@ -111,26 +117,43 @@ export class BrowserState {
   }
 
   async compute() {
-    if (this.dir.get()) {
-      const dir: FileSystemDirectoryHandle = this.dir.get()!
+    const handle: any = this.dir.get()
+    const promises: Promise<FhirFile>[] = []
 
-      const promises: Promise<FhirFile>[] = []
+    if (handle) {
+      if (!isPonyfill(handle)) {
+        // On desktop chrome
+        for await (const entry of handle.values() as AsyncIterable<FileSystemFileHandle>) {
+          promises
+            .push(entry
+                    .getFile()
+                    .then(async (f) => ({
+                      name: f.name,
+                      //TODO: very expensive. find some other way
+                      type: getValueFromJsonKey('resourceType', await f.text()),
+                      isMetaData: f.name.indexOf('example') === -1,
+                      data: f
+                    })))
 
-      // @ts-ignore
-      for await (const entry of dir.values() as AsyncIterable<FileSystemFileHandle>) {
+        }
+      } else {
+        // other browsers
+        for await (const entry of handle.entries()) {
+          const h: PonyfillDirectoryHandle | FileSystemHandle = entry[1]
+          if (isFileHandle(h)) {
 
-        promises
-          .push(entry
-                  .getFile()
-                  .then(async (f) => ({
-                    name: f.name,
-                    //TODO: very expensive. find some other way
-                    type: getValueFromJsonKey('resourceType', await f.text()),
-                    isMetaData: f.name.indexOf('example') === -1,
-                    data: f
-                  })))
-
+            h.getFile()
+             .then(async (f) => ({
+               name: f.name,
+               //TODO: very expensive. find some other way
+               type: getValueFromJsonKey('resourceType', await f.text()),
+               isMetaData: f.name.indexOf('example') === -1,
+               data: f
+             }))
+          }
+        }
       }
+
 
       this.files.set(
         (await Promise.all(promises))
@@ -209,4 +232,13 @@ export class BrowserState {
   }
 
 
+}
+
+
+function isPonyfill(handle: FileSystemDirectoryHandle | PonyfillDirectoryHandle): handle is PonyfillDirectoryHandle {
+  return handle instanceof PonyfillDirectoryHandle
+}
+
+function isFileHandle(handle: FileSystemFileHandle | any): handle is FileSystemFileHandle {
+  return (handle as FileSystemFileHandle).kind === 'file'
 }

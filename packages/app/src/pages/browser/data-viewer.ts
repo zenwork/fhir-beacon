@@ -44,7 +44,6 @@ export class DataViewer extends SignalWatcher(LitElement) {
   private mode: string='display'
 
   protected render() {
-    console.log(this.state.selected)
     return html`
 
         <sl-tab-group @sl-close=${(event: any) => {
