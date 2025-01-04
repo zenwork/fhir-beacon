@@ -34,7 +34,7 @@ jobs:
         working-directory: ./packages/app
 
       - name: Build step
-        run: "deno task build"
+        run: "pwd && deno task build"
         working-directory: ./packages/app
 
       - name: Upload to Deno Deploy
