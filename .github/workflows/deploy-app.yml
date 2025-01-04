@@ -29,12 +29,17 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
       - name: Install step
-        run: "deno install"
+        run: "npm install"
         working-directory: ./packages/app
 
       - name: Build step
-        run: "pwd && deno task build"
+        run: "pwd && npm run build"
         working-directory: ./packages/app
 
       - name: Upload to Deno Deploy
