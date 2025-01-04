@@ -12,6 +12,9 @@ jobs:
   deploy:
     name: Deploy App
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./packages/app"
 
     permissions:
       id-token: write # Needed for auth with Deno Deploy
