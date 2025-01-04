@@ -1,10 +1,10 @@
 {
     "id": "/",
     "scope": "/",
-    "name": "Beacon",
+    "name": "FHIR-beacon Showcase",
     "display": "standalone",
     "start_url": "/",
-    "short_name": "FHIR-beacon App",
+    "short_name": "Beacon",
     "theme_color": "#101218",
     "description": "This a showcase application to demonstrate the capabilities of the fhir-beacon library",
     "orientation": "any",
