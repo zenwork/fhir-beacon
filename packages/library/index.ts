@@ -2,7 +2,8 @@ export * from './src/types'
 
 /* Core Stuff */
 export * from './src/internal/BaseElement'
-export * from './src/internal'
+export { BaseElement  } from './src/internal'
+export type { Generators  } from './src/internal'
 
 /* Customization API */
 export * from './src/internal/customization/fhir-context-element'

@@ -7,7 +7,8 @@
         "dev-server": "vite",
         "dev": "deno run dev-server",
         "dev-task": "vite",
-        "deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
+        "_deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
+        "tsc": "tsc",
         "build": "tsc && vite build",
         "start": "deno run dev",
         "start-remote": "vite --host"

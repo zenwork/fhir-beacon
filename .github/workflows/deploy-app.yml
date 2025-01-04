@@ -1,0 +1,42 @@
+name: CD (APP)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  deploy:
+    name: Deploy App
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Install step
+        run: "deno install"
+        working-directory: ./packages/app
+
+      - name: Build step
+        run: "deno task build"
+        working-directory: ./packages/app
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "fhir-beacon-app"
+          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+          root: "./packages/app/dist"

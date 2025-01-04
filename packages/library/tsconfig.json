@@ -17,6 +17,7 @@
         "declaration": true,
         "incremental": true,
         "resolveJsonModule": true,
+        "skipLibCheck": true,
         "types": [
             "@vitest/browser/providers/playwright"
         ]
