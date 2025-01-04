@@ -35,11 +35,11 @@ jobs:
           node-version: lts/*
 
       - name: Install step
-        run: "npm install"
+        run: "npm install --verbose"
         working-directory: ./packages/app
 
       - name: Build step
-        run: "pwd && npm run build"
+        run: "pwd && npm run build --verbose"
         working-directory: ./packages/app
 
       - name: Upload to Deno Deploy

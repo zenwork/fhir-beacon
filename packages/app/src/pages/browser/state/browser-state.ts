@@ -3,7 +3,7 @@ import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
 import {IDBPDatabase}                   from 'idb'
 
 import {SignalArray}              from 'signal-utils/array'
-import {FhirElementData}          from '../../../../../library/src/internal'
+import {FhirElementData}          from 'fhir-beacon/src/internal'
 import {drop, getDB, read, store} from '../../../indexeddb'
 import {getValueFromJsonKey}      from '../local/local-chooser'
 

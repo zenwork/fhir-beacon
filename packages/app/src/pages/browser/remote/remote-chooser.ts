@@ -2,7 +2,7 @@ import {SignalWatcher}                              from '@lit-labs/signals'
 import {SlDialog, SlInput, SlMenuItem}              from '@shoelace-style/shoelace'
 import {css, html, LitElement, TemplateResult}      from 'lit'
 import {customElement, property, queryAsync, state} from 'lit/decorators.js'
-import {FhirElementData}                            from '../../../../../library/src/internal'
+import {FhirElementData}                            from 'fhir-beacon/src/internal'
 import {BrowserState, FhirQuery}                    from '../state/browser-state'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
