@@ -29,6 +29,19 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
         font-size: var(--sl-font-size-x-small);
         overflow-wrap: anywhere;
       }
+
+      .play sl-icon-button::part(base) {
+        color: green;
+      }
+
+      .delete sl-icon-button::part(base) {
+        color: red;
+      }
+
+      .edit sl-icon-button::part(base) {
+        color: lightblue;
+      }
+      
     `
   ]
 
@@ -137,9 +150,50 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
         </div>
         <sl-menu @sl-select=${this.selectQuery}>
             ${filteredQueries ? filteredQueries.map(q => html`
-                <sl-menu-item .value=${q} ?disabled=${this.state.selected.find(f => f.name === q.name)}>
-                    ${q.name}
-                </sl-menu-item>`) : ''}
+                <div style="display:flex">
+                    <sl-menu-item .value=${q}
+                                  ?disabled=${this.state.selected.find(f => f.name === q.name)}
+                                  style="flex-grow: 1"
+                    >
+                        ${q.name}
+                    </sl-menu-item>
+                    <sl-copy-button value=${q.query} copy-label=${q.query}></sl-copy-button>
+                    <div class="edit">
+                        <sl-icon-button
+                                name="pencil-fill"
+                                @click=${() => {
+                                    this.newQuery = { ...q }
+                                    this.addDialog.then((d: SlDialog) => d.show())
+                                }}
+                        ></sl-icon-button>
+                    </div>
+                    <div class="delete">
+                        <sl-icon-button
+                                name="trash"
+                                @click=${() => {
+                                    const all: FhirQuery[] = this.state.currentCollection.get()
+                                    const queries: FhirQuery[] = all.filter(c => c.name !== q.name)
+                                    this.state.currentCollection.set(queries)
+                                }}
+                        ></sl-icon-button>
+                    </div>
+                    <div class="play">
+                        <sl-icon-button
+                                name="play-fill"
+                                ?disabled=${this.state.selected.find(f => f.name === q.name)}
+                                @click=${() => {
+                                    this.state.selected.push({
+                                                                 name: q.name,
+                                                                 type: null,
+                                                                 isMetaData: false,
+                                                                 data: this.execute(q)
+                                                             })
+                                }}
+                        ></sl-icon-button>
+                    </div>
+
+                </div>
+            `) : ''}
         </sl-menu>
 
         ${(this.addQueryDialog())}
@@ -173,12 +227,15 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
   private addQueryDialog(): TemplateResult {
     const setName = (e: InputEvent) => this.newQuery.name = (e.target as SlInput).value
     const setQuery = (e: InputEvent) => this.newQuery.query = (e.target as SlInput).value
-    const addQuery = () => {
-      const values: FhirQuery[] = [
-        ...this.state.currentCollection.get(),
-        this.newQuery
-      ]
-      this.state.currentCollection.set(values)
+
+    const addOrUpdateQuery = () => {
+      if (this.state.currentCollection.get().some(q => q.name === this.newQuery.name))
+        this.state.currentCollection.set(this.state.currentCollection.get().map(c => c.name === this.newQuery.name
+                                                                                     ? this.newQuery
+                                                                                     : c))
+      else
+        this.state.currentCollection.set(this.state.currentCollection.get().concat(this.newQuery))
+
       this.state.storeRemote()
           .then(() => this.newQuery = { name: '', query: '', data: null })
           .then(() => this.addDialog.then((d: SlDialog) => d.hide()))
@@ -189,6 +246,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
             <sl-input autofocus
                       placeholder="name"
                       required
+                      ?disabled=${this.state.currentCollection.get().some(c => c.name === this.newQuery.name)}
                       value=${this.newQuery.name}
                       @input=${setName}
             ></sl-input>
@@ -197,7 +255,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
                       value=${this.newQuery.query}
                       @input=${setQuery}
             ></sl-input>
-            <sl-button slot="footer" variant="primary" @click=${addQuery}>Close</sl-button>
+            <sl-button slot="footer" variant="primary" @click=${addOrUpdateQuery}>Close</sl-button>
         </sl-dialog>
     `
   }
@@ -205,12 +263,29 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
 
   private async selectQuery(e: CustomEvent) {
     const query = e.detail.item.value as FhirQuery
-    this.state.selected.push({ name:query.name,type:'unknown',isMetaData:false, data: this.execute(query) })
-    this.requestUpdate('state')
+    this.state.selected.push({ name: query.name, type: null, isMetaData: false, data: this.execute(query) })
   }
 
-  private execute(query: FhirQuery): Promise<FhirElementData> {
-    return Promise.resolve({id:`ID::NULLOBJECT+${query.name}`})
+  private async execute(query: FhirQuery): Promise<FhirElementData> {
+    return fetch(
+      query.query,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/fhir+xml;q=1.0, application/fhir+json;q=1.0, application/xml+fhir;q=0.9, application/json+fhir;q=0.9',
+          'Accept-Encoding': 'gzip'
+        }
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+      })
+      .then((data) => {
+        return data as FhirElementData
+      })
+
   }
 
 }

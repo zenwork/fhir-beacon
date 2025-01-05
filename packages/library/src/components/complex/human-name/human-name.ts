@@ -7,6 +7,8 @@ import {DisplayConfig}          from '../../../types'
 import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
 import {HumanNameData}          from '../../resources/patient/patient.data'
 
+
+
 @customElement('fhir-human-name')
 export class HumanName extends BaseElement<HumanNameData> {
   constructor() {
@@ -14,9 +16,10 @@ export class HumanName extends BaseElement<HumanNameData> {
   }
 
   public renderDisplay(config: DisplayConfig, data: Decorated<HumanNameData>): TemplateResult[] {
-    if (data.given && data.family) {
+    if (data.given || data.family) {
       return [
         html`
+            <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive>
             ${config.verbose
               ? wrap(
                             {
@@ -52,6 +55,7 @@ export class HumanName extends BaseElement<HumanNameData> {
     if (data.text) {
       return [
         html`
+            <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive>
             <fhir-primitive label="full name"
                             .value=${data.text}
                             .type=${PrimitiveType.fhir_string}
@@ -75,7 +79,7 @@ export class HumanName extends BaseElement<HumanNameData> {
           ></fhir-primitive>
           ${strap(
                   {
-                      key: this.key,
+                      key: 'given',
                       pluralBase: 'given',
                       collection: data.given,
                       generator: (g, i) => html`

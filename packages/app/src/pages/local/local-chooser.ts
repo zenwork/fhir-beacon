@@ -67,10 +67,13 @@ export class LocalChooser extends SignalWatcher(LitElement) {
                     </sl-button>
                     <sl-menu @sl-select=${this.selectType}>
                         <sl-menu-item value=${null}>ALL</sl-menu-item>
+                        <sl-divider></sl-divider>
+                        <sl-menu-label >Beacon-Rendered</sl-menu-label>
                         ${prefTypes.map(t => html`
                             <sl-menu-item value=${t}>${t}</sl-menu-item>`)}
                         ${prefTypes.length > 0 ? html`
                             <sl-divider></sl-divider>` : nothing}
+                        <sl-menu-label >JSON only</sl-menu-label>
                         ${types.map(t => html`
                             <sl-menu-item value=${t}>${t}</sl-menu-item>`)}
                     </sl-menu>
@@ -120,7 +123,7 @@ export class LocalChooser extends SignalWatcher(LitElement) {
 
   private async selectFile(e: CustomEvent) {
     const blob = e.detail.item.value as FhirFile
-    this.state.selected.push({ ...blob, data: await this.toJson(blob) })
+    this.state.selected.push({ ...blob, data: this.toJson(blob) })
     this.requestUpdate('state')
   }
 

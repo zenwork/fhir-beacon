@@ -88,41 +88,76 @@ export class DataViewer extends SignalWatcher(LitElement) {
   }
 
   private async toResource(file: FhirData): Promise<TemplateResult> {
-    let resource = html``
-    const type: string | null | undefined = file.type
-    if (type) {
+    return file.data
+               .then((d:any) => {
 
-      switch (type) {
-        case 'Medication':
-          resource = html`
-              ${this.addMode()}
+                 let resource = html``
+                 const type: string | null | undefined = file.type ?? d.resourceType
+                 const text = JSON.stringify(d, null, 2)
+                 if (type) {
+                   switch (type) {
+                     case 'Medication':
+                       resource = html`
+                           ${this.addMode()}
+                           <sl-copy-button .value=${text}></sl-copy-button>
+                           <fhir-medication .data=${d}
+                                            showerror
+                                            headless
+                                            .mode=${this.mode}
+                                            open
+                           ></fhir-medication>`
+                       break
+                     case 'Patient':
+                       resource = html`
+                           ${this.addMode()}
+                           <sl-copy-button .value=${text}></sl-copy-button>
+                           <fhir-patient .data=${d} showerror headless .mode=${this.mode} open></fhir-patient>`
+                       break
+                     case 'Appointment':
+                       resource = html`
+                           ${this.addMode()}
+                           <sl-copy-button .value=${text}></sl-copy-button>
+                           <fhir-appointment .data=${d}
+                                             showerror
+                                             headless
+                                             .mode=${this.mode}
+                                             open
+                           ></fhir-appointment>`
+                       break
+                     case 'Slot':
+                       resource = html`
+                           ${this.addMode()}
+                           <sl-copy-button .value=${text}></sl-copy-button>
+                           <fhir-slot .data=${d}
+                                      showerror
+                                      headless
+                                      .mode=${this.mode}
+                                      open
+                           ></fhir-slot>`
+                       break
+                     default:
 
-              <fhir-medication .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-medication>`
-          break
-        case 'Patient':
-          resource = html`
-              ${this.addMode()}
-              <fhir-patient .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-patient>`
-          break
-        case 'Appointment':
-          resource = html`
-              ${this.addMode()}
-              <fhir-appointment .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-appointment>`
-          break
-        case 'Slot':
-          resource = html`
-              ${this.addMode()}
-              <fhir-slot .data=${until(file.data,html`loading...`)} showerror headless .mode=${this.mode} open></fhir-slot>`
-          break
-        default:
-          //TODO: create option to show summary
-          resource = html`
-              <pre><code>${JSON.stringify(await file.data, null, 2)}</code></pre>
-          `
-      }
-      return resource
-    }
-    return Promise.resolve(resource)
+                       resource = html`
+                           <h3>Narrative<sl-copy-button .value=${JSON.stringify(d.text,null,2)} ?disabled=${!d.text}></sl-copy-button></h3>
+                           ${d.text?html`<fhir-narrative .data=${d.text}></fhir-narrative>`:html`
+                               <div style="width:43rem">
+                               <sl-alert variant="warning" open >
+                                   <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+                                   <strong>No Narrative </strong><br />
+                                   Narrative is not available for this resource instance. 
+                               </sl-alert>
+                               </div>
+                           `}
+                           <sl-divider></sl-divider>
+                           <h3>JSON<sl-copy-button .value=${text}></sl-copy-button></h3>
+                           <fhir-debug .data=${d}></fhir-debug>
+                           
+                       `
+                   }
+                 }
+                 return Promise.resolve(resource)
+               })
+
   }
 
   private addMode(): TemplateResult {
