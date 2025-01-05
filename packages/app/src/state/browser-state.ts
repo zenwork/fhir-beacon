@@ -194,7 +194,9 @@ export class BrowserState {
                                                            || t
                                                            === 'Slot'
                                                            || t
-                                                           === 'Bundle'))
+                                                           === 'Bundle'
+                                                           || t
+                                                           === 'Account'))
 
       return this.store()
 

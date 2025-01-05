@@ -191,7 +191,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
                                                                  mode: DisplayMode.display,
                                                                  open: true,
                                                                  showerrors: false,
-                                                                 headless: false
+                                                                 headless: true
                                                              })
                                 }}
                         ></sl-icon-button>
@@ -276,7 +276,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
                                mode: DisplayMode.display,
                                open: true,
                                showerrors: false,
-                               headless: false
+                               headless: true
                              })
   }
 

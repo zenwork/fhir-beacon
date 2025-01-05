@@ -201,7 +201,6 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                              .mode=${file.mode}
                                              ?open=${file.open}
                            >
-                               >
                            </fhir-appointment>`
                        break
                      case 'Slot':
@@ -213,20 +212,27 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                       .mode=${file.mode}
                                       ?open=${file.open}
                            >
-                               >
                            </fhir-slot>`
                        break
                      case 'Bundle':
                        resource = html`
-
                            <fhir-bundle .data=${d}
                                         ?showerror=${file.showerrors}
                                         ?headless=${file.headless}
                                         .mode=${file.mode}
                                         ?open=${file.open}
                            >
-                               >
                            </fhir-bundle>`
+                       break
+                     case 'Account':
+                       resource = html`
+                           <fhir-account .data=${d}
+                                        ?showerror=${file.showerrors}
+                                        ?headless=${file.headless}
+                                        .mode=${file.mode}
+                                        ?open=${file.open}
+                           >
+                           </fhir-account>`
                        break
                      default:
 

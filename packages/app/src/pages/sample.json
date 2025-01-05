@@ -55,6 +55,16 @@
                 "name": "bundle-everything-patient-45084016",
                 "query": "https://hapi.fhir.org/baseR4/Patient/45084016/$everything",
                 "data": null
+            },
+            {
+                "name": "account-45082931",
+                "query": "https://hapi.fhir.org/baseR4/Account/45082931/_history/1",
+                "data": null
+            },
+            {
+                "name": "account-104818",
+                "query": "https://hapi.fhir.org/baseR4/Account/104818/_history/1",
+                "data": null
             }
         ]
     },
