@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+  <meta charset="UTF-8">
+  <title >Demo Environment</title >
+  <link crossorigin="anonymous" href="./node_modules/@shoelace-style/shoelace/dist/themes/light.css" rel="stylesheet" title="fhir-style" />
+  <script src="./node_modules/@shoelace-style/shoelace/dist/shoelace-autoloader.js" type="module"></script >
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Assistant&family=Courier+Prime&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yanone+Kaffeesatz&display=swap"
+      rel="stylesheet"
+  >
+  <link
+      crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+      title="fhir-style"
+  >
+  <style >
+    .roboto-thin {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-style: normal;
+    }
+
+    .roboto-light {
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    .roboto-regular {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .roboto-medium {
+      font-family: "Roboto", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    .roboto-bold {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .roboto-black {
+      font-family: "Roboto", sans-serif;
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    .roboto-thin-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-style: italic;
+    }
+
+    .roboto-light-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .roboto-regular-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .roboto-medium-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .roboto-bold-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .roboto-black-italic {
+      font-family: "Roboto", sans-serif;
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: #0a5681 solid 0.1rem;
+    }
+  </style >
+
+  <script type="module">
+      import {html, render} from 'lit-html'
+
+      export {Annotation} from './src/components/complex'
+
+    const data = {
+      authorReference:{reference:'Patient/example'},
+      authorString:'Jack Smith',
+      time:'2ssdf022-02-08T10:18:14.034+10:00',
+      text:'I don\'t think that this is true, or what I said, and it should be corrected'
+    }
+
+    const medData = {
+      resourceType:'Medication',
+      id:'med0307',
+      text:{
+        status:'generated',
+        div:'<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Medication</b><a name="med0307"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Medication &quot;med0307&quot; </p></div><p><b>code</b>: Novolog 100u/ml <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="http://terminology.hl7.org/5.1.0/CodeSystem-v3-ndc.html">National drug codes</a>#0169-7501-11)</span></p><p><b>marketingAuthorizationHolder</b>: <a name="mmanu"> </a></p><blockquote><p/><p><a name="mmanu"> </a></p><p><b>name</b>: Medication Manufacturer</p></blockquote><p><b>doseForm</b>: Injection solution (qualifier value) <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#385219001)</span></p><blockquote><p><b>ingredient</b></p><h3>Items</h3><table class="grid"><tr><td>-</td><td><b>Concept</b></td></tr><tr><td>*</td><td>Insulin Aspart (substance) <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#325072002)</span></td></tr></table><p><b>strength</b>: 100 U<span style="background: LightGoldenRodYellow"> (Details: UCUM code U = \'U\')</span>/1 mL<span style="background: LightGoldenRodYellow"> (Details: UCUM code mL = \'mL\')</span></p></blockquote><h3>Batches</h3><table class="grid"><tr><td>-</td><td><b>LotNumber</b></td><td><b>ExpirationDate</b></td></tr><tr><td>*</td><td>12345</td><td>2019-10-31</td></tr></table></div>'
+      },
+      contained:[
+        {
+          resourceType:'Organization',
+          id:'mmanu',
+          name:'Medication Manufacturer'
+        }
+      ],
+      code:{
+        coding:[
+          {
+            system:'http://hl7.org/fhir/sid/ndc',
+            code:'0169-7501-11',
+            display:'Novolog 100u/ml'
+          }
+        ]
+      },
+      marketingAuthorizationHolder:{
+        reference:'#mmanu'
+      },
+      doseForm:{
+        coding:[
+          {
+            system:'http://snomed.info/sct',
+            code:'385219001',
+            display:'Injection solution (qualifier value)'
+          }
+        ]
+      },
+      ingredient:[
+        {
+          item:{
+            concept:{
+              coding:[
+                {
+                  system:'http://snomed.info/sct',
+                  code:'325072002',
+                  display:'Insulin Aspart (substance)'
+                }
+              ]
+            }
+          },
+          strengthRatio:{
+            numerator:{
+              value:100,
+              system:'http://unitsofmeasure.org',
+              code:'U'
+            },
+            denominator:{
+              value:1,
+              system:'http://unitsofmeasure.org',
+              code:'mL'
+            }
+          }
+        }
+      ],
+      batch:{
+        lotNumber:'12345',
+        expirationDate:'2019.10-31'
+      }
+    }
+
+    const container = document.getElementById('app')
+    let disp2struct = 'display'
+    let show = false
+    let verbose = false
+
+    const renderTemplate = () => {
+
+      const updateErr = () => {
+        show = !show
+        render(renderTemplate(), container)
+      }
+
+      const updateVerb = () => {
+        verbose = !verbose
+        render(renderTemplate(), container)
+      }
+      const updateMode = () => {
+        disp2struct = disp2struct === 'display' ? 'structure' : 'display'
+        render(renderTemplate(), container)
+      }
+
+      /*return html`
+       <section >
+       <button @click=${updateMode}>mode: ${disp2struct}</button >
+       <button @click=${updateErr}>error: ${show}</button >
+       <button @click=${updateVerb}>verbose: ${verbose}</button >
+       </section >
+       <fhir-shell mode=${disp2struct} ?verbose=${verbose} ?showerror=${show}>
+       <section >
+       <fhir-annotation label="example" .data=${data}></fhir-annotation >
+       </section >
+
+       </fhir-shell >
+       `*/
+
+      return html`
+        <section >
+          <button @click=${updateMode}>mode: ${disp2struct}</button >
+          <button @click=${updateErr}>error: ${show}</button >
+          <button @click=${updateVerb}>verbose: ${verbose}</button >
+        </section >
+
+        <section >
+          <fhir-medication
+              label="medication"
+              .data=${medData}
+              .mode=${disp2struct}
+              ?verbose=${verbose}
+              ?showerror=${show}
+          ></fhir-medication >
+        </section >
+
+      `
+
+    }
+    render(renderTemplate(), container)
+  </script >
+</head >
+<body >
+
+  <div id="app"></div >
+
+    <script src="index.ts" type="module"></script>
+</body >
+</html >

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>FHIR-beacon Showcase</title>
+
+    <base href="/"/>
+
+    <!-- This meta viewport ensures the webpage's dimensions change according to the device it's on. This is called Responsive Web Design.-->
+    <meta content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+          name="viewport"
+    />
+    <meta content="This is a  app" name="description"/>
+
+    <meta content="#181818" media="(prefers-color-scheme: dark)" name="theme-color"/>
+    <meta content="#f3f3f3" media="(prefers-color-scheme: light)" name="theme-color"/>
+
+    <!-- These meta tags are Apple-specific, and set the web application to run in full-screen mode with a black status bar. Learn more at https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="app" name="apple-mobile-web-app-title"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+
+    <!-- This tag is used by the app CLI to identify template projects. Don't remove if you are using the CLI. -->
+    <meta content="pwa-starter" name="pwa-starter-template-identity"/>
+
+    <!-- Imports an icon to represent the document. -->
+    <link href="/assets/icons/icon_24.png" rel="icon" type="image/png"/>
+
+    <!-- Imports the manifest to represent the web application. A web app must have a manifest to be a PWA. -->
+    <link href="manifest.json" rel="manifest"/>
+
+    <link href="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/styles/themes/default.css" rel="stylesheet" />
+    <script src="https://early.webawesome.com/webawesome@3.0.0-alpha.7/dist/webawesome.loader.js" type="module"></script>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+
+
+    <!-- light mode and dark mode CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/dist/themes/dark.css" media="(prefers-color-scheme:dark)" onload="document.documentElement.classList.add('sl-theme-dark');" rel="stylesheet">
+
+    <script type="module">
+        import {setBasePath} from '@shoelace-style/shoelace/dist/utilities/base-path.js'
+
+        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/')
+    </script>
+
+    <script type="module">
+        // Conditional ESM module loading (Node.js and browser)
+        // @ts-ignore: Property 'UrlPattern' does not exist
+        if (!globalThis.URLPattern) {
+            await import('urlpattern-polyfill')
+        }
+        /**
+         * The above is the recommended way to load the ESM module, as it only
+         * loads it on demand, thus when not natively supported by the runtime or
+         * already polyfilled.
+         */
+        import 'urlpattern-polyfill'
+
+        /**
+         * In case you want to replace an existing implementation with the polyfill:
+         */
+        import {URLPattern} from 'urlpattern-polyfill'
+
+        // @ts-ignore
+        globalThis.URLPattern = URLPattern
+
+    </script>
+    <style id="fhir-beacon-narrative">
+      /**
+       * Overrides styles to to change the appearance of 3rd-party narrative html.
+       * Setting id="fhir-beacon-narrative" above and top level class of #formatted-narrative is necessary to localise styles.
+       * The exact styling depends on the provided narrative
+       */
+      #formatted-narrative {
+        font-size: 1rem;
+        font-family: sans-serif;
+        border: 0.1rem solid gray;
+        border-radius: 10px;
+        margin: 1rem;
+        padding: 1rem;
+
+        div,div[xmlns] {
+          all: unset;
+          display: inline-block;
+          background:unset !important;
+          width: fit-content;
+
+          div,td,p,span {
+            background: unset !important;
+            border:unset !important;
+            line-height: 1.5rem;
+          }
+
+          b,h4,h5,h6 {
+            color: lightseagreen;
+          }
+          h1,h2,h3 {
+            color: #2aeae0;
+          }
+          td {
+            border-left: 0.1rem solid gray;
+          }
+        }
+      }
+    </style>
+    <script src="/src/app-index.ts" type="module"></script>
+</head>
+
+<body>
+    <!-- Our app-index web component. This component is defined in src/pages/app-index.ts-->
+    <app-index></app-index>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.onload = () => {
+                navigator.serviceWorker.register(
+                    '/sw.js'
+                )
+            }
+        }
+    </script>
+</body>
+
+</html>

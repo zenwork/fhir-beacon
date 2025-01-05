@@ -226,3 +226,5 @@ test-results/
 results/
 **/__screenshots__/
 /html/
+/packages/data/synthea-with-dependencies.jar
+/packages/server/hapi.postgress.data/

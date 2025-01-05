@@ -1,0 +1,12 @@
+{
+    "directory": ["./src", "./tests"],
+    
+    "exclude": [
+        ".*\\.story\\.data\\.ts",
+        ".*\\.stories\\.ts",
+        ".*\\.spec\\.ts",
+        ".*\\.test\\.ts",
+        ".*\\.styles\\.ts",
+        ".*-styles\\.ts"
+    ]
+}

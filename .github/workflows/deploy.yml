@@ -1,4 +1,4 @@
-name: CD
+name: "[CD] - STORYBOOK"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy Storybook (Deno Deploy)
     runs-on: ubuntu-latest
 
     permissions:
@@ -30,13 +30,15 @@ jobs:
 
       - name: Install step
         run: "npm install"
+        working-directory: ./packages/library
 
       - name: Build step
         run: "npm run storybook::build"
+        working-directory: ./packages/library
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "fhir-beacon"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
-          root: "storybook-static"
+          root: "./packages/library/storybook-static"

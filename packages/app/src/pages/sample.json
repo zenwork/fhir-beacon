@@ -1,0 +1,82 @@
+[
+    {
+        "key": "dirHandle",
+        "value": {}
+    },
+    {
+        "key": "remote-hapi-fhir",
+        "value": [
+            {
+                "name": "patient-791342",
+                "query": "https://hapi.fhir.org/baseR5/Patient/791342/_history/1",
+                "data": null
+            },
+            {
+                "name": "slot-765688",
+                "query": "https://hapi.fhir.org/baseR5/Slot/765688/_history/1",
+                "data": null
+            },
+            {
+                "name": "medication-791296(error)",
+                "query": "https://hapi.fhir.org/baseR5/Medication/791296/_history/1",
+                "data": null
+            },
+            {
+                "name": "medication-790927",
+                "query": "https://hapi.fhir.org/baseR5/Medication/790927/_history/1",
+                "data": null
+            },
+            {
+                "name": "appointment-135656",
+                "query": "https://hapi.fhir.org/baseR5/Appointment/135656/_history/2",
+                "data": null
+            },
+            {
+                "name": "Peter James Chalmers",
+                "query": "https://hapi.fhir.org/baseR5/Patient/135647/_history/1",
+                "data": null
+            },
+            {
+                "name": "intelloerance-791343",
+                "query": "https://hapi.fhir.org/baseR5/AllergyIntolerance/791343/_history/1",
+                "data": null
+            },
+            {
+                "name": "encounter-45084042",
+                "query": "https://hapi.fhir.org/baseR4/Encounter/45084042/_history/1",
+                "data": null
+            },
+            {
+                "name": "patient-45084016",
+                "query": "https://hapi.fhir.org/baseR4/Patient/45084016",
+                "data": null
+            },
+            {
+                "name": "bundle-everything-patient-45084016",
+                "query": "https://hapi.fhir.org/baseR4/Patient/45084016/$everything",
+                "data": null
+            },
+            {
+                "name": "account-45082931",
+                "query": "https://hapi.fhir.org/baseR4/Account/45082931/_history/1",
+                "data": null
+            },
+            {
+                "name": "account-104818",
+                "query": "https://hapi.fhir.org/baseR4/Account/104818/_history/1",
+                "data": null
+            }
+        ]
+    },
+    {
+        "key": "remoteCollections",
+        "value": [
+            "hapi-fhir",
+            ""
+        ]
+    },
+    {
+        "key": "remoteHandle",
+        "value": "hapi-fhir"
+    }
+]

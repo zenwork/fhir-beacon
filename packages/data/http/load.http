@@ -1,0 +1,6 @@
+POST http://localhost:8080/fhir/?_pretty=true
+Accept: application/fhir+json;q=1.0, application/json+fhir;q=0.9
+User-Agent: HAPI-FHIR/7.4.0 (FHIR Client; FHIR 4.0.1/R4; apache)
+Content-Type: application/fhir+json; charset=UTF-8
+
+{"foo":"bar"}

@@ -1,0 +1,173 @@
+<!-- Loads a font from a CDN -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link
+    href="https://fonts.googleapis.com/css2?family=Assistant&family=Courier+Prime&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yanone+Kaffeesatz&display=swap"
+    rel="stylesheet"
+>
+<!-- Load your CSS file -->
+<link
+    crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    rel="stylesheet"
+    title="fhir-style"
+>
+<link
+    crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/themes/light.css"
+    rel="stylesheet"
+    title="fhir-style"
+/>
+<script
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/shoelace.js"
+    type="module"
+>
+</script >
+
+<style id="fhir-beacon-narrative">
+  /**
+   * Overrides styles to to change the appearance of 3rd-party narrative html.
+   * Setting id="fhir-beacon-narrative" above and top level class of #formatted-narrative is necessary to localise styles.
+   * The exact styling depends on the provided narrative
+   */
+  #formatted-narrative {
+    font-size: 1rem;
+    font-family: sans-serif;
+    border: 0.1rem solid gray;
+    border-radius: 10px;
+    margin: 1rem;
+    padding: 1rem;
+
+    div,div[xmlns] {
+      all: unset;
+      display: inline-block;
+      background:unset !important;
+      width: fit-content;
+
+      div,td,p,span {
+        background: unset !important;
+        border:unset !important;
+        line-height: 1.5rem;
+      }
+
+      b,h4,h5,h6 {
+        color: lightseagreen;
+      }
+      h1,h2,h3 {
+        color: #2aeae0;
+      }
+      td {
+        border-left: 0.1rem solid gray;
+      }
+    }
+  }
+</style>
+
+<style>
+
+  :root {
+    --sl-color-primary-700: #0a5681;
+  }
+
+  .roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  .roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  .roboto-thin-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  .roboto-light-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .roboto-regular-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .roboto-medium-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .roboto-bold-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  .roboto-black-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  ::part(domain-resource) {
+    border: var(--sl-color-neutral-200) solid 0.1rem;
+    border-radius: 0.2rem;
+    background: var(--sl-color-neutral-100);
+
+  }
+
+  fhir-primitive, fhir-primitive-wrapper, fhir-label, fhir-value, fhir-context, fhir-error {
+    display: inline;
+  }
+
+
+  @media screen and (max-width: 600px) {
+    #root-inner {
+      width: 90vw;
+    }
+  }
+
+  @media screen and (min-width: 601px) {
+    #root-inner {
+      width: min(100vw - 200px, 40rem);
+    }
+  }
+</style>

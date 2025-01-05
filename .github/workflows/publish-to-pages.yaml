@@ -1,4 +1,4 @@
-name: CI
+name: "[CI] - STORYBOOK"
 
 on:
   push:
@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   publish:
+    name: Deploy Storybook (Pages)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,7 +31,10 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
-      - run: npm ci
+          cache-dependency-path: packages/library/package-lock.json
+      - run: |
+          cd packages/library
+          npm ci
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
@@ -42,13 +46,19 @@ jobs:
 
       - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
         name: Install playwright browsers
-        run: npx playwright install --with-deps
+        run: |
+          cd packages/library
+          npx playwright install --with-deps
 
       - name: Run tests
-        run: npm run vitest
+        run: |
+          cd packages/library
+          npm run vitest 
 
       - name: Publish
-        run: npm run publish
+        run: |
+          cd packages/library
+          npm run publish
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -57,21 +67,19 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './storybook-static'
+          path: './packages/library/storybook-static'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: ./path-to-your-built-site
 
       - name: Store test results
         uses: actions/upload-artifact@v4
         with:
           name: junit-test-results
-          path: ./results/*.xml
+          path: ./packages/library/results/*.xml
 
       - name: Publish test results
         uses: mikepenz/action-junit-report@v4
