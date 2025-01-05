@@ -3,6 +3,7 @@ import {html, LitElement}     from 'lit'
 import {customElement, state} from 'lit/decorators.js'
 import {exportDB}             from '../indexeddb/exportDB'
 import {importDB}             from '../indexeddb/importDB'
+import sample                 from './sample.json' assert {type: 'json'}
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 
@@ -55,6 +56,7 @@ export class AppHome extends LitElement {
                     <sl-textarea
                             rows="30"
                             placeholder="paste json text here & press import button"
+                            value=${this.importData}
                             @sl-input=${(e: CustomEvent) => {
                                 this.importData = (e.target as SlTextarea).value
                                 this.requestUpdate()
@@ -66,6 +68,12 @@ export class AppHome extends LitElement {
                                         .then(() => this.requestUpdate())
                             }}
                             >Import DB
+                            </sl-button>
+                            <sl-button @click=${() => {
+                              this.importData = JSON.stringify(sample, null, 2)
+                                this.requestUpdate()
+                            }}
+                            >Use HAPI-FHIR Sample
                             </sl-button>
                             <sl-copy-button value=${this.importData}></sl-copy-button>
                         </div>
