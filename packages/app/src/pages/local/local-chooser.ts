@@ -1,5 +1,6 @@
 import {SignalWatcher}                                                          from '@lit-labs/signals'
 import {SlMenuItem}                                                             from '@shoelace-style/shoelace'
+import {DisplayMode}                                                            from 'fhir-beacon'
 import {css, html, LitElement, nothing}                                         from 'lit'
 import {customElement, property, state}                                         from 'lit/decorators.js'
 import {showDirectoryPicker}                                                    from 'native-file-system-adapter'
@@ -123,7 +124,15 @@ export class LocalChooser extends SignalWatcher(LitElement) {
 
   private async selectFile(e: CustomEvent) {
     const blob = e.detail.item.value as FhirFile
-    this.state.selected.push({ ...blob, data: this.toJson(blob) })
+    this.state.selected.push({
+                               ...blob,
+                               data: this.toJson(blob),
+      mode:DisplayMode.display,
+      showerrors: false,
+      headless: false,
+      open: false
+
+    })
     this.requestUpdate('state')
   }
 

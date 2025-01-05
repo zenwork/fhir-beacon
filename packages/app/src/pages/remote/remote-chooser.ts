@@ -1,5 +1,6 @@
 import {SignalWatcher}                              from '@lit-labs/signals'
 import {SlDialog, SlInput, SlMenuItem}              from '@shoelace-style/shoelace'
+import {DisplayMode}                                from 'fhir-beacon'
 import {FhirElementData}                            from 'fhir-beacon/src/internal'
 
 
@@ -186,7 +187,11 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
                                                                  name: q.name,
                                                                  type: null,
                                                                  isMetaData: false,
-                                                                 data: this.execute(q)
+                                                                 data: this.execute(q),
+                                                                 mode: DisplayMode.display,
+                                                                 open: true,
+                                                                 showerrors: false,
+                                                                 headless: false
                                                              })
                                 }}
                         ></sl-icon-button>
@@ -263,7 +268,16 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
 
   private async selectQuery(e: CustomEvent) {
     const query = e.detail.item.value as FhirQuery
-    this.state.selected.push({ name: query.name, type: null, isMetaData: false, data: this.execute(query) })
+    this.state.selected.push({
+                               name: query.name,
+                               type: null,
+                               isMetaData: false,
+                               data: this.execute(query),
+                               mode: DisplayMode.display,
+                               open: true,
+                               showerrors: false,
+                               headless: false
+                             })
   }
 
   private async execute(query: FhirQuery): Promise<FhirElementData> {

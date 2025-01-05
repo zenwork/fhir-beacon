@@ -1,5 +1,6 @@
 import {Signal}                         from '@lit-labs/signals'
 import {FileWithDirectoryAndFileHandle} from 'browser-fs-access'
+import {DisplayMode}                    from 'fhir-beacon'
 import {FhirElementData}                from 'fhir-beacon/src/internal'
 import {IDBPDatabase}                   from 'idb'
 
@@ -26,6 +27,10 @@ export type FhirData = {
   type: string | null,
   isMetaData: boolean,
   data: Promise<FhirElementData>
+  mode: DisplayMode
+  open: boolean
+  showerrors: boolean
+  headless: boolean
 }
 
 export type FhirQuery = {
@@ -187,7 +192,9 @@ export class BrowserState {
                                                            || t
                                                            === 'Appointment'
                                                            || t
-                                                           === 'Slot'))
+                                                           === 'Slot'
+                                                           || t
+                                                           === 'Bundle'))
 
       return this.store()
 
