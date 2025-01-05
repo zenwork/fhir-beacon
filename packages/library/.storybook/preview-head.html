@@ -24,7 +24,45 @@
 >
 </script >
 
-<!--<link rel="stylesheet" href="path/to/your/styles.css" />-->
+<style id="fhir-beacon-narrative">
+  /**
+   * Overrides styles to to change the appearance of 3rd-party narrative html.
+   * Setting id="fhir-beacon-narrative" above and top level class of #formatted-narrative is necessary to localise styles.
+   * The exact styling depends on the provided narrative
+   */
+  #formatted-narrative {
+    font-size: 1rem;
+    font-family: sans-serif;
+    border: 0.1rem solid gray;
+    border-radius: 10px;
+    margin: 1rem;
+    padding: 1rem;
+
+    div,div[xmlns] {
+      all: unset;
+      display: inline-block;
+      background:unset !important;
+      width: fit-content;
+
+      div,td,p,span {
+        background: unset !important;
+        border:unset !important;
+        line-height: 1.5rem;
+      }
+
+      b,h4,h5,h6 {
+        color: lightseagreen;
+      }
+      h1,h2,h3 {
+        color: #2aeae0;
+      }
+      td {
+        border-left: 0.1rem solid gray;
+      }
+    }
+  }
+</style>
+
 <style>
 
   :root {

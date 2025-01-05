@@ -6,6 +6,8 @@ import {DisplayConfig}                        from '../../../types'
 
 import {NarrativeData} from './narrative.data'
 
+
+
 @customElement('fhir-narrative')
 export class Narrative extends BaseElement<NarrativeData> {
 
@@ -19,7 +21,9 @@ export class Narrative extends BaseElement<NarrativeData> {
   public renderNarrative(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
     return [
       html`
-          <div part="narrative">${unsafeHTML(data.div)}</div >
+          <div id="formatted-narrative" part="narrative-styling">
+              <div part="narrative">${unsafeHTML(data.div)}</div>
+          </div>
       `
     ]
   }
@@ -30,7 +34,9 @@ export class Narrative extends BaseElement<NarrativeData> {
           <fhir-wrapper label="${config.verbose ? `summary (status:${data.status})` : 'summary'}"
                           ?summaryonly=${this.getDisplayConfig().summaryonly}
           >
+          <div id="formatted-narrative" part="narrative-styling">
               <div part="narrative">${unsafeHTML(data.div)}</div >
+          </div>
           </fhir-wrapper>
       `
     ]
@@ -47,10 +53,30 @@ export class Narrative extends BaseElement<NarrativeData> {
     ]
   }
 
-  protected createRenderRoot() {
-    return this
-  }
+  // protected createRenderRoot() {
+  //   return this
+  // }
+  public async connectedCallback() {
+    super.connectedCallback()
 
+    // Find the <style> element by its ID
+    const styleElement = document.getElementById('fhir-beacon-narrative') as HTMLStyleElement
+
+    // Check if the <style> element exists and has valid text content
+    if (styleElement && styleElement.sheet && (styleElement.sheet as CSSStyleSheet).cssRules) {
+      // Access the stylesheet's rules
+      const styleSheet = styleElement.sheet as CSSStyleSheet
+
+      // Create a new Constructable StyleSheet
+      const constructableSheet = new CSSStyleSheet()
+      Array.from(styleSheet.cssRules).forEach(rule => {
+        constructableSheet.insertRule(rule.cssText) // Copy each rule
+      })
+
+      // Attach to shadowRoot's adoptedStyleSheets
+      this.shadowRoot!.adoptedStyleSheets = [...this.shadowRoot!.adoptedStyleSheets, constructableSheet]
+    }
+  }
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (_changedProperties.has('data') && this.data !== NoDataObject) {

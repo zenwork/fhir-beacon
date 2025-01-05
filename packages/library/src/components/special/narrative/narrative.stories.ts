@@ -1,5 +1,7 @@
 import {StoryObj} from '@storybook/web-components'
 
+
+
 const meta = {
   title: 'Components/Datatypes/Special Type/Narrative',
   component: 'fhir-narrative',
@@ -36,6 +38,17 @@ export const DisplayMode: Story = {
   }
 }
 
+export const NarrativeMode: Story = {
+  args: {
+    data: narativeData,
+    mode: 'narrative',
+    showerror: false,
+    verbose: false,
+    open: false
+  }
+}
+
+
 export const StructureMode: Story = {
   args: {
     data: narativeData,
@@ -44,17 +57,4 @@ export const StructureMode: Story = {
     verbose: false,
     open: true
   }
-}
-
-export const NarrativeModeWithStyling: Story = {
-  args: {
-    data: narativeData,
-    mode: 'narrative',
-    showerror: false,
-    id: 'formatted',
-    verbose: false,
-    open: false
-  }
-
-
 }

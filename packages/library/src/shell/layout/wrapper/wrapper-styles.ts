@@ -31,8 +31,9 @@ export const componentStyles = css`
   }
 
   .items, .details_items {
-    width: clamp(calc(27rem - calc((var(--sl-spacing-3x-small) + 0.7rem) * 2)), 80%, calc(90% - calc((var(--sl-spacing-3x-small) + 0.7rem) * 2)));
-    margin: var(--sl-spacing-3x-small) 0 0 var(--sl-spacing-x-small);
+    /*width: clamp(calc(27rem - calc((var(--sl-spacing-3x-small) + 0.7rem) * 2)), 80%, calc(90% - calc((var(--sl-spacing-3x-small) + 0.7rem) * 2)));*/
+    width:fit-content;
+    margin: var(--sl-spacing-3x-small) 0 0 var(--sl-spacing-large);
     border-left-width: 0.06rem;
   }
 

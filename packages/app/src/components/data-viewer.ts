@@ -135,11 +135,25 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                       open
                            ></fhir-slot>`
                        break
+                     case 'Bundle':
+                       resource = html`
+                           ${this.addMode()}
+                           <sl-copy-button .value=${text}></sl-copy-button>
+                           <fhir-bundle .data=${d}
+                                      showerror
+                                      headless
+                                      .mode=${this.mode}
+                                      open
+                           ></fhir-bundle>`
+                       break
                      default:
 
                        resource = html`
+                           
                            <h3>Narrative<sl-copy-button .value=${JSON.stringify(d.text,null,2)} ?disabled=${!d.text}></sl-copy-button></h3>
-                           ${d.text?html`<fhir-narrative .data=${d.text}></fhir-narrative>`:html`
+                           ${d.text?html`
+                               <fhir-narrative .data=${d.text} headless></fhir-narrative>
+                           `:html`
                                <div style="width:43rem">
                                <sl-alert variant="warning" open >
                                    <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
