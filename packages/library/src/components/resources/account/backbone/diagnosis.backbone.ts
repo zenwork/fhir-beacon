@@ -16,7 +16,7 @@ export class Diagnosis extends Backbone<AccountDiagnosisData> {
           <fhir-primitive key="sequence" .value=${data.sequence} .type=${PrimitiveType.positiveInt}></fhir-primitive>
           <fhir-codeable-reference key="condition" .data=${data.condition}></fhir-codeable-reference>
           <fhir-primitive key="dateOfOrigin"
-                          .value=${data.dateOfOrigin}
+                          .value=${data.dateOfDiagnosis}
                           type=${PrimitiveType.datetime}
           ></fhir-primitive>
           ${wrap({ key: 'type', collection: data.type, generator: 'fhir-codeable-concept', config })}
@@ -36,7 +36,7 @@ export class Diagnosis extends Backbone<AccountDiagnosisData> {
           <fhir-primitive key="sequence" .value=${data.sequence} .type=${PrimitiveType.positiveInt}></fhir-primitive>
           <fhir-codeable-reference key="condition" .data=${data.condition}></fhir-codeable-reference>
           <fhir-primitive key="dateOfOrigin"
-                          .value=${data.dateOfOrigin}
+                          .value=${data.dateOfDiagnosis}
                           type=${PrimitiveType.datetime}
           ></fhir-primitive>
           ${strap({ key: 'type', collection: data.type, generator: 'fhir-codeable-concept', config })}

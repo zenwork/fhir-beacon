@@ -2,8 +2,8 @@ import {html}                         from 'lit'
 import {assert, describe, expect, it} from 'vitest'
 import {fixture}                      from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveValue}               from '../../../components'
-import {BaseElement}                  from '../../BaseElement'
-import {choiceOf}                     from './choiceOf'
+import {BaseElement} from '../../BaseElement'
+import {oneOf}       from './oneOf'
 
 describe('OneOrError', () => {
   it('Should show an error if there is more than one value to show', async () => {
@@ -14,10 +14,10 @@ describe('OneOrError', () => {
       extendedData: { errors: [] }
     } as unknown as BaseElement<any>
     const el = await fixture(html`
-        ${choiceOf(base,
-                   'foo',
-                   'err',
-                   [
+        ${oneOf(base,
+                'foo',
+                'err',
+                [
                        {
                            data: 'abc',
                            html: (d: any) => html`
@@ -43,10 +43,10 @@ describe('OneOrError', () => {
     } as unknown as BaseElement<any>
 
     const el = await fixture(html`
-        ${choiceOf(base,
-                   'foo',
-                   'err',
-                   [
+        ${oneOf(base,
+                'foo',
+                'err',
+                [
                        {
                            data: false,
                            html: (d: any) => html`

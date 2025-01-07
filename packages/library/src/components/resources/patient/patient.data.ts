@@ -69,7 +69,7 @@ export type PatientLinkData = BackboneElementData & {
 }
 
 export type PatientData = DomainResourceData & {
-  identifier: IdentifierData[]
+  identifier?: IdentifierData[]
   active?: boolean
   name: HumanNameData[]
   telecom: ContactPointData[]

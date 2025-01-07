@@ -2,8 +2,8 @@ import {html, TemplateResult}       from 'lit'
 import {map}                        from 'lit/directives/map.js'
 import {DisplayConfig, DisplayMode} from '../../../types'
 import {hasMany, hasOnlyOne}        from '../directives'
-import {pluralize}                  from '../pluralize'
-import {Generators, generators} from './strap'
+import {pluralize}                     from '../pluralize'
+import {Generators, generators, strap} from './strap'
 
 type WrapConfig<T> = {
   key?: string,
@@ -34,6 +34,11 @@ export function wrap<T>({
                           config
                         }: WrapConfig<T>
 ): TemplateResult {
+
+  if(config.mode === DisplayMode.structure) {
+    return strap({key, pluralBase, collection, generator, summary, config})
+  }
+
   if (!key && typeof generator === 'string') {
     key = generator.substring(5)
   }

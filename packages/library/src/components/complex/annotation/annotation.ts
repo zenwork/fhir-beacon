@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {html, TemplateResult}                          from 'lit'
-import {customElement}                                 from 'lit/decorators.js'
-import {BaseElement, choiceOf, Decorated, Validations} from '../../../internal'
-import {DisplayConfig}                                 from '../../../types'
+import {customElement}                              from 'lit/decorators.js'
+import {BaseElement, oneOf, Decorated, Validations} from '../../../internal'
+import {DisplayConfig}                              from '../../../types'
 import {PrimitiveType}                                 from '../../primitive/type-converters/type-converters'
 import {AnnotationData}                                from './annotation.data'
 
@@ -37,10 +37,10 @@ export class Annotation extends BaseElement<AnnotationData> {
   }
 
   protected renderAll(data: Decorated<AnnotationData>): TemplateResult[] {
-    const author = choiceOf(this,
-                            '',
-                            '',
-                            [
+    const author = oneOf(this,
+                         '',
+                         '',
+                         [
                                 {
                                   data: data.authorReference,
                                   html: (d: any) => html`

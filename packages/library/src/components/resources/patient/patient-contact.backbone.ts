@@ -42,7 +42,7 @@ export class PatientContactBackbone extends Backbone<PatientContactData> {
 
           <fhir-address key="address" label="address" .data=${data.address}></fhir-address>
           <fhir-primitive key="gender" label="gender" .value=${data.gender} .type=${code}></fhir-primitive>
-          <fhir-reference key="organisation" label="organisation" .data=${data.reference}></fhir-reference>
+          <fhir-reference key="organisation" label="organisation" .data=${data.organization}></fhir-reference>
           <fhir-period key="period" label="period" .data=${data.period}></fhir-period>
 
       `
@@ -79,7 +79,7 @@ export class PatientContactBackbone extends Backbone<PatientContactData> {
 
           <fhir-address key="address" label="address" .data=${data.address}></fhir-address>
           <fhir-primitive key="gender" label="gender" .value=${data.gender} .type=${code}></fhir-primitive>
-          <fhir-reference key="organisation" label="organisation" .data=${data.reference}></fhir-reference>
+          <fhir-reference key="organisation" label="organisation" .data=${data.organization}></fhir-reference>
           <fhir-period key="period" label="period" .data=${data.period}></fhir-period>
 
 

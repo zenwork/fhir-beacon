@@ -27,11 +27,12 @@ import {
 import {ReferenceData} from '../../special/reference/reference.data'
 
 
-type BoundDuration = QuantityData //TODO: should be constrained to a duration: https://www.hl7.org/fhir/datatypes.html#Duration
-type BoundRange = RangeData
-type BoundPeriod = PeriodData
 
-type TimingData = FhirElementData & {
+export type BoundDuration = QuantityData //TODO: should be constrained to a duration: https://www.hl7.org/fhir/dataexport types.html#Duration
+export type BoundRange = RangeData
+export type BoundPeriod = PeriodData
+
+export type TimingData = FhirElementData & {
   event?: DateTime
   bound?: BoundDuration | BoundRange | BoundPeriod
   count?: PositiveInt
@@ -51,12 +52,7 @@ type TimingData = FhirElementData & {
 
 }
 
-type EffectiveDateTime = DateTime
-type EffectivePeriod = PeriodData
-type EffectiveTiming = TimingData
-type EffectiveInstant = Instant
-
-type SampledData = FhirElementData & {
+export type SampledDataData = FhirElementData & {
   origin: SimpleQuantityData
   interval?: Decimal
   intervalUnit?: Code
@@ -69,21 +65,7 @@ type SampledData = FhirElementData & {
   data?: FhirString
 }
 
-type  ValueQuantityData = QuantityData
-type  ValueCodeableConceptData = CodeableConceptData
-type  ValueFhirString = FhirString
-type  ValueBoolean = boolean
-type  ValueInteger = Integer
-type  ValueRange = Range
-type  ValueRatioData = RatioData
-type  ValueSampledData = SampledData
-type  ValueTime = Time
-type  ValueDateTime = DateTime
-type  ValuePeriodData = PeriodData
-type  ValueAttachmentData = AttachmentData
-type  ValueReferenceData = ReferenceData
-
-type ReferenceRangeBackboneElementData = BackboneElementData & {
+export type ReferenceRangeBackboneElementData = BackboneElementData & {
   low?: SimpleQuantityData
   high?: SimpleQuantityData
   normalValue?: CodeableConceptData
@@ -99,9 +81,9 @@ export type TriggeredByBackboneElementData = BackboneElementData & {
   reason: FhirString
 }
 
-type ComponentBackboneElementData = BackboneElementData & {
+export type ComponentBackboneElementData = BackboneElementData & {
   code: CodeableConceptData
-  value?: ValueQuantityData | ValueCodeableConceptData | ValueFhirString | ValueBoolean | ValueInteger | ValueRange | ValueRatioData | ValueSampledData | ValueTime | ValueDateTime | ValuePeriodData | ValueAttachmentData | ValueReferenceData
+  value?: QuantityData | CodeableConceptData | FhirString | boolean | Integer | Range | RatioData | SampledDataData | Time | DateTime | PeriodData | AttachmentData | ReferenceData
   dataAbsentReason?: CodeableConceptData
   interpretation?: CodeableConceptData[]
   referenceRange?: ReferenceRangeBackboneElementData[]
@@ -109,7 +91,8 @@ type ComponentBackboneElementData = BackboneElementData & {
 
 export type ObservationData = DomainResourceData & {
   identifier?: IdentifierData[],
-  instantiates_x?: { instantiatesCanonical: Canonical, instantiatesReference: ReferenceData }
+  instantiatesCanonical?: Canonical,
+  instantiatesReference?: ReferenceData,
   basedOn?: ReferenceData[]
   triggeredBy?: TriggeredByBackboneElementData[]
   partOf?: ReferenceData[]
@@ -119,10 +102,25 @@ export type ObservationData = DomainResourceData & {
   subject?: ReferenceData
   focus?: ReferenceData[]
   encounter?: ReferenceData
-  effective?: EffectiveDateTime | EffectivePeriod | EffectiveTiming | EffectiveInstant
+  effectiveDateTime?: DateTime
+  effectivePeriod?: PeriodData
+  effectiveTiming?: TimingData
+  effectiveInstant?: Instant
   issued?: Instant
   performer?: ReferenceData[]
-  value?: ValueQuantityData | ValueCodeableConceptData | ValueFhirString | ValueBoolean | ValueInteger | ValueRange | ValueRatioData | ValueSampledData | ValueTime | ValueDateTime | ValuePeriodData | ValueAttachmentData | ValueReferenceData
+  valueQuantity?: QuantityData
+  valueCodeableConcept?: CodeableConceptData
+  valueString?: FhirString
+  valueBoolean?: boolean
+  valueInteger?: Integer
+  valueRange?: RangeData
+  valueRatio?: RatioData
+  valueSampledData?: SampledDataData
+  valueTime?:  Time
+  valueDateTime?:  DateTime
+  valuePeriod?:  PeriodData
+  valueAttachment?:  AttachmentData
+  valueReference?:  ReferenceData
   dataAbsentReason?: CodeableConceptData
   interpretation?: CodeableConceptData[]
   note?: AnnotationData

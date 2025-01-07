@@ -77,7 +77,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                   () => html``,
                   () => html`
                       <fhir-primitive key="comparator"
-                                      .value=${data.comparator}
+                                      .value=${(data as QuantityData).comparator}
                                       type="code"
                                       summary
                                       .choices=${quantityComparatorChoices()}

@@ -1,7 +1,7 @@
 import {html, TemplateResult}               from 'lit'
-import {customElement}                      from 'lit/decorators.js'
-import {BaseElement, choiceOf, Validations} from '../../../internal'
-import {DisplayConfig}                      from '../../../types'
+import {customElement}                   from 'lit/decorators.js'
+import {BaseElement, oneOf, Validations} from '../../../internal'
+import {DisplayConfig}                   from '../../../types'
 import {CodeableReferenceData}              from './codeable-reference.data'
 
 @customElement('fhir-codeable-reference')
@@ -21,10 +21,10 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
   }
 
   public renderDisplay(_: DisplayConfig, data: CodeableReferenceData, validations: Validations): TemplateResult[] {
-    return choiceOf(this,
-                    '',
-                    validations.errFor(this.type + '::' + this.key),
-                    [
+    return oneOf(this,
+                 '',
+                 validations.errFor(this.type + '::' + this.key),
+                 [
                       {
                         data: data.concept,
                         html: (d, n) => html`

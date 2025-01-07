@@ -1,12 +1,16 @@
-import {html, TemplateResult}                                  from 'lit'
-import {customElement}                                         from 'lit/decorators.js'
-import {choiceOf, choiceValidate, DomainResource, Validations} from '../../../internal'
-import {strap}                                                 from '../../../shell/layout/wrapper/strap'
-import {wrap}                                                  from '../../../shell/layout/wrapper/wrap'
+import {html, TemplateResult}                               from 'lit'
+import {customElement}                                      from 'lit/decorators.js'
+import {choiceValidate, DomainResource, oneOf, Validations} from '../../../internal'
+import {wrap}                                               from '../../../shell/layout/wrapper/wrap'
 
 import {DisplayConfig} from '../../../types'
+import {identifiers}                                        from '../../complex/identifier/identifiers'
 import {PrimitiveType} from '../../primitive/type-converters/type-converters'
 import {PatientData}   from './patient.data'
+
+
+
+const { code, datetime, date, boolean, integer } = PrimitiveType
 
 @customElement('fhir-patient')
 export class Patient extends DomainResource<PatientData> {
@@ -15,115 +19,24 @@ export class Patient extends DomainResource<PatientData> {
     super('Patient')
   }
 
-  public renderDisplay(config: DisplayConfig, data: PatientData): TemplateResult[] {
-    return [
-      html`
-          ${(wrap({
-                      key: 'name',
-                      collection: data.name,
-                      generator: (data, label, key) => html`
-                      <fhir-human-name key=${key} label=${label} .data=${data} summary></fhir-human-name> `,
-                      config
-                  })
-          )}
-
-          ${(wrap({
-                      key: 'identifier',
-                      collection: data.identifier,
-                      generator: 'fhir-identifier',
-                      config
-                  }
-          ))}
-          <fhir-primitive label="active" .value=${data.active} .type=${PrimitiveType.boolean} summary></fhir-primitive>
-
-          ${(wrap({
-                      key: 'telecom',
-                      collection: data.telecom,
-                      generator: (data, label, key) => html`
-                      <fhir-contact-point key=${key} label=${label} .data=${data} summary></fhir-contact-point>`,
-                      config
-                  }
-          ))}
-
-          ${wrap({
-                     key: 'address',
-                     collection: data.address,
-                     generator: (data, label, key) => html`
-                     <fhir-address key=${key} label=${label} .data=${data} summary></fhir-address> `,
-                     config
-                 }
-          )}
-          <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
-          ${wrap({
-                     key: 'contact',
-                     collection: data.contact,
-                     generator: (data, label, key) => html`
-                     <fhir-patient-contact key=${key}
-                                           label=${label}
-                                           .data=${data}
-                                           summary
-                     ></fhir-patient-contact summary> `,
-                     config
-                 }
-          )}
-          ${wrap({
-                     key: 'communication',
-                     collection: data.communication,
-                     generator: (data, label, key) => html`
-                     <fhir-patient-communication key=${key}
-                                                 label=${label}
-                                                 .data=${data}
-                                                 summary
-                     ></fhir-patient-communication summary> `,
-                     config
-                 }
-          )}
-          ${wrap({
-                     key: 'generalPractitioner',
-                     collection: data.generalPractitioner,
-                     generator: 'fhir-reference',
-                     config
-                 }
-          )}
-          <fhir-reference key="managingOrganization"
-                          label="managingOrganization"
-                          .data=${data.managingOrganization}
-                          summary
-          ></fhir-reference>
-          ${wrap({
-                     key: 'link',
-                     pluralBase: 'link',
-                     collection: data.link,
-                     generator: (data, label, key) => html`
-                     <fhir-patient-link key=${key}
-                                        label=${label}
-                                        .data=${data}
-                     ></fhir-patient-link> `,
-                     summary: this.summary,
-                     config
-                 }
-          )}
-      `
-    ]
+  public renderDisplay(config: DisplayConfig, data: PatientData, validations: Validations): TemplateResult[] {
+    return this.renderAny(config, data, validations)
   }
 
 
   public renderStructure(config: DisplayConfig, data: PatientData, validations: Validations): TemplateResult[] {
-    const { code, datetime, date, boolean, integer } = PrimitiveType
+    return this.renderAny(config, data, validations)
+  }
+
+  public renderAny(config: DisplayConfig, data: PatientData, validations: Validations): TemplateResult[] {
+
 
     return [
       html`
-          ${(strap(
-                  {
-                      key: 'identifier',
-                      collection: data.identifier,
-                      generator: 'fhir-identifier',
-                      config
-                  }
-          ))}
+          ${identifiers(data.identifier, config)}
           <fhir-primitive label="active" .value=${data.active} .type=${boolean} summary></fhir-primitive>
 
-          ${(strap({
+          ${(wrap({
                        key: 'name',
                        collection: data.name,
                        generator: (data, label, key) => html`
@@ -132,7 +45,7 @@ export class Patient extends DomainResource<PatientData> {
                    }
           ))}
 
-          ${(strap({
+          ${(wrap({
                        key: 'telecom',
                        collection: data.telecom,
                        generator: (data, label, key) => html`
@@ -146,10 +59,10 @@ export class Patient extends DomainResource<PatientData> {
                           .type=${date}
                           summary
           ></fhir-primitive>
-          ${choiceOf(this,
-                     'deceased[x]',
-                     validations.errFor('deceased[x]'),
-                     [
+          ${oneOf(this,
+                  'deceased[x]',
+                  validations.errFor('deceased[x]'),
+                  [
                          {
                              data: data.deceasedBoolean,
                              html: (d, n, e) => {
@@ -178,7 +91,7 @@ export class Patient extends DomainResource<PatientData> {
                      ])
           }
 
-          ${strap({
+          ${wrap({
                       key: 'address',
                       collection: data.address,
                       generator: (data, label, key) => html`
@@ -188,10 +101,10 @@ export class Patient extends DomainResource<PatientData> {
           )}
           <fhir-codeable-concept key="maritalStatus" .data=${data.maritalStatus}></fhir-codeable-concept>
 
-          ${choiceOf(this,
-                     'multipleBirth[x]',
-                     validations.errFor('multipleBirth[x]'),
-                     [
+          ${oneOf(this,
+                  'multipleBirth[x]',
+                  validations.errFor('multipleBirth[x]'),
+                  [
                          {
                              data: data.multipleBirthBoolean,
                              html: (d, n, e) => html`
@@ -217,7 +130,7 @@ export class Patient extends DomainResource<PatientData> {
                      ])}
 
           <fhir-attachment key="photo" label="photo" .data=${data.photo}></fhir-attachment>
-          ${strap({
+          ${wrap({
                       key: 'contact',
                       collection: data.contact,
                       generator: (data, label, key) => html`
@@ -228,7 +141,7 @@ export class Patient extends DomainResource<PatientData> {
                       config
                   }
           )}
-          ${strap({
+          ${wrap({
                       key: 'communication',
                       collection: data.communication,
                       generator: (data, label, key) => html`
@@ -239,7 +152,7 @@ export class Patient extends DomainResource<PatientData> {
                       config
                   }
           )}
-          ${strap({
+          ${wrap({
                       key: 'generalPractitioner',
                       pluralBase: 'generalPractitioner',
                       collection: data.generalPractitioner,
@@ -252,7 +165,7 @@ export class Patient extends DomainResource<PatientData> {
                           .data=${data.managingOrganization}
                           summary
           ></fhir-reference>
-          ${strap({
+          ${wrap({
                       key: 'link',
                       collection: data.link,
                       generator: (data, label, key) => html`

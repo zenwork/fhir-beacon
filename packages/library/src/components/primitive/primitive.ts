@@ -18,7 +18,7 @@ import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
   toBase64,
-  toBoolean,
+  toBoolean, toCanonical,
   toCode,
   toDate,
   toDatetime,
@@ -30,13 +30,13 @@ import {
   toInteger64,
   toLink,
   toMarkdown,
-  toPositiveInt,
+  toPositiveInt, toTime,
   toType,
   toUnsignedInt,
   toUri,
   toUrl,
   valueOrError
-}                                                      from './type-converters'
+} from './type-converters'
 import {asDateTime, asReadable}                        from './type-presenters'
 
 
@@ -150,6 +150,7 @@ export class Primitive extends ConfigurableElement {
           [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
           [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
           [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
+          [PrimitiveType.canonical, () => this.validOrError(toCanonical, this.value)],
           [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
           [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
           [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
@@ -165,6 +166,7 @@ export class Primitive extends ConfigurableElement {
           [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
           [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
           [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
+          [PrimitiveType.time, () => this.validOrError(toTime, this.value)],
           [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
           [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
           [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
@@ -196,7 +198,6 @@ export class Primitive extends ConfigurableElement {
    * @protected
    */
   protected render(): unknown {
-
     if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
         && !this.valuePath
         && this.mode !== DisplayMode.override
@@ -227,7 +228,9 @@ export class Primitive extends ConfigurableElement {
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
-                             : this.presentableValue} link=${this.link} .variant=${this.variant}
+                             : this.presentableValue} 
+                      link=${this.link} 
+                      .variant=${this.variant}
           >
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>

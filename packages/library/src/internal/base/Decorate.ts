@@ -14,7 +14,6 @@ export type Errors = Record<ErrorKeys, ErrorItems | string>
 
 export type MetaDecoration = { hide: boolean }
 export type Decoration = {
-  [key: string]: any,
   [errors]: Errors
   [meta]: MetaDecoration
 

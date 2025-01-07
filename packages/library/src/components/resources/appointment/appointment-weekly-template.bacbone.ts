@@ -18,8 +18,8 @@ export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplat
           <fhir-primitive key="tuesday" .value=${data.tuesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="wednesday" .value=${data.wednesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="thursday" .value=${data.thursday} .type=${PrimitiveType.boolean}></fhir-primitive>
-          <fhir-primitive key="friday" .value=${data.frday} .type=${PrimitiveType.boolean}></fhir-primitive>
-          <fhir-primitive key="saturday" .value=${data.staurday} .type=${PrimitiveType.boolean}></fhir-primitive>
+          <fhir-primitive key="friday" .value=${data.friday} .type=${PrimitiveType.boolean}></fhir-primitive>
+          <fhir-primitive key="saturday" .value=${data.saturday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="sunday" .value=${data.sunday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="weekInterval"
                           .value=${data.weekInterval}
@@ -37,8 +37,8 @@ export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplat
           <fhir-primitive key="tuesday" .value=${data.tuesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="wednesday" .value=${data.wednesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="thursday" .value=${data.thursday} .type=${PrimitiveType.boolean}></fhir-primitive>
-          <fhir-primitive key="friday" .value=${data.frday} .type=${PrimitiveType.boolean}></fhir-primitive>
-          <fhir-primitive key="saturday" .value=${data.staurday} .type=${PrimitiveType.boolean}></fhir-primitive>
+          <fhir-primitive key="friday" .value=${data.friday} .type=${PrimitiveType.boolean}></fhir-primitive>
+          <fhir-primitive key="saturday" .value=${data.saturday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="sunday" .value=${data.sunday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="weekInterval"
                           .value=${data.weekInterval}
