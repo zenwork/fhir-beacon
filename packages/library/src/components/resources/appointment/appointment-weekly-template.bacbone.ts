@@ -5,6 +5,8 @@ import {DisplayConfig}                 from '../../../types'
 import {PrimitiveType}                 from '../../primitive'
 import {AppointmentWeeklyTemplateData} from './appointment.data'
 
+
+
 @customElement('fhir-weekly-template')
 export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplateData> {
   constructor() {super('WeeklyTemplate') }

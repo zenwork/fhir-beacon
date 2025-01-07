@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, TemplateResult}                          from 'lit'
+import {html, TemplateResult}                       from 'lit'
 import {customElement}                              from 'lit/decorators.js'
-import {BaseElement, oneOf, Decorated, Validations} from '../../../internal'
+import {BaseElement, Decorated, oneOf, Validations} from '../../../internal'
 import {DisplayConfig}                              from '../../../types'
-import {PrimitiveType}                                 from '../../primitive/type-converters/type-converters'
-import {AnnotationData}                                from './annotation.data'
+import {PrimitiveType}                              from '../../primitive/type-converters/type-converters'
+import {AnnotationData}                             from './annotation.data'
 
 
 

@@ -1,12 +1,14 @@
-import {html, TemplateResult}                                                from 'lit'
-import {customElement}                                                       from 'lit/decorators.js'
-import {choice, Decorated, DomainResource, oneOf, Validations}               from '../../../internal'
-import {wrap}                                                                from '../../../shell'
+import {html, TemplateResult}                                                                from 'lit'
+import {customElement}                                                                       from 'lit/decorators.js'
+import {choice, Decorated, DomainResource, oneOf, Validations}                               from '../../../internal'
+import {wrap}                                                                                from '../../../shell'
 import {DisplayConfig}                                                                       from '../../../types'
 import {AttachmentData, CodeableConceptData, PeriodData, QuantityData, RangeData, RatioData} from '../../complex'
-import {identifiers}                                                                         from '../../complex/identifier/identifiers'
-import {Canonical, DateTime, Instant, Integer, PrimitiveType, Time}          from '../../primitive'
-import {ReferenceData}                                                       from '../../special'
+import {
+  identifiers
+}                                                                                            from '../../complex/identifier/identifiers'
+import {Canonical, DateTime, Instant, Integer, PrimitiveType, Time}                          from '../../primitive'
+import {ReferenceData}                                                                       from '../../special'
 
 import {ObservationData, SampledDataData, TimingData} from './observation.data'
 

@@ -6,6 +6,8 @@ import {DisplayConfig}        from '../../../types'
 import {PrimitiveType}        from '../../primitive'
 import {PatientContactData}   from './patient.data'
 
+
+
 const { code } = PrimitiveType
 
 @customElement('fhir-patient-contact')

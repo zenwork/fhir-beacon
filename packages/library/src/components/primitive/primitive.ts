@@ -1,5 +1,5 @@
 import {consume}                                       from '@lit/context'
-import {SlInput, SlSwitch}   from '@shoelace-style/shoelace'
+import {SlInput, SlSwitch}                             from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -13,12 +13,13 @@ import {mustRender}                                    from '../mustRender'
 import {DateTime}                                      from './primitive.data'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
-import {PrimitiveValidEvent} from './primitiveValidEvent'
+import {PrimitiveValidEvent}                           from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
   toBase64,
-  toBoolean, toCanonical,
+  toBoolean,
+  toCanonical,
   toCode,
   toDate,
   toDatetime,
@@ -30,13 +31,14 @@ import {
   toInteger64,
   toLink,
   toMarkdown,
-  toPositiveInt, toTime,
+  toPositiveInt,
+  toTime,
   toType,
   toUnsignedInt,
   toUri,
   toUrl,
   valueOrError
-} from './type-converters'
+}                                                      from './type-converters'
 import {asDateTime, asReadable}                        from './type-presenters'
 
 

@@ -1,5 +1,5 @@
 import {html, TemplateResult} from 'lit'
-import {DisplayMode} from '../../../types'
+import {DisplayMode}          from '../../../types'
 import {isBlank}              from '../../../utilities'
 import {BaseElement}          from '../../BaseElement'
 

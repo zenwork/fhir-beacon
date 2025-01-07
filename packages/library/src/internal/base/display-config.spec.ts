@@ -205,8 +205,8 @@ describe('DisplayConfig', () => {
       shell.verbose = true
 
       await aTimeout(200)
-      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 8 }))
-      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 24 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-wrapper', expect: 9 }))
+      assert.ok(annotation.queryShadow({ select: 'fhir-primitive', expect: 25 }))
 
     })
 

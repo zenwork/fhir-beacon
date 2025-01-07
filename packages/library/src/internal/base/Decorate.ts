@@ -2,6 +2,7 @@ import {URI}                              from '../../components/primitive/primi
 import {DomainResourceData, ResourceData} from '../resource/domain-resource.data'
 
 
+
 type ErrorKeys = '_root' | string
 export const errors = Symbol('errors')
 export const meta = Symbol('metadata')

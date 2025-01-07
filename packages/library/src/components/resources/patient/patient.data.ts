@@ -12,6 +12,8 @@ import {PeriodData}                                                 from '../../
 import {Code, DateTime, FhirDate, FhirString, Integer, PositiveInt} from '../../primitive/primitive.data'
 import {ReferenceData}                                              from '../../special/reference/reference.data'
 
+
+
 export type HumanNameData = FhirElementData & {
   use?: Code
   text?: FhirString

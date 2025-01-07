@@ -5,6 +5,8 @@ import {DisplayConfig}        from '../../../../types'
 import {PrimitiveType}        from '../../../primitive'
 import {AccountBalanceData}   from '../account.data'
 
+
+
 @customElement('fhir-account-balance')
 export class Balance extends Backbone<AccountBalanceData> {
   constructor() {super('AccountBalance')}

@@ -4,7 +4,7 @@ import {choiceValidate, DomainResource, oneOf, Validations} from '../../../inter
 import {wrap}                                               from '../../../shell/layout/wrapper/wrap'
 
 import {DisplayConfig} from '../../../types'
-import {identifiers}                                        from '../../complex/identifier/identifiers'
+import {identifiers}   from '../../complex/identifier/identifiers'
 import {PrimitiveType} from '../../primitive/type-converters/type-converters'
 import {PatientData}   from './patient.data'
 

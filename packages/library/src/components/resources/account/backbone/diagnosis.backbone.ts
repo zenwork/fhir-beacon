@@ -6,6 +6,8 @@ import {DisplayConfig}        from '../../../../types'
 import {PrimitiveType}        from '../../../primitive'
 import {AccountDiagnosisData} from '../account.data'
 
+
+
 @customElement('fhir-account-diagnosis')
 export class Diagnosis extends Backbone<AccountDiagnosisData> {
   constructor() {super('AccountDiagnosis')}

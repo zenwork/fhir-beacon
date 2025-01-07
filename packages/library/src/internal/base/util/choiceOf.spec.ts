@@ -2,8 +2,10 @@ import {html}                         from 'lit'
 import {assert, describe, expect, it} from 'vitest'
 import {fixture}                      from '../../../../tests/lit/lit-vitest-fixture'
 import {PrimitiveValue}               from '../../../components'
-import {BaseElement} from '../../BaseElement'
-import {oneOf}       from './oneOf'
+import {BaseElement}                  from '../../BaseElement'
+import {oneOf}                        from './oneOf'
+
+
 
 describe('OneOrError', () => {
   it('Should show an error if there is more than one value to show', async () => {
