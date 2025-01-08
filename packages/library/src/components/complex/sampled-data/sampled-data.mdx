@@ -1,0 +1,18 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './sampled-data.stories'
+
+<Meta of={Stories}/>
+
+# Sampled Data
+
+A SampledData provides a concise way to handle the data produced by devices that sample a particular physical state at a high frequency.
+
+reference:
+* [ 2.1.28.0.12 Sampled Data (R5)](https://hl7.org/fhir/datatypes.html#sampleddata)
+
+
+
+<Canvas of={Stories.Display}/>
+
+<Canvas of={Stories.Structure}/>

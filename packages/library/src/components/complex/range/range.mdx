@@ -1,0 +1,16 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './range.stories'
+
+<Meta of={Stories}/>
+
+# Range
+
+A set of ordered Quantity values defined by a low and high limit.
+
+reference: [2.1.28.0.8 Range (R5)](http://hl7.org/fhir/datatypes.html#range)
+
+# Display View
+
+## a distance range
+<Canvas of={Stories.Distance} />

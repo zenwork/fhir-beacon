@@ -40,6 +40,46 @@ export function renderResourceComponent(data: ResourceData | undefined,
               ?open=${displayConfig.open}
               ?summary=${summary}
           ></fhir-patient >`
+      case 'Observation':
+        return html`
+            <fhir-observation
+                    .data=${data}
+                    .mode=${displayConfig.mode}
+                    ?showerror=${displayConfig.showerror}
+                    ?verbose=${displayConfig.verbose}
+                    ?open=${displayConfig.open}
+                    ?summary=${summary}
+            ></fhir-observation >`
+      case 'Appointment':
+        return html`
+            <fhir-appointment
+                    .data=${data}
+                    .mode=${displayConfig.mode}
+                    ?showerror=${displayConfig.showerror}
+                    ?verbose=${displayConfig.verbose}
+                    ?open=${displayConfig.open}
+                    ?summary=${summary}
+            ></fhir-appointment >`
+      case 'Slot':
+        return html`
+            <fhir-slot
+                    .data=${data}
+                    .mode=${displayConfig.mode}
+                    ?showerror=${displayConfig.showerror}
+                    ?verbose=${displayConfig.verbose}
+                    ?open=${displayConfig.open}
+                    ?summary=${summary}
+            ></fhir-slot >`
+      case 'Account':
+        return html`
+            <fhir-account
+                    .data=${data}
+                    .mode=${displayConfig.mode}
+                    ?showerror=${displayConfig.showerror}
+                    ?verbose=${displayConfig.verbose}
+                    ?open=${displayConfig.open}
+                    ?summary=${summary}
+            ></fhir-account >`
       default:
         return html`
             <fhir-primitive label="resource"

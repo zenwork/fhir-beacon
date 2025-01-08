@@ -2,15 +2,23 @@ import {html, TemplateResult}                                                   
 import {customElement}                                                                       from 'lit/decorators.js'
 import {choice, Decorated, DomainResource, oneOf, Validations}                               from '../../../internal'
 import {wrap}                                                                                from '../../../shell'
-import {DisplayConfig}                                                                       from '../../../types'
-import {AttachmentData, CodeableConceptData, PeriodData, QuantityData, RangeData, RatioData} from '../../complex'
+import {DisplayConfig} from '../../../types'
+import {
+  AttachmentData,
+  CodeableConceptData,
+  PeriodData,
+  QuantityData,
+  RangeData,
+  RatioData, SampledDataData,
+  TimingData
+} from '../../complex'
 import {
   identifiers
-}                                                                                            from '../../complex/identifier/identifiers'
+}                      from '../../complex/identifier/identifiers'
 import {Canonical, DateTime, Instant, Integer, PrimitiveType, Time}                          from '../../primitive'
 import {ReferenceData}                                                                       from '../../special'
 
-import {ObservationData, SampledDataData, TimingData} from './observation.data'
+import {ObservationData} from './observation.data'
 
 
 
@@ -73,8 +81,15 @@ export class Observation extends DomainResource<ObservationData> {
                       config
                   }
           )}
-
-          <fhir-not-supported label="triggeredBy" variant='no-impl'></fhir-not-supported>
+          ${wrap(
+                  {
+                      key: 'triggeredBy',
+                      collection: data.triggeredBy ?? [],
+                      generator: (d, l) => html`
+                          <fhir-observation-triggered-by key=${l} .data=${d}></fhir-observation-triggered-by>`,
+                      config
+                  }
+          )}
           ${wrap(
                   {
                       key: 'partOf',
@@ -128,9 +143,8 @@ export class Observation extends DomainResource<ObservationData> {
                                  ></fhir-period>`
                       ),
                       choice(data.effectiveTiming,
-                             // eslint-disable-next-line @typescript-eslint/no-unused-vars
                              (d: TimingData) => html`
-                                 <fhir-not-supported label="effectiveTiming" variant='no-impl'></fhir-not-supported>`
+                                 <fhir-timing key="effectiveTiming" .data=${d}></fhir-timing>`
                       ),
                       choice(data.effectiveInstant,
                              (d: Instant) => html`
@@ -202,13 +216,11 @@ export class Observation extends DomainResource<ObservationData> {
                       ),
                       choice(data.valueRange,
                              (d: RangeData) => html`
-                                 <fhir-not-supported
-                                         variant="no-impl"
-                                         label="valueRange"
-                                         .value=${d}
-                                         .type=${PrimitiveType.datetime}
+                                 <fhir-range
+                                         key="valueRange"
+                                         .data=${d}
                                          summary
-                                 ></fhir-not-supported>`
+                                 ></fhir-range>`
                       ),
                       choice(data.valueRatio,
                              (d: RatioData) => html`
@@ -220,12 +232,11 @@ export class Observation extends DomainResource<ObservationData> {
                       ),
                       choice(data.valueSampledData,
                              (d: SampledDataData) => html`
-                                 <fhir-not-supported
-                                         variant="no-impl"
-                                         label="valueSampledData"
+                                 <fhir-sampled-data
+                                         key="valueSampledData"
                                          .data=${d}
                                          summary
-                                 ></fhir-not-supported>`
+                                 ></fhir-sampled-data>`
                       ),
                       choice(data.valueTime,
                              (d: Time) => html`
@@ -271,6 +282,54 @@ export class Observation extends DomainResource<ObservationData> {
                       )
                   ]
           )}
+          <fhir-codeable-concept key="dataAbsentReason" .data=${data.dataAbsentReason} ></fhir-codeable-concept>
+          ${wrap({
+                     key: 'interpretation',
+                     collection: data.interpretation ?? [],
+                     generator: (d, l) => html`
+                         <fhir-codeable-concept key=${l} .data=${d} ></fhir-codeable-concept>`,
+                     config
+                 }
+          )}
+          ${wrap({
+                     key: 'note',
+                     collection: data.note ?? [],
+                     generator: (d, l) => html`
+                         <fhir-annotation key=${l} .data=${d} ></fhir-annotation>`,
+                     config
+                 }
+          )}
+          <fhir-codeable-concept key="bodySite" .data=${data.bodySite} ></fhir-codeable-concept>
+          <fhir-reference key="bodyStructure" .data=${data.bodyStructure}></fhir-reference>
+          <fhir-codeable-concept key="method" .data=${data.method} ></fhir-codeable-concept>
+          <fhir-reference key="specimen" .data=${data.specimen}></fhir-reference>
+          <fhir-reference key="device" .data=${data.device}></fhir-reference>
+          <fhir-observation-reference-range key="referenceRange" .data=${data.referenceRange}></fhir-observation-reference-range>
+          ${wrap({
+                     key: 'hasMember',
+                     collection: data.hasMember ?? [],
+                     generator: (d, l) => html`
+                         <fhir-reference key=${l} .data=${d} summary></fhir-reference>`,
+                     config
+                 }
+          )}
+          ${wrap({
+                     key: 'derivedFrom',
+                     collection: data.derivedFrom ?? [],
+                     generator: (d, l) => html`
+                         <fhir-reference key=${l} .data=${d} summary></fhir-reference>`,
+                     config
+                 }
+          )}
+          ${wrap({
+                     key: 'component',
+                     collection: data.component ?? [],
+                     generator: (d, l) => html`
+                         <fhir-observation-component key=${l} .data=${d}></fhir-observation-component>`,
+                     config
+                 }
+          )}
+          
 
       `
     ]

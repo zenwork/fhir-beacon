@@ -1,71 +1,21 @@
-import {FhirElementData}                  from '../../../internal'
-import {BackboneElementData}              from '../../../internal/resource/backbone.data'
-import {DomainResourceData}               from '../../../internal/resource/domain-resource.data'
-import {AttachmentData}                   from '../../complex'
-import {AnnotationData}                   from '../../complex/annotation/annotation.data'
-import {CodeableConceptData}              from '../../complex/codeable-concept/codeable-concept.data'
-import {IdentifierData}                   from '../../complex/identifier/identifier.data'
-import {PeriodData}                       from '../../complex/period/period.data'
-import {QuantityData, SimpleQuantityData} from '../../complex/quantity/quantity.data'
-import {RangeData}                        from '../../complex/range/range.data'
-import {RatioData}                        from '../../complex/ratio/ratio.data'
+import {BackboneElementData}                         from '../../../internal/resource/backbone.data'
+import {DomainResourceData}                          from '../../../internal/resource/domain-resource.data'
+import {AttachmentData, SampledDataData, TimingData} from '../../complex'
+import {AnnotationData}                              from '../../complex/annotation/annotation.data'
+import {CodeableConceptData}                         from '../../complex/codeable-concept/codeable-concept.data'
+import {IdentifierData}                              from '../../complex/identifier/identifier.data'
+import {PeriodData}                                  from '../../complex/period/period.data'
+import {QuantityData, SimpleQuantityData}            from '../../complex/quantity/quantity.data'
+import {RangeData}                                   from '../../complex/range/range.data'
+import {RatioData}                                   from '../../complex/ratio/ratio.data'
 
-import {
-  Canonical,
-  Code,
-  DateTime,
-  Decimal,
-  FhirString,
-  Instant,
-  Integer,
-  Markdown,
-  PositiveInt,
-  Time,
-  UnsignedInt
-} from '../../primitive/primitive.data'
+import {Canonical, Code, DateTime, FhirString, Instant, Integer, Markdown, Time} from '../../primitive/primitive.data'
 
 import {ReferenceData} from '../../special/reference/reference.data'
 
 
 
-export type BoundDuration = QuantityData //TODO: should be constrained to a duration: https://www.hl7.org/fhir/dataexport types.html#Duration
-export type BoundRange = RangeData
-export type BoundPeriod = PeriodData
-
-export type TimingData = FhirElementData & {
-  event?: DateTime
-  bound?: BoundDuration | BoundRange | BoundPeriod
-  count?: PositiveInt
-  countMax?: PositiveInt
-  duration?: Decimal
-  durationMax?: Decimal
-  durationUnit?: Code
-  frequency?: PositiveInt
-  frequencyMax?: PositiveInt
-  period?: Decimal
-  periodMax?: Decimal
-  periodUnitr?: Code
-  dayOfWeek?: Code[]
-  timeOfDay?: Time[]
-  when?: Code[]
-  offset?: UnsignedInt
-
-}
-
-export type SampledDataData = FhirElementData & {
-  origin: SimpleQuantityData
-  interval?: Decimal
-  intervalUnit?: Code
-  factor?: Decimal
-  lowerLimit?: Decimal
-  upperLimit?: Decimal
-  dimensions: PositiveInt
-  codeMap?: Canonical
-  offset?: FhirString
-  data?: FhirString
-}
-
-export type ReferenceRangeBackboneElementData = BackboneElementData & {
+export type ObservationReferenceRangeData = BackboneElementData & {
   low?: SimpleQuantityData
   high?: SimpleQuantityData
   normalValue?: CodeableConceptData
@@ -75,18 +25,30 @@ export type ReferenceRangeBackboneElementData = BackboneElementData & {
   text?: Markdown
 }
 
-export type TriggeredByBackboneElementData = BackboneElementData & {
+export type ObservationTriggeredByData = BackboneElementData & {
   observation: ReferenceData
   type: Code
   reason: FhirString
 }
 
-export type ComponentBackboneElementData = BackboneElementData & {
+export type ObservationComponentData = BackboneElementData & {
   code: CodeableConceptData
-  value?: QuantityData | CodeableConceptData | FhirString | boolean | Integer | Range | RatioData | SampledDataData | Time | DateTime | PeriodData | AttachmentData | ReferenceData
+  valueQuantity?: QuantityData
+  valueCodeableConcept?: CodeableConceptData
+  valueString?: FhirString
+  valueBoolean?: boolean
+  valueInteger?: Integer
+  valueRange?: RangeData
+  valueRatio?: RatioData
+  valueSampledData?: SampledDataData
+  valueTime?:  Time
+  valueDateTime?:  DateTime
+  valuePeriod?:  PeriodData
+  valueAttachment?:  AttachmentData
+  valueReference?:  ReferenceData
   dataAbsentReason?: CodeableConceptData
   interpretation?: CodeableConceptData[]
-  referenceRange?: ReferenceRangeBackboneElementData[]
+  referenceRange?: ObservationReferenceRangeData[]
 }
 
 export type ObservationData = DomainResourceData & {
@@ -94,7 +56,7 @@ export type ObservationData = DomainResourceData & {
   instantiatesCanonical?: Canonical,
   instantiatesReference?: ReferenceData,
   basedOn?: ReferenceData[]
-  triggeredBy?: TriggeredByBackboneElementData[]
+  triggeredBy?: ObservationTriggeredByData[]
   partOf?: ReferenceData[]
   status: Code
   category?: CodeableConceptData[]
@@ -123,15 +85,15 @@ export type ObservationData = DomainResourceData & {
   valueReference?:  ReferenceData
   dataAbsentReason?: CodeableConceptData
   interpretation?: CodeableConceptData[]
-  note?: AnnotationData
+  note?: AnnotationData[]
   bodySite?: CodeableConceptData
   bodyStructure?: ReferenceData
   method?: CodeableConceptData
   specimen?: ReferenceData
   device?: ReferenceData
-  referenceRange?: ReferenceRangeBackboneElementData[]
+  referenceRange?: ObservationReferenceRangeData[]
   hasMember?: ReferenceData[]
   derivedFrom?: ReferenceData[]
-  component?: ComponentBackboneElementData[]
+  component?: ObservationComponentData[]
 
 }

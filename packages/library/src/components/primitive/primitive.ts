@@ -177,12 +177,15 @@ export class Primitive extends ConfigurableElement {
     }
 
 
-    if (isBlank(this.value) && this.required && !this.verbose) {
-      this.presentableError = 'Error: this property is required'
+    if (isBlank(this.value) && this.required) {
       this.error = true
-      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, this.presentableError)
+      if (this.showerror) {
+        this.presentableError = 'Error: this property is required'
+      }
+      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, 'Error: this property is required')
       this.dispatchEvent(event)
     }
+
 
     if (changed.has('errormessage')) {
       if (!isBlank(this.errormessage)) {
