@@ -65,7 +65,7 @@ export class Annotation extends BaseElement<AnnotationData> {
       html`
           ${author}
           <fhir-primitive key="time" .value=${data.time} .type=${PrimitiveType.datetime} summary></fhir-primitive>
-          <fhir-primitive key="text" .value=${data.text} .type=${PrimitiveType.markdown} summary></fhir-primitive>
+          <fhir-primitive key="text" .value=${data.text} .type=${PrimitiveType.markdown} summary variant="fixed-width"></fhir-primitive>
       `
     ]
   }

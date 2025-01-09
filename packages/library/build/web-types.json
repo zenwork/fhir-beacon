@@ -1205,256 +1205,8 @@
           }
         },
         {
-          "name": "fhir-identifier",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<IdentifierData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<IdentifierData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _IdentifierData_, validations: _Validations_, fetched: _boolean_): _void_** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "fhir-money",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(_: _DisplayConfig_, data: _Decorated<MoneyData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(_: _DisplayConfig_, data: _Decorated<MoneyData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-period",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<PeriodData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<PeriodData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -1706,8 +1458,256 @@
           }
         },
         {
+          "name": "fhir-period",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<PeriodData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<PeriodData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-identifier",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<IdentifierData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<IdentifierData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _IdentifierData_, validations: _Validations_, fetched: _boolean_): _void_** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-range",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<RangeData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<RangeData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<RangeData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<RangeData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "label", "value": { "type": "string", "default": "''" } },
@@ -2202,6 +2202,254 @@
           }
         },
         {
+          "name": "fhir-timing-repeat",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<TimingRepeatData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<TimingRepeatData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-timing",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<TimingData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<TimingData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
           "name": "fhir-bundle",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<BundleData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<BundleData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
@@ -2326,8 +2574,465 @@
           }
         },
         {
+          "name": "fhir-context",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "text", "value": { "type": "string", "default": "''" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [{ "name": "text", "type": "string" }],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-error",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [{ "name": "text", "value": { "type": "string" } }],
+          "events": [],
+          "js": {
+            "properties": [{ "name": "text", "type": "string" }],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-value",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "placeholder",
+              "value": { "type": "string", "default": "'n/a'" }
+            },
+            { "name": "text", "value": { "type": "string", "default": "''" } },
+            { "name": "variant", "value": { "type": "string" } },
+            { "name": "link", "value": { "type": "string", "default": "''" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "placeholder", "type": "string" },
+              { "name": "text", "type": "string" },
+              { "name": "variant", "type": "string" },
+              { "name": "link", "type": "string" },
+              { "name": "beforeSlot", "type": "Array<HTMLElement>" },
+              { "name": "afterSlot", "type": "Array<HTMLElement>" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-label",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "text", "value": { "type": "string" } },
+            { "name": "variant", "value": { "type": "string" } },
+            {
+              "name": "delimiter",
+              "value": { "type": "string", "default": "':'" }
+            },
+            { "name": "for", "value": { "type": "string" } }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "text", "type": "string" },
+              { "name": "variant", "type": "string" },
+              { "name": "delimiter", "type": "string" },
+              { "name": "for", "type": "string" },
+              { "name": "assignedElements", "type": "Array<HTMLElement>" }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-primitive-wrapper",
+          "description": "\n---\n",
+          "doc-url": "",
+          "attributes": [],
+          "events": [],
+          "js": { "properties": [], "events": [] }
+        },
+        {
           "name": "fhir-account",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<AccountData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<AccountData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "override-template", "value": { "type": "string" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "overrideTemplate", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "label", "type": "string" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication-batch",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication-ingredient",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "label", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-medication",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "override-template", "value": { "type": "string" } },
@@ -3198,380 +3903,6 @@
           }
         },
         {
-          "name": "fhir-medication-batch",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationBatchData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-medication-ingredient",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _MedicationIngredientData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "label", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-medication",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<MedicationData>_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "override-template", "value": { "type": "string" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "overrideTemplate", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "label", "type": "string" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "fhir-observation-component",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<ObservationComponentData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<ObservationComponentData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
@@ -3946,6 +4277,132 @@
         {
           "name": "fhir-observation",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<ObservationData>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<ObservationData>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
+          "doc-url": "",
+          "attributes": [
+            { "name": "override-template", "value": { "type": "string" } },
+            { "name": "label", "value": { "type": "string", "default": "''" } },
+            {
+              "name": "summary",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "required",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "headless",
+              "value": { "type": "boolean", "default": "false" }
+            },
+            {
+              "name": "key",
+              "description": "The key the element is known as in its parent data strucuture",
+              "value": { "type": "string", "default": "''" }
+            },
+            {
+              "name": "data",
+              "description": "Element data",
+              "value": { "type": "T", "default": "NoDataObject" }
+            },
+            { "name": "data-path", "value": { "type": "string" } },
+            {
+              "name": "errors",
+              "description": "An array of objects representing validation errors.",
+              "value": { "type": "ValidationErrors", "default": "{}" }
+            },
+            {
+              "name": "mode",
+              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "DisplayMode" }
+            },
+            {
+              "name": "showerror",
+              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "input",
+              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "verbose",
+              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "summaryonly",
+              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            },
+            {
+              "name": "open",
+              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+              "value": { "type": "boolean" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              { "name": "overrideTemplate", "type": "string" },
+              { "name": "summary", "type": "boolean" },
+              { "name": "label", "type": "string" },
+              { "name": "required", "type": "boolean" },
+              { "name": "headless", "type": "boolean" },
+              {
+                "name": "key",
+                "description": "The key the element is known as in its parent data strucuture",
+                "type": "string"
+              },
+              { "name": "data", "description": "Element data", "type": "T" },
+              { "name": "dataPath", "type": "string" },
+              {
+                "name": "extendedData",
+                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
+                "type": "T & {} | null"
+              },
+              {
+                "name": "errors",
+                "description": "An array of objects representing validation errors.",
+                "type": "ValidationErrors"
+              },
+              { "name": "dataContext", "type": "FhirDataContext" },
+              {
+                "name": "mode",
+                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
+                "type": "DisplayMode"
+              },
+              {
+                "name": "showerror",
+                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "input",
+                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "verbose",
+                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "summaryonly",
+                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              },
+              {
+                "name": "open",
+                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
+                "type": "boolean"
+              }
+            ],
+            "events": []
+          }
+        },
+        {
+          "name": "fhir-observation-definition",
+          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
           "attributes": [
             { "name": "override-template", "value": { "type": "string" } },
@@ -4694,132 +5151,6 @@
           }
         },
         {
-          "name": "fhir-observation-definition",
-          "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "override-template", "value": { "type": "string" } },
-            { "name": "label", "value": { "type": "string", "default": "''" } },
-            {
-              "name": "summary",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "required",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "headless",
-              "value": { "type": "boolean", "default": "false" }
-            },
-            {
-              "name": "key",
-              "description": "The key the element is known as in its parent data strucuture",
-              "value": { "type": "string", "default": "''" }
-            },
-            {
-              "name": "data",
-              "description": "Element data",
-              "value": { "type": "T", "default": "NoDataObject" }
-            },
-            { "name": "data-path", "value": { "type": "string" } },
-            {
-              "name": "errors",
-              "description": "An array of objects representing validation errors.",
-              "value": { "type": "ValidationErrors", "default": "{}" }
-            },
-            {
-              "name": "mode",
-              "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "DisplayMode" }
-            },
-            {
-              "name": "showerror",
-              "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "input",
-              "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "verbose",
-              "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "summaryonly",
-              "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            },
-            {
-              "name": "open",
-              "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-              "value": { "type": "boolean" }
-            }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "overrideTemplate", "type": "string" },
-              { "name": "summary", "type": "boolean" },
-              { "name": "label", "type": "string" },
-              { "name": "required", "type": "boolean" },
-              { "name": "headless", "type": "boolean" },
-              {
-                "name": "key",
-                "description": "The key the element is known as in its parent data strucuture",
-                "type": "string"
-              },
-              { "name": "data", "description": "Element data", "type": "T" },
-              { "name": "dataPath", "type": "string" },
-              {
-                "name": "extendedData",
-                "description": "The extendedData variable is used to store additional data of type T and an empty object type {}.\nIt can also hold a null value.",
-                "type": "T & {} | null"
-              },
-              {
-                "name": "errors",
-                "description": "An array of objects representing validation errors.",
-                "type": "ValidationErrors"
-              },
-              { "name": "dataContext", "type": "FhirDataContext" },
-              {
-                "name": "mode",
-                "description": "Retrieves the current display mode.\n\nSetting the attribute overrides context-provided property.",
-                "type": "DisplayMode"
-              },
-              {
-                "name": "showerror",
-                "description": "Determines whether error messages should be displayed.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "input",
-                "description": "Display primitive as an input field.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "verbose",
-                "description": "This property determines whether verbose mode is enabled.\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "summaryonly",
-                "description": "Only display value if the priitive also has the summary attribute\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              },
-              {
-                "name": "open",
-                "description": "Display the content of the component in an open state\n\nSetting the attribute overrides context-provided property.",
-                "type": "boolean"
-              }
-            ],
-            "events": []
-          }
-        },
-        {
           "name": "fhir-substance-ingredient",
           "description": "\n---\n\n\n### **Methods:**\n - **renderDisplay(config: _DisplayConfig_, data: _SubstanceIngredientData | SubstanceIngredientReferenceData_): _TemplateResult[]_** - convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **renderStructure(config: _DisplayConfig_, data: _SubstanceIngredientData | SubstanceIngredientReferenceData_): _TemplateResult[]_** - Convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.\n- **validate(data: _D_, validations: _Validations_, fetched: _boolean_): __** - validate data to find complex errors not covered by primitive types. Errors can be accessed through `this.errors`.\nit is recommended to call\n`super.validate(T)` as well.\n- **decorate(data: _Decorated<D>_, validations: _Validations_, fetched: _boolean_): __** - Override to extend the given data with some useful context\n- **isPrepared(providedData: _T_, decoratedData: _(T & Decorated) | null_): _void_** - This method is used to indicate that the data is ready.\n- **willRender(config: _DisplayConfig_, data: _Decorated<T> | null_, changes: _PropertyValues_): _void_** - Determines if the component will render based on the given parameters.\n- **hasRendered(config: _DisplayConfig_, data: _Decorated<D> | null_, haveChanged: _PropertyValues_): _void_** - Called after the component has rendered.\n- **renderEditableDisplay(config: _DisplayConfig_, data: _Decorated<D>_, validations: _Validations_): _TemplateResult[]_** - Override this method to provide an alternate template when rendering editable display\n\n",
           "doc-url": "",
@@ -5068,89 +5399,6 @@
             ],
             "events": []
           }
-        },
-        {
-          "name": "fhir-context",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "text", "value": { "type": "string", "default": "''" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [{ "name": "text", "type": "string" }],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-error",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [{ "name": "text", "value": { "type": "string" } }],
-          "events": [],
-          "js": {
-            "properties": [{ "name": "text", "type": "string" }],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-label",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [
-            { "name": "text", "value": { "type": "string" } },
-            { "name": "variant", "value": { "type": "string" } },
-            {
-              "name": "delimiter",
-              "value": { "type": "string", "default": "':'" }
-            },
-            { "name": "for", "value": { "type": "string" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "text", "type": "string" },
-              { "name": "variant", "type": "string" },
-              { "name": "delimiter", "type": "string" },
-              { "name": "for", "type": "string" },
-              { "name": "assignedElements", "type": "Array<HTMLElement>" }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-value",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [
-            {
-              "name": "placeholder",
-              "value": { "type": "string", "default": "'n/a'" }
-            },
-            { "name": "text", "value": { "type": "string", "default": "''" } },
-            { "name": "variant", "value": { "type": "string" } },
-            { "name": "link", "value": { "type": "string", "default": "''" } }
-          ],
-          "events": [],
-          "js": {
-            "properties": [
-              { "name": "placeholder", "type": "string" },
-              { "name": "text", "type": "string" },
-              { "name": "variant", "type": "string" },
-              { "name": "link", "type": "string" },
-              { "name": "beforeSlot", "type": "Array<HTMLElement>" },
-              { "name": "afterSlot", "type": "Array<HTMLElement>" }
-            ],
-            "events": []
-          }
-        },
-        {
-          "name": "fhir-primitive-wrapper",
-          "description": "\n---\n",
-          "doc-url": "",
-          "attributes": [],
-          "events": [],
-          "js": { "properties": [], "events": [] }
         },
         {
           "name": "fhir-meta",

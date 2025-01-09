@@ -30,16 +30,20 @@ export class DataViewer extends SignalWatcher(LitElement) {
         color: red;
       }
 
-     
+
       sl-tab-panel::part(base) {
         padding: 0;
-        
+
       }
-        
-        sl-divider{
-          padding-top: 0;
-          margin-top:0;
-        }
+
+      sl-divider {
+        padding-top: 0;
+        margin-top: 0;
+      }
+      
+      sl-switch {
+        margin-right:1rem
+      }
     `
   ]
 
@@ -91,7 +95,7 @@ export class DataViewer extends SignalWatcher(LitElement) {
                     <sl-tab-panel name="${file.name}" ?active=${files.length === index + 1} data-id="${file.name}">
                         ${(this.renderToolbar(file))}
                         <div style="margin-left: 5rem; margin-top:2rem">
-                        ${until(this.toResource(file), this.renderSkeleton())}
+                            ${until(this.toResource(file), this.renderSkeleton())}
                         </div>
                     </sl-tab-panel>
                 `
@@ -178,6 +182,8 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                             ?headless=${file.headless}
                                             .mode=${file.mode}
                                             ?open=${file.open}
+                                            ?verbose=${file.verbose}
+                                            ?summaryonly=${file.summary}
                            >
                                >
                            </fhir-medication>`
@@ -189,6 +195,8 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                          ?headless=${file.headless}
                                          .mode=${file.mode}
                                          ?open=${file.open}
+                                         ?verbose=${file.verbose}
+                                         ?summaryonly=${file.summary}
                            >
 
                            </fhir-patient>`
@@ -200,6 +208,8 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                              ?headless=${file.headless}
                                              .mode=${file.mode}
                                              ?open=${file.open}
+                                             ?verbose=${file.verbose}
+                                             ?summaryonly=${file.summary}
                            >
                            </fhir-appointment>`
                        break
@@ -211,6 +221,8 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                       ?headless=${file.headless}
                                       .mode=${file.mode}
                                       ?open=${file.open}
+                                      ?verbose=${file.verbose}
+                                      ?summaryonly=${file.summary}
                            >
                            </fhir-slot>`
                        break
@@ -221,18 +233,34 @@ export class DataViewer extends SignalWatcher(LitElement) {
                                         ?headless=${file.headless}
                                         .mode=${file.mode}
                                         ?open=${file.open}
+                                        ?verbose=${file.verbose}
+                                        ?summaryonly=${file.summary}
                            >
                            </fhir-bundle>`
                        break
                      case 'Account':
                        resource = html`
                            <fhir-account .data=${d}
-                                        ?showerror=${file.showerrors}
-                                        ?headless=${file.headless}
-                                        .mode=${file.mode}
-                                        ?open=${file.open}
+                                         ?showerror=${file.showerrors}
+                                         ?headless=${file.headless}
+                                         .mode=${file.mode}
+                                         ?open=${file.open}
+                                         ?verbose=${file.verbose}
+                                         ?summaryonly=${file.summary}
                            >
                            </fhir-account>`
+                       break
+                     case 'Observation':
+                       resource = html`
+                           <fhir-observation .data=${d}
+                                             ?showerror=${file.showerrors}
+                                             ?headless=${file.headless}
+                                             .mode=${file.mode}
+                                             ?open=${file.open}
+                                             ?verbose=${file.verbose}
+                                             ?summaryonly=${file.summary}
+                           >
+                           </fhir-observation>`
                        break
                      default:
 
@@ -275,9 +303,25 @@ export class DataViewer extends SignalWatcher(LitElement) {
                 .value="${file.mode}"
                 @sl-change=${(e: CustomEvent) => {
                     file.mode = (e.target as SlRadioButton).value as DisplayMode
-                    console.log(
-                            'sl-change',
-                            this.state.selected.find(f => f.name === file.name))
+                    switch (file.mode) {
+                        case DisplayMode.display:
+                        case DisplayMode.debug:
+                        case DisplayMode.narrative:
+                            file.open = false
+                            file.showerrors = false
+                            file.headless = true
+                            file.verbose = false
+                            file.summary = false
+                            break;
+                        case DisplayMode.structure:
+                            file.open = false
+                            file.showerrors = true
+                            file.headless = true
+                            file.verbose = false
+                            file.summary = false
+                            break;
+
+                    }
                     this.requestUpdate()
 
                 }}
@@ -301,48 +345,75 @@ export class DataViewer extends SignalWatcher(LitElement) {
 
   private switchGroup(file: FhirData): TemplateResult {
     return html`
-        <sl-button-group label="Switches">
-            <sl-tooltip .content="${file.open ? 'expand' : 'collapse'}">
-                <sl-icon-button
-                        label="expand/collapse"
-                        name="${file.open ? 'arrows-expand' : 'arrows-collapse'}"
-
+        
+            <sl-tooltip .content="${file.open ? 'collapse' : 'expand'}">
+                <sl-switch
+                        size="small"
+                        help-text="expand"
+                        ?checked=${file.open}
                         ?disabled=${file.mode !== DisplayMode.structure}
-                        @click=${() => {
+                        @sl-change=${() => {
                             file.open = !file.open
                             this.requestUpdate()
                         }}
-                ></sl-icon-button>
+                        
+                ></sl-switch>
             </sl-tooltip>
             <sl-tooltip .content="${file.showerrors ? 'show error messages' : 'hide error messages'}">
-                <sl-icon-button
-                        label="show/hide error messages"
-                        name="${file.showerrors ? 'file-earmark-excel' : 'file-earmark-x'}"
-
+                <sl-switch
+                        size="small"
+                        help-text="errors"
+                        ?checked=${file.showerrors}
                         ?disabled=${file.mode === DisplayMode.narrative || file.mode === DisplayMode.debug}
-                        @click=${() => {
+                        @sl-change=${() => {
                             file.showerrors = !file.showerrors
                             this.requestUpdate()
                         }}
-                ></sl-icon-button>
+                        
+                ></sl-switch>
             </sl-tooltip>
             <sl-tooltip .content="${file.headless ? 'hide header' : 'show header'}">
-                <sl-icon-button
-                        label="show/hide error messages"
-                        name="${file.headless ? 'person-fill-slash' : 'person-fill-check'}"
-
+                <sl-switch
+                        size="small"
+                        help-text="headless"
+                        ?checked=${file.headless}
                         ?disabled=${file.mode === DisplayMode.narrative || file.mode === DisplayMode.debug}
-                        @click=${() => {
+                        @sl-change=${() => {
                             file.headless = !file.headless
                             this.requestUpdate()
                         }}
-                ></sl-icon-button>
+                       
+                ></sl-switch>
             </sl-tooltip>
-            
+            <sl-tooltip .content="${file.verbose ? 'normal' : 'verbose'}">
+                <sl-switch
+                        size="small"
+                        help-text="verbose"
+                        ?checked=${file.verbose}
+                        ?disabled=${file.mode === DisplayMode.narrative || file.mode === DisplayMode.debug}
+                        @sl-change=${() => {
+                            file.verbose = !file.verbose
+                            this.requestUpdate()
+                        }}
+                        
+                ></sl-switch>
+            </sl-tooltip>
+            <sl-tooltip content="summary">
+                <sl-switch
+                        size="small"
+                        help-text="summary"
+                        ?checked=${file.summary}
+                        ?disabled=${file.mode === DisplayMode.narrative || file.mode === DisplayMode.debug}
+                        @sl-change=${() => {
+                            file.summary = !file.summary
+                            this.requestUpdate()
+                        }}
+                       
+                ></sl-switch>
+            </sl-tooltip>
 
 
-        </sl-button-group>
-        <br>
+
     `
   }
 }

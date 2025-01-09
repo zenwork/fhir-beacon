@@ -1,8 +1,8 @@
-import {html, TemplateResult}                from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {BaseElement, Decorated, Validations} from '../../../internal'
-import {DisplayConfig}                       from '../../../types'
-import {RangeData}                           from './range.data'
+import {html, TemplateResult}   from 'lit'
+import {customElement}          from 'lit/decorators.js'
+import {BaseElement, Decorated} from '../../../internal'
+import {DisplayConfig}          from '../../../types'
+import {RangeData}              from './range.data'
 
 
 
@@ -12,14 +12,12 @@ export class Range extends BaseElement<RangeData> {
 
 
   public renderDisplay(config: DisplayConfig,
-                       data: Decorated<RangeData>,
-                       validations: Validations): TemplateResult[] {
+                       data: Decorated<RangeData>): TemplateResult[] {
     return this.renderAny(config, data)
   }
 
   public renderStructure(config: DisplayConfig,
-                         data: Decorated<RangeData>,
-                         validations: Validations): TemplateResult[] {
+                         data: Decorated<RangeData>): TemplateResult[] {
     return this.renderAny(config, data)
   }
 

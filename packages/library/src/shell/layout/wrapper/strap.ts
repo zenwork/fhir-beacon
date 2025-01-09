@@ -6,6 +6,8 @@ import {hasMany, hasOnlyOne}        from '../directives'
 import {pluralize}                  from '../pluralize'
 import {show}                       from '../show'
 
+
+
 export type Generators = 'fhir-identifier' | 'fhir-codeable-concept' | 'fhir-codeable-reference' | 'fhir-reference'
 
 export const generators: { [key: string]: { (data: any, label: string, key: Generators): TemplateResult } } = {
@@ -107,7 +109,7 @@ export function strap<T>({
       if (config.verbose && config.mode === DisplayMode.structure) {
         return html`
             <fhir-wrapper label="${label}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
-                ${generator(null as unknown as T, '*', key)}
+               ${generator(null as unknown as T, '*', key)}
             </fhir-wrapper>`
       }
     }
