@@ -1,9 +1,13 @@
-import {html, TemplateResult}                                                                from 'lit'
-import {customElement}                                                                       from 'lit/decorators.js'
+import {html, TemplateResult} from 'lit'
+import {customElement}        from 'lit/decorators.js'
 
-import {Backbone, choice, Decorated, oneOf, Validations}                                     from '../../../internal'
-import {wrap}                                                                                from '../../../shell'
-import {DisplayConfig}                          from '../../../types'
+import {Backbone, choice, Decorated, oneOf, Validations} from '../../../internal'
+import {
+  wrap
+}                                                        from '../../../shell'
+import {
+  DisplayConfig
+}                                                        from '../../../types'
 import {
   AttachmentData,
   CodeableConceptData,
@@ -12,10 +16,19 @@ import {
   RangeData,
   RatioData,
   SampledDataData
-}                                               from '../../complex'
-import {DateTime, Integer, PrimitiveType, Time} from '../../primitive'
-import {ReferenceData}                                                                       from '../../special'
-import {ObservationComponentData}                                           from './observation.data'
+}                                                        from '../../complex'
+import {
+  DateTime,
+  Integer,
+  PrimitiveType,
+  Time
+}                                                        from '../../primitive'
+import {
+  ReferenceData
+}                                                        from '../../special'
+import {
+  ObservationComponentData
+}                                                        from './observation.data'
 
 
 

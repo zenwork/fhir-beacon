@@ -1,9 +1,9 @@
-import {html, TemplateResult}                from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {BaseElement, Decorated, Validations} from '../../../internal'
-import {DisplayConfig}                       from '../../../types'
-import {PrimitiveType}                       from '../../primitive'
-import {SampledDataData}                     from './sample-data.data'
+import {html, TemplateResult}   from 'lit'
+import {customElement}          from 'lit/decorators.js'
+import {BaseElement, Decorated} from '../../../internal'
+import {DisplayConfig}          from '../../../types'
+import {PrimitiveType}          from '../../primitive'
+import {SampledDataData}        from './sample-data.data'
 
 
 
@@ -15,15 +15,13 @@ export class SampledData extends BaseElement<SampledDataData> {
   }
 
   public renderDisplay(config: DisplayConfig,
-                       data: Decorated<SampledDataData>,
-                       validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                       data: Decorated<SampledDataData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderStructure(config: DisplayConfig,
-                         data: Decorated<SampledDataData>,
-                         validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                         data: Decorated<SampledDataData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderAny(config: DisplayConfig,

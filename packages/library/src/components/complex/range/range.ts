@@ -5,6 +5,7 @@ import {DisplayConfig}                       from '../../../types'
 import {RangeData}                           from './range.data'
 
 
+
 @customElement('fhir-range')
 export class Range extends BaseElement<RangeData> {
   constructor() {super('Range')}
@@ -13,13 +14,13 @@ export class Range extends BaseElement<RangeData> {
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<RangeData>,
                        validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+    return this.renderAny(config, data)
   }
 
   public renderStructure(config: DisplayConfig,
                          data: Decorated<RangeData>,
                          validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+    return this.renderAny(config, data)
   }
 
   private renderAny(config: DisplayConfig, data: Decorated<RangeData>): TemplateResult[] {

@@ -28634,12 +28634,6 @@
                   "type": {
                     "text": "Decorated<SampledDataData>"
                   }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
-                  }
                 }
               ],
               "description": "convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.",
@@ -28668,12 +28662,6 @@
                   "name": "data",
                   "type": {
                     "text": "Decorated<SampledDataData>"
-                  }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
                   }
                 }
               ],
@@ -47001,12 +46989,6 @@
                   "type": {
                     "text": "Decorated<ObservationReferenceRangeData>"
                   }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
-                  }
                 }
               ],
               "description": "convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.",
@@ -47035,12 +47017,6 @@
                   "name": "data",
                   "type": {
                     "text": "Decorated<ObservationReferenceRangeData>"
-                  }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
                   }
                 }
               ],
@@ -48251,12 +48227,6 @@
                   "type": {
                     "text": "Decorated<ObservationTriggeredByData>"
                   }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
-                  }
                 }
               ],
               "description": "convenience method implemented by fhir model elements and resources. Internal and abstract classes should\ncontribute templateGenerators instead.",
@@ -48285,12 +48255,6 @@
                   "name": "data",
                   "type": {
                     "text": "Decorated<ObservationTriggeredByData>"
-                  }
-                },
-                {
-                  "name": "validations",
-                  "type": {
-                    "text": "Validations"
                   }
                 }
               ],

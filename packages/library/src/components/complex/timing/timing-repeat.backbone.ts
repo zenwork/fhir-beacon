@@ -1,12 +1,12 @@
-import {html, TemplateResult}                    from 'lit'
+import {html, TemplateResult}                            from 'lit'
 import {customElement}                                   from 'lit/decorators.js'
 import {Backbone, choice, Decorated, oneOf, Validations} from '../../../internal'
 import {DisplayConfig}                                   from '../../../types'
-import {PrimitiveType} from '../../primitive'
-import {PeriodData} from '../period'
-import {QuantityData} from '../quantity'
-import {TimingRepeatData}                        from './timing.data'
-import { RangeData } from '../range'
+import {PrimitiveType}                                   from '../../primitive'
+import {PeriodData}                                      from '../period'
+import {QuantityData}                                    from '../quantity'
+import {RangeData}                                       from '../range'
+import {TimingRepeatData}                                from './timing.data'
 
 
 

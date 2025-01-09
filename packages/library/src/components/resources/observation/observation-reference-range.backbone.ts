@@ -1,10 +1,10 @@
-import {html, TemplateResult}             from 'lit'
-import {customElement}                    from 'lit/decorators.js'
-import {Backbone, Decorated, Validations} from '../../../internal'
-import {wrap}                             from '../../../shell'
-import {DisplayConfig}                    from '../../../types'
-import {PrimitiveType}                    from '../../primitive'
-import {ObservationReferenceRangeData}    from './observation.data'
+import {html, TemplateResult}          from 'lit'
+import {customElement}                 from 'lit/decorators.js'
+import {Backbone, Decorated}           from '../../../internal'
+import {wrap}                          from '../../../shell'
+import {DisplayConfig}                 from '../../../types'
+import {PrimitiveType}                 from '../../primitive'
+import {ObservationReferenceRangeData} from './observation.data'
 
 
 
@@ -15,15 +15,13 @@ export class ObservationReferenceRange extends Backbone<ObservationReferenceRang
   }
 
   public renderDisplay(config: DisplayConfig,
-                       data: Decorated<ObservationReferenceRangeData>,
-                       validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                       data: Decorated<ObservationReferenceRangeData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderStructure(config: DisplayConfig,
-                         data: Decorated<ObservationReferenceRangeData>,
-                         validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                         data: Decorated<ObservationReferenceRangeData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderAny(config: DisplayConfig,

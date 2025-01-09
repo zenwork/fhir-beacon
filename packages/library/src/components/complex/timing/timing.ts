@@ -1,9 +1,9 @@
-import {html, TemplateResult}                from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {BaseElement, Decorated, Validations} from '../../../internal'
-import {wrap}                                from '../../../shell'
-import {DisplayConfig}                       from '../../../types'
-import {PrimitiveType}                       from '../../primitive'
+import {html, TemplateResult}   from 'lit'
+import {customElement}          from 'lit/decorators.js'
+import {BaseElement, Decorated} from '../../../internal'
+import {wrap}                   from '../../../shell'
+import {DisplayConfig}          from '../../../types'
+import {PrimitiveType}          from '../../primitive'
 
 import {TimingData} from './timing.data'
 
@@ -17,15 +17,13 @@ export class Timing extends BaseElement<TimingData> {
 
 
   public renderDisplay(config: DisplayConfig,
-                       data: Decorated<TimingData>,
-                       validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                       data: Decorated<TimingData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderStructure(config: DisplayConfig,
-                         data: Decorated<TimingData>,
-                         validations: Validations): TemplateResult[] {
-    return this.renderAny(config, data, validations)
+                         data: Decorated<TimingData>): TemplateResult[] {
+    return this.renderAny(config, data)
   }
 
   public renderAny(config: DisplayConfig,
