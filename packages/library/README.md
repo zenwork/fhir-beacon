@@ -1,66 +1,70 @@
 FHIR Beacon
 ===========
 
-demo site: https://zenwork.github.io/fhir-beacon/
+## The Library
+Open Source library for working with [FHIR](http://hl7.org/fhir/) data in the browser that enables web-developers to 
+easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer. 
 
-* #### [FHIR](http://hl7.org/fhir/) UI components that do not require a backend 🏝️
-* #### Works with all frameworks 🖼️
-* #### Works in CSR, SSR, and SSG environments
-* #### Built on top of [https://shoelace.style] 👟
-* #### Fully customizable with CSS 🎨
-* #### Open source
+## Status
+* in full alpha mode.
+* storybook catalog: https://fhir-beacon.deno.dev
+* use-case showcase: https://fhir-beacon-app.deno.dev
 
-What Problems Does `fhir-beacon` Solve?
------
+## Design Philosophy?
+1. `idiomatic` - UI markup that easily reflect the core FHIR documentation 
+2. `local-first` - data validation without a backend; leverages web-APIs for state-management
+3. `framework-agnostic` - the library is can be used in any framework, plain JS, or in statically generated single 
+   HTML file.
+4. `resources or fragments` - use the library to render complete resources or any fragments
+5. `composable, decomposable, and extendable` - use the library differently in different contexts
+6. `fast prototyping` - use 4 default view-modes through-out the development process (display, structural, narrative,
+   jason)
+7. `customize` - extend existing FHIR element to change what you need or support your FHIR extensions 
+8. `create` - build components from scratch with a FHIR-ready toolkit 
 
-* Build FHIR-based UIs in an idiomatic way that aligns to the standard
-* Provide out-of-the-box rendering of resources, complex, simple, and other FHIR data structures
-* Display errors
-* Render as detailed structures
-* Extend components to customize what is rendered
-* \[TODO] - edit data with full validation
-* \[TODO] - display collections as tables.
+## Foreseen Benefits
+* Eliminate the overhead of maintaining a frontend data-model.
+* Make front-end developers productive without being FHIR domain experts.
+* Integrate FHIR data in UIs far away from a FHIR backend.
 
-Why Use Web Components?
---------------
+## Usage
 
-Web Components are a way to instruct the browser on the introduction of new custom elements that can be used just
-like any other HTML markup.
+NOTE: All usage examples assume that the `fhir-beacon` library is loaded in the browser.      
 
-```html
 
-<html >
-<head >
-  <script src="/js/my-element.js"></script >
-</head >
-<body >
-  <my-element title="Salutation" value="Hello World!"></my-element >
-</body >
-</html >
+Display an observation with default rendering using the lit html template rendering:
+```typescript
+import {DisplayMode, ObservationData} from 'fhir-beacon'
+import {html} from 'lit'
+
+function render(data:ObservationData){
+  return html`<fhir-observation .data=${data}></fhir-observation>`
+}
 ```
 
-### A Browser Standard
+  
+Display an observation with structural details in React:
+```jsx
+import {DisplayMode, ObservationData} from 'fhir-beacon'
 
-Web component is a browser standard supported in all major browsers and one implementation can be used in all major
-frameworks.
+function render(data:ObservationData){
+  return <fhir-observation data={data} mode={DisplayMode.structure} verbose></fhir-observation>
+}
+```
 
-They are made up of the following Browser APIs:
-
-* Custom Elements
-* Shadow DOM
-* Template Elements
-* CSS custom properties
-* CSS Parts
-
-### Libraries
-
-Although no extra library is needed to create or interact with a web component, there are many librairies that make
-their development easier.
-
-### Resources
-
-* [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) - The specification
-* [Lit Library](https://lit.dev) - most popular library for implenting web components
-* [Web Component](https://webcomponents.dev/) - online IDE with demos of supporting libraries and
-  frameworks
-* [Browser Support](https://caniuse.com/custom-elementsv1)
+Display an observation as a narrative in plain html:
+```html
+<document>
+    <template>
+        <fhir-observation mode="narrative"></fhir-observation>        
+    </template>
+    <script>
+            const temp = document.getElementsByTagName("template")[0];
+            const obs = temp.content.cloneNode(true);
+            
+            obs.data = data
+            
+            document.body.appendChild(obs);
+    </script>
+</document>
+```
