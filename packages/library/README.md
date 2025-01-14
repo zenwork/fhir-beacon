@@ -5,6 +5,13 @@ FHIR Beacon
 Open Source library for working with [FHIR](http://hl7.org/fhir/) data in the browser that enables web-developers to 
 easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer. 
 
+## Features
+* default implementation of FHIR primitives, complex, resource as HTML custom elements
+* display view, editable form, metamodel view, narrative view, debug view modes for all elements
+* Extend any element to support extensions and profiles
+* Base classes, utilities to create custom FHIR elements that implements the metamodel (cardinality, bindings, 
+  summary, constraints, etc.)  
+
 ## Status
 * in full alpha mode.
 * storybook catalog: https://fhir-beacon.deno.dev
@@ -23,16 +30,18 @@ easily adopt the FHIR metamodel as is, without having to implement a separate ma
 8. `create` - build components from scratch with a FHIR-ready toolkit 
 
 ## Foreseen Benefits
-* Eliminate the overhead of maintaining a frontend data-model.
-* Make front-end developers productive without being FHIR domain experts.
+* enable local-first client development
 * Integrate FHIR data in UIs far away from a FHIR backend.
+* Make front-end developers productive without being FHIR domain experts.
+* Use FHIR domain knowledge to reason about the UI.
+* Eliminate the overhead of maintaining a lot of middleware/BFF models just for the frontend.
 
 ## Usage
 
-NOTE: All usage examples assume that the `fhir-beacon` library is loaded in the browser.      
+Below are some illustrative examples. All usage examples assume that the `fhir-beacon` library is loaded in the 
+browser.
 
-
-Display an observation with default rendering using the lit html template rendering:
+*Display an observation with default rendering using the lit html template rendering:*
 ```typescript
 import {DisplayMode, ObservationData} from 'fhir-beacon'
 import {html} from 'lit'
@@ -41,9 +50,30 @@ function render(data:ObservationData){
   return html`<fhir-observation .data=${data}></fhir-observation>`
 }
 ```
+ 
+*Or, use FHIR primitives & complex elements in combination with utility functions (ie: `wrap()`) to define your own 
+rendering:* 
+```typescript
+import {DisplayMode, TimingData, wrap} from 'fhir-beacon'
+import {html} from 'lit'
+
+function render(data:TimingData, config:DisplayConfig){
+  return html`
+          ${wrap({
+                 key: 'event',
+                 collection: data.event ?? [],
+                 generator: (d, l, k) => html`
+                 <fhir-primitive key=${k} label=${l} .value=${d} .type=${PrimitiveType.datetime} summary ></fhir-primitive>`,
+                 config
+          })}
+          <fhir-timing-repeat key="repeat" .data=${data.repeat}></fhir-timing-repeat>
+          <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
+  `
+}
+```
 
   
-Display an observation with structural details in React:
+*Display an observation with structural details in React:*
 ```jsx
 import {DisplayMode, ObservationData} from 'fhir-beacon'
 
@@ -52,7 +82,7 @@ function render(data:ObservationData){
 }
 ```
 
-Display an observation as a narrative in plain html:
+*Display an observation as a narrative in plain html:*
 ```html
 <document>
     <template>
@@ -62,7 +92,7 @@ Display an observation as a narrative in plain html:
             const temp = document.getElementsByTagName("template")[0];
             const obs = temp.content.cloneNode(true);
             
-            obs.data = data
+            obs.data = fetchData()
             
             document.body.appendChild(obs);
     </script>

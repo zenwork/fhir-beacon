@@ -31,6 +31,7 @@ export const Structure: Story = {
     mode: 'structure',
     showerror: true,
     verbose: true,
-    open: true
+    open: true,
+    input: false
   }
 }

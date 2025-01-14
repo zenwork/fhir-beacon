@@ -9475,7 +9475,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ args: { data, mode: 'structure', showerror: true, verbose: true, open: true } }"
+          "default": "{ args: { data, mode: 'structure', showerror: true, verbose: true, open: true, input: false } }"
         }
       ],
       "exports": [
