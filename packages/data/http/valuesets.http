@@ -1,0 +1,2 @@
+GET http://hl7.org/fhir/request-intent
+Accept: application/json
