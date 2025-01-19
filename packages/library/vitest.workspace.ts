@@ -26,9 +26,12 @@ export default defineWorkspace([
         headless: headless,
         name: 'chromium',
         screenshotFailures: true,
-        providerOptions: { debugger: true },
+
         provider: 'playwright',
-        viewport: { width: 1000, height: 800 }
+        viewport: { width: 1000, height: 800 },
+        instances: [
+          { browser: 'chromium' }
+        ]
       },
       typecheck: {
         enabled: true,

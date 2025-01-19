@@ -6,4 +6,9 @@ GET http://hl7.org/fhir/ValueSet/definition-use
 Accept: application/json
 
 ###
-GET http://dicom.nema.org/resources/ontology/DCM
+GET http://hl7.org/fhir/sid/cvx
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+
+###
+GET https://terminology.hl7.org/5.1.0/CodeSystem-CVX.json
+Accept: application/json

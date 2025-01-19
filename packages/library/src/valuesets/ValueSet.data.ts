@@ -98,8 +98,9 @@ export type ValueSetData = DomainResourceData & {
 }
 
 export type ResolvedValue = { code: Code, display: FhirString, definition: FhirString }
+type ResolutionError = { source: string, error: string }
 export type ResolvedValueSet = {
-  origin: ValueSetData,
+  origin: ValueSetData | ResolutionError,
   id: string,
   name: string,
   version: string,
@@ -114,8 +115,33 @@ export type ResolvedValueSet = {
   }
 }
 
+export type ValueAsChoice = { value: string, display: string }
 export type ValueSetChoices = {
   id: string,
   name: string,
-  choice: []
+  choices: ValueAsChoice[]
+  valid: boolean
+}
+
+export interface ValueSetSource {
+  resolve(source: string, debug?: boolean): Promise<ResolvedValueSet>
+  cacheAll(debug?: boolean): Promise<boolean>
+  allIds(): Promise<string[]>
+}
+
+export interface ValueSetStore {
+  write(valueSet: ValueSetChoices): Promise<void>
+}
+
+export interface LoadableStore extends ValueSetSource {
+  isLoaded(): Promise<boolean>
+  load(): Promise<boolean>
+}
+
+export function isLoadableStore(source: ValueSetSource | LoadableStore): source is LoadableStore {
+  return (source as LoadableStore).load !== undefined
+}
+
+export function isResolutionError(origin: ValueSetData | ResolutionError): origin is ResolutionError {
+  return (origin as ResolutionError).error !== undefined
 }

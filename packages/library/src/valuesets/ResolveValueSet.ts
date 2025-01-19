@@ -3,7 +3,7 @@ import {ResolvedValue, ResolvedValueSet, ValueSetData, ValueSetIncludeExcludeDat
 
 
 
-export async function resolveValueSet(vs: ValueSetData): Promise<ResolvedValueSet> {
+export async function resolveValueSet(vs: ValueSetData, debug: boolean = false): Promise<ResolvedValueSet> {
 
   if (isBlank(vs.name)) {
     throw new Error('ValueSet name is required for code generation'
@@ -22,11 +22,11 @@ export async function resolveValueSet(vs: ValueSetData): Promise<ResolvedValueSe
 
 
   return Promise.all([
-                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.include ?? []))
+                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.include ?? [], 'include', debug))
                               .then(r => {
                                 return r.flat()
                               }),
-                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.exclude ?? [], 'exclude'))
+                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.exclude ?? [], 'exclude', debug))
                               .then(r => r.flat())
 
                      ])
@@ -48,7 +48,8 @@ export async function resolveValueSet(vs: ValueSetData): Promise<ResolvedValueSe
 }
 
 function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
-                                  variant: 'include' | 'exclude' = 'include'): Promise<ResolvedValue[][]> {
+                                  variant: 'include' | 'exclude' = 'include',
+                                  debug: boolean): Promise<ResolvedValue[][]> {
   const promises: Promise<ResolvedValue[]>[] = []
 
   for (let idx = 0; idx < segment.length; idx++) {
@@ -70,16 +71,31 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
       }
 
       if (inc.concept) {
-        console.log('resolved [' + inc.concept.length + '] from self')
+        if (debug) console.log('resolved [' + inc.concept.length + '] from self')
         inc.concept.forEach(c => concepts.push({ code: c.code, display: c.display ?? 'n/a', definition: 'n/a' }))
         resolve(concepts)
 
-      } else if (inc.system) {
-        const url: string = `${inc.system}`
-        fetch(url, { headers: { 'Accept': 'application/json' } })
-          .then(r => r.json())
+      } else if (inc.system && inc.system.match(/^http/) !== null) {
+        const url: string = `${inc.system}`.replace(/http:/, 'https:')
+        fetchWithRetry(url,
+                       {
+                         headers: { 'Accept': 'application/json' },
+                         redirect: 'follow'
+                       })
+          .then(r => {
+            if (!r.ok) {
+              throw new Error(`Request failed with status ${r.status}: ${r.statusText}`)
+            }
+            return r.text()
+          })
+          .then(text => {
+            if (!text) {
+              throw new Error('Received empty response body')
+            }
+            return JSON.parse(text)
+          })
           .then(json => {
-                  console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
+            if (debug) console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
                   json.concept.forEach((c: Record<string, unknown>) =>
                                          concepts.push({
                                                          code: c.code as string,
@@ -91,7 +107,7 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
                 }
           )
           .catch((r) => {
-            console.log('failed to resolve code system: ' + ' ' + url)
+            // console.log('failed to resolve code system: ' + ' ' + url)
             reject(new Error(`Failed to coding system set [${url}][${r}]`))
           })
 
@@ -99,18 +115,37 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
       } else if (inc.valueSet) {
         const promises: Promise<ResolvedValue[]>[] = []
         inc.valueSet.forEach(vs => {
-          const url: string = `${vs}`
-          console.log('resolving [' + url + '] value set')
-          promises.push(fetch(url, { headers: { 'Accept': 'application/json' } })
-                          .then(r => r.json())
-                          .then(json => resolveIncludesOrExclude(json.compose[variant] ?? []))
-                          .then(r => r.flat())
-                          .catch((r) => {
-                            console.log('failed to resolve code system: ' + ' ' + url)
-                            reject(new Error(`Failed to resolve value set [${vs}][${r}]`))
-                            return []
-                          })
-          )
+          if (vs.match(/^http/) !== null) {
+            const url: string = `${vs}`.replace(/http:/, 'https:')
+            if (debug) console.log('resolving [' + url + '] value set')
+            promises.push(fetchWithRetry(
+                            url,
+                            {
+                              headers: { 'Accept': 'application/json' },
+                              redirect: 'follow'
+                            }
+                          )
+                            .then((r) => {
+                              if (!r.ok) {
+                                throw new Error(`Request failed with status ${r.status}: ${r.statusText}`)
+                              }
+                              return r.text()
+                            })
+                            .then(text => {
+                              if (!text) {
+                                throw new Error('Received empty response body')
+                              }
+                              return JSON.parse(text)
+                            })
+                            .then(json => resolveIncludesOrExclude(json.compose[variant] ?? [], variant, debug))
+                            .then(r => r.flat())
+                            .catch((r) => {
+                              // console.log('failed to resolve code system: ' + ' ' + url)
+                              reject(new Error(`Failed to resolve value set [${vs}][${r}]`))
+                              return []
+                            })
+            )
+          }
 
         })
 
@@ -132,9 +167,39 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
 
   return Promise.race([
                         Promise.all(promises),
-                        timeout(30_000)
+                        timeout(60_000)
                       ])
                 .catch((err) => { throw new Error(`Failed to resolve value set [${err}]`) })
 
 
+}
+
+
+// @ts-ignore
+async function fetchWithRetry(url: string, options = {}, retries = 5, retryDelay = 1000): Promise<Response> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      // Attempt to fetch the resource
+      const response = await fetch(url, options)
+
+      // If the response is successful, return it
+      if (response.ok) {
+        return response
+      }
+
+      // Handle non-success statuses (like 4xx or 5xx)
+      throw new Error(`Fetch failed with status: ${response.status}`)
+    } catch (error) {
+      // If it's the last attempt, throw the error
+      if (attempt === retries) {
+        throw error
+      }
+
+      // Optionally log or handle the retry attempt
+      // console.warn(`Retry attempt ${attempt} failed for ${url}. Retrying in ${retryDelay}ms...`)
+
+      // Wait for the retry delay
+      await new Promise(res => setTimeout(res, retryDelay))
+    }
+  }
 }

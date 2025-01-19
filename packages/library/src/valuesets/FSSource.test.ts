@@ -13,24 +13,44 @@ describe('FSSource', () => {
     const source: FSSource = new FSSource(exampleData)
     const result: boolean = await source.load()
     expect(result).to.be.true
-    expect(source.size()).to.equal(1331)
+    expect(source.size()).to.equal(1241)
     expect(source.exists('valueset-transport-intent.json')).to.be.true
   })
 
-  test('should read a file and resolve referenced coding system concepts over the internet', async () => {
-    const source: FSSource = new FSSource(exampleData)
-    await source.load()
+  test('should read a file and resolve referenced coding system concepts over the internet',
+       { timeout: 30000 },
+       async () => {
+         const source: FSSource = new FSSource(exampleData)
+         await source.load()
 
-    const valueSet: ResolvedValueSet = await source.read('valueset-transport-intent.json')
+         const valueSet: ResolvedValueSet = await source.resolve('valueset-transport-intent.json', false)
 
-    expect(valueSet.id).to.equal('transport-intent')
-    expect(valueSet.name).to.equal('TransportIntent')
-    expect(valueSet.status).to.equal('draft')
-    expect(valueSet.version).to.equal('5.0.0')
-    expect(valueSet.compose.include.concept).to.have.lengthOf(9)
-    expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
+         expect(valueSet.id).to.equal('transport-intent')
+         expect(valueSet.name).to.equal('TransportIntent')
+         expect(valueSet.status).to.equal('draft')
+         expect(valueSet.version).to.equal('5.0.0')
+         expect(valueSet.compose.include.concept).to.have.lengthOf(9)
+         expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
 
-  })
+       })
+
+  test('should read a file and resolve referenced coding system concepts over the internet',
+       { timeout: 30000 },
+       async () => {
+         const source: FSSource = new FSSource(exampleData)
+         await source.load()
+
+         const valueSet: ResolvedValueSet = await source.resolve('valueset-week-of-month.json', false)
+
+         expect(valueSet.id).to.equal('week-of-month')
+         expect(valueSet.name).to.equal('WeekOfMonth')
+         expect(valueSet.status).to.equal('draft')
+         expect(valueSet.version).to.equal('5.0.0')
+         expect(valueSet.compose.include.concept).to.have.lengthOf(5)
+         expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
+         // console.log(JSON.stringify(valueSet,null,2))
+
+       })
 
   test('should read a file and resolve referenced value set concepts over the internet',
        { timeout: 30000 },
@@ -38,7 +58,7 @@ describe('FSSource', () => {
          const source: FSSource = new FSSource(exampleData)
          await source.load()
 
-         const valueSet: ResolvedValueSet = await source.read('valueset-definition-topic.json')
+         const valueSet: ResolvedValueSet = await source.resolve('valueset-definition-topic.json')
 
          expect(valueSet.id).to.equal('definition-topic')
          expect(valueSet.name).to.equal('DefinitionTopic')
@@ -55,7 +75,7 @@ describe('FSSource', () => {
          await source.load()
 
          try {
-           await source.read('valueset-participation-role-type.json')
+           await source.resolve('valueset-participation-role-type.json')
          } catch (err) {
            expect((err as Error).message).to.equal(
              'Failed to read and resolve ValueSet for source "valueset-participation-role-type.json". Details: Error: Failed to resolve value set [Error: Failed to coding system set [http://dicom.nema.org/resources/ontology/DCM][SyntaxError: Unexpected token \'<\', "<!DOCTYPE "... is not valid JSON]]')
@@ -71,12 +91,13 @@ describe('FSSource', () => {
          await source.load()
 
          try {
-           await source.read('foo.json')
+           await source.resolve('foo.json')
          } catch (err) {
            expect((err as Error).message).to.equal('ValueSet foo.json not found')
          }
 
        }
   )
+
 
 })
