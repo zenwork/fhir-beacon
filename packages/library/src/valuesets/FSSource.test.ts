@@ -31,4 +31,52 @@ describe('FSSource', () => {
     expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
 
   })
+
+  test('should read a file and resolve referenced value set concepts over the internet',
+       { timeout: 30000 },
+       async () => {
+         const source: FSSource = new FSSource(exampleData)
+         await source.load()
+
+         const valueSet: ResolvedValueSet = await source.read('valueset-definition-topic.json')
+
+         expect(valueSet.id).to.equal('definition-topic')
+         expect(valueSet.name).to.equal('DefinitionTopic')
+         expect(valueSet.compose.include.concept).to.have.lengthOf(9)
+         expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
+
+       }
+  )
+
+  test('should fail when url are not resolvable',
+       { timeout: 30000 },
+       async () => {
+         const source: FSSource = new FSSource(exampleData)
+         await source.load()
+
+         try {
+           await source.read('valueset-participation-role-type.json')
+         } catch (err) {
+           expect((err as Error).message).to.equal(
+             'Failed to read and resolve ValueSet for source "valueset-participation-role-type.json". Details: Error: Failed to resolve value set [Error: Failed to coding system set [http://dicom.nema.org/resources/ontology/DCM][SyntaxError: Unexpected token \'<\', "<!DOCTYPE "... is not valid JSON]]')
+         }
+
+       }
+  )
+
+  test('should fail when file not found',
+       { timeout: 30000 },
+       async () => {
+         const source: FSSource = new FSSource(exampleData)
+         await source.load()
+
+         try {
+           await source.read('foo.json')
+         } catch (err) {
+           expect((err as Error).message).to.equal('ValueSet foo.json not found')
+         }
+
+       }
+  )
+
 })

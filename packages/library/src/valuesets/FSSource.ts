@@ -39,18 +39,27 @@ export class FSSource implements ValueSetSource {
   }
 
   async read(source: string): Promise<ResolvedValueSet> {
+
     if (this.exists(source)) {
       if (!this.#cache.has(source)) {
-        return realpath(`${this.#path}/${source}`)
+        const fullpath: string = `${this.#path}/${source}`
+        console.log(`Reading ${fullpath}`)
+        return realpath(fullpath)
           .then(path => readFile(path, { encoding: 'utf8' }))
           .then(data => JSON.parse(data) as ValueSetData)
           .then(json => resolveValueSet(json))
           .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
           .then(() => this.#cache.get(source)!)
+          .catch(error => {
+            // Handle and re-throw the error with meaningful context
+            throw new Error(`Failed to read and resolve ValueSet for source "${source}". Details: ${error}`)
+          })
+
       }
 
     }
-    return Promise.reject(`ValueSet ${source} not found`)
+
+    return Promise.reject(new Error(`ValueSet ${source} not found`))
 
   }
 

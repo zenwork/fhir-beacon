@@ -1,2 +1,9 @@
 GET http://hl7.org/fhir/request-intent
 Accept: application/json
+
+###
+GET http://hl7.org/fhir/ValueSet/definition-use
+Accept: application/json
+
+###
+GET http://dicom.nema.org/resources/ontology/DCM

@@ -22,9 +22,11 @@ export async function resolveValueSet(vs: ValueSetData): Promise<ResolvedValueSe
 
 
   return Promise.all([
-                       Promise.resolve(resolveIncludes(vs.compose?.include ?? []))
-                              .then(r => r.flat()),
-                       Promise.resolve(resolveIncludes(vs.compose?.exclude ?? []))
+                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.include ?? []))
+                              .then(r => {
+                                return r.flat()
+                              }),
+                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.exclude ?? [], 'exclude'))
                               .then(r => r.flat())
 
                      ])
@@ -45,15 +47,15 @@ export async function resolveValueSet(vs: ValueSetData): Promise<ResolvedValueSe
 
 }
 
-function resolveIncludes(includes: ValueSetIncludeExcludeData[]): Promise<ResolvedValue[][]> {
+function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
+                                  variant: 'include' | 'exclude' = 'include'): Promise<ResolvedValue[][]> {
   const promises: Promise<ResolvedValue[]>[] = []
 
+  for (let idx = 0; idx < segment.length; idx++) {
 
-  for (let idx = 0; idx < includes.length; idx++) {
-
-    promises.push(new Promise<ResolvedValue[]>((resolve) => {
+    promises.push(new Promise<ResolvedValue[]>((resolve, reject) => {
       const concepts: ResolvedValue[] = []
-      const inc = includes[idx]
+      const inc = segment[idx]
       if (isBlank(inc.system) && isBlank(inc.valueSet)) {
         throw new Error(`ValueSet include system or concept is required for code generation [${idx}] (vsd-1 -> http://hl7.org/fhir/valueset-definitions.html#ValueSet.compose.include)'}`)
       }
@@ -68,25 +70,71 @@ function resolveIncludes(includes: ValueSetIncludeExcludeData[]): Promise<Resolv
       }
 
       if (inc.concept) {
+        console.log('resolved [' + inc.concept.length + '] from self')
         inc.concept.forEach(c => concepts.push({ code: c.code, display: c.display ?? 'n/a', definition: 'n/a' }))
         resolve(concepts)
+
       } else if (inc.system) {
         const url: string = `${inc.system}`
         fetch(url, { headers: { 'Accept': 'application/json' } })
           .then(r => r.json())
           .then(json => {
-                  json.concept.forEach((c: Record<string, unknown>) => concepts.push({
-                                                                                       code: c.code as string,
-                                                                                       display: c.display as string ?? 'n/a',
-                                                                                       definition: c.definition as string
-                                                                                                   ?? 'n/a'
-                                                                                     }))
+                  console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
+                  json.concept.forEach((c: Record<string, unknown>) =>
+                                         concepts.push({
+                                                         code: c.code as string,
+                                                         display: c.display as string ?? 'n/a',
+                                                         definition: c.definition as string
+                                                                     ?? 'n/a'
+                                                       }))
                   resolve(concepts)
                 }
           )
+          .catch((r) => {
+            console.log('failed to resolve code system: ' + ' ' + url)
+            reject(new Error(`Failed to coding system set [${url}][${r}]`))
+          })
+
+
+      } else if (inc.valueSet) {
+        const promises: Promise<ResolvedValue[]>[] = []
+        inc.valueSet.forEach(vs => {
+          const url: string = `${vs}`
+          console.log('resolving [' + url + '] value set')
+          promises.push(fetch(url, { headers: { 'Accept': 'application/json' } })
+                          .then(r => r.json())
+                          .then(json => resolveIncludesOrExclude(json.compose[variant] ?? []))
+                          .then(r => r.flat())
+                          .catch((r) => {
+                            console.log('failed to resolve code system: ' + ' ' + url)
+                            reject(new Error(`Failed to resolve value set [${vs}][${r}]`))
+                            return []
+                          })
+          )
+
+        })
+
+        Promise.all(promises)
+               .then(r => r.flat())
+               .then(r => {
+                 concepts.push(...r)
+                 resolve(concepts)
+               })
+
+
       }
     }))
   }
 
-  return Promise.all(promises)
+  const timeout = (millis: number) => {
+    return new Promise<ResolvedValue[][]>((_, rej) => setTimeout(() => rej('Resolving values took too long'), millis))
+  }
+
+  return Promise.race([
+                        Promise.all(promises),
+                        timeout(30_000)
+                      ])
+                .catch((err) => { throw new Error(`Failed to resolve value set [${err}]`) })
+
+
 }
