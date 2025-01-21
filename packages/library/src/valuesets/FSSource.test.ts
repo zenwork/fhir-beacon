@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import {describe, expect, test} from 'vitest'
 import {FSSource}               from './FSSource'
-import {ResolvedValueSet}       from './ValueSet.data'
+import {ResolvedSet}            from './ValueSet.data'
 
 
 
@@ -23,7 +23,7 @@ describe('FSSource', () => {
          const source: FSSource = new FSSource(exampleData)
          await source.load()
 
-         const valueSet: ResolvedValueSet = await source.resolve('valueset-transport-intent.json', false)
+         const valueSet: ResolvedSet = await source.resolve('valueset-transport-intent.json', false)
 
          expect(valueSet.id).to.equal('transport-intent')
          expect(valueSet.name).to.equal('TransportIntent')
@@ -40,7 +40,7 @@ describe('FSSource', () => {
          const source: FSSource = new FSSource(exampleData)
          await source.load()
 
-         const valueSet: ResolvedValueSet = await source.resolve('valueset-week-of-month.json', false)
+         const valueSet: ResolvedSet = await source.resolve('valueset-week-of-month.json', false)
 
          expect(valueSet.id).to.equal('week-of-month')
          expect(valueSet.name).to.equal('WeekOfMonth')
@@ -58,7 +58,7 @@ describe('FSSource', () => {
          const source: FSSource = new FSSource(exampleData)
          await source.load()
 
-         const valueSet: ResolvedValueSet = await source.resolve('valueset-definition-topic.json')
+         const valueSet: ResolvedSet = await source.resolve('valueset-definition-topic.json')
 
          expect(valueSet.id).to.equal('definition-topic')
          expect(valueSet.name).to.equal('DefinitionTopic')

@@ -1,7 +1,7 @@
-import {FSSource}                       from './FSSource'
-import {FSStore}                        from './FSStore'
-import {ValueSetChoices, ValueSetStore} from './ValueSet.data'
-import {ValueSetProcessor}              from './ValueSetProcessor'
+import {FSSource}               from './FSSource'
+import {FSStore}                from './FSStore'
+import {Choices, ValueSetStore} from './ValueSet.data'
+import {ValueSetProcessor}      from './ValueSetProcessor'
 
 
 
@@ -15,7 +15,7 @@ export class ValueSets {
     this.store = store
   }
 
-  async processAll(): Promise<ValueSetChoices[]> {
+  async processAll(): Promise<Choices[]> {
     return this.processor
                .processAll()
                .then(sets => {
@@ -34,7 +34,7 @@ export class ValueSets {
                .then(choices => this.store.write(choices))
   }
 
-  async get(id: string): Promise<ValueSetChoices> {
+  async get(id: string): Promise<Choices> {
     return this.processor.process(id)
   }
 

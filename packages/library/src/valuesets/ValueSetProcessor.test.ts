@@ -1,7 +1,7 @@
-import {describe, test}                 from 'vitest'
-import {FSSource, vsOrCsCriteria}       from './FSSource'
-import {LoadableStore, ValueSetChoices} from './ValueSet.data'
-import {ValueSetProcessor}              from './ValueSetProcessor'
+import {describe, test}                     from 'vitest'
+import {Criteria, FSSource, vsOrCsCriteria} from './FSSource'
+import {Choices, LoadableStore}             from './ValueSet.data'
+import {ValueSetProcessor}                  from './ValueSetProcessor'
 
 
 
@@ -20,7 +20,7 @@ describe('ValueSetProcessor', () => {
       return false
     }))
 
-    const valueSetChoices: ValueSetChoices[] = await processor.processAll(false)
+    const valueSetChoices: Choices[] = await processor.processAll(false)
 
     const count: number = valueSetChoices
       .reduce(
@@ -43,7 +43,7 @@ describe('ValueSetProcessor', () => {
 
   test('should process one', { timeout: 180_000 }, async () => {
 
-    const criteria: any = (id: string) => {
+    const criteria: Criteria = (id: string) => {
       return id === 'valueset-week-of-month.json'
     }
 
@@ -55,7 +55,7 @@ describe('ValueSetProcessor', () => {
 
     // const resolved: ResolvedValueSet = await source.resolve('valueset-week-of-month.json')
 
-    const choices: ValueSetChoices = await processor.process('valueset-week-of-month.json')
+    await processor.process('valueset-week-of-month.json')
 
     // console.log(resolved)
     // console.log(choices)

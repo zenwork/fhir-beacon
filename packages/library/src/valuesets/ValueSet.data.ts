@@ -5,12 +5,16 @@ import {
   CodeableConceptData,
   CodingData,
   ContactDetailData,
+  DateTime,
+  Decimal,
   FhirDate,
   FhirString,
   IdentifierData,
+  Integer,
   Markdown,
   PeriodData,
   ReferenceData,
+  UnsignedInt,
   URI,
   Url,
   UsageContextData
@@ -38,6 +42,7 @@ type ValueSetDesignationData = BackboneElementData & {
   additionalUse: CodingData[]
   value: FhirString
 }
+
 type ValueSetConceptData = BackboneElementData & {
   code: Code
   display?: FhirString
@@ -97,11 +102,87 @@ export type ValueSetData = DomainResourceData & {
   compose?: ValueSetComposeData
 }
 
+export type CodeSystemFilterData = BackboneElementData & {
+  code: Code
+  description?: FhirString
+  operator: Code[]
+  value: FhirString
+}
+
+export type CodeSystemPropertyData = BackboneElementData & {
+  code: Code
+  uri?: URI
+  description?: FhirString
+  type: Code
+}
+
+export type CodeSystemConceptPropertyData = BackboneElementData & {
+  code: Code
+  valueCode: Code
+  valueCoding: CodingData
+  valueString: FhirString
+  valueInteger: Integer
+  valueBoolean: boolean
+  valueDateTime: DateTime
+  valueDecimal: Decimal
+}
+
+export type CodeSystemConceptData = BackboneElementData & {
+  code: Code
+  display?: FhirString
+  definition?: Markdown
+  designation: CodeableConceptData[]
+  property: CodeSystemConceptPropertyData[]
+  concept: CodeSystemConceptData[]
+}
+
+export type CodeSystemData = DomainResourceData & {
+  url?: Url
+  identifier: IdentifierData[]
+  version?: FhirString
+  versionAlgorithm?: FhirString
+  versionAlgorithmCoding?: CodingData
+  name?: FhirString
+  title?: FhirString
+  status: FhirString
+  experimental?: boolean
+  date?: FhirString
+  publisher?: FhirString
+  contact: ContactDetailData[]
+  description?: Markdown
+  useContext: UsageContextData[]
+  jurisdiction: CodeableConceptData[]
+  purpose?: Markdown
+  copyright?: Markdown
+  copyrightLabel?: FhirString
+  approvalDate?: FhirDate
+  lastReviewDate?: FhirDate
+  effectivePeriod?: PeriodData
+  topic: CodeableConceptData[]
+  author: ContactDetailData[]
+  editor: ContactDetailData[]
+  reviewer: ContactDetailData[]
+  endorser: ContactDetailData[]
+  relatedArtifact: RelatedArtifactData[]
+  caseSensitive?: boolean
+  valueSet?: Canonical
+  hierarchyMeaning?: Code
+  compositional?: boolean
+  versionNeeded?: boolean
+  content?: Code
+  supplements?: Canonical
+  count?: UnsignedInt
+  filter: CodeSystemFilterData[]
+  property: CodeSystemPropertyData[]
+  concept: CodeSystemConceptData[]
+}
+
 export type ResolvedValue = { code: Code, display: FhirString, definition: FhirString }
 type ResolutionError = { source: string, error: string }
-export type ResolvedValueSet = {
-  origin: ValueSetData | ResolutionError,
+export type ResolvedSet = {
   id: string,
+  type: 'CodeSystem' | 'ValueSet' | 'unknown'
+  origin: ValueSetData | ResolutionError, // should also include code system
   name: string,
   version: string,
   status: string,
@@ -115,22 +196,23 @@ export type ResolvedValueSet = {
   }
 }
 
-export type ValueAsChoice = { value: string, display: string }
-export type ValueSetChoices = {
+export type Choice = { value: string, display: string }
+export type Choices = {
   id: string,
+  type: 'CodeSystem' | 'ValueSet' | 'unknown'
   name: string,
-  choices: ValueAsChoice[]
+  choices: Choice[]
   valid: boolean
 }
 
 export interface ValueSetSource {
-  resolve(source: string, debug?: boolean): Promise<ResolvedValueSet>
+  resolve(source: string, debug?: boolean): Promise<ResolvedSet>
   cacheAll(debug?: boolean): Promise<boolean>
   allIds(): Promise<string[]>
 }
 
 export interface ValueSetStore {
-  write(valueSet: ValueSetChoices): Promise<void>
+  write(valueSet: Choices): Promise<void>
 }
 
 export interface LoadableStore extends ValueSetSource {

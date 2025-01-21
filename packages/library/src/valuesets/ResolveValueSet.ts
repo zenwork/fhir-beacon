@@ -1,9 +1,9 @@
-import {isBlank}                                                                   from '../utilities'
-import {ResolvedValue, ResolvedValueSet, ValueSetData, ValueSetIncludeExcludeData} from './ValueSet.data'
+import {isBlank}                                                              from '../utilities'
+import {ResolvedSet, ResolvedValue, ValueSetData, ValueSetIncludeExcludeData} from './ValueSet.data'
 
 
 
-export async function resolveValueSet(vs: ValueSetData, debug: boolean = false): Promise<ResolvedValueSet> {
+export async function resolveValueSet(vs: ValueSetData, debug: boolean = false): Promise<ResolvedSet> {
 
   if (isBlank(vs.name)) {
     throw new Error('ValueSet name is required for code generation'
@@ -34,6 +34,7 @@ export async function resolveValueSet(vs: ValueSetData, debug: boolean = false):
                   return ({
                     origin: vs,
                     id: vs.id ?? 'unknown',
+                    type: vs.resourceType ?? 'unknown',
                     name: vs.name ?? 'unknown',
                     status: vs.status,
                     version: vs.version ?? 'unknown',
@@ -41,7 +42,7 @@ export async function resolveValueSet(vs: ValueSetData, debug: boolean = false):
                       include: { concept: r[0] },
                       exclude: { concept: r[1] }
                     }
-                  } as ResolvedValueSet)
+                  } as ResolvedSet)
                 })
 
 

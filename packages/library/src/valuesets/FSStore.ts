@@ -1,24 +1,23 @@
-import {mkdir, writeFile}               from 'node:fs/promises'
-import {join}                           from 'node:path'
-import {ValueSetChoices, ValueSetStore} from './ValueSet.data'
+import {mkdir, writeFile}       from 'node:fs/promises'
+import {join}                   from 'node:path'
+import {Choices, ValueSetStore} from './ValueSet.data'
 
 
 
 export class FSStore implements ValueSetStore {
 
-  #target: string
-  #folder: string
   #created: Promise<string | undefined>
+  #choices: string
 
   constructor(target: string) {
-    this.#target = target
 
-    this.#folder = join(target, 'valuesets')
-    this.#created = mkdir(this.#folder, { recursive: true })
+    this.#choices = join(target, 'choice')
+
+    this.#created = mkdir(this.#choices, { recursive: true })
 
   }
 
-  write(valueSet: ValueSetChoices): Promise<void> {
+  write(choices: Choices): Promise<void> {
     return this.#created
                .then(() => {
                  try {
@@ -27,9 +26,20 @@ export class FSStore implements ValueSetStore {
                    const { signal } = controller
 
                    const encoder = new TextEncoder() // Built-in API for text encoding
-                   const uint8Array = encoder.encode(JSON.stringify(valueSet, null, 2))
+                   const uint8Array = encoder.encode(JSON.stringify(choices, null, 2))
 
-                   const promise = writeFile(`${this.#folder}/${valueSet.id}.json`, uint8Array, { signal })
+                   let promise: Promise<void>
+                   switch (choices.type) {
+                     case 'CodeSystem':
+                       promise = writeFile(`${this.#choices}/cs-${choices.id}.json`, uint8Array, { signal })
+                       break
+                     case 'ValueSet':
+                       promise = writeFile(`${this.#choices}/vs-${choices.id}.json`, uint8Array, { signal })
+                       break
+                     case 'unknown':
+                       promise = writeFile(`${this.#choices}/er-${choices.id}`, uint8Array, { signal })
+                       break
+                   }
 
                    setTimeout(controller.abort, 5000)
 

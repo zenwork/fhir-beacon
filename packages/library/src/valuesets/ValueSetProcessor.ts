@@ -1,11 +1,11 @@
 import {
+  Choice,
+  Choices,
   isLoadableStore,
   isResolutionError,
   LoadableStore,
+  ResolvedSet,
   ResolvedValue,
-  ResolvedValueSet,
-  ValueAsChoice,
-  ValueSetChoices,
   ValueSetSource
 } from './ValueSet.data'
 
@@ -37,17 +37,18 @@ export class ValueSetProcessor {
     }
   }
 
-  process(id: string): Promise<ValueSetChoices> {
+  process(id: string): Promise<Choices> {
     return this.#ready
                .then(() =>
                        this.#source
                            .resolve(id)
-                           .then((resolved: ResolvedValueSet) => {
+                           .then((resolved: ResolvedSet) => {
 
                              if (isResolutionError(resolved.origin)) {
                                return {
                                  id: resolved.origin.source,
                                  name: resolved.origin.error,
+                                 type: 'unknown',
                                  choices: [],
                                  valid: false
                                }
@@ -56,7 +57,7 @@ export class ValueSetProcessor {
                              const reducedSet: ResolvedValue[] = removeValues(resolved.compose.include.concept,
                                                                               resolved.compose.exclude.concept)
 
-                             const choices: ValueAsChoice[] =
+                             const choices: Choice[] =
                                reducedSet.map(c => ({
                                  value: c.code,
                                  display: c.display
@@ -65,13 +66,14 @@ export class ValueSetProcessor {
                              return {
                                id: resolved.id,
                                name: resolved.name,
+                               type: resolved.type,
                                valid: true,
                                choices
-                             } as ValueSetChoices
+                             } as Choices
                            }))
   }
 
-  public processAll(debug: boolean = false): Promise<ValueSetChoices[]> {
+  public processAll(debug: boolean = false): Promise<Choices[]> {
     return this.#ready
                .then(() => this.#source.cacheAll(debug))
                .then(() => this.#source.allIds())
@@ -79,7 +81,7 @@ export class ValueSetProcessor {
 
   }
 
-  public all(): Promise<ValueSetChoices[]> {
+  public all(): Promise<Choices[]> {
     return Promise.resolve([])
 
   }
