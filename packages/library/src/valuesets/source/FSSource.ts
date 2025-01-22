@@ -1,21 +1,34 @@
 import {readdir, readFile, realpath}                                              from 'node:fs/promises'
+import {DomainResourceData}                                                       from '../../internal'
+import {CodeSystemData, LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from '../ValueSet.data'
+import {FetchError}                                                               from './Fetch'
 import {resolveCodeSystem}                                                        from './ResolveCodeSystem'
 import {resolveValueSet}                                                          from './ResolveValueSet'
-import {CodeSystemData, LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from './ValueSet.data'
 
 
 
 function empty(source: string,
                path: string,
                error: string,
-               type: 'CodeSystem' | 'ValueSet' | 'unknown'): ResolvedSet {
+               type: 'CodeSystem' | 'ValueSet' | 'unknown', err?: FetchError): ResolvedSet {
+  // console.error({path: path, source: source, error: error, errmsg: err?.message, body: err?.body ?? '', status:
+  // err?.status ?? null, statusText: err?.statusText ?? null, url: err?.url ?? null})
   return {
     id: source,
     version: 'n/a',
     type: type,
     name: source,
     status: 'error',
-    origin: { path: path, source: source, error: error },
+    origin: {
+      path: path,
+      source: source,
+      error: error,
+      errmsg: err?.message,
+      body: err?.body ?? '',
+      status: err?.status ?? null,
+      statusText: err?.statusText ?? null,
+      url: err?.url ?? null
+    },
     compose: {
       include: {
         concept: []
@@ -31,14 +44,16 @@ function empty(source: string,
 export type Criteria = (file: string) => boolean
 
 export class FSSource implements ValueSetSource, LoadableStore {
-  readonly #criteria: Criteria
 
+  readonly #criteria: Criteria
   readonly #path: string
+
   #loaded: boolean | null = null
   #files: string[] = []
   #cache: Map<string, ResolvedSet> = new Map()
+
   constructor(path: string, criteria?: Criteria) {
-    this.#criteria = criteria ?? vsOrCsCriteria
+    this.#criteria = criteria ?? matchAll
     this.#path = path
   }
 
@@ -111,20 +126,26 @@ export class FSSource implements ValueSetSource, LoadableStore {
           .then(json => {
             if (isValueSet(json)) return resolveValueSet(json, debug)
             if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
-            // @ts-ignore
-            throw new Error(`Unknown resource type: ${json.resourceType} for: ${fullpath}`)
+            if (isResource(json)) { // @ts-ignore
+              return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
+            }
+            throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json, null, 2))
           })
           .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
           .then(() => this.#cache.get(source)!)
           .catch(error => {
+            //console.error('url1:',error.constructor.name,'/', error,'/',(error as FetchError).url, (error as'
+            //                                                + ' Error).stack)
             return empty(source,
                          this.#path,
-                         `Failed to read and resolve ValueSet for source "${source}". Details: ${error}`,
-                         'unknown')
+                         `Failed to read and resolve ValueSet for source [${source}]. Details: ${error}`,
+                         'unknown',
+                         error)
           })
 
       } catch (e) {
-        return empty(source, this.#path, `read and resolved failed: ${e}`, 'unknown')
+        //console.error('url2:',e.constructor.name,(e as FetchError).message,(typeof e ),(e as FetchError).url)
+        return empty(source, this.#path, `read and resolved failed: ${e}`, 'unknown', e as FetchError)
       }
 
     }
@@ -156,8 +177,9 @@ export class FSSource implements ValueSetSource, LoadableStore {
 
 }
 
-export function vsOrCsCriteria(file: string): boolean {
-  return valueSetCriteria(file) || codesystemCriteria(file)
+
+export function matchAll(_: string): boolean {
+  return true
 }
 
 export function valueSetCriteria(file: string): boolean {
@@ -168,12 +190,17 @@ export function codesystemCriteria(file: string): boolean {
   return file.startsWith('codesystem')
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: type-guard
 function isValueSet(data: any): data is ValueSetData {
   return data.resourceType === 'ValueSet'
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: type-guard
 function isCodeSystem(data: any): data is CodeSystemData {
   return data.resourceType === 'CodeSystem'
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: type-guard
+function isResource(data: any): data is DomainResourceData {
+  return data.resourceType
 }

@@ -1,7 +1,7 @@
-import {describe, test}                     from 'vitest'
-import {Criteria, FSSource, vsOrCsCriteria} from './FSSource'
-import {Choices, LoadableStore}             from './ValueSet.data'
-import {ValueSetProcessor}                  from './ValueSetProcessor'
+import {describe, test}               from 'vitest'
+import {Criteria, FSSource, matchAll} from '../source/FSSource'
+import {Choices, LoadableStore}       from '../ValueSet.data'
+import {ValueSetProcessor}            from './ValueSetProcessor'
 
 
 
@@ -13,7 +13,7 @@ describe('ValueSetProcessor', () => {
 
   test.runIf(process.env.EXPENSIVE)('should load all valuesets', { timeout: 180_000 }, async () => {
     const processor: ValueSetProcessor = new ValueSetProcessor(new FSSource(exampleData, (id: string) => {
-      if (vsOrCsCriteria(id)) {
+      if (matchAll(id)) {
         countLoad++
         return countLoad <= maxLoad
       }

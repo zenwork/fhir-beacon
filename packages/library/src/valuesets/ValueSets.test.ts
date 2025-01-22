@@ -9,9 +9,11 @@ describe('ValueSets', () => {
   const target: string = `${process.cwd()}/./generation`
 
   test.runIf(process.env.EXPENSIVE)('should read from fs and write to fs',
-                                    { timeout: 180_000 },
+                                    { timeout: 800_000 },
                                     async () => {
-                                      const valueSets: ValueSets = ValueSetsFactory.fs(source, target)
-                                      await valueSets.processAll()
+                                      await ValueSetsFactory
+                                        .fs(source, target, /valueset/)
+                                        .processAll()
+
                                     })
 })

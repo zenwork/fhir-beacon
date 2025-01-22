@@ -12,3 +12,8 @@ Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 ###
 GET https://terminology.hl7.org/5.1.0/CodeSystem-CVX.json
 Accept: application/json
+
+
+###
+GET https://hl7.org/fhir/week-of-month
+Accept: application/json

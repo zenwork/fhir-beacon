@@ -181,8 +181,9 @@ export type ResolvedValue = { code: Code, display: FhirString, definition: FhirS
 type ResolutionError = { source: string, error: string }
 export type ResolvedSet = {
   id: string,
-  type: 'CodeSystem' | 'ValueSet' | 'unknown'
-  origin: ValueSetData | ResolutionError, // should also include code system
+  type: 'CodeSystem' | 'ValueSet' | 'unknown' | string
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  origin: ValueSetData | ResolutionError | any, // should also include code system
   name: string,
   version: string,
   status: string,
@@ -199,7 +200,7 @@ export type ResolvedSet = {
 export type Choice = { value: string, display: string }
 export type Choices = {
   id: string,
-  type: 'CodeSystem' | 'ValueSet' | 'unknown'
+  type: 'CodeSystem' | 'ValueSet' | 'unknown' | string,
   name: string,
   choices: Choice[]
   valid: boolean

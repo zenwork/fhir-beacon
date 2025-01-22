@@ -1,5 +1,6 @@
-import {isBlank}                                                              from '../utilities'
-import {ResolvedSet, ResolvedValue, ValueSetData, ValueSetIncludeExcludeData} from './ValueSet.data'
+import {isBlank}                                                              from '../../utilities'
+import {ResolvedSet, ResolvedValue, ValueSetData, ValueSetIncludeExcludeData} from '../ValueSet.data'
+import {fetchWithRetry}                                                       from './Fetch'
 
 
 
@@ -51,11 +52,16 @@ export async function resolveValueSet(vs: ValueSetData, debug: boolean = false):
 function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
                                   variant: 'include' | 'exclude' = 'include',
                                   debug: boolean): Promise<ResolvedValue[][]> {
+
+  if (segment.length <= 0) return Promise.resolve([])
+
   const promises: Promise<ResolvedValue[]>[] = []
+  const urlsToResolve: { uri: string, resolved: boolean }[] = []
 
   for (let idx = 0; idx < segment.length; idx++) {
 
     promises.push(new Promise<ResolvedValue[]>((resolve, reject) => {
+
       const concepts: ResolvedValue[] = []
       const inc = segment[idx]
       if (isBlank(inc.system) && isBlank(inc.valueSet)) {
@@ -72,78 +78,56 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
       }
 
       if (inc.concept) {
+
         if (debug) console.log('resolved [' + inc.concept.length + '] from self')
         inc.concept.forEach(c => concepts.push({ code: c.code, display: c.display ?? 'n/a', definition: 'n/a' }))
         resolve(concepts)
 
       } else if (inc.system && inc.system.match(/^http/) !== null) {
+
         const url: string = `${inc.system}`.replace(/http:/, 'https:')
-        fetchWithRetry(url,
-                       {
-                         headers: { 'Accept': 'application/json' },
-                         redirect: 'follow'
-                       })
-          .then(r => {
-            if (!r.ok) {
-              throw new Error(`Request failed with status ${r.status}: ${r.statusText}`)
-            }
-            return r.text()
-          })
-          .then(text => {
-            if (!text) {
-              throw new Error('Received empty response body')
-            }
-            return JSON.parse(text)
-          })
-          .then(json => {
+        if (isBlank(url)) console.error('url is blank')
+        urlsToResolve.push({ uri: url, resolved: false })
+        fetchWithRetry(url, {
+          headers: {
+            'Accept': 'application/fhir+json;q=1.0, '
+                      + 'application/json+fhir;q=0.9, '
+                      + 'application/json+fhir;q=0.9, '
+                      + '*/*;q=0.5'
+          }, redirect: 'follow'
+        })
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+          .then((json: any) => {
             if (debug) console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
-                  json.concept.forEach((c: Record<string, unknown>) =>
-                                         concepts.push({
-                                                         code: c.code as string,
-                                                         display: c.display as string ?? 'n/a',
-                                                         definition: c.definition as string
-                                                                     ?? 'n/a'
-                                                       }))
+            json.concept
+                .forEach((c: Record<string, unknown>) =>
+                           concepts.push({
+                                           code: c.code as string,
+                                           display: c.display as string ?? 'n/a',
+                                           definition: c.definition as string ?? 'n/a'
+                                         }))
+            urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
                   resolve(concepts)
                 }
           )
-          .catch((r) => {
-            // console.log('failed to resolve code system: ' + ' ' + url)
-            reject(new Error(`Failed to coding system set [${url}][${r}]`))
-          })
+          .catch((r) => reject(r))
 
 
       } else if (inc.valueSet) {
+
         const promises: Promise<ResolvedValue[]>[] = []
+
         inc.valueSet.forEach(vs => {
           if (vs.match(/^http/) !== null) {
             const url: string = `${vs}`.replace(/http:/, 'https:')
             if (debug) console.log('resolving [' + url + '] value set')
-            promises.push(fetchWithRetry(
-                            url,
-                            {
-                              headers: { 'Accept': 'application/json' },
-                              redirect: 'follow'
-                            }
-                          )
-                            .then((r) => {
-                              if (!r.ok) {
-                                throw new Error(`Request failed with status ${r.status}: ${r.statusText}`)
-                              }
-                              return r.text()
-                            })
-                            .then(text => {
-                              if (!text) {
-                                throw new Error('Received empty response body')
-                              }
-                              return JSON.parse(text)
-                            })
-                            .then(json => resolveIncludesOrExclude(json.compose[variant] ?? [], variant, debug))
-                            .then(r => r.flat())
-                            .catch((r) => {
-                              // console.log('failed to resolve code system: ' + ' ' + url)
-                              reject(new Error(`Failed to resolve value set [${vs}][${r}]`))
-                              return []
+            urlsToResolve.push({ uri: url, resolved: false })
+            promises.push(fetchWithRetry(url, { headers: { 'Accept': 'application/json' }, redirect: 'follow' })
+                            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                            .then((json: any) => resolveIncludesOrExclude(json.compose[variant] ?? [], variant, debug))
+                            .then(r => {
+                              urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
+                              return r.flat()
                             })
             )
           }
@@ -156,51 +140,26 @@ function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
                  concepts.push(...r)
                  resolve(concepts)
                })
-
-
       }
     }))
   }
 
+
+  const maxTime: number = 30_000
   const timeout = (millis: number) => {
-    return new Promise<ResolvedValue[][]>((_, rej) => setTimeout(() => rej('Resolving values took too long'), millis))
+    return new Promise<ResolvedValue[][]>((_, rej) => {
+      const urls: string = JSON.stringify(urlsToResolve)
+      return setTimeout(() => rej(`Failed to resolve value set in ${maxTime / 1000}s for ${urls}`), millis)
+    })
   }
 
-  return Promise.race([
-                        Promise.all(promises),
-                        timeout(60_000)
-                      ])
-                .catch((err) => { throw new Error(`Failed to resolve value set [${err}]`) })
-
-
-}
-
-
-// @ts-ignore
-async function fetchWithRetry(url: string, options = {}, retries = 5, retryDelay = 1000): Promise<Response> {
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      // Attempt to fetch the resource
-      const response = await fetch(url, options)
-
-      // If the response is successful, return it
-      if (response.ok) {
-        return response
-      }
-
-      // Handle non-success statuses (like 4xx or 5xx)
-      throw new Error(`Fetch failed with status: ${response.status}`)
-    } catch (error) {
-      // If it's the last attempt, throw the error
-      if (attempt === retries) {
-        throw error
-      }
-
-      // Optionally log or handle the retry attempt
-      // console.warn(`Retry attempt ${attempt} failed for ${url}. Retrying in ${retryDelay}ms...`)
-
-      // Wait for the retry delay
-      await new Promise(res => setTimeout(res, retryDelay))
-    }
+  if (promises.length > 0) {
+    return Promise
+      .race([Promise.all(promises), timeout(maxTime)])
+      .catch((err) => {throw err})
+  } else {
+    return Promise.resolve([])
   }
+
+
 }

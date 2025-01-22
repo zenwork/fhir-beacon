@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest'
-import {ResolvedValue}          from './ValueSet.data'
+import {ResolvedValue}          from '../ValueSet.data'
 import {removeValues}           from './ValueSetProcessor'
 
 

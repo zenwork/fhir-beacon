@@ -1,8 +1,10 @@
-import {mkdir, writeFile}       from 'node:fs/promises'
+import {mkdir, rm, writeFile}   from 'node:fs/promises'
 import {join}                   from 'node:path'
-import {Choices, ValueSetStore} from './ValueSet.data'
+import {Choices, ValueSetStore} from '../ValueSet.data'
 
 
+
+let errCount = 0
 
 export class FSStore implements ValueSetStore {
 
@@ -13,7 +15,8 @@ export class FSStore implements ValueSetStore {
 
     this.#choices = join(target, 'choice')
 
-    this.#created = mkdir(this.#choices, { recursive: true })
+    this.#created = rm(this.#choices, { recursive: true, force: true }).then(() => mkdir(this.#choices,
+                                                                                         { recursive: true }))
 
   }
 
@@ -36,8 +39,9 @@ export class FSStore implements ValueSetStore {
                      case 'ValueSet':
                        promise = writeFile(`${this.#choices}/vs-${choices.id}.json`, uint8Array, { signal })
                        break
-                     case 'unknown':
-                       promise = writeFile(`${this.#choices}/er-${choices.id}`, uint8Array, { signal })
+                     default:
+                       promise = writeFile(`${this.#choices}/er-${choices.id.replace('.json', '')}-${String(errCount++)
+                         .padStart(4, '0')}.json`, uint8Array, { signal })
                        break
                    }
 

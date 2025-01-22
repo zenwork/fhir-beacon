@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import {describe, expect, test} from 'vitest'
+import {ResolvedSet}            from '../ValueSet.data'
 import {FSSource}               from './FSSource'
-import {ResolvedSet}            from './ValueSet.data'
 
 
 
@@ -13,7 +13,7 @@ describe('FSSource', () => {
     const source: FSSource = new FSSource(exampleData)
     const result: boolean = await source.load()
     expect(result).to.be.true
-    expect(source.size()).to.equal(1241)
+    expect(source.size()).to.equal(2824)
     expect(source.exists('valueset-transport-intent.json')).to.be.true
   })
 

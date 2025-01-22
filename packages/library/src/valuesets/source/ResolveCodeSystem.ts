@@ -1,5 +1,5 @@
-import {isBlank}                                                           from '../utilities'
-import {CodeSystemConceptData, CodeSystemData, ResolvedSet, ResolvedValue} from './ValueSet.data'
+import {isBlank}                                                           from '../../utilities'
+import {CodeSystemConceptData, CodeSystemData, ResolvedSet, ResolvedValue} from '../ValueSet.data'
 
 
 

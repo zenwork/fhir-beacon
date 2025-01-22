@@ -1,7 +1,7 @@
-import {FSSource}               from './FSSource'
-import {FSStore}                from './FSStore'
-import {Choices, ValueSetStore} from './ValueSet.data'
-import {ValueSetProcessor}      from './ValueSetProcessor'
+import {ValueSetProcessor}                     from './processor/ValueSetProcessor'
+import {FSSource}                              from './source/FSSource'
+import {FSStore}                               from './store/FSStore'
+import {Choices, LoadableStore, ValueSetStore} from './ValueSet.data'
 
 
 
@@ -20,7 +20,15 @@ export class ValueSets {
                .processAll()
                .then(sets => {
                  return Promise
-                   .all(sets.map(set => this.store.write(set)))
+                   .all(sets
+                          .filter(set => set.type
+                                         === 'ValueSet'
+                                         || set.type
+                                         === 'CodeSystem'
+                                         || set.type
+                                         === 'unknown')
+                          .map(set => this.store.write(set))
+                   )
                    .then(() => sets)
                    .catch((e) => {
                      throw new Error(`processing failed: ${e}`)
@@ -41,7 +49,18 @@ export class ValueSets {
 }
 
 export class ValueSetsFactory {
-  static fs(source: string, target: string): ValueSets {
-    return new ValueSets(new ValueSetProcessor(new FSSource(source)), new FSStore(target))
+
+  static fs(source: string, target: string, regex?: RegExp): ValueSets {
+
+    const fsSource: LoadableStore = !regex
+                                    ? new FSSource(source)
+                                    : new FSSource(source, file => regex.test(file))
+
+    const processor: ValueSetProcessor = new ValueSetProcessor(fsSource)
+
+    const store: ValueSetStore = new FSStore(target)
+
+    return new ValueSets(processor, store)
+
   }
 }
