@@ -5,7 +5,7 @@ import {FSSource}               from './FSSource'
 
 
 
-describe('FSSource', () => {
+describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
 
   const exampleData: string = `${process.cwd()}/../data/r5/examples-json`
 
