@@ -10,7 +10,7 @@ import {
   ValueSetData,
   ValueSetIncludeExcludeData
 }                          from '../ValueSet.data'
-import {fetchAt}           from './Fetch'
+import {fetchIt}           from './Fetch'
 import {resolveCodeSystem} from './ResolveCodeSystem'
 
 
@@ -169,7 +169,7 @@ function resolveChildSystem(system: URI,
     const url: string = convert(`${system}`.replace(/http:/, 'https:'))
     const concepts: ResolvedValue[] = []
     urlsToResolve.push({ uri: url, resolved: false })
-    return fetchAt(url)
+    return fetchIt({ url: url, debug })
 
       .then((json: ValueSetData | CodeSystemData | unknown) => {
               if (isCodeSystem(json)) {
@@ -205,14 +205,15 @@ function resolveChildValueSet(valueSetUri: URI,
 
     if (debug) console.log('resolving [' + httpsUri + '] value set')
 
-    return fetchAt(httpsUri)
+    return fetchIt({ url: httpsUri, debug })
       .then((json: ValueSetData | CodeSystemData | unknown) => {
+
               if (isValueSet(json)) {
                 return resolveValueSet(json, skipUrl, debug)
               } else if (isCodeSystem(json)) {
                 return resolveCodeSystem(json, debug)
               } else {
-                throw Error(`Unknown value set type: ${(json as { resourceType: string }).resourceType}`)
+                throw Error(`Unknown ValueSet type: ${(json as { resourceType: string }).resourceType}`)
               }
             }
       )

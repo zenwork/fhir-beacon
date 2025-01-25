@@ -1,19 +1,13 @@
-import {afterEach, describe, expect, it, Mock, vi} from 'vitest'
-import {ValueSetIncludeExcludeData}                from '../ValueSet.data'
+import {afterEach, describe, expect, it, vi}      from 'vitest'
+import {ValueSetData, ValueSetIncludeExcludeData} from '../ValueSet.data'
+import {createResponse}                           from './Fetch.test'
 // directory
-import {resolveIncludesOrExclude}                  from './ResolveValueSet'
+import {resolveIncludesOrExclude}                 from './ResolveValueSet'
 
 
 // Begin testing resolveIncludesOrExclude
 describe('ResolveValueSet', () => {
 
-  const fetch: Mock = vi.fn()
-
-  vi.mock('./Fetch', () => {
-    return {
-      fetchWithRetry: fetch // Mock fetchWithRetry
-    }
-  })
 
   describe('resolveIncludesOrExclude', () => {
 
@@ -23,18 +17,6 @@ describe('ResolveValueSet', () => {
     })
 
     it('should resolve nothing when nothing passed', async () => {
-      // const segment: ValueSetIncludeExcludeData[] = [
-      //   {
-      //     modifierExtension: [],
-      //     system: 'http://example.com/system',
-      //     concept: [
-      //
-      //       { modifierExtension: [], designation: [], code: '001', display: 'Test Code 1' },
-      //       { modifierExtension: [], designation: [], code: '002', display: 'Test Code 2' }
-      //     ],
-      //     filter: []
-      //   }
-      // ]
 
       const skipUrl = vi.fn().mockReturnValue(false)
       const result = await resolveIncludesOrExclude([], 'include', false, skipUrl)
@@ -53,12 +35,73 @@ describe('ResolveValueSet', () => {
         }
       ]
 
-      const skipUrl = vi.fn().mockReturnValue(true)
+      const skipUrl = vi.fn().mockImplementation((id: string) => /example\.com/.test(id))
       const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
 
       expect(result).toEqual([[]])
       expect(skipUrl).toHaveBeenCalledTimes(1)
       expect(fetch).toHaveBeenCalledTimes(0)
+    })
+
+    it('should not skip url when skip function fails', { timeout: 180_000 }, async () => {
+
+      const resp: object = createResponse(
+        200,
+        'https://example.com/valueset',
+        {
+          resourceType: 'ValueSet',
+          id: 'example',
+          name: 'Example',
+          status: 'active',
+          url: 'http://example.com/valueset',
+          compose: { include: [], exclude: [] },
+          identifier: []
+        } as unknown as ValueSetData)
+
+      global.fetch = vi.fn().mockResolvedValue(resp)
+
+      const segment: ValueSetIncludeExcludeData[] = [
+        {
+          modifierExtension: [],
+          valueSet: ['http://example.com'],
+          concept: [],
+          filter: []
+        }
+      ]
+
+      const skipUrl = vi.fn().mockImplementation((id: string) => /foobar\.com/.test(id))
+      const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
+
+      expect(result).toEqual([[]])
+      expect(skipUrl).toHaveBeenCalledTimes(1)
+      expect(fetch).toHaveBeenCalledTimes(1)
+    })
+
+    it('should locally found concept', async () => {
+      const segment: ValueSetIncludeExcludeData[] = [
+        {
+          modifierExtension: [],
+          system: 'http://example.com/system',
+          concept: [
+
+            { modifierExtension: [], designation: [], code: '001', display: 'Test Code 1' },
+            { modifierExtension: [], designation: [], code: '002', display: 'Test Code 2' }
+          ],
+          filter: []
+        }
+      ]
+
+      const skipUrl = vi.fn().mockReturnValue(false)
+      const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
+
+      expect(result).toEqual([
+                               [
+                                 { code: '001', display: 'Test Code 1', definition: 'n/a' },
+                                 { code: '002', display: 'Test Code 2', definition: 'n/a' }
+                               ]
+                             ])
+
+      expect(skipUrl).not.toHaveBeenCalled()
     })
 
     /*  it('should fetch data when system URL is provided', async () => {

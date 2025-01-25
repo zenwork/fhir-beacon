@@ -1,7 +1,8 @@
 import {readdir, readFile, realpath}                              from 'node:fs/promises'
 import {LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from '../ValueSet.data'
-import {FetchError}                                               from './Fetch'
-import {resolveValueSet}                                          from './ResolveValueSet'
+
+import {FetchError}      from './FetchError'
+import {resolveValueSet} from './ResolveValueSet'
 
 
 

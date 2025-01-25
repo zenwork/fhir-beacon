@@ -18,7 +18,7 @@ describe('ValueSetProcessor', () => {
         return countLoad <= maxLoad
       }
       return false
-    }, skipUrl))
+    }, () => false))
 
     const valueSetChoices: Choices[] = await processor.processAll(false)
 

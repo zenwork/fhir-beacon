@@ -87,10 +87,16 @@ export class ValueSetProcessor {
     const ids: string[] = await this.#ready.then(() => this.#source.allIds())
 
     const results: Choices[] = []
+    let promises: Promise<Choices>[] = []
     for (const id of ids) {
       try {
-        const result = await this.process(id, debug) // Blocking call, one at a time
-        results.push(result)
+        promises.push(this.process(id, debug))
+        if (promises.length >= 10) {
+          const r = await Promise.all(promises)
+          results.push(...r)
+          promises = []
+        }
+
       } catch (e) {
         throw new Error(`Failed to process valueset: ${id}`)
       }

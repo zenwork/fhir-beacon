@@ -22,10 +22,10 @@ describe('ValueSets', () => {
                                       await ValueSetsFactory
                                         .fs(source,
                                             target,
-                                            /valueset/
-                                            // url => exclusions.some(skip => skip.test(url))
+                                            /valueset/,
+                                            url => exclusions.some(skip => skip.test(url))
                                         )
-                                        .processAll(true)
+                                        .processAll(false)
 
                                     })
 })
