@@ -43,7 +43,7 @@ type ValueSetDesignationData = BackboneElementData & {
   value: FhirString
 }
 
-type ValueSetConceptData = BackboneElementData & {
+export type ValueSetConceptData = BackboneElementData & {
   code: Code
   display?: FhirString
   designation: ValueSetDesignationData[]
@@ -227,4 +227,12 @@ export function isLoadableStore(source: ValueSetSource | LoadableStore): source 
 
 export function isResolutionError(origin: ValueSetData | ResolutionError): origin is ResolutionError {
   return (origin as ResolutionError).error !== undefined
+}
+
+export function isValueSet(origin: unknown): origin is ValueSetData {
+  return (origin as ValueSetData).resourceType === 'ValueSet'
+}
+
+export function isCodeSystem(origin: unknown): origin is CodeSystemData {
+  return (origin as CodeSystemData).resourceType === 'CodeSystem'
 }

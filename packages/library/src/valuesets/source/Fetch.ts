@@ -1,31 +1,65 @@
-import * as http from 'node:http'
+import {CodeSystemData, ValueSetData} from '../ValueSet.data'
 
 
 
-http.globalAgent.maxSockets = 100
+let callCount = 0
 
-export async function fetchWithRetry(url: string,
-                                     options = {},
-                                     retries = 5,
-                                     retryDelay = 1000): Promise<Response | undefined> {
+export async function fetchAt(url: string,
+                              options: object = {
+                                       headers: {
+                                         'Accept': 'application/fhir+json;q=1.0, '
+                                                   + 'application/json+fhir;q=0.9, '
+                                                   + 'application/json+fhir;q=0.9, '
+                                                   + '*/*;q=0.5'
+                                       },
+                                       redirect: 'follow'
+
+                                     },
+                              retries = 1,
+                              retryDelay = 1000): Promise<ValueSetData|CodeSystemData| unknown> {
 
   for (let attempt = 1; attempt <= retries; attempt++) {
-
+    const current = callCount++
+    const id: string = String(current)
     try {
 
+      // const controller = new AbortController()
       const response = await fetch(url, options)
+      // console.log(`fetching ${url} - attempt ${attempt} of ${retries}`)
+      // const response = await axios.get<FhirElementData>(
+      //   url,
+      //   {
+      //     timeout: 5000,
+      //     maxRedirects: 10,
+      //     headers: {
+      //       'Accept': 'application/fhir+json;q=1.0, '
+      //                 + 'application/json+fhir;q=0.9, '
+      //                 + 'application/json+fhir;q=0.9, '
+      //                 + '*/*;q=0.5'
+      //     }
+      //
+      //   })
+      // const fetchTimeout = setTimeout(() => {
+      //   controller.abort()
+      //   logRequest(id, 0, 'ABORT', '', url, new Error('Request aborted after 5 seconds'))
+      //
+      //   clearTimeout(fetchTimeout)
+      // }, 5_000)
 
-      let txt: string = 'n/a'
 
-      if (response.ok) {
+      let d: string = ''
+
+      logRequest(id, response.status, response.statusText, 'n/a', url)
+
+      if (response.status >= 200 && response.status < 300) {
         try {
-          txt = await response.text()
+          d = await response.text()
 
-          if (!txt || txt.length === 0) {
-            throwError(response, txt, `Empty response`, undefined, true)
+          if (!d) {
+            throwError(response, d, `Empty response`, undefined, true)
           }
 
-          return JSON.parse(txt)
+          return JSON.parse(d) as ValueSetData|CodeSystemData| unknown
 
         } catch (err: unknown) {
 
@@ -33,24 +67,37 @@ export async function fetchWithRetry(url: string,
             throw err
           }
 
-          throwError(response, txt, `Failed to parse response`, err, false)
+          throwError(response, d, `Failed to parse response`, err, false)
 
         }
 
       }
 
-      throwError(response, txt, `Url not resolvable`)
+      throwError(response, d, `Url not resolvable`)
 
     } catch (error) {
 
       if (error instanceof FetchError) {
         if (!error.retryable) throw error
         if (attempt === retries) {
-          throwError(error, error.body, `failed after reties: ${retries} - ${error.message}`, error)
+
+          logRequest(id, 'FAIL', 'MAX', '', url, error)
+          throw new FetchError(
+            `failed after reties: ${retries} - ${error.message}`,
+            error.url,
+            error.status,
+            error.statusText,
+            error.body,
+            error,
+            false
+          )
         }
       } else {
 
-        throw new FetchError(`unhandled reason: ${error}`,
+
+        const cause: unknown = error instanceof Error && 'cause' in error ? error.cause : 'unknown'
+        logRequest(id, 'FAIL', String(error), '', url, cause)
+        throw new FetchError(`unhandled reason: ${error instanceof Error ? error.message : String(error)}`,
                              url,
                              -1,
                              '',
@@ -71,7 +118,7 @@ function throwError(response: Response | FetchError,
                     retryable: boolean = false): FetchError {
   throw new FetchError(
     message,
-    response.url,
+    (response instanceof FetchError) ? response.url : response.url,
     response.status,
     response.statusText,
     body,
@@ -83,11 +130,31 @@ function throwError(response: Response | FetchError,
 export class FetchError extends Error {
   constructor(message: string,
               public url: string,
-              public status: number,
+              public status: number | string,
               public statusText: string,
               public body: string,
               public cause?: Error | unknown,
               public retryable = false) {
     super(message)
   }
+}
+
+
+function logRequest(id: string,
+                    status: string | number,
+                    statusText: string,
+                    type: 'basic' | 'cors' | 'default' | 'error' | 'opaque' | 'opaqueredirect' | string,
+                    url: string,
+                    cause?: Error | unknown): void {
+
+  const i: string = id.padStart(5, '0')
+  const s: string = String(status).padStart(10, ' ')
+  const st: string = String(statusText).padEnd(20, ' ')
+  const ty: string = type.padStart(10, ' ')
+  const u: string = url.padEnd(70)
+
+  const message: string = `${i} - ${s} - ${st} - ${ty} - ${u} - ${cause ?? ''}`
+
+  if (status === 200) console.log(`OK>>> ${message}`)
+  if (status !== 200) console.error(`NOK>> ${message}`)
 }

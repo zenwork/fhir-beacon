@@ -52,7 +52,7 @@ export class FSSource implements ValueSetSource, LoadableStore {
   #files: string[] = []
   #cache: Map<string, ResolvedSet> = new Map()
 
-  constructor(path: string, criteria?: Criteria) {
+  constructor(path: string, criteria: Criteria|undefined, public skipUrl: (url: string) => boolean) {
     this.#criteria = criteria ?? matchAll
     this.#path = path
   }
@@ -109,8 +109,6 @@ export class FSSource implements ValueSetSource, LoadableStore {
 
   async resolve(source: string, debug: boolean = false): Promise<ResolvedSet> {
 
-    // await this.isLoaded()
-
     if (this.exists(source)) {
       try {
 
@@ -124,18 +122,20 @@ export class FSSource implements ValueSetSource, LoadableStore {
           .then(path => readFile(path, { encoding: 'utf8' }))
           .then(data => JSON.parse(data) as ValueSetData)
           .then(json => {
-            if (isValueSet(json)) return resolveValueSet(json, debug)
-            if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
-            if (isResource(json)) { // @ts-ignore
-              return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
-            }
-            throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json, null, 2))
+            if (isValueSet(json)) return resolveValueSet(json, this.skipUrl, debug)
+            // if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
+            // if (isResource(json)) { // @ts-ignore
+            //   return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
+            // }
+            throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json).replace(/"/g,"'"))
           })
           .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
-          .then(() => this.#cache.get(source)!)
+          .then(() => {
+            const rs: ResolvedSet = this.#cache.get(source)!
+            //console.log(`returning cached valueset: ${rs.id} - ${rs.name}`)
+            return rs!
+          })
           .catch(error => {
-            //console.error('url1:',error.constructor.name,'/', error,'/',(error as FetchError).url, (error as'
-            //                                                + ' Error).stack)
             return empty(source,
                          this.#path,
                          `Failed to read and resolve ValueSet for source [${source}]. Details: ${error}`,
@@ -154,6 +154,7 @@ export class FSSource implements ValueSetSource, LoadableStore {
 
   }
 
+  // TODO: does too much
   public cacheAll(debug: boolean = false): Promise<boolean> {
     return Promise
       .all<boolean>(
@@ -193,14 +194,4 @@ export function codesystemCriteria(file: string): boolean {
 // biome-ignore lint/suspicious/noExplicitAny: type-guard
 function isValueSet(data: any): data is ValueSetData {
   return data.resourceType === 'ValueSet'
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: type-guard
-function isCodeSystem(data: any): data is CodeSystemData {
-  return data.resourceType === 'CodeSystem'
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: type-guard
-function isResource(data: any): data is DomainResourceData {
-  return data.resourceType
 }

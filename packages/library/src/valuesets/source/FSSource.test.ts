@@ -10,7 +10,7 @@ describe('FSSource', () => {
   const exampleData: string = `${process.cwd()}/../data/r5/examples-json`
 
   test('should read a dir', async () => {
-    const source: FSSource = new FSSource(exampleData)
+    const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
     const result: boolean = await source.load()
     expect(result).to.be.true
     expect(source.size()).to.equal(2824)
@@ -20,7 +20,7 @@ describe('FSSource', () => {
   test('should read a file and resolve referenced coding system concepts over the internet',
        { timeout: 30000 },
        async () => {
-         const source: FSSource = new FSSource(exampleData)
+         const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
          await source.load()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-transport-intent.json', false)
@@ -37,25 +37,25 @@ describe('FSSource', () => {
   test('should read a file and resolve referenced coding system concepts over the internet',
        { timeout: 30000 },
        async () => {
-         const source: FSSource = new FSSource(exampleData)
+         const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
          await source.load()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-week-of-month.json', false)
 
+          // console.log(JSON.stringify(valueSet,null,2))
          expect(valueSet.id).to.equal('week-of-month')
          expect(valueSet.name).to.equal('WeekOfMonth')
          expect(valueSet.status).to.equal('draft')
          expect(valueSet.version).to.equal('5.0.0')
          expect(valueSet.compose.include.concept).to.have.lengthOf(5)
          expect(valueSet.compose.exclude.concept).to.have.lengthOf(0)
-         // console.log(JSON.stringify(valueSet,null,2))
 
        })
 
   test('should read a file and resolve referenced value set concepts over the internet',
        { timeout: 30000 },
        async () => {
-         const source: FSSource = new FSSource(exampleData)
+         const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
          await source.load()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-definition-topic.json')
@@ -71,7 +71,7 @@ describe('FSSource', () => {
   test('should fail when url are not resolvable',
        { timeout: 30000 },
        async () => {
-         const source: FSSource = new FSSource(exampleData)
+         const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
          await source.load()
 
          try {
@@ -87,7 +87,7 @@ describe('FSSource', () => {
   test('should fail when file not found',
        { timeout: 30000 },
        async () => {
-         const source: FSSource = new FSSource(exampleData)
+         const source: FSSource = new FSSource(exampleData, undefined, ()=>false)
          await source.load()
 
          try {

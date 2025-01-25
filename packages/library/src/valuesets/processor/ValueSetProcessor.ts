@@ -37,11 +37,12 @@ export class ValueSetProcessor {
     }
   }
 
-  process(id: string): Promise<Choices> {
+  process(id: string, debug?: boolean): Promise<Choices> {
+
     return this.#ready
                .then(() =>
                        this.#source
-                           .resolve(id)
+                           .resolve(id, debug)
                            .then((resolved: ResolvedSet) => {
 
                              if (isResolutionError(resolved.origin)) {
@@ -74,16 +75,30 @@ export class ValueSetProcessor {
                            }))
   }
 
-  public processAll(debug: boolean = false): Promise<Choices[]> {
-    return this.#ready
-               .then(() => this.#source.cacheAll(debug))
-               .then(() => this.#source.allIds())
-               .then((ids: string[]) => {
-                 return processInBatchesWithPause(ids, 10, id => this.process(id), 1000)
-                 // return Promise.all(ids.map(id => this.process(id)))
-               })
+  // public async processAll(debug: boolean = false): Promise<Choices[]> {
+  //
+  //   const ids: string[] = await this.#ready.then(() => this.#source.allIds())
+  //
+  //   return Promise.all(ids.map(id => this.process(id, debug)))
+  //
+  // }
 
+  public async processAll(debug: boolean = false): Promise<Choices[]> {
+    const ids: string[] = await this.#ready.then(() => this.#source.allIds())
+
+    const results: Choices[] = []
+    for (const id of ids) {
+      try {
+        const result = await this.process(id, debug) // Blocking call, one at a time
+        results.push(result)
+      } catch (e) {
+        console.error('fuck',e)
+      }
+    }
+
+    return results
   }
+
 
   public all(): Promise<Choices[]> {
     return Promise.resolve([])
@@ -128,9 +143,9 @@ async function processInBatches<T>(
  * @param ms - The number of milliseconds to sleep.
  * @returns A Promise that resolves after the given time.
  */
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
+// function sleep(ms: number): Promise<void> {
+//   return new Promise((resolve) => setTimeout(resolve, ms))
+// }
 
 /**
  * Processes a list of IDs in batches, with a pause between each batch.
@@ -141,29 +156,34 @@ function sleep(ms: number): Promise<void> {
  * @param pauseDuration - The number of milliseconds to pause between batches.
  * @returns A Promise that resolves to an array of all the processed results.
  */
-async function processInBatchesWithPause<T>(
-  ids: string[],
-  batchSize: number,
-  processor: (id: string) => Promise<T>,
-  pauseDuration: number
-): Promise<T[]> {
-  const results: T[] = []
+/*
+ async function processInBatchesWithPause<T>(
+ ids: string[],
+ batchSize: number,
+ processor: (id: string) => Promise<T>,
+ pauseDuration: number
+ ): Promise<T[]> {
+ console.log(ids.length, batchSize, pauseDuration)
+ const results: T[] = []
 
-  for (let i = 0; i < ids.length; i += batchSize) {
-    // Take the next batch of IDs
-    const batch = ids.slice(i, i + batchSize)
+ for (let i = 0; i < ids.length; i += batchSize) {
 
-    // Process all IDs in the batch concurrently
-    const batchResults = await Promise.all(batch.map(processor))
+ // Take the next batch of IDs
+ const batch = ids.slice(i, i + batchSize)
+ console.log('next batch', i, i + batchSize)
 
-    // Append the batch results to the overall results
-    results.push(...batchResults)
+ // Process all IDs in the batch concurrently
+ const batchResults = await Promise.all(batch.map(processor))
 
-    // Pause between batches (only if there are more batches to process)
-    if (i + batchSize < ids.length) {
-      await sleep(pauseDuration) // Pause for the specified duration
-    }
-  }
+ // Append the batch results to the overall results
+ results.push(...batchResults)
 
-  return results
-}
+ // Pause between batches (only if there are more batches to process)
+ if (i + batchSize < ids.length) {
+ await sleep(pauseDuration) // Pause for the specified duration
+ }
+ }
+
+ return results
+ }
+ */

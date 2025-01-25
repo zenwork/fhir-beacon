@@ -18,7 +18,7 @@ describe('ValueSetProcessor', () => {
         return countLoad <= maxLoad
       }
       return false
-    }))
+    }, skipUrl))
 
     const valueSetChoices: Choices[] = await processor.processAll(false)
 
@@ -47,7 +47,7 @@ describe('ValueSetProcessor', () => {
       return id === 'valueset-week-of-month.json'
     }
 
-    const source: LoadableStore = new FSSource(exampleData, criteria)
+    const source: LoadableStore = new FSSource(exampleData, criteria, () => false)
 
 
     const processor: ValueSetProcessor = new ValueSetProcessor(source)

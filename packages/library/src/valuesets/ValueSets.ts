@@ -15,9 +15,9 @@ export class ValueSets {
     this.store = store
   }
 
-  async processAll(): Promise<Choices[]> {
+  async processAll(debug: boolean = false): Promise<Choices[]> {
     return this.processor
-               .processAll()
+               .processAll(debug)
                .then(sets => {
                  return Promise
                    .all(sets
@@ -50,11 +50,14 @@ export class ValueSets {
 
 export class ValueSetsFactory {
 
-  static fs(source: string, target: string, regex?: RegExp): ValueSets {
+  static fs(source: string,
+            target: string,
+            regex: RegExp | undefined,
+            skipUrl: (url: string) => boolean = () => false): ValueSets {
 
     const fsSource: LoadableStore = !regex
-                                    ? new FSSource(source)
-                                    : new FSSource(source, file => regex.test(file))
+                                    ? new FSSource(source, undefined, skipUrl)
+                                    : new FSSource(source, file => regex.test(file), skipUrl)
 
     const processor: ValueSetProcessor = new ValueSetProcessor(fsSource)
 
