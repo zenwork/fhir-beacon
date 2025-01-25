@@ -6,17 +6,17 @@ let callCount = 0
 
 export async function fetchAt(url: string,
                               options: object = {
-                                       headers: {
-                                         'Accept': 'application/fhir+json;q=1.0, '
-                                                   + 'application/json+fhir;q=0.9, '
-                                                   + 'application/json+fhir;q=0.9, '
-                                                   + '*/*;q=0.5'
-                                       },
-                                       redirect: 'follow'
+                                headers: {
+                                  'Accept': 'application/fhir+json;q=1.0, '
+                                            + 'application/json+fhir;q=0.9, '
+                                            + 'application/json+fhir;q=0.9, '
+                                            + '*/*;q=0.5'
+                                },
+                                redirect: 'follow'
 
-                                     },
+                              },
                               retries = 1,
-                              retryDelay = 1000): Promise<ValueSetData|CodeSystemData| unknown> {
+                              retryDelay = 1000): Promise<ValueSetData | CodeSystemData | unknown> {
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     const current = callCount++
@@ -59,7 +59,7 @@ export async function fetchAt(url: string,
             throwError(response, d, `Empty response`, undefined, true)
           }
 
-          return JSON.parse(d) as ValueSetData|CodeSystemData| unknown
+          return JSON.parse(d) as ValueSetData | CodeSystemData | unknown
 
         } catch (err: unknown) {
 

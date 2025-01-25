@@ -1,9 +1,7 @@
-import {readdir, readFile, realpath}                                              from 'node:fs/promises'
-import {DomainResourceData}                                                       from '../../internal'
-import {CodeSystemData, LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from '../ValueSet.data'
-import {FetchError}                                                               from './Fetch'
-import {resolveCodeSystem}                                                        from './ResolveCodeSystem'
-import {resolveValueSet}                                                          from './ResolveValueSet'
+import {readdir, readFile, realpath}                              from 'node:fs/promises'
+import {LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from '../ValueSet.data'
+import {FetchError}                                               from './Fetch'
+import {resolveValueSet}                                          from './ResolveValueSet'
 
 
 
@@ -52,7 +50,7 @@ export class FSSource implements ValueSetSource, LoadableStore {
   #files: string[] = []
   #cache: Map<string, ResolvedSet> = new Map()
 
-  constructor(path: string, criteria: Criteria|undefined, public skipUrl: (url: string) => boolean) {
+  constructor(path: string, criteria: Criteria | undefined, public skipUrl: (url: string) => boolean) {
     this.#criteria = criteria ?? matchAll
     this.#path = path
   }
@@ -127,7 +125,7 @@ export class FSSource implements ValueSetSource, LoadableStore {
             // if (isResource(json)) { // @ts-ignore
             //   return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
             // }
-            throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json).replace(/"/g,"'"))
+            throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json).replace(/"/g, '\''))
           })
           .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
           .then(() => {

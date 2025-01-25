@@ -1,5 +1,5 @@
 import {afterEach, describe, expect, it, vi} from 'vitest'
-import {fetchAt, FetchError} from './Fetch'
+import {fetchAt, FetchError}                 from './Fetch'
 
 
 

@@ -92,7 +92,7 @@ export class ValueSetProcessor {
         const result = await this.process(id, debug) // Blocking call, one at a time
         results.push(result)
       } catch (e) {
-        console.error('fuck',e)
+        throw new Error(`Failed to process valueset: ${id}`)
       }
     }
 
