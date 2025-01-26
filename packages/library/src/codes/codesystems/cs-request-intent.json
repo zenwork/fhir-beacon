@@ -1,0 +1,29 @@
+{
+    "id": "request-intent",
+    "name": "RequestIntent",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/request-intent",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposal",
+            "display": "Proposal"
+        },
+        {
+            "value": "plan",
+            "display": "Plan"
+        },
+        {
+            "value": "directive",
+            "display": "Directive"
+        },
+        {
+            "value": "order",
+            "display": "Order"
+        },
+        {
+            "value": "option",
+            "display": "Option"
+        }
+    ]
+}

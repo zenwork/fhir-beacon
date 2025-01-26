@@ -1,0 +1,25 @@
+{
+    "id": "medicationrequest-intent",
+    "name": "MedicationRequestIntentCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposal",
+            "display": "Proposal"
+        },
+        {
+            "value": "plan",
+            "display": "Plan"
+        },
+        {
+            "value": "order",
+            "display": "Order"
+        },
+        {
+            "value": "option",
+            "display": "Option"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "biologicallyderived-product-property-type-codes",
+    "name": "BiologicallyDerivedProductPropertyTypeCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/biologicallyderived-product-property-type-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "collectiontype",
+            "display": "Collection Type"
+        },
+        {
+            "value": "aborhd",
+            "display": "ABORhD"
+        },
+        {
+            "value": "singleeuropeancode",
+            "display": "Single European Code"
+        },
+        {
+            "value": "redcellantigen",
+            "display": "Red Cell Antigen"
+        }
+    ]
+}

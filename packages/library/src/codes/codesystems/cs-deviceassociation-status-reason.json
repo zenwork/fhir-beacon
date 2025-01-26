@@ -1,0 +1,29 @@
+{
+    "id": "deviceassociation-status-reason",
+    "name": "DeviceAssociation",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/deviceassociation-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "attached",
+            "display": "Attached"
+        },
+        {
+            "value": "disconnected",
+            "display": "Disconnected"
+        },
+        {
+            "value": "failed",
+            "display": "Failed"
+        },
+        {
+            "value": "placed",
+            "display": "placed"
+        },
+        {
+            "value": "replaced",
+            "display": "Replaced"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "substance-amount-type",
+    "name": "SubstanceAmountType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Average",
+            "display": "Average"
+        },
+        {
+            "value": "Approximately",
+            "display": "Approximately"
+        },
+        {
+            "value": "LessThan",
+            "display": "Less Than"
+        },
+        {
+            "value": "MoreThan",
+            "display": "More Than"
+        }
+    ]
+}

@@ -3,3 +3,4 @@
  */
 
 export * from './range.data'
+export * from './range'

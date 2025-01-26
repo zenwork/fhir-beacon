@@ -1,0 +1,69 @@
+{
+    "id": "contract-status",
+    "name": "ContractStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "amended",
+            "display": "Amended"
+        },
+        {
+            "value": "appended",
+            "display": "Appended"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "disputed",
+            "display": "Disputed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "executable",
+            "display": "Executable"
+        },
+        {
+            "value": "executed",
+            "display": "Executed"
+        },
+        {
+            "value": "negotiable",
+            "display": "Negotiable"
+        },
+        {
+            "value": "offered",
+            "display": "Offered"
+        },
+        {
+            "value": "policy",
+            "display": "Policy"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        },
+        {
+            "value": "renewed",
+            "display": "Renewed"
+        },
+        {
+            "value": "revoked",
+            "display": "Revoked"
+        },
+        {
+            "value": "resolved",
+            "display": "Resolved"
+        },
+        {
+            "value": "terminated",
+            "display": "Terminated"
+        }
+    ]
+}

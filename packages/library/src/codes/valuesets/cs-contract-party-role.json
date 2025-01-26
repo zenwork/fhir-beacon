@@ -1,0 +1,12 @@
+{
+    "id": "contract-party-role",
+    "name": "ContractPartyRole",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "flunky",
+            "display": "FLunky"
+        }
+    ]
+}

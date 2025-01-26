@@ -1,0 +1,8 @@
+{
+    "id": "cdshooks-indicator",
+    "name": "Indicator",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/cdshooks-indicator",
+    "valid": true,
+    "choices": []
+}

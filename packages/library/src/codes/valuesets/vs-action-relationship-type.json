@@ -1,0 +1,20 @@
+{
+    "id": "action-relationship-type",
+    "name": "ActionRelationshipType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "before",
+            "display": "Before"
+        },
+        {
+            "value": "concurrent",
+            "display": "Concurrent"
+        },
+        {
+            "value": "after",
+            "display": "After"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+import {Canvas, Meta} from '@storybook/blocks'
+
+import * as Stories from './timing.stories'
+
+<Meta of={Stories}/>
+
+# Timing
+
+Describes the occurrence of an event that may occur multiple times. Timing schedules are used for specifying when events are expected or requested to occur and may also be used to represent the summary of a past or ongoing event.
+
+reference:
+* [ 2.1.28.0.17 Timing (R5)](https://hl7.org/fhir/datatypes.html#timing)
+
+
+
+<Canvas of={Stories.Display}/>
+
+<Canvas of={Stories.Structure}/>

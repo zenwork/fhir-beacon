@@ -1,0 +1,7 @@
+{
+    "id": "color-rgb",
+    "name": "ColorRGB",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": []
+}

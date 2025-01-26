@@ -1,0 +1,73 @@
+{
+    "id": "medicinal-product-name-part-type",
+    "name": "ProductNamePartType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-name-part-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "FullName",
+            "display": "Full name"
+        },
+        {
+            "value": "InventedNamePart",
+            "display": "Invented name part"
+        },
+        {
+            "value": "ScientificNamePart",
+            "display": "Scientific name part"
+        },
+        {
+            "value": "StrengthPart",
+            "display": "Strength part"
+        },
+        {
+            "value": "DoseFormPart",
+            "display": "Pharmaceutical dose form part"
+        },
+        {
+            "value": "FormulationPart",
+            "display": "Formulation part"
+        },
+        {
+            "value": "IntendedUsePart",
+            "display": "Intended use part"
+        },
+        {
+            "value": "PopulationPart",
+            "display": "Target population part"
+        },
+        {
+            "value": "ContainerPart",
+            "display": "Container or pack part"
+        },
+        {
+            "value": "DevicePart",
+            "display": "Device part"
+        },
+        {
+            "value": "TrademarkOrCompanyPart",
+            "display": "Trademark or company name part"
+        },
+        {
+            "value": "TimeOrPeriodPart",
+            "display": "Time/Period part"
+        },
+        {
+            "value": "FlavorPart",
+            "display": "Flavor part"
+        },
+        {
+            "value": "DelimiterPart",
+            "display": "Delimiter part"
+        },
+        {
+            "value": "LegacyNamePart",
+            "display": "Legacy name"
+        },
+        {
+            "value": "SpeciesNamePart",
+            "display": "Target species name part"
+        }
+    ]
+}

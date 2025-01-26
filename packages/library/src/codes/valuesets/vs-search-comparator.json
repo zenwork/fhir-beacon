@@ -1,0 +1,44 @@
+{
+    "id": "search-comparator",
+    "name": "SearchComparator",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "eq",
+            "display": "Equals"
+        },
+        {
+            "value": "ne",
+            "display": "Not Equals"
+        },
+        {
+            "value": "gt",
+            "display": "Greater Than"
+        },
+        {
+            "value": "lt",
+            "display": "Less Than"
+        },
+        {
+            "value": "ge",
+            "display": "Greater or Equals"
+        },
+        {
+            "value": "le",
+            "display": "Less of Equal"
+        },
+        {
+            "value": "sa",
+            "display": "Starts After"
+        },
+        {
+            "value": "eb",
+            "display": "Ends Before"
+        },
+        {
+            "value": "ap",
+            "display": "Approximately"
+        }
+    ]
+}

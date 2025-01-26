@@ -1,0 +1,44 @@
+{
+    "id": "transport-intent",
+    "name": "TransportIntent",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        },
+        {
+            "value": "proposal",
+            "display": "n/a"
+        },
+        {
+            "value": "plan",
+            "display": "n/a"
+        },
+        {
+            "value": "order",
+            "display": "n/a"
+        },
+        {
+            "value": "original-order",
+            "display": "n/a"
+        },
+        {
+            "value": "reflex-order",
+            "display": "n/a"
+        },
+        {
+            "value": "filler-order",
+            "display": "n/a"
+        },
+        {
+            "value": "instance-order",
+            "display": "n/a"
+        },
+        {
+            "value": "option",
+            "display": "n/a"
+        }
+    ]
+}

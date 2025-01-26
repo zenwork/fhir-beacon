@@ -1,0 +1,69 @@
+{
+    "id": "endpoint-connection-type",
+    "name": "EndpointConnectionType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/endpoint-connection-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "dicom-wado-rs",
+            "display": "DICOM WADO-RS"
+        },
+        {
+            "value": "dicom-qido-rs",
+            "display": "DICOM QIDO-RS"
+        },
+        {
+            "value": "dicom-stow-rs",
+            "display": "DICOM STOW-RS"
+        },
+        {
+            "value": "dicom-wado-uri",
+            "display": "DICOM WADO-URI"
+        },
+        {
+            "value": "hl7-fhir-rest",
+            "display": "HL7 FHIR"
+        },
+        {
+            "value": "hl7-fhir-msg",
+            "display": "HL7 FHIR Messaging"
+        },
+        {
+            "value": "hl7v2-mllp",
+            "display": "HL7 v2 MLLP"
+        },
+        {
+            "value": "secure-email",
+            "display": "Secure email"
+        },
+        {
+            "value": "direct-project",
+            "display": "Direct Project"
+        },
+        {
+            "value": "cds-hooks-service",
+            "display": "CDS Hooks Service"
+        },
+        {
+            "value": "ihe-xcpd",
+            "display": "IHE XCPD"
+        },
+        {
+            "value": "ihe-xca",
+            "display": "IHE XCA"
+        },
+        {
+            "value": "ihe-xdr",
+            "display": "IHE XDR"
+        },
+        {
+            "value": "ihe-xds",
+            "display": "IHE XDS"
+        },
+        {
+            "value": "ihe-iid",
+            "display": "IHE IID"
+        }
+    ]
+}

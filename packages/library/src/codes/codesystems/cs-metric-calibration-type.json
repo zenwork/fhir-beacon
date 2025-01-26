@@ -1,0 +1,25 @@
+{
+    "id": "metric-calibration-type",
+    "name": "DeviceMetricCalibrationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/metric-calibration-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unspecified",
+            "display": "Unspecified"
+        },
+        {
+            "value": "offset",
+            "display": "Offset"
+        },
+        {
+            "value": "gain",
+            "display": "Gain"
+        },
+        {
+            "value": "two-point",
+            "display": "Two Point"
+        }
+    ]
+}

@@ -1,0 +1,169 @@
+{
+    "id": "body-site",
+    "name": "SNOMEDCTBodyStructures",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/body-site",
+    "valid": true,
+    "choices": [
+        {
+            "value": "53075003",
+            "display": "Distal phalanx of hallux"
+        },
+        {
+            "value": "76986006",
+            "display": "Distal phalanx of second toe"
+        },
+        {
+            "value": "65258003",
+            "display": "Distal phalanx of third toe"
+        },
+        {
+            "value": "54333003",
+            "display": "Distal phalanx of fourth toe"
+        },
+        {
+            "value": "10770001",
+            "display": "Distal phalanx of fifth toe"
+        },
+        {
+            "value": "363670009",
+            "display": "Interphalangeal joint structure of great toe"
+        },
+        {
+            "value": "371216008",
+            "display": "Distal interphalangeal joint of second toe"
+        },
+        {
+            "value": "371219001",
+            "display": "Distal interphalangeal joint of third toe"
+        },
+        {
+            "value": "371205001",
+            "display": "Distal interphalangeal joint of fourth toe"
+        },
+        {
+            "value": "371203008",
+            "display": "Distal interphalangeal joint of fifth toe"
+        },
+        {
+            "value": "371292009",
+            "display": "Proximal interphalangeal joint of second toe"
+        },
+        {
+            "value": "371255009",
+            "display": "Proximal interphalangeal joint of third toe"
+        },
+        {
+            "value": "371288002",
+            "display": "Proximal interphalangeal joint of fourth toe"
+        },
+        {
+            "value": "371284000",
+            "display": "Proximal interphalangeal joint of fifth toe"
+        },
+        {
+            "value": "67169006",
+            "display": "Head of first metatarsal bone"
+        },
+        {
+            "value": "9677004",
+            "display": "Head of second metatarsal bone"
+        },
+        {
+            "value": "46971007",
+            "display": "Head of third metatarsal bone"
+        },
+        {
+            "value": "3134008",
+            "display": "Head of fourth metatarsal bone"
+        },
+        {
+            "value": "71822005",
+            "display": "Head of fifth metatarsal bone"
+        },
+        {
+            "value": "89221001",
+            "display": "Base of first metatarsal bone"
+        },
+        {
+            "value": "90894004",
+            "display": "Base of second metatarsal bone"
+        },
+        {
+            "value": "89995006",
+            "display": "Base of third metatarsal bone"
+        },
+        {
+            "value": "15368009",
+            "display": "Base of fourth metatarsal bone"
+        },
+        {
+            "value": "30980004",
+            "display": "Base of fifth metatarsal bone"
+        },
+        {
+            "value": "38607000",
+            "display": "Styloid process of fifth metatarsal bone"
+        },
+        {
+            "value": "2979003",
+            "display": "Medial cuneiform bone"
+        },
+        {
+            "value": "19193007",
+            "display": "Intermediate cuneiform bone"
+        },
+        {
+            "value": "67411009",
+            "display": "Lateral cuneiform bone"
+        },
+        {
+            "value": "81012005",
+            "display": "Bone structure of cuboid"
+        },
+        {
+            "value": "75772009",
+            "display": "Bone structure of navicular"
+        },
+        {
+            "value": "67453005",
+            "display": "Bone structure of talus"
+        },
+        {
+            "value": "80144004",
+            "display": "Bone structure of calcaneum"
+        },
+        {
+            "value": "6417001",
+            "display": "Medial malleolus"
+        },
+        {
+            "value": "113225006",
+            "display": "Lateral malleolus of fibula"
+        },
+        {
+            "value": "22457002",
+            "display": "Head of fibula"
+        },
+        {
+            "value": "45879002",
+            "display": "Tibial tuberosity"
+        },
+        {
+            "value": "122474001",
+            "display": "Medial condyle of femur"
+        },
+        {
+            "value": "122475000",
+            "display": "Lateral condyle of femur"
+        },
+        {
+            "value": "69030007",
+            "display": "Ischial tuberosity"
+        },
+        {
+            "value": "29850006",
+            "display": "Iliac crest"
+        }
+    ]
+}

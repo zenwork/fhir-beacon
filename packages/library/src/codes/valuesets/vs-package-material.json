@@ -1,0 +1,180 @@
+{
+    "id": "package-material",
+    "name": "PackageMaterial",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "200000003200",
+            "display": "Aluminium"
+        },
+        {
+            "value": "200000003201",
+            "display": "Cyclic Olefin Copolymer"
+        },
+        {
+            "value": "200000003202",
+            "display": "Epoxyphenol"
+        },
+        {
+            "value": "200000003203",
+            "display": "Glass"
+        },
+        {
+            "value": "200000003204",
+            "display": "Glass type I"
+        },
+        {
+            "value": "200000003205",
+            "display": "Glass type II"
+        },
+        {
+            "value": "200000003206",
+            "display": "Glass type III"
+        },
+        {
+            "value": "200000003207",
+            "display": "Paper"
+        },
+        {
+            "value": "200000003208",
+            "display": "Plastic"
+        },
+        {
+            "value": "200000003209",
+            "display": "PolyAmide"
+        },
+        {
+            "value": "200000003210",
+            "display": "Orientated PolyAmide"
+        },
+        {
+            "value": "200000003211",
+            "display": "PolyCarbonate"
+        },
+        {
+            "value": "200000003212",
+            "display": "PolyChloroTriFluoroEthylene"
+        },
+        {
+            "value": "200000003213",
+            "display": "Polyester"
+        },
+        {
+            "value": "200000003214",
+            "display": "PolyEthylene"
+        },
+        {
+            "value": "200000003215",
+            "display": "High Density PolyEthylene"
+        },
+        {
+            "value": "200000003216",
+            "display": "Low Density PolyEthylene"
+        },
+        {
+            "value": "200000003217",
+            "display": "PolyEthylene TerePhthalate"
+        },
+        {
+            "value": "200000003218",
+            "display": "Polyolefin"
+        },
+        {
+            "value": "200000003219",
+            "display": "PolyPropylene"
+        },
+        {
+            "value": "200000003220",
+            "display": "PolyStyrene"
+        },
+        {
+            "value": "200000003221",
+            "display": "PolyVinyl Acetate"
+        },
+        {
+            "value": "200000003222",
+            "display": "PolyVinyl Chloride"
+        },
+        {
+            "value": "200000003223",
+            "display": "Plasticised PolyVinyl Chloride"
+        },
+        {
+            "value": "200000003224",
+            "display": "Non-plasticised PolyVinyl Chloride / Unplasticised PolyVinyl Chloride"
+        },
+        {
+            "value": "200000003225",
+            "display": "PolyVinylidene Chloride"
+        },
+        {
+            "value": "200000003226",
+            "display": "Rubber"
+        },
+        {
+            "value": "200000003227",
+            "display": "Silicone oil"
+        },
+        {
+            "value": "200000003228",
+            "display": "Silicone elastomer"
+        },
+        {
+            "value": "200000003229",
+            "display": "Steel"
+        },
+        {
+            "value": "200000003529",
+            "display": "Cardboard"
+        },
+        {
+            "value": "200000012514",
+            "display": "PolyAcryloNitrile"
+        },
+        {
+            "value": "200000012515",
+            "display": "Ethylene acrylic acid copolymer"
+        },
+        {
+            "value": "200000012521",
+            "display": "Ethylene meta-acrylic acid"
+        },
+        {
+            "value": "200000012522",
+            "display": "Ethylene-Vinyl Alcohol copolymer"
+        },
+        {
+            "value": "200000012523",
+            "display": "PolyVinylidene Fluoride"
+        },
+        {
+            "value": "200000012524",
+            "display": "Medium Density PolyEthylene"
+        },
+        {
+            "value": "200000012538",
+            "display": "Syndiotactic Polypropylene"
+        },
+        {
+            "value": "200000015521",
+            "display": "PolyEthylene copolymer"
+        },
+        {
+            "value": "200000023330",
+            "display": "Expanded Polyethylene"
+        },
+        {
+            "value": "200000023332",
+            "display": "Cyclic Olefin Polymer"
+        },
+        {
+            "value": "200000025255",
+            "display": "Silica gel"
+        },
+        {
+            "value": "200000025257",
+            "display": "Linear Low Density PolyEthylene"
+        }
+    ]
+}

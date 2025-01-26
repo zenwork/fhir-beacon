@@ -1,0 +1,16 @@
+{
+    "id": "examplescenario-actor-type",
+    "name": "ExampleScenarioActorType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "person",
+            "display": "Person"
+        },
+        {
+            "value": "system",
+            "display": "System"
+        }
+    ]
+}

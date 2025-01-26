@@ -1,0 +1,25 @@
+{
+    "id": "action-type",
+    "name": "ActionType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/action-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "create",
+            "display": "Create"
+        },
+        {
+            "value": "update",
+            "display": "Update"
+        },
+        {
+            "value": "remove",
+            "display": "Remove"
+        },
+        {
+            "value": "fire-event",
+            "display": "Fire Event"
+        }
+    ]
+}

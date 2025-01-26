@@ -1,0 +1,25 @@
+{
+    "id": "adverse-event-status",
+    "name": "AdverseEventStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "n/a"
+        },
+        {
+            "value": "completed",
+            "display": "n/a"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "n/a"
+        },
+        {
+            "value": "unknown",
+            "display": "n/a"
+        }
+    ]
+}

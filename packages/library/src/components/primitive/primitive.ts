@@ -1,5 +1,5 @@
 import {consume}                                       from '@lit/context'
-import {SlInput, SlSwitch}   from '@shoelace-style/shoelace'
+import {SlInput, SlSwitch}                             from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
 import {choose}                                        from 'lit/directives/choose.js'
@@ -13,12 +13,13 @@ import {mustRender}                                    from '../mustRender'
 import {DateTime}                                      from './primitive.data'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
-import {PrimitiveValidEvent} from './primitiveValidEvent'
+import {PrimitiveValidEvent}                           from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
 import {
   PrimitiveType,
   toBase64,
   toBoolean,
+  toCanonical,
   toCode,
   toDate,
   toDatetime,
@@ -31,6 +32,7 @@ import {
   toLink,
   toMarkdown,
   toPositiveInt,
+  toTime,
   toType,
   toUnsignedInt,
   toUri,
@@ -150,6 +152,7 @@ export class Primitive extends ConfigurableElement {
           [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
           [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
           [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
+          [PrimitiveType.canonical, () => this.validOrError(toCanonical, this.value)],
           [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
           [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
           [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
@@ -165,6 +168,7 @@ export class Primitive extends ConfigurableElement {
           [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
           [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
           [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
+          [PrimitiveType.time, () => this.validOrError(toTime, this.value)],
           [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
           [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
           [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
@@ -173,12 +177,15 @@ export class Primitive extends ConfigurableElement {
     }
 
 
-    if (isBlank(this.value) && this.required && !this.verbose) {
-      this.presentableError = 'Error: this property is required'
+    if (isBlank(this.value) && this.required) {
       this.error = true
-      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, this.presentableError)
+      if (this.showerror) {
+        this.presentableError = 'Error: this property is required'
+      }
+      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, 'Error: this property is required')
       this.dispatchEvent(event)
     }
+
 
     if (changed.has('errormessage')) {
       if (!isBlank(this.errormessage)) {
@@ -196,7 +203,6 @@ export class Primitive extends ConfigurableElement {
    * @protected
    */
   protected render(): unknown {
-
     if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
         && !this.valuePath
         && this.mode !== DisplayMode.override
@@ -227,7 +233,9 @@ export class Primitive extends ConfigurableElement {
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
-                             : this.presentableValue} link=${this.link} .variant=${this.variant}
+                             : this.presentableValue} 
+                      link=${this.link} 
+                      .variant=${this.variant}
           >
               <span slot="before"><slot name="before"></slot></span>
               <span slot="after"><slot name="after"></slot></span>

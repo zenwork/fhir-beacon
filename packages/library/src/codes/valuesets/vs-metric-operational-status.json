@@ -1,0 +1,24 @@
+{
+    "id": "metric-operational-status",
+    "name": "DeviceMetricOperationalStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "on",
+            "display": "On"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "standby",
+            "display": "Standby"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

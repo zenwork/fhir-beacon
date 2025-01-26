@@ -1,0 +1,41 @@
+{
+    "id": "coverageeligibilityresponse-ex-auth-support",
+    "name": "CoverageEligibilityResponseAuthSupportCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/coverageeligibilityresponse-ex-auth-support",
+    "valid": true,
+    "choices": [
+        {
+            "value": "laborder",
+            "display": "Lab Order"
+        },
+        {
+            "value": "labreport",
+            "display": "Lab Report"
+        },
+        {
+            "value": "diagnosticimageorder",
+            "display": "Diagnostic Image Order"
+        },
+        {
+            "value": "diagnosticimagereport",
+            "display": "Diagnostic Image Report"
+        },
+        {
+            "value": "professionalreport",
+            "display": "Professional Report"
+        },
+        {
+            "value": "accidentreport",
+            "display": "Accident Report"
+        },
+        {
+            "value": "model",
+            "display": "Model"
+        },
+        {
+            "value": "picture",
+            "display": "Picture"
+        }
+    ]
+}

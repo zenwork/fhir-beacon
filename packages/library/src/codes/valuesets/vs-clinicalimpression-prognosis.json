@@ -1,0 +1,8 @@
+{
+    "id": "clinicalimpression-prognosis",
+    "name": "ClinicalImpressionPrognosis",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/clinicalimpression-prognosis",
+    "valid": true,
+    "choices": []
+}

@@ -1,0 +1,16 @@
+{
+    "id": "map-input-mode",
+    "name": "StructureMapInputMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "source",
+            "display": "Source Instance"
+        },
+        {
+            "value": "target",
+            "display": "Target Instance"
+        }
+    ]
+}

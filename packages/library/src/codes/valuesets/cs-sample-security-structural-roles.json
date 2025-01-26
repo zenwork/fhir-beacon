@@ -1,0 +1,16 @@
+{
+    "id": "sample-security-structural-roles",
+    "name": "SampleSecurityStructuralRoles",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "regulated-health-professionals",
+            "display": "Regulated Health Professionals"
+        },
+        {
+            "value": "non-regulated-health-professionals",
+            "display": "Non-Regulated health Professionals"
+        }
+    ]
+}

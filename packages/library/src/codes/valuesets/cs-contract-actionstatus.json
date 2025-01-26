@@ -1,0 +1,12 @@
+{
+    "id": "contract-actionstatus",
+    "name": "ContractActionStatus",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        }
+    ]
+}

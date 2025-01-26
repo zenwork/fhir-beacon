@@ -1,0 +1,29 @@
+{
+    "id": "deviceassociation-operationstatus",
+    "name": "FHIRDeviceAssociationOperationStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/deviceassociation-operationstatus",
+    "valid": true,
+    "choices": [
+        {
+            "value": "on",
+            "display": "On"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "standby",
+            "display": "Stand By"
+        },
+        {
+            "value": "defective",
+            "display": "Stand By"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

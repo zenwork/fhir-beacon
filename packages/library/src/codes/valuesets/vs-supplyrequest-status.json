@@ -1,0 +1,36 @@
+{
+    "id": "supplyrequest-status",
+    "name": "SupplyRequestStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "suspended",
+            "display": "Suspended"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

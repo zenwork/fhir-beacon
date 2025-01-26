@@ -1,0 +1,32 @@
+{
+    "id": "research-study-party-organization-type",
+    "name": "ResearchStudyPartyOrgType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "nih",
+            "display": "NIH"
+        },
+        {
+            "value": "fda",
+            "display": "FDA"
+        },
+        {
+            "value": "government",
+            "display": "Government"
+        },
+        {
+            "value": "nonprofit",
+            "display": "Nonprofit"
+        },
+        {
+            "value": "academic",
+            "display": "Academic"
+        },
+        {
+            "value": "industry",
+            "display": "Industry"
+        }
+    ]
+}

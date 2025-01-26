@@ -1,0 +1,24 @@
+{
+    "id": "explanationofbenefit-status",
+    "name": "ExplanationOfBenefitStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

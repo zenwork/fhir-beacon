@@ -1,0 +1,29 @@
+{
+    "id": "immunization-recommendation-status",
+    "name": "ImmunizationRecommendationStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-recommendation-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "due",
+            "display": "Due"
+        },
+        {
+            "value": "overdue",
+            "display": "Overdue"
+        },
+        {
+            "value": "immune",
+            "display": "Immune"
+        },
+        {
+            "value": "contraindicated",
+            "display": "Contraindicated"
+        },
+        {
+            "value": "complete",
+            "display": "Complete"
+        }
+    ]
+}

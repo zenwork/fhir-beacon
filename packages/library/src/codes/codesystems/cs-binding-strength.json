@@ -1,0 +1,25 @@
+{
+    "id": "binding-strength",
+    "name": "BindingStrength",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/binding-strength",
+    "valid": true,
+    "choices": [
+        {
+            "value": "required",
+            "display": "Required"
+        },
+        {
+            "value": "extensible",
+            "display": "Extensible"
+        },
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        },
+        {
+            "value": "example",
+            "display": "Example"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "designation-use",
+    "name": "DesignationUse",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/designation-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "900000000000003001",
+            "display": "n/a"
+        },
+        {
+            "value": "900000000000013009",
+            "display": "n/a"
+        }
+    ]
+}

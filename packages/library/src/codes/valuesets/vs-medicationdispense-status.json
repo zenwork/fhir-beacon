@@ -1,0 +1,44 @@
+{
+    "id": "medicationdispense-status",
+    "name": "MedicationDispenseStatusCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preparation",
+            "display": "Preparation"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        },
+        {
+            "value": "declined",
+            "display": "Declined"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "binding-strength",
+    "name": "BindingStrength",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "required",
+            "display": "Required"
+        },
+        {
+            "value": "extensible",
+            "display": "Extensible"
+        },
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        },
+        {
+            "value": "example",
+            "display": "Example"
+        }
+    ]
+}

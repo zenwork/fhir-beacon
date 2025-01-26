@@ -1,0 +1,16 @@
+{
+    "id": "medication-cost-category",
+    "name": "MedicationCostCategoryCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "banda",
+            "display": "Band A"
+        },
+        {
+            "value": "bandb",
+            "display": "Band B"
+        }
+    ]
+}

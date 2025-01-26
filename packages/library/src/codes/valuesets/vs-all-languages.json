@@ -1,0 +1,8 @@
+{
+    "id": "all-languages",
+    "name": "AllLanguages",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/all-languages",
+    "valid": true,
+    "choices": []
+}

@@ -1,0 +1,48 @@
+{
+    "id": "regulated-authorization-basis",
+    "name": "RegulatedAuthorizationBasis",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Full",
+            "display": "Full application"
+        },
+        {
+            "value": "NewSubstance",
+            "display": "New active substance"
+        },
+        {
+            "value": "KnownSubstance",
+            "display": "Known active substance"
+        },
+        {
+            "value": "SimilarBiological",
+            "display": "Similar biological application"
+        },
+        {
+            "value": "Well-establishedUse",
+            "display": "Well-established use application"
+        },
+        {
+            "value": "TraditionalUse",
+            "display": "Traditional use registration for herbal medicinal product application"
+        },
+        {
+            "value": "Bibliographical",
+            "display": "Bibliographical application (stand-alone)"
+        },
+        {
+            "value": "KnownHumanBlood",
+            "display": "Known human blood/plasma derived ancillary medicinal substance"
+        },
+        {
+            "value": "TemporaryUse",
+            "display": "Authorizations for temporary use"
+        },
+        {
+            "value": "ParallelTrade",
+            "display": "Parallel traded products"
+        }
+    ]
+}

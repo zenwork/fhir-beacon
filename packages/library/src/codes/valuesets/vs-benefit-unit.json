@@ -1,0 +1,17 @@
+{
+    "id": "benefit-unit",
+    "name": "UnitTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/benefit-unit",
+    "valid": true,
+    "choices": [
+        {
+            "value": "individual",
+            "display": "Individual"
+        },
+        {
+            "value": "family",
+            "display": "Family"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "id": "medicinal-product-additional-monitoring",
+    "name": "AdditionalMonitoring",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BlackTriangleMonitoring",
+            "display": "Requirement for Black Triangle Monitoring"
+        }
+    ]
+}

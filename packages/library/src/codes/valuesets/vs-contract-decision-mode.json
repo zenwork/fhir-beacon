@@ -1,0 +1,12 @@
+{
+    "id": "contract-decision-mode",
+    "name": "ContractResourceDecisionModeCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "metric-category",
+    "name": "DeviceMetricCategory",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "measurement",
+            "display": "Measurement"
+        },
+        {
+            "value": "setting",
+            "display": "Setting"
+        },
+        {
+            "value": "calculation",
+            "display": "Calculation"
+        },
+        {
+            "value": "unspecified",
+            "display": "Unspecified"
+        }
+    ]
+}

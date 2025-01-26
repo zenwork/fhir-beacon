@@ -1,0 +1,24 @@
+{
+    "id": "contributor-type",
+    "name": "ContributorType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "author",
+            "display": "Author"
+        },
+        {
+            "value": "editor",
+            "display": "Editor"
+        },
+        {
+            "value": "reviewer",
+            "display": "Reviewer"
+        },
+        {
+            "value": "endorser",
+            "display": "Endorser"
+        }
+    ]
+}

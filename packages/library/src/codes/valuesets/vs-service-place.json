@@ -1,0 +1,77 @@
+{
+    "id": "service-place",
+    "name": "ExampleServicePlaceCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-place",
+    "valid": true,
+    "choices": [
+        {
+            "value": "01",
+            "display": "Pharmacy"
+        },
+        {
+            "value": "03",
+            "display": "School"
+        },
+        {
+            "value": "04",
+            "display": "Homeless Shelter"
+        },
+        {
+            "value": "05",
+            "display": "Indian Health Service Free-standing Facility"
+        },
+        {
+            "value": "06",
+            "display": "Indian Health Service Provider-based Facility"
+        },
+        {
+            "value": "07",
+            "display": "Tribal 638 Free-Standing Facility"
+        },
+        {
+            "value": "08",
+            "display": "Tribal 638 Provider-Based Facility"
+        },
+        {
+            "value": "09",
+            "display": "Prison/Correctional Facility"
+        },
+        {
+            "value": "11",
+            "display": "Office"
+        },
+        {
+            "value": "12",
+            "display": "Home"
+        },
+        {
+            "value": "13",
+            "display": "Assisted Living Fa"
+        },
+        {
+            "value": "14",
+            "display": "Group Home"
+        },
+        {
+            "value": "15",
+            "display": "Mobile Unit"
+        },
+        {
+            "value": "19",
+            "display": "Off Campus-Outpatient Hospital"
+        },
+        {
+            "value": "20",
+            "display": "Urgent Care Facility"
+        },
+        {
+            "value": "21",
+            "display": "Inpatient Hospital"
+        },
+        {
+            "value": "41",
+            "display": "Ambulance—Land"
+        }
+    ]
+}

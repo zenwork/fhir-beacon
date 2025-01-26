@@ -1,0 +1,33 @@
+{
+    "id": "security-label-event-examples",
+    "name": "SecurityLabelEventExamples",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/security-label-event-examples",
+    "valid": true,
+    "choices": [
+        {
+            "value": "TREAT",
+            "display": "n/a"
+        },
+        {
+            "value": "HPAYMT",
+            "display": "n/a"
+        },
+        {
+            "value": "ETREAT",
+            "display": "n/a"
+        },
+        {
+            "value": "NOAUTH",
+            "display": "n/a"
+        },
+        {
+            "value": "DELAU",
+            "display": "n/a"
+        },
+        {
+            "value": "NORDSCLCD",
+            "display": "n/a"
+        }
+    ]
+}

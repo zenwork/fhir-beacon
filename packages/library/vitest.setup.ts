@@ -7,6 +7,8 @@ import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-
 import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
 import {Query}                               from './tests/types/global'
 
+
+
 /**
  * Represents an error that occurs during the execution of a Beacon Test.
  *
@@ -25,6 +27,7 @@ export class BeaconTestError extends Error {
 Element.prototype.queryShadow =
   function <T extends Element | Element[]>({ select, expect = 1 }: Query): T {
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     let results: any[] = [this]
 
     if (typeof select === 'string') {
@@ -33,6 +36,7 @@ Element.prototype.queryShadow =
 
     if (Array.isArray(select)) {
       // search down stack of values
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       let intermediateSet: any[] = results
 
       select.forEach((sel) => {

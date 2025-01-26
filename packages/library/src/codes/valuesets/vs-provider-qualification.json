@@ -1,0 +1,21 @@
+{
+    "id": "provider-qualification",
+    "name": "ExampleProviderQualificationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/provider-qualification",
+    "valid": true,
+    "choices": [
+        {
+            "value": "311405",
+            "display": "Dentist"
+        },
+        {
+            "value": "604215",
+            "display": "Ophthalmologist"
+        },
+        {
+            "value": "604210",
+            "display": "Optometrist"
+        }
+    ]
+}

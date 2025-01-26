@@ -1,0 +1,25 @@
+{
+    "id": "inventoryitem-nametype",
+    "name": "InventoryItemNameType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/inventoryitem-nametype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "trade-name",
+            "display": "Trade Name"
+        },
+        {
+            "value": "alias",
+            "display": "Alias"
+        },
+        {
+            "value": "original-name",
+            "display": "Original Name"
+        },
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        }
+    ]
+}

@@ -36,8 +36,6 @@ export class Identifier extends BaseElement<IdentifierData> {
   public renderStructure(config: DisplayConfig,
                          data: Decorated<IdentifierData>,
                          validations: Validations): TemplateResult[] {
-
-    if (data) {
       return [
         html`
             <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use}
@@ -51,8 +49,6 @@ export class Identifier extends BaseElement<IdentifierData> {
             <fhir-period label="period" .data=${data.period} summary></fhir-period>
             <fhir-reference label="assigner" .data=${data.assigner} summary></fhir-reference> `
       ]
-    }
-    return [html``]
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

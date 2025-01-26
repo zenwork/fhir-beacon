@@ -1,0 +1,16 @@
+{
+    "id": "subscriptiontopic-cr-behavior",
+    "name": "CriteriaNotExistsBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "test-passes",
+            "display": "Test passes"
+        },
+        {
+            "value": "test-fails",
+            "display": "Test fails"
+        }
+    ]
+}

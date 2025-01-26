@@ -1,0 +1,32 @@
+{
+    "id": "document-relationship-type",
+    "name": "DocumentRelationshipType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "transforms",
+            "display": "Transforms"
+        },
+        {
+            "value": "signs",
+            "display": "Signs"
+        },
+        {
+            "value": "appends",
+            "display": "Appends"
+        },
+        {
+            "value": "incorporates",
+            "display": "Incorporates"
+        },
+        {
+            "value": "summarizes",
+            "display": "Summarizes"
+        }
+    ]
+}

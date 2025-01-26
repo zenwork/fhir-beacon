@@ -1,0 +1,36 @@
+{
+    "id": "request-status",
+    "name": "RequestStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        },
+        {
+            "value": "revoked",
+            "display": "Revoked"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

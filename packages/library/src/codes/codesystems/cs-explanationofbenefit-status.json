@@ -1,0 +1,25 @@
+{
+    "id": "explanationofbenefit-status",
+    "name": "ExplanationOfBenefitStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/explanationofbenefit-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

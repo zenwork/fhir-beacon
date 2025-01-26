@@ -1,0 +1,17 @@
+{
+    "id": "inventoryreport-counttype",
+    "name": "InventoryCountType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/inventoryreport-counttype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "snapshot",
+            "display": "Snapshot"
+        },
+        {
+            "value": "difference",
+            "display": "Difference"
+        }
+    ]
+}

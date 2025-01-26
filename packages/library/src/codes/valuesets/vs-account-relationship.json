@@ -1,0 +1,16 @@
+{
+    "id": "account-relationship",
+    "name": "AccountRelationship",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "parent",
+            "display": "Parent"
+        },
+        {
+            "value": "guarantor",
+            "display": "Guarantor"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "vision-eye-codes",
+    "name": "VisionEyes",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "right",
+            "display": "Right Eye"
+        },
+        {
+            "value": "left",
+            "display": "Left Eye"
+        }
+    ]
+}

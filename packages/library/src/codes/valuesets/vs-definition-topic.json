@@ -1,0 +1,44 @@
+{
+    "id": "definition-topic",
+    "name": "DefinitionTopic",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fhir-structure",
+            "display": "FHIR Structure"
+        },
+        {
+            "value": "custom-resource",
+            "display": "Custom Resource"
+        },
+        {
+            "value": "dam",
+            "display": "Domain Analysis Model"
+        },
+        {
+            "value": "wire-format",
+            "display": "Wire Format"
+        },
+        {
+            "value": "archetype",
+            "display": "Domain Analysis Model"
+        },
+        {
+            "value": "template",
+            "display": "Template"
+        },
+        {
+            "value": "treatment",
+            "display": "Treatment"
+        },
+        {
+            "value": "education",
+            "display": "Education"
+        },
+        {
+            "value": "assessment",
+            "display": "Assessment"
+        }
+    ]
+}

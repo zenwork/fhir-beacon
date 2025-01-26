@@ -1,0 +1,37 @@
+{
+    "id": "episode-of-care-status",
+    "name": "EpisodeOfCareStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/episode-of-care-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "waitlist",
+            "display": "Waitlist"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "onhold",
+            "display": "On Hold"
+        },
+        {
+            "value": "finished",
+            "display": "Finished"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

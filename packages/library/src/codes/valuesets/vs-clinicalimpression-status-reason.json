@@ -1,0 +1,53 @@
+{
+    "id": "clinicalimpression-status-reason",
+    "name": "ClinicalImpressionStatusReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/clinicalimpression-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "397709008",
+            "display": "n/a"
+        },
+        {
+            "value": "105480006",
+            "display": "n/a"
+        },
+        {
+            "value": "719500002",
+            "display": "n/a"
+        },
+        {
+            "value": "445060000",
+            "display": "n/a"
+        },
+        {
+            "value": "704273008",
+            "display": "n/a"
+        },
+        {
+            "value": "704274002",
+            "display": "n/a"
+        },
+        {
+            "value": "704458005",
+            "display": "n/a"
+        },
+        {
+            "value": "704275001",
+            "display": "n/a"
+        },
+        {
+            "value": "704276000",
+            "display": "n/a"
+        },
+        {
+            "value": "704277009",
+            "display": "n/a"
+        },
+        {
+            "value": "398090008",
+            "display": "n/a"
+        }
+    ]
+}

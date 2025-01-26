@@ -1,0 +1,21 @@
+{
+    "id": "substance-source-material-type",
+    "name": "SubstanceSourceMaterialType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-source-material-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Animal",
+            "display": "animal"
+        },
+        {
+            "value": "Plant",
+            "display": "plant"
+        },
+        {
+            "value": "Mineral",
+            "display": "mineral"
+        }
+    ]
+}

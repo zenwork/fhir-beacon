@@ -1,0 +1,16 @@
+{
+    "id": "action-cardinality-behavior",
+    "name": "ActionCardinalityBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "single",
+            "display": "Single"
+        },
+        {
+            "value": "multiple",
+            "display": "Multiple"
+        }
+    ]
+}

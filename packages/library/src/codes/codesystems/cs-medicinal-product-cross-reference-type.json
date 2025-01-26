@@ -1,0 +1,33 @@
+{
+    "id": "medicinal-product-cross-reference-type",
+    "name": "ProductCrossReferenceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-cross-reference-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "InvestigationalProduct",
+            "display": "Link to Investigational Product"
+        },
+        {
+            "value": "VirtualProduct",
+            "display": "Link Actual to Virtual Product"
+        },
+        {
+            "value": "ActualProduct",
+            "display": "Link Virtual to Actual Product"
+        },
+        {
+            "value": "BrandedProduct",
+            "display": "Link Generic to Branded Product"
+        },
+        {
+            "value": "GenericProduct",
+            "display": "Link Branded to Generic Product"
+        },
+        {
+            "value": "Parallel",
+            "display": "Link to Parallel Import Product"
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "id": "security-label-examples",
+    "name": "SecurityLabelExamples",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "N",
+            "display": "n/a"
+        },
+        {
+            "value": "R",
+            "display": "n/a"
+        },
+        {
+            "value": "ETH",
+            "display": "n/a"
+        },
+        {
+            "value": "PSY",
+            "display": "n/a"
+        },
+        {
+            "value": "STD",
+            "display": "n/a"
+        },
+        {
+            "value": "TREAT",
+            "display": "n/a"
+        },
+        {
+            "value": "HPAYMT",
+            "display": "n/a"
+        },
+        {
+            "value": "ETREAT",
+            "display": "n/a"
+        },
+        {
+            "value": "NOAUTH",
+            "display": "n/a"
+        },
+        {
+            "value": "DELAU",
+            "display": "n/a"
+        },
+        {
+            "value": "NORDSCLCD",
+            "display": "n/a"
+        }
+    ]
+}

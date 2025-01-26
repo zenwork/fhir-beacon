@@ -6,3 +6,4 @@ build
 types
 .idea
 .github
+/.vite/

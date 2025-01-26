@@ -1,0 +1,16 @@
+{
+    "id": "measure-definition-example",
+    "name": "MeasureDefinitionExample",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "screening",
+            "display": "Screening"
+        },
+        {
+            "value": "standardized-depression-screening-tool",
+            "display": "Standardized Depression Screening Tool"
+        }
+    ]
+}

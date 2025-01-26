@@ -1,0 +1,12 @@
+{
+    "id": "conceptmap-properties",
+    "name": "ConceptMapProperties",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "relationshipRefinement",
+            "display": "Relationship Refinement"
+        }
+    ]
+}

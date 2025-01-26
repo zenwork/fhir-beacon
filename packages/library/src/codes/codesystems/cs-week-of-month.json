@@ -1,0 +1,29 @@
+{
+    "id": "week-of-month",
+    "name": "WeekOfMonth",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/week-of-month",
+    "valid": true,
+    "choices": [
+        {
+            "value": "first",
+            "display": "First"
+        },
+        {
+            "value": "second",
+            "display": "Second"
+        },
+        {
+            "value": "third",
+            "display": "Third"
+        },
+        {
+            "value": "fourth",
+            "display": "Fourth"
+        },
+        {
+            "value": "last",
+            "display": "Last"
+        }
+    ]
+}

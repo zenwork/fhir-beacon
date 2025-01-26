@@ -1,0 +1,24 @@
+{
+    "id": "assert-manual-completion-codes",
+    "name": "AssertionManualCompletionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "skip",
+            "display": "Skip"
+        },
+        {
+            "value": "stop",
+            "display": "Stop"
+        }
+    ]
+}

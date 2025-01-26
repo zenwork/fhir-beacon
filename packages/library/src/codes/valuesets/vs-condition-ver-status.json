@@ -1,0 +1,25 @@
+{
+    "id": "condition-ver-status",
+    "name": "ConditionVerificationStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-ver-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unconfirmed",
+            "display": "Unconfirmed"
+        },
+        {
+            "value": "confirmed",
+            "display": "Confirmed"
+        },
+        {
+            "value": "refuted",
+            "display": "Refuted"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

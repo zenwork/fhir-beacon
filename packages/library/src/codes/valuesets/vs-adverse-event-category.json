@@ -1,0 +1,37 @@
+{
+    "id": "adverse-event-category",
+    "name": "AdverseEventCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "wrong-patient",
+            "display": "Wrong Patient"
+        },
+        {
+            "value": "procedure-mishap",
+            "display": "Procedure Mishap"
+        },
+        {
+            "value": "medication-mishap",
+            "display": "Medication Mishap"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "unsafe-physical-environment",
+            "display": "Unsafe Physical Environment"
+        },
+        {
+            "value": "hospital-aquired-infection",
+            "display": "Hospital Acquired Infection"
+        },
+        {
+            "value": "wrong-body-site",
+            "display": "Wrong Body Site"
+        }
+    ]
+}

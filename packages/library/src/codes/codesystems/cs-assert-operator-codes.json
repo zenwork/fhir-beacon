@@ -1,0 +1,57 @@
+{
+    "id": "assert-operator-codes",
+    "name": "AssertionOperatorType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/assert-operator-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "equals",
+            "display": "equals"
+        },
+        {
+            "value": "notEquals",
+            "display": "notEquals"
+        },
+        {
+            "value": "in",
+            "display": "in"
+        },
+        {
+            "value": "notIn",
+            "display": "notIn"
+        },
+        {
+            "value": "greaterThan",
+            "display": "greaterThan"
+        },
+        {
+            "value": "lessThan",
+            "display": "lessThan"
+        },
+        {
+            "value": "empty",
+            "display": "empty"
+        },
+        {
+            "value": "notEmpty",
+            "display": "notEmpty"
+        },
+        {
+            "value": "contains",
+            "display": "contains"
+        },
+        {
+            "value": "notContains",
+            "display": "notContains"
+        },
+        {
+            "value": "eval",
+            "display": "evaluate"
+        },
+        {
+            "value": "manualEval",
+            "display": "manualEvaluate"
+        }
+    ]
+}

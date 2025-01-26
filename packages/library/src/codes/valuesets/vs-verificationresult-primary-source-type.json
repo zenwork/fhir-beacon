@@ -1,0 +1,45 @@
+{
+    "id": "verificationresult-primary-source-type",
+    "name": "PrimarySourceType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-primary-source-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lic-board",
+            "display": "License Board"
+        },
+        {
+            "value": "prim",
+            "display": "Primary Education"
+        },
+        {
+            "value": "cont-ed",
+            "display": "Continuing Education"
+        },
+        {
+            "value": "post-serv",
+            "display": "Postal Service"
+        },
+        {
+            "value": "rel-own",
+            "display": "Relationship owner"
+        },
+        {
+            "value": "reg-auth",
+            "display": "Registration Authority"
+        },
+        {
+            "value": "legal",
+            "display": "Legal source"
+        },
+        {
+            "value": "issuer",
+            "display": "Issuing source"
+        },
+        {
+            "value": "auth-source",
+            "display": "Authoritative source"
+        }
+    ]
+}

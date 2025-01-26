@@ -1,0 +1,25 @@
+{
+    "id": "publication-status",
+    "name": "PublicationStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/publication-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "retired",
+            "display": "Retired"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

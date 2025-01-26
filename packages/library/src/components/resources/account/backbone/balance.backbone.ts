@@ -5,6 +5,8 @@ import {DisplayConfig}        from '../../../../types'
 import {PrimitiveType}        from '../../../primitive'
 import {AccountBalanceData}   from '../account.data'
 
+
+
 @customElement('fhir-account-balance')
 export class Balance extends Backbone<AccountBalanceData> {
   constructor() {super('AccountBalance')}
@@ -23,7 +25,7 @@ export class Balance extends Backbone<AccountBalanceData> {
           <fhir-codeable-concept key="aggregate" .data=${data.aggregate}></fhir-codeable-concept>
           <fhir-codeable-concept key="term" .data=${data.term}></fhir-codeable-concept>
           <fhir-primitive key="estimate" .value=${data.estimate} .type=${PrimitiveType.boolean}></fhir-primitive>
-          <fhir-money key="amount" .data=${data.money}></fhir-money>
+          <fhir-money key="amount" .data=${data.amount}></fhir-money>
       `
     ]
   }

@@ -1,0 +1,17 @@
+{
+    "id": "characteristic-offset",
+    "name": "CharacteristicOffset",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/characteristic-offset",
+    "valid": true,
+    "choices": [
+        {
+            "value": "UNL",
+            "display": "Upper Normal Limit"
+        },
+        {
+            "value": "LNL",
+            "display": "Lower Normal Limit"
+        }
+    ]
+}

@@ -1,0 +1,325 @@
+{
+    "id": "statistic-model-code",
+    "name": "StatisticModelCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/statistic-model-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "oneTailedTest",
+            "display": "one-tailed test (1 threshold)"
+        },
+        {
+            "value": "twoTailedTest",
+            "display": "two-tailed test (2 thresholds)"
+        },
+        {
+            "value": "zTest",
+            "display": "z-test"
+        },
+        {
+            "value": "oneSampleTTest",
+            "display": "1-sample t-test"
+        },
+        {
+            "value": "twoSampleTTest",
+            "display": "2-sample t-test"
+        },
+        {
+            "value": "pairedTTest",
+            "display": "paired t-test"
+        },
+        {
+            "value": "chiSquareTest",
+            "display": "Chi-square test"
+        },
+        {
+            "value": "chiSquareTestTrend",
+            "display": "Chi-square test for trend"
+        },
+        {
+            "value": "pearsonCorrelation",
+            "display": "Pearson correlation"
+        },
+        {
+            "value": "anova",
+            "display": "ANOVA (ANalysis Of VAriance)"
+        },
+        {
+            "value": "anovaOneWay",
+            "display": "one-way ANOVA"
+        },
+        {
+            "value": "anovaTwoWay",
+            "display": "2-way ANOVA without replication"
+        },
+        {
+            "value": "anovaTwoWayReplication",
+            "display": "2-way ANOVA with replication"
+        },
+        {
+            "value": "manova",
+            "display": "multivariate ANOVA (MANOVA)"
+        },
+        {
+            "value": "anovaThreeWay",
+            "display": "3-way ANOVA"
+        },
+        {
+            "value": "signTest",
+            "display": "sign test"
+        },
+        {
+            "value": "wilcoxonSignedRankTest",
+            "display": "Wilcoxon signed-rank test"
+        },
+        {
+            "value": "wilcoxonRankSumTest",
+            "display": "Wilcoxon rank-sum test"
+        },
+        {
+            "value": "mannWhitneyUTest",
+            "display": "Mann-Whitney U test"
+        },
+        {
+            "value": "fishersExactTest",
+            "display": "Fisher’s exact test"
+        },
+        {
+            "value": "mcnemarsTest",
+            "display": "McNemar’s test"
+        },
+        {
+            "value": "kruskalWallisTest",
+            "display": "Kruskal Wallis test"
+        },
+        {
+            "value": "spearmanCorrelation",
+            "display": "Spearman correlation"
+        },
+        {
+            "value": "kendallCorrelation",
+            "display": "Kendall correlation"
+        },
+        {
+            "value": "friedmanTest",
+            "display": "Friedman test"
+        },
+        {
+            "value": "goodmanKruskasGamma",
+            "display": "Goodman Kruska’s Gamma"
+        },
+        {
+            "value": "glm",
+            "display": "GLM (Generalized Linear Model)"
+        },
+        {
+            "value": "glmProbit",
+            "display": "GLM with probit link"
+        },
+        {
+            "value": "glmLogit",
+            "display": "GLM with logit link"
+        },
+        {
+            "value": "glmIdentity",
+            "display": "GLM with identity link"
+        },
+        {
+            "value": "glmLog",
+            "display": "GLM with log link"
+        },
+        {
+            "value": "glmGeneralizedLogit",
+            "display": "GLM with generalized logit link"
+        },
+        {
+            "value": "glmm",
+            "display": "Generalized linear mixed model (GLMM)"
+        },
+        {
+            "value": "glmmProbit",
+            "display": "GLMM with probit link"
+        },
+        {
+            "value": "glmmLogit",
+            "display": "GLMM with logit link"
+        },
+        {
+            "value": "glmmIdentity",
+            "display": "GLMM with identity link"
+        },
+        {
+            "value": "glmmLog",
+            "display": "GLMM with log link"
+        },
+        {
+            "value": "glmmGeneralizedLogit",
+            "display": "GLMM with generalized logit link"
+        },
+        {
+            "value": "linearRegression",
+            "display": "Linear Regression"
+        },
+        {
+            "value": "logisticRegression",
+            "display": "Logistic Regression"
+        },
+        {
+            "value": "polynomialRegression",
+            "display": "Polynomial Regression"
+        },
+        {
+            "value": "coxProportionalHazards",
+            "display": "Cox Proportional Hazards"
+        },
+        {
+            "value": "binomialDistributionRegression",
+            "display": "Binomial Distribution for Regression"
+        },
+        {
+            "value": "multinomialDistributionRegression",
+            "display": "Multinomial Distribution for Regression"
+        },
+        {
+            "value": "poissonRegression",
+            "display": "Poisson Regression"
+        },
+        {
+            "value": "negativeBinomialRegression",
+            "display": "Negative Binomial Regression"
+        },
+        {
+            "value": "zeroCellConstant",
+            "display": "Zero-cell adjustment with constant"
+        },
+        {
+            "value": "zeroCellContinuityCorrection",
+            "display": "Zero-cell adjustment with continuity correction"
+        },
+        {
+            "value": "adjusted",
+            "display": "Adjusted analysis"
+        },
+        {
+            "value": "interactionTerm",
+            "display": "Interaction term"
+        },
+        {
+            "value": "manteHaenszelMethod",
+            "display": "Mantel-Haenszel method"
+        },
+        {
+            "value": "metaAnalysis",
+            "display": "Meta-analysis"
+        },
+        {
+            "value": "inverseVariance",
+            "display": "Inverse variance method"
+        },
+        {
+            "value": "petoMethod",
+            "display": "Peto method"
+        },
+        {
+            "value": "hartungKnapp",
+            "display": "Hartung-Knapp adjustment"
+        },
+        {
+            "value": "modifiedHartungKnapp",
+            "display": "Modified Hartung-Knapp adjustment"
+        },
+        {
+            "value": "effectsFixed",
+            "display": "Fixed-effects"
+        },
+        {
+            "value": "effectsRandom",
+            "display": "Random-effects"
+        },
+        {
+            "value": "chiSquareTestHomogeneity",
+            "display": "Chi-square test for homogeneity"
+        },
+        {
+            "value": "dersimonianLairdMethod",
+            "display": "Dersimonian-Laird method"
+        },
+        {
+            "value": "pauleMandelMethod",
+            "display": "Paule-Mandel method"
+        },
+        {
+            "value": "restrictedLikelihood",
+            "display": "Restricted Maximum Likelihood method"
+        },
+        {
+            "value": "maximumLikelihood",
+            "display": "Maximum Likelihood method"
+        },
+        {
+            "value": "empiricalBayes",
+            "display": "Empirical Bayes method"
+        },
+        {
+            "value": "hunterSchmidt",
+            "display": "Hunter-Schmidt method"
+        },
+        {
+            "value": "sidikJonkman",
+            "display": "Sidik-Jonkman method"
+        },
+        {
+            "value": "hedgesMethod",
+            "display": "Hedges method"
+        },
+        {
+            "value": "tauDersimonianLaird",
+            "display": "Dersimonian-Laird method"
+        },
+        {
+            "value": "tauPauleMandel",
+            "display": "Paule-Mandel method"
+        },
+        {
+            "value": "tauRestrictedMaximumLikelihood",
+            "display": "Restricted Maximum Likelihood method"
+        },
+        {
+            "value": "tauMaximumLikelihood",
+            "display": "Maximum Likelihood method"
+        },
+        {
+            "value": "tauEmpiricalBayes",
+            "display": "Empirical Bayes method"
+        },
+        {
+            "value": "tauHunterSchmidt",
+            "display": "Hunter-Schmidt method"
+        },
+        {
+            "value": "tauSidikJonkman",
+            "display": "Sidik-Jonkman method"
+        },
+        {
+            "value": "tauHedges",
+            "display": "Hedges method"
+        },
+        {
+            "value": "poolMantelHaenzsel",
+            "display": "Mantel-Haenszel method"
+        },
+        {
+            "value": "poolInverseVariance",
+            "display": "Inverse variance method"
+        },
+        {
+            "value": "poolPeto",
+            "display": "Peto method"
+        },
+        {
+            "value": "poolGeneralizedLinearMixedModel",
+            "display": "Generalized linear mixed model (GLMM)"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "contract-assetscope",
+    "name": "ContractAssetScope",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-asset-scope",
+    "valid": true,
+    "choices": [
+        {
+            "value": "thing",
+            "display": "Thing"
+        }
+    ]
+}

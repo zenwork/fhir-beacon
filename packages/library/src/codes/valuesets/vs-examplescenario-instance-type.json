@@ -1,0 +1,1904 @@
+{
+    "id": "examplescenario-instance-type",
+    "name": "ExampleScenarioResourceType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Account",
+            "display": "n/a"
+        },
+        {
+            "value": "ActivityDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ActorDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "AdministrableProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "AdverseEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "AllergyIntolerance",
+            "display": "n/a"
+        },
+        {
+            "value": "Appointment",
+            "display": "n/a"
+        },
+        {
+            "value": "AppointmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ArtifactAssessment",
+            "display": "n/a"
+        },
+        {
+            "value": "AuditEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "Basic",
+            "display": "n/a"
+        },
+        {
+            "value": "Binary",
+            "display": "n/a"
+        },
+        {
+            "value": "BiologicallyDerivedProduct",
+            "display": "n/a"
+        },
+        {
+            "value": "BiologicallyDerivedProductDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "BodyStructure",
+            "display": "n/a"
+        },
+        {
+            "value": "Bundle",
+            "display": "n/a"
+        },
+        {
+            "value": "CapabilityStatement",
+            "display": "n/a"
+        },
+        {
+            "value": "CarePlan",
+            "display": "n/a"
+        },
+        {
+            "value": "CareTeam",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItem",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItemDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Citation",
+            "display": "n/a"
+        },
+        {
+            "value": "Claim",
+            "display": "n/a"
+        },
+        {
+            "value": "ClaimResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalImpression",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalUseDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeSystem",
+            "display": "n/a"
+        },
+        {
+            "value": "Communication",
+            "display": "n/a"
+        },
+        {
+            "value": "CommunicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "CompartmentDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Composition",
+            "display": "n/a"
+        },
+        {
+            "value": "ConceptMap",
+            "display": "n/a"
+        },
+        {
+            "value": "Condition",
+            "display": "n/a"
+        },
+        {
+            "value": "ConditionDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Consent",
+            "display": "n/a"
+        },
+        {
+            "value": "Contract",
+            "display": "n/a"
+        },
+        {
+            "value": "Coverage",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "DetectedIssue",
+            "display": "n/a"
+        },
+        {
+            "value": "Device",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceAssociation",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceMetric",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceUsage",
+            "display": "n/a"
+        },
+        {
+            "value": "DiagnosticReport",
+            "display": "n/a"
+        },
+        {
+            "value": "DocumentReference",
+            "display": "n/a"
+        },
+        {
+            "value": "Encounter",
+            "display": "n/a"
+        },
+        {
+            "value": "EncounterHistory",
+            "display": "n/a"
+        },
+        {
+            "value": "Endpoint",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "EpisodeOfCare",
+            "display": "n/a"
+        },
+        {
+            "value": "EventDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Evidence",
+            "display": "n/a"
+        },
+        {
+            "value": "EvidenceReport",
+            "display": "n/a"
+        },
+        {
+            "value": "EvidenceVariable",
+            "display": "n/a"
+        },
+        {
+            "value": "ExampleScenario",
+            "display": "n/a"
+        },
+        {
+            "value": "ExplanationOfBenefit",
+            "display": "n/a"
+        },
+        {
+            "value": "FamilyMemberHistory",
+            "display": "n/a"
+        },
+        {
+            "value": "Flag",
+            "display": "n/a"
+        },
+        {
+            "value": "FormularyItem",
+            "display": "n/a"
+        },
+        {
+            "value": "GenomicStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "Goal",
+            "display": "n/a"
+        },
+        {
+            "value": "GraphDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Group",
+            "display": "n/a"
+        },
+        {
+            "value": "GuidanceResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "HealthcareService",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingSelection",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "Immunization",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationEvaluation",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationRecommendation",
+            "display": "n/a"
+        },
+        {
+            "value": "ImplementationGuide",
+            "display": "n/a"
+        },
+        {
+            "value": "Ingredient",
+            "display": "n/a"
+        },
+        {
+            "value": "InsurancePlan",
+            "display": "n/a"
+        },
+        {
+            "value": "InventoryItem",
+            "display": "n/a"
+        },
+        {
+            "value": "InventoryReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Invoice",
+            "display": "n/a"
+        },
+        {
+            "value": "Library",
+            "display": "n/a"
+        },
+        {
+            "value": "Linkage",
+            "display": "n/a"
+        },
+        {
+            "value": "List",
+            "display": "n/a"
+        },
+        {
+            "value": "Location",
+            "display": "n/a"
+        },
+        {
+            "value": "ManufacturedItemDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Measure",
+            "display": "n/a"
+        },
+        {
+            "value": "MeasureReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Medication",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationAdministration",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationKnowledge",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationStatement",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicinalProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageHeader",
+            "display": "n/a"
+        },
+        {
+            "value": "MolecularSequence",
+            "display": "n/a"
+        },
+        {
+            "value": "NamingSystem",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionIntake",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionOrder",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionProduct",
+            "display": "n/a"
+        },
+        {
+            "value": "Observation",
+            "display": "n/a"
+        },
+        {
+            "value": "ObservationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "OperationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "OperationOutcome",
+            "display": "n/a"
+        },
+        {
+            "value": "Organization",
+            "display": "n/a"
+        },
+        {
+            "value": "OrganizationAffiliation",
+            "display": "n/a"
+        },
+        {
+            "value": "PackagedProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Parameters",
+            "display": "n/a"
+        },
+        {
+            "value": "Patient",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentNotice",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentReconciliation",
+            "display": "n/a"
+        },
+        {
+            "value": "Permission",
+            "display": "n/a"
+        },
+        {
+            "value": "Person",
+            "display": "n/a"
+        },
+        {
+            "value": "PlanDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Practitioner",
+            "display": "n/a"
+        },
+        {
+            "value": "PractitionerRole",
+            "display": "n/a"
+        },
+        {
+            "value": "Procedure",
+            "display": "n/a"
+        },
+        {
+            "value": "Provenance",
+            "display": "n/a"
+        },
+        {
+            "value": "Questionnaire",
+            "display": "n/a"
+        },
+        {
+            "value": "QuestionnaireResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "RegulatedAuthorization",
+            "display": "n/a"
+        },
+        {
+            "value": "RelatedPerson",
+            "display": "n/a"
+        },
+        {
+            "value": "RequestOrchestration",
+            "display": "n/a"
+        },
+        {
+            "value": "Requirements",
+            "display": "n/a"
+        },
+        {
+            "value": "ResearchStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "ResearchSubject",
+            "display": "n/a"
+        },
+        {
+            "value": "RiskAssessment",
+            "display": "n/a"
+        },
+        {
+            "value": "Schedule",
+            "display": "n/a"
+        },
+        {
+            "value": "SearchParameter",
+            "display": "n/a"
+        },
+        {
+            "value": "ServiceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "Slot",
+            "display": "n/a"
+        },
+        {
+            "value": "Specimen",
+            "display": "n/a"
+        },
+        {
+            "value": "SpecimenDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "StructureDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "StructureMap",
+            "display": "n/a"
+        },
+        {
+            "value": "Subscription",
+            "display": "n/a"
+        },
+        {
+            "value": "SubscriptionStatus",
+            "display": "n/a"
+        },
+        {
+            "value": "SubscriptionTopic",
+            "display": "n/a"
+        },
+        {
+            "value": "Substance",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceNucleicAcid",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstancePolymer",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceProtein",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceReferenceInformation",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceSourceMaterial",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyDelivery",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "Task",
+            "display": "n/a"
+        },
+        {
+            "value": "TerminologyCapabilities",
+            "display": "n/a"
+        },
+        {
+            "value": "TestPlan",
+            "display": "n/a"
+        },
+        {
+            "value": "TestReport",
+            "display": "n/a"
+        },
+        {
+            "value": "TestScript",
+            "display": "n/a"
+        },
+        {
+            "value": "Transport",
+            "display": "n/a"
+        },
+        {
+            "value": "ValueSet",
+            "display": "n/a"
+        },
+        {
+            "value": "VerificationResult",
+            "display": "n/a"
+        },
+        {
+            "value": "VisionPrescription",
+            "display": "n/a"
+        },
+        {
+            "value": "OMD_O01",
+            "display": "n/a"
+        },
+        {
+            "value": "OMN_O01",
+            "display": "n/a"
+        },
+        {
+            "value": "OMS_O01",
+            "display": "n/a"
+        },
+        {
+            "value": "ORD_O02",
+            "display": "n/a"
+        },
+        {
+            "value": "ORN_O02",
+            "display": "n/a"
+        },
+        {
+            "value": "ORS_O02",
+            "display": "n/a"
+        },
+        {
+            "value": "RDO_O01",
+            "display": "n/a"
+        },
+        {
+            "value": "RRO_O02",
+            "display": "n/a"
+        },
+        {
+            "value": "ACK",
+            "display": "Varies"
+        },
+        {
+            "value": "ADR_A19",
+            "display": "A19"
+        },
+        {
+            "value": "ADT_A01",
+            "display": "A01, A04, A08, A13"
+        },
+        {
+            "value": "ADT_A02",
+            "display": "A02"
+        },
+        {
+            "value": "ADT_A03",
+            "display": "A03"
+        },
+        {
+            "value": "ADT_A05",
+            "display": "A05, A14, A28, A31"
+        },
+        {
+            "value": "ADT_A06",
+            "display": "A06, A07"
+        },
+        {
+            "value": "ADT_A09",
+            "display": "A09, A10, A11"
+        },
+        {
+            "value": "ADT_A12",
+            "display": "A12"
+        },
+        {
+            "value": "ADT_A15",
+            "display": "A15"
+        },
+        {
+            "value": "ADT_A16",
+            "display": "A16"
+        },
+        {
+            "value": "ADT_A17",
+            "display": "A17"
+        },
+        {
+            "value": "ADT_A28",
+            "display": "A28, A31"
+        },
+        {
+            "value": "ADT_A18",
+            "display": "A18"
+        },
+        {
+            "value": "ADT_A20",
+            "display": "A20"
+        },
+        {
+            "value": "ADT_A21",
+            "display": "A21, A22, A23, A25, A26, A27, A29, A32, A33"
+        },
+        {
+            "value": "ADT_A24",
+            "display": "A24"
+        },
+        {
+            "value": "ADT_A30",
+            "display": "A30, A34, A35, A36, A46, A47, A48, A49"
+        },
+        {
+            "value": "ADT_A37",
+            "display": "A37"
+        },
+        {
+            "value": "ADT_A38",
+            "display": "A38"
+        },
+        {
+            "value": "ADT_A39",
+            "display": "A39, A40, A41, A42"
+        },
+        {
+            "value": "ARD_A19",
+            "display": "A19"
+        },
+        {
+            "value": "ADT_A43",
+            "display": "A43"
+        },
+        {
+            "value": "ADT_A44",
+            "display": "A44"
+        },
+        {
+            "value": "ADT_A45",
+            "display": "A45"
+        },
+        {
+            "value": "ADT_A50",
+            "display": "A50, A51"
+        },
+        {
+            "value": "ADT_A52",
+            "display": "A52, A53"
+        },
+        {
+            "value": "ADT_A54",
+            "display": "A54, A55"
+        },
+        {
+            "value": "ADT_A60",
+            "display": "A60"
+        },
+        {
+            "value": "ADT_A61",
+            "display": "A61, A62"
+        },
+        {
+            "value": "BAR_P01",
+            "display": "P01"
+        },
+        {
+            "value": "BAR_P02",
+            "display": "P02"
+        },
+        {
+            "value": "BAR_P05",
+            "display": "P05"
+        },
+        {
+            "value": "BAR_P06",
+            "display": "P06"
+        },
+        {
+            "value": "BAR_P10",
+            "display": "P10"
+        },
+        {
+            "value": "BAR_P12",
+            "display": "P12"
+        },
+        {
+            "value": "BRP_030",
+            "display": "O30"
+        },
+        {
+            "value": "MFD_P09",
+            "display": "P09"
+        },
+        {
+            "value": "BPS_O29",
+            "display": "O29"
+        },
+        {
+            "value": "BRP_O30",
+            "display": "O30"
+        },
+        {
+            "value": "BRT_O32",
+            "display": "O32"
+        },
+        {
+            "value": "BTS_O31",
+            "display": "O31"
+        },
+        {
+            "value": "CCF_I22",
+            "display": "I22"
+        },
+        {
+            "value": "CCI_I22",
+            "display": "I22"
+        },
+        {
+            "value": "CCM_I21",
+            "display": "I21"
+        },
+        {
+            "value": "CCQ_I19",
+            "display": "I19"
+        },
+        {
+            "value": "DSR_Q01",
+            "display": "Q01"
+        },
+        {
+            "value": "DSR_P04",
+            "display": "P04"
+        },
+        {
+            "value": "CCR_I16",
+            "display": "I16, |17, |18"
+        },
+        {
+            "value": "DSR_Q03",
+            "display": "Q03"
+        },
+        {
+            "value": "CCU_I20",
+            "display": "I20"
+        },
+        {
+            "value": "CQU_I19",
+            "display": "I19"
+        },
+        {
+            "value": "CRM_C01",
+            "display": "C01, C02, C03, C04, C05, C06, C07, C08"
+        },
+        {
+            "value": "CSU_C09",
+            "display": "C09, C10, C11, C12"
+        },
+        {
+            "value": "ORF_R02",
+            "display": "R02, R04"
+        },
+        {
+            "value": "DBC_O41",
+            "display": "O41"
+        },
+        {
+            "value": "EDR_R07",
+            "display": "R07"
+        },
+        {
+            "value": "DBC_O42",
+            "display": "O42"
+        },
+        {
+            "value": "EQQ_Q04",
+            "display": "Q04"
+        },
+        {
+            "value": "ORM_Q06",
+            "display": "Q06"
+        },
+        {
+            "value": "DEL_O46",
+            "display": "O46"
+        },
+        {
+            "value": "ERP_R09",
+            "display": "R09"
+        },
+        {
+            "value": "DEO_O45",
+            "display": "O45"
+        },
+        {
+            "value": "ORR_Q06",
+            "display": "Q06"
+        },
+        {
+            "value": "DER_O44",
+            "display": "O44"
+        },
+        {
+            "value": "DFT_P03",
+            "display": "P03"
+        },
+        {
+            "value": "DFT_P11",
+            "display": "P11"
+        },
+        {
+            "value": "DOC_T12",
+            "display": "T12"
+        },
+        {
+            "value": "DPR_O48",
+            "display": "O48"
+        },
+        {
+            "value": "DRC_O47",
+            "display": "O47"
+        },
+        {
+            "value": "DRG_O43",
+            "display": "O43"
+        },
+        {
+            "value": "PIN_I07",
+            "display": "I07"
+        },
+        {
+            "value": "EAC_U07",
+            "display": "U07"
+        },
+        {
+            "value": "MFD_MFA",
+            "display": "MFA"
+        },
+        {
+            "value": "EAN_U09",
+            "display": "U09"
+        },
+        {
+            "value": "EAR_U08",
+            "display": "U08"
+        },
+        {
+            "value": "EHC_E01",
+            "display": "E01"
+        },
+        {
+            "value": "EHC_E02",
+            "display": "E02"
+        },
+        {
+            "value": "EHC_E04",
+            "display": "E04"
+        },
+        {
+            "value": "EHC_E10",
+            "display": "E10"
+        },
+        {
+            "value": "EHC_E12",
+            "display": "E12"
+        },
+        {
+            "value": "EHC_E13",
+            "display": "E13"
+        },
+        {
+            "value": "EHC_E15",
+            "display": "E15"
+        },
+        {
+            "value": "EHC_E20",
+            "display": "E20"
+        },
+        {
+            "value": "EHC_E21",
+            "display": "E21"
+        },
+        {
+            "value": "EHC_E24",
+            "display": "E24"
+        },
+        {
+            "value": "ESR_U02",
+            "display": "U02"
+        },
+        {
+            "value": "ESU_U01",
+            "display": "U01"
+        },
+        {
+            "value": "INR_U06",
+            "display": "U06"
+        },
+        {
+            "value": "RAS_O01",
+            "display": "O01"
+        },
+        {
+            "value": "INU_U05",
+            "display": "U05"
+        },
+        {
+            "value": "RAS_O02",
+            "display": "O022"
+        },
+        {
+            "value": "INV_U14",
+            "display": "Events U14"
+        },
+        {
+            "value": "LSU_U12",
+            "display": "U12, U13"
+        },
+        {
+            "value": "MDM_T01",
+            "display": "T01, T03, T05, T07, T09, T11"
+        },
+        {
+            "value": "MDM_T02",
+            "display": "T02, T04, T06, T08, T10"
+        },
+        {
+            "value": "MFK_M01",
+            "display": "M01, M02, M03, M04, M05, M06, M07, M08, M09, M10, M11"
+        },
+        {
+            "value": "MFN_M01",
+            "display": "M01"
+        },
+        {
+            "value": "RDS_O01",
+            "display": "O01"
+        },
+        {
+            "value": "MFN_M02",
+            "display": "M02"
+        },
+        {
+            "value": "MFN_M03",
+            "display": "M03"
+        },
+        {
+            "value": "MFN_M04",
+            "display": "M04"
+        },
+        {
+            "value": "MFN_M05",
+            "display": "M05"
+        },
+        {
+            "value": "RGV_O01",
+            "display": "O01"
+        },
+        {
+            "value": "MFN_M06",
+            "display": "M06"
+        },
+        {
+            "value": "MFN_M07",
+            "display": "M07"
+        },
+        {
+            "value": "MFN_M08",
+            "display": "M08"
+        },
+        {
+            "value": "RPI_I0I",
+            "display": "I01, I04"
+        },
+        {
+            "value": "MFN_M09",
+            "display": "M09"
+        },
+        {
+            "value": "MFN_M10",
+            "display": "M10"
+        },
+        {
+            "value": "MFN_M11",
+            "display": "M11"
+        },
+        {
+            "value": "MFN_M12",
+            "display": "M12"
+        },
+        {
+            "value": "RQC_I06",
+            "display": "I06"
+        },
+        {
+            "value": "MFN_M13",
+            "display": "M13"
+        },
+        {
+            "value": "RQI_I0I",
+            "display": "I01, I02, I03"
+        },
+        {
+            "value": "MFN_M15",
+            "display": "M15"
+        },
+        {
+            "value": "MFN_M16",
+            "display": "M16"
+        },
+        {
+            "value": "MFN_M17",
+            "display": "M17"
+        },
+        {
+            "value": "MFN_M18",
+            "display": "M18"
+        },
+        {
+            "value": "RRD_O02",
+            "display": "O02"
+        },
+        {
+            "value": "MFQ_M01",
+            "display": "M01, M02, M03, M04, M05, M06"
+        },
+        {
+            "value": "RRE_O02",
+            "display": "O02"
+        },
+        {
+            "value": "MFR_M01",
+            "display": "M01, M02, M03,"
+        },
+        {
+            "value": "RRG_O02",
+            "display": "O02"
+        },
+        {
+            "value": "MFR_M04",
+            "display": "M04"
+        },
+        {
+            "value": "MFR_M05",
+            "display": "M05"
+        },
+        {
+            "value": "MFR_M06",
+            "display": "M06"
+        },
+        {
+            "value": "MFR_M07",
+            "display": "M07"
+        },
+        {
+            "value": "NMD_N02",
+            "display": "N02"
+        },
+        {
+            "value": "NMQ_N01",
+            "display": "N01"
+        },
+        {
+            "value": "NMR_N01",
+            "display": "N01"
+        },
+        {
+            "value": "ORU_R31",
+            "display": "R31"
+        },
+        {
+            "value": "SRM_T12",
+            "display": "T12"
+        },
+        {
+            "value": "OMB_O27",
+            "display": "O27"
+        },
+        {
+            "value": "ORU_R32",
+            "display": "R32"
+        },
+        {
+            "value": "OMD_O03",
+            "display": "O03"
+        },
+        {
+            "value": "SRR_T12",
+            "display": "T12"
+        },
+        {
+            "value": "OMG_O19",
+            "display": "O19"
+        },
+        {
+            "value": "OMI_O23",
+            "display": "O23"
+        },
+        {
+            "value": "OML_O21",
+            "display": "O21"
+        },
+        {
+            "value": "OML_O33",
+            "display": "O33"
+        },
+        {
+            "value": "OML_O35",
+            "display": "O35"
+        },
+        {
+            "value": "OML_O39",
+            "display": "O39"
+        },
+        {
+            "value": "OML_O59",
+            "display": "Laboratory Fulfillment request with REL segment"
+        },
+        {
+            "value": "OMN_O07",
+            "display": "O07"
+        },
+        {
+            "value": "OMP_O09",
+            "display": "O09"
+        },
+        {
+            "value": "OMQ_O42",
+            "display": "O42"
+        },
+        {
+            "value": "OMQ_O57",
+            "display": "O57"
+        },
+        {
+            "value": "OMS_O05",
+            "display": "O05"
+        },
+        {
+            "value": "OPL_O37",
+            "display": "O37"
+        },
+        {
+            "value": "OPR_O38",
+            "display": "O38"
+        },
+        {
+            "value": "OPU_R25",
+            "display": "R25"
+        },
+        {
+            "value": "ORA_R33",
+            "display": "R33"
+        },
+        {
+            "value": "ORA_R41",
+            "display": "R41"
+        },
+        {
+            "value": "ORB_O28",
+            "display": "O28"
+        },
+        {
+            "value": "ORD_O04",
+            "display": "O04"
+        },
+        {
+            "value": "ORF_R04",
+            "display": "R04"
+        },
+        {
+            "value": "ORG_O20",
+            "display": "O20"
+        },
+        {
+            "value": "ORI_O24",
+            "display": "O24"
+        },
+        {
+            "value": "ORL_O22",
+            "display": "O22"
+        },
+        {
+            "value": "ORL_O34",
+            "display": "O34"
+        },
+        {
+            "value": "ORL_O36",
+            "display": "O36"
+        },
+        {
+            "value": "ORL_O40",
+            "display": "O40"
+        },
+        {
+            "value": "ORL_O41",
+            "display": "O41"
+        },
+        {
+            "value": "QRY_P04",
+            "display": "P04"
+        },
+        {
+            "value": "ORL_O42",
+            "display": "O42"
+        },
+        {
+            "value": "ORL_O43",
+            "display": "O43"
+        },
+        {
+            "value": "ORL_O44",
+            "display": "O44"
+        },
+        {
+            "value": "ORL_O53",
+            "display": "O53"
+        },
+        {
+            "value": "ORL_O54",
+            "display": "O54"
+        },
+        {
+            "value": "ORL_O55",
+            "display": "O55"
+        },
+        {
+            "value": "ORL_O56",
+            "display": "O56"
+        },
+        {
+            "value": "ORM_O01",
+            "display": "O01"
+        },
+        {
+            "value": "ORN_O08",
+            "display": "O08"
+        },
+        {
+            "value": "ORP_O10",
+            "display": "O10"
+        },
+        {
+            "value": "ORR_O02",
+            "display": "O02"
+        },
+        {
+            "value": "RDE_O01",
+            "display": "O01"
+        },
+        {
+            "value": "ORS_O06",
+            "display": "O06"
+        },
+        {
+            "value": "ORU_R01",
+            "display": "R01"
+        },
+        {
+            "value": "ORU_R30",
+            "display": "R30"
+        },
+        {
+            "value": "ORU_W01",
+            "display": "W01"
+        },
+        {
+            "value": "ORX_O43",
+            "display": "O43"
+        },
+        {
+            "value": "ORX_O58",
+            "display": "O58"
+        },
+        {
+            "value": "OSM_R26",
+            "display": "R26"
+        },
+        {
+            "value": "OSQ_Q06",
+            "display": "Q06"
+        },
+        {
+            "value": "OSR_Q06",
+            "display": "Q06"
+        },
+        {
+            "value": "OSU_O41",
+            "display": "O41"
+        },
+        {
+            "value": "OSU_O51",
+            "display": "O51"
+        },
+        {
+            "value": "OSU_O52",
+            "display": "O52"
+        },
+        {
+            "value": "OUL_R21",
+            "display": "R21"
+        },
+        {
+            "value": "OUL_R22",
+            "display": "R22"
+        },
+        {
+            "value": "OUL_R23",
+            "display": "R23"
+        },
+        {
+            "value": "OUL_R24",
+            "display": "R24"
+        },
+        {
+            "value": "PEX_P07",
+            "display": "P07, P08"
+        },
+        {
+            "value": "PGL_PC6",
+            "display": "PC6, PC7, PC8"
+        },
+        {
+            "value": "PMU_B01",
+            "display": "B01, B02"
+        },
+        {
+            "value": "RQQ_Q09",
+            "display": "Q09"
+        },
+        {
+            "value": "RRA_O02",
+            "display": "O02"
+        },
+        {
+            "value": "PMU_B03",
+            "display": "B03"
+        },
+        {
+            "value": "PMU_B04",
+            "display": "B04, B05, B06"
+        },
+        {
+            "value": "PMU_B07",
+            "display": "B07"
+        },
+        {
+            "value": "PMU_B08",
+            "display": "B08"
+        },
+        {
+            "value": "PPG_PCG",
+            "display": "PCC, PCG, PCH, PCJ"
+        },
+        {
+            "value": "PPP_PCB",
+            "display": "PCB, PCD"
+        },
+        {
+            "value": "PPR_PC1",
+            "display": "PC1, PC2, PC3"
+        },
+        {
+            "value": "PPT_PCL",
+            "display": "PCL"
+        },
+        {
+            "value": "PPV_PCA",
+            "display": "PCA"
+        },
+        {
+            "value": "PRR_PC5",
+            "display": "PC5"
+        },
+        {
+            "value": "PTR_PCF",
+            "display": "PCF"
+        },
+        {
+            "value": "QBP_E03",
+            "display": "E03"
+        },
+        {
+            "value": "QBP_E22",
+            "display": "E22"
+        },
+        {
+            "value": "QBP_O33",
+            "display": "O33"
+        },
+        {
+            "value": "QBP_O34",
+            "display": "O34"
+        },
+        {
+            "value": "SPQ_Q08",
+            "display": "Q08"
+        },
+        {
+            "value": "QBP_Q11",
+            "display": "Q11"
+        },
+        {
+            "value": "RDY_K11",
+            "display": "K11"
+        },
+        {
+            "value": "QBP_Q13",
+            "display": "Q13"
+        },
+        {
+            "value": "QBP_Q15",
+            "display": "Q15"
+        },
+        {
+            "value": "QBP_Q21",
+            "display": "Q21, Q22, Q23,Q24, Q25"
+        },
+        {
+            "value": "QCK_Q02",
+            "display": "Q02"
+        },
+        {
+            "value": "QCN_J01",
+            "display": "J01, J02"
+        },
+        {
+            "value": "RSP_K24",
+            "display": "K24"
+        },
+        {
+            "value": "QRF_W02",
+            "display": "W02"
+        },
+        {
+            "value": "QRY_A19",
+            "display": "A19"
+        },
+        {
+            "value": "QRY_PC4",
+            "display": "PC4, PC9, PCE, PCK"
+        },
+        {
+            "value": "TBR_R08",
+            "display": "R08"
+        },
+        {
+            "value": "QRY_Q01",
+            "display": "Q01, Q26, Q27, Q28, Q29, Q30"
+        },
+        {
+            "value": "TBR_R09",
+            "display": "R09"
+        },
+        {
+            "value": "QRY_Q02",
+            "display": "Q02"
+        },
+        {
+            "value": "QRY_R02",
+            "display": "R02"
+        },
+        {
+            "value": "QRY_T12",
+            "display": "T12"
+        },
+        {
+            "value": "VQQ_Q07",
+            "display": "Q07"
+        },
+        {
+            "value": "QSB_Q16",
+            "display": "Q16"
+        },
+        {
+            "value": "QVR_Q17",
+            "display": "Q17"
+        },
+        {
+            "value": "RAR_RAR",
+            "display": "RAR"
+        },
+        {
+            "value": "RAS_O17",
+            "display": "O17"
+        },
+        {
+            "value": "RCI_I05",
+            "display": "I05"
+        },
+        {
+            "value": "RCL_I06",
+            "display": "I06"
+        },
+        {
+            "value": "RDE_O11",
+            "display": "O11, O25"
+        },
+        {
+            "value": "RDE_O49",
+            "display": "Events O49"
+        },
+        {
+            "value": "RDR_RDR",
+            "display": "RDR"
+        },
+        {
+            "value": "RDS_O13",
+            "display": "O13"
+        },
+        {
+            "value": "RDY_K15",
+            "display": "K15"
+        },
+        {
+            "value": "REF_I12",
+            "display": "I12, I13, I14, I15"
+        },
+        {
+            "value": "RER_RER",
+            "display": "RER"
+        },
+        {
+            "value": "RGR_RGR",
+            "display": "RGR"
+        },
+        {
+            "value": "RGV_O15",
+            "display": "O15"
+        },
+        {
+            "value": "ROR_ROR",
+            "display": "ROR"
+        },
+        {
+            "value": "RPA_I08",
+            "display": "I08, I09. I10, I11"
+        },
+        {
+            "value": "RPI_I01",
+            "display": "I01, I04"
+        },
+        {
+            "value": "RPI_I04",
+            "display": "I04"
+        },
+        {
+            "value": "RPL_I02",
+            "display": "I02"
+        },
+        {
+            "value": "RPR_I03",
+            "display": "I03"
+        },
+        {
+            "value": "RQA_I08",
+            "display": "I08, I09, I10, I11"
+        },
+        {
+            "value": "RQC_I05",
+            "display": "I05, I06"
+        },
+        {
+            "value": "RQI_I01",
+            "display": "I01, I02, I03, I07"
+        },
+        {
+            "value": "RQP_I04",
+            "display": "I04"
+        },
+        {
+            "value": "RRA_O18",
+            "display": "O18"
+        },
+        {
+            "value": "RRD_O14",
+            "display": "O14"
+        },
+        {
+            "value": "RRE_O12",
+            "display": "O12, O26"
+        },
+        {
+            "value": "RRE_O50",
+            "display": "Events O50"
+        },
+        {
+            "value": "RRG_O16",
+            "display": "O16"
+        },
+        {
+            "value": "RRI_I12",
+            "display": "I12, I13, I14, I15"
+        },
+        {
+            "value": "RSP_E03",
+            "display": "E03"
+        },
+        {
+            "value": "RSP_E22",
+            "display": "E22"
+        },
+        {
+            "value": "RSP_K11",
+            "display": "K11"
+        },
+        {
+            "value": "RSP_K21",
+            "display": "K21"
+        },
+        {
+            "value": "RSP_K22",
+            "display": "K22"
+        },
+        {
+            "value": "RSP_K23",
+            "display": "K23, K24"
+        },
+        {
+            "value": "RSP_K25",
+            "display": "K25"
+        },
+        {
+            "value": "RSP_K31",
+            "display": "K31"
+        },
+        {
+            "value": "RSP_K32",
+            "display": "K32"
+        },
+        {
+            "value": "RSP_O33",
+            "display": "O33"
+        },
+        {
+            "value": "RSP_O34",
+            "display": "O34"
+        },
+        {
+            "value": "RSP_Q11",
+            "display": "Q11"
+        },
+        {
+            "value": "RTB_K13",
+            "display": "K13"
+        },
+        {
+            "value": "SDR_S31",
+            "display": "S31, S36"
+        },
+        {
+            "value": "SDR_S32",
+            "display": "S32, S37"
+        },
+        {
+            "value": "SET_S38",
+            "display": "Specimen Container Preparation and Specimen Collection Event"
+        },
+        {
+            "value": "SET_S40",
+            "display": "Specimen Collection Event unsuccessful"
+        },
+        {
+            "value": "SET_S41",
+            "display": "Specimen Movement Event"
+        },
+        {
+            "value": "SET_S45",
+            "display": "Specimen Identification Events"
+        },
+        {
+            "value": "SET_S50",
+            "display": "Specimen Procedure Step successful"
+        },
+        {
+            "value": "SET_S52",
+            "display": "Specimen Procedure Step unsuccessful"
+        },
+        {
+            "value": "SIU_S12",
+            "display": "S12, S13, S14, S15, S16, S17, S18, S19, S20, S21, S22, S23, S24, S26"
+        },
+        {
+            "value": "SLR_S28",
+            "display": "S28, S29, S30, S34, S35"
+        },
+        {
+            "value": "SQM_S25",
+            "display": "S25"
+        },
+        {
+            "value": "SQR_S25",
+            "display": "S25"
+        },
+        {
+            "value": "SRM_S01",
+            "display": "S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11"
+        },
+        {
+            "value": "SRR_S01",
+            "display": "S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11"
+        },
+        {
+            "value": "QBP_Z73",
+            "display": "Z73"
+        },
+        {
+            "value": "SSR_U04",
+            "display": "U04"
+        },
+        {
+            "value": "RSP_Z82",
+            "display": "Z82"
+        },
+        {
+            "value": "SSU_U03",
+            "display": "U03"
+        },
+        {
+            "value": "RSP_Z86",
+            "display": "Z86"
+        },
+        {
+            "value": "STC_S33",
+            "display": "S33"
+        },
+        {
+            "value": "RSP_Z88",
+            "display": "Z88"
+        },
+        {
+            "value": "SUR_P09",
+            "display": "P09"
+        },
+        {
+            "value": "RSP_Z90",
+            "display": "Z90"
+        },
+        {
+            "value": "TCU_U10",
+            "display": "U10, U11"
+        },
+        {
+            "value": "RTB_Knn",
+            "display": "Knn"
+        },
+        {
+            "value": "UDM_Q05",
+            "display": "Q05"
+        },
+        {
+            "value": "RTB_Z74",
+            "display": "Z74"
+        },
+        {
+            "value": "VXQ_V01",
+            "display": "V01"
+        },
+        {
+            "value": "QBP_Qnn",
+            "display": "Qnn"
+        },
+        {
+            "value": "VXR_V03",
+            "display": "V03"
+        },
+        {
+            "value": "VXU_V04",
+            "display": "V04"
+        },
+        {
+            "value": "VXX_V02",
+            "display": "V02"
+        }
+    ]
+}

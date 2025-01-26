@@ -1,0 +1,13 @@
+{
+    "id": "fhir-types",
+    "name": "FHIRTypes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/fhir-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Base",
+            "display": "Base"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "administration-subpotent-reason",
+    "name": "AdministrationSubPotentReason",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/administration-subpotent-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "partialdose",
+            "display": "Partial Dose"
+        },
+        {
+            "value": "coldchainbreak",
+            "display": "Cold Chain Break"
+        },
+        {
+            "value": "recall",
+            "display": "Manufacturer Recall"
+        },
+        {
+            "value": "adversestorage",
+            "display": "Adverse Storage"
+        },
+        {
+            "value": "expired",
+            "display": "Expired Product"
+        }
+    ]
+}

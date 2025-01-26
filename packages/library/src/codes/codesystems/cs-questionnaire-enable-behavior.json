@@ -1,0 +1,17 @@
+{
+    "id": "questionnaire-enable-behavior",
+    "name": "EnableWhenBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/questionnaire-enable-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "all",
+            "display": "All"
+        },
+        {
+            "value": "any",
+            "display": "Any"
+        }
+    ]
+}

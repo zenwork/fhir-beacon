@@ -1,0 +1,28 @@
+{
+    "id": "genomicstudy-changetype",
+    "name": "GenomicStudyChangeType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "DNA",
+            "display": "DNA change"
+        },
+        {
+            "value": "RNA",
+            "display": "RNA change"
+        },
+        {
+            "value": "AA",
+            "display": "Protein/amino Acids change "
+        },
+        {
+            "value": "CHR",
+            "display": "Chromosomal changes"
+        },
+        {
+            "value": "CNV",
+            "display": "Copy number variations"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "verificationresult-need",
+    "name": "Need",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-need",
+    "valid": true,
+    "choices": [
+        {
+            "value": "none",
+            "display": "None"
+        },
+        {
+            "value": "initial",
+            "display": "Initial"
+        },
+        {
+            "value": "periodic",
+            "display": "Periodic"
+        }
+    ]
+}

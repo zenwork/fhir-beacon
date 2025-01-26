@@ -1,0 +1,13 @@
+{
+    "id": "medicinal-product-special-measures",
+    "name": "SpecialMeasures",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-special-measures",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Post-authorizationStudies",
+            "display": "Requirement to conduct post-authorization studies"
+        }
+    ]
+}

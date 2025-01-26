@@ -1,0 +1,105 @@
+{
+    "id": "object-role",
+    "name": "AuditEventEntityRole",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/object-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Patient"
+        },
+        {
+            "value": "2",
+            "display": "Location"
+        },
+        {
+            "value": "3",
+            "display": "Report"
+        },
+        {
+            "value": "4",
+            "display": "Domain Resource"
+        },
+        {
+            "value": "5",
+            "display": "Master file"
+        },
+        {
+            "value": "6",
+            "display": "User"
+        },
+        {
+            "value": "7",
+            "display": "List"
+        },
+        {
+            "value": "8",
+            "display": "Doctor"
+        },
+        {
+            "value": "9",
+            "display": "Subscriber"
+        },
+        {
+            "value": "10",
+            "display": "Guarantor"
+        },
+        {
+            "value": "11",
+            "display": "Security User Entity"
+        },
+        {
+            "value": "12",
+            "display": "Security User Group"
+        },
+        {
+            "value": "13",
+            "display": "Security Resource"
+        },
+        {
+            "value": "14",
+            "display": "Security Granularity Definition"
+        },
+        {
+            "value": "15",
+            "display": "Practitioner"
+        },
+        {
+            "value": "16",
+            "display": "Data Destination"
+        },
+        {
+            "value": "17",
+            "display": "Data Repository"
+        },
+        {
+            "value": "18",
+            "display": "Schedule"
+        },
+        {
+            "value": "19",
+            "display": "Customer"
+        },
+        {
+            "value": "20",
+            "display": "Job"
+        },
+        {
+            "value": "21",
+            "display": "Job Stream"
+        },
+        {
+            "value": "22",
+            "display": "Table"
+        },
+        {
+            "value": "23",
+            "display": "Routing Criteria"
+        },
+        {
+            "value": "24",
+            "display": "Query"
+        }
+    ]
+}

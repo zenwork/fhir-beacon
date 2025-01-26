@@ -1,0 +1,21 @@
+{
+    "id": "med-admin-perform-function",
+    "name": "MedicationAdministrationPerformerFunctionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/med-admin-perform-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "performer",
+            "display": "Performer"
+        },
+        {
+            "value": "verifier",
+            "display": "Verifier"
+        },
+        {
+            "value": "witness",
+            "display": "Witness"
+        }
+    ]
+}

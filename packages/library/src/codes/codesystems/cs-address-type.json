@@ -1,0 +1,21 @@
+{
+    "id": "address-type",
+    "name": "AddressType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/address-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "postal",
+            "display": "Postal"
+        },
+        {
+            "value": "physical",
+            "display": "Physical"
+        },
+        {
+            "value": "both",
+            "display": "Postal & Physical"
+        }
+    ]
+}

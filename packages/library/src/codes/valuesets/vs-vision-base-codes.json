@@ -1,0 +1,24 @@
+{
+    "id": "vision-base-codes",
+    "name": "VisionBase",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "up",
+            "display": "Up"
+        },
+        {
+            "value": "down",
+            "display": "Down"
+        },
+        {
+            "value": "in",
+            "display": "In"
+        },
+        {
+            "value": "out",
+            "display": "Out"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "action-relationship-type",
+    "name": "ActionRelationshipType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-relationship-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "before",
+            "display": "Before"
+        },
+        {
+            "value": "concurrent",
+            "display": "Concurrent"
+        },
+        {
+            "value": "after",
+            "display": "After"
+        }
+    ]
+}

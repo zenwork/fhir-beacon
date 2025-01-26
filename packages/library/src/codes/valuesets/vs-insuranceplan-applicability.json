@@ -1,0 +1,21 @@
+{
+    "id": "insuranceplan-applicability",
+    "name": "BenefitCostApplicability",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/insuranceplan-applicability",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-network",
+            "display": "In Network"
+        },
+        {
+            "value": "out-of-network",
+            "display": "Out of Network"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "id": "research-subject-state",
+    "name": "ResearchSubjectState",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/research-subject-state",
+    "valid": true,
+    "choices": [
+        {
+            "value": "candidate",
+            "display": "Candidate"
+        },
+        {
+            "value": "eligible",
+            "display": "Eligible"
+        },
+        {
+            "value": "follow-up",
+            "display": "Follow-up"
+        },
+        {
+            "value": "ineligible",
+            "display": "Ineligible"
+        },
+        {
+            "value": "not-registered",
+            "display": "Not Registered"
+        },
+        {
+            "value": "off-study",
+            "display": "Off-study"
+        },
+        {
+            "value": "on-study",
+            "display": "On-study"
+        },
+        {
+            "value": "on-study-intervention",
+            "display": "On-study-intervention"
+        },
+        {
+            "value": "on-study-observation",
+            "display": "On-study-observation"
+        },
+        {
+            "value": "pending-on-study",
+            "display": "Pending on-study"
+        },
+        {
+            "value": "potential-candidate",
+            "display": "Potential Candidate"
+        },
+        {
+            "value": "screening",
+            "display": "Screening"
+        },
+        {
+            "value": "withdrawn",
+            "display": "Withdrawn"
+        }
+    ]
+}

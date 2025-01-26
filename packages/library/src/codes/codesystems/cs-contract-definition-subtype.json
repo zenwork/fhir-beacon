@@ -1,0 +1,13 @@
+{
+    "id": "contract-definition-subtype",
+    "name": "ContractDefinitionSubtype",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-definition-subtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "temp",
+            "display": "Temporary Value"
+        }
+    ]
+}

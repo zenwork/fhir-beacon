@@ -1,0 +1,49 @@
+{
+    "id": "coverage-copay-type",
+    "name": "CoverageCopayTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/coverage-copay-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "gpvisit",
+            "display": "GP Office Visit"
+        },
+        {
+            "value": "spvisit",
+            "display": "Specialist Office Visit"
+        },
+        {
+            "value": "emergency",
+            "display": "Emergency"
+        },
+        {
+            "value": "inpthosp",
+            "display": "Inpatient Hospital"
+        },
+        {
+            "value": "televisit",
+            "display": "Tele-visit"
+        },
+        {
+            "value": "urgentcare",
+            "display": "Urgent Care"
+        },
+        {
+            "value": "copaypct",
+            "display": "Copay Percentage"
+        },
+        {
+            "value": "copay",
+            "display": "Copay Amount"
+        },
+        {
+            "value": "deductible",
+            "display": "Deductible"
+        },
+        {
+            "value": "maxoutofpocket",
+            "display": "Maximum out of pocket"
+        }
+    ]
+}

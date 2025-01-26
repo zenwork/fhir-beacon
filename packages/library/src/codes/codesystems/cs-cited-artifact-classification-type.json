@@ -1,0 +1,53 @@
+{
+    "id": "cited-artifact-classification-type",
+    "name": "CitedArtifactClassificationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/cited-artifact-classification-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "publication-type",
+            "display": "Publication type"
+        },
+        {
+            "value": "mesh-heading",
+            "display": "MeSH heading"
+        },
+        {
+            "value": "supplemental-mesh-protocol",
+            "display": "Supplemental MeSH for Protocol"
+        },
+        {
+            "value": "supplemental-mesh-disease",
+            "display": "Supplemental MeSH for Disease"
+        },
+        {
+            "value": "supplemental-mesh-organism",
+            "display": "Supplemental MeSH for Organism"
+        },
+        {
+            "value": "keyword",
+            "display": "Keyword"
+        },
+        {
+            "value": "citation-subset",
+            "display": "Citation subset"
+        },
+        {
+            "value": "chemical",
+            "display": "Chemical"
+        },
+        {
+            "value": "publishing-model",
+            "display": "Publishing Model"
+        },
+        {
+            "value": "knowledge-artifact-type",
+            "display": "Knowledge Artifact Type"
+        },
+        {
+            "value": "coverage",
+            "display": "Coverage"
+        }
+    ]
+}

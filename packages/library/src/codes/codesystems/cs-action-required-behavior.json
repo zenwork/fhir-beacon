@@ -1,0 +1,21 @@
+{
+    "id": "action-required-behavior",
+    "name": "ActionRequiredBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-required-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "must",
+            "display": "Must"
+        },
+        {
+            "value": "could",
+            "display": "Could"
+        },
+        {
+            "value": "must-unless-documented",
+            "display": "Must Unless Documented"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "id": "permission-rule-combining",
+    "name": "PermissionRuleCombining",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "deny-overrides",
+            "display": "Deny-overrides"
+        },
+        {
+            "value": "permit-overrides",
+            "display": "Permit-overrides"
+        },
+        {
+            "value": "ordered-deny-overrides",
+            "display": "Ordered-deny-overrides"
+        },
+        {
+            "value": "ordered-permit-overrides",
+            "display": "Ordered-permit-overrides"
+        },
+        {
+            "value": "deny-unless-permit",
+            "display": "Deny-unless-permit"
+        },
+        {
+            "value": "permit-unless-deny",
+            "display": "Permit-unless-deny"
+        }
+    ]
+}

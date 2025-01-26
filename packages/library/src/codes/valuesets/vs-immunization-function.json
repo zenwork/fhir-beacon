@@ -1,0 +1,17 @@
+{
+    "id": "immunization-function",
+    "name": "ImmunizationFunctionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "OP",
+            "display": "n/a"
+        },
+        {
+            "value": "AP",
+            "display": "n/a"
+        }
+    ]
+}

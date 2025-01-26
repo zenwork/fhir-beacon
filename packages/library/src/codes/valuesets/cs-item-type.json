@@ -1,0 +1,20 @@
+{
+    "id": "item-type",
+    "name": "QuestionnaireItemType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "group",
+            "display": "Group"
+        },
+        {
+            "value": "display",
+            "display": "Display"
+        },
+        {
+            "value": "question",
+            "display": "Question"
+        }
+    ]
+}

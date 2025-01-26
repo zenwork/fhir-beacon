@@ -1,0 +1,21 @@
+{
+    "id": "search-processingmode",
+    "name": "SearchProcessingModeType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/search-processingmode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "normal",
+            "display": "Normal"
+        },
+        {
+            "value": "phonetic",
+            "display": "Phonetic"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

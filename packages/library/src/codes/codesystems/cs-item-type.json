@@ -1,0 +1,21 @@
+{
+    "id": "item-type",
+    "name": "QuestionnaireItemType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/item-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "group",
+            "display": "Group"
+        },
+        {
+            "value": "display",
+            "display": "Display"
+        },
+        {
+            "value": "question",
+            "display": "Question"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "color-rgb",
+    "name": "ColorRGB",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/color-rgb",
+    "valid": true,
+    "choices": []
+}

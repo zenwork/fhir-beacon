@@ -1,0 +1,20 @@
+{
+    "id": "virtual-service-type",
+    "name": "VirtualServiceType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "zoom",
+            "display": "Zoom web conferencing"
+        },
+        {
+            "value": "ms-teams",
+            "display": "Microsoft Teams"
+        },
+        {
+            "value": "whatsapp",
+            "display": "WhatsApp conference call"
+        }
+    ]
+}

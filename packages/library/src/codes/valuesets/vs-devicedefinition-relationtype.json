@@ -1,0 +1,20 @@
+{
+    "id": "devicedefinition-relationtype",
+    "name": "DeviceDefinitionRelationType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "gateway",
+            "display": "Gateway"
+        },
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "previous",
+            "display": "Previous"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "id": "claim-careteamrole",
+    "name": "ClaimCareTeamRoleCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-careteamrole",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary",
+            "display": "Primary provider"
+        },
+        {
+            "value": "assist",
+            "display": "Assisting Provider"
+        },
+        {
+            "value": "supervisor",
+            "display": "Supervising Provider"
+        },
+        {
+            "value": "attending",
+            "display": "Attending"
+        },
+        {
+            "value": "referring",
+            "display": "Referring"
+        },
+        {
+            "value": "operating",
+            "display": "Operating"
+        },
+        {
+            "value": "otheroperating",
+            "display": "Other Operating"
+        },
+        {
+            "value": "prescribing",
+            "display": "Prescribing provider"
+        },
+        {
+            "value": "purchasedservice",
+            "display": "Purchased Service"
+        },
+        {
+            "value": "rendering",
+            "display": "Rendering provider"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

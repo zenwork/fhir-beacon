@@ -1,0 +1,17 @@
+{
+    "id": "consent-provision-type",
+    "name": "ConsentProvisionType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/consent-provision-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "deny",
+            "display": "Deny"
+        },
+        {
+            "value": "permit",
+            "display": "Permit"
+        }
+    ]
+}

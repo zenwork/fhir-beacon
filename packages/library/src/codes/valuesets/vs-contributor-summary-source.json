@@ -1,0 +1,24 @@
+{
+    "id": "contributor-summary-source",
+    "name": "ContributorSummarySource",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "publisher-data",
+            "display": "Publisher provided"
+        },
+        {
+            "value": "article-copy",
+            "display": "Copied from article"
+        },
+        {
+            "value": "citation-manager",
+            "display": "Reported by citation manager"
+        },
+        {
+            "value": "custom",
+            "display": "custom format"
+        }
+    ]
+}

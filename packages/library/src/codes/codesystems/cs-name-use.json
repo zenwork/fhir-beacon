@@ -1,0 +1,33 @@
+{
+    "id": "name-use",
+    "name": "NameUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/name-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "usual",
+            "display": "Usual"
+        },
+        {
+            "value": "official",
+            "display": "Official"
+        },
+        {
+            "value": "temp",
+            "display": "Temp"
+        },
+        {
+            "value": "nickname",
+            "display": "Nickname"
+        },
+        {
+            "value": "anonymous",
+            "display": "Anonymous"
+        },
+        {
+            "value": "old",
+            "display": "Old"
+        }
+    ]
+}

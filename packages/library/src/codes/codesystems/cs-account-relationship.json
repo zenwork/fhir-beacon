@@ -1,0 +1,17 @@
+{
+    "id": "account-relationship",
+    "name": "AccountRelationship",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/account-relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "parent",
+            "display": "Parent"
+        },
+        {
+            "value": "guarantor",
+            "display": "Guarantor"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "imagingselection-status",
+    "name": "ImagingSelectionStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/imagingselection-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

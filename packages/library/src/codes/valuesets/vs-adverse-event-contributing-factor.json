@@ -1,0 +1,8 @@
+{
+    "id": "adverse-event-contributing-factor",
+    "name": "AdverseEventContributingFactor",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-contributing-factor",
+    "valid": true,
+    "choices": []
+}

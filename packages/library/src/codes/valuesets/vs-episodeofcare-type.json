@@ -1,0 +1,29 @@
+{
+    "id": "episodeofcare-type",
+    "name": "EpisodeOfCareType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/episodeofcare-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "hacc",
+            "display": "Home and Community Care"
+        },
+        {
+            "value": "pac",
+            "display": "Post Acute Care"
+        },
+        {
+            "value": "diab",
+            "display": "Post coordinated diabetes program"
+        },
+        {
+            "value": "da",
+            "display": "Drug and alcohol rehabilitation"
+        },
+        {
+            "value": "cacp",
+            "display": "Community-based aged care"
+        }
+    ]
+}

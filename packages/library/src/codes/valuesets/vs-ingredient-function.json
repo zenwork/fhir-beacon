@@ -1,0 +1,16 @@
+{
+    "id": "ingredient-function",
+    "name": "IngredientFunction",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Antioxidant",
+            "display": "Antioxidant"
+        },
+        {
+            "value": "AlkalizingAgent",
+            "display": "Alkalizing Agent"
+        }
+    ]
+}

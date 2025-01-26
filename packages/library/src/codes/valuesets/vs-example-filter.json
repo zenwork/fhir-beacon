@@ -1,0 +1,20 @@
+{
+    "id": "example-filter",
+    "name": "ACMECholCodesPlasma",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "chol-mmol",
+            "display": "SChol (mmol/L)"
+        },
+        {
+            "value": "chol-mass",
+            "display": "SChol (mg/L)"
+        },
+        {
+            "value": "chol",
+            "display": "SChol"
+        }
+    ]
+}

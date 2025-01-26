@@ -1,0 +1,25 @@
+{
+    "id": "biologicallyderivedproductdispense-match-status",
+    "name": "BiologicallyDerivedProductDispenseMatchStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/biologicallyderivedproductdispense-match-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "crossmatched",
+            "display": "Crossmatched"
+        },
+        {
+            "value": "selected",
+            "display": "Selected"
+        },
+        {
+            "value": "unmatched",
+            "display": "Unmatched"
+        },
+        {
+            "value": "least-incompatible",
+            "display": "Least incompatible"
+        }
+    ]
+}

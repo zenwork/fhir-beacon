@@ -1,0 +1,20 @@
+{
+    "id": "report-participant-type",
+    "name": "TestReportParticipantType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "test-engine",
+            "display": "Test Engine"
+        },
+        {
+            "value": "client",
+            "display": "Client"
+        },
+        {
+            "value": "server",
+            "display": "Server"
+        }
+    ]
+}

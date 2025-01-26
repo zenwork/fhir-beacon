@@ -1,0 +1,25 @@
+{
+    "id": "immunization-origin",
+    "name": "ImmunizationOriginCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-origin",
+    "valid": true,
+    "choices": [
+        {
+            "value": "provider",
+            "display": "Other Provider"
+        },
+        {
+            "value": "record",
+            "display": "Written Record"
+        },
+        {
+            "value": "recall",
+            "display": "Parent/Guardian/Patient Recall"
+        },
+        {
+            "value": "school",
+            "display": "School Record"
+        }
+    ]
+}

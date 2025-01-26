@@ -1,0 +1,20 @@
+{
+    "id": "capability-statement-kind",
+    "name": "CapabilityStatementKind",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "capability",
+            "display": "Capability"
+        },
+        {
+            "value": "requirements",
+            "display": "Requirements"
+        }
+    ]
+}

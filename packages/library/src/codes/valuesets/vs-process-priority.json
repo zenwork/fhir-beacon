@@ -1,0 +1,21 @@
+{
+    "id": "process-priority",
+    "name": "ProcessPriorityCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/process-priority",
+    "valid": true,
+    "choices": [
+        {
+            "value": "stat",
+            "display": "Immediate"
+        },
+        {
+            "value": "normal",
+            "display": "Normal"
+        },
+        {
+            "value": "deferred",
+            "display": "Deferred"
+        }
+    ]
+}

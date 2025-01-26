@@ -1,0 +1,21 @@
+{
+    "id": "catalogType",
+    "name": "CatalogType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/catalogType",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication Catalog"
+        },
+        {
+            "value": "device",
+            "display": "Device Catalog"
+        },
+        {
+            "value": "protocol",
+            "display": "Protocol List"
+        }
+    ]
+}

@@ -1,0 +1,189 @@
+{
+    "id": "diagnostic-service-sections",
+    "name": "DiagnosticServiceSectionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/diagnostic-service-sections",
+    "valid": true,
+    "choices": [
+        {
+            "value": "AU",
+            "display": "Audiology"
+        },
+        {
+            "value": "BG",
+            "display": "Blood Gases"
+        },
+        {
+            "value": "BLB",
+            "display": "Blood Bank"
+        },
+        {
+            "value": "CG",
+            "display": "Cytogenetics"
+        },
+        {
+            "value": "CUS",
+            "display": "Cardiac Ultrasound"
+        },
+        {
+            "value": "CTH",
+            "display": "Cardiac Catheterization"
+        },
+        {
+            "value": "CT",
+            "display": "CAT Scan"
+        },
+        {
+            "value": "CH",
+            "display": "Chemistry"
+        },
+        {
+            "value": "CP",
+            "display": "Cytopathology"
+        },
+        {
+            "value": "EC",
+            "display": "Electrocardiac (e.g., EKG,  EEC, Holter)"
+        },
+        {
+            "value": "EN",
+            "display": "Electroneuro (EEG, EMG,EP,PSG)"
+        },
+        {
+            "value": "GE",
+            "display": "Genetics"
+        },
+        {
+            "value": "HM",
+            "display": "Hematology"
+        },
+        {
+            "value": "IMG",
+            "display": "Diagnostic Imaging"
+        },
+        {
+            "value": "ICU",
+            "display": "Bedside ICU Monitoring"
+        },
+        {
+            "value": "IMM",
+            "display": "Immunology"
+        },
+        {
+            "value": "LAB",
+            "display": "Laboratory"
+        },
+        {
+            "value": "MB",
+            "display": "Microbiology"
+        },
+        {
+            "value": "MCB",
+            "display": "Mycobacteriology"
+        },
+        {
+            "value": "MYC",
+            "display": "Mycology"
+        },
+        {
+            "value": "NMS",
+            "display": "Nuclear Medicine Scan"
+        },
+        {
+            "value": "NMR",
+            "display": "Nuclear Magnetic Resonance"
+        },
+        {
+            "value": "NRS",
+            "display": "Nursing Service Measures"
+        },
+        {
+            "value": "OUS",
+            "display": "OB Ultrasound"
+        },
+        {
+            "value": "OT",
+            "display": "Occupational Therapy"
+        },
+        {
+            "value": "OTH",
+            "display": "Other"
+        },
+        {
+            "value": "OSL",
+            "display": "Outside Lab"
+        },
+        {
+            "value": "PAR",
+            "display": "Parasitology"
+        },
+        {
+            "value": "PHR",
+            "display": "Pharmacy"
+        },
+        {
+            "value": "PAT",
+            "display": "Pathology (gross & histopath, not surgical)"
+        },
+        {
+            "value": "PT",
+            "display": "Physical Therapy"
+        },
+        {
+            "value": "PHY",
+            "display": "Physician (Hx. Dx, admission note, etc.)"
+        },
+        {
+            "value": "PF",
+            "display": "Pulmonary Function"
+        },
+        {
+            "value": "RAD",
+            "display": "Radiology"
+        },
+        {
+            "value": "RX",
+            "display": "Radiograph"
+        },
+        {
+            "value": "RUS",
+            "display": "Radiology Ultrasound"
+        },
+        {
+            "value": "RC",
+            "display": "Respiratory Care (therapy)"
+        },
+        {
+            "value": "RT",
+            "display": "Radiation Therapy"
+        },
+        {
+            "value": "SR",
+            "display": "Serology"
+        },
+        {
+            "value": "SP",
+            "display": "Surgical Pathology"
+        },
+        {
+            "value": "TX",
+            "display": "Toxicology"
+        },
+        {
+            "value": "VUS",
+            "display": "Vascular Ultrasound"
+        },
+        {
+            "value": "VR",
+            "display": "Virology"
+        },
+        {
+            "value": "URN",
+            "display": "Urinalysis"
+        },
+        {
+            "value": "XRC",
+            "display": "Cineradiograph"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "id": "group-type",
+    "name": "GroupType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/group-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "person",
+            "display": "Person"
+        },
+        {
+            "value": "animal",
+            "display": "Animal"
+        },
+        {
+            "value": "practitioner",
+            "display": "Practitioner"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "careteam",
+            "display": "CareTeam"
+        },
+        {
+            "value": "healthcareservice",
+            "display": "HealthcareService"
+        },
+        {
+            "value": "location",
+            "display": "Location"
+        },
+        {
+            "value": "organization",
+            "display": "Organization"
+        },
+        {
+            "value": "relatedperson",
+            "display": "RelatedPerson"
+        },
+        {
+            "value": "specimen",
+            "display": "Specimen"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "reason-medication-given-codes",
+    "name": "ReasonMedicationGivenCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/reason-medication-given-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "a",
+            "display": "None"
+        },
+        {
+            "value": "b",
+            "display": "Given as Ordered"
+        },
+        {
+            "value": "c",
+            "display": "Emergency"
+        }
+    ]
+}

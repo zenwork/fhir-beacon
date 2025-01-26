@@ -1,0 +1,21 @@
+{
+    "id": "document-reference-status",
+    "name": "DocumentReferenceStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/document-reference-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "current",
+            "display": "Current"
+        },
+        {
+            "value": "superseded",
+            "display": "Superseded"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

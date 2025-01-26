@@ -1,0 +1,24 @@
+{
+    "id": "consent-data-meaning",
+    "name": "ConsentDataMeaning",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "related",
+            "display": "Related"
+        },
+        {
+            "value": "dependents",
+            "display": "Dependents"
+        },
+        {
+            "value": "authoredby",
+            "display": "AuthoredBy"
+        }
+    ]
+}

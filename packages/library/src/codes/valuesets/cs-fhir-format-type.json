@@ -1,0 +1,20 @@
+{
+    "id": "fhir-format-type",
+    "name": "FHIRFormatType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "json",
+            "display": "JSON"
+        },
+        {
+            "value": "ttl",
+            "display": "TTL"
+        }
+    ]
+}

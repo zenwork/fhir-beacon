@@ -1,0 +1,21 @@
+{
+    "id": "clinical-use-definition-category",
+    "name": "ClinicalUseDefinitionCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/clinical-use-definition-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Pregnancy",
+            "display": "Pregnancy and Lactation"
+        },
+        {
+            "value": "Overdose",
+            "display": "Overdose"
+        },
+        {
+            "value": "DriveAndMachines",
+            "display": "Effects on Ability to Drive and Use Machines"
+        }
+    ]
+}

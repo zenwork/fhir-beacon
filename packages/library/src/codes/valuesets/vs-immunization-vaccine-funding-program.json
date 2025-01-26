@@ -1,0 +1,13 @@
+{
+    "id": "immunization-vaccine-funding-program",
+    "name": "CodesForVaccineFundingPrograms",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-vaccine-funding-program",
+    "valid": true,
+    "choices": [
+        {
+            "value": "64994-7",
+            "display": "n/a"
+        }
+    ]
+}

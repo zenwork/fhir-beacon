@@ -1,0 +1,17 @@
+{
+    "id": "allergyintolerance-clinical",
+    "name": "AllergyIntoleranceClinicalStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/allergyintolerance-clinical",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        }
+    ]
+}

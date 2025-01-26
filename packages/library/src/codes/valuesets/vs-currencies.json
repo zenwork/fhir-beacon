@@ -1,0 +1,8 @@
+{
+    "id": "currencies",
+    "name": "Currencies",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/currencies",
+    "valid": true,
+    "choices": []
+}

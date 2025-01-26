@@ -1,0 +1,25 @@
+{
+    "id": "administrative-gender",
+    "name": "AdministrativeGender",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/administrative-gender",
+    "valid": true,
+    "choices": [
+        {
+            "value": "male",
+            "display": "Male"
+        },
+        {
+            "value": "female",
+            "display": "Female"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "strand-type",
+    "name": "StrandType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "watson",
+            "display": "Watson strand of starting sequence"
+        },
+        {
+            "value": "crick",
+            "display": "Crick strand of starting sequence"
+        }
+    ]
+}

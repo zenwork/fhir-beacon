@@ -1,0 +1,28 @@
+{
+    "id": "biologicallyderivedproductdispense-origin-relationship",
+    "name": "BiologicallyDerivedProductDispenseOriginRelationship",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "autologous",
+            "display": "Autologous"
+        },
+        {
+            "value": "related",
+            "display": "Related"
+        },
+        {
+            "value": "directed",
+            "display": "Directed"
+        },
+        {
+            "value": "allogeneic",
+            "display": "Allogeneic"
+        },
+        {
+            "value": "xenogenic",
+            "display": "Xenogenic"
+        }
+    ]
+}

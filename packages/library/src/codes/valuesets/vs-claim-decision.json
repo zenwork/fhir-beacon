@@ -1,0 +1,24 @@
+{
+    "id": "claim-decision",
+    "name": "ClaimAdjudicationDecisionsCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "denied",
+            "display": "Denied"
+        },
+        {
+            "value": "approved",
+            "display": "Approved"
+        },
+        {
+            "value": "partial",
+            "display": "Partial"
+        },
+        {
+            "value": "pending",
+            "display": "Pending"
+        }
+    ]
+}

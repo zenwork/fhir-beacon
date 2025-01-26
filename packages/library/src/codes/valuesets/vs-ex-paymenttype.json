@@ -1,0 +1,17 @@
+{
+    "id": "ex-paymenttype",
+    "name": "ExamplePaymentTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-paymenttype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        },
+        {
+            "value": "partial",
+            "display": "Partial"
+        }
+    ]
+}

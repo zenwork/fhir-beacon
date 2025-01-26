@@ -1,0 +1,20 @@
+{
+    "id": "message-significance-category",
+    "name": "MessageSignificanceCategory",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "consequence",
+            "display": "Consequence"
+        },
+        {
+            "value": "currency",
+            "display": "Currency"
+        },
+        {
+            "value": "notification",
+            "display": "Notification"
+        }
+    ]
+}

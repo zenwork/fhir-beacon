@@ -1,0 +1,16 @@
+{
+    "id": "map-group-type-mode",
+    "name": "StructureMapGroupTypeMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "types",
+            "display": "Default for Type Combination"
+        },
+        {
+            "value": "type-and-types",
+            "display": "Default for type + combination"
+        }
+    ]
+}

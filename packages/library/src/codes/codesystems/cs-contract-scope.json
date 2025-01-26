@@ -1,0 +1,13 @@
+{
+    "id": "contract-scope",
+    "name": "ContractScope",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-scope",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "id": "focus-characteristic-code",
+    "name": "FocusCharacteristicCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/focus-characteristic-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "citation",
+            "display": "Citation"
+        },
+        {
+            "value": "clinical-outcomes-observed",
+            "display": "Observed outcomes are clinical outcomes"
+        },
+        {
+            "value": "population",
+            "display": "Population"
+        },
+        {
+            "value": "exposure",
+            "display": "Exposure"
+        },
+        {
+            "value": "comparator",
+            "display": "Comparator"
+        },
+        {
+            "value": "outcome",
+            "display": "Outcome"
+        },
+        {
+            "value": "medication-exposures",
+            "display": "Medication exposures"
+        },
+        {
+            "value": "study-type",
+            "display": "Study type"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "bodystructure-code",
+    "name": "SNOMEDCTMorphologicAbnormalities",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/bodystructure-code",
+    "valid": true,
+    "choices": []
+}

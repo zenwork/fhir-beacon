@@ -1,0 +1,17 @@
+{
+    "id": "immunization-evaluation-dose-status",
+    "name": "ImmunizationEvaluationDoseStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "valid",
+            "display": "Valid"
+        },
+        {
+            "value": "notvalid",
+            "display": "Not valid"
+        }
+    ]
+}

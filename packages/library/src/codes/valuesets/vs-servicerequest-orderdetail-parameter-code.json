@@ -1,0 +1,24 @@
+{
+    "id": "servicerequest-orderdetail-parameter-code",
+    "name": "ServiceRequestOrderDetailParameterCode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "catheter-insertion",
+            "display": "Catheter Insertion"
+        },
+        {
+            "value": "body-elevation",
+            "display": "Body Elevation"
+        },
+        {
+            "value": "device-configuration",
+            "display": "Device Configuration"
+        },
+        {
+            "value": "device-settings",
+            "display": "Device Settings"
+        }
+    ]
+}

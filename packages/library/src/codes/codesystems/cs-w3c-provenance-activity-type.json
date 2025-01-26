@@ -1,0 +1,57 @@
+{
+    "id": "w3c-provenance-activity-type",
+    "name": "W3cProvenanceActivityType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/w3c-provenance-activity-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Generation",
+            "display": "wasGeneratedBy"
+        },
+        {
+            "value": "Usage",
+            "display": "used"
+        },
+        {
+            "value": "Communication",
+            "display": "wasInformedBy"
+        },
+        {
+            "value": "Start",
+            "display": "wasStartedBy"
+        },
+        {
+            "value": "End",
+            "display": "wasEndedBy"
+        },
+        {
+            "value": "Invalidation",
+            "display": "wasInvalidatedBy"
+        },
+        {
+            "value": "Derivation",
+            "display": "wasDerivedFrom"
+        },
+        {
+            "value": "Revision",
+            "display": "wasRevisionOf"
+        },
+        {
+            "value": "Quotation",
+            "display": "wasQuotedFrom"
+        },
+        {
+            "value": "Primary-Source",
+            "display": "wasPrimarySourceOf"
+        },
+        {
+            "value": "Attribution",
+            "display": "wasAttributedTo"
+        },
+        {
+            "value": "Collection",
+            "display": "isCollectionOf"
+        }
+    ]
+}

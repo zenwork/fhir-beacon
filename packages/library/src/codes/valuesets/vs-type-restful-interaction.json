@@ -1,0 +1,45 @@
+{
+    "id": "type-restful-interaction",
+    "name": "TypeRestfulInteraction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/type-restful-interaction",
+    "valid": true,
+    "choices": [
+        {
+            "value": "read",
+            "display": "n/a"
+        },
+        {
+            "value": "vread",
+            "display": "n/a"
+        },
+        {
+            "value": "update",
+            "display": "n/a"
+        },
+        {
+            "value": "patch",
+            "display": "n/a"
+        },
+        {
+            "value": "delete",
+            "display": "n/a"
+        },
+        {
+            "value": "history-instance",
+            "display": "n/a"
+        },
+        {
+            "value": "history-type",
+            "display": "n/a"
+        },
+        {
+            "value": "create",
+            "display": "n/a"
+        },
+        {
+            "value": "search-type",
+            "display": "n/a"
+        }
+    ]
+}

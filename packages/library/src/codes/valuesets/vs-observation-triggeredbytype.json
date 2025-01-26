@@ -1,0 +1,20 @@
+{
+    "id": "observation-triggeredbytype",
+    "name": "TriggeredBytype",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reflex",
+            "display": "Reflex"
+        },
+        {
+            "value": "repeat",
+            "display": "Repeat (per policy)"
+        },
+        {
+            "value": "re-run",
+            "display": "Re-run (per policy)"
+        }
+    ]
+}

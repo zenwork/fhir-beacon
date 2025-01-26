@@ -1,0 +1,61 @@
+{
+    "id": "observation-vitalsignresult",
+    "name": "VitalSigns",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-vitalsignresult",
+    "valid": true,
+    "choices": [
+        {
+            "value": "85353-1",
+            "display": "n/a"
+        },
+        {
+            "value": "9279-1",
+            "display": "n/a"
+        },
+        {
+            "value": "8867-4",
+            "display": "n/a"
+        },
+        {
+            "value": "2708-6",
+            "display": "n/a"
+        },
+        {
+            "value": "8310-5",
+            "display": "n/a"
+        },
+        {
+            "value": "8302-2",
+            "display": "n/a"
+        },
+        {
+            "value": "9843-4",
+            "display": "n/a"
+        },
+        {
+            "value": "29463-7",
+            "display": "n/a"
+        },
+        {
+            "value": "39156-5",
+            "display": "n/a"
+        },
+        {
+            "value": "85354-9",
+            "display": "n/a"
+        },
+        {
+            "value": "8480-6",
+            "display": "n/a"
+        },
+        {
+            "value": "8462-4",
+            "display": "n/a"
+        },
+        {
+            "value": "8478-0",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "enrollment-outcome",
+    "name": "ClaimProcessingCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/enrollment-outcome",
+    "valid": true,
+    "choices": [
+        {
+            "value": "queued",
+            "display": "Queued"
+        },
+        {
+            "value": "complete",
+            "display": "Processing Complete"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "partial",
+            "display": "Partial Processing"
+        }
+    ]
+}

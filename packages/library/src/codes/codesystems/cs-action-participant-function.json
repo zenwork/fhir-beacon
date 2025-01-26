@@ -1,0 +1,25 @@
+{
+    "id": "action-participant-function",
+    "name": "ActionParticipantFunction",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-participant-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "performer",
+            "display": "Performer"
+        },
+        {
+            "value": "author",
+            "display": "Author"
+        },
+        {
+            "value": "reviewer",
+            "display": "Reviewer"
+        },
+        {
+            "value": "witness",
+            "display": "Witness"
+        }
+    ]
+}

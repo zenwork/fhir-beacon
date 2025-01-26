@@ -1,0 +1,20 @@
+{
+    "id": "list-status",
+    "name": "ListStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "current",
+            "display": "Current"
+        },
+        {
+            "value": "retired",
+            "display": "Retired"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

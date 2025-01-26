@@ -1,0 +1,21 @@
+{
+    "id": "datestype",
+    "name": "DatesEventTypeCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/datestype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "card-issued",
+            "display": "Card Issued"
+        },
+        {
+            "value": "claim-received",
+            "display": "Claim Received"
+        },
+        {
+            "value": "service-expected",
+            "display": "Service Expected"
+        }
+    ]
+}

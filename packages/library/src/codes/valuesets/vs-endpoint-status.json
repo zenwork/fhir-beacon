@@ -1,0 +1,28 @@
+{
+    "id": "endpoint-status",
+    "name": "EndpointStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "suspended",
+            "display": "Suspended"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in error"
+        }
+    ]
+}

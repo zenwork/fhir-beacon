@@ -1,0 +1,25 @@
+{
+    "id": "narrative-status",
+    "name": "NarrativeStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/narrative-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "generated",
+            "display": "Generated"
+        },
+        {
+            "value": "extensions",
+            "display": "Extensions"
+        },
+        {
+            "value": "additional",
+            "display": "Additional"
+        },
+        {
+            "value": "empty",
+            "display": "Empty"
+        }
+    ]
+}

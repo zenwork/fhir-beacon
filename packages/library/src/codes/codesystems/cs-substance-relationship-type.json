@@ -1,0 +1,29 @@
+{
+    "id": "substance-relationship-type",
+    "name": "SubstanceRelationshipType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-relationship-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Salt",
+            "display": "Salt to parent"
+        },
+        {
+            "value": "ActiveMoiety",
+            "display": "Active moiety"
+        },
+        {
+            "value": "StartingMaterial",
+            "display": "Starting material for"
+        },
+        {
+            "value": "Polymorph",
+            "display": "Polymorph of"
+        },
+        {
+            "value": "Impurity",
+            "display": "Impurity of"
+        }
+    ]
+}

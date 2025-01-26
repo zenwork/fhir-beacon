@@ -1,0 +1,53 @@
+{
+    "id": "surface",
+    "name": "SurfaceCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/surface",
+    "valid": true,
+    "choices": [
+        {
+            "value": "M",
+            "display": "Mesial"
+        },
+        {
+            "value": "O",
+            "display": "Occlusal"
+        },
+        {
+            "value": "I",
+            "display": "Incisal"
+        },
+        {
+            "value": "D",
+            "display": "Distal"
+        },
+        {
+            "value": "B",
+            "display": "Buccal"
+        },
+        {
+            "value": "V",
+            "display": "Ventral"
+        },
+        {
+            "value": "L",
+            "display": "Lingual"
+        },
+        {
+            "value": "MO",
+            "display": "Mesioclusal"
+        },
+        {
+            "value": "DO",
+            "display": "Distoclusal"
+        },
+        {
+            "value": "DI",
+            "display": "Distoincisal"
+        },
+        {
+            "value": "MOD",
+            "display": "Mesioclusodistal"
+        }
+    ]
+}

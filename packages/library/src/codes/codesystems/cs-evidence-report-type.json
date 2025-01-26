@@ -1,0 +1,25 @@
+{
+    "id": "evidence-report-type",
+    "name": "EvidenceReportType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/evidence-report-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "classification",
+            "display": "Classification"
+        },
+        {
+            "value": "search-results",
+            "display": "Search Results"
+        },
+        {
+            "value": "resources-compiled",
+            "display": "Resource Compilation"
+        },
+        {
+            "value": "text-structured",
+            "display": "Structured Text"
+        }
+    ]
+}

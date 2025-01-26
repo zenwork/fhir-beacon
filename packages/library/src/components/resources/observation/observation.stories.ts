@@ -2,6 +2,8 @@ import {StoryObj} from '@storybook/web-components'
 import {argtypes} from '../../../../stories/storybook-utils'
 import {data}     from './observation.story.data'
 
+
+
 const path = 'Components/Resources/Observation/Observation'
 const elementName = 'fhir-observation'
 
@@ -30,6 +32,7 @@ export const Structure: Story = {
     mode: 'structure',
     showerror: true,
     verbose: true,
-    open: true
+    open: false,
+    headless: true
   }
 }

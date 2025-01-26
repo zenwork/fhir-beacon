@@ -1,0 +1,41 @@
+{
+    "id": "data-absent-reason",
+    "name": "DataAbsentReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/data-absent-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        },
+        {
+            "value": "masked",
+            "display": "Masked"
+        },
+        {
+            "value": "not-applicable",
+            "display": "Not Applicable"
+        },
+        {
+            "value": "unsupported",
+            "display": "Unsupported"
+        },
+        {
+            "value": "as-text",
+            "display": "As Text"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "not-performed",
+            "display": "Not Performed"
+        },
+        {
+            "value": "not-permitted",
+            "display": "Not Permitted"
+        }
+    ]
+}

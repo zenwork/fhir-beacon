@@ -1,0 +1,201 @@
+{
+    "id": "contract-signer-type",
+    "name": "ContractSignerTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-signer-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "AMENDER",
+            "display": "Amender"
+        },
+        {
+            "value": "AUTHN",
+            "display": "Authenticator"
+        },
+        {
+            "value": "AUT",
+            "display": "Author"
+        },
+        {
+            "value": "AFFL",
+            "display": "Affiliate"
+        },
+        {
+            "value": "AGNT",
+            "display": "Agent"
+        },
+        {
+            "value": "ASSIGNED",
+            "display": "Assigned Entity"
+        },
+        {
+            "value": "CIT",
+            "display": "Citizen"
+        },
+        {
+            "value": "CLAIMANT",
+            "display": "Claimant"
+        },
+        {
+            "value": "COAUTH",
+            "display": "Co-Author"
+        },
+        {
+            "value": "CONSENTER",
+            "display": "Consenter"
+        },
+        {
+            "value": "CONSWIT",
+            "display": "Consent Witness"
+        },
+        {
+            "value": "CONT",
+            "display": "Contact"
+        },
+        {
+            "value": "COPART",
+            "display": "Co-Participant"
+        },
+        {
+            "value": "COVPTY",
+            "display": "Covered Party"
+        },
+        {
+            "value": "DELEGATEE",
+            "display": "Delegatee"
+        },
+        {
+            "value": "delegator",
+            "display": "Delegator"
+        },
+        {
+            "value": "DEPEND",
+            "display": "Dependent"
+        },
+        {
+            "value": "DPOWATT",
+            "display": "Durable Power of Attorney"
+        },
+        {
+            "value": "EMGCON",
+            "display": "Emergency Contact"
+        },
+        {
+            "value": "EVTWIT",
+            "display": "Event Witness"
+        },
+        {
+            "value": "EXCEST",
+            "display": "Executor of Estate"
+        },
+        {
+            "value": "GRANTEE",
+            "display": "Grantee"
+        },
+        {
+            "value": "GRANTOR",
+            "display": "Grantor"
+        },
+        {
+            "value": "GUAR",
+            "display": "Guarantor"
+        },
+        {
+            "value": "GUARD",
+            "display": "Guardian"
+        },
+        {
+            "value": "GUADLTM",
+            "display": "Guardian ad lidem"
+        },
+        {
+            "value": "INF",
+            "display": "Informant"
+        },
+        {
+            "value": "INTPRT",
+            "display": "Interpreter"
+        },
+        {
+            "value": "INSBJ",
+            "display": "Investigation Subject"
+        },
+        {
+            "value": "HPOWATT",
+            "display": "Healthcare Power of Attorney"
+        },
+        {
+            "value": "HPROV",
+            "display": "Healthcare Provider"
+        },
+        {
+            "value": "LEGAUTHN",
+            "display": "Legal Authenticator"
+        },
+        {
+            "value": "NMDINS",
+            "display": "Named Insured"
+        },
+        {
+            "value": "NOK",
+            "display": "Next of Kin"
+        },
+        {
+            "value": "NOTARY",
+            "display": "Notary"
+        },
+        {
+            "value": "PAT",
+            "display": "Patient"
+        },
+        {
+            "value": "POWATT",
+            "display": "Power of Attorney"
+        },
+        {
+            "value": "PRIMAUTH",
+            "display": "Primary Author"
+        },
+        {
+            "value": "PRIRECIP",
+            "display": "Primary Responsible Party"
+        },
+        {
+            "value": "RECIP",
+            "display": "Recipient"
+        },
+        {
+            "value": "RESPRSN",
+            "display": "Responsible Party"
+        },
+        {
+            "value": "REVIEWER",
+            "display": "Reviewer"
+        },
+        {
+            "value": "TRANS",
+            "display": "Transcriber"
+        },
+        {
+            "value": "SOURCE",
+            "display": "Source"
+        },
+        {
+            "value": "SPOWATT",
+            "display": "Special Power of Attorney"
+        },
+        {
+            "value": "VALID",
+            "display": "Validator"
+        },
+        {
+            "value": "VERF",
+            "display": "Verifier"
+        },
+        {
+            "value": "WIT",
+            "display": "Witness"
+        }
+    ]
+}

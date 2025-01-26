@@ -1,0 +1,28 @@
+{
+    "id": "issue-severity",
+    "name": "IssueSeverity",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fatal",
+            "display": "Fatal"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        },
+        {
+            "value": "information",
+            "display": "Information"
+        },
+        {
+            "value": "success",
+            "display": "Operation Successful"
+        }
+    ]
+}

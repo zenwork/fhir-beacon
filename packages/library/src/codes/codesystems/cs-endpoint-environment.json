@@ -1,0 +1,29 @@
+{
+    "id": "endpoint-environment",
+    "name": "EndpointEnvironment",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/endpoint-environment",
+    "valid": true,
+    "choices": [
+        {
+            "value": "prod",
+            "display": "Production"
+        },
+        {
+            "value": "staging",
+            "display": "Staging"
+        },
+        {
+            "value": "dev",
+            "display": "Development"
+        },
+        {
+            "value": "test",
+            "display": "Test"
+        },
+        {
+            "value": "train",
+            "display": "Training"
+        }
+    ]
+}

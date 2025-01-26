@@ -1,0 +1,37 @@
+{
+    "id": "fhirpath-types",
+    "name": "FHIRPathTypesCodeSystem",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/fhirpath-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "http://hl7.org/fhirpath/System.String",
+            "display": "String"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.Boolean",
+            "display": "Boolean"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.Date",
+            "display": "Date"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.DateTime",
+            "display": "DateTime"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.Decimal",
+            "display": "Decimal"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.Integer",
+            "display": "Integer"
+        },
+        {
+            "value": "http://hl7.org/fhirpath/System.Time",
+            "display": "Time"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "device-status",
+    "name": "FHIRDeviceStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/device-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

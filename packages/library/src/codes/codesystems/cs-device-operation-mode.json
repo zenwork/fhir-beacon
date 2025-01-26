@@ -1,0 +1,29 @@
+{
+    "id": "device-operation-mode",
+    "name": "FHIRDeviceOperationMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/device-operation-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "normal",
+            "display": "Normal"
+        },
+        {
+            "value": "demo",
+            "display": "Demo"
+        },
+        {
+            "value": "service",
+            "display": "Service"
+        },
+        {
+            "value": "maintenance",
+            "display": "Maintenance"
+        },
+        {
+            "value": "test",
+            "display": "Test"
+        }
+    ]
+}

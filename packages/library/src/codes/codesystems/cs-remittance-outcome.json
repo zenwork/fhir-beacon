@@ -1,0 +1,21 @@
+{
+    "id": "remittance-outcome",
+    "name": "RemittanceOutcome",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/remittance-outcome",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "partial",
+            "display": "Partial"
+        }
+    ]
+}

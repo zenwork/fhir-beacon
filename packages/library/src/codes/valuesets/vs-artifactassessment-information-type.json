@@ -1,0 +1,32 @@
+{
+    "id": "artifactassessment-information-type",
+    "name": "ArtifactAssessmentInformationType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "comment",
+            "display": "Comment"
+        },
+        {
+            "value": "classifier",
+            "display": "Classifier"
+        },
+        {
+            "value": "rating",
+            "display": "Rating"
+        },
+        {
+            "value": "container",
+            "display": "Container"
+        },
+        {
+            "value": "response",
+            "display": "Response"
+        },
+        {
+            "value": "change-request",
+            "display": "Change Request"
+        }
+    ]
+}

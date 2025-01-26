@@ -1,0 +1,36 @@
+{
+    "id": "evidence-variable-event",
+    "name": "EvidenceVariableEvent",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "study-start",
+            "display": "Study Start"
+        },
+        {
+            "value": "treatment-start",
+            "display": "Start of Treatment"
+        },
+        {
+            "value": "condition-detection",
+            "display": "Detection of Condition"
+        },
+        {
+            "value": "condition-treatment",
+            "display": "Treatment of Condition"
+        },
+        {
+            "value": "hospital-admission",
+            "display": "Hospital Admission"
+        },
+        {
+            "value": "hospital-discharge",
+            "display": "Hospital Discharge"
+        },
+        {
+            "value": "operative-procedure",
+            "display": "Operative Procedure"
+        }
+    ]
+}

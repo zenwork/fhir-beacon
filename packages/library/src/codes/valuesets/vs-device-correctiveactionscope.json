@@ -1,0 +1,20 @@
+{
+    "id": "device-correctiveactionscope",
+    "name": "DeviceCorrectiveActionScope",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "model",
+            "display": "Model"
+        },
+        {
+            "value": "lot-numbers",
+            "display": "Lot Numbers"
+        },
+        {
+            "value": "serial-numbers",
+            "display": "Serial Numbers"
+        }
+    ]
+}

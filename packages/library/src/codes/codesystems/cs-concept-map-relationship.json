@@ -1,0 +1,17 @@
+{
+    "id": "concept-map-relationship",
+    "name": "ConceptMapRelationship",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/concept-map-relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "related-to",
+            "display": "Related To"
+        },
+        {
+            "value": "not-related-to",
+            "display": "Not Related To"
+        }
+    ]
+}

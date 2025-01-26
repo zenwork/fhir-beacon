@@ -1,0 +1,33 @@
+{
+    "id": "practitioner-role",
+    "name": "PractitionerRole",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/practitioner-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "doctor",
+            "display": "Doctor"
+        },
+        {
+            "value": "nurse",
+            "display": "Nurse"
+        },
+        {
+            "value": "pharmacist",
+            "display": "Pharmacist"
+        },
+        {
+            "value": "researcher",
+            "display": "Researcher"
+        },
+        {
+            "value": "teacher",
+            "display": "Teacher/educator"
+        },
+        {
+            "value": "ict",
+            "display": "ICT professional"
+        }
+    ]
+}

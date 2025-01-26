@@ -1,0 +1,21 @@
+{
+    "id": "report-participant-type",
+    "name": "TestReportParticipantType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/report-participant-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "test-engine",
+            "display": "Test Engine"
+        },
+        {
+            "value": "client",
+            "display": "Client"
+        },
+        {
+            "value": "server",
+            "display": "Server"
+        }
+    ]
+}

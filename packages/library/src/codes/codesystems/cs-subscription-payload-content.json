@@ -1,0 +1,21 @@
+{
+    "id": "subscription-payload-content",
+    "name": "SubscriptionPayloadContent",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/subscription-payload-content",
+    "valid": true,
+    "choices": [
+        {
+            "value": "empty",
+            "display": "Empty"
+        },
+        {
+            "value": "id-only",
+            "display": "Id-only"
+        },
+        {
+            "value": "full-resource",
+            "display": "Full-resource"
+        }
+    ]
+}

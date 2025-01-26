@@ -1,0 +1,21 @@
+{
+    "id": "immunization-status",
+    "name": "ImmunizationStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "completed",
+            "display": "n/a"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "n/a"
+        },
+        {
+            "value": "not-done",
+            "display": "n/a"
+        }
+    ]
+}

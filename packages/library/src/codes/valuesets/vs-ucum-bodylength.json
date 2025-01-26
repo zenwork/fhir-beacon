@@ -1,0 +1,17 @@
+{
+    "id": "ucum-bodylength",
+    "name": "BodyLengthUnits",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ucum-bodylength",
+    "valid": true,
+    "choices": [
+        {
+            "value": "cm",
+            "display": "n/a"
+        },
+        {
+            "value": "[in_i]",
+            "display": "n/a"
+        }
+    ]
+}

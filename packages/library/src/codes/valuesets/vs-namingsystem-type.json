@@ -1,0 +1,20 @@
+{
+    "id": "namingsystem-type",
+    "name": "NamingSystemType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "codesystem",
+            "display": "Code System"
+        },
+        {
+            "value": "identifier",
+            "display": "Identifier"
+        },
+        {
+            "value": "root",
+            "display": "Root"
+        }
+    ]
+}

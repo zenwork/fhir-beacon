@@ -1,0 +1,48 @@
+{
+    "id": "bundle-type",
+    "name": "BundleType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "document",
+            "display": "Document"
+        },
+        {
+            "value": "message",
+            "display": "Message"
+        },
+        {
+            "value": "transaction",
+            "display": "Transaction"
+        },
+        {
+            "value": "transaction-response",
+            "display": "Transaction Response"
+        },
+        {
+            "value": "batch",
+            "display": "Batch"
+        },
+        {
+            "value": "batch-response",
+            "display": "Batch Response"
+        },
+        {
+            "value": "history",
+            "display": "History List"
+        },
+        {
+            "value": "searchset",
+            "display": "Search Results"
+        },
+        {
+            "value": "collection",
+            "display": "Collection"
+        },
+        {
+            "value": "subscription-notification",
+            "display": "Subscription Notification"
+        }
+    ]
+}

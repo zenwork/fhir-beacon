@@ -1,0 +1,33 @@
+{
+    "id": "restful-security-service",
+    "name": "RestfulSecurityService",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/restful-security-service",
+    "valid": true,
+    "choices": [
+        {
+            "value": "OAuth",
+            "display": "OAuth"
+        },
+        {
+            "value": "SMART-on-FHIR",
+            "display": "SMART-on-FHIR"
+        },
+        {
+            "value": "NTLM",
+            "display": "NTLM"
+        },
+        {
+            "value": "Basic",
+            "display": "Basic"
+        },
+        {
+            "value": "Kerberos",
+            "display": "Kerberos"
+        },
+        {
+            "value": "Certificates",
+            "display": "Certificates"
+        }
+    ]
+}

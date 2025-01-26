@@ -1,0 +1,20 @@
+{
+    "id": "response-code",
+    "name": "ResponseType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ok",
+            "display": "OK"
+        },
+        {
+            "value": "transient-error",
+            "display": "Transient Error"
+        },
+        {
+            "value": "fatal-error",
+            "display": "Fatal Error"
+        }
+    ]
+}

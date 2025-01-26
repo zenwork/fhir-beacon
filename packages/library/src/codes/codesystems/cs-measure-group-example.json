@@ -1,0 +1,17 @@
+{
+    "id": "measure-group-example",
+    "name": "MeasureGroupExample",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-group-example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary-rate",
+            "display": "Primary Rate"
+        },
+        {
+            "value": "secondary-rate",
+            "display": "Secondary Rate"
+        }
+    ]
+}

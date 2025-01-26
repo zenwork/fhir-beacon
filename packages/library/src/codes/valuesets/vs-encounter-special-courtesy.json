@@ -1,0 +1,33 @@
+{
+    "id": "encounter-special-courtesy",
+    "name": "SpecialCourtesy",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-special-courtesy",
+    "valid": true,
+    "choices": [
+        {
+            "value": "EXT",
+            "display": "n/a"
+        },
+        {
+            "value": "NRM",
+            "display": "n/a"
+        },
+        {
+            "value": "PRF",
+            "display": "n/a"
+        },
+        {
+            "value": "STF",
+            "display": "n/a"
+        },
+        {
+            "value": "VIP",
+            "display": "n/a"
+        },
+        {
+            "value": "UNK",
+            "display": "n/a"
+        }
+    ]
+}

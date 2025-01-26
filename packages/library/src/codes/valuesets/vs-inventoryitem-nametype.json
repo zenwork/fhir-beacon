@@ -1,0 +1,24 @@
+{
+    "id": "inventoryitem-nametype",
+    "name": "InventoryItemStatusCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "trade-name",
+            "display": "Trade Name"
+        },
+        {
+            "value": "alias",
+            "display": "Alias"
+        },
+        {
+            "value": "original-name",
+            "display": "Original Name"
+        },
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        }
+    ]
+}

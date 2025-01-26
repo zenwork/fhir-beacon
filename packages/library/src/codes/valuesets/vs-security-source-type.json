@@ -1,0 +1,41 @@
+{
+    "id": "security-source-type",
+    "name": "AuditEventSourceType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/security-source-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "n/a"
+        },
+        {
+            "value": "2",
+            "display": "n/a"
+        },
+        {
+            "value": "3",
+            "display": "n/a"
+        },
+        {
+            "value": "4",
+            "display": "n/a"
+        },
+        {
+            "value": "5",
+            "display": "n/a"
+        },
+        {
+            "value": "6",
+            "display": "n/a"
+        },
+        {
+            "value": "7",
+            "display": "n/a"
+        },
+        {
+            "value": "8",
+            "display": "n/a"
+        }
+    ]
+}

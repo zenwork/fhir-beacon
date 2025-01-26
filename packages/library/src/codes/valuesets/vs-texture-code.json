@@ -1,0 +1,65 @@
+{
+    "id": "texture-code",
+    "name": "TextureModifierCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/texture-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "228053002",
+            "display": "Cut-up food"
+        },
+        {
+            "value": "439091000124107",
+            "display": "Easy to chew food"
+        },
+        {
+            "value": "228049004",
+            "display": "Chopped food"
+        },
+        {
+            "value": "441881000124103",
+            "display": "Ground food"
+        },
+        {
+            "value": "441761000124103",
+            "display": "Minced food"
+        },
+        {
+            "value": "441751000124100",
+            "display": "Mashed food"
+        },
+        {
+            "value": "228059003",
+            "display": "Soft food"
+        },
+        {
+            "value": "441791000124106",
+            "display": "Strained food"
+        },
+        {
+            "value": "228055009",
+            "display": "Liquidized food"
+        },
+        {
+            "value": "228056005",
+            "display": "Lumpy food"
+        },
+        {
+            "value": "441771000124105",
+            "display": "Moist food"
+        },
+        {
+            "value": "228057001",
+            "display": "Semi-solid food"
+        },
+        {
+            "value": "228058006",
+            "display": "Single texture food"
+        },
+        {
+            "value": "228060008",
+            "display": "Solid food"
+        }
+    ]
+}

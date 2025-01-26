@@ -1,0 +1,25 @@
+{
+    "id": "conformance-expectation",
+    "name": "ConformanceExpectation",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conformance-expectation",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SHALL",
+            "display": "SHALL"
+        },
+        {
+            "value": "SHOULD",
+            "display": "SHOULD"
+        },
+        {
+            "value": "MAY",
+            "display": "MAY"
+        },
+        {
+            "value": "SHOULD-NOT",
+            "display": "SHOULD-NOT"
+        }
+    ]
+}

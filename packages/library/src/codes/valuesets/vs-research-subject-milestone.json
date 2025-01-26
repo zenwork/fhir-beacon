@@ -1,0 +1,21 @@
+{
+    "id": "research-subject-milestone",
+    "name": "ResearchSubjectMilestone",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/research-subject-milestone",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SignedUp",
+            "display": "Signed up"
+        },
+        {
+            "value": "Screened",
+            "display": "Screened"
+        },
+        {
+            "value": "Randomized",
+            "display": "Randomized"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "id": "variable-role",
+    "name": "EvidenceVariableRole",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/variable-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "population",
+            "display": "population"
+        },
+        {
+            "value": "subpopulation",
+            "display": "subpopulation"
+        },
+        {
+            "value": "exposure",
+            "display": "exposure"
+        },
+        {
+            "value": "referenceExposure",
+            "display": "reference exposure"
+        },
+        {
+            "value": "measuredVariable",
+            "display": "measured variable"
+        },
+        {
+            "value": "confounder",
+            "display": "confounder"
+        },
+        {
+            "value": "measuredVariableA",
+            "display": "measured variable A"
+        },
+        {
+            "value": "measuredVariableB",
+            "display": "measured variable B"
+        },
+        {
+            "value": "measuredVariableAB",
+            "display": "measured variable A to B"
+        }
+    ]
+}

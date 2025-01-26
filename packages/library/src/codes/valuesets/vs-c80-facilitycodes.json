@@ -1,0 +1,325 @@
+{
+    "id": "c80-facilitycodes",
+    "name": "FacilityTypeCodeValueSet",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/c80-facilitycodes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "82242000",
+            "display": "Hospital-children's"
+        },
+        {
+            "value": "225732001",
+            "display": "Hospital-community"
+        },
+        {
+            "value": "79993009",
+            "display": "Hospital-government"
+        },
+        {
+            "value": "32074000",
+            "display": "Hospital-long term care"
+        },
+        {
+            "value": "4322002",
+            "display": "Hospital-military field"
+        },
+        {
+            "value": "224687002",
+            "display": "Hospital-prison"
+        },
+        {
+            "value": "62480006",
+            "display": "Hospital-psychiatric"
+        },
+        {
+            "value": "80522000",
+            "display": "Hospital-rehabilitation"
+        },
+        {
+            "value": "36125001",
+            "display": "Hospital-trauma center"
+        },
+        {
+            "value": "48311003",
+            "display": "Hospital-Veterans' Administration"
+        },
+        {
+            "value": "284546000",
+            "display": "Hospice facility"
+        },
+        {
+            "value": "42665001",
+            "display": "Nursing home"
+        },
+        {
+            "value": "45618002",
+            "display": "Skilled nursing facility"
+        },
+        {
+            "value": "418518002",
+            "display": "Dialysis unit--hospital"
+        },
+        {
+            "value": "73770003",
+            "display": "Emergency department--hospital"
+        },
+        {
+            "value": "69362002",
+            "display": "Hospital ambulatory surgery facility"
+        },
+        {
+            "value": "52668009",
+            "display": "Hospital birthing center"
+        },
+        {
+            "value": "360957003",
+            "display": "Hospital outpatient allergy clinic"
+        },
+        {
+            "value": "10206005",
+            "display": "Hospital outpatient dental clinic"
+        },
+        {
+            "value": "37550003",
+            "display": "Hospital outpatient dermatology clinic"
+        },
+        {
+            "value": "73644007",
+            "display": "Hospital outpatient endocrinology clinic"
+        },
+        {
+            "value": "31628002",
+            "display": "Hospital outpatient family medicine clinic"
+        },
+        {
+            "value": "58482006",
+            "display": "Hospital outpatient gastroenterology clinic"
+        },
+        {
+            "value": "90484001",
+            "display": "Hospital outpatient general surgery clinic"
+        },
+        {
+            "value": "1814000",
+            "display": "Hospital outpatient geriatric health center"
+        },
+        {
+            "value": "22549003",
+            "display": "Hospital outpatient gynecology clinic"
+        },
+        {
+            "value": "56293002",
+            "display": "Hospital outpatient hematology clinic"
+        },
+        {
+            "value": "360966004",
+            "display": "Hospital outpatient immunology clinic"
+        },
+        {
+            "value": "2849009",
+            "display": "Hospital outpatient infectious disease clinic"
+        },
+        {
+            "value": "14866005",
+            "display": "Hospital outpatient mental health center"
+        },
+        {
+            "value": "38238005",
+            "display": "Hospital outpatient neurology clinic"
+        },
+        {
+            "value": "56189001",
+            "display": "Hospital outpatient obstetrical clinic"
+        },
+        {
+            "value": "89972002",
+            "display": "Hospital outpatient oncology clinic"
+        },
+        {
+            "value": "78088001",
+            "display": "Hospital outpatient ophthalmology clinic"
+        },
+        {
+            "value": "78001009",
+            "display": "Hospital outpatient orthopedics clinic"
+        },
+        {
+            "value": "23392004",
+            "display": "Hospital outpatient otorhinolaryngology clinic"
+        },
+        {
+            "value": "36293008",
+            "display": "Hospital outpatient pain clinic"
+        },
+        {
+            "value": "3729002",
+            "display": "Hospital outpatient pediatric clinic"
+        },
+        {
+            "value": "5584006",
+            "display": "Hospital outpatient peripheral vascular clinic"
+        },
+        {
+            "value": "37546005",
+            "display": "Hospital outpatient rehabilitation clinic"
+        },
+        {
+            "value": "57159002",
+            "display": "Hospital outpatient respiratory disease clinic"
+        },
+        {
+            "value": "331006",
+            "display": "Hospital outpatient rheumatology clinic"
+        },
+        {
+            "value": "50569004",
+            "display": "Hospital outpatient urology clinic"
+        },
+        {
+            "value": "79491001",
+            "display": "Hospital radiology facility"
+        },
+        {
+            "value": "33022008",
+            "display": "Hospital-based outpatient clinic or department--OTHER-NOT LISTED"
+        },
+        {
+            "value": "19602009",
+            "display": "Fee-for-service private physicians' group office"
+        },
+        {
+            "value": "39350007",
+            "display": "Private physicians' group office"
+        },
+        {
+            "value": "83891005",
+            "display": "Solo practice private office"
+        },
+        {
+            "value": "394759007",
+            "display": "Independent ambulatory care provider site--OTHER--NOT LISTED"
+        },
+        {
+            "value": "405607001",
+            "display": "Ambulatory surgery center"
+        },
+        {
+            "value": "309900005",
+            "display": "Care of the elderly day hospital"
+        },
+        {
+            "value": "275576008",
+            "display": "Elderly assessment clinic"
+        },
+        {
+            "value": "10531005",
+            "display": "Free-standing ambulatory surgery facility"
+        },
+        {
+            "value": "91154008",
+            "display": "Free-standing birthing center"
+        },
+        {
+            "value": "41844007",
+            "display": "Free-standing geriatric health center"
+        },
+        {
+            "value": "45899008",
+            "display": "Free-standing laboratory facility"
+        },
+        {
+            "value": "51563005",
+            "display": "Free-standing mental health center"
+        },
+        {
+            "value": "1773006",
+            "display": "Free-standing radiology facility"
+        },
+        {
+            "value": "72311000",
+            "display": "Health maintenance organization"
+        },
+        {
+            "value": "6827000",
+            "display": "Local community health center"
+        },
+        {
+            "value": "309898008",
+            "display": "Psychogeriatric day hospital"
+        },
+        {
+            "value": "39913001",
+            "display": "Residential school infirmary"
+        },
+        {
+            "value": "77931003",
+            "display": "Rural health center"
+        },
+        {
+            "value": "25681007",
+            "display": "Sexually transmitted disease health center"
+        },
+        {
+            "value": "20078004",
+            "display": "Substance abuse treatment center"
+        },
+        {
+            "value": "46224007",
+            "display": "Vaccination clinic"
+        },
+        {
+            "value": "81234003",
+            "display": "Walk-in clinic"
+        },
+        {
+            "value": "35971002",
+            "display": "Ambulatory care site--OTHER--NOT LISTED"
+        },
+        {
+            "value": "11424001",
+            "display": "Ambulance-based care"
+        },
+        {
+            "value": "409519008",
+            "display": "Contained casualty setting"
+        },
+        {
+            "value": "901005",
+            "display": "Helicopter-based care"
+        },
+        {
+            "value": "2081004",
+            "display": "Hospital ship"
+        },
+        {
+            "value": "59374000",
+            "display": "Traveler's aid clinic"
+        },
+        {
+            "value": "413456002",
+            "display": "Adult day care center"
+        },
+        {
+            "value": "413817003",
+            "display": "Child day care center"
+        },
+        {
+            "value": "310205006",
+            "display": "Private residential home"
+        },
+        {
+            "value": "419955002",
+            "display": "Residential institution"
+        },
+        {
+            "value": "272501009",
+            "display": "Sports facility"
+        },
+        {
+            "value": "394777002",
+            "display": "Health encounter site--NOT LISTED"
+        }
+    ]
+}

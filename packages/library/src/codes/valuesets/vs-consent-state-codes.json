@@ -1,0 +1,32 @@
+{
+    "id": "consent-state-codes",
+    "name": "ConsentState",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Pending"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "not-done",
+            "display": "Abandoned"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

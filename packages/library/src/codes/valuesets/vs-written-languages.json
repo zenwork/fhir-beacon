@@ -1,0 +1,113 @@
+{
+    "id": "written-languages",
+    "name": "CommonLanguagesWritten",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/written-languages",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ar",
+            "display": "Arabic"
+        },
+        {
+            "value": "bn",
+            "display": "Bengali"
+        },
+        {
+            "value": "cs",
+            "display": "Czech"
+        },
+        {
+            "value": "da",
+            "display": "Danish"
+        },
+        {
+            "value": "de",
+            "display": "German"
+        },
+        {
+            "value": "el",
+            "display": "Greek"
+        },
+        {
+            "value": "en",
+            "display": "English"
+        },
+        {
+            "value": "es",
+            "display": "Spanish"
+        },
+        {
+            "value": "fi",
+            "display": "Finnish"
+        },
+        {
+            "value": "fr",
+            "display": "French"
+        },
+        {
+            "value": "fy",
+            "display": "Frisian"
+        },
+        {
+            "value": "hi",
+            "display": "Hindi"
+        },
+        {
+            "value": "hr",
+            "display": "Croatian"
+        },
+        {
+            "value": "it",
+            "display": "Italian"
+        },
+        {
+            "value": "ja",
+            "display": "Japanese"
+        },
+        {
+            "value": "ko",
+            "display": "Korean"
+        },
+        {
+            "value": "nl",
+            "display": "Dutch"
+        },
+        {
+            "value": "no",
+            "display": "Norwegian"
+        },
+        {
+            "value": "pa",
+            "display": "Punjabi"
+        },
+        {
+            "value": "pl",
+            "display": "Polish"
+        },
+        {
+            "value": "pt",
+            "display": "Portuguese"
+        },
+        {
+            "value": "ru",
+            "display": "Russian"
+        },
+        {
+            "value": "sr",
+            "display": "Serbian"
+        },
+        {
+            "value": "sv",
+            "display": "Swedish"
+        },
+        {
+            "value": "te",
+            "display": "Telugu"
+        },
+        {
+            "value": "zh",
+            "display": "Chinese"
+        }
+    ]
+}

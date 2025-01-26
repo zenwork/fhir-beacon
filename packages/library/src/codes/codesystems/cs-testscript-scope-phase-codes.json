@@ -1,0 +1,21 @@
+{
+    "id": "testscript-scope-phase-codes",
+    "name": "TestScriptScopePhaseType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/testscript-scope-phase-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unit",
+            "display": "Unit"
+        },
+        {
+            "value": "integration",
+            "display": "Integration"
+        },
+        {
+            "value": "production",
+            "display": "Production"
+        }
+    ]
+}

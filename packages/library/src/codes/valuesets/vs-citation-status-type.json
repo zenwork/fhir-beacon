@@ -1,0 +1,116 @@
+{
+    "id": "citation-status-type",
+    "name": "CitationStatusType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pubmed-pubstatus-received",
+            "display": "PubMed Pubstatus of Received"
+        },
+        {
+            "value": "pubmed-pubstatus-accepted",
+            "display": "PubMed Pubstatus of Accepted"
+        },
+        {
+            "value": "pubmed-pubstatus-epublish",
+            "display": "PubMed Pubstatus of Epublish"
+        },
+        {
+            "value": "pubmed-pubstatus-ppublish",
+            "display": "PubMed Pubstatus of Ppublish"
+        },
+        {
+            "value": "pubmed-pubstatus-revised",
+            "display": "PubMed Pubstatus of Revised"
+        },
+        {
+            "value": "pubmed-pubstatus-aheadofprint",
+            "display": "PubMed Pubstatus of aheadofprint"
+        },
+        {
+            "value": "pubmed-pubstatus-retracted",
+            "display": "PubMed Pubstatus of Retracted"
+        },
+        {
+            "value": "pubmed-pubstatus-ecollection",
+            "display": "PubMed Pubstatus of Ecollection"
+        },
+        {
+            "value": "pubmed-pubstatus-pmc",
+            "display": "PubMed Pubstatus of PMC"
+        },
+        {
+            "value": "pubmed-pubstatus-pmcr",
+            "display": "PubMed Pubstatus of PMCr"
+        },
+        {
+            "value": "pubmed-pubstatus-pubmed",
+            "display": "PubMed Pubstatus of PubMed"
+        },
+        {
+            "value": "pubmed-pubstatus-pubmedr",
+            "display": "PubMed Pubstatus of PubMedr"
+        },
+        {
+            "value": "pubmed-pubstatus-premedline",
+            "display": "PubMed Pubstatus of Premedline"
+        },
+        {
+            "value": "pubmed-pubstatus-medline",
+            "display": "PubMed Pubstatus of Medline"
+        },
+        {
+            "value": "pubmed-pubstatus-medliner",
+            "display": "PubMed Pubstatus of Medliner"
+        },
+        {
+            "value": "pubmed-pubstatus-entrez",
+            "display": "PubMed Pubstatus of Entrez"
+        },
+        {
+            "value": "pubmed-pubstatus-pmc-release",
+            "display": "PubMed Pubstatus of PMC release"
+        },
+        {
+            "value": "medline-completed",
+            "display": "Medline Citation Status of Completed"
+        },
+        {
+            "value": "medline-in-process",
+            "display": "Medline Citation Status of In-Process"
+        },
+        {
+            "value": "medline-pubmed-not-medline",
+            "display": "Medline Citation Status of PubMed-not-MEDLINE"
+        },
+        {
+            "value": "medline-in-data-review",
+            "display": "Medline Citation Status of In-Data-Review"
+        },
+        {
+            "value": "medline-publisher",
+            "display": "Medline Citation Status of Publisher"
+        },
+        {
+            "value": "medline-medline",
+            "display": "Medline Citation Status of MEDLINE"
+        },
+        {
+            "value": "medline-oldmedline",
+            "display": "Medline Citation Status of OLDMEDLINE"
+        },
+        {
+            "value": "pubmed-publication-status-ppublish",
+            "display": "PubMed PublicationStatus of ppublish"
+        },
+        {
+            "value": "pubmed-publication-status-epublish",
+            "display": "PubMed PublicationStatus of epublish"
+        },
+        {
+            "value": "pubmed-publication-status-aheadofprint",
+            "display": "PubMed PublicationStatus of aheadofprint"
+        }
+    ]
+}

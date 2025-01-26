@@ -1,0 +1,44 @@
+{
+    "id": "search-param-type",
+    "name": "SearchParamType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "number",
+            "display": "Number"
+        },
+        {
+            "value": "date",
+            "display": "Date/DateTime"
+        },
+        {
+            "value": "string",
+            "display": "String"
+        },
+        {
+            "value": "token",
+            "display": "Token"
+        },
+        {
+            "value": "reference",
+            "display": "Reference"
+        },
+        {
+            "value": "composite",
+            "display": "Composite"
+        },
+        {
+            "value": "quantity",
+            "display": "Quantity"
+        },
+        {
+            "value": "uri",
+            "display": "URI"
+        },
+        {
+            "value": "special",
+            "display": "Special"
+        }
+    ]
+}

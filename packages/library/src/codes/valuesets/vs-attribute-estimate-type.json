@@ -1,0 +1,53 @@
+{
+    "id": "attribute-estimate-type",
+    "name": "AttributeEstimateType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/attribute-estimate-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "0000419",
+            "display": "Cochran's Q statistic"
+        },
+        {
+            "value": "C53324",
+            "display": "Confidence interval"
+        },
+        {
+            "value": "0000455",
+            "display": "Credible interval"
+        },
+        {
+            "value": "0000420",
+            "display": "I-squared"
+        },
+        {
+            "value": "C53245",
+            "display": "Interquartile range"
+        },
+        {
+            "value": "C44185",
+            "display": "P-value"
+        },
+        {
+            "value": "C38013",
+            "display": "Range"
+        },
+        {
+            "value": "C53322",
+            "display": "Standard deviation"
+        },
+        {
+            "value": "0000037",
+            "display": "Standard error of the mean"
+        },
+        {
+            "value": "0000421",
+            "display": "Tau squared"
+        },
+        {
+            "value": "C48918",
+            "display": "Variance"
+        }
+    ]
+}

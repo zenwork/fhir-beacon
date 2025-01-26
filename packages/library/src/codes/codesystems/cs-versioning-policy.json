@@ -1,0 +1,21 @@
+{
+    "id": "versioning-policy",
+    "name": "ResourceVersionPolicy",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/versioning-policy",
+    "valid": true,
+    "choices": [
+        {
+            "value": "no-version",
+            "display": "No VersionId Support"
+        },
+        {
+            "value": "versioned",
+            "display": "Versioned"
+        },
+        {
+            "value": "versioned-update",
+            "display": "VersionId tracked fully"
+        }
+    ]
+}

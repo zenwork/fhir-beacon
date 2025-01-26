@@ -1,0 +1,25 @@
+{
+    "id": "example",
+    "name": "LOINCCodesForCholesterolInSerumPlasma",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "14647-2",
+            "display": "Cholesterol [Moles/Volume]"
+        },
+        {
+            "value": "2093-3",
+            "display": "Cholesterol [Mass/Volume]"
+        },
+        {
+            "value": "35200-5",
+            "display": "Cholesterol [Mass Or Moles/Volume]"
+        },
+        {
+            "value": "9342-7",
+            "display": "Cholesterol [Percentile]"
+        }
+    ]
+}

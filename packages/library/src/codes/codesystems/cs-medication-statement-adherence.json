@@ -1,0 +1,21 @@
+{
+    "id": "medication-statement-adherence",
+    "name": "MedicationStatementAdherenceCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medication-statement-adherence",
+    "valid": true,
+    "choices": [
+        {
+            "value": "taking",
+            "display": "Taking"
+        },
+        {
+            "value": "not-taking",
+            "display": "Not Taking"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "subscription-notification-type",
+    "name": "SubscriptionNotificationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/subscription-notification-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "handshake",
+            "display": "Handshake"
+        },
+        {
+            "value": "heartbeat",
+            "display": "Heartbeat"
+        },
+        {
+            "value": "event-notification",
+            "display": "Event Notification"
+        },
+        {
+            "value": "query-status",
+            "display": "Query Status"
+        },
+        {
+            "value": "query-event",
+            "display": "Query Event"
+        }
+    ]
+}

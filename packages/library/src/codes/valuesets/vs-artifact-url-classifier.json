@@ -1,0 +1,68 @@
+{
+    "id": "artifact-url-classifier",
+    "name": "ArtifactUrlClassifier",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "abstract",
+            "display": "Abstract"
+        },
+        {
+            "value": "full-text",
+            "display": "Full-Text"
+        },
+        {
+            "value": "supplement",
+            "display": "Supplement"
+        },
+        {
+            "value": "webpage",
+            "display": "Webpage"
+        },
+        {
+            "value": "file-directory",
+            "display": "File directory"
+        },
+        {
+            "value": "code-repository",
+            "display": "Code repository"
+        },
+        {
+            "value": "restricted",
+            "display": "Restricted"
+        },
+        {
+            "value": "compressed-file",
+            "display": "Compressed file"
+        },
+        {
+            "value": "doi-based",
+            "display": "DOI Based"
+        },
+        {
+            "value": "pdf",
+            "display": "PDF"
+        },
+        {
+            "value": "json",
+            "display": "JSON"
+        },
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "version-specific",
+            "display": "Version Specific"
+        },
+        {
+            "value": "computable-resource",
+            "display": "Computable resource"
+        },
+        {
+            "value": "not-specified",
+            "display": "Not Specified"
+        }
+    ]
+}

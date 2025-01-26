@@ -1,0 +1,17 @@
+{
+    "id": "contract-action",
+    "name": "ContractActionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-action",
+    "valid": true,
+    "choices": [
+        {
+            "value": "action-a",
+            "display": "Action A"
+        },
+        {
+            "value": "action-b",
+            "display": "Action B"
+        }
+    ]
+}

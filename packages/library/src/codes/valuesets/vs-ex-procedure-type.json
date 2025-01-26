@@ -1,0 +1,17 @@
+{
+    "id": "ex-procedure-type",
+    "name": "ExampleProcedureTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-procedure-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary",
+            "display": "Primary procedure"
+        },
+        {
+            "value": "secondary",
+            "display": "Secondary procedure"
+        }
+    ]
+}

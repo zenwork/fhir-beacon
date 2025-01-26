@@ -1,0 +1,65 @@
+{
+    "id": "citation-summary-style",
+    "name": "CitationSummaryStyle",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/citation-summary-style",
+    "valid": true,
+    "choices": [
+        {
+            "value": "vancouver",
+            "display": "Vancouver style"
+        },
+        {
+            "value": "ama11",
+            "display": "American Medical Association 11th edition"
+        },
+        {
+            "value": "apa7",
+            "display": "American Psychological Association 7th edition"
+        },
+        {
+            "value": "apa6",
+            "display": "American Psychological Association 6th edition"
+        },
+        {
+            "value": "asa6",
+            "display": "American Sociological Association 6th edition"
+        },
+        {
+            "value": "mla8",
+            "display": "Modern Language Association 8th edition"
+        },
+        {
+            "value": "cochrane",
+            "display": "Cochrane Style"
+        },
+        {
+            "value": "elsevier-harvard",
+            "display": "Elsevier-Harvard Style"
+        },
+        {
+            "value": "nature",
+            "display": "Nature Referencing style"
+        },
+        {
+            "value": "acs",
+            "display": "American Chemical Society"
+        },
+        {
+            "value": "chicago-a-17",
+            "display": "Chicago Style Version 17 Author Date"
+        },
+        {
+            "value": "chicago-b-17",
+            "display": "Chicago Style Version 17 Full note"
+        },
+        {
+            "value": "ieee",
+            "display": "Institute of Electrical and Electronics Engineers"
+        },
+        {
+            "value": "comppub",
+            "display": "Computable Publishing"
+        }
+    ]
+}

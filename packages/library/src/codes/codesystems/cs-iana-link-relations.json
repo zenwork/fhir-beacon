@@ -1,0 +1,542 @@
+{
+    "id": "iana-link-relations",
+    "name": "LinkRelationTypes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/iana-link-relations",
+    "valid": true,
+    "choices": [
+        {
+            "value": "about",
+            "display": "Refers to a resource that is the subject of the link's context."
+        },
+        {
+            "value": "acl",
+            "display": "Asserts that the link target provides an access control description for the link context."
+        },
+        {
+            "value": "alternate",
+            "display": "Refers to a substitute for this context"
+        },
+        {
+            "value": "amphtml",
+            "display": "Used to reference alternative content that uses the AMP profile of the HTML format."
+        },
+        {
+            "value": "appendix",
+            "display": "Refers to an appendix."
+        },
+        {
+            "value": "apple-touch-icon",
+            "display": "Refers to an icon for the context. Synonym for icon."
+        },
+        {
+            "value": "apple-touch-startup-image",
+            "display": "Refers to a launch screen for the context."
+        },
+        {
+            "value": "archives",
+            "display": "Refers to a collection of records, documents, or other\n      materials of historical interest."
+        },
+        {
+            "value": "author",
+            "display": "Refers to the context's author."
+        },
+        {
+            "value": "blocked-by",
+            "display": "Identifies the entity that blocks access to a resource\n      following receipt of a legal demand.",
+            
+        },
+        {
+            "value": "bookmark",
+            "display": "Gives a permanent link to use for bookmarking purposes."
+        },
+        {
+            "value": "canonical",
+            "display": "Designates the preferred version of a resource (the IRI and its contents)."
+        },
+        {
+            "value": "chapter",
+            "display": "Refers to a chapter in a collection of resources."
+        },
+        {
+            "value": "cite-as",
+            "display": "Indicates that the link target is preferred over the link context for the purpose of permanent citation.",
+            
+        },
+        {
+            "value": "collection",
+            "display": "The target IRI points to a resource which represents the collection resource for the context IRI.",
+            
+        },
+        {
+            "value": "contents",
+            "display": "Refers to a table of contents."
+        },
+        {
+            "value": "convertedFrom",
+            "display": "The document linked to was later converted to the\n      document that contains this link relation.  For example, an RFC can\n      have a link to the Internet-Draft that became the RFC; in that case,\n      the link relation would be \"convertedFrom\".",
+            
+        },
+        {
+            "value": "copyright",
+            "display": "Refers to a copyright statement that applies to the\n    link's context."
+        },
+        {
+            "value": "create-form",
+            "display": "The target IRI points to a resource where a submission form can be obtained."
+        },
+        {
+            "value": "current",
+            "display": "Refers to a resource containing the most recent\n      item(s) in a collection of resources."
+        },
+        {
+            "value": "describedby",
+            "display": "Refers to a resource providing information about the\n      link's context."
+        },
+        {
+            "value": "describes",
+            "display": "The relationship A 'describes' B asserts that\n      resource A provides a description of resource B. There are no\n      constraints on the format or representation of either A or B,\n      neither are there any further constraints on either resource.",
+            
+        },
+        {
+            "value": "disclosure",
+            "display": "Refers to a list of patent disclosures made with respect to \n      material for which 'disclosure' relation is specified.",
+            
+        },
+        {
+            "value": "dns-prefetch",
+            "display": "Used to indicate an origin that will be used to fetch required \n      resources for the link context, and that the user agent ought to resolve \n      as early as possible.",
+            
+        },
+        {
+            "value": "duplicate",
+            "display": "Refers to a resource whose available representations\n      are byte-for-byte identical with the corresponding representations of\n      the context IRI.",
+            
+        },
+        {
+            "value": "edit",
+            "display": "Refers to a resource that can be used to edit the\n      link's context."
+        },
+        {
+            "value": "edit-form",
+            "display": "The target IRI points to a resource where a submission form for\n      editing associated resource can be obtained.",
+            
+        },
+        {
+            "value": "edit-media",
+            "display": "Refers to a resource that can be used to edit media\n      associated with the link's context."
+        },
+        {
+            "value": "enclosure",
+            "display": "Identifies a related resource that is potentially\n      large and might require special handling.",
+            
+        },
+        {
+            "value": "external",
+            "display": "Refers to a resource that is not part of the same site as the current context."
+        },
+        {
+            "value": "first",
+            "display": "An IRI that refers to the furthest preceding resource\n    in a series of resources."
+        },
+        {
+            "value": "glossary",
+            "display": "Refers to a glossary of terms."
+        },
+        {
+            "value": "help",
+            "display": "Refers to context-sensitive help."
+        },
+        {
+            "value": "hosts",
+            "display": "Refers to a resource hosted by the server indicated by\n      the link context."
+        },
+        {
+            "value": "hub",
+            "display": "Refers to a hub that enables registration for\n    notification of updates to the context."
+        },
+        {
+            "value": "icon",
+            "display": "Refers to an icon representing the link's context."
+        },
+        {
+            "value": "index",
+            "display": "Refers to an index."
+        },
+        {
+            "value": "intervalAfter",
+            "display": "refers to a resource associated with a time interval that ends before the beginning of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalBefore",
+            "display": "refers to a resource associated with a time interval that begins after the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalContains",
+            "display": "refers to a resource associated with a time interval that begins after the beginning of the time interval associated with the context resource, and ends before the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalDisjoint",
+            "display": "refers to a resource associated with a time interval that begins after the end of the time interval associated with the context resource, or ends before the beginning of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalDuring",
+            "display": "refers to a resource associated with a time interval that begins before the beginning of the time interval associated with the context resource, and ends after the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalEquals",
+            "display": "refers to a resource associated with a time interval whose beginning coincides with the beginning of the time interval associated with the context resource, and whose end coincides with the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalFinishedBy",
+            "display": "refers to a resource associated with a time interval that begins after the beginning of the time interval associated with the context resource, and whose end coincides with the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalFinishes",
+            "display": "refers to a resource associated with a time interval that begins before the beginning of the time interval associated with the context resource, and whose end coincides with the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalIn",
+            "display": "refers to a resource associated with a time interval that begins before or is coincident with the beginning of the time interval associated with the context resource, and ends after or is coincident with the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalMeets",
+            "display": "refers to a resource associated with a time interval whose beginning coincides with the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalMetBy",
+            "display": "refers to a resource associated with a time interval whose end coincides with the beginning of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalOverlappedBy",
+            "display": "refers to a resource associated with a time interval that begins before the beginning of the time interval associated with the context resource, and ends after the beginning of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalOverlaps",
+            "display": "refers to a resource associated with a time interval that begins before the end of the time interval associated with the context resource, and ends after the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalStartedBy",
+            "display": "refers to a resource associated with a time interval whose beginning coincides with the beginning of the time interval associated with the context resource, and ends before the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "intervalStarts",
+            "display": "refers to a resource associated with a time interval whose beginning coincides with the beginning of the time interval associated with the context resource, and ends after the end of the time interval associated with the context resource",
+            
+        },
+        {
+            "value": "item",
+            "display": "The target IRI points to a resource that is a member of the collection represented by the context IRI.",
+            
+        },
+        {
+            "value": "last",
+            "display": "An IRI that refers to the furthest following resource\n      in a series of resources."
+        },
+        {
+            "value": "latest-version",
+            "display": "Points to a resource containing the latest (e.g.,\n      current) version of the context."
+        },
+        {
+            "value": "license",
+            "display": "Refers to a license associated with this context."
+        },
+        {
+            "value": "linkset",
+            "display": "The link target of a link with the \"linkset\" relation\n      type provides a set of links, including links in which the link\n      context of the link participates.\n    ",
+            
+        },
+        {
+            "value": "lrdd",
+            "display": "Refers to further information about the link's context,\n      expressed as a LRDD (\"Link-based Resource Descriptor Document\")\n      resource.  See  for information about\n      processing this relation type in host-meta documents. When used\n      elsewhere, it refers to additional links and other metadata.\n      Multiple instances indicate additional LRDD resources. LRDD\n      resources MUST have an \"application/xrd+xml\" representation, and\n      MAY have others.",
+            
+        },
+        {
+            "value": "manifest",
+            "display": "Links to a manifest file for the context."
+        },
+        {
+            "value": "mask-icon",
+            "display": "Refers to a mask that can be applied to the icon for the context."
+        },
+        {
+            "value": "media-feed",
+            "display": "Refers to a feed of personalised media recommendations relevant to the link context."
+        },
+        {
+            "value": "memento",
+            "display": "The Target IRI points to a Memento, a fixed resource that will not change state anymore."
+        },
+        {
+            "value": "micropub",
+            "display": "Links to the context's Micropub endpoint."
+        },
+        {
+            "value": "modulepreload",
+            "display": "Refers to a module that the user agent is to preemptively fetch and store for use in the current context.",
+            
+        },
+        {
+            "value": "monitor",
+            "display": "Refers to a resource that can be used to monitor changes in an HTTP resource.\n    "
+        },
+        {
+            "value": "monitor-group",
+            "display": "Refers to a resource that can be used to monitor changes in a specified group of HTTP resources.\n    ",
+            
+        },
+        {
+            "value": "next",
+            "display": "Indicates that the link's context is a part of a series, and\n      that the next in the series is the link target.\n    ",
+            
+        },
+        {
+            "value": "next-archive",
+            "display": "Refers to the immediately following archive resource."
+        },
+        {
+            "value": "nofollow",
+            "display": "Indicates that the context’s original author or publisher does not endorse the link target."
+        },
+        {
+            "value": "noopener",
+            "display": "Indicates that any newly created top-level browsing context which results from following the link will not be an auxiliary browsing context.",
+            
+        },
+        {
+            "value": "noreferrer",
+            "display": "Indicates that no referrer information is to be leaked when following the link."
+        },
+        {
+            "value": "opener",
+            "display": "Indicates that any newly created top-level browsing context which results from following the link will be an auxiliary browsing context.",
+            
+        },
+        {
+            "value": "openid2.local_id",
+            "display": "Refers to an OpenID Authentication server on which the context relies for an assertion that the end user controls an Identifier.",
+            
+        },
+        {
+            "value": "openid2.provider",
+            "display": "Refers to a resource which accepts OpenID Authentication protocol messages for the context."
+        },
+        {
+            "value": "original",
+            "display": "The Target IRI points to an Original Resource."
+        },
+        {
+            "value": "P3Pv1",
+            "display": "Refers to a P3P privacy policy for the context."
+        },
+        {
+            "value": "payment",
+            "display": "Indicates a resource where payment is accepted."
+        },
+        {
+            "value": "pingback",
+            "display": "Gives the address of the pingback resource for the link context."
+        },
+        {
+            "value": "preconnect",
+            "display": "Used to indicate an origin that will be used to fetch required \n      resources for the link context. Initiating an early connection, which \n      includes the DNS lookup, TCP handshake, and optional TLS negotiation, \n      allows the user agent to mask the high latency costs of establishing a \n      connection.",
+            
+        },
+        {
+            "value": "predecessor-version",
+            "display": "Points to a resource containing the predecessor\n      version in the version history.\n    "
+        },
+        {
+            "value": "prefetch",
+            "display": "The prefetch link relation type is used to identify a resource \n      that might be required by the next navigation from the link context, and \n      that the user agent ought to fetch, such that the user agent can deliver a \n      faster response once the resource is requested in the future.",
+            
+        },
+        {
+            "value": "preload",
+            "display": "Refers to a resource that should be loaded early in the \n      processing of the link's context, without blocking rendering.",
+            
+        },
+        {
+            "value": "prerender",
+            "display": "Used to identify a resource that might be required by the next \n      navigation from the link context, and that the user agent ought to fetch \n      and execute, such that the user agent can deliver a faster response once \n      the resource is requested in the future.",
+            
+        },
+        {
+            "value": "prev",
+            "display": "Indicates that the link's context is a part of a series, and\n      that the previous in the series is the link target.\n    ",
+            
+        },
+        {
+            "value": "preview",
+            "display": "Refers to a resource that provides a preview of the link's context."
+        },
+        {
+            "value": "previous",
+            "display": "Refers to the previous resource in an ordered series\n      of resources.  Synonym for \"prev\".",
+            
+        },
+        {
+            "value": "prev-archive",
+            "display": "Refers to the immediately preceding archive resource."
+        },
+        {
+            "value": "privacy-policy",
+            "display": "Refers to a privacy policy associated with the link's context."
+        },
+        {
+            "value": "profile",
+            "display": "Identifying that a resource representation conforms\nto a certain profile, without affecting the non-profile semantics\nof the resource representation.",
+            
+        },
+        {
+            "value": "publication",
+            "display": "Links to a publication manifest. A manifest represents \n      structured information about a publication, such as informative metadata, \n      a list of resources, and a default reading order.",
+            
+        },
+        {
+            "value": "related",
+            "display": "Identifies a related resource."
+        },
+        {
+            "value": "restconf",
+            "display": "Identifies the root of RESTCONF API as configured on this HTTP server.\n      The \"restconf\" relation defines the root of the API defined in RFC8040.\n      Subsequent revisions of RESTCONF will use alternate relation values to support \n      protocol versioning.",
+            
+        },
+        {
+            "value": "replies",
+            "display": "Identifies a resource that is a reply to the context\n      of the link.\n    "
+        },
+        {
+            "value": "ruleinput",
+            "display": "The resource identified by the link target provides an input value to an \n    instance of a rule, where the resource which represents the rule instance is \n    identified by the link context.\n    ",
+            
+        },
+        {
+            "value": "search",
+            "display": "Refers to a resource that can be used to search through\n      the link's context and related resources.",
+            
+        },
+        {
+            "value": "section",
+            "display": "Refers to a section in a collection of resources."
+        },
+        {
+            "value": "self",
+            "display": "Conveys an identifier for the link's context.\n    "
+        },
+        {
+            "value": "service",
+            "display": "Indicates a URI that can be used to retrieve a\n      service document."
+        },
+        {
+            "value": "service-desc",
+            "display": "Identifies service description for the context that\n      is primarily intended for consumption by machines.",
+            
+        },
+        {
+            "value": "service-doc",
+            "display": "Identifies service documentation for the context that\n      is primarily intended for human consumption.",
+            
+        },
+        {
+            "value": "service-meta",
+            "display": "Identifies general metadata for the context that is\n      primarily intended for consumption by machines.",
+            
+        },
+        {
+            "value": "sponsored",
+            "display": "Refers to a resource that is within a context that is \n\t\tsponsored (such as advertising or another compensation agreement).",
+            
+        },
+        {
+            "value": "start",
+            "display": "Refers to the first resource in a collection of\n      resources."
+        },
+        {
+            "value": "status",
+            "display": "Identifies a resource that represents the context's\n      status."
+        },
+        {
+            "value": "stylesheet",
+            "display": "Refers to a stylesheet."
+        },
+        {
+            "value": "subsection",
+            "display": "Refers to a resource serving as a subsection in a\n      collection of resources."
+        },
+        {
+            "value": "successor-version",
+            "display": "Points to a resource containing the successor version\n      in the version history.\n    "
+        },
+        {
+            "value": "sunset",
+            "display": "Identifies a resource that provides information about\n      the context's retirement policy.\n    ",
+            
+        },
+        {
+            "value": "tag",
+            "display": "Gives a tag (identified by the given address) that applies to\n      the current document.\n    ",
+            
+        },
+        {
+            "value": "terms-of-service",
+            "display": "Refers to the terms of service associated with the link's context."
+        },
+        {
+            "value": "timegate",
+            "display": "The Target IRI points to a TimeGate for an Original Resource."
+        },
+        {
+            "value": "timemap",
+            "display": "The Target IRI points to a TimeMap for an Original Resource."
+        },
+        {
+            "value": "type",
+            "display": "Refers to a resource identifying the abstract semantic type of which the link's context is considered to be an instance.",
+            
+        },
+        {
+            "value": "ugc",
+            "display": "Refers to a resource that is within a context that is User Generated Content.\n    "
+        },
+        {
+            "value": "up",
+            "display": "Refers to a parent document in a hierarchy of\n      documents.\n    "
+        },
+        {
+            "value": "version-history",
+            "display": "Points to a resource containing the version history\n      for the context.\n    "
+        },
+        {
+            "value": "via",
+            "display": "Identifies a resource that is the source of the\n      information in the link's context.\n    "
+        },
+        {
+            "value": "webmention",
+            "display": "Identifies a target URI that supports the Webmention protocol.\n    This allows clients that mention a resource in some form of publishing process\n    to contact that endpoint and inform it that this resource has been mentioned.",
+            
+        },
+        {
+            "value": "working-copy",
+            "display": "Points to a working copy for this resource."
+        },
+        {
+            "value": "working-copy-of",
+            "display": "Points to the versioned resource from which this\n      working copy was obtained.\n    "
+        }
+    ]
+}

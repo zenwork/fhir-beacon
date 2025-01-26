@@ -1,0 +1,21 @@
+{
+    "id": "observation-triggeredbytype",
+    "name": "TriggeredBytype",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/observation-triggeredbytype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reflex",
+            "display": "Reflex"
+        },
+        {
+            "value": "repeat",
+            "display": "Repeat (per policy)"
+        },
+        {
+            "value": "re-run",
+            "display": "Re-run (per policy)"
+        }
+    ]
+}

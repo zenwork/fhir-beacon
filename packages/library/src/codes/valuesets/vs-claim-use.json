@@ -1,0 +1,20 @@
+{
+    "id": "claim-use",
+    "name": "Use",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "claim",
+            "display": "Claim"
+        },
+        {
+            "value": "preauthorization",
+            "display": "Preauthorization"
+        },
+        {
+            "value": "predetermination",
+            "display": "Predetermination"
+        }
+    ]
+}

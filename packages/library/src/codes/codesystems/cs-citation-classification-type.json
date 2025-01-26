@@ -1,0 +1,21 @@
+{
+    "id": "citation-classification-type",
+    "name": "CitationClassificationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/citation-classification-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "citation-source",
+            "display": "Citation Source"
+        },
+        {
+            "value": "medline-owner",
+            "display": "MEDLINE Citation Owner"
+        },
+        {
+            "value": "fevir-platform-use",
+            "display": "FEvIR Platform Use"
+        }
+    ]
+}

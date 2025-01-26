@@ -1,0 +1,25 @@
+{
+    "id": "appointment-recurrrence-type",
+    "name": "AppointmentRecurrenceType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/appointment-recurrrence-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "d",
+            "display": "day"
+        },
+        {
+            "value": "wk",
+            "display": "week"
+        },
+        {
+            "value": "mo",
+            "display": "month"
+        },
+        {
+            "value": "a",
+            "display": "year"
+        }
+    ]
+}

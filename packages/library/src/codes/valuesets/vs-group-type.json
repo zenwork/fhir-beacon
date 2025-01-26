@@ -1,0 +1,48 @@
+{
+    "id": "group-type",
+    "name": "GroupType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "person",
+            "display": "Person"
+        },
+        {
+            "value": "animal",
+            "display": "Animal"
+        },
+        {
+            "value": "practitioner",
+            "display": "Practitioner"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "careteam",
+            "display": "CareTeam"
+        },
+        {
+            "value": "healthcareservice",
+            "display": "HealthcareService"
+        },
+        {
+            "value": "location",
+            "display": "Location"
+        },
+        {
+            "value": "organization",
+            "display": "Organization"
+        },
+        {
+            "value": "relatedperson",
+            "display": "RelatedPerson"
+        },
+        {
+            "value": "specimen",
+            "display": "Specimen"
+        }
+    ]
+}

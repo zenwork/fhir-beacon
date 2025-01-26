@@ -1,0 +1,21 @@
+{
+    "id": "medicationdispense-admin-location",
+    "name": "MedDispenseAdminLocationCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicationdispense-admin-location",
+    "valid": true,
+    "choices": [
+        {
+            "value": "inpatient",
+            "display": "Inpatient"
+        },
+        {
+            "value": "outpatient",
+            "display": "Outpatient"
+        },
+        {
+            "value": "community",
+            "display": "Community"
+        }
+    ]
+}

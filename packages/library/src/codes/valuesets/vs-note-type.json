@@ -1,0 +1,20 @@
+{
+    "id": "note-type",
+    "name": "NoteType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "display",
+            "display": "Display"
+        },
+        {
+            "value": "print",
+            "display": "Print (Form)"
+        },
+        {
+            "value": "printoper",
+            "display": "Print (Operator)"
+        }
+    ]
+}

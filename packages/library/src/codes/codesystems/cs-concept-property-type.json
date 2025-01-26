@@ -1,0 +1,37 @@
+{
+    "id": "concept-property-type",
+    "name": "PropertyType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/concept-property-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "code",
+            "display": "code (internal reference)"
+        },
+        {
+            "value": "Coding",
+            "display": "Coding (external reference)"
+        },
+        {
+            "value": "string",
+            "display": "string"
+        },
+        {
+            "value": "integer",
+            "display": "integer"
+        },
+        {
+            "value": "boolean",
+            "display": "boolean"
+        },
+        {
+            "value": "dateTime",
+            "display": "dateTime"
+        },
+        {
+            "value": "decimal",
+            "display": "decimal"
+        }
+    ]
+}

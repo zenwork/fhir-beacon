@@ -1,0 +1,29 @@
+{
+    "id": "claim-type",
+    "name": "ClaimTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "institutional",
+            "display": "Institutional"
+        },
+        {
+            "value": "oral",
+            "display": "Oral"
+        },
+        {
+            "value": "pharmacy",
+            "display": "Pharmacy"
+        },
+        {
+            "value": "professional",
+            "display": "Professional"
+        },
+        {
+            "value": "vision",
+            "display": "Vision"
+        }
+    ]
+}

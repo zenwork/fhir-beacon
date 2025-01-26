@@ -1,0 +1,20 @@
+{
+    "id": "reaction-event-severity",
+    "name": "AllergyIntoleranceSeverity",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "mild",
+            "display": "Mild"
+        },
+        {
+            "value": "moderate",
+            "display": "Moderate"
+        },
+        {
+            "value": "severe",
+            "display": "Severe"
+        }
+    ]
+}

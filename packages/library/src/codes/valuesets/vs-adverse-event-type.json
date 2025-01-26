@@ -1,0 +1,13 @@
+{
+    "id": "adverse-event-type",
+    "name": "AdverseEventType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1912002",
+            "display": "n/a"
+        }
+    ]
+}

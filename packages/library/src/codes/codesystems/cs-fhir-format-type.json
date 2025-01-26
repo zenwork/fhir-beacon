@@ -1,0 +1,21 @@
+{
+    "id": "fhir-format-type",
+    "name": "FHIRFormatType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/fhir-format-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "json",
+            "display": "JSON"
+        },
+        {
+            "value": "ttl",
+            "display": "TTL"
+        }
+    ]
+}

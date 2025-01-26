@@ -1,0 +1,24 @@
+{
+    "id": "measure-supplemental-data-example",
+    "name": "MeasureSupplementalDataExample",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "age",
+            "display": "Age"
+        },
+        {
+            "value": "gender",
+            "display": "Gender"
+        },
+        {
+            "value": "ethnicity",
+            "display": "Ethnicity"
+        },
+        {
+            "value": "payer",
+            "display": "Payer"
+        }
+    ]
+}

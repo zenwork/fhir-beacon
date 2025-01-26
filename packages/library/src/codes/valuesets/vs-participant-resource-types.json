@@ -1,0 +1,49 @@
+{
+    "id": "participant-resource-types",
+    "name": "ParticipantResourceTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/participant-resource-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "CareTeam",
+            "display": "n/a"
+        },
+        {
+            "value": "Device",
+            "display": "n/a"
+        },
+        {
+            "value": "Group",
+            "display": "n/a"
+        },
+        {
+            "value": "HealthcareService",
+            "display": "n/a"
+        },
+        {
+            "value": "Location",
+            "display": "n/a"
+        },
+        {
+            "value": "Organization",
+            "display": "n/a"
+        },
+        {
+            "value": "Patient",
+            "display": "n/a"
+        },
+        {
+            "value": "Practitioner",
+            "display": "n/a"
+        },
+        {
+            "value": "PractitionerRole",
+            "display": "n/a"
+        },
+        {
+            "value": "RelatedPerson",
+            "display": "n/a"
+        }
+    ]
+}

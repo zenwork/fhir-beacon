@@ -1,0 +1,8 @@
+{
+    "id": "interaction-effect",
+    "name": "InteractionEffect",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/interaction-effect",
+    "valid": true,
+    "choices": []
+}

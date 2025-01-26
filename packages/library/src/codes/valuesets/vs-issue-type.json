@@ -1,0 +1,32 @@
+{
+    "id": "issue-type",
+    "name": "IssueType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "invalid",
+            "display": "Invalid Content"
+        },
+        {
+            "value": "security",
+            "display": "Security Problem"
+        },
+        {
+            "value": "processing",
+            "display": "Processing Failure"
+        },
+        {
+            "value": "transient",
+            "display": "Transient Issue"
+        },
+        {
+            "value": "informational",
+            "display": "Informational Note"
+        },
+        {
+            "value": "success",
+            "display": "Operation Successful"
+        }
+    ]
+}

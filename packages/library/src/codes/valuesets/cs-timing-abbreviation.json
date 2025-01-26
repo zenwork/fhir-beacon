@@ -1,0 +1,12 @@
+{
+    "id": "timing-abbreviation",
+    "name": "TimingAbbreviation",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "C",
+            "display": "Continuous (frequency)"
+        }
+    ]
+}

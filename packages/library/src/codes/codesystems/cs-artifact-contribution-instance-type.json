@@ -1,0 +1,21 @@
+{
+    "id": "artifact-contribution-instance-type",
+    "name": "ArtifactContributionInstanceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/artifact-contribution-instance-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reviewed",
+            "display": "Reviewed"
+        },
+        {
+            "value": "approved",
+            "display": "Approved"
+        },
+        {
+            "value": "edited",
+            "display": "Edited"
+        }
+    ]
+}

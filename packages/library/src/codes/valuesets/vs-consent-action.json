@@ -1,0 +1,29 @@
+{
+    "id": "consent-action",
+    "name": "ConsentActionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/consent-action",
+    "valid": true,
+    "choices": [
+        {
+            "value": "collect",
+            "display": "Collect"
+        },
+        {
+            "value": "access",
+            "display": "Access"
+        },
+        {
+            "value": "use",
+            "display": "Use"
+        },
+        {
+            "value": "disclose",
+            "display": "Disclose"
+        },
+        {
+            "value": "correct",
+            "display": "Access and Correct"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "biologicallyderived-productcodes",
+    "name": "BiologicallyDerivedProductCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "e0398",
+            "display": "RED BLOOD CELLS|CPD>AS5/450mL/refg|Irr|ResLeu"
+        },
+        {
+            "value": "s1128",
+            "display": "HPC, APHERESIS/Citrate/XX/refg/Mobilized"
+        },
+        {
+            "value": "s1194",
+            "display": "HPC, APHERESIS|NS/XX/<=-120C|10% DMSO|Cryopreserved|Mobilized"
+        },
+        {
+            "value": "s1195",
+            "display": "HPC, APHERESIS|NS/XX/<=-120C|5% DMSO|Cryopreserved|Mobilized"
+        },
+        {
+            "value": "s1310",
+            "display": "HPC, APHERESIS|None/XX/refg|3rd Party Comp:Yes|Other Additives:Yes|Mobilized|CD34 enriched"
+        },
+        {
+            "value": "s1398",
+            "display": "HPC, MARROW|NS/XX/rt|Plasma reduced"
+        },
+        {
+            "value": "s2598",
+            "display": "HPC, MARROW|NS/XX/<=-150C|10% DMSO|3rd Party Comp:Yes|Cryopreserved|RBC reduced"
+        },
+        {
+            "value": "e4377",
+            "display": "Apheresis RED BLOOD CELLS|ACD-A/XX/refg|Irradiated|1st container"
+        },
+        {
+            "value": "t1396",
+            "display": "BONE, FEMUR|Frozen|Right|Radiation sterilization"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "list-mode",
+    "name": "ListMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/list-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "working",
+            "display": "Working List"
+        },
+        {
+            "value": "snapshot",
+            "display": "Snapshot List"
+        },
+        {
+            "value": "changes",
+            "display": "Change List"
+        }
+    ]
+}

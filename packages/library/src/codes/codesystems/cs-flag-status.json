@@ -1,0 +1,21 @@
+{
+    "id": "flag-status",
+    "name": "FlagStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/flag-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

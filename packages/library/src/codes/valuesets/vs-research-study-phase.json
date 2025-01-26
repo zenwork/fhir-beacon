@@ -1,0 +1,40 @@
+{
+    "id": "research-study-phase",
+    "name": "ResearchStudyPhase",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "n-a",
+            "display": "N/A"
+        },
+        {
+            "value": "early-phase-1",
+            "display": "Early Phase 1"
+        },
+        {
+            "value": "phase-1",
+            "display": "Phase 1"
+        },
+        {
+            "value": "phase-1-phase-2",
+            "display": "Phase 1/Phase 2"
+        },
+        {
+            "value": "phase-2",
+            "display": "Phase 2"
+        },
+        {
+            "value": "phase-2-phase-3",
+            "display": "Phase 2/Phase 3"
+        },
+        {
+            "value": "phase-3",
+            "display": "Phase 3"
+        },
+        {
+            "value": "phase-4",
+            "display": "Phase 4"
+        }
+    ]
+}

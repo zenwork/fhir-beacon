@@ -1,0 +1,17 @@
+{
+    "id": "immunization-site",
+    "name": "CodesForImmunizationSiteOfAdministration",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-site",
+    "valid": true,
+    "choices": [
+        {
+            "value": "LA",
+            "display": "Left arm"
+        },
+        {
+            "value": "RA",
+            "display": "Right arm"
+        }
+    ]
+}

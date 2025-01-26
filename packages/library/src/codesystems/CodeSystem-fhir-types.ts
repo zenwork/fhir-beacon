@@ -428,7 +428,7 @@ export const CodeSystemFhirTypes = {
                                 {
                                     "code": "SampledData",
                                     "display": "SampledData",
-                                    "definition": "SampledData Type: A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data.",
+                                    "definition": "Timing Type: A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data.",
                                     "property": [{"code": "kind", "valueCode": "datatype"}]
                                 },
                                 {

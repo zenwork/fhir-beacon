@@ -1,0 +1,25 @@
+{
+    "id": "library-type",
+    "name": "LibraryType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/library-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "logic-library",
+            "display": "Logic Library"
+        },
+        {
+            "value": "model-definition",
+            "display": "Model Definition"
+        },
+        {
+            "value": "asset-collection",
+            "display": "Asset Collection"
+        },
+        {
+            "value": "module-definition",
+            "display": "Module Definition"
+        }
+    ]
+}

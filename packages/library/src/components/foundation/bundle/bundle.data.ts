@@ -12,6 +12,7 @@ import {
 }                                                                                 from '../../special/reference/reference.data'
 
 
+
 export type BundleLinkBackbone = BackboneElementData & {
   relation: Code
   url: URI
@@ -60,7 +61,7 @@ export type SignatureData = FhirElementData & {
 }
 
 export type BundleData = FhirElementData & {
-
+  resourceType: Code,
   identifier?: IdentifierData,
   type: Code,
   timestamp?: Instant,

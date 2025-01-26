@@ -31,6 +31,8 @@ export type FhirData = {
   open: boolean
   showerrors: boolean
   headless: boolean
+  verbose: boolean
+  summary: boolean
 }
 
 export type FhirQuery = {
@@ -196,7 +198,9 @@ export class BrowserState {
                                                            || t
                                                            === 'Bundle'
                                                            || t
-                                                           === 'Account'))
+                                                           === 'Account'
+                                                           || t
+                                                           === 'Observation'))
 
       return this.store()
 

@@ -1,0 +1,17 @@
+{
+    "id": "constraint-severity",
+    "name": "ConstraintSeverity",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/constraint-severity",
+    "valid": true,
+    "choices": [
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "immunization-evaluation-dose-status-reason",
+    "name": "ImmunizationEvaluationDoseStatusReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "partialdose",
+            "display": "Partial Dose"
+        },
+        {
+            "value": "coldchainbreak",
+            "display": "Cold Chain Break"
+        },
+        {
+            "value": "recall",
+            "display": "Manufacturer Recall"
+        },
+        {
+            "value": "adversestorage",
+            "display": "Adverse Storage"
+        },
+        {
+            "value": "expired",
+            "display": "Expired Product"
+        },
+        {
+            "value": "outsideschedule",
+            "display": "Outside Schedule"
+        }
+    ]
+}

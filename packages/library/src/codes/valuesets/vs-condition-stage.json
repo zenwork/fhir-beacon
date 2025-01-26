@@ -1,0 +1,17 @@
+{
+    "id": "condition-stage",
+    "name": "ConditionStage",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-stage",
+    "valid": true,
+    "choices": [
+        {
+            "value": "416780008",
+            "display": "n/a"
+        },
+        {
+            "value": "715345007",
+            "display": "n/a"
+        }
+    ]
+}

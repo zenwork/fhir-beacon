@@ -1,0 +1,17 @@
+{
+    "id": "measure-definition-example",
+    "name": "MeasureDefinitionExample",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-definition-example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "screening",
+            "display": "Screening"
+        },
+        {
+            "value": "standardized-depression-screening-tool",
+            "display": "Standardized Depression Screening Tool"
+        }
+    ]
+}

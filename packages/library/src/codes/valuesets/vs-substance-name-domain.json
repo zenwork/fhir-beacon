@@ -1,0 +1,16 @@
+{
+    "id": "substance-name-domain",
+    "name": "SubstanceNameDomain",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ActiveIngredient",
+            "display": "Active Ingredient"
+        },
+        {
+            "value": "FoodColorAdditive",
+            "display": "Food Color Additive"
+        }
+    ]
+}

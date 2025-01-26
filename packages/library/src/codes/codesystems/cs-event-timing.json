@@ -1,0 +1,61 @@
+{
+    "id": "event-timing",
+    "name": "EventTiming",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/event-timing",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MORN",
+            "display": "Morning"
+        },
+        {
+            "value": "MORN.early",
+            "display": "Early Morning"
+        },
+        {
+            "value": "MORN.late",
+            "display": "Late Morning"
+        },
+        {
+            "value": "NOON",
+            "display": "Noon"
+        },
+        {
+            "value": "AFT",
+            "display": "Afternoon"
+        },
+        {
+            "value": "AFT.early",
+            "display": "Early Afternoon"
+        },
+        {
+            "value": "AFT.late",
+            "display": "Late Afternoon"
+        },
+        {
+            "value": "EVE",
+            "display": "Evening"
+        },
+        {
+            "value": "EVE.early",
+            "display": "Early Evening"
+        },
+        {
+            "value": "EVE.late",
+            "display": "Late Evening"
+        },
+        {
+            "value": "NIGHT",
+            "display": "Night"
+        },
+        {
+            "value": "PHS",
+            "display": "After Sleep"
+        },
+        {
+            "value": "IMD",
+            "display": "Immediate"
+        }
+    ]
+}

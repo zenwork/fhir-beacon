@@ -1,0 +1,33 @@
+{
+    "id": "definition-use",
+    "name": "DefinitionUseCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/definition-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fhir-structure",
+            "display": "FHIR Structure"
+        },
+        {
+            "value": "custom-resource",
+            "display": "Custom Resource"
+        },
+        {
+            "value": "dam",
+            "display": "Domain Analysis Model"
+        },
+        {
+            "value": "wire-format",
+            "display": "Wire Format"
+        },
+        {
+            "value": "archetype",
+            "display": "Domain Analysis Model"
+        },
+        {
+            "value": "template",
+            "display": "Template"
+        }
+    ]
+}

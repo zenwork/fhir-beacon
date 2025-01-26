@@ -1,0 +1,24 @@
+{
+    "id": "composition-attestation-mode",
+    "name": "CompositionAttestationMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "personal",
+            "display": "Personal"
+        },
+        {
+            "value": "professional",
+            "display": "Professional"
+        },
+        {
+            "value": "legal",
+            "display": "Legal"
+        },
+        {
+            "value": "official",
+            "display": "Official"
+        }
+    ]
+}

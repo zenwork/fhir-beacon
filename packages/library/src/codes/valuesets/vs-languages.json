@@ -1,0 +1,337 @@
+{
+    "id": "languages",
+    "name": "CommonLanguages",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/languages",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ar",
+            "display": "Arabic"
+        },
+        {
+            "value": "bg",
+            "display": "Bulgarian"
+        },
+        {
+            "value": "bg-BG",
+            "display": "Bulgarian (Bulgaria)"
+        },
+        {
+            "value": "bn",
+            "display": "Bengali"
+        },
+        {
+            "value": "cs",
+            "display": "Czech"
+        },
+        {
+            "value": "cs-CZ",
+            "display": "Czech (Czechia)"
+        },
+        {
+            "value": "bs",
+            "display": "Bosnian"
+        },
+        {
+            "value": "bs-BA",
+            "display": "Bosnian (Bosnia and Herzegovina)"
+        },
+        {
+            "value": "da",
+            "display": "Danish"
+        },
+        {
+            "value": "da-DK",
+            "display": "Danish (Denmark)"
+        },
+        {
+            "value": "de",
+            "display": "German"
+        },
+        {
+            "value": "de-AT",
+            "display": "German (Austria)"
+        },
+        {
+            "value": "de-CH",
+            "display": "German (Switzerland)"
+        },
+        {
+            "value": "de-DE",
+            "display": "German (Germany)"
+        },
+        {
+            "value": "el",
+            "display": "Greek"
+        },
+        {
+            "value": "el-GR",
+            "display": "Greek (Greece)"
+        },
+        {
+            "value": "en",
+            "display": "English"
+        },
+        {
+            "value": "en-AU",
+            "display": "English (Australia)"
+        },
+        {
+            "value": "en-CA",
+            "display": "English (Canada)"
+        },
+        {
+            "value": "en-GB",
+            "display": "English (Great Britain)"
+        },
+        {
+            "value": "en-IN",
+            "display": "English (India)"
+        },
+        {
+            "value": "en-NZ",
+            "display": "English (New Zealand)"
+        },
+        {
+            "value": "en-SG",
+            "display": "English (Singapore)"
+        },
+        {
+            "value": "en-US",
+            "display": "English (United States)"
+        },
+        {
+            "value": "es",
+            "display": "Spanish"
+        },
+        {
+            "value": "es-AR",
+            "display": "Spanish (Argentina)"
+        },
+        {
+            "value": "es-ES",
+            "display": "Spanish (Spain)"
+        },
+        {
+            "value": "es-UY",
+            "display": "Spanish (Uruguay)"
+        },
+        {
+            "value": "et",
+            "display": "Estonian"
+        },
+        {
+            "value": "et-EE",
+            "display": "Estonian (Estonia)"
+        },
+        {
+            "value": "fi",
+            "display": "Finnish"
+        },
+        {
+            "value": "fr",
+            "display": "French"
+        },
+        {
+            "value": "fr-BE",
+            "display": "French (Belgium)"
+        },
+        {
+            "value": "fr-CH",
+            "display": "French (Switzerland)"
+        },
+        {
+            "value": "fr-FR",
+            "display": "French (France)"
+        },
+        {
+            "value": "fi-FI",
+            "display": "Finnish (Finland)"
+        },
+        {
+            "value": "fr-CA",
+            "display": "French (Canada)"
+        },
+        {
+            "value": "fy",
+            "display": "Frisian"
+        },
+        {
+            "value": "fy-NL",
+            "display": "Frisian (Netherlands)"
+        },
+        {
+            "value": "hi",
+            "display": "Hindi"
+        },
+        {
+            "value": "hr",
+            "display": "Croatian"
+        },
+        {
+            "value": "hr-HR",
+            "display": "Croatian (Croatia)"
+        },
+        {
+            "value": "is",
+            "display": "Icelandic"
+        },
+        {
+            "value": "is-IS",
+            "display": "Icelandic (Iceland)"
+        },
+        {
+            "value": "it",
+            "display": "Italian"
+        },
+        {
+            "value": "it-CH",
+            "display": "Italian (Switzerland)"
+        },
+        {
+            "value": "it-IT",
+            "display": "Italian (Italy)"
+        },
+        {
+            "value": "ja",
+            "display": "Japanese"
+        },
+        {
+            "value": "ko",
+            "display": "Korean"
+        },
+        {
+            "value": "lt",
+            "display": "Lithuanian"
+        },
+        {
+            "value": "lt-LT",
+            "display": "Lithuanian (Lithuania)"
+        },
+        {
+            "value": "lv",
+            "display": "Latvian"
+        },
+        {
+            "value": "lv-LV",
+            "display": "Latvian (Latvia)"
+        },
+        {
+            "value": "nl",
+            "display": "Dutch"
+        },
+        {
+            "value": "nl-BE",
+            "display": "Dutch (Belgium)"
+        },
+        {
+            "value": "nl-NL",
+            "display": "Dutch (Netherlands)"
+        },
+        {
+            "value": "no",
+            "display": "Norwegian"
+        },
+        {
+            "value": "no-NO",
+            "display": "Norwegian (Norway)"
+        },
+        {
+            "value": "pa",
+            "display": "Punjabi"
+        },
+        {
+            "value": "pl",
+            "display": "Polish"
+        },
+        {
+            "value": "pl-PL",
+            "display": "Polish (Poland)"
+        },
+        {
+            "value": "pt",
+            "display": "Portuguese"
+        },
+        {
+            "value": "pt-PT",
+            "display": "Portuguese (Portugal)"
+        },
+        {
+            "value": "pt-BR",
+            "display": "Portuguese (Brazil)"
+        },
+        {
+            "value": "ro",
+            "display": "Romanian"
+        },
+        {
+            "value": "ro-RO",
+            "display": "Romanian (Romania)"
+        },
+        {
+            "value": "ru",
+            "display": "Russian"
+        },
+        {
+            "value": "ru-RU",
+            "display": "Russian (Russia)"
+        },
+        {
+            "value": "sk",
+            "display": "Slovakian"
+        },
+        {
+            "value": "sk-SK",
+            "display": "Slovakian (Slovakia)"
+        },
+        {
+            "value": "sl",
+            "display": "Slovenian"
+        },
+        {
+            "value": "sl-SI",
+            "display": "Slovenian (Slovenia)"
+        },
+        {
+            "value": "sr",
+            "display": "Serbian"
+        },
+        {
+            "value": "sr-RS",
+            "display": "Serbian (Serbia)"
+        },
+        {
+            "value": "sv",
+            "display": "Swedish"
+        },
+        {
+            "value": "sv-SE",
+            "display": "Swedish (Sweden)"
+        },
+        {
+            "value": "te",
+            "display": "Telugu"
+        },
+        {
+            "value": "zh",
+            "display": "Chinese"
+        },
+        {
+            "value": "zh-CN",
+            "display": "Chinese (China)"
+        },
+        {
+            "value": "zh-HK",
+            "display": "Chinese (Hong Kong)"
+        },
+        {
+            "value": "zh-SG",
+            "display": "Chinese (Singapore)"
+        },
+        {
+            "value": "zh-TW",
+            "display": "Chinese (Taiwan)"
+        }
+    ]
+}

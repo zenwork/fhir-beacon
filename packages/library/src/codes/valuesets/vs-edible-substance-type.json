@@ -1,0 +1,8 @@
+{
+    "id": "edible-substance-type",
+    "name": "TypesOfEdibleSubstances",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/edible-substance-type",
+    "valid": true,
+    "choices": []
+}

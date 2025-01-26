@@ -1,0 +1,20 @@
+{
+    "id": "remittance-outcome",
+    "name": "RemittanceOutcome",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "partial",
+            "display": "Partial"
+        }
+    ]
+}

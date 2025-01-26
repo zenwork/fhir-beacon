@@ -1,0 +1,49 @@
+{
+    "id": "encounter-admit-source",
+    "name": "AdmitSource",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-admit-source",
+    "valid": true,
+    "choices": [
+        {
+            "value": "hosp-trans",
+            "display": "Transferred from other hospital"
+        },
+        {
+            "value": "emd",
+            "display": "From accident/emergency department"
+        },
+        {
+            "value": "outp",
+            "display": "From outpatient department"
+        },
+        {
+            "value": "born",
+            "display": "Born in hospital"
+        },
+        {
+            "value": "gp",
+            "display": "General Practitioner referral"
+        },
+        {
+            "value": "mp",
+            "display": "Medical Practitioner/physician referral"
+        },
+        {
+            "value": "nursing",
+            "display": "From nursing home"
+        },
+        {
+            "value": "psych",
+            "display": "From psychiatric hospital"
+        },
+        {
+            "value": "rehab",
+            "display": "From rehabilitation facility"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

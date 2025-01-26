@@ -1,0 +1,21 @@
+{
+    "id": "medicinal-product-domain",
+    "name": "MedicinalProductDomain",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-domain",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Human",
+            "display": "Human use"
+        },
+        {
+            "value": "Veterinary",
+            "display": "Veterinary use"
+        },
+        {
+            "value": "HumanAndVeterinary",
+            "display": "Human and Veterinary use"
+        }
+    ]
+}

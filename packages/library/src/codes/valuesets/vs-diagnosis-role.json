@@ -1,0 +1,37 @@
+{
+    "id": "diagnosis-role",
+    "name": "DiagnosisRole",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/diagnosis-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "AD",
+            "display": "Admission diagnosis"
+        },
+        {
+            "value": "DD",
+            "display": "Discharge diagnosis"
+        },
+        {
+            "value": "CC",
+            "display": "Chief complaint"
+        },
+        {
+            "value": "CM",
+            "display": "Comorbidity diagnosis"
+        },
+        {
+            "value": "pre-op",
+            "display": "pre-op diagnosis"
+        },
+        {
+            "value": "post-op",
+            "display": "post-op diagnosis"
+        },
+        {
+            "value": "billing",
+            "display": "Billing"
+        }
+    ]
+}

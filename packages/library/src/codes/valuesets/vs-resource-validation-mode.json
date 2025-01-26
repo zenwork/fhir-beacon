@@ -1,0 +1,24 @@
+{
+    "id": "resource-validation-mode",
+    "name": "ResourceValidationMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "create",
+            "display": "Validate for Create"
+        },
+        {
+            "value": "update",
+            "display": "Validate for Update"
+        },
+        {
+            "value": "delete",
+            "display": "Validate for Delete"
+        },
+        {
+            "value": "profile",
+            "display": "Validate Against a Profile"
+        }
+    ]
+}

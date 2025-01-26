@@ -1,0 +1,21 @@
+{
+    "id": "research-study-objective-type",
+    "name": "ResearchStudyObjectiveType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-objective-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary",
+            "display": "Primary"
+        },
+        {
+            "value": "secondary",
+            "display": "Secondary"
+        },
+        {
+            "value": "exploratory",
+            "display": "Exploratory"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "example-supplement-2",
+    "name": "BundleTypeGerman",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "document",
+            "display": "n/a"
+        },
+        {
+            "value": "message",
+            "display": "n/a"
+        },
+        {
+            "value": "transaction",
+            "display": "n/a"
+        },
+        {
+            "value": "transaction-response",
+            "display": "n/a"
+        },
+        {
+            "value": "batch",
+            "display": "n/a"
+        },
+        {
+            "value": "batch-response",
+            "display": "n/a"
+        },
+        {
+            "value": "history",
+            "display": "n/a"
+        },
+        {
+            "value": "searchset",
+            "display": "n/a"
+        },
+        {
+            "value": "collection",
+            "display": "n/a"
+        }
+    ]
+}

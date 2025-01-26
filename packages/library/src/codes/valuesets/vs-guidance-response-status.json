@@ -1,0 +1,32 @@
+{
+    "id": "guidance-response-status",
+    "name": "GuidanceResponseStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "success",
+            "display": "Success"
+        },
+        {
+            "value": "data-requested",
+            "display": "Data Requested"
+        },
+        {
+            "value": "data-required",
+            "display": "Data Required"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "failure",
+            "display": "Failure"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

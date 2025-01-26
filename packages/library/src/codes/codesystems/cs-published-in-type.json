@@ -1,0 +1,25 @@
+{
+    "id": "published-in-type",
+    "name": "PublishedInType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/published-in-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "D020492",
+            "display": "Periodical"
+        },
+        {
+            "value": "D019991",
+            "display": "Database"
+        },
+        {
+            "value": "D001877",
+            "display": "Book"
+        },
+        {
+            "value": "D064886",
+            "display": "Dataset"
+        }
+    ]
+}

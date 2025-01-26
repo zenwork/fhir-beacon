@@ -1,0 +1,25 @@
+{
+    "id": "structure-definition-kind",
+    "name": "StructureDefinitionKind",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/structure-definition-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primitive-type",
+            "display": "Primitive Data Type"
+        },
+        {
+            "value": "complex-type",
+            "display": "Complex Data Type"
+        },
+        {
+            "value": "resource",
+            "display": "Resource"
+        },
+        {
+            "value": "logical",
+            "display": "Logical"
+        }
+    ]
+}

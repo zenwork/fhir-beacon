@@ -1,0 +1,45 @@
+{
+    "id": "cited-artifact-part-type",
+    "name": "CitedArtifactPartType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/cited-artifact-part-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pages",
+            "display": "pages"
+        },
+        {
+            "value": "sections",
+            "display": "sections"
+        },
+        {
+            "value": "paragraphs",
+            "display": "paragraphs"
+        },
+        {
+            "value": "lines",
+            "display": "lines"
+        },
+        {
+            "value": "tables",
+            "display": "tables"
+        },
+        {
+            "value": "figures",
+            "display": "figures"
+        },
+        {
+            "value": "supplement",
+            "display": "Supplement or Appendix"
+        },
+        {
+            "value": "supplement-subpart",
+            "display": "Supplement or Appendix Subpart"
+        },
+        {
+            "value": "article-set",
+            "display": "Part of an article set"
+        }
+    ]
+}

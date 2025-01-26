@@ -1,8 +1,23 @@
-import {CodeData}                                                                          from 'mdast'
-import {BackboneElementData, DomainResourceData}                                           from '../../../internal'
-import {CodeableConceptData, CodeableReferenceData, IdentifierData, MoneyData, PeriodData} from '../../complex'
-import {DateTime, FhirString, Markdown, PositiveInt}                                       from '../../primitive'
-import {ReferenceData}                                                                     from '../../special'
+import {BackboneElementData, DomainResourceData} from '../../../internal'
+import {
+  CodeableConceptData,
+  CodeableReferenceData,
+  CodingData,
+  IdentifierData,
+  MoneyData,
+  PeriodData
+}                                                from '../../complex'
+import {
+  DateTime,
+  FhirString,
+  Markdown,
+  PositiveInt
+}                                                from '../../primitive'
+import {
+  ReferenceData
+}                                                from '../../special'
+
+
 
 export type AccountCoverageData = BackboneElementData & {
   coverage: ReferenceData
@@ -48,7 +63,7 @@ export type AccountBalanceData = BackboneElementData & {
 
 export type AccountData = DomainResourceData & {
   identifier: IdentifierData[]
-  status: CodeData
+  status: CodingData
   billingStatus?: CodeableConceptData
   type?: CodeableConceptData
   name?: FhirString

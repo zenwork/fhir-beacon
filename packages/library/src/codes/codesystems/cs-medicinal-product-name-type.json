@@ -1,0 +1,29 @@
+{
+    "id": "medicinal-product-name-type",
+    "name": "ProductNameType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-name-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BAN",
+            "display": "British Approved Name"
+        },
+        {
+            "value": "INN",
+            "display": "International Non-Proprietary Name"
+        },
+        {
+            "value": "INNM",
+            "display": "Modified International Non-Proprietary Name"
+        },
+        {
+            "value": "pINN",
+            "display": "Proposed International Non-Proprietary Name"
+        },
+        {
+            "value": "rINN",
+            "display": "Recommended International Non-Proprietary Name"
+        }
+    ]
+}

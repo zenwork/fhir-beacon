@@ -5,4 +5,13 @@ GET http://hapi.fhir.org/baseR5/Patient/791342/_history/1?_pretty=true
 
 ### Big Patient
 
-GET http://hapi.fhir.org/baseR4/Patient/45084016/$everything?_pretty=true
+GET http://hapi.fhir.org/baseR5/Patient/45084016/$everything?_pretty=true
+
+
+###
+GET https://www.ama-assn.org/practice-management/cpt/cpt-licensing-frequently-asked-questions-faqs
+Accept: application/fhir+xml;q=1.0, application/fhir+json;q=1.0, application/xml+fhir;q=0.9, application/json+fhir;q=0.9
+
+###
+GET https://www.iana.org/time-zones
+Accept: application/fhir+xml;q=1.0, application/fhir+json;q=1.0, application/xml+fhir;q=0.9, application/json+fhir;q=0.9, */*;q=0.5

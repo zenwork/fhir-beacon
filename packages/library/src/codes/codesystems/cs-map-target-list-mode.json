@@ -1,0 +1,25 @@
+{
+    "id": "map-target-list-mode",
+    "name": "StructureMapTargetListMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/map-target-list-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "first",
+            "display": "First"
+        },
+        {
+            "value": "share",
+            "display": "Share"
+        },
+        {
+            "value": "last",
+            "display": "Last"
+        },
+        {
+            "value": "single",
+            "display": "single"
+        }
+    ]
+}

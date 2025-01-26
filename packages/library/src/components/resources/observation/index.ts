@@ -3,4 +3,7 @@
  */
 
 export * from './observation.data'
+export {ObservationReferenceRange} from './observation-reference-range.backbone'
+export * from './observation-triggered-by.backbone'
+export * from './observation-component.backbone'
 export * from './observation'

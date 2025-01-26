@@ -1,0 +1,8 @@
+{
+    "id": "adverse-event-supporting-info",
+    "name": "AdverseEventSupportingInforation",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-supporting-info",
+    "valid": true,
+    "choices": []
+}

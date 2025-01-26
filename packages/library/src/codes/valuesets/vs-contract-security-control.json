@@ -1,0 +1,12 @@
+{
+    "id": "contract-security-control",
+    "name": "ContractResourceSecurityControlCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

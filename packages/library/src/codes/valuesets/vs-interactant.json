@@ -1,0 +1,8 @@
+{
+    "id": "interactant",
+    "name": "Interactant",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/interactant",
+    "valid": true,
+    "choices": []
+}

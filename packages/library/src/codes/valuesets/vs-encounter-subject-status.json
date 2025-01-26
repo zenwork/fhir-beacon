@@ -1,0 +1,29 @@
+{
+    "id": "encounter-subject-status",
+    "name": "EncounterSubjectStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-subject-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "arrived",
+            "display": "Arrived"
+        },
+        {
+            "value": "triaged",
+            "display": "Triaged"
+        },
+        {
+            "value": "receiving-care",
+            "display": "Receiving Care"
+        },
+        {
+            "value": "on-leave",
+            "display": "On Leave"
+        },
+        {
+            "value": "departed",
+            "display": "Departed"
+        }
+    ]
+}

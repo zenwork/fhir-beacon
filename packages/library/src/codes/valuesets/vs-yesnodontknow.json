@@ -1,0 +1,21 @@
+{
+    "id": "yesnodontknow",
+    "name": "YesNoDontKnow",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/yesnodontknow",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Y",
+            "display": "n/a"
+        },
+        {
+            "value": "N",
+            "display": "n/a"
+        },
+        {
+            "value": "asked-unknown",
+            "display": "Don't know"
+        }
+    ]
+}

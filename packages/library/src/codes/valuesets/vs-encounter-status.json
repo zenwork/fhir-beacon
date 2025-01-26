@@ -1,0 +1,44 @@
+{
+    "id": "encounter-status",
+    "name": "EncounterStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        },
+        {
+            "value": "discharged",
+            "display": "Discharged"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "discontinued",
+            "display": "Discontinued"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "handling-condition",
+    "name": "HandlingConditionSet",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/handling-condition",
+    "valid": true,
+    "choices": [
+        {
+            "value": "room",
+            "display": "room temperature"
+        },
+        {
+            "value": "refrigerated",
+            "display": "refrigerated"
+        },
+        {
+            "value": "frozen",
+            "display": "frozen"
+        }
+    ]
+}

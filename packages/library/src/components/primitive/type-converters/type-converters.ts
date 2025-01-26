@@ -34,6 +34,7 @@ export enum PrimitiveType {
   none = 'none',
   positiveInt = 'positiveInt',
   string_reference = 'string_reference',
+  time = 'time',
   unsigned_int = 'unsigned_int',
   uri = 'uri',
   uri_type = 'uri_type', //TODO: not 100% this belongs here

@@ -1,0 +1,17 @@
+{
+    "id": "condition-stage-type",
+    "name": "ConditionStageType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-stage-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "261023001",
+            "display": "Pathological staging (qualifier value)"
+        },
+        {
+            "value": "260998006",
+            "display": "Clinical staging (qualifier value)"
+        }
+    ]
+}

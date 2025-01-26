@@ -1,0 +1,20 @@
+{
+    "id": "document-reference-status",
+    "name": "DocumentReferenceStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "current",
+            "display": "Current"
+        },
+        {
+            "value": "superseded",
+            "display": "Superseded"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

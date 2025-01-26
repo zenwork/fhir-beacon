@@ -1,0 +1,65 @@
+{
+    "id": "performer-function",
+    "name": "PerformerFunctionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/performer-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "TRANS",
+            "display": "n/a"
+        },
+        {
+            "value": "PART",
+            "display": "n/a"
+        },
+        {
+            "value": "ATND",
+            "display": "n/a"
+        },
+        {
+            "value": "CON",
+            "display": "n/a"
+        },
+        {
+            "value": "AUT",
+            "display": "n/a"
+        },
+        {
+            "value": "INF",
+            "display": "n/a"
+        },
+        {
+            "value": "ENT",
+            "display": "n/a"
+        },
+        {
+            "value": "WIT",
+            "display": "n/a"
+        },
+        {
+            "value": "PPRF",
+            "display": "n/a"
+        },
+        {
+            "value": "SPRF",
+            "display": "n/a"
+        },
+        {
+            "value": "RESP",
+            "display": "n/a"
+        },
+        {
+            "value": "VRF",
+            "display": "n/a"
+        },
+        {
+            "value": "AUTHEN",
+            "display": "n/a"
+        },
+        {
+            "value": "LA",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "id": "duration-units",
+    "name": "CommonUCUMCodesForDuration",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/duration-units",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ms",
+            "display": "milliseconds"
+        },
+        {
+            "value": "s",
+            "display": "seconds"
+        },
+        {
+            "value": "min",
+            "display": "minutes"
+        },
+        {
+            "value": "h",
+            "display": "hours"
+        },
+        {
+            "value": "d",
+            "display": "days"
+        },
+        {
+            "value": "wk",
+            "display": "weeks"
+        },
+        {
+            "value": "mo",
+            "display": "months"
+        },
+        {
+            "value": "a",
+            "display": "years"
+        }
+    ]
+}

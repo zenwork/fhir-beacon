@@ -1,0 +1,21 @@
+{
+    "id": "action-grouping-behavior",
+    "name": "ActionGroupingBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-grouping-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "visual-group",
+            "display": "Visual Group"
+        },
+        {
+            "value": "logical-group",
+            "display": "Logical Group"
+        },
+        {
+            "value": "sentence-group",
+            "display": "Sentence Group"
+        }
+    ]
+}

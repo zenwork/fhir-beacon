@@ -1,0 +1,16 @@
+{
+    "id": "document-mode",
+    "name": "DocumentMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "producer",
+            "display": "Producer"
+        },
+        {
+            "value": "consumer",
+            "display": "Consumer"
+        }
+    ]
+}

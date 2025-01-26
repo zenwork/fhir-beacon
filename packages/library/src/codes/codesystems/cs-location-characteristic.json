@@ -1,0 +1,33 @@
+{
+    "id": "location-characteristic",
+    "name": "LocationCharacteristic",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/location-characteristic",
+    "valid": true,
+    "choices": [
+        {
+            "value": "wheelchair",
+            "display": "Wheelchair accessible"
+        },
+        {
+            "value": "has-translation",
+            "display": "translation services available"
+        },
+        {
+            "value": "has-oxy-nitro",
+            "display": "oxygen/nitrogen available"
+        },
+        {
+            "value": "has-neg-press",
+            "display": "negative pressure rooms available"
+        },
+        {
+            "value": "has-iso-ward",
+            "display": "isolation ward"
+        },
+        {
+            "value": "has-icu",
+            "display": "has ICU"
+        }
+    ]
+}

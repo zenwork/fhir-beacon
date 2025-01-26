@@ -1,0 +1,40 @@
+{
+    "id": "definition-method",
+    "name": "DefinitionMethod",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "systematic-assessment",
+            "display": "Systematic Assessment"
+        },
+        {
+            "value": "non-systematic-assessment",
+            "display": "Non-Systematic Assessment"
+        },
+        {
+            "value": "mean",
+            "display": "Mean"
+        },
+        {
+            "value": "median",
+            "display": "Median"
+        },
+        {
+            "value": "mean-of-mean",
+            "display": "Mean of Means"
+        },
+        {
+            "value": "mean-of-median",
+            "display": "Mean of Medians"
+        },
+        {
+            "value": "median-of-mean",
+            "display": "Median of Means"
+        },
+        {
+            "value": "median-of-median",
+            "display": "Median of Medians"
+        }
+    ]
+}

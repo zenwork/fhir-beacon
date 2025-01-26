@@ -1,0 +1,20 @@
+{
+    "id": "extension-context-type",
+    "name": "ExtensionContextType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fhirpath",
+            "display": "FHIRPath"
+        },
+        {
+            "value": "element",
+            "display": "Element ID"
+        },
+        {
+            "value": "extension",
+            "display": "Extension URL"
+        }
+    ]
+}

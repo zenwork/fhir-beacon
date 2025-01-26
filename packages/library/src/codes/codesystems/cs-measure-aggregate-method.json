@@ -1,0 +1,33 @@
+{
+    "id": "measure-aggregate-method",
+    "name": "MeasureAggregateMethod",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/measure-aggregate-method",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sum",
+            "display": "Sum"
+        },
+        {
+            "value": "average",
+            "display": "Average"
+        },
+        {
+            "value": "median",
+            "display": "Median"
+        },
+        {
+            "value": "minimum",
+            "display": "Minimum"
+        },
+        {
+            "value": "maximum",
+            "display": "Maximum"
+        },
+        {
+            "value": "count",
+            "display": "Count"
+        }
+    ]
+}

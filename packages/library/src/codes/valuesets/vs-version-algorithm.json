@@ -1,0 +1,28 @@
+{
+    "id": "version-algorithm",
+    "name": "VersionAlgorithm",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "semver",
+            "display": "SemVer"
+        },
+        {
+            "value": "integer",
+            "display": "Integer"
+        },
+        {
+            "value": "alpha",
+            "display": "Alphabetical"
+        },
+        {
+            "value": "date",
+            "display": "Date"
+        },
+        {
+            "value": "natural",
+            "display": "Natural"
+        }
+    ]
+}

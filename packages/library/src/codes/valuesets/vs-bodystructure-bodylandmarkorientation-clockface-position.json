@@ -1,0 +1,57 @@
+{
+    "id": "bodystructure-bodylandmarkorientation-clockface-position",
+    "name": "BodystructureBodyLandmarkClockFacePosition",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/bodystructure-bodylandmarkorientation-clockface-position",
+    "valid": true,
+    "choices": [
+        {
+            "value": "260318004",
+            "display": "1 o'clock position"
+        },
+        {
+            "value": "260328008",
+            "display": "2 o'clock position"
+        },
+        {
+            "value": "260330005",
+            "display": "3 o'clock position"
+        },
+        {
+            "value": "260333007",
+            "display": "4 o'clock position"
+        },
+        {
+            "value": "260335000",
+            "display": "5 o'clock position"
+        },
+        {
+            "value": "260337008",
+            "display": "6 o'clock position"
+        },
+        {
+            "value": "260339006",
+            "display": "7 o'clock position"
+        },
+        {
+            "value": "260341007",
+            "display": "8 o'clock position"
+        },
+        {
+            "value": "260343005",
+            "display": "9 o'clock position"
+        },
+        {
+            "value": "260322009",
+            "display": "10 o'clock position"
+        },
+        {
+            "value": "260324005",
+            "display": "11 o'clock position"
+        },
+        {
+            "value": "260326007",
+            "display": "12 o'clock position"
+        }
+    ]
+}

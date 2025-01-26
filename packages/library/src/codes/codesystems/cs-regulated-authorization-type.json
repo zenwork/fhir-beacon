@@ -1,0 +1,21 @@
+{
+    "id": "regulated-authorization-type",
+    "name": "RegulatedAuthorizationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/regulated-authorization-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MarketingAuth",
+            "display": "Marketing Authorization"
+        },
+        {
+            "value": "Orphan",
+            "display": "Orphan Drug Authorization"
+        },
+        {
+            "value": "Pediatric",
+            "display": "Pediatric Use Drug Authorization"
+        }
+    ]
+}

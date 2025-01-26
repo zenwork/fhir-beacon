@@ -1,0 +1,8 @@
+{
+    "id": "product-characteristic-codes",
+    "name": "ProductCharacteristic",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/product-characteristic-codes",
+    "valid": true,
+    "choices": []
+}

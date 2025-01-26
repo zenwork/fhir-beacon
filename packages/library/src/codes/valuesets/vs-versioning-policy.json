@@ -1,0 +1,20 @@
+{
+    "id": "versioning-policy",
+    "name": "ResourceVersionPolicy",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "no-version",
+            "display": "No VersionId Support"
+        },
+        {
+            "value": "versioned",
+            "display": "Versioned"
+        },
+        {
+            "value": "versioned-update",
+            "display": "VersionId tracked fully"
+        }
+    ]
+}

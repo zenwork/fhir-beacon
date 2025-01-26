@@ -1,0 +1,29 @@
+{
+    "id": "product-intended-use",
+    "name": "ProductIntendedUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/product-intended-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Prevention",
+            "display": "Prevention"
+        },
+        {
+            "value": "Treatment",
+            "display": "Treatment"
+        },
+        {
+            "value": "Alleviation",
+            "display": "Alleviation"
+        },
+        {
+            "value": "Diagnosis",
+            "display": "Diagnosis"
+        },
+        {
+            "value": "Monitoring",
+            "display": "Monitoring"
+        }
+    ]
+}

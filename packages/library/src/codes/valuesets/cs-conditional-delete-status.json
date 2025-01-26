@@ -1,0 +1,20 @@
+{
+    "id": "conditional-delete-status",
+    "name": "ConditionalDeleteStatus",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "not-supported",
+            "display": "Not Supported"
+        },
+        {
+            "value": "single",
+            "display": "Single Deletes Supported"
+        },
+        {
+            "value": "multiple",
+            "display": "Multiple Deletes Supported"
+        }
+    ]
+}

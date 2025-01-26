@@ -1,0 +1,29 @@
+{
+    "id": "appointment-cancellation-reason",
+    "name": "AppointmentCancellationReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/appointment-cancellation-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pat",
+            "display": "Patient"
+        },
+        {
+            "value": "prov",
+            "display": "Provider"
+        },
+        {
+            "value": "maint",
+            "display": "Equipment Maintenance/Repair"
+        },
+        {
+            "value": "meds-inc",
+            "display": "Prep/Med Incomplete"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

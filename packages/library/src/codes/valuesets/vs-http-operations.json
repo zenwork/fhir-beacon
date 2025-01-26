@@ -1,0 +1,36 @@
+{
+    "id": "http-operations",
+    "name": "TestScriptRequestMethodCode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "delete",
+            "display": "DELETE"
+        },
+        {
+            "value": "get",
+            "display": "GET"
+        },
+        {
+            "value": "options",
+            "display": "OPTIONS"
+        },
+        {
+            "value": "patch",
+            "display": "PATCH"
+        },
+        {
+            "value": "post",
+            "display": "POST"
+        },
+        {
+            "value": "put",
+            "display": "PUT"
+        },
+        {
+            "value": "head",
+            "display": "HEAD"
+        }
+    ]
+}

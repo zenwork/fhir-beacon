@@ -1,0 +1,65 @@
+{
+    "id": "modified-foodtype",
+    "name": "TextureModifiedFoodTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/modified-foodtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "255620007",
+            "display": "Foods"
+        },
+        {
+            "value": "28647000",
+            "display": "Meat"
+        },
+        {
+            "value": "22836000",
+            "display": "Vegetables"
+        },
+        {
+            "value": "72511004",
+            "display": "Fruit"
+        },
+        {
+            "value": "226760005",
+            "display": "Dairy foods"
+        },
+        {
+            "value": "226887002",
+            "display": "Dietary Fats and Oils"
+        },
+        {
+            "value": "102263004",
+            "display": "Eggs"
+        },
+        {
+            "value": "74242007",
+            "display": "Food Starch"
+        },
+        {
+            "value": "227415002",
+            "display": "Fruit Nuts and Seeds"
+        },
+        {
+            "value": "264331002",
+            "display": "Grain"
+        },
+        {
+            "value": "227518002",
+            "display": "Sauce seasonings and soups"
+        },
+        {
+            "value": "44027008",
+            "display": "Seafood"
+        },
+        {
+            "value": "226529007",
+            "display": "Starchy food"
+        },
+        {
+            "value": "227210005",
+            "display": "Vegetables plus herbs and spices"
+        }
+    ]
+}

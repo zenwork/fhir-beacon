@@ -1,0 +1,160 @@
+{
+    "id": "related-artifact-type-all",
+    "name": "RelatedArtifactTypeExpanded",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "documentation",
+            "display": "Documentation"
+        },
+        {
+            "value": "justification",
+            "display": "Justification"
+        },
+        {
+            "value": "citation",
+            "display": "Citation"
+        },
+        {
+            "value": "predecessor",
+            "display": "Predecessor"
+        },
+        {
+            "value": "successor",
+            "display": "Successor"
+        },
+        {
+            "value": "derived-from",
+            "display": "Derived From"
+        },
+        {
+            "value": "depends-on",
+            "display": "Depends On"
+        },
+        {
+            "value": "composed-of",
+            "display": "Composed Of"
+        },
+        {
+            "value": "part-of",
+            "display": "Part Of"
+        },
+        {
+            "value": "amends",
+            "display": "Amends"
+        },
+        {
+            "value": "amended-with",
+            "display": "Amended With"
+        },
+        {
+            "value": "appends",
+            "display": "Appends"
+        },
+        {
+            "value": "appended-with",
+            "display": "Appended With"
+        },
+        {
+            "value": "cites",
+            "display": "Cites"
+        },
+        {
+            "value": "cited-by",
+            "display": "Cited By"
+        },
+        {
+            "value": "comments-on",
+            "display": "Is Comment On"
+        },
+        {
+            "value": "comment-in",
+            "display": "Has Comment In"
+        },
+        {
+            "value": "contains",
+            "display": "Contains"
+        },
+        {
+            "value": "contained-in",
+            "display": "Contained In"
+        },
+        {
+            "value": "corrects",
+            "display": "Corrects"
+        },
+        {
+            "value": "correction-in",
+            "display": "Correction In"
+        },
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "replaced-with",
+            "display": "Replaced With"
+        },
+        {
+            "value": "retracts",
+            "display": "Retracts"
+        },
+        {
+            "value": "retracted-by",
+            "display": "Retracted By"
+        },
+        {
+            "value": "signs",
+            "display": "Signs"
+        },
+        {
+            "value": "similar-to",
+            "display": "Similar To"
+        },
+        {
+            "value": "supports",
+            "display": "Supports"
+        },
+        {
+            "value": "supported-with",
+            "display": "Supported With"
+        },
+        {
+            "value": "transforms",
+            "display": "Transforms"
+        },
+        {
+            "value": "transformed-into",
+            "display": "Transformed Into"
+        },
+        {
+            "value": "transformed-with",
+            "display": "Transformed With"
+        },
+        {
+            "value": "documents",
+            "display": "Documents"
+        },
+        {
+            "value": "specification-of",
+            "display": "Specification Of"
+        },
+        {
+            "value": "created-with",
+            "display": "Created With"
+        },
+        {
+            "value": "cite-as",
+            "display": "Cite As"
+        },
+        {
+            "value": "reprint",
+            "display": "Reprint"
+        },
+        {
+            "value": "reprint-of",
+            "display": "Reprint Of"
+        }
+    ]
+}

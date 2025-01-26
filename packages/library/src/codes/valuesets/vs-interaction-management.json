@@ -1,0 +1,8 @@
+{
+    "id": "interaction-management",
+    "name": "InteractionManagement",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/interaction-management",
+    "valid": true,
+    "choices": []
+}

@@ -1,0 +1,81 @@
+{
+    "id": "communication-request-status-reason",
+    "name": "CommunicationRequestStatusReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/communication-request-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "281323002",
+            "display": "n/a"
+        },
+        {
+            "value": "397709008",
+            "display": "n/a"
+        },
+        {
+            "value": "105480006",
+            "display": "n/a"
+        },
+        {
+            "value": "719500002",
+            "display": "n/a"
+        },
+        {
+            "value": "445060000",
+            "display": "n/a"
+        },
+        {
+            "value": "704273008",
+            "display": "n/a"
+        },
+        {
+            "value": "704274002",
+            "display": "n/a"
+        },
+        {
+            "value": "704458005",
+            "display": "n/a"
+        },
+        {
+            "value": "704275001",
+            "display": "n/a"
+        },
+        {
+            "value": "704276000",
+            "display": "n/a"
+        },
+        {
+            "value": "704277009",
+            "display": "n/a"
+        },
+        {
+            "value": "310376006",
+            "display": "n/a"
+        },
+        {
+            "value": "414859005",
+            "display": "n/a"
+        },
+        {
+            "value": "416409005",
+            "display": "n/a"
+        },
+        {
+            "value": "416308001",
+            "display": "n/a"
+        },
+        {
+            "value": "737038009",
+            "display": "n/a"
+        },
+        {
+            "value": "713835001",
+            "display": "n/a"
+        },
+        {
+            "value": "398227009",
+            "display": "n/a"
+        }
+    ]
+}

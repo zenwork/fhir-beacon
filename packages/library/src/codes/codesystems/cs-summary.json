@@ -1,0 +1,8 @@
+{
+    "id": "summary",
+    "name": "CodeSystemSummaryExampleACMEBodySites",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/summary",
+    "valid": true,
+    "choices": []
+}

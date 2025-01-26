@@ -1,0 +1,25 @@
+{
+    "id": "link-type",
+    "name": "LinkType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/link-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "replaced-by",
+            "display": "Replaced-by"
+        },
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "refer",
+            "display": "Refer"
+        },
+        {
+            "value": "seealso",
+            "display": "See also"
+        }
+    ]
+}

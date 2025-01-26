@@ -1,0 +1,28 @@
+{
+    "id": "task-status-reason",
+    "name": "TaskStatusReason",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "missing",
+            "display": "Missing"
+        },
+        {
+            "value": "misidentified",
+            "display": "Misidentified"
+        },
+        {
+            "value": "equipment-issue",
+            "display": "Equipment-issue"
+        },
+        {
+            "value": "environmental-issue",
+            "display": "Environmental-issue"
+        },
+        {
+            "value": "personnel-issue",
+            "display": "Personnel-issue"
+        }
+    ]
+}

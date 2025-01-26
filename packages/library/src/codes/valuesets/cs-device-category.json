@@ -1,0 +1,48 @@
+{
+    "id": "device-category",
+    "name": "FHIRDeviceCategory",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "communicating",
+            "display": "communicating"
+        },
+        {
+            "value": "dme",
+            "display": "Durable Medical Equipment"
+        },
+        {
+            "value": "home-use",
+            "display": "Maintenance"
+        },
+        {
+            "value": "implantable",
+            "display": "Implantable"
+        },
+        {
+            "value": "in-vitro",
+            "display": "In vitro"
+        },
+        {
+            "value": "point-of-care",
+            "display": "Point of Care"
+        },
+        {
+            "value": "single-use",
+            "display": "Single Use"
+        },
+        {
+            "value": "reusable",
+            "display": "Reusable"
+        },
+        {
+            "value": "software",
+            "display": "Software"
+        }
+    ]
+}

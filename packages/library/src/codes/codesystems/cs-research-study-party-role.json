@@ -1,0 +1,57 @@
+{
+    "id": "research-study-party-role",
+    "name": "ResearchStudyPartyRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-party-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sponsor",
+            "display": "sponsor"
+        },
+        {
+            "value": "lead-sponsor",
+            "display": "lead-sponsor"
+        },
+        {
+            "value": "sponsor-investigator",
+            "display": "sponsor-investigator"
+        },
+        {
+            "value": "primary-investigator",
+            "display": "primary-investigator"
+        },
+        {
+            "value": "collaborator",
+            "display": "collaborator"
+        },
+        {
+            "value": "funding-source",
+            "display": "funding-source"
+        },
+        {
+            "value": "general-contact",
+            "display": "general-contact"
+        },
+        {
+            "value": "recruitment-contact",
+            "display": "recruitment-contact"
+        },
+        {
+            "value": "sub-investigator",
+            "display": "sub-investigator"
+        },
+        {
+            "value": "study-director",
+            "display": "study-director"
+        },
+        {
+            "value": "study-chair",
+            "display": "study-chair"
+        },
+        {
+            "value": "irb",
+            "display": "Institutional Review Board"
+        }
+    ]
+}

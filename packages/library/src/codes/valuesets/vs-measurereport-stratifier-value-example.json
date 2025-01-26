@@ -1,0 +1,24 @@
+{
+    "id": "measurereport-stratifier-value-example",
+    "name": "MeasureReportStratifierValueExample",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "northwest",
+            "display": "Northwest"
+        },
+        {
+            "value": "northeast",
+            "display": "Northeast"
+        },
+        {
+            "value": "southwest",
+            "display": "Soutwest"
+        },
+        {
+            "value": "southeast",
+            "display": "Southeast"
+        }
+    ]
+}

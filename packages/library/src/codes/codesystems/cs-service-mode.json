@@ -1,0 +1,25 @@
+{
+    "id": "service-mode",
+    "name": "ServiceMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/service-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-person",
+            "display": "In Person"
+        },
+        {
+            "value": "telephone",
+            "display": "Telephone"
+        },
+        {
+            "value": "videoconference",
+            "display": "Video Conference"
+        },
+        {
+            "value": "chat",
+            "display": "Chat/Messaging"
+        }
+    ]
+}

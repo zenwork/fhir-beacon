@@ -1,0 +1,25 @@
+{
+    "id": "verificationresult-failure-action",
+    "name": "FailureAction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-failure-action",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fatal",
+            "display": "Fatal"
+        },
+        {
+            "value": "warn",
+            "display": "Warning"
+        },
+        {
+            "value": "rec-only",
+            "display": "Record only"
+        },
+        {
+            "value": "none",
+            "display": "None"
+        }
+    ]
+}

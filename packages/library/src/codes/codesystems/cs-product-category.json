@@ -1,0 +1,29 @@
+{
+    "id": "product-category",
+    "name": "BiologicallyDerivedProductCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/product-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "organ",
+            "display": "Organ"
+        },
+        {
+            "value": "tissue",
+            "display": "Tissue"
+        },
+        {
+            "value": "fluid",
+            "display": "Fluid"
+        },
+        {
+            "value": "cells",
+            "display": "Cells"
+        },
+        {
+            "value": "biologicalAgent",
+            "display": "BiologicalAgent"
+        }
+    ]
+}

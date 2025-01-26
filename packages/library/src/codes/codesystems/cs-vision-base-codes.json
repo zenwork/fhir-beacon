@@ -1,0 +1,25 @@
+{
+    "id": "vision-base-codes",
+    "name": "VisionBase",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/vision-base-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "up",
+            "display": "Up"
+        },
+        {
+            "value": "down",
+            "display": "Down"
+        },
+        {
+            "value": "in",
+            "display": "In"
+        },
+        {
+            "value": "out",
+            "display": "Out"
+        }
+    ]
+}

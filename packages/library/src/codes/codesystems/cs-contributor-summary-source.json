@@ -1,0 +1,25 @@
+{
+    "id": "contributor-summary-source",
+    "name": "ContributorSummarySource",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contributor-summary-source",
+    "valid": true,
+    "choices": [
+        {
+            "value": "publisher-data",
+            "display": "Publisher provided"
+        },
+        {
+            "value": "article-copy",
+            "display": "Copied from article"
+        },
+        {
+            "value": "citation-manager",
+            "display": "Reported by citation manager"
+        },
+        {
+            "value": "custom",
+            "display": "custom format"
+        }
+    ]
+}

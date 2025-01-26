@@ -1,0 +1,20 @@
+{
+    "id": "regulated-authorization-type",
+    "name": "RegulatedAuthorizationType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MarketingAuth",
+            "display": "Marketing Authorization"
+        },
+        {
+            "value": "Orphan",
+            "display": "Orphan Drug Authorization"
+        },
+        {
+            "value": "Pediatric",
+            "display": "Pediatric Use Drug Authorization"
+        }
+    ]
+}

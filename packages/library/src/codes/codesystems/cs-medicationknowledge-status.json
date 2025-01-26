@@ -1,0 +1,21 @@
+{
+    "id": "medicationknowledge-status",
+    "name": "MedicationKnowledgeStatusCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medicationknowledge-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        }
+    ]
+}

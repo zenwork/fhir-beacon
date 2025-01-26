@@ -1,0 +1,28 @@
+{
+    "id": "request-intent",
+    "name": "RequestIntent",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposal",
+            "display": "Proposal"
+        },
+        {
+            "value": "plan",
+            "display": "Plan"
+        },
+        {
+            "value": "directive",
+            "display": "Directive"
+        },
+        {
+            "value": "order",
+            "display": "Order"
+        },
+        {
+            "value": "option",
+            "display": "Option"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "id": "audit-event-action",
+    "name": "AuditEventAction",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "C",
+            "display": "Create"
+        },
+        {
+            "value": "R",
+            "display": "Read"
+        },
+        {
+            "value": "U",
+            "display": "Update"
+        },
+        {
+            "value": "D",
+            "display": "Delete"
+        },
+        {
+            "value": "E",
+            "display": "Execute"
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "id": "research-study-status",
+    "name": "ResearchStudyStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "overall-study",
+            "display": "Overall study"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "active-but-not-recruiting",
+            "display": "Active, not recruiting"
+        },
+        {
+            "value": "administratively-completed",
+            "display": "Administratively Completed"
+        },
+        {
+            "value": "approved",
+            "display": "Approved"
+        },
+        {
+            "value": "closed-to-accrual",
+            "display": "Closed to Accrual"
+        },
+        {
+            "value": "closed-to-accrual-and-intervention",
+            "display": "Closed to Accrual and Intervention"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "disapproved",
+            "display": "Disapproved"
+        },
+        {
+            "value": "enrolling-by-invitation",
+            "display": "Enrolling by invitation"
+        },
+        {
+            "value": "in-review",
+            "display": "In Review"
+        },
+        {
+            "value": "not-yet-recruiting",
+            "display": "Not yet recruiting"
+        },
+        {
+            "value": "recruiting",
+            "display": "Recruiting"
+        },
+        {
+            "value": "temporarily-closed-to-accrual",
+            "display": "Temporarily Closed to Accrual"
+        },
+        {
+            "value": "temporarily-closed-to-accrual-and-intervention",
+            "display": "Temporarily Closed to Accrual and Intervention"
+        },
+        {
+            "value": "terminated",
+            "display": "Terminated"
+        },
+        {
+            "value": "withdrawn",
+            "display": "Withdrawn"
+        }
+    ]
+}

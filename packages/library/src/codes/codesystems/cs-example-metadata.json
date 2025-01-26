@@ -1,0 +1,21 @@
+{
+    "id": "example-metadata",
+    "name": "ExampleMetadata",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/example-metadata",
+    "valid": true,
+    "choices": [
+        {
+            "value": "A",
+            "display": "A"
+        },
+        {
+            "value": "B",
+            "display": "B"
+        },
+        {
+            "value": "C",
+            "display": "C"
+        }
+    ]
+}

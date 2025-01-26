@@ -1,0 +1,17 @@
+{
+    "id": "examplescenario-actor-type",
+    "name": "ExampleScenarioActorType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/examplescenario-actor-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "person",
+            "display": "Person"
+        },
+        {
+            "value": "system",
+            "display": "System"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "id": "definition-resource-types",
+    "name": "DefinitionResourceTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/definition-resource-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ActivityDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItemDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalUseDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "EventDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Measure",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ObservationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "OperationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "PlanDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Questionnaire",
+            "display": "n/a"
+        },
+        {
+            "value": "Requirements",
+            "display": "n/a"
+        },
+        {
+            "value": "SubscriptionTopic",
+            "display": "n/a"
+        },
+        {
+            "value": "TestPlan",
+            "display": "n/a"
+        },
+        {
+            "value": "TestScript",
+            "display": "n/a"
+        }
+    ]
+}

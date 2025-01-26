@@ -1,0 +1,29 @@
+{
+    "id": "care-plan-intent",
+    "name": "CarePlanIntent",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/care-plan-intent",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposal",
+            "display": "n/a"
+        },
+        {
+            "value": "plan",
+            "display": "n/a"
+        },
+        {
+            "value": "order",
+            "display": "n/a"
+        },
+        {
+            "value": "option",
+            "display": "n/a"
+        },
+        {
+            "value": "directive",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "id": "substance-representation-format",
+    "name": "SubstanceRepresentationFormat",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "InChI",
+            "display": "InChI"
+        },
+        {
+            "value": "SMILES",
+            "display": "SMILES"
+        },
+        {
+            "value": "MOLFILE",
+            "display": "MOLFILE"
+        },
+        {
+            "value": "CDX",
+            "display": "CDX"
+        },
+        {
+            "value": "SDF",
+            "display": "SDF"
+        },
+        {
+            "value": "PDB",
+            "display": "PDB"
+        },
+        {
+            "value": "mmCIF",
+            "display": "mmCIF"
+        }
+    ]
+}

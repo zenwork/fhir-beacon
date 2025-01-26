@@ -1,0 +1,25 @@
+{
+    "id": "detectedissue-status",
+    "name": "DetectedIssueStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/detectedissue-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preliminary",
+            "display": "Preliminary"
+        },
+        {
+            "value": "final",
+            "display": "Final"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "mitigated",
+            "display": "Mitigated"
+        }
+    ]
+}

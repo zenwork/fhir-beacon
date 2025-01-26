@@ -1,0 +1,21 @@
+{
+    "id": "example-supplement",
+    "name": "CholCodeLegacyStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/example-supplement",
+    "valid": true,
+    "choices": [
+        {
+            "value": "chol-mmol",
+            "display": "n/a"
+        },
+        {
+            "value": "chol-mass",
+            "display": "n/a"
+        },
+        {
+            "value": "chol",
+            "display": "n/a"
+        }
+    ]
+}

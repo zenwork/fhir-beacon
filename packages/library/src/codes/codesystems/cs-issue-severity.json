@@ -1,0 +1,29 @@
+{
+    "id": "issue-severity",
+    "name": "IssueSeverity",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/issue-severity",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fatal",
+            "display": "Fatal"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        },
+        {
+            "value": "information",
+            "display": "Information"
+        },
+        {
+            "value": "success",
+            "display": "Operation Successful"
+        }
+    ]
+}

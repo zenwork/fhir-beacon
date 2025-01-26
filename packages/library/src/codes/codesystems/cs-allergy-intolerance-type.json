@@ -1,0 +1,17 @@
+{
+    "id": "allergy-intolerance-type",
+    "name": "AllergyIntoleranceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/allergy-intolerance-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "allergy",
+            "display": "Allergy"
+        },
+        {
+            "value": "intolerance",
+            "display": "Intolerance"
+        }
+    ]
+}

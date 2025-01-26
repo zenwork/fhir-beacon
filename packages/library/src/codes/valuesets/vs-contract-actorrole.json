@@ -1,0 +1,17 @@
+{
+    "id": "contract-actorrole",
+    "name": "ContractActorRoleCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-actorrole",
+    "valid": true,
+    "choices": [
+        {
+            "value": "practitioner",
+            "display": "Practitioner"
+        },
+        {
+            "value": "patient",
+            "display": "Patient"
+        }
+    ]
+}

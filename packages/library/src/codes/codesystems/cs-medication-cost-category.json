@@ -1,0 +1,17 @@
+{
+    "id": "medication-cost-category",
+    "name": "MedicationCostCategoryCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medication-cost-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "banda",
+            "display": "Band A"
+        },
+        {
+            "value": "bandb",
+            "display": "Band B"
+        }
+    ]
+}

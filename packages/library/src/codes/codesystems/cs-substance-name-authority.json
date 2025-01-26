@@ -1,0 +1,69 @@
+{
+    "id": "substance-name-authority",
+    "name": "SubstanceNameAuthority",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-name-authority",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BAN",
+            "display": "BAN"
+        },
+        {
+            "value": "COSING",
+            "display": "COSING"
+        },
+        {
+            "value": "Ph.Eur.",
+            "display": "Ph.Eur."
+        },
+        {
+            "value": "FCC",
+            "display": "FCC"
+        },
+        {
+            "value": "INCI",
+            "display": "INCI"
+        },
+        {
+            "value": "INN",
+            "display": "INN"
+        },
+        {
+            "value": "JAN",
+            "display": "JAN"
+        },
+        {
+            "value": "JECFA",
+            "display": "JECFA"
+        },
+        {
+            "value": "MARTINDALE",
+            "display": "MARTINDALE"
+        },
+        {
+            "value": "USAN",
+            "display": "USAN"
+        },
+        {
+            "value": "USP",
+            "display": "USP"
+        },
+        {
+            "value": "PHF",
+            "display": "PHF"
+        },
+        {
+            "value": "HAB",
+            "display": "HAB"
+        },
+        {
+            "value": "PhF",
+            "display": "PhF (Pharmacopée française)"
+        },
+        {
+            "value": "IUIS",
+            "display": "IUIS"
+        }
+    ]
+}

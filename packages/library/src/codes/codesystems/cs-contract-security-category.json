@@ -1,0 +1,13 @@
+{
+    "id": "contract-security-category",
+    "name": "ContractSecurityCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-security-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

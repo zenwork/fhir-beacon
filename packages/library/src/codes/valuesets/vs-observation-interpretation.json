@@ -1,0 +1,237 @@
+{
+    "id": "observation-interpretation",
+    "name": "ObservationInterpretationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+    "valid": true,
+    "choices": [
+        {
+            "value": "_GeneticObservationInterpretation",
+            "display": "GeneticObservationInterpretation"
+        },
+        {
+            "value": "_ObservationInterpretationChange",
+            "display": "ObservationInterpretationChange"
+        },
+        {
+            "value": "_ObservationInterpretationExceptions",
+            "display": "ObservationInterpretationExceptions"
+        },
+        {
+            "value": "_ObservationInterpretationNormality",
+            "display": "ObservationInterpretationNormality"
+        },
+        {
+            "value": "_ObservationInterpretationSusceptibility",
+            "display": "ObservationInterpretationSusceptibility"
+        },
+        {
+            "value": "EX",
+            "display": "outside threshold"
+        },
+        {
+            "value": "HM",
+            "display": "Hold for Medical Review"
+        },
+        {
+            "value": "ObservationInterpretationDetection",
+            "display": "ObservationInterpretationDetection"
+        },
+        {
+            "value": "ObservationInterpretationExpectation",
+            "display": "ObservationInterpretationExpectation"
+        },
+        {
+            "value": "OBX",
+            "display": "Interpretation qualifiers in separate OBX segments"
+        },
+        {
+            "value": "ReactivityObservationInterpretation",
+            "display": "ReactivityObservationInterpretation"
+        },
+        {
+            "value": "CAR",
+            "display": "Carrier"
+        },
+        {
+            "value": "Carrier",
+            "display": "Carrier"
+        },
+        {
+            "value": "B",
+            "display": "Better"
+        },
+        {
+            "value": "D",
+            "display": "Significant change down"
+        },
+        {
+            "value": "U",
+            "display": "Significant change up"
+        },
+        {
+            "value": "W",
+            "display": "Worse"
+        },
+        {
+            "value": "<",
+            "display": "Off scale low"
+        },
+        {
+            "value": ">",
+            "display": "Off scale high"
+        },
+        {
+            "value": "AC",
+            "display": "Anti-complementary substances present"
+        },
+        {
+            "value": "IE",
+            "display": "Insufficient evidence"
+        },
+        {
+            "value": "QCF",
+            "display": "Quality control failure"
+        },
+        {
+            "value": "TOX",
+            "display": "Cytotoxic substance present"
+        },
+        {
+            "value": "A",
+            "display": "Abnormal"
+        },
+        {
+            "value": "N",
+            "display": "Normal"
+        },
+        {
+            "value": "I",
+            "display": "Intermediate"
+        },
+        {
+            "value": "MS",
+            "display": "moderately susceptible"
+        },
+        {
+            "value": "NCL",
+            "display": "No CLSI defined breakpoint"
+        },
+        {
+            "value": "NS",
+            "display": "Non-susceptible"
+        },
+        {
+            "value": "R",
+            "display": "Resistant"
+        },
+        {
+            "value": "S",
+            "display": "Susceptible"
+        },
+        {
+            "value": "VS",
+            "display": "very susceptible"
+        },
+        {
+            "value": "AA",
+            "display": "Critical abnormal"
+        },
+        {
+            "value": "H",
+            "display": "High"
+        },
+        {
+            "value": "L",
+            "display": "Low"
+        },
+        {
+            "value": "HH",
+            "display": "Critical high"
+        },
+        {
+            "value": "LL",
+            "display": "Critical low"
+        },
+        {
+            "value": "HX",
+            "display": "above high threshold"
+        },
+        {
+            "value": "LX",
+            "display": "below low threshold"
+        },
+        {
+            "value": "H>",
+            "display": "Significantly high"
+        },
+        {
+            "value": "HU",
+            "display": "Significantly high"
+        },
+        {
+            "value": "E",
+            "display": "Equivocal"
+        },
+        {
+            "value": "L<",
+            "display": "Significantly low"
+        },
+        {
+            "value": "LU",
+            "display": "Significantly low"
+        },
+        {
+            "value": "ND",
+            "display": "Not detected"
+        },
+        {
+            "value": "IND",
+            "display": "Indeterminate"
+        },
+        {
+            "value": "NEG",
+            "display": "Negative"
+        },
+        {
+            "value": "POS",
+            "display": "Positive"
+        },
+        {
+            "value": "EXP",
+            "display": "Expected"
+        },
+        {
+            "value": "UNE",
+            "display": "Unexpected"
+        },
+        {
+            "value": "DET",
+            "display": "Detected"
+        },
+        {
+            "value": "SYN-R",
+            "display": "Synergy - resistant"
+        },
+        {
+            "value": "NR",
+            "display": "Non-reactive"
+        },
+        {
+            "value": "RR",
+            "display": "Reactive"
+        },
+        {
+            "value": "WR",
+            "display": "Weakly reactive"
+        },
+        {
+            "value": "SDD",
+            "display": "Susceptible-dose dependent"
+        },
+        {
+            "value": "SYN-S",
+            "display": "Synergy - susceptible"
+        }
+    ]
+}

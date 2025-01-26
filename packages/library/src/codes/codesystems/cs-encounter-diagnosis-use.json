@@ -1,0 +1,17 @@
+{
+    "id": "encounter-diagnosis-use",
+    "name": "EncounterDiagnosisUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/encounter-diagnosis-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "working",
+            "display": "Working"
+        },
+        {
+            "value": "final",
+            "display": "Final"
+        }
+    ]
+}

@@ -1,0 +1,132 @@
+{
+    "id": "evidence-classifier-code",
+    "name": "EvidenceClassifier",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "COVID19Specific",
+            "display": "COVID-19 specific article"
+        },
+        {
+            "value": "COVID19Relevant",
+            "display": "COVID-19 relevant (but not specific) article"
+        },
+        {
+            "value": "COVID19HumanResearch",
+            "display": "COVID-19 human data in population, exposure, or outcome"
+        },
+        {
+            "value": "OriginalResearch",
+            "display": "Article includes original research"
+        },
+        {
+            "value": "ResearchSynthesis",
+            "display": "Article includes synthesis of research"
+        },
+        {
+            "value": "Guideline",
+            "display": "Article includes guideline"
+        },
+        {
+            "value": "ResearchProtocol",
+            "display": "Article provides protocol without results"
+        },
+        {
+            "value": "NotResearchNotGuideline",
+            "display": "Article is neither research nor guideline"
+        },
+        {
+            "value": "Treatment",
+            "display": "Article about treatment"
+        },
+        {
+            "value": "PreventionAndControl",
+            "display": "Article about prevention and control"
+        },
+        {
+            "value": "Diagnosis",
+            "display": "Article about diagnosis"
+        },
+        {
+            "value": "PrognosisPrediction",
+            "display": "Article about prognosis or prediction"
+        },
+        {
+            "value": "RatedAsYes",
+            "display": "Rated as yes, affirmative, positive, present, or include"
+        },
+        {
+            "value": "RatedAsNo",
+            "display": "Rated as no, negative, absent, or exclude"
+        },
+        {
+            "value": "NotAssessed",
+            "display": "Not rated, not assessed"
+        },
+        {
+            "value": "RatedAsRCT",
+            "display": "classified as randomized controlled trial"
+        },
+        {
+            "value": "RatedAsControlledTrial",
+            "display": "classified as nonrandomized controlled trial (experimental)"
+        },
+        {
+            "value": "RatedAsComparativeCohort",
+            "display": "classified as comparative cohort study (observational)"
+        },
+        {
+            "value": "RatedAsCaseControl",
+            "display": "classified as case-control study"
+        },
+        {
+            "value": "RatedAsUncontrolledSeries",
+            "display": "classified as uncontrolled cohort (case series)"
+        },
+        {
+            "value": "RatedAsMixedMethods",
+            "display": "classified as mixed-methods study"
+        },
+        {
+            "value": "RatedAsOther",
+            "display": "classified as other concept (not elsewhere classified)"
+        },
+        {
+            "value": "RiskOfBias",
+            "display": "Risk of bias assessment"
+        },
+        {
+            "value": "NoBlinding",
+            "display": "No blinding"
+        },
+        {
+            "value": "AllocConcealNotStated",
+            "display": "Allocation concealment not stated"
+        },
+        {
+            "value": "EarlyTrialTermination",
+            "display": "Early trial termination"
+        },
+        {
+            "value": "NoITT",
+            "display": "No intention-to-treat analysis"
+        },
+        {
+            "value": "Preprint",
+            "display": "Preprint (not final publication)"
+        },
+        {
+            "value": "PreliminaryAnalysis",
+            "display": "Preliminary analysis"
+        },
+        {
+            "value": "BaselineImbalance",
+            "display": "Baseline imbalances"
+        },
+        {
+            "value": "SubgroupAnalysis",
+            "display": "Subgroup analysis"
+        }
+    ]
+}

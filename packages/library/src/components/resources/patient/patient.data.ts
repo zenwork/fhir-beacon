@@ -12,6 +12,8 @@ import {PeriodData}                                                 from '../../
 import {Code, DateTime, FhirDate, FhirString, Integer, PositiveInt} from '../../primitive/primitive.data'
 import {ReferenceData}                                              from '../../special/reference/reference.data'
 
+
+
 export type HumanNameData = FhirElementData & {
   use?: Code
   text?: FhirString
@@ -69,7 +71,7 @@ export type PatientLinkData = BackboneElementData & {
 }
 
 export type PatientData = DomainResourceData & {
-  identifier: IdentifierData[]
+  identifier?: IdentifierData[]
   active?: boolean
   name: HumanNameData[]
   telecom: ContactPointData[]

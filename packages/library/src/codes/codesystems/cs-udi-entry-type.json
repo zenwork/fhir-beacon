@@ -1,0 +1,37 @@
+{
+    "id": "udi-entry-type",
+    "name": "UDIEntryType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/udi-entry-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "barcode",
+            "display": "Barcode"
+        },
+        {
+            "value": "rfid",
+            "display": "RFID"
+        },
+        {
+            "value": "manual",
+            "display": "Manual"
+        },
+        {
+            "value": "card",
+            "display": "Card"
+        },
+        {
+            "value": "self-reported",
+            "display": "Self Reported"
+        },
+        {
+            "value": "electronic-transmission",
+            "display": "Electronic Transmission"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

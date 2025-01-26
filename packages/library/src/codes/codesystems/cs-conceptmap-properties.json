@@ -1,0 +1,13 @@
+{
+    "id": "conceptmap-properties",
+    "name": "ConceptMapProperties",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conceptmap-properties",
+    "valid": true,
+    "choices": [
+        {
+            "value": "relationshipRefinement",
+            "display": "Relationship Refinement"
+        }
+    ]
+}

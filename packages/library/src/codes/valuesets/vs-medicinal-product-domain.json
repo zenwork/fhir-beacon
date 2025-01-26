@@ -1,0 +1,20 @@
+{
+    "id": "medicinal-product-domain",
+    "name": "MedicinalProductDomain",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Human",
+            "display": "Human use"
+        },
+        {
+            "value": "Veterinary",
+            "display": "Veterinary use"
+        },
+        {
+            "value": "HumanAndVeterinary",
+            "display": "Human and Veterinary use"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "contract-term-type",
+    "name": "ContractTermTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-term-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "statutory",
+            "display": "Statutory"
+        },
+        {
+            "value": "subject-to",
+            "display": "Subject To"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "id": "action-participant-type",
+    "name": "ActionParticipantType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-participant-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "careteam",
+            "display": "CareTeam"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "group",
+            "display": "Group"
+        },
+        {
+            "value": "healthcareservice",
+            "display": "HealthcareService"
+        },
+        {
+            "value": "location",
+            "display": "Location"
+        },
+        {
+            "value": "organization",
+            "display": "Organization"
+        },
+        {
+            "value": "patient",
+            "display": "Patient"
+        },
+        {
+            "value": "practitioner",
+            "display": "Practitioner"
+        },
+        {
+            "value": "practitionerrole",
+            "display": "PractitionerRole"
+        },
+        {
+            "value": "relatedperson",
+            "display": "RelatedPerson"
+        }
+    ]
+}

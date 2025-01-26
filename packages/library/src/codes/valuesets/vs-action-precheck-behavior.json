@@ -1,0 +1,16 @@
+{
+    "id": "action-precheck-behavior",
+    "name": "ActionPrecheckBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "yes",
+            "display": "Yes"
+        },
+        {
+            "value": "no",
+            "display": "No"
+        }
+    ]
+}

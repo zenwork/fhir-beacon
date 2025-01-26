@@ -1,0 +1,37 @@
+{
+    "id": "http-operations",
+    "name": "TestScriptRequestMethodCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/http-operations",
+    "valid": true,
+    "choices": [
+        {
+            "value": "delete",
+            "display": "DELETE"
+        },
+        {
+            "value": "get",
+            "display": "GET"
+        },
+        {
+            "value": "options",
+            "display": "OPTIONS"
+        },
+        {
+            "value": "patch",
+            "display": "PATCH"
+        },
+        {
+            "value": "post",
+            "display": "POST"
+        },
+        {
+            "value": "put",
+            "display": "PUT"
+        },
+        {
+            "value": "head",
+            "display": "HEAD"
+        }
+    ]
+}

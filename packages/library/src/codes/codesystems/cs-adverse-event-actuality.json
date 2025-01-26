@@ -1,0 +1,17 @@
+{
+    "id": "adverse-event-actuality",
+    "name": "AdverseEventActuality",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/adverse-event-actuality",
+    "valid": true,
+    "choices": [
+        {
+            "value": "actual",
+            "display": "Adverse Event"
+        },
+        {
+            "value": "potential",
+            "display": "Potential Adverse Event"
+        }
+    ]
+}

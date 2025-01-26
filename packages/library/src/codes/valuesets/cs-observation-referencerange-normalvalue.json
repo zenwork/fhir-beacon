@@ -1,0 +1,16 @@
+{
+    "id": "observation-referencerange-normalvalue",
+    "name": "ObservationReferenceRangeNormalValue",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "negative",
+            "display": "Negative"
+        },
+        {
+            "value": "absent",
+            "display": "Absent"
+        }
+    ]
+}

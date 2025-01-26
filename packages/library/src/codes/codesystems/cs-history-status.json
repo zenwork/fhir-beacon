@@ -1,0 +1,25 @@
+{
+    "id": "history-status",
+    "name": "FamilyHistoryStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/history-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "partial",
+            "display": "Partial"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "health-unknown",
+            "display": "Health Unknown"
+        }
+    ]
+}

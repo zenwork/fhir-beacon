@@ -1,0 +1,41 @@
+{
+    "id": "task-code",
+    "name": "TaskCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/task-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "approve",
+            "display": "Activate/approve the focal resource"
+        },
+        {
+            "value": "fulfill",
+            "display": "Fulfill the focal request"
+        },
+        {
+            "value": "instantiate",
+            "display": "Instantiate the focal definition"
+        },
+        {
+            "value": "abort",
+            "display": "Mark the focal resource as no longer active"
+        },
+        {
+            "value": "replace",
+            "display": "Replace the focal resource with the input resource"
+        },
+        {
+            "value": "change",
+            "display": "Change the focal resource"
+        },
+        {
+            "value": "suspend",
+            "display": "Suspend the focal resource"
+        },
+        {
+            "value": "resume",
+            "display": "Re-activate the focal resource"
+        }
+    ]
+}

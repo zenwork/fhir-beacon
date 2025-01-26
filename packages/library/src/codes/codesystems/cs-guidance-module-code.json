@@ -1,0 +1,33 @@
+{
+    "id": "guidance-module-code",
+    "name": "GuidanceModuleCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/guidance-module-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "bmi-calculator",
+            "display": "BMI Calculator"
+        },
+        {
+            "value": "mme-calculator",
+            "display": "MME Calculator"
+        },
+        {
+            "value": "opioid-cds",
+            "display": "Opioid CDS"
+        },
+        {
+            "value": "anc-cds",
+            "display": "ANC CDS"
+        },
+        {
+            "value": "chf-pathway",
+            "display": "CHF Pathway"
+        },
+        {
+            "value": "covid-19-severity",
+            "display": "COVID-19 Severity Score"
+        }
+    ]
+}

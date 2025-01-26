@@ -1,0 +1,17 @@
+{
+    "id": "strand-type",
+    "name": "StrandType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/strand-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "watson",
+            "display": "Watson strand of starting sequence"
+        },
+        {
+            "value": "crick",
+            "display": "Crick strand of starting sequence"
+        }
+    ]
+}

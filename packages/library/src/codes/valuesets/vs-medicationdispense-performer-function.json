@@ -1,0 +1,29 @@
+{
+    "id": "medicationdispense-performer-function",
+    "name": "MedicationDispensePerformerFunctionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medicationdispense-performer-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "dataenterer",
+            "display": "Data Enterer"
+        },
+        {
+            "value": "packager",
+            "display": "Packager"
+        },
+        {
+            "value": "checker",
+            "display": "Checker"
+        },
+        {
+            "value": "finalchecker",
+            "display": "Final Checker"
+        },
+        {
+            "value": "counsellor",
+            "display": "Counsellor"
+        }
+    ]
+}

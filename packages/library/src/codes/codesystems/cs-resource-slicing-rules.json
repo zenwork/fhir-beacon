@@ -1,0 +1,21 @@
+{
+    "id": "resource-slicing-rules",
+    "name": "SlicingRules",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/resource-slicing-rules",
+    "valid": true,
+    "choices": [
+        {
+            "value": "closed",
+            "display": "Closed"
+        },
+        {
+            "value": "open",
+            "display": "Open"
+        },
+        {
+            "value": "openAtEnd",
+            "display": "Open at End"
+        }
+    ]
+}

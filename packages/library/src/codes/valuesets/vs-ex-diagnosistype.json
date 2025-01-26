@@ -1,0 +1,57 @@
+{
+    "id": "ex-diagnosistype",
+    "name": "ExampleDiagnosisTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-diagnosistype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "admitting",
+            "display": "Admitting Diagnosis"
+        },
+        {
+            "value": "clinical",
+            "display": "Clinical Diagnosis"
+        },
+        {
+            "value": "differential",
+            "display": "Differential Diagnosis"
+        },
+        {
+            "value": "discharge",
+            "display": "Discharge Diagnosis"
+        },
+        {
+            "value": "laboratory",
+            "display": "Laboratory Diagnosis"
+        },
+        {
+            "value": "nursing",
+            "display": "Nursing Diagnosis"
+        },
+        {
+            "value": "prenatal",
+            "display": "Prenatal Diagnosis"
+        },
+        {
+            "value": "principal",
+            "display": "Principal Diagnosis"
+        },
+        {
+            "value": "radiology",
+            "display": "Radiology Diagnosis"
+        },
+        {
+            "value": "remote",
+            "display": "Remote Diagnosis"
+        },
+        {
+            "value": "retrospective",
+            "display": "Retrospective Diagnosis"
+        },
+        {
+            "value": "self",
+            "display": "Self Diagnosis"
+        }
+    ]
+}

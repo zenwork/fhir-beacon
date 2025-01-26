@@ -1,0 +1,232 @@
+{
+    "id": "unit-of-presentation",
+    "name": "UnitOfPresentation",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "200000002108",
+            "display": "Barrel"
+        },
+        {
+            "value": "200000002109",
+            "display": "Blister"
+        },
+        {
+            "value": "200000002110",
+            "display": "Block"
+        },
+        {
+            "value": "200000002111",
+            "display": "Bottle"
+        },
+        {
+            "value": "200000002112",
+            "display": "Cachet"
+        },
+        {
+            "value": "200000002113",
+            "display": "Capsule"
+        },
+        {
+            "value": "200000002114",
+            "display": "Cartridge"
+        },
+        {
+            "value": "200000002115",
+            "display": "Collar"
+        },
+        {
+            "value": "200000002116",
+            "display": "Container"
+        },
+        {
+            "value": "200000002117",
+            "display": "Cup"
+        },
+        {
+            "value": "200000002118",
+            "display": "Cylinder"
+        },
+        {
+            "value": "200000002119",
+            "display": "Dart"
+        },
+        {
+            "value": "200000002120",
+            "display": "Dressing"
+        },
+        {
+            "value": "200000002121",
+            "display": "Drop"
+        },
+        {
+            "value": "200000002122",
+            "display": "Film"
+        },
+        {
+            "value": "200000002123",
+            "display": "Chewing gum"
+        },
+        {
+            "value": "200000002124",
+            "display": "Implant"
+        },
+        {
+            "value": "200000002125",
+            "display": "Inhaler"
+        },
+        {
+            "value": "200000002126",
+            "display": "Insert"
+        },
+        {
+            "value": "200000002127",
+            "display": "Jar"
+        },
+        {
+            "value": "200000002128",
+            "display": "Lozenge"
+        },
+        {
+            "value": "200000002129",
+            "display": "Lyophilisate"
+        },
+        {
+            "value": "200000002130",
+            "display": "Matrix"
+        },
+        {
+            "value": "200000002131",
+            "display": "Pad"
+        },
+        {
+            "value": "200000002132",
+            "display": "Paper"
+        },
+        {
+            "value": "200000002133",
+            "display": "Pastille"
+        },
+        {
+            "value": "200000002134",
+            "display": "Patch"
+        },
+        {
+            "value": "200000002135",
+            "display": "Pen"
+        },
+        {
+            "value": "200000002136",
+            "display": "Pendant"
+        },
+        {
+            "value": "200000002137",
+            "display": "Pessary"
+        },
+        {
+            "value": "200000002138",
+            "display": "Pillule"
+        },
+        {
+            "value": "200000002139",
+            "display": "Pipette"
+        },
+        {
+            "value": "200000002140",
+            "display": "Plaster"
+        },
+        {
+            "value": "200000002141",
+            "display": "Plug"
+        },
+        {
+            "value": "200000002142",
+            "display": "Pouch"
+        },
+        {
+            "value": "200000002143",
+            "display": "Sachet"
+        },
+        {
+            "value": "200000002144",
+            "display": "Sponge"
+        },
+        {
+            "value": "200000002145",
+            "display": "Spoonful"
+        },
+        {
+            "value": "200000002146",
+            "display": "Stick"
+        },
+        {
+            "value": "200000002147",
+            "display": "Straw"
+        },
+        {
+            "value": "200000002148",
+            "display": "Strip"
+        },
+        {
+            "value": "200000002149",
+            "display": "Suppository"
+        },
+        {
+            "value": "200000002150",
+            "display": "Syringe"
+        },
+        {
+            "value": "200000002151",
+            "display": "System"
+        },
+        {
+            "value": "200000002152",
+            "display": "Tablet"
+        },
+        {
+            "value": "200000002153",
+            "display": "Tag"
+        },
+        {
+            "value": "200000002154",
+            "display": "Tampon"
+        },
+        {
+            "value": "200000002155",
+            "display": "Thread"
+        },
+        {
+            "value": "200000002156",
+            "display": "Tube"
+        },
+        {
+            "value": "200000002157",
+            "display": "Vessel"
+        },
+        {
+            "value": "200000002158",
+            "display": "Vial"
+        },
+        {
+            "value": "200000002159",
+            "display": "Puff"
+        },
+        {
+            "value": "200000002163",
+            "display": "Actuation"
+        },
+        {
+            "value": "200000002164",
+            "display": "Ampoule"
+        },
+        {
+            "value": "200000002165",
+            "display": "Applicator"
+        },
+        {
+            "value": "200000002166",
+            "display": "Bag"
+        }
+    ]
+}

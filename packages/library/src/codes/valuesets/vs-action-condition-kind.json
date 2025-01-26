@@ -1,0 +1,20 @@
+{
+    "id": "action-condition-kind",
+    "name": "ActionConditionKind",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "applicability",
+            "display": "Applicability"
+        },
+        {
+            "value": "start",
+            "display": "Start"
+        },
+        {
+            "value": "stop",
+            "display": "Stop"
+        }
+    ]
+}

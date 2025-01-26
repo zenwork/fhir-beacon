@@ -1,0 +1,16 @@
+{
+    "id": "medicinal-product-confidentiality",
+    "name": "ProductConfidentiality",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "CommerciallySensitive",
+            "display": "Commercially Sensitive"
+        },
+        {
+            "value": "NotCommerciallySensitive",
+            "display": "Not Commercially Sensitive"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "allergy-intolerance-category",
+    "name": "AllergyIntoleranceCategory",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "food",
+            "display": "Food"
+        },
+        {
+            "value": "medication",
+            "display": "Medication"
+        },
+        {
+            "value": "environment",
+            "display": "Environment"
+        },
+        {
+            "value": "biologic",
+            "display": "Biologic"
+        }
+    ]
+}

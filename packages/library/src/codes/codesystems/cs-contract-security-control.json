@@ -1,0 +1,13 @@
+{
+    "id": "contract-security-control",
+    "name": "ContractSecurityControl",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-security-control",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "goal-status",
+    "name": "GoalLifecycleStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/goal-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposed",
+            "display": "Proposed"
+        },
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        }
+    ]
+}

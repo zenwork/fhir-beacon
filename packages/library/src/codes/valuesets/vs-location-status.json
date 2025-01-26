@@ -1,0 +1,20 @@
+{
+    "id": "location-status",
+    "name": "LocationStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "suspended",
+            "display": "Suspended"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        }
+    ]
+}

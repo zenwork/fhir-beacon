@@ -1,0 +1,169 @@
+{
+    "id": "genomicstudy-dataformat",
+    "name": "GenomicStudyDataFormat",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/genomicstudy-dataformat",
+    "valid": true,
+    "choices": [
+        {
+            "value": "bam",
+            "display": "BAM"
+        },
+        {
+            "value": "bed",
+            "display": "BED"
+        },
+        {
+            "value": "bedpe",
+            "display": "BEDPE"
+        },
+        {
+            "value": "bedgraph",
+            "display": "BedGraph"
+        },
+        {
+            "value": "bigbed",
+            "display": "bigBed"
+        },
+        {
+            "value": "bigWig",
+            "display": "bigWig"
+        },
+        {
+            "value": "birdsuite-files",
+            "display": "Birdsuite-Files"
+        },
+        {
+            "value": "broadpeak",
+            "display": "broadPeak"
+        },
+        {
+            "value": "cbs",
+            "display": "CBS"
+        },
+        {
+            "value": "chemical-reactivity-probing-profiles",
+            "display": "Chemical-Reactivity-Probing-Profiles"
+        },
+        {
+            "value": "chrom-sizes",
+            "display": "chrom-sizes"
+        },
+        {
+            "value": "cn",
+            "display": "CN"
+        },
+        {
+            "value": "custom-file-formats",
+            "display": "Custom-File-Formats"
+        },
+        {
+            "value": "cytoband",
+            "display": "Cytoband"
+        },
+        {
+            "value": "fasta",
+            "display": "FASTA"
+        },
+        {
+            "value": "gct",
+            "display": "GCT"
+        },
+        {
+            "value": "cram",
+            "display": "CRAM"
+        },
+        {
+            "value": "genepred",
+            "display": "genePred"
+        },
+        {
+            "value": "gff-gtf",
+            "display": "GFF/GTF"
+        },
+        {
+            "value": "gistic",
+            "display": "GISTIC"
+        },
+        {
+            "value": "goby",
+            "display": "Goby"
+        },
+        {
+            "value": "gwas",
+            "display": "GWAS"
+        },
+        {
+            "value": "igv",
+            "display": "IGV"
+        },
+        {
+            "value": "loh",
+            "display": "LOH"
+        },
+        {
+            "value": "maf-multiple-alignment-format",
+            "display": "MAF-Multiple Alignment Format"
+        },
+        {
+            "value": "maf-mutation-annotation-format",
+            "display": "MAF-Mutation-Annotation-Format"
+        },
+        {
+            "value": "merged-bam-file",
+            "display": "Merged BAM File"
+        },
+        {
+            "value": "mut",
+            "display": "MUT"
+        },
+        {
+            "value": "narrowpeak",
+            "display": "narrowPeak"
+        },
+        {
+            "value": "psl",
+            "display": "PSL"
+        },
+        {
+            "value": "res",
+            "display": "RES"
+        },
+        {
+            "value": "rna-secondary-structure-formats",
+            "display": "RNA-Secondary-Structure-Formats"
+        },
+        {
+            "value": "sam",
+            "display": "SAM"
+        },
+        {
+            "value": "sample-info-attributes-file",
+            "display": "Sample-Info-Attributes-file"
+        },
+        {
+            "value": "seg",
+            "display": "SEG"
+        },
+        {
+            "value": "tdf",
+            "display": "TDF"
+        },
+        {
+            "value": "track-line",
+            "display": "Track Line"
+        },
+        {
+            "value": "type-line",
+            "display": "Type Line"
+        },
+        {
+            "value": "vcf",
+            "display": "VCF"
+        },
+        {
+            "value": "wig",
+            "display": "WIG"
+        }
+    ]
+}

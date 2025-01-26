@@ -1,9 +1,9 @@
 import {html, nothing, TemplateResult}                                    from 'lit'
-import {customElement}                                                    from 'lit/decorators.js'
+import {customElement, property}                                          from 'lit/decorators.js'
 import {when}                                                             from 'lit/directives/when.js'
 import {FhirAges, FhirDistances, FhirDuration, systems, useSystem, Value} from '../../../codesystems/code-systems'
 import {BaseElement, Decorated, Validations}                              from '../../../internal'
-import {hostStyles}      from '../../../styles'
+import {hostStyles}                                                       from '../../../styles'
 import {DisplayConfig}                                                    from '../../../types'
 import {hasAllOrNone}                                                     from '../../../utilities/hasAllOrNone'
 import {isWholeNumber}                                                    from '../../../utilities/isWhole'
@@ -12,7 +12,7 @@ import {
   quantityComparatorChoices
 }                                                                         from '../../primitive/type-presenters/asQuantityComparator'
 import {QuantityData, QuantityVariations, SimpleQuantityData}             from './quantity.data'
-import {componentStyles} from './quantity.styles'
+import {componentStyles}                                                  from './quantity.styles'
 import {isQuantity, isSimpleQuantity}                                     from './quantity.type-guards'
 
 
@@ -22,14 +22,20 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   static styles = [hostStyles, componentStyles]
   constructor() {super('Quantity')}
+
+  @property({ type: Boolean })
+  public simple: boolean = false
+
   private variation: QuantityVariations = QuantityVariations.unknown
 
-  public renderDisplay(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
+  public renderDisplay(config: DisplayConfig,
+                       data: QuantityData | SimpleQuantityData,
+                       validations: Validations): TemplateResult[] {
 
     const displayValue: undefined | string | number = data.value
     const type: string = 'decimal'
     const after = config.verbose ? data.unit + '(' + data.code + ')' : data.code
-    if (isQuantity(data)) {
+    if (isQuantity(data) && !this.simple) {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
@@ -42,12 +48,19 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       ]
     }
 
-    if (isSimpleQuantity(data)) {
+    if (isSimpleQuantity(data) || this.simple) {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
+            ${validations.errFor('comparator::sqty-1') ? html`
+                <fhir-primitive label="comparator"
+                                .value=${(data as any).comparator}
+                                type="code"
+                                summary
+                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                ></fhir-primitive>` : nothing}
         `
       ]
     }
@@ -77,10 +90,11 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                   () => html``,
                   () => html`
                       <fhir-primitive key="comparator"
-                                      .value=${data.comparator}
+                                      .value=${(data as QuantityData).comparator}
                                       type="code"
                                       summary
                                       .choices=${quantityComparatorChoices()}
+
                       ></fhir-primitive>`
           )}
 
@@ -100,9 +114,11 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     ]
   }
 
-  public renderStructure(config: DisplayConfig, data: QuantityData | SimpleQuantityData): TemplateResult[] {
+  public renderStructure(config: DisplayConfig,
+                         data: QuantityData | SimpleQuantityData,
+                         validations: Validations): TemplateResult[] {
 
-    if (isQuantity(data)) {
+    if (isQuantity(data) && !this.simple) {
       return [
         html`
             <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
@@ -115,11 +131,18 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       ]
     }
 
-    if (isSimpleQuantity(data)) {
+    if (isSimpleQuantity(data) || this.simple) {
       return [
         html`
             <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
             <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
+            ${validations.errFor('comparator::sqty-1') ? html`
+                <fhir-primitive label="comparator"
+                                .value=${(data as any).comparator}
+                                type="code"
+                                summary
+                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                ></fhir-primitive>` : nothing}
             <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
             <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>
             <fhir-primitive label="code" .value=${data.code} type="code" summary></fhir-primitive>
@@ -139,6 +162,13 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(data: QuantityData | SimpleQuantityData, validations: Validations, fetched: boolean) {
+    if (this.simple && !isSimpleQuantity(data)) {
+      validations.addErr({
+                           key: 'comparator::sqty-1',
+                           err: `${this.type}:${this.key}: comparator should not be present`
+                         })
+
+    }
 
     if (!hasAllOrNone(data, ['code', 'system'])) {
       validations.addErr({
@@ -163,6 +193,10 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       // convert html encoded strings such as &gt;
       data.comparator = new DOMParser().parseFromString(data.comparator, 'text/html').body.textContent ?? undefined
     } else {
+      this.variation = QuantityVariations.simple
+    }
+
+    if (this.simple) {
       this.variation = QuantityVariations.simple
     }
 

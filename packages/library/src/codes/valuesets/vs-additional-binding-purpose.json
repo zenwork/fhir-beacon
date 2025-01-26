@@ -1,0 +1,48 @@
+{
+    "id": "additional-binding-purpose",
+    "name": "AdditionalBindingPurposeVS",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "maximum",
+            "display": "Maximum Binding"
+        },
+        {
+            "value": "minimum",
+            "display": "Minimum Binding"
+        },
+        {
+            "value": "required",
+            "display": "Required Binding"
+        },
+        {
+            "value": "extensible",
+            "display": "Conformance Binding"
+        },
+        {
+            "value": "candidate",
+            "display": "Candidate Binding"
+        },
+        {
+            "value": "current",
+            "display": "Current Binding"
+        },
+        {
+            "value": "preferred",
+            "display": "Preferred Binding"
+        },
+        {
+            "value": "ui",
+            "display": "UI Suggested Binding"
+        },
+        {
+            "value": "starter",
+            "display": "Starter Binding"
+        },
+        {
+            "value": "component",
+            "display": "Component Binding"
+        }
+    ]
+}

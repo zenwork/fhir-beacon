@@ -1,0 +1,20 @@
+{
+    "id": "catalogType",
+    "name": "CatalogType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication Catalog"
+        },
+        {
+            "value": "device",
+            "display": "Device Catalog"
+        },
+        {
+            "value": "protocol",
+            "display": "Protocol List"
+        }
+    ]
+}

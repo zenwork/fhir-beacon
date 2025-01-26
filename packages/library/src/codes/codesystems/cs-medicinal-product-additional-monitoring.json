@@ -1,0 +1,13 @@
+{
+    "id": "medicinal-product-additional-monitoring",
+    "name": "AdditionalMonitoring",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-additional-monitoring",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BlackTriangleMonitoring",
+            "display": "Requirement for Black Triangle Monitoring"
+        }
+    ]
+}

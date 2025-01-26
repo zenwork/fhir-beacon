@@ -1,0 +1,13 @@
+{
+    "id": "contract-expiration-type",
+    "name": "ContractExpirationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-expiration-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "breach",
+            "display": "Breach"
+        }
+    ]
+}

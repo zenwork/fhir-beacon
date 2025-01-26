@@ -1,0 +1,25 @@
+{
+    "id": "measurereport-stratifier-value-example",
+    "name": "MeasureReportStratifierValueExample",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measurereport-stratifier-value-example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "northwest",
+            "display": "Northwest"
+        },
+        {
+            "value": "northeast",
+            "display": "Northeast"
+        },
+        {
+            "value": "southwest",
+            "display": "Soutwest"
+        },
+        {
+            "value": "southeast",
+            "display": "Southeast"
+        }
+    ]
+}

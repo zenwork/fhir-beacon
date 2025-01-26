@@ -1,0 +1,25 @@
+{
+    "id": "verificationresult-communication-method",
+    "name": "VerificationresultCommunicationMethod",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-communication-method",
+    "valid": true,
+    "choices": [
+        {
+            "value": "manual",
+            "display": "Manual"
+        },
+        {
+            "value": "portal",
+            "display": "Portal"
+        },
+        {
+            "value": "pull",
+            "display": "Pull"
+        },
+        {
+            "value": "push",
+            "display": "Push"
+        }
+    ]
+}

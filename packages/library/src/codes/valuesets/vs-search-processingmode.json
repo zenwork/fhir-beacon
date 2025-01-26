@@ -1,0 +1,20 @@
+{
+    "id": "search-processingmode",
+    "name": "SearchProcessingModeType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "normal",
+            "display": "Normal"
+        },
+        {
+            "value": "phonetic",
+            "display": "Phonetic"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

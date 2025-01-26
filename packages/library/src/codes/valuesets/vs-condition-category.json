@@ -1,0 +1,17 @@
+{
+    "id": "condition-category",
+    "name": "ConditionCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "problem-list-item",
+            "display": "Problem List Item"
+        },
+        {
+            "value": "encounter-diagnosis",
+            "display": "Encounter Diagnosis"
+        }
+    ]
+}

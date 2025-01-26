@@ -1,0 +1,21 @@
+{
+    "id": "virtual-service-type",
+    "name": "VirtualServiceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/virtual-service-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "zoom",
+            "display": "Zoom web conferencing"
+        },
+        {
+            "value": "ms-teams",
+            "display": "Microsoft Teams"
+        },
+        {
+            "value": "whatsapp",
+            "display": "WhatsApp conference call"
+        }
+    ]
+}

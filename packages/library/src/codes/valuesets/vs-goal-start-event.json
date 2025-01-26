@@ -1,0 +1,25 @@
+{
+    "id": "goal-start-event",
+    "name": "GoalStartEvent",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/goal-start-event",
+    "valid": true,
+    "choices": [
+        {
+            "value": "32485007",
+            "display": "Admission to hospital"
+        },
+        {
+            "value": "308283009",
+            "display": "Discharge from hospital"
+        },
+        {
+            "value": "442137000",
+            "display": "Completion time of procedure"
+        },
+        {
+            "value": "386216000",
+            "display": "Childbirth"
+        }
+    ]
+}

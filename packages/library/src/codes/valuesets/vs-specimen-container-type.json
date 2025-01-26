@@ -1,0 +1,8 @@
+{
+    "id": "specimen-container-type",
+    "name": "SpecimenContainerType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/specimen-container-type",
+    "valid": true,
+    "choices": []
+}

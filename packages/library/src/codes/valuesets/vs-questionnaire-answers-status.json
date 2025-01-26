@@ -1,0 +1,28 @@
+{
+    "id": "questionnaire-answers-status",
+    "name": "QuestionnaireResponseStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "amended",
+            "display": "Amended"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        }
+    ]
+}

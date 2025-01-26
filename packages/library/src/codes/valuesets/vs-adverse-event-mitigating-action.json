@@ -1,0 +1,8 @@
+{
+    "id": "adverse-event-mitigating-action",
+    "name": "AdverseEventMitigatingAction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-mitigating-action",
+    "valid": true,
+    "choices": []
+}

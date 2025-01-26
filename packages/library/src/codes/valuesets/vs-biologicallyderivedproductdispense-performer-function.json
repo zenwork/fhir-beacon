@@ -1,0 +1,36 @@
+{
+    "id": "biologicallyderivedproductdispense-performer-function",
+    "name": "BiologicallyDerivedProductDispensePerformerFunction",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "group-and-type",
+            "display": "Group and Type"
+        },
+        {
+            "value": "antibody-screen",
+            "display": "Antibody Screen"
+        },
+        {
+            "value": "antibody-identification",
+            "display": "Antibody Identification"
+        },
+        {
+            "value": "crossmatch",
+            "display": "Crossmatch"
+        },
+        {
+            "value": "release",
+            "display": "Release"
+        },
+        {
+            "value": "transport",
+            "display": "Transport"
+        },
+        {
+            "value": "receipt",
+            "display": "Receipt"
+        }
+    ]
+}

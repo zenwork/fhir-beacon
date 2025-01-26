@@ -1,0 +1,8 @@
+{
+    "id": "not-consumed-reason",
+    "name": "ReasonsFoodItemNotConsumed",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/not-consumed-reason",
+    "valid": true,
+    "choices": []
+}

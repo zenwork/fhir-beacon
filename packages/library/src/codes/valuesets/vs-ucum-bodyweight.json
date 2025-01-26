@@ -1,0 +1,21 @@
+{
+    "id": "ucum-bodyweight",
+    "name": "BodyWeightUnits",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ucum-bodyweight",
+    "valid": true,
+    "choices": [
+        {
+            "value": "kg",
+            "display": "n/a"
+        },
+        {
+            "value": "[lb_av]",
+            "display": "n/a"
+        },
+        {
+            "value": "g",
+            "display": "n/a"
+        }
+    ]
+}

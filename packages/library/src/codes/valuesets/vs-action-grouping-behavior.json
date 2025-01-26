@@ -1,0 +1,20 @@
+{
+    "id": "action-grouping-behavior",
+    "name": "ActionGroupingBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "visual-group",
+            "display": "Visual Group"
+        },
+        {
+            "value": "logical-group",
+            "display": "Logical Group"
+        },
+        {
+            "value": "sentence-group",
+            "display": "Sentence Group"
+        }
+    ]
+}

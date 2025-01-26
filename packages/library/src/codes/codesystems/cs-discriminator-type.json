@@ -1,0 +1,33 @@
+{
+    "id": "discriminator-type",
+    "name": "DiscriminatorType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/discriminator-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "value",
+            "display": "Value"
+        },
+        {
+            "value": "exists",
+            "display": "Exists"
+        },
+        {
+            "value": "pattern",
+            "display": "Pattern"
+        },
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "profile",
+            "display": "Profile"
+        },
+        {
+            "value": "position",
+            "display": "Position"
+        }
+    ]
+}

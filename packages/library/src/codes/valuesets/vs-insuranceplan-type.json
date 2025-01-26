@@ -1,0 +1,53 @@
+{
+    "id": "insuranceplan-type",
+    "name": "InsurancePlanType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/insuranceplan-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medical",
+            "display": "Medical"
+        },
+        {
+            "value": "dental",
+            "display": "Dental"
+        },
+        {
+            "value": "mental",
+            "display": "Mental Health"
+        },
+        {
+            "value": "subst-ab",
+            "display": "Substance Abuse"
+        },
+        {
+            "value": "vision",
+            "display": "Vision"
+        },
+        {
+            "value": "drug",
+            "display": "Drug"
+        },
+        {
+            "value": "short-term",
+            "display": "Short Term"
+        },
+        {
+            "value": "long-term",
+            "display": "Long Term Care"
+        },
+        {
+            "value": "hospice",
+            "display": "Hospice"
+        },
+        {
+            "value": "home",
+            "display": "Home Health"
+        },
+        {
+            "value": "Drug",
+            "display": "Drug"
+        }
+    ]
+}

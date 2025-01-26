@@ -1,0 +1,20 @@
+{
+    "id": "research-study-objective-type",
+    "name": "ResearchStudyObjectiveType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary",
+            "display": "Primary"
+        },
+        {
+            "value": "secondary",
+            "display": "Secondary"
+        },
+        {
+            "value": "exploratory",
+            "display": "Exploratory"
+        }
+    ]
+}

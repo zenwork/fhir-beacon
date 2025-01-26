@@ -1,0 +1,24 @@
+{
+    "id": "supplydelivery-status",
+    "name": "SupplyDeliveryStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "completed",
+            "display": "Delivered"
+        },
+        {
+            "value": "abandoned",
+            "display": "Abandoned"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

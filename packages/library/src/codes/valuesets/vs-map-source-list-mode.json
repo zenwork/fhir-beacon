@@ -1,0 +1,28 @@
+{
+    "id": "map-source-list-mode",
+    "name": "StructureMapSourceListMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "first",
+            "display": "First"
+        },
+        {
+            "value": "not_first",
+            "display": "All but the first"
+        },
+        {
+            "value": "last",
+            "display": "Last"
+        },
+        {
+            "value": "not_last",
+            "display": "All but the last"
+        },
+        {
+            "value": "only_one",
+            "display": "Enforce only one"
+        }
+    ]
+}

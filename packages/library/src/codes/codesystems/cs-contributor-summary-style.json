@@ -1,0 +1,73 @@
+{
+    "id": "contributor-summary-style",
+    "name": "ContributorSummaryStyle",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contributor-summary-style",
+    "valid": true,
+    "choices": [
+        {
+            "value": "a1full",
+            "display": "First author (full name) et al"
+        },
+        {
+            "value": "a1init",
+            "display": "First author (last name first initials) et al"
+        },
+        {
+            "value": "a3full",
+            "display": "First 3 authors (full name) et al"
+        },
+        {
+            "value": "a3init",
+            "display": "First 3 authors (last name first initials) et al"
+        },
+        {
+            "value": "a6full",
+            "display": "First 6 authors (full name) et al"
+        },
+        {
+            "value": "a6init",
+            "display": "First 6 authors (last name first initials) et al"
+        },
+        {
+            "value": "aallfull",
+            "display": "All authors (full name)"
+        },
+        {
+            "value": "aallfullwithand",
+            "display": "All authors (full name) with and before last author"
+        },
+        {
+            "value": "aallfullwithampersand",
+            "display": "All authors (full name) with an ampersand before last author"
+        },
+        {
+            "value": "aallinit",
+            "display": "All authors (last name first initials)"
+        },
+        {
+            "value": "aallinitwithand",
+            "display": "All authors (last name first initials) with and before last author"
+        },
+        {
+            "value": "aallinitwithampersand",
+            "display": "All authors (last name first initials) with an ampersand before last author"
+        },
+        {
+            "value": "contr-full-by-person",
+            "display": "Contributorship statement listed by person with full names"
+        },
+        {
+            "value": "contr-init-by-person",
+            "display": "Contributorship statement listed by person with initials"
+        },
+        {
+            "value": "contr-full-by-contr",
+            "display": "Contributorship statement listed by contribution with full names"
+        },
+        {
+            "value": "contr-init-by-contr",
+            "display": "Contributorship statement listed by contribution with initials"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "service-referral-method",
+    "name": "ReferralMethod",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-referral-method",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fax",
+            "display": "Fax"
+        },
+        {
+            "value": "phone",
+            "display": "Phone"
+        },
+        {
+            "value": "elec",
+            "display": "Secure Messaging"
+        },
+        {
+            "value": "semail",
+            "display": "Secure Email"
+        },
+        {
+            "value": "mail",
+            "display": "Mail"
+        },
+        {
+            "value": "self",
+            "display": "Self-referral"
+        }
+    ]
+}

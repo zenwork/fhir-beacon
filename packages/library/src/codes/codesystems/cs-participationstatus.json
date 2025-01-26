@@ -1,0 +1,25 @@
+{
+    "id": "participationstatus",
+    "name": "ParticipationStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/participationstatus",
+    "valid": true,
+    "choices": [
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "declined",
+            "display": "Declined"
+        },
+        {
+            "value": "tentative",
+            "display": "Tentative"
+        },
+        {
+            "value": "needs-action",
+            "display": "Needs Action"
+        }
+    ]
+}

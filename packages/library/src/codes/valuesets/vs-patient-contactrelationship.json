@@ -1,0 +1,57 @@
+{
+    "id": "patient-contactrelationship",
+    "name": "PatientContactRelationship",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/patient-contactrelationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BP",
+            "display": "Billing contact person"
+        },
+        {
+            "value": "CP",
+            "display": "Contact person"
+        },
+        {
+            "value": "EP",
+            "display": "Emergency contact person"
+        },
+        {
+            "value": "PR",
+            "display": "Person preparing referral"
+        },
+        {
+            "value": "E",
+            "display": "Employer"
+        },
+        {
+            "value": "C",
+            "display": "Emergency Contact"
+        },
+        {
+            "value": "F",
+            "display": "Federal Agency"
+        },
+        {
+            "value": "I",
+            "display": "Insurance Company"
+        },
+        {
+            "value": "N",
+            "display": "Next-of-Kin"
+        },
+        {
+            "value": "S",
+            "display": "State Agency"
+        },
+        {
+            "value": "O",
+            "display": "Other"
+        },
+        {
+            "value": "U",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "procedure-not-performed-reason",
+    "name": "ProcedureNotPerformedReasonSNOMEDCT",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/procedure-not-performed-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "410536001",
+            "display": "n/a"
+        }
+    ]
+}

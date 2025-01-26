@@ -1,0 +1,161 @@
+{
+    "id": "service-category",
+    "name": "ServiceCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Adoption"
+        },
+        {
+            "value": "2",
+            "display": "Aged Care"
+        },
+        {
+            "value": "34",
+            "display": "Allied Health"
+        },
+        {
+            "value": "3",
+            "display": "Alternative/Complementary Therapies"
+        },
+        {
+            "value": "4",
+            "display": "Child Care /Kindergarten"
+        },
+        {
+            "value": "5",
+            "display": "Child Development"
+        },
+        {
+            "value": "6",
+            "display": "Child Protection & Family Services"
+        },
+        {
+            "value": "7",
+            "display": "Community Health Care"
+        },
+        {
+            "value": "8",
+            "display": "Counselling"
+        },
+        {
+            "value": "36",
+            "display": "Crisis Line (GPAH use only)"
+        },
+        {
+            "value": "9",
+            "display": "Death Services"
+        },
+        {
+            "value": "10",
+            "display": "Dental"
+        },
+        {
+            "value": "11",
+            "display": "Disability Support"
+        },
+        {
+            "value": "12",
+            "display": "Drug/Alcohol"
+        },
+        {
+            "value": "13",
+            "display": "Education & Learning"
+        },
+        {
+            "value": "14",
+            "display": "Emergency Department"
+        },
+        {
+            "value": "15",
+            "display": "Employment"
+        },
+        {
+            "value": "16",
+            "display": "Financial & Material Aid"
+        },
+        {
+            "value": "17",
+            "display": "General Practice"
+        },
+        {
+            "value": "35",
+            "display": "Hospital"
+        },
+        {
+            "value": "18",
+            "display": "Housing/Homelessness"
+        },
+        {
+            "value": "19",
+            "display": "Interpreting"
+        },
+        {
+            "value": "20",
+            "display": "Justice"
+        },
+        {
+            "value": "21",
+            "display": "Legal"
+        },
+        {
+            "value": "22",
+            "display": "Mental Health"
+        },
+        {
+            "value": "38",
+            "display": "NDIA"
+        },
+        {
+            "value": "23",
+            "display": "Physical Activity & Recreation"
+        },
+        {
+            "value": "24",
+            "display": "Regulation"
+        },
+        {
+            "value": "25",
+            "display": "Respite/Carer Support"
+        },
+        {
+            "value": "26",
+            "display": "Specialist Clinical Pathology"
+        },
+        {
+            "value": "27",
+            "display": "Specialist Medical"
+        },
+        {
+            "value": "28",
+            "display": "Specialist Obstetrics & Gynecology"
+        },
+        {
+            "value": "29",
+            "display": "Specialist Paediatric"
+        },
+        {
+            "value": "30",
+            "display": "Specialist Radiology/Imaging"
+        },
+        {
+            "value": "31",
+            "display": "Specialist Surgical"
+        },
+        {
+            "value": "32",
+            "display": "Support Group/s"
+        },
+        {
+            "value": "37",
+            "display": "Test Message (HSD admin)"
+        },
+        {
+            "value": "33",
+            "display": "Transport"
+        }
+    ]
+}

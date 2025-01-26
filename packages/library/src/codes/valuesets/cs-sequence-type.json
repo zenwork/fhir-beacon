@@ -1,0 +1,20 @@
+{
+    "id": "sequence-type",
+    "name": "SequenceType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "aa",
+            "display": "AA Sequence"
+        },
+        {
+            "value": "dna",
+            "display": "DNA Sequence"
+        },
+        {
+            "value": "rna",
+            "display": "RNA Sequence"
+        }
+    ]
+}

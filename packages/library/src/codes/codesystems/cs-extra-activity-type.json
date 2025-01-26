@@ -1,0 +1,21 @@
+{
+    "id": "extra-activity-type",
+    "name": "ExtraActivityType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/extra-activity-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "aggregate",
+            "display": "aggregate"
+        },
+        {
+            "value": "compose",
+            "display": "compose"
+        },
+        {
+            "value": "label",
+            "display": "label"
+        }
+    ]
+}

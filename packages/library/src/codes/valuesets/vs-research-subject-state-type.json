@@ -1,0 +1,17 @@
+{
+    "id": "research-subject-state-type",
+    "name": "ResearchSubjectStateType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/research-subject-state-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Milestone",
+            "display": "Milestone status"
+        },
+        {
+            "value": "Enrollment",
+            "display": "Enrollment status"
+        }
+    ]
+}

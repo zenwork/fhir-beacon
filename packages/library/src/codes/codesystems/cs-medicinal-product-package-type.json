@@ -1,0 +1,57 @@
+{
+    "id": "medicinal-product-package-type",
+    "name": "MedicinalProductPackageType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-package-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "100000073490",
+            "display": "Ampoule"
+        },
+        {
+            "value": "100000073491",
+            "display": "Applicator"
+        },
+        {
+            "value": "100000073492",
+            "display": "Automatic injection device"
+        },
+        {
+            "value": "100000073493",
+            "display": "Bag"
+        },
+        {
+            "value": "100000073494",
+            "display": "Balling gun"
+        },
+        {
+            "value": "100000073495",
+            "display": "Barrel"
+        },
+        {
+            "value": "100000073496",
+            "display": "Blister"
+        },
+        {
+            "value": "100000073497",
+            "display": "Bottle"
+        },
+        {
+            "value": "100000073498",
+            "display": "Box"
+        },
+        {
+            "value": "100000073547",
+            "display": "Sachet"
+        },
+        {
+            "value": "100000073563",
+            "display": "Vial"
+        },
+        {
+            "value": "100000143555",
+            "display": "Pack"
+        }
+    ]
+}

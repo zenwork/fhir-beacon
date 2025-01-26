@@ -1,0 +1,25 @@
+{
+    "id": "codesystem-hierarchy-meaning",
+    "name": "CodeSystemHierarchyMeaning",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/codesystem-hierarchy-meaning",
+    "valid": true,
+    "choices": [
+        {
+            "value": "grouped-by",
+            "display": "Grouped By"
+        },
+        {
+            "value": "is-a",
+            "display": "Is-A"
+        },
+        {
+            "value": "part-of",
+            "display": "Part Of"
+        },
+        {
+            "value": "classified-with",
+            "display": "Classified With"
+        }
+    ]
+}

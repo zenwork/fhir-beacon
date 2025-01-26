@@ -1,5 +1,10 @@
-import {URI}                              from '../../components/primitive/primitive.data'
+import {Codes}                           from '../../codes/Codes'
+import {CodeIds}                         from '../../codes/types'
+import {CodeableConceptData, CodingData} from '../../components'
+import {Code, URI}                       from '../../components/primitive/primitive.data'
+import {Choices}                         from '../../valuesets/ValueSet.data'
 import {DomainResourceData, ResourceData} from '../resource/domain-resource.data'
+
 
 
 type ErrorKeys = '_root' | string
@@ -14,7 +19,6 @@ export type Errors = Record<ErrorKeys, ErrorItems | string>
 
 export type MetaDecoration = { hide: boolean }
 export type Decoration = {
-  [key: string]: any,
   [errors]: Errors
   [meta]: MetaDecoration
 
@@ -46,6 +50,7 @@ export type FhirElementData = {
  */
 export type Extension = FhirElementData & {
   url: URI
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   value: any //should be like what I did in Ingredient. see: http://hl7.org/fhir/R5/extensibility.html#Extension and
              // http://hl7.org/fhir/R5/datatypes.html#open
 }
@@ -63,11 +68,23 @@ export type ValidationError = { key: string, err: string }
  */
 export type ValidationErrors = { [key: string]: string }
 
+type ErrorKey = { parent?: string[], key: string }
+
+type Error = { err: string }
+
+type CodeIdPair = { code: Code | undefined, id: CodeIds }
+
+type CodeableConceptIdPair = {
+  value: CodeableConceptData | CodeableConceptData[] | undefined,
+  id: CodeIds
+}
+
 export interface Validations {
   errFor(key: string): string | undefined
-  addErr(err: { parent?: string[], key: string, err: string }): void
+  addErr(err: ErrorKey & Error): void
   remErr(key: string): void
-
+  validateCode(props: ErrorKey & CodeIdPair): boolean
+  validateCodeableConcept(props: ErrorKey & CodeableConceptIdPair): void
 }
 
 /**
@@ -80,22 +97,23 @@ export interface Validations {
 export type Decorated<T extends FhirElementData | DomainResourceData> = T & Decoration
 
 export class ValidationsImpl<D extends FhirElementData> implements Validations {
-  private readonly data: Decorated<D>
-
-  constructor(decorated: Decorated<D>) {this.data = decorated}
+  readonly #data: Decorated<D>
+  #codes = new Codes()
+  constructor(decorated: Decorated<D>) {this.#data = decorated}
 
   public errFor(key: string): string | undefined {
-    const error: unknown = this.data[errors][key]
+    const error: unknown = this.#data[errors][key]
     if (typeof error === 'string') return error
     return undefined
   }
 
   public addErr(props: { parent?: string[], key: string, err: string }): void {
     if (!props.parent) {
-      this.data[errors][props.key] = props.err
+      this.#data[errors][props.key] = props.err
     } else {
 
-      let root: any = this.data[errors]
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      let root: any = this.#data[errors]
       props.parent.forEach(p => {
         root[p] = { '_root': '' }
         root = root[p]
@@ -105,7 +123,66 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
   }
 
   public remErr(key: string): void {
-    delete this.data[errors][key]
+    delete this.#data[errors][key]
+  }
+
+  public validateCode({ key, code, id }: { key: string, code: Code, id: CodeIds }): boolean {
+    const codes = this.code(id)
+    if (codes) {
+      const valid: boolean = codes.choices.some(choice => code === choice.value)
+      if (!valid) {
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        const choiceList: any = codes.choices.map(c => c.value).join(', ')
+        this.addErr(
+          {
+            key: key,
+            err: `${code} is not a valid ${id} code. Valid codes are: ${choiceList}`
+          })
+      }
+      return valid
+    }
+    return false
+  }
+
+  public validateCodeableConcept({ key, value, id }: {
+    key: string,
+    value: CodeableConceptData | CodeableConceptData[] | undefined,
+    id: CodeIds
+  }): boolean {
+    const codes = this.code(id)
+
+    const validateOne = (coding: CodingData, i: number) => {
+      const valid: boolean =
+        codes.choices.some(choice => {
+          return coding.code === choice.value
+                 && coding.system === codes.system
+        })
+
+      if (!valid) {
+        const choices: string = codes.choices.map(c => c.value).join(', ')
+        this.addErr(
+          {
+            key: `${key}::${i}`,
+            err: `${coding.code} is not a valid ${id} code. Valid codes are: ${choices}`
+          }
+        )
+      }
+
+    }
+
+    if (value) {
+      if (value instanceof Array) {
+        value.forEach(validateOne)
+      } else {
+        validateOne(value.coding as CodingData, 0)
+      }
+    }
+
+    return false
+  }
+
+  private code(id: CodeIds): Choices {
+    return this.#codes.get(id)!
   }
 }
 
@@ -126,6 +203,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
 export const NoDataObject: FhirElementData | ResourceData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
 export function decorate<T extends FhirElementData>(data?: T): Decorated<T> {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const d: any = data !== NoDataObject ? data : {}
   return {
     ...d,

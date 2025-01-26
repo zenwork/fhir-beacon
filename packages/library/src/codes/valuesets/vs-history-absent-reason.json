@@ -1,0 +1,25 @@
+{
+    "id": "history-absent-reason",
+    "name": "FamilyHistoryAbsentReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/history-absent-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "subject-unknown",
+            "display": "Subject Unknown"
+        },
+        {
+            "value": "withheld",
+            "display": "Information Withheld"
+        },
+        {
+            "value": "unable-to-obtain",
+            "display": "Unable To Obtain"
+        },
+        {
+            "value": "deferred",
+            "display": "Deferred"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "specimen-contained-preference",
+    "name": "SpecimenContainedPreference",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        },
+        {
+            "value": "alternate",
+            "display": "Alternate"
+        }
+    ]
+}

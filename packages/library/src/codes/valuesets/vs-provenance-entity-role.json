@@ -1,0 +1,28 @@
+{
+    "id": "provenance-entity-role",
+    "name": "ProvenanceEntityRole",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "revision",
+            "display": "Revision"
+        },
+        {
+            "value": "quotation",
+            "display": "Quotation"
+        },
+        {
+            "value": "source",
+            "display": "Source"
+        },
+        {
+            "value": "instantiates",
+            "display": "Instantiates"
+        },
+        {
+            "value": "removal",
+            "display": "Removal"
+        }
+    ]
+}

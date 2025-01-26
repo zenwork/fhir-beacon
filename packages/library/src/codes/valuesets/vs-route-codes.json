@@ -1,0 +1,8 @@
+{
+    "id": "route-codes",
+    "name": "SNOMEDCTRouteCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/route-codes",
+    "valid": true,
+    "choices": []
+}

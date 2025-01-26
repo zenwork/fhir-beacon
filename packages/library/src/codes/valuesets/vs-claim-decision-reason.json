@@ -1,0 +1,28 @@
+{
+    "id": "claim-decision-reason",
+    "name": "ClaimAdjudicationDecisionReasonCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "0001",
+            "display": "Not medically necessary"
+        },
+        {
+            "value": "0002",
+            "display": "Prior authorization not obtained"
+        },
+        {
+            "value": "0003",
+            "display": "Provider out-of-network"
+        },
+        {
+            "value": "0004",
+            "display": "Service inconsistent with patient age"
+        },
+        {
+            "value": "0005",
+            "display": "Benefit limits exceeded"
+        }
+    ]
+}

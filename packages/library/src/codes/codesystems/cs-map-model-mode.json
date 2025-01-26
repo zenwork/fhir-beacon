@@ -1,0 +1,25 @@
+{
+    "id": "map-model-mode",
+    "name": "StructureMapModelMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/map-model-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "source",
+            "display": "Source Structure Definition"
+        },
+        {
+            "value": "queried",
+            "display": "Queried Structure Definition"
+        },
+        {
+            "value": "target",
+            "display": "Target Structure Definition"
+        },
+        {
+            "value": "produced",
+            "display": "Produced Structure Definition"
+        }
+    ]
+}

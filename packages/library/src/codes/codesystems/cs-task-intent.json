@@ -1,0 +1,13 @@
+{
+    "id": "task-intent",
+    "name": "TaskIntent",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/task-intent",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

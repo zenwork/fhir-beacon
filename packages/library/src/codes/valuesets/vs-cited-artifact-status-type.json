@@ -1,0 +1,72 @@
+{
+    "id": "cited-artifact-status-type",
+    "name": "CitedArtifactStatusType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "created",
+            "display": "Created"
+        },
+        {
+            "value": "submitted",
+            "display": "Submitted"
+        },
+        {
+            "value": "withdrawn",
+            "display": "Withdrawn"
+        },
+        {
+            "value": "pre-review",
+            "display": "Pre review"
+        },
+        {
+            "value": "under-review",
+            "display": "Under review"
+        },
+        {
+            "value": "post-review-pre-published",
+            "display": "Post review pre published"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        },
+        {
+            "value": "published-early-form",
+            "display": "Published early form"
+        },
+        {
+            "value": "published-final-form",
+            "display": "Published final form"
+        },
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "archived",
+            "display": "Archived"
+        },
+        {
+            "value": "retracted",
+            "display": "Retracted"
+        },
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "approved",
+            "display": "Approved"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

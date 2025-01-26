@@ -1,0 +1,20 @@
+{
+    "id": "reference-version-rules",
+    "name": "ReferenceVersionRules",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "either",
+            "display": "Either Specific or independent"
+        },
+        {
+            "value": "independent",
+            "display": "Version independent"
+        },
+        {
+            "value": "specific",
+            "display": "Version Specific"
+        }
+    ]
+}

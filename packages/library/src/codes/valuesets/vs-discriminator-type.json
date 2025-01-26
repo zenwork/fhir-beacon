@@ -1,0 +1,32 @@
+{
+    "id": "discriminator-type",
+    "name": "DiscriminatorType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "value",
+            "display": "Value"
+        },
+        {
+            "value": "exists",
+            "display": "Exists"
+        },
+        {
+            "value": "pattern",
+            "display": "Pattern"
+        },
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "profile",
+            "display": "Profile"
+        },
+        {
+            "value": "position",
+            "display": "Position"
+        }
+    ]
+}

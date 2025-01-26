@@ -1,0 +1,24 @@
+{
+    "id": "inventoryreport-status",
+    "name": "InventoryReportStatus",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "requested",
+            "display": "Requested"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

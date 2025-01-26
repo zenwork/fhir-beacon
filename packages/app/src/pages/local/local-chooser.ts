@@ -129,8 +129,10 @@ export class LocalChooser extends SignalWatcher(LitElement) {
                                data: this.toJson(blob),
       mode:DisplayMode.display,
       showerrors: false,
-      headless: false,
-      open: false
+      headless: true,
+      open: false,
+      summary: false,
+      verbose: false,
 
     })
     this.requestUpdate('state')

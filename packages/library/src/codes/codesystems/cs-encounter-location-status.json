@@ -1,0 +1,25 @@
+{
+    "id": "encounter-location-status",
+    "name": "EncounterLocationStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/encounter-location-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "reserved",
+            "display": "Reserved"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        }
+    ]
+}

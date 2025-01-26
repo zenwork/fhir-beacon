@@ -1,0 +1,29 @@
+{
+    "id": "report-status-codes",
+    "name": "TestReportStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/report-status-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "waiting",
+            "display": "Waiting"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

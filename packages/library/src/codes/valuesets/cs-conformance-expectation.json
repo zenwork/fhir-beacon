@@ -1,0 +1,24 @@
+{
+    "id": "conformance-expectation",
+    "name": "ConformanceExpectation",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SHALL",
+            "display": "SHALL"
+        },
+        {
+            "value": "SHOULD",
+            "display": "SHOULD"
+        },
+        {
+            "value": "MAY",
+            "display": "MAY"
+        },
+        {
+            "value": "SHOULD-NOT",
+            "display": "SHOULD-NOT"
+        }
+    ]
+}

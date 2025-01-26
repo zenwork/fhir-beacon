@@ -1,0 +1,29 @@
+{
+    "id": "deviceassociation-status",
+    "name": "DeviceAssociation",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/deviceassociation-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "implanted",
+            "display": "Implanted"
+        },
+        {
+            "value": "explanted",
+            "display": "Explanted"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "attached",
+            "display": "Attached"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

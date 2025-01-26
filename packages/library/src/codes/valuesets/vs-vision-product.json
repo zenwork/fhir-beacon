@@ -1,0 +1,17 @@
+{
+    "id": "vision-product",
+    "name": "ExampleVisionPrescriptionProductCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/vision-product",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lens",
+            "display": "Lens"
+        },
+        {
+            "value": "contact",
+            "display": "Contact Lens"
+        }
+    ]
+}

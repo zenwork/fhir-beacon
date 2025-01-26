@@ -1,0 +1,16 @@
+{
+    "id": "event-capability-mode",
+    "name": "EventCapabilityMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sender",
+            "display": "Sender"
+        },
+        {
+            "value": "receiver",
+            "display": "Receiver"
+        }
+    ]
+}

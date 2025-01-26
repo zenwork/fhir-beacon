@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, TemplateResult}                          from 'lit'
-import {customElement}                                 from 'lit/decorators.js'
-import {BaseElement, choiceOf, Decorated, Validations} from '../../../internal'
-import {DisplayConfig}                                 from '../../../types'
-import {PrimitiveType}                                 from '../../primitive/type-converters/type-converters'
-import {AnnotationData}                                from './annotation.data'
+import {html, TemplateResult}                       from 'lit'
+import {customElement}                              from 'lit/decorators.js'
+import {BaseElement, Decorated, oneOf, Validations} from '../../../internal'
+import {DisplayConfig}                              from '../../../types'
+import {PrimitiveType}                              from '../../primitive/type-converters/type-converters'
+import {AnnotationData}                             from './annotation.data'
 
 
 
@@ -37,10 +37,10 @@ export class Annotation extends BaseElement<AnnotationData> {
   }
 
   protected renderAll(data: Decorated<AnnotationData>): TemplateResult[] {
-    const author = choiceOf(this,
-                            '',
-                            '',
-                            [
+    const author = oneOf(this,
+                         '',
+                         '',
+                         [
                                 {
                                   data: data.authorReference,
                                   html: (d: any) => html`
@@ -65,7 +65,7 @@ export class Annotation extends BaseElement<AnnotationData> {
       html`
           ${author}
           <fhir-primitive key="time" .value=${data.time} .type=${PrimitiveType.datetime} summary></fhir-primitive>
-          <fhir-primitive key="text" .value=${data.text} .type=${PrimitiveType.markdown} summary></fhir-primitive>
+          <fhir-primitive key="text" .value=${data.text} .type=${PrimitiveType.markdown} summary variant="fixed-width"></fhir-primitive>
       `
     ]
   }

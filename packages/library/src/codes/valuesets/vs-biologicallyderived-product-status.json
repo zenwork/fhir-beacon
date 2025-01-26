@@ -1,0 +1,16 @@
+{
+    "id": "biologicallyderived-product-status",
+    "name": "BiologicallyDerivedProductStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "unavailable",
+            "display": "Unavailable"
+        }
+    ]
+}

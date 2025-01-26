@@ -1,0 +1,29 @@
+{
+    "id": "genomicstudy-status",
+    "name": "GenomicStudyStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/genomicstudy-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registered",
+            "display": "Registered"
+        },
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

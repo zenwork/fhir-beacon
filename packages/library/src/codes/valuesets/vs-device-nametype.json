@@ -1,0 +1,20 @@
+{
+    "id": "device-nametype",
+    "name": "DeviceNameType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registered-name",
+            "display": "Registered name"
+        },
+        {
+            "value": "user-friendly-name",
+            "display": "User Friendly name"
+        },
+        {
+            "value": "patient-reported-name",
+            "display": "Patient Reported name"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "id": "observation-category",
+    "name": "ObservationCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "social-history",
+            "display": "Social History"
+        },
+        {
+            "value": "vital-signs",
+            "display": "Vital Signs"
+        },
+        {
+            "value": "imaging",
+            "display": "Imaging"
+        },
+        {
+            "value": "laboratory",
+            "display": "Laboratory"
+        },
+        {
+            "value": "procedure",
+            "display": "Procedure"
+        },
+        {
+            "value": "survey",
+            "display": "Survey"
+        },
+        {
+            "value": "exam",
+            "display": "Exam"
+        },
+        {
+            "value": "therapy",
+            "display": "Therapy"
+        },
+        {
+            "value": "activity",
+            "display": "Activity"
+        }
+    ]
+}

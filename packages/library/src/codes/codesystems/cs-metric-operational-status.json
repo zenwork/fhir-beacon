@@ -1,0 +1,25 @@
+{
+    "id": "metric-operational-status",
+    "name": "DeviceMetricOperationalStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/metric-operational-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "on",
+            "display": "On"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "standby",
+            "display": "Standby"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

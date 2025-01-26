@@ -1,0 +1,16 @@
+{
+    "id": "related-artifact-type-expanded",
+    "name": "RelatedArtifactTypeExpanded",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reprint",
+            "display": "Reprint"
+        },
+        {
+            "value": "reprint-of",
+            "display": "Reprint Of"
+        }
+    ]
+}

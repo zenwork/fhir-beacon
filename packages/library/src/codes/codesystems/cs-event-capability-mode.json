@@ -1,0 +1,17 @@
+{
+    "id": "event-capability-mode",
+    "name": "EventCapabilityMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/event-capability-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sender",
+            "display": "Sender"
+        },
+        {
+            "value": "receiver",
+            "display": "Receiver"
+        }
+    ]
+}

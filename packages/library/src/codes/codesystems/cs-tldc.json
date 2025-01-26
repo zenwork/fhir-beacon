@@ -1,0 +1,41 @@
+{
+    "id": "tldc",
+    "name": "TemplateStatusCodeLifeCycle",
+    "type": "CodeSystem",
+    "system": "urn:oid:2.16.840.1.113883.3.1937.98.5.8",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "pending",
+            "display": "Under pre-publication review"
+        },
+        {
+            "value": "active",
+            "display": "active"
+        },
+        {
+            "value": "review",
+            "display": "In Review"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        },
+        {
+            "value": "retired",
+            "display": "retired"
+        },
+        {
+            "value": "terminated",
+            "display": "Terminated"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "subscription-payload-content",
+    "name": "SubscriptionPayloadContent",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "empty",
+            "display": "Empty"
+        },
+        {
+            "value": "id-only",
+            "display": "Id-only"
+        },
+        {
+            "value": "full-resource",
+            "display": "Full-resource"
+        }
+    ]
+}

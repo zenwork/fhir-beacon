@@ -1,0 +1,24 @@
+{
+    "id": "service-mode",
+    "name": "ServiceMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-person",
+            "display": "In Person"
+        },
+        {
+            "value": "telephone",
+            "display": "Telephone"
+        },
+        {
+            "value": "videoconference",
+            "display": "Video Conference"
+        },
+        {
+            "value": "chat",
+            "display": "Chat/Messaging"
+        }
+    ]
+}

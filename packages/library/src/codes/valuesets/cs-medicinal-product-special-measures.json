@@ -1,0 +1,12 @@
+{
+    "id": "medicinal-product-special-measures",
+    "name": "SpecialMeasures",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Post-authorizationStudies",
+            "display": "Requirement to conduct post-authorization studies"
+        }
+    ]
+}

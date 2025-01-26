@@ -1,0 +1,76 @@
+{
+    "id": "map-transform",
+    "name": "StructureMapTransform",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "create",
+            "display": "create"
+        },
+        {
+            "value": "copy",
+            "display": "copy"
+        },
+        {
+            "value": "truncate",
+            "display": "truncate"
+        },
+        {
+            "value": "escape",
+            "display": "escape"
+        },
+        {
+            "value": "cast",
+            "display": "cast"
+        },
+        {
+            "value": "append",
+            "display": "append"
+        },
+        {
+            "value": "translate",
+            "display": "translate"
+        },
+        {
+            "value": "reference",
+            "display": "reference"
+        },
+        {
+            "value": "dateOp",
+            "display": "dateOp"
+        },
+        {
+            "value": "uuid",
+            "display": "uuid"
+        },
+        {
+            "value": "pointer",
+            "display": "pointer"
+        },
+        {
+            "value": "evaluate",
+            "display": "evaluate"
+        },
+        {
+            "value": "cc",
+            "display": "cc"
+        },
+        {
+            "value": "c",
+            "display": "c"
+        },
+        {
+            "value": "qty",
+            "display": "qty"
+        },
+        {
+            "value": "id",
+            "display": "id"
+        },
+        {
+            "value": "cp",
+            "display": "cp"
+        }
+    ]
+}

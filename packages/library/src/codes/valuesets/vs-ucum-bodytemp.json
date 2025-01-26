@@ -1,0 +1,17 @@
+{
+    "id": "ucum-bodytemp",
+    "name": "BodyTemperatureUnits",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ucum-bodytemp",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Cel",
+            "display": "n/a"
+        },
+        {
+            "value": "[degF]",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "assert-direction-codes",
+    "name": "AssertionDirectionType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/assert-direction-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "response",
+            "display": "response"
+        },
+        {
+            "value": "request",
+            "display": "request"
+        }
+    ]
+}

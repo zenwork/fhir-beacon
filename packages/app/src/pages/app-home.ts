@@ -26,12 +26,47 @@ export class AppHome extends LitElement {
             <p>Demo app for showing capabilities of the fhir-beacon library</p>
 
             <h3>features</h3>
-            <ol>
-                <li>local - access and view locally stored files</li>
-                <li>remote - query a server</li>
-            </ol>
-                <hr style="margin:2rem 0 2rem 0;">
-            <h3>import / export</h3>
+            <ul>
+                <li><h4>general</h4>
+                    <p>This app is a demo space. At the moment there are two simple data browsers.</p>
+                    <h5>Known Issues</h5>
+                    <ol>
+                        <li>Some UI components used are subject to CORS issues if you are running this behind a
+                            corporate firewall or VPN.
+                        </li>
+                        <li>Medication, Patient, and Observation have received the most attention</li>
+                    </ol>
+                </li>
+                <li><h4>local client</h4>
+                    <p>In this tab you can access and view locally stored FHIR json files</p>
+                    <h5>Known Issues</h5>
+                    <ol>
+                        <li>The library only supports a few resource types at the moment. They come up first in the
+                            drop-down menu
+                        </li>
+                        <li>Only work on desktop browsers that support local file access. Support varies. The best
+                            experience is on Chrome on desktop.
+                        </li>
+                    </ol>
+                </li>
+                <li><h4>remote client</h4>
+                    <p>In this tab you can access and view remote data. You can load sample queries by pressing the 'Use
+                       HAPI-FHIR Sample' button and the 'Import DB'. You can also export your queries with the 'Export
+                       DB' button and then copy/pasting the export data somewhere.</p>
+                    <h5>Known Issues</h5>
+                    <ol>
+                        <li>only supports GET</li>
+                        <li>only tested against the HAPI FHIR test site</li>
+
+                    </ol>
+                </li>
+            </ul>
+            <hr style="margin:2rem 0 2rem 0;">
+            <h3>import / export for
+                <r></r>
+                emote client
+            </h3>
+            <p>Use this area to import or export remote queries. </p>
             <div style="display: flex; gap:2rem">
                 <div style="display:flex;flex-direction: column; width:40vw">
                     <sl-textarea
@@ -70,7 +105,7 @@ export class AppHome extends LitElement {
                             >Import DB
                             </sl-button>
                             <sl-button @click=${() => {
-                              this.importData = JSON.stringify(sample, null, 2)
+                                this.importData = JSON.stringify(sample, null, 2)
                                 this.requestUpdate()
                             }}
                             >Use HAPI-FHIR Sample

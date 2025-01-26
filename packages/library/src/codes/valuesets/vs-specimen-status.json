@@ -1,0 +1,24 @@
+{
+    "id": "specimen-status",
+    "name": "SpecimenStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "unavailable",
+            "display": "Unavailable"
+        },
+        {
+            "value": "unsatisfactory",
+            "display": "Unsatisfactory"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

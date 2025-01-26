@@ -1,0 +1,28 @@
+{
+    "id": "report-status-codes",
+    "name": "TestReportStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "waiting",
+            "display": "Waiting"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

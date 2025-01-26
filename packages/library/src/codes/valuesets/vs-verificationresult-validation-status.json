@@ -1,0 +1,21 @@
+{
+    "id": "verificationresult-validation-status",
+    "name": "ValidationStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-validation-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "successful",
+            "display": "Successful"
+        },
+        {
+            "value": "failed",
+            "display": "Failed"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

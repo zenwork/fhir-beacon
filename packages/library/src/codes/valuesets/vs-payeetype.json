@@ -1,0 +1,25 @@
+{
+    "id": "payeetype",
+    "name": "ClaimPayeeTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/payeetype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "subscriber",
+            "display": "Subscriber"
+        },
+        {
+            "value": "provider",
+            "display": "Provider"
+        },
+        {
+            "value": "beneficiary",
+            "display": "Beneficiary"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

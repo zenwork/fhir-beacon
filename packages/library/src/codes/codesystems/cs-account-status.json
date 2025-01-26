@@ -1,0 +1,29 @@
+{
+    "id": "account-status",
+    "name": "AccountStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/account-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in error"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

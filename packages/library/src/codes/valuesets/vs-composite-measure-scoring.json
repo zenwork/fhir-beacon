@@ -1,0 +1,25 @@
+{
+    "id": "composite-measure-scoring",
+    "name": "CompositeMeasureScoring",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/composite-measure-scoring",
+    "valid": true,
+    "choices": [
+        {
+            "value": "opportunity",
+            "display": "Opportunity"
+        },
+        {
+            "value": "all-or-nothing",
+            "display": "All-or-nothing"
+        },
+        {
+            "value": "linear",
+            "display": "Linear"
+        },
+        {
+            "value": "weighted",
+            "display": "Weighted"
+        }
+    ]
+}

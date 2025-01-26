@@ -1,0 +1,16 @@
+{
+    "id": "resource-aggregation-mode",
+    "name": "AggregationMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "contained",
+            "display": "Contained"
+        },
+        {
+            "value": "referenced",
+            "display": "Referenced"
+        }
+    ]
+}

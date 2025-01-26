@@ -1,0 +1,24 @@
+{
+    "id": "eligibilityresponse-purpose",
+    "name": "EligibilityResponsePurpose",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "auth-requirements",
+            "display": "Coverage auth-requirements"
+        },
+        {
+            "value": "benefits",
+            "display": "Coverage benefits"
+        },
+        {
+            "value": "discovery",
+            "display": "Coverage Discovery"
+        },
+        {
+            "value": "validation",
+            "display": "Coverage Validation"
+        }
+    ]
+}

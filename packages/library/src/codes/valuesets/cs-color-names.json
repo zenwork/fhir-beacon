@@ -1,0 +1,600 @@
+{
+    "id": "color-names",
+    "name": "ColorCodes",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "aliceblue",
+            "display": "aliceblue"
+        },
+        {
+            "value": "antiquewhite",
+            "display": "antiquewhite"
+        },
+        {
+            "value": "aqua",
+            "display": "aqua"
+        },
+        {
+            "value": "aquamarine",
+            "display": "aquamarine"
+        },
+        {
+            "value": "azure",
+            "display": "azure"
+        },
+        {
+            "value": "beige",
+            "display": "beige"
+        },
+        {
+            "value": "bisque",
+            "display": "bisque"
+        },
+        {
+            "value": "black",
+            "display": "black"
+        },
+        {
+            "value": "blanchedalmond",
+            "display": "blanchedalmond"
+        },
+        {
+            "value": "blue",
+            "display": "blue"
+        },
+        {
+            "value": "blueviolet",
+            "display": "blueviolet"
+        },
+        {
+            "value": "brown",
+            "display": "brown"
+        },
+        {
+            "value": "burlywood",
+            "display": "burlywood"
+        },
+        {
+            "value": "cadetblue",
+            "display": "cadetblue"
+        },
+        {
+            "value": "chartreuse",
+            "display": "chartreuse"
+        },
+        {
+            "value": "chocolate",
+            "display": "chocolate"
+        },
+        {
+            "value": "coral",
+            "display": "coral"
+        },
+        {
+            "value": "cornflowerblue",
+            "display": "cornflowerblue"
+        },
+        {
+            "value": "cornsilk",
+            "display": "cornsilk"
+        },
+        {
+            "value": "crimson",
+            "display": "crimson"
+        },
+        {
+            "value": "cyan",
+            "display": "cyan"
+        },
+        {
+            "value": "darkblue",
+            "display": "darkblue"
+        },
+        {
+            "value": "darkcyan",
+            "display": "darkcyan"
+        },
+        {
+            "value": "darkgoldenrod",
+            "display": "darkgoldenrod"
+        },
+        {
+            "value": "darkgray",
+            "display": "darkgray"
+        },
+        {
+            "value": "darkgreen",
+            "display": "darkgreen"
+        },
+        {
+            "value": "darkgrey",
+            "display": "darkgrey"
+        },
+        {
+            "value": "darkkhaki",
+            "display": "darkkhaki"
+        },
+        {
+            "value": "darkmagenta",
+            "display": "darkmagenta"
+        },
+        {
+            "value": "darkolivegreen",
+            "display": "darkolivegreen"
+        },
+        {
+            "value": "darkorange",
+            "display": "darkorange"
+        },
+        {
+            "value": "darkorchid",
+            "display": "darkorchid"
+        },
+        {
+            "value": "darkred",
+            "display": "darkred"
+        },
+        {
+            "value": "darksalmon",
+            "display": "darksalmon"
+        },
+        {
+            "value": "darkseagreen",
+            "display": "darkseagreen"
+        },
+        {
+            "value": "darkslateblue",
+            "display": "darkslateblue"
+        },
+        {
+            "value": "darkslategray",
+            "display": "darkslategray"
+        },
+        {
+            "value": "darkslategrey",
+            "display": "darkslategrey"
+        },
+        {
+            "value": "darkturquoise",
+            "display": "darkturquoise"
+        },
+        {
+            "value": "darkviolet",
+            "display": "darkviolet"
+        },
+        {
+            "value": "deeppink",
+            "display": "deeppink"
+        },
+        {
+            "value": "deepskyblue",
+            "display": "deepskyblue"
+        },
+        {
+            "value": "dimgray",
+            "display": "dimgray"
+        },
+        {
+            "value": "dimgrey",
+            "display": "dimgrey"
+        },
+        {
+            "value": "dodgerblue",
+            "display": "dodgerblue"
+        },
+        {
+            "value": "firebrick",
+            "display": "firebrick"
+        },
+        {
+            "value": "floralwhite",
+            "display": "floralwhite"
+        },
+        {
+            "value": "forestgreen",
+            "display": "forestgreen"
+        },
+        {
+            "value": "fuchsia",
+            "display": "fuchsia"
+        },
+        {
+            "value": "gainsboro",
+            "display": "gainsboro"
+        },
+        {
+            "value": "ghostwhite",
+            "display": "ghostwhite"
+        },
+        {
+            "value": "gold",
+            "display": "gold"
+        },
+        {
+            "value": "goldenrod",
+            "display": "goldenrod"
+        },
+        {
+            "value": "gray",
+            "display": "gray"
+        },
+        {
+            "value": "green",
+            "display": "green"
+        },
+        {
+            "value": "greenyellow",
+            "display": "greenyellow"
+        },
+        {
+            "value": "grey",
+            "display": "grey"
+        },
+        {
+            "value": "honeydew",
+            "display": "honeydew"
+        },
+        {
+            "value": "hotpink",
+            "display": "hotpink"
+        },
+        {
+            "value": "indianred",
+            "display": "indianred"
+        },
+        {
+            "value": "indigo",
+            "display": "indigo"
+        },
+        {
+            "value": "ivory",
+            "display": "ivory"
+        },
+        {
+            "value": "khaki",
+            "display": "khaki"
+        },
+        {
+            "value": "lavender",
+            "display": "lavender"
+        },
+        {
+            "value": "lavenderblush",
+            "display": "lavenderblush"
+        },
+        {
+            "value": "lawngreen",
+            "display": "lawngreen"
+        },
+        {
+            "value": "lemonchiffon",
+            "display": "lemonchiffon"
+        },
+        {
+            "value": "lightblue",
+            "display": "lightblue"
+        },
+        {
+            "value": "lightcoral",
+            "display": "lightcoral"
+        },
+        {
+            "value": "lightcyan",
+            "display": "lightcyan"
+        },
+        {
+            "value": "lightgoldenrodyellow",
+            "display": "lightgoldenrodyellow"
+        },
+        {
+            "value": "lightgray",
+            "display": "lightgray"
+        },
+        {
+            "value": "lightgreen",
+            "display": "lightgreen"
+        },
+        {
+            "value": "lightgrey",
+            "display": "lightgrey"
+        },
+        {
+            "value": "lightpink",
+            "display": "lightpink"
+        },
+        {
+            "value": "lightsalmon",
+            "display": "lightsalmon"
+        },
+        {
+            "value": "lightseagreen",
+            "display": "lightseagreen"
+        },
+        {
+            "value": "lightskyblue",
+            "display": "lightskyblue"
+        },
+        {
+            "value": "lightslategray",
+            "display": "lightslategray"
+        },
+        {
+            "value": "lightslategrey",
+            "display": "lightslategrey"
+        },
+        {
+            "value": "lightsteelblue",
+            "display": "lightsteelblue"
+        },
+        {
+            "value": "lightyellow",
+            "display": "lightyellow"
+        },
+        {
+            "value": "lime",
+            "display": "lime"
+        },
+        {
+            "value": "limegreen",
+            "display": "limegreen"
+        },
+        {
+            "value": "linen",
+            "display": "linen"
+        },
+        {
+            "value": "magenta",
+            "display": "magenta"
+        },
+        {
+            "value": "maroon",
+            "display": "maroon"
+        },
+        {
+            "value": "mediumaquamarine",
+            "display": "mediumaquamarine"
+        },
+        {
+            "value": "mediumblue",
+            "display": "mediumblue"
+        },
+        {
+            "value": "mediumorchid",
+            "display": "mediumorchid"
+        },
+        {
+            "value": "mediumpurple",
+            "display": "mediumpurple"
+        },
+        {
+            "value": "mediumseagreen",
+            "display": "mediumseagreen"
+        },
+        {
+            "value": "mediumslateblue",
+            "display": "mediumslateblue"
+        },
+        {
+            "value": "mediumspringgreen",
+            "display": "mediumspringgreen"
+        },
+        {
+            "value": "mediumturquoise",
+            "display": "mediumturquoise"
+        },
+        {
+            "value": "mediumvioletred",
+            "display": "mediumvioletred"
+        },
+        {
+            "value": "midnightblue",
+            "display": "midnightblue"
+        },
+        {
+            "value": "mintcream",
+            "display": "mintcream"
+        },
+        {
+            "value": "mistyrose",
+            "display": "mistyrose"
+        },
+        {
+            "value": "moccasin",
+            "display": "moccasin"
+        },
+        {
+            "value": "navajowhite",
+            "display": "navajowhite"
+        },
+        {
+            "value": "navy",
+            "display": "navy"
+        },
+        {
+            "value": "oldlace",
+            "display": "oldlace"
+        },
+        {
+            "value": "olive",
+            "display": "olive"
+        },
+        {
+            "value": "olivedrab",
+            "display": "olivedrab"
+        },
+        {
+            "value": "orange",
+            "display": "orange"
+        },
+        {
+            "value": "orangered",
+            "display": "orangered"
+        },
+        {
+            "value": "orchid",
+            "display": "orchid"
+        },
+        {
+            "value": "palegoldenrod",
+            "display": "palegoldenrod"
+        },
+        {
+            "value": "palegreen",
+            "display": "palegreen"
+        },
+        {
+            "value": "paleturquoise",
+            "display": "paleturquoise"
+        },
+        {
+            "value": "palevioletred",
+            "display": "palevioletred"
+        },
+        {
+            "value": "papayawhip",
+            "display": "papayawhip"
+        },
+        {
+            "value": "peachpuff",
+            "display": "peachpuff"
+        },
+        {
+            "value": "peru",
+            "display": "peru"
+        },
+        {
+            "value": "pink",
+            "display": "pink"
+        },
+        {
+            "value": "plum",
+            "display": "plum"
+        },
+        {
+            "value": "powderblue",
+            "display": "powderblue"
+        },
+        {
+            "value": "purple",
+            "display": "purple"
+        },
+        {
+            "value": "rebeccapurple",
+            "display": "rebeccapurple"
+        },
+        {
+            "value": "red",
+            "display": "red"
+        },
+        {
+            "value": "rosybrown",
+            "display": "rosybrown"
+        },
+        {
+            "value": "royalblue",
+            "display": "royalblue"
+        },
+        {
+            "value": "saddlebrown",
+            "display": "saddlebrown"
+        },
+        {
+            "value": "salmon",
+            "display": "salmon"
+        },
+        {
+            "value": "sandybrown",
+            "display": "sandybrown"
+        },
+        {
+            "value": "seagreen",
+            "display": "seagreen"
+        },
+        {
+            "value": "seashell",
+            "display": "seashell"
+        },
+        {
+            "value": "sienna",
+            "display": "sienna"
+        },
+        {
+            "value": "silver",
+            "display": "silver"
+        },
+        {
+            "value": "skyblue",
+            "display": "skyblue"
+        },
+        {
+            "value": "slateblue",
+            "display": "slateblue"
+        },
+        {
+            "value": "slategray",
+            "display": "slategray"
+        },
+        {
+            "value": "slategrey",
+            "display": "slategrey"
+        },
+        {
+            "value": "snow",
+            "display": "snow"
+        },
+        {
+            "value": "springgreen",
+            "display": "springgreen"
+        },
+        {
+            "value": "steelblue",
+            "display": "steelblue"
+        },
+        {
+            "value": "tan",
+            "display": "tan"
+        },
+        {
+            "value": "teal",
+            "display": "teal"
+        },
+        {
+            "value": "thistle",
+            "display": "thistle"
+        },
+        {
+            "value": "tomato",
+            "display": "tomato"
+        },
+        {
+            "value": "turquoise",
+            "display": "turquoise"
+        },
+        {
+            "value": "violet",
+            "display": "violet"
+        },
+        {
+            "value": "wheat",
+            "display": "wheat"
+        },
+        {
+            "value": "white",
+            "display": "white"
+        },
+        {
+            "value": "whitesmoke",
+            "display": "whitesmoke"
+        },
+        {
+            "value": "yellow",
+            "display": "yellow"
+        },
+        {
+            "value": "yellowgreen",
+            "display": "yellowgreen"
+        }
+    ]
+}

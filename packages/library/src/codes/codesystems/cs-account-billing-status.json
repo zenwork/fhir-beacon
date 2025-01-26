@@ -1,0 +1,37 @@
+{
+    "id": "account-billing-status",
+    "name": "AccountBillingStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/account-billing-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "open",
+            "display": "Open"
+        },
+        {
+            "value": "carecomplete-notbilled",
+            "display": "CareComplete/Not Billed"
+        },
+        {
+            "value": "billing",
+            "display": "Billing"
+        },
+        {
+            "value": "closed-baddebt",
+            "display": "Closed-Bad Debt"
+        },
+        {
+            "value": "closed-voided",
+            "display": "Closed-Voided"
+        },
+        {
+            "value": "closed-completed",
+            "display": "Closed-Completed"
+        },
+        {
+            "value": "closed-combined",
+            "display": "Closed-Combined"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "performer-role",
+    "name": "ProcedurePerformerRoleCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/performer-role",
+    "valid": true,
+    "choices": []
+}

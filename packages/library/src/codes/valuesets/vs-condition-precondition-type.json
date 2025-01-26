@@ -1,0 +1,16 @@
+{
+    "id": "condition-precondition-type",
+    "name": "ConditionPreconditionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sensitive",
+            "display": "Sensitive"
+        },
+        {
+            "value": "specific",
+            "display": "Specific"
+        }
+    ]
+}

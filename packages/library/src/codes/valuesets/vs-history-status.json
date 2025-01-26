@@ -1,0 +1,24 @@
+{
+    "id": "history-status",
+    "name": "FamilyHistoryStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "partial",
+            "display": "Partial"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "health-unknown",
+            "display": "Health Unknown"
+        }
+    ]
+}

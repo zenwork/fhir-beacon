@@ -1,0 +1,118 @@
+{
+    "id": "consent-policy",
+    "name": "ConsentPolicyRuleCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/consent-policy",
+    "valid": true,
+    "choices": [
+        {
+            "value": "cric",
+            "display": "Common Rule Informed Consent"
+        },
+        {
+            "value": "illinois-minor-procedure",
+            "display": "Illinois Consent by Minors to Medical Procedures"
+        },
+        {
+            "value": "hipaa-auth",
+            "display": "HIPAA Authorization"
+        },
+        {
+            "value": "hipaa-npp",
+            "display": "HIPAA Notice of Privacy Practices"
+        },
+        {
+            "value": "hipaa-restrictions",
+            "display": "HIPAA Restrictions"
+        },
+        {
+            "value": "hipaa-research",
+            "display": "HIPAA Research Authorization"
+        },
+        {
+            "value": "hipaa-self-pay",
+            "display": "HIPAA Self-Pay Restriction"
+        },
+        {
+            "value": "mdhhs-5515",
+            "display": "Michigan MDHHS-5515 Consent to Share Behavioral Health Information for Care Coordination Purposes",
+            
+        },
+        {
+            "value": "nyssipp",
+            "display": "New York State Surgical and Invasive Procedure Protocol"
+        },
+        {
+            "value": "va-10-0484",
+            "display": "VA Form 10-0484"
+        },
+        {
+            "value": "va-10-0485",
+            "display": "VA Form 10-0485"
+        },
+        {
+            "value": "va-10-5345",
+            "display": "VA Form 10-5345"
+        },
+        {
+            "value": "va-10-5345a",
+            "display": "VA Form 10-5345a"
+        },
+        {
+            "value": "va-10-5345a-mhv",
+            "display": "VA Form 10-5345a-MHV"
+        },
+        {
+            "value": "va-10-10116",
+            "display": "VA Form 10-10-10116"
+        },
+        {
+            "value": "va-21-4142",
+            "display": "VA Form 21-4142"
+        },
+        {
+            "value": "ssa-827",
+            "display": "SSA Authorization to Disclose"
+        },
+        {
+            "value": "dch-3927",
+            "display": "Michigan behavior and mental health consent"
+        },
+        {
+            "value": "squaxin",
+            "display": "Squaxin Indian behavioral health and HIPAA consent"
+        },
+        {
+            "value": "nl-lsp",
+            "display": "NL LSP Permission"
+        },
+        {
+            "value": "at-elga",
+            "display": "AT ELGA Opt-in Consent"
+        },
+        {
+            "value": "nih-hipaa",
+            "display": "HHS NIH HIPAA Research Authorization"
+        },
+        {
+            "value": "nci",
+            "display": "NCI Cancer Clinical Trial consent"
+        },
+        {
+            "value": "nih-grdr",
+            "display": "NIH Global Rare Disease Patient Registry and Data Repository consent"
+        },
+        {
+            "value": "nih-527",
+            "display": "NIH Authorization for the Release of Medical Information"
+        },
+        {
+            "value": "ga4gh",
+            "display": "Population origins and ancestry research consent"
+        },
+        {
+            "value": "ch-epr",
+            "display": "CH EPR Consent"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "participant-role",
+    "name": "ParticipantRoles",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/participant-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "429577009",
+            "display": "n/a"
+        },
+        {
+            "value": "116154003",
+            "display": "n/a"
+        },
+        {
+            "value": "133932002",
+            "display": "n/a"
+        }
+    ]
+}

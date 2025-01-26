@@ -1,0 +1,17 @@
+{
+    "id": "action-precheck-behavior",
+    "name": "ActionPrecheckBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-precheck-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "yes",
+            "display": "Yes"
+        },
+        {
+            "value": "no",
+            "display": "No"
+        }
+    ]
+}

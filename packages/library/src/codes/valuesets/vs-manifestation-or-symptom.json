@@ -1,0 +1,8 @@
+{
+    "id": "manifestation-or-symptom",
+    "name": "ManifestationAndSymptomCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/manifestation-or-symptom",
+    "valid": true,
+    "choices": []
+}

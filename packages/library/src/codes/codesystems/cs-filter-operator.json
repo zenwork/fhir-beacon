@@ -1,0 +1,53 @@
+{
+    "id": "filter-operator",
+    "name": "FilterOperator",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/filter-operator",
+    "valid": true,
+    "choices": [
+        {
+            "value": "=",
+            "display": "Equals"
+        },
+        {
+            "value": "is-a",
+            "display": "Is A (by subsumption)"
+        },
+        {
+            "value": "descendent-of",
+            "display": "Descendent Of (by subsumption)"
+        },
+        {
+            "value": "is-not-a",
+            "display": "Not (Is A) (by subsumption)"
+        },
+        {
+            "value": "regex",
+            "display": "Regular Expression"
+        },
+        {
+            "value": "in",
+            "display": "In Set"
+        },
+        {
+            "value": "not-in",
+            "display": "Not in Set"
+        },
+        {
+            "value": "generalizes",
+            "display": "Generalizes (by Subsumption)"
+        },
+        {
+            "value": "child-of",
+            "display": "Child Of"
+        },
+        {
+            "value": "descendent-leaf",
+            "display": "Descendent Leaf"
+        },
+        {
+            "value": "exists",
+            "display": "Exists"
+        }
+    ]
+}

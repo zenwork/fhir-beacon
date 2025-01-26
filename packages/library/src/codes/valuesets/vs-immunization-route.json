@@ -1,0 +1,33 @@
+{
+    "id": "immunization-route",
+    "name": "ImmunizationRouteCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-route",
+    "valid": true,
+    "choices": [
+        {
+            "value": "IDINJ",
+            "display": "Injection, intradermal"
+        },
+        {
+            "value": "IM",
+            "display": "Injection, intramuscular"
+        },
+        {
+            "value": "IVINJ",
+            "display": "Injection, intravenous"
+        },
+        {
+            "value": "PO",
+            "display": "Swallow, oral"
+        },
+        {
+            "value": "SQ",
+            "display": "Injection, subcutaneous"
+        },
+        {
+            "value": "TRNSDERM",
+            "display": "Transdermal"
+        }
+    ]
+}

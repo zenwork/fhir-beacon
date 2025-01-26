@@ -1,0 +1,184 @@
+{
+    "id": "assert-response-code-types",
+    "name": "AssertionResponseTypes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "continue",
+            "display": "Continue"
+        },
+        {
+            "value": "switchingProtocols",
+            "display": "Switching Protocols"
+        },
+        {
+            "value": "okay",
+            "display": "OK"
+        },
+        {
+            "value": "created",
+            "display": "Created"
+        },
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "nonAuthoritativeInformation",
+            "display": "Non-Authoritative Information"
+        },
+        {
+            "value": "noContent",
+            "display": "No Content"
+        },
+        {
+            "value": "resetContent",
+            "display": "Reset Content"
+        },
+        {
+            "value": "partialContent",
+            "display": "Partial Content"
+        },
+        {
+            "value": "multipleChoices",
+            "display": "Multiple Choices"
+        },
+        {
+            "value": "movedPermanently",
+            "display": "Moved Permanently"
+        },
+        {
+            "value": "found",
+            "display": "Found"
+        },
+        {
+            "value": "seeOther",
+            "display": "See Other"
+        },
+        {
+            "value": "notModified",
+            "display": "Not Modified"
+        },
+        {
+            "value": "useProxy",
+            "display": "Use Proxy"
+        },
+        {
+            "value": "temporaryRedirect",
+            "display": "Temporary Redirect"
+        },
+        {
+            "value": "permanentRedirect",
+            "display": "Permanent Redirect"
+        },
+        {
+            "value": "badRequest",
+            "display": "Bad Request"
+        },
+        {
+            "value": "unauthorized",
+            "display": "Unauthorized"
+        },
+        {
+            "value": "paymentRequired",
+            "display": "Payment Required"
+        },
+        {
+            "value": "forbidden",
+            "display": "Forbidden"
+        },
+        {
+            "value": "notFound",
+            "display": "Not Found"
+        },
+        {
+            "value": "methodNotAllowed",
+            "display": "Method Not Allowed"
+        },
+        {
+            "value": "notAcceptable",
+            "display": "Not Acceptable"
+        },
+        {
+            "value": "proxyAuthenticationRequired",
+            "display": "Proxy Authentication Required"
+        },
+        {
+            "value": "requestTimeout",
+            "display": "Request Timeout"
+        },
+        {
+            "value": "conflict",
+            "display": "Conflict"
+        },
+        {
+            "value": "gone",
+            "display": "Gone"
+        },
+        {
+            "value": "lengthRequired",
+            "display": "Length Required"
+        },
+        {
+            "value": "preconditionFailed",
+            "display": "Precondition Failed"
+        },
+        {
+            "value": "contentTooLarge",
+            "display": "Content Too Large"
+        },
+        {
+            "value": "uriTooLong",
+            "display": "URI Too Long"
+        },
+        {
+            "value": "unsupportedMediaType",
+            "display": "Unsupported Media Type"
+        },
+        {
+            "value": "rangeNotSatisfiable",
+            "display": "Range Not Satisfiable"
+        },
+        {
+            "value": "expectationFailed",
+            "display": "Expectation Failed"
+        },
+        {
+            "value": "misdirectedRequest",
+            "display": "Misdirected Request"
+        },
+        {
+            "value": "unprocessableContent",
+            "display": "Unprocessable Content"
+        },
+        {
+            "value": "upgradeRequired",
+            "display": "Upgrade Required"
+        },
+        {
+            "value": "internalServerError",
+            "display": "Internal Server Error"
+        },
+        {
+            "value": "notImplemented",
+            "display": "Not Implemented"
+        },
+        {
+            "value": "badGateway",
+            "display": "Bad Gateway"
+        },
+        {
+            "value": "serviceUnavailable",
+            "display": "Service Unavailable"
+        },
+        {
+            "value": "gatewayTimeout",
+            "display": "Gateway Timeout"
+        },
+        {
+            "value": "httpVersionNotSupported",
+            "display": "HTTP Version Not Supported"
+        }
+    ]
+}

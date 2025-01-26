@@ -1,0 +1,24 @@
+{
+    "id": "research-study-focus-type",
+    "name": "ResearchStudyFocusType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "intervention",
+            "display": "Intervention"
+        },
+        {
+            "value": "factor",
+            "display": "Factor"
+        }
+    ]
+}

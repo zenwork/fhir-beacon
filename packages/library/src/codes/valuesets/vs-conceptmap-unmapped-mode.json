@@ -1,0 +1,20 @@
+{
+    "id": "conceptmap-unmapped-mode",
+    "name": "ConceptMapGroupUnmappedMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "use-source-code",
+            "display": "Use Provided Source Code"
+        },
+        {
+            "value": "fixed",
+            "display": "Fixed Code"
+        },
+        {
+            "value": "other-map",
+            "display": "Other Map"
+        }
+    ]
+}

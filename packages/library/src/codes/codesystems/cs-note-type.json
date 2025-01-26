@@ -1,0 +1,21 @@
+{
+    "id": "note-type",
+    "name": "NoteType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/note-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "display",
+            "display": "Display"
+        },
+        {
+            "value": "print",
+            "display": "Print (Form)"
+        },
+        {
+            "value": "printoper",
+            "display": "Print (Operator)"
+        }
+    ]
+}

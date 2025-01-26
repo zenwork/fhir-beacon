@@ -1,0 +1,21 @@
+{
+    "id": "verificationresult-can-push-updates",
+    "name": "CanPushUpdates",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-can-push-updates",
+    "valid": true,
+    "choices": [
+        {
+            "value": "yes",
+            "display": "Yes"
+        },
+        {
+            "value": "no",
+            "display": "No"
+        },
+        {
+            "value": "undetermined",
+            "display": "Undetermined"
+        }
+    ]
+}

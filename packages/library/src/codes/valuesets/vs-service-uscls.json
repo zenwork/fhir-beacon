@@ -1,0 +1,89 @@
+{
+    "id": "service-uscls",
+    "name": "USCLSCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-uscls",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1101",
+            "display": "Exam, comp, primary"
+        },
+        {
+            "value": "1102",
+            "display": "Exam, comp, mixed"
+        },
+        {
+            "value": "1103",
+            "display": "Exam, comp, permanent"
+        },
+        {
+            "value": "1201",
+            "display": "Exam, recall"
+        },
+        {
+            "value": "1205",
+            "display": "Exam, emergency"
+        },
+        {
+            "value": "2101",
+            "display": "Radiograph, series (12)"
+        },
+        {
+            "value": "2102",
+            "display": "Radiograph, series (16)"
+        },
+        {
+            "value": "2141",
+            "display": "Radiograph, bitewing"
+        },
+        {
+            "value": "2601",
+            "display": "Radiograph, panoramic"
+        },
+        {
+            "value": "11101",
+            "display": "Polishing, 1 unit"
+        },
+        {
+            "value": "11102",
+            "display": "Polishing, 2 unit"
+        },
+        {
+            "value": "11103",
+            "display": "Polishing, 3 unit"
+        },
+        {
+            "value": "11104",
+            "display": "Polishing, 4 unit"
+        },
+        {
+            "value": "21211",
+            "display": "Amalgam, 1 surface"
+        },
+        {
+            "value": "21212",
+            "display": "Amalgam, 2 surface"
+        },
+        {
+            "value": "27211",
+            "display": "Crown, PFM"
+        },
+        {
+            "value": "67211",
+            "display": "Maryland Bridge"
+        },
+        {
+            "value": "99111",
+            "display": "Lab, commercial"
+        },
+        {
+            "value": "99333",
+            "display": "Lab, in office"
+        },
+        {
+            "value": "99555",
+            "display": "Expense"
+        }
+    ]
+}

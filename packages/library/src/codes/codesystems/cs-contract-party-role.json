@@ -1,0 +1,13 @@
+{
+    "id": "contract-party-role",
+    "name": "ContractPartyRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-party-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "flunky",
+            "display": "FLunky"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "sort-direction",
+    "name": "SortDirection",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ascending",
+            "display": "Ascending"
+        },
+        {
+            "value": "descending",
+            "display": "Descending"
+        }
+    ]
+}

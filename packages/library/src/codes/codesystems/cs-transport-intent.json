@@ -1,0 +1,13 @@
+{
+    "id": "transport-intent",
+    "name": "TransportIntent",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/transport-intent",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

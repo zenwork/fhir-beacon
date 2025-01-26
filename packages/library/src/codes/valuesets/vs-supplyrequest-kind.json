@@ -1,0 +1,17 @@
+{
+    "id": "supplyrequest-kind",
+    "name": "SupplyType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/supplyrequest-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "central",
+            "display": "Central Supply"
+        },
+        {
+            "value": "nonstock",
+            "display": "Non-Stock"
+        }
+    ]
+}

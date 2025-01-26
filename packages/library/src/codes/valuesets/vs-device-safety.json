@@ -1,0 +1,33 @@
+{
+    "id": "device-safety",
+    "name": "DeviceSafety",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/device-safety",
+    "valid": true,
+    "choices": [
+        {
+            "value": "C106046",
+            "display": "Magnetic Resonance Conditional"
+        },
+        {
+            "value": "C106045",
+            "display": "Magnetic Resonance Safe"
+        },
+        {
+            "value": "C106047",
+            "display": "Magnetic Resonance Unsafe"
+        },
+        {
+            "value": "C113844",
+            "display": "Labeling does not Contain MRI Safety Information"
+        },
+        {
+            "value": "C101673",
+            "display": "Labeled as Containing Natural Rubber Latex"
+        },
+        {
+            "value": "C106038",
+            "display": "Not Made with Natural Rubber Latex"
+        }
+    ]
+}

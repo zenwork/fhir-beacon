@@ -1,0 +1,21 @@
+{
+    "id": "code-search-support",
+    "name": "CodeSearchSupport",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/code-search-support",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-compose",
+            "display": "In Compose"
+        },
+        {
+            "value": "in-expansion",
+            "display": "In Expansion"
+        },
+        {
+            "value": "in-compose-or-expansion",
+            "display": "In Compose Or Expansion"
+        }
+    ]
+}

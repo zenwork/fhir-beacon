@@ -1,0 +1,29 @@
+{
+    "id": "expression-language",
+    "name": "ExpressionLanguage",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/expression-language",
+    "valid": true,
+    "choices": [
+        {
+            "value": "text/cql",
+            "display": "CQL"
+        },
+        {
+            "value": "text/fhirpath",
+            "display": "FHIRPath"
+        },
+        {
+            "value": "text/x-fhir-query",
+            "display": "FHIR Query"
+        },
+        {
+            "value": "text/cql-identifier",
+            "display": "CQL Identifier"
+        },
+        {
+            "value": "text/cql-expression",
+            "display": "CQL Expression"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "conditional-delete-status",
+    "name": "ConditionalDeleteStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conditional-delete-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "not-supported",
+            "display": "Not Supported"
+        },
+        {
+            "value": "single",
+            "display": "Single Deletes Supported"
+        },
+        {
+            "value": "multiple",
+            "display": "Multiple Deletes Supported"
+        }
+    ]
+}

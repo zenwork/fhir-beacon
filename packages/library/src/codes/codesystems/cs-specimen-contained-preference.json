@@ -1,0 +1,17 @@
+{
+    "id": "specimen-contained-preference",
+    "name": "SpecimenContainedPreference",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/specimen-contained-preference",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preferred",
+            "display": "Preferred"
+        },
+        {
+            "value": "alternate",
+            "display": "Alternate"
+        }
+    ]
+}

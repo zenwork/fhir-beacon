@@ -1,0 +1,28 @@
+{
+    "id": "artifactassessment-disposition",
+    "name": "ArtifactAssessmentDisposition",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unresolved",
+            "display": "Unresolved"
+        },
+        {
+            "value": "not-persuasive",
+            "display": "Not Persuasive"
+        },
+        {
+            "value": "persuasive",
+            "display": "Persuasive"
+        },
+        {
+            "value": "persuasive-with-modification",
+            "display": "Persuasive with Modification"
+        },
+        {
+            "value": "not-persuasive-with-modification",
+            "display": "Not Persuasive with Modification"
+        }
+    ]
+}

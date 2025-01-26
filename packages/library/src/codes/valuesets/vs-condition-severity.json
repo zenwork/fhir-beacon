@@ -1,0 +1,21 @@
+{
+    "id": "condition-severity",
+    "name": "ConditionDiagnosisSeverity",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-severity",
+    "valid": true,
+    "choices": [
+        {
+            "value": "24484000",
+            "display": "n/a"
+        },
+        {
+            "value": "6736007",
+            "display": "n/a"
+        },
+        {
+            "value": "255604002",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "adverse-event-participant-function",
+    "name": "AdverseEventParticipantFunction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-participant-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "INF",
+            "display": "n/a"
+        },
+        {
+            "value": "PART",
+            "display": "n/a"
+        },
+        {
+            "value": "WIT",
+            "display": "n/a"
+        },
+        {
+            "value": "AUT",
+            "display": "n/a"
+        }
+    ]
+}

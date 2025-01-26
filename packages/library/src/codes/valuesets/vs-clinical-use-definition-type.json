@@ -1,0 +1,28 @@
+{
+    "id": "clinical-use-definition-type",
+    "name": "ClinicalUseDefinitionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "indication",
+            "display": "Indication"
+        },
+        {
+            "value": "contraindication",
+            "display": "Contraindication"
+        },
+        {
+            "value": "interaction",
+            "display": "Interaction"
+        },
+        {
+            "value": "undesirable-effect",
+            "display": "Undesirable Effect"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        }
+    ]
+}

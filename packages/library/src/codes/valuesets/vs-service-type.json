@@ -1,0 +1,2393 @@
+{
+    "id": "service-type",
+    "name": "ServiceType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Adoption/Permanent Care Info/Support"
+        },
+        {
+            "value": "2",
+            "display": "Aged Care Assessment"
+        },
+        {
+            "value": "3",
+            "display": "Aged Care Information/Referral"
+        },
+        {
+            "value": "4",
+            "display": "Aged Residential Care"
+        },
+        {
+            "value": "5",
+            "display": "Case Management for Older Persons"
+        },
+        {
+            "value": "6",
+            "display": "Delivered Meals (Meals On Wheels)"
+        },
+        {
+            "value": "7",
+            "display": "Friendly Visiting"
+        },
+        {
+            "value": "8",
+            "display": "Home Care/Housekeeping Assistance"
+        },
+        {
+            "value": "9",
+            "display": "Home Maintenance and Repair"
+        },
+        {
+            "value": "10",
+            "display": "Personal Alarms/Alerts"
+        },
+        {
+            "value": "11",
+            "display": "Personal Care for Older Persons"
+        },
+        {
+            "value": "12",
+            "display": "Planned Activity Groups"
+        },
+        {
+            "value": "13",
+            "display": "Acupuncture"
+        },
+        {
+            "value": "14",
+            "display": "Alexander Technique Therapy"
+        },
+        {
+            "value": "15",
+            "display": "Aromatherapy"
+        },
+        {
+            "value": "16",
+            "display": "Biorhythm Services"
+        },
+        {
+            "value": "17",
+            "display": "Bowen Therapy"
+        },
+        {
+            "value": "18",
+            "display": "Chinese Herbal Medicine"
+        },
+        {
+            "value": "19",
+            "display": "Feldenkrais"
+        },
+        {
+            "value": "20",
+            "display": "Homoeopathy"
+        },
+        {
+            "value": "21",
+            "display": "Hydrotherapy"
+        },
+        {
+            "value": "22",
+            "display": "Hypnotherapy"
+        },
+        {
+            "value": "23",
+            "display": "Kinesiology"
+        },
+        {
+            "value": "24",
+            "display": "Magnetic Therapy"
+        },
+        {
+            "value": "25",
+            "display": "Massage Therapy"
+        },
+        {
+            "value": "26",
+            "display": "Meditation"
+        },
+        {
+            "value": "27",
+            "display": "Myotherapy"
+        },
+        {
+            "value": "28",
+            "display": "Naturopathy"
+        },
+        {
+            "value": "29",
+            "display": "Reflexology"
+        },
+        {
+            "value": "30",
+            "display": "Reiki"
+        },
+        {
+            "value": "31",
+            "display": "Relaxation Therapy"
+        },
+        {
+            "value": "32",
+            "display": "Shiatsu"
+        },
+        {
+            "value": "33",
+            "display": "Western Herbal Medicine"
+        },
+        {
+            "value": "34",
+            "display": "Family Day care"
+        },
+        {
+            "value": "35",
+            "display": "Holiday Programs"
+        },
+        {
+            "value": "36",
+            "display": "Kindergarten Inclusion Support"
+        },
+        {
+            "value": "37",
+            "display": "Kindergarten/Preschool"
+        },
+        {
+            "value": "38",
+            "display": "Long Day Child Care"
+        },
+        {
+            "value": "39",
+            "display": "Occasional Child Care"
+        },
+        {
+            "value": "40",
+            "display": "Outside School Hours Care"
+        },
+        {
+            "value": "41",
+            "display": "Children's Play Programs"
+        },
+        {
+            "value": "42",
+            "display": "Parenting/Family Support/Education"
+        },
+        {
+            "value": "43",
+            "display": "Playgroup"
+        },
+        {
+            "value": "44",
+            "display": "School Nursing"
+        },
+        {
+            "value": "45",
+            "display": "Toy Library"
+        },
+        {
+            "value": "46",
+            "display": "Child Protection/Child Abuse Report"
+        },
+        {
+            "value": "47",
+            "display": "Foster Care"
+        },
+        {
+            "value": "48",
+            "display": "Residential/Out-of-Home Care"
+        },
+        {
+            "value": "49",
+            "display": "Support - Young People Leaving Care"
+        },
+        {
+            "value": "50",
+            "display": "Audiology"
+        },
+        {
+            "value": "51",
+            "display": "Blood Donation"
+        },
+        {
+            "value": "52",
+            "display": "Chiropractic"
+        },
+        {
+            "value": "53",
+            "display": "Dietetics"
+        },
+        {
+            "value": "54",
+            "display": "Family Planning"
+        },
+        {
+            "value": "55",
+            "display": "Health Advocacy/Liaison Service"
+        },
+        {
+            "value": "56",
+            "display": "Health Information/Referral"
+        },
+        {
+            "value": "57",
+            "display": "Immunization"
+        },
+        {
+            "value": "58",
+            "display": "Maternal & Child Health"
+        },
+        {
+            "value": "59",
+            "display": "Nursing"
+        },
+        {
+            "value": "60",
+            "display": "Nutrition"
+        },
+        {
+            "value": "61",
+            "display": "Occupational Therapy"
+        },
+        {
+            "value": "62",
+            "display": "Optometry"
+        },
+        {
+            "value": "63",
+            "display": "Osteopathy"
+        },
+        {
+            "value": "64",
+            "display": "Pharmacy"
+        },
+        {
+            "value": "65",
+            "display": "Physiotherapy"
+        },
+        {
+            "value": "66",
+            "display": "Podiatry"
+        },
+        {
+            "value": "67",
+            "display": "Sexual Health"
+        },
+        {
+            "value": "68",
+            "display": "Speech Pathology/Therapy"
+        },
+        {
+            "value": "69",
+            "display": "Bereavement Counselling"
+        },
+        {
+            "value": "70",
+            "display": "Crisis Counselling"
+        },
+        {
+            "value": "71",
+            "display": "Family Counselling/Therapy"
+        },
+        {
+            "value": "72",
+            "display": "Family Violence Counselling"
+        },
+        {
+            "value": "73",
+            "display": "Financial Counselling"
+        },
+        {
+            "value": "74",
+            "display": "Generalist Counselling"
+        },
+        {
+            "value": "75",
+            "display": "Genetic Counselling"
+        },
+        {
+            "value": "76",
+            "display": "Health Counselling"
+        },
+        {
+            "value": "77",
+            "display": "Mediation"
+        },
+        {
+            "value": "78",
+            "display": "Problem Gambling Counselling"
+        },
+        {
+            "value": "79",
+            "display": "Relationship Counselling"
+        },
+        {
+            "value": "80",
+            "display": "Sexual Assault Counselling"
+        },
+        {
+            "value": "81",
+            "display": "Trauma Counselling"
+        },
+        {
+            "value": "82",
+            "display": "Victims of Crime Counselling"
+        },
+        {
+            "value": "83",
+            "display": "Cemetery Operation"
+        },
+        {
+            "value": "84",
+            "display": "Cremation"
+        },
+        {
+            "value": "85",
+            "display": "Death Service Information"
+        },
+        {
+            "value": "86",
+            "display": "Funeral Services"
+        },
+        {
+            "value": "87",
+            "display": "Endodontic"
+        },
+        {
+            "value": "88",
+            "display": "General Dental"
+        },
+        {
+            "value": "89",
+            "display": "Oral Medicine"
+        },
+        {
+            "value": "90",
+            "display": "Oral Surgery"
+        },
+        {
+            "value": "91",
+            "display": "Orthodontic"
+        },
+        {
+            "value": "92",
+            "display": "Paediatric Dentistry"
+        },
+        {
+            "value": "93",
+            "display": "Periodontic"
+        },
+        {
+            "value": "94",
+            "display": "Prosthodontic"
+        },
+        {
+            "value": "95",
+            "display": "Acquired Brain Injury Info/Referral"
+        },
+        {
+            "value": "96",
+            "display": "Disability Advocacy"
+        },
+        {
+            "value": "97",
+            "display": "Disability Aids & Equipment"
+        },
+        {
+            "value": "98",
+            "display": "Disability Case Management"
+        },
+        {
+            "value": "99",
+            "display": "Disability Day Programs/Activities"
+        },
+        {
+            "value": "100",
+            "display": "Disability Information/Referral"
+        },
+        {
+            "value": "101",
+            "display": "Disability Support Packages"
+        },
+        {
+            "value": "102",
+            "display": "Disability Supported Accommodation"
+        },
+        {
+            "value": "103",
+            "display": "Early Childhood Intervention"
+        },
+        {
+            "value": "104",
+            "display": "Hearing Aids & Equipment"
+        },
+        {
+            "value": "105",
+            "display": "Drug and/or Alcohol Counselling"
+        },
+        {
+            "value": "106",
+            "display": "Drug/Alcohol Information/Referral"
+        },
+        {
+            "value": "107",
+            "display": "Needle & Syringe Exchange"
+        },
+        {
+            "value": "108",
+            "display": "Non-resid. Alcohol/Drug Treatment"
+        },
+        {
+            "value": "109",
+            "display": "Pharmacotherapy"
+        },
+        {
+            "value": "110",
+            "display": "Quit Program"
+        },
+        {
+            "value": "111",
+            "display": "Residential Alcohol/Drug Treatment"
+        },
+        {
+            "value": "112",
+            "display": "Adult/Community Education"
+        },
+        {
+            "value": "113",
+            "display": "Higher Education"
+        },
+        {
+            "value": "114",
+            "display": "Primary Education"
+        },
+        {
+            "value": "115",
+            "display": "Secondary Education"
+        },
+        {
+            "value": "116",
+            "display": "Training & Vocational Education"
+        },
+        {
+            "value": "117",
+            "display": "Emergency Medical"
+        },
+        {
+            "value": "118",
+            "display": "Employment Placement and/or Support"
+        },
+        {
+            "value": "119",
+            "display": "Vocational Rehabilitation"
+        },
+        {
+            "value": "120",
+            "display": "Work Safety/Accident Prevention"
+        },
+        {
+            "value": "121",
+            "display": "Financial Assistance"
+        },
+        {
+            "value": "122",
+            "display": "Financial Information/Advice"
+        },
+        {
+            "value": "123",
+            "display": "Material Aid"
+        },
+        {
+            "value": "124",
+            "display": "General Practice"
+        },
+        {
+            "value": "125",
+            "display": "Accommodation Placement/Support"
+        },
+        {
+            "value": "126",
+            "display": "Crisis/Emergency Accommodation"
+        },
+        {
+            "value": "127",
+            "display": "Homelessness Support"
+        },
+        {
+            "value": "128",
+            "display": "Housing Information/Referral"
+        },
+        {
+            "value": "129",
+            "display": "Public Rental Housing"
+        },
+        {
+            "value": "130",
+            "display": "Interpreting/Multilingual Service"
+        },
+        {
+            "value": "131",
+            "display": "Juvenile Justice"
+        },
+        {
+            "value": "132",
+            "display": "Legal Advocacy"
+        },
+        {
+            "value": "133",
+            "display": "Legal Information/Advice/Referral"
+        },
+        {
+            "value": "134",
+            "display": "Mental Health Advocacy"
+        },
+        {
+            "value": "135",
+            "display": "Mental Health Assess/Triage/Crisis Response"
+        },
+        {
+            "value": "136",
+            "display": "Mental Health Case Management"
+        },
+        {
+            "value": "137",
+            "display": "Mental Health Information/Referral"
+        },
+        {
+            "value": "138",
+            "display": "Mental Health Inpatient Services"
+        },
+        {
+            "value": "139",
+            "display": "Mental Health Non-residential Rehab"
+        },
+        {
+            "value": "140",
+            "display": "Mental Health Residential Rehab/CCU"
+        },
+        {
+            "value": "141",
+            "display": "Psychiatry (Requires Referral)"
+        },
+        {
+            "value": "142",
+            "display": "Psychology"
+        },
+        {
+            "value": "143",
+            "display": "Martial Arts"
+        },
+        {
+            "value": "144",
+            "display": "Personal Fitness Training"
+        },
+        {
+            "value": "145",
+            "display": "Physical Activity Group"
+        },
+        {
+            "value": "146",
+            "display": "Physical Activity Programs"
+        },
+        {
+            "value": "147",
+            "display": "Physical Fitness Testing"
+        },
+        {
+            "value": "148",
+            "display": "Pilates"
+        },
+        {
+            "value": "149",
+            "display": "Self-Defence"
+        },
+        {
+            "value": "150",
+            "display": "Sporting Club"
+        },
+        {
+            "value": "151",
+            "display": "Yoga"
+        },
+        {
+            "value": "152",
+            "display": "Food Safety"
+        },
+        {
+            "value": "153",
+            "display": "Health Regulatory /Inspection /Cert."
+        },
+        {
+            "value": "154",
+            "display": "Work Health/Safety Inspection/Cert."
+        },
+        {
+            "value": "155",
+            "display": "Carer Support"
+        },
+        {
+            "value": "156",
+            "display": "Respite Care"
+        },
+        {
+            "value": "157",
+            "display": "Anatomical Pathology"
+        },
+        {
+            "value": "158",
+            "display": "Pathology - Clinical Chemistry"
+        },
+        {
+            "value": "159",
+            "display": "Pathology - General"
+        },
+        {
+            "value": "160",
+            "display": "Pathology - Genetics"
+        },
+        {
+            "value": "161",
+            "display": "Pathology - Haematology"
+        },
+        {
+            "value": "162",
+            "display": "Pathology - Immunology"
+        },
+        {
+            "value": "163",
+            "display": "Pathology - Microbiology"
+        },
+        {
+            "value": "164",
+            "display": "Anaesthesiology - Pain Medicine"
+        },
+        {
+            "value": "165",
+            "display": "Cardiology"
+        },
+        {
+            "value": "166",
+            "display": "Clinical Genetics"
+        },
+        {
+            "value": "167",
+            "display": "Clinical Pharmacology"
+        },
+        {
+            "value": "168",
+            "display": "Dermatology"
+        },
+        {
+            "value": "169",
+            "display": "Endocrinology"
+        },
+        {
+            "value": "170",
+            "display": "Gastroenterology & Hepatology"
+        },
+        {
+            "value": "171",
+            "display": "Geriatric Medicine"
+        },
+        {
+            "value": "172",
+            "display": "Immunology & Allergy"
+        },
+        {
+            "value": "173",
+            "display": "Infectious Diseases"
+        },
+        {
+            "value": "174",
+            "display": "Intensive Care Medicine"
+        },
+        {
+            "value": "175",
+            "display": "Medical Oncology"
+        },
+        {
+            "value": "176",
+            "display": "Nephrology"
+        },
+        {
+            "value": "177",
+            "display": "Neurology"
+        },
+        {
+            "value": "178",
+            "display": "Occupational Medicine"
+        },
+        {
+            "value": "179",
+            "display": "Palliative Medicine"
+        },
+        {
+            "value": "180",
+            "display": "Public Health Medicine"
+        },
+        {
+            "value": "181",
+            "display": "Rehabilitation Medicine"
+        },
+        {
+            "value": "182",
+            "display": "Rheumatology"
+        },
+        {
+            "value": "183",
+            "display": "Sleep Medicine"
+        },
+        {
+            "value": "184",
+            "display": "Thoracic Medicine"
+        },
+        {
+            "value": "185",
+            "display": "Gynaecological Oncology"
+        },
+        {
+            "value": "186",
+            "display": "Obstetrics & Gynaecology"
+        },
+        {
+            "value": "187",
+            "display": "Reproductive Endocrinology/Infertility"
+        },
+        {
+            "value": "188",
+            "display": "Urogynaecology"
+        },
+        {
+            "value": "189",
+            "display": "Neonatology & Perinatology"
+        },
+        {
+            "value": "190",
+            "display": "Paediatric Cardiology"
+        },
+        {
+            "value": "191",
+            "display": "Paediatric Clinical Genetics"
+        },
+        {
+            "value": "192",
+            "display": "Paediatric Clinical Pharmacology"
+        },
+        {
+            "value": "193",
+            "display": "Paediatric Endocrinology"
+        },
+        {
+            "value": "194",
+            "display": "Paed. Gastroenterology/Hepatology"
+        },
+        {
+            "value": "195",
+            "display": "Paediatric Haematology"
+        },
+        {
+            "value": "196",
+            "display": "Paediatric Immunology & Allergy"
+        },
+        {
+            "value": "197",
+            "display": "Paediatric Infectious Diseases"
+        },
+        {
+            "value": "198",
+            "display": "Paediatric Intensive Care Medicine"
+        },
+        {
+            "value": "199",
+            "display": "Paediatric Medical Oncology"
+        },
+        {
+            "value": "200",
+            "display": "Paediatric Medicine"
+        },
+        {
+            "value": "201",
+            "display": "Paediatric Nephrology"
+        },
+        {
+            "value": "202",
+            "display": "Paediatric Neurology"
+        },
+        {
+            "value": "203",
+            "display": "Paediatric Nuclear Medicine"
+        },
+        {
+            "value": "204",
+            "display": "Paediatric Rehabilitation Medicine"
+        },
+        {
+            "value": "205",
+            "display": "Paediatric Rheumatology"
+        },
+        {
+            "value": "206",
+            "display": "Paediatric Sleep Medicine"
+        },
+        {
+            "value": "207",
+            "display": "Paediatric Surgery"
+        },
+        {
+            "value": "208",
+            "display": "Paediatric Thoracic Medicine"
+        },
+        {
+            "value": "209",
+            "display": "Diag. Radiology /Xray /CT /Fluoroscopy"
+        },
+        {
+            "value": "210",
+            "display": "Diagnostic Ultrasound"
+        },
+        {
+            "value": "211",
+            "display": "Magnetic Resonance Imaging (MRI)"
+        },
+        {
+            "value": "212",
+            "display": "Nuclear Medicine"
+        },
+        {
+            "value": "213",
+            "display": "Obstetric/Gynaecological Ultrasound"
+        },
+        {
+            "value": "214",
+            "display": "Radiation Oncology"
+        },
+        {
+            "value": "215",
+            "display": "Cardiothoracic Surgery"
+        },
+        {
+            "value": "216",
+            "display": "Neurosurgery"
+        },
+        {
+            "value": "217",
+            "display": "Ophthalmology"
+        },
+        {
+            "value": "218",
+            "display": "Orthopaedic Surgery"
+        },
+        {
+            "value": "219",
+            "display": "Otolaryngology/Head & Neck Surgery"
+        },
+        {
+            "value": "220",
+            "display": "Plastic & Reconstructive Surgery"
+        },
+        {
+            "value": "221",
+            "display": "Surgery - General"
+        },
+        {
+            "value": "222",
+            "display": "Urology"
+        },
+        {
+            "value": "223",
+            "display": "Vascular Surgery"
+        },
+        {
+            "value": "224",
+            "display": "Support Groups"
+        },
+        {
+            "value": "225",
+            "display": "Air ambulance"
+        },
+        {
+            "value": "226",
+            "display": "Ambulance"
+        },
+        {
+            "value": "227",
+            "display": "Blood Transport"
+        },
+        {
+            "value": "228",
+            "display": "Community Bus"
+        },
+        {
+            "value": "229",
+            "display": "Flying Doctor Service"
+        },
+        {
+            "value": "230",
+            "display": "Patient Transport"
+        },
+        {
+            "value": "231",
+            "display": "A&E"
+        },
+        {
+            "value": "232",
+            "display": "A&EP"
+        },
+        {
+            "value": "233",
+            "display": "Abuse"
+        },
+        {
+            "value": "234",
+            "display": "ACAS"
+        },
+        {
+            "value": "235",
+            "display": "Access"
+        },
+        {
+            "value": "236",
+            "display": "Accident"
+        },
+        {
+            "value": "237",
+            "display": "Acute Inpatient Serv"
+        },
+        {
+            "value": "238",
+            "display": "Adult Day Programs"
+        },
+        {
+            "value": "239",
+            "display": "Adult Mental Health Services"
+        },
+        {
+            "value": "240",
+            "display": "Advice"
+        },
+        {
+            "value": "241",
+            "display": "Advocacy"
+        },
+        {
+            "value": "242",
+            "display": "Aged Persons Mental"
+        },
+        {
+            "value": "243",
+            "display": "Aged Persons Mental"
+        },
+        {
+            "value": "244",
+            "display": "Aged Persons Mental"
+        },
+        {
+            "value": "245",
+            "display": "Aids"
+        },
+        {
+            "value": "246",
+            "display": "Al-Anon"
+        },
+        {
+            "value": "247",
+            "display": "Alcohol"
+        },
+        {
+            "value": "248",
+            "display": "Al-Teen"
+        },
+        {
+            "value": "249",
+            "display": "Antenatal"
+        },
+        {
+            "value": "250",
+            "display": "Anxiety"
+        },
+        {
+            "value": "251",
+            "display": "Arthritis"
+        },
+        {
+            "value": "252",
+            "display": "Assessment"
+        },
+        {
+            "value": "253",
+            "display": "Assistance"
+        },
+        {
+            "value": "254",
+            "display": "Asthma"
+        },
+        {
+            "value": "255",
+            "display": "ATSS"
+        },
+        {
+            "value": "256",
+            "display": "Attendant Care"
+        },
+        {
+            "value": "257",
+            "display": "Babies"
+        },
+        {
+            "value": "258",
+            "display": "Bathroom Modificatio"
+        },
+        {
+            "value": "259",
+            "display": "Behavior"
+        },
+        {
+            "value": "260",
+            "display": "Behavior Interventi"
+        },
+        {
+            "value": "261",
+            "display": "Bereavement"
+        },
+        {
+            "value": "262",
+            "display": "Bipolar"
+        },
+        {
+            "value": "263",
+            "display": "Birth"
+        },
+        {
+            "value": "264",
+            "display": "Birth Control"
+        },
+        {
+            "value": "265",
+            "display": "Birthing Options"
+        },
+        {
+            "value": "266",
+            "display": "BIST"
+        },
+        {
+            "value": "267",
+            "display": "Blood"
+        },
+        {
+            "value": "268",
+            "display": "Bone"
+        },
+        {
+            "value": "269",
+            "display": "Bowel"
+        },
+        {
+            "value": "270",
+            "display": "Brain"
+        },
+        {
+            "value": "271",
+            "display": "Breast Feeding"
+        },
+        {
+            "value": "272",
+            "display": "Breast Screen"
+        },
+        {
+            "value": "273",
+            "display": "Brokerage"
+        },
+        {
+            "value": "274",
+            "display": "Cancer"
+        },
+        {
+            "value": "275",
+            "display": "Cancer Support"
+        },
+        {
+            "value": "276",
+            "display": "Cardiovascular Disea"
+        },
+        {
+            "value": "277",
+            "display": "Care Packages"
+        },
+        {
+            "value": "278",
+            "display": "Carer"
+        },
+        {
+            "value": "279",
+            "display": "Case Management"
+        },
+        {
+            "value": "280",
+            "display": "Casualty"
+        },
+        {
+            "value": "281",
+            "display": "Centrelink"
+        },
+        {
+            "value": "282",
+            "display": "Chemists"
+        },
+        {
+            "value": "283",
+            "display": "Child And Adolescent"
+        },
+        {
+            "value": "284",
+            "display": "Child Care"
+        },
+        {
+            "value": "285",
+            "display": "Child Services"
+        },
+        {
+            "value": "286",
+            "display": "Children"
+        },
+        {
+            "value": "287",
+            "display": "Children's Services"
+        },
+        {
+            "value": "288",
+            "display": "Cholesterol"
+        },
+        {
+            "value": "289",
+            "display": "Clothing"
+        },
+        {
+            "value": "290",
+            "display": "Community Based Acco"
+        },
+        {
+            "value": "291",
+            "display": "Community Care Unit"
+        },
+        {
+            "value": "292",
+            "display": "Community Child And"
+        },
+        {
+            "value": "293",
+            "display": "Community Health"
+        },
+        {
+            "value": "294",
+            "display": "Community Residentia"
+        },
+        {
+            "value": "295",
+            "display": "Community Transport"
+        },
+        {
+            "value": "296",
+            "display": "Companion Visiting"
+        },
+        {
+            "value": "297",
+            "display": "Companionship"
+        },
+        {
+            "value": "298",
+            "display": "Consumer Advice"
+        },
+        {
+            "value": "299",
+            "display": "Consumer Issues"
+        },
+        {
+            "value": "300",
+            "display": "Continuing Care Serv"
+        },
+        {
+            "value": "301",
+            "display": "Contraception Inform"
+        },
+        {
+            "value": "302",
+            "display": "Coordinating Bodies"
+        },
+        {
+            "value": "303",
+            "display": "Correctional Service"
+        },
+        {
+            "value": "304",
+            "display": "Council Environmenta"
+        },
+        {
+            "value": "305",
+            "display": "Counselling"
+        },
+        {
+            "value": "306",
+            "display": "Criminal"
+        },
+        {
+            "value": "307",
+            "display": "Crises"
+        },
+        {
+            "value": "308",
+            "display": "Crisis Assessment An"
+        },
+        {
+            "value": "309",
+            "display": "Crisis Assistance"
+        },
+        {
+            "value": "310",
+            "display": "Crisis Refuge"
+        },
+        {
+            "value": "311",
+            "display": "Day Program"
+        },
+        {
+            "value": "312",
+            "display": "Deaf"
+        },
+        {
+            "value": "313",
+            "display": "Dental Hygiene"
+        },
+        {
+            "value": "314",
+            "display": "Dentistry"
+        },
+        {
+            "value": "315",
+            "display": "Dentures"
+        },
+        {
+            "value": "316",
+            "display": "Depression"
+        },
+        {
+            "value": "317",
+            "display": "Detoxification"
+        },
+        {
+            "value": "318",
+            "display": "Diabetes"
+        },
+        {
+            "value": "319",
+            "display": "Diaphragm Fitting"
+        },
+        {
+            "value": "320",
+            "display": "Dieticians"
+        },
+        {
+            "value": "321",
+            "display": "Disabled Parking"
+        },
+        {
+            "value": "322",
+            "display": "District Nursing"
+        },
+        {
+            "value": "323",
+            "display": "Divorce"
+        },
+        {
+            "value": "324",
+            "display": "Doctors"
+        },
+        {
+            "value": "325",
+            "display": "Drink-Drive"
+        },
+        {
+            "value": "326",
+            "display": "Dual Diagnosis Servi"
+        },
+        {
+            "value": "327",
+            "display": "Early Choice"
+        },
+        {
+            "value": "328",
+            "display": "Eating Disorder"
+        },
+        {
+            "value": "330",
+            "display": "Emergency Relief"
+        },
+        {
+            "value": "331",
+            "display": "Employment And Train"
+        },
+        {
+            "value": "332",
+            "display": "Environment"
+        },
+        {
+            "value": "333",
+            "display": "Equipment"
+        },
+        {
+            "value": "334",
+            "display": "Exercise"
+        },
+        {
+            "value": "335",
+            "display": "Facility"
+        },
+        {
+            "value": "336",
+            "display": "Family Choice"
+        },
+        {
+            "value": "337",
+            "display": "Family Law"
+        },
+        {
+            "value": "338",
+            "display": "Family Options"
+        },
+        {
+            "value": "339",
+            "display": "Family Services"
+        },
+        {
+            "value": "340",
+            "display": "FFYA"
+        },
+        {
+            "value": "341",
+            "display": "Financial Aid"
+        },
+        {
+            "value": "342",
+            "display": "Fitness"
+        },
+        {
+            "value": "343",
+            "display": "Flexible Care Packag"
+        },
+        {
+            "value": "344",
+            "display": "Food"
+        },
+        {
+            "value": "345",
+            "display": "Food Vouchers"
+        },
+        {
+            "value": "346",
+            "display": "Forensic Mental Heal"
+        },
+        {
+            "value": "347",
+            "display": "Futures"
+        },
+        {
+            "value": "348",
+            "display": "Futures For Young Ad"
+        },
+        {
+            "value": "349",
+            "display": "General Practitioner"
+        },
+        {
+            "value": "350",
+            "display": "Grants"
+        },
+        {
+            "value": "351",
+            "display": "Grief"
+        },
+        {
+            "value": "352",
+            "display": "Grief Counselling"
+        },
+        {
+            "value": "353",
+            "display": "HACC"
+        },
+        {
+            "value": "354",
+            "display": "Heart Disease"
+        },
+        {
+            "value": "355",
+            "display": "Help"
+        },
+        {
+            "value": "356",
+            "display": "High Blood Pressure"
+        },
+        {
+            "value": "357",
+            "display": "Home Help"
+        },
+        {
+            "value": "358",
+            "display": "Home Nursing"
+        },
+        {
+            "value": "359",
+            "display": "Homefirst"
+        },
+        {
+            "value": "360",
+            "display": "Hospice Care"
+        },
+        {
+            "value": "361",
+            "display": "Hospital Services"
+        },
+        {
+            "value": "362",
+            "display": "Hospital To Home"
+        },
+        {
+            "value": "364",
+            "display": "Hostel"
+        },
+        {
+            "value": "365",
+            "display": "Hostel Accommodation"
+        },
+        {
+            "value": "366",
+            "display": "Household Items"
+        },
+        {
+            "value": "367",
+            "display": "Hypertension"
+        },
+        {
+            "value": "368",
+            "display": "Illness"
+        },
+        {
+            "value": "369",
+            "display": "Independent Living"
+        },
+        {
+            "value": "370",
+            "display": "Information"
+        },
+        {
+            "value": "371",
+            "display": "Injury"
+        },
+        {
+            "value": "372",
+            "display": "Intake"
+        },
+        {
+            "value": "373",
+            "display": "Intensive Mobile You"
+        },
+        {
+            "value": "374",
+            "display": "Intervention"
+        },
+        {
+            "value": "375",
+            "display": "Job Searching"
+        },
+        {
+            "value": "376",
+            "display": "Justice"
+        },
+        {
+            "value": "377",
+            "display": "Leisure"
+        },
+        {
+            "value": "378",
+            "display": "Loans"
+        },
+        {
+            "value": "379",
+            "display": "Low Income Earners"
+        },
+        {
+            "value": "380",
+            "display": "Lung"
+        },
+        {
+            "value": "381",
+            "display": "Making A Difference"
+        },
+        {
+            "value": "382",
+            "display": "Medical Services"
+        },
+        {
+            "value": "383",
+            "display": "Medical Specialists"
+        },
+        {
+            "value": "384",
+            "display": "Medication Administr"
+        },
+        {
+            "value": "385",
+            "display": "Menstrual Informatio"
+        },
+        {
+            "value": "386",
+            "display": "Methadone"
+        },
+        {
+            "value": "387",
+            "display": "Mobile Support And T"
+        },
+        {
+            "value": "388",
+            "display": "Motor Neurone"
+        },
+        {
+            "value": "389",
+            "display": "Multiple Sclerosis"
+        },
+        {
+            "value": "390",
+            "display": "Neighbourhood House"
+        },
+        {
+            "value": "391",
+            "display": "Nursing Home"
+        },
+        {
+            "value": "392",
+            "display": "Nursing Mothers"
+        },
+        {
+            "value": "393",
+            "display": "Obesity"
+        },
+        {
+            "value": "394",
+            "display": "Occupational Health"
+        },
+        {
+            "value": "395",
+            "display": "Optometrist"
+        },
+        {
+            "value": "396",
+            "display": "Oral Hygiene"
+        },
+        {
+            "value": "397",
+            "display": "Outpatients"
+        },
+        {
+            "value": "398",
+            "display": "Outreach Service"
+        },
+        {
+            "value": "399",
+            "display": "PADP"
+        },
+        {
+            "value": "400",
+            "display": "Pain"
+        },
+        {
+            "value": "401",
+            "display": "Pap Smear"
+        },
+        {
+            "value": "402",
+            "display": "Parenting"
+        },
+        {
+            "value": "403",
+            "display": "Peak Organizations"
+        },
+        {
+            "value": "404",
+            "display": "Personal Care"
+        },
+        {
+            "value": "405",
+            "display": "Pharmacies"
+        },
+        {
+            "value": "406",
+            "display": "Phobias"
+        },
+        {
+            "value": "407",
+            "display": "Physical"
+        },
+        {
+            "value": "408",
+            "display": "Physical Activity"
+        },
+        {
+            "value": "409",
+            "display": "Postnatal"
+        },
+        {
+            "value": "410",
+            "display": "Pregnancy"
+        },
+        {
+            "value": "411",
+            "display": "Pregnancy Tests"
+        },
+        {
+            "value": "412",
+            "display": "Preschool"
+        },
+        {
+            "value": "413",
+            "display": "Prescriptions"
+        },
+        {
+            "value": "414",
+            "display": "Primary Mental Healt"
+        },
+        {
+            "value": "415",
+            "display": "Property Maintenance"
+        },
+        {
+            "value": "416",
+            "display": "Prostate"
+        },
+        {
+            "value": "417",
+            "display": "Psychiatric"
+        },
+        {
+            "value": "418",
+            "display": "Psychiatric Disabili"
+        },
+        {
+            "value": "419",
+            "display": "Psychiatric Disabili"
+        },
+        {
+            "value": "420",
+            "display": "Psychiatric Disabili"
+        },
+        {
+            "value": "421",
+            "display": "Psychiatric Disabili"
+        },
+        {
+            "value": "422",
+            "display": "Psychiatric Disabili"
+        },
+        {
+            "value": "423",
+            "display": "Psychiatric Support"
+        },
+        {
+            "value": "424",
+            "display": "Recreation"
+        },
+        {
+            "value": "425",
+            "display": "Referral"
+        },
+        {
+            "value": "426",
+            "display": "Refuge"
+        },
+        {
+            "value": "427",
+            "display": "Rent Assistance"
+        },
+        {
+            "value": "428",
+            "display": "Residential Faciliti"
+        },
+        {
+            "value": "429",
+            "display": "Residential Respite"
+        },
+        {
+            "value": "430",
+            "display": "Respiratory"
+        },
+        {
+            "value": "431",
+            "display": "Response"
+        },
+        {
+            "value": "432",
+            "display": "Rooming Houses"
+        },
+        {
+            "value": "433",
+            "display": "Safe Sex"
+        },
+        {
+            "value": "434",
+            "display": "Secure Extended Care"
+        },
+        {
+            "value": "435",
+            "display": "Self Help"
+        },
+        {
+            "value": "436",
+            "display": "Separation"
+        },
+        {
+            "value": "437",
+            "display": "Services"
+        },
+        {
+            "value": "438",
+            "display": "Sex Education"
+        },
+        {
+            "value": "439",
+            "display": "Sexual Abuse"
+        },
+        {
+            "value": "440",
+            "display": "Sexual Issues"
+        },
+        {
+            "value": "441",
+            "display": "Sexually Transmitted"
+        },
+        {
+            "value": "442",
+            "display": "SIDS"
+        },
+        {
+            "value": "443",
+            "display": "Social Support"
+        },
+        {
+            "value": "444",
+            "display": "Socialisation"
+        },
+        {
+            "value": "445",
+            "display": "Special Needs"
+        },
+        {
+            "value": "446",
+            "display": "Speech Therapist"
+        },
+        {
+            "value": "447",
+            "display": "Splinting"
+        },
+        {
+            "value": "448",
+            "display": "Sport"
+        },
+        {
+            "value": "449",
+            "display": "Statewide And Specia"
+        },
+        {
+            "value": "450",
+            "display": "STD"
+        },
+        {
+            "value": "451",
+            "display": "STI"
+        },
+        {
+            "value": "452",
+            "display": "Stillbirth"
+        },
+        {
+            "value": "453",
+            "display": "Stomal Care"
+        },
+        {
+            "value": "454",
+            "display": "Stroke"
+        },
+        {
+            "value": "455",
+            "display": "Substance Abuse"
+        },
+        {
+            "value": "456",
+            "display": "Support"
+        },
+        {
+            "value": "457",
+            "display": "Syringes"
+        },
+        {
+            "value": "458",
+            "display": "Teeth"
+        },
+        {
+            "value": "459",
+            "display": "Tenancy Advice"
+        },
+        {
+            "value": "460",
+            "display": "Terminal Illness"
+        },
+        {
+            "value": "461",
+            "display": "Therapy"
+        },
+        {
+            "value": "462",
+            "display": "Transcription"
+        },
+        {
+            "value": "463",
+            "display": "Translating Services"
+        },
+        {
+            "value": "464",
+            "display": "Translator"
+        },
+        {
+            "value": "465",
+            "display": "Transport"
+        },
+        {
+            "value": "466",
+            "display": "Vertebrae"
+        },
+        {
+            "value": "467",
+            "display": "Violence"
+        },
+        {
+            "value": "468",
+            "display": "Vocational Guidance"
+        },
+        {
+            "value": "469",
+            "display": "Weight"
+        },
+        {
+            "value": "470",
+            "display": "Welfare Assistance"
+        },
+        {
+            "value": "471",
+            "display": "Welfare Counselling"
+        },
+        {
+            "value": "472",
+            "display": "Wheelchairs"
+        },
+        {
+            "value": "473",
+            "display": "Wound Management"
+        },
+        {
+            "value": "474",
+            "display": "Young People At Risk"
+        },
+        {
+            "value": "475",
+            "display": "Further Desc. - Community Health Care"
+        },
+        {
+            "value": "476",
+            "display": "Library"
+        },
+        {
+            "value": "477",
+            "display": "Community Hours"
+        },
+        {
+            "value": "478",
+            "display": "Further Desc. - Specialist Medical"
+        },
+        {
+            "value": "479",
+            "display": "Hepatology"
+        },
+        {
+            "value": "480",
+            "display": "Gastroenterology"
+        },
+        {
+            "value": "481",
+            "display": "Gynaecology"
+        },
+        {
+            "value": "482",
+            "display": "Obstetrics"
+        },
+        {
+            "value": "483",
+            "display": "Further Desc. - Specialist Surgical"
+        },
+        {
+            "value": "484",
+            "display": "Placement Protection"
+        },
+        {
+            "value": "485",
+            "display": "Family Violence"
+        },
+        {
+            "value": "486",
+            "display": "Integrated Family Services"
+        },
+        {
+            "value": "488",
+            "display": "Diabetes Educator"
+        },
+        {
+            "value": "489",
+            "display": "Kinship Care"
+        },
+        {
+            "value": "490",
+            "display": "General Mental Health Services"
+        },
+        {
+            "value": "491",
+            "display": "Exercise Physiology"
+        },
+        {
+            "value": "492",
+            "display": "Medical Research"
+        },
+        {
+            "value": "493",
+            "display": "Youth"
+        },
+        {
+            "value": "494",
+            "display": "Youth Services"
+        },
+        {
+            "value": "495",
+            "display": "Youth Health"
+        },
+        {
+            "value": "496",
+            "display": "Child and Family Ser"
+        },
+        {
+            "value": "497",
+            "display": "Home Visits"
+        },
+        {
+            "value": "498",
+            "display": "Mobile Services"
+        },
+        {
+            "value": "500",
+            "display": "Before and/or After"
+        },
+        {
+            "value": "501",
+            "display": "Cancer Services"
+        },
+        {
+            "value": "502",
+            "display": "Integrated Cancer Se"
+        },
+        {
+            "value": "503",
+            "display": "Multidisciplinary Se"
+        },
+        {
+            "value": "504",
+            "display": "Multidisciplinary Ca"
+        },
+        {
+            "value": "505",
+            "display": "Meetings"
+        },
+        {
+            "value": "506",
+            "display": "Blood pressure monit"
+        },
+        {
+            "value": "507",
+            "display": "Dose administration"
+        },
+        {
+            "value": "508",
+            "display": "Medical Equipment Hi"
+        },
+        {
+            "value": "509",
+            "display": "Parenting/Family Support/Education"
+        },
+        {
+            "value": "510",
+            "display": "Deputising Service"
+        },
+        {
+            "value": "513",
+            "display": "Cancer Support Groups"
+        },
+        {
+            "value": "514",
+            "display": "Community Cancer Services"
+        },
+        {
+            "value": "530",
+            "display": "Disability Care Transport"
+        },
+        {
+            "value": "531",
+            "display": "Aged Care Transport"
+        },
+        {
+            "value": "532",
+            "display": "Diabetes Education s"
+        },
+        {
+            "value": "533",
+            "display": "Cardiac Rehabilitati"
+        },
+        {
+            "value": "534",
+            "display": "Young Adult Diabetes"
+        },
+        {
+            "value": "535",
+            "display": "Pulmonary Rehabilita"
+        },
+        {
+            "value": "536",
+            "display": "Art therapy"
+        },
+        {
+            "value": "537",
+            "display": "Medication Reviews"
+        },
+        {
+            "value": "538",
+            "display": "Telephone Counselling"
+        },
+        {
+            "value": "539",
+            "display": "Telephone Help Line"
+        },
+        {
+            "value": "540",
+            "display": "Online Service"
+        },
+        {
+            "value": "541",
+            "display": "Crisis - Mental Health"
+        },
+        {
+            "value": "542",
+            "display": "Youth Crisis"
+        },
+        {
+            "value": "543",
+            "display": "Sexual Assault"
+        },
+        {
+            "value": "544",
+            "display": "GPAH Other"
+        },
+        {
+            "value": "545",
+            "display": "Paediatric Dermatology"
+        },
+        {
+            "value": "546",
+            "display": "Veterans Services"
+        },
+        {
+            "value": "547",
+            "display": "Veterans"
+        },
+        {
+            "value": "548",
+            "display": "Food Relief/Food/Meals"
+        },
+        {
+            "value": "550",
+            "display": "Dementia Care"
+        },
+        {
+            "value": "551",
+            "display": "Alzheimer"
+        },
+        {
+            "value": "552",
+            "display": "Drug and/or Alcohol Support Groups"
+        },
+        {
+            "value": "553",
+            "display": "1-on-1 Support /Mentoring /Coaching"
+        },
+        {
+            "value": "554",
+            "display": "Chronic Disease Management"
+        },
+        {
+            "value": "555",
+            "display": "Liaison Services"
+        },
+        {
+            "value": "556",
+            "display": "Walk-in Centre /Non-Emergency"
+        },
+        {
+            "value": "557",
+            "display": "Inpatients"
+        },
+        {
+            "value": "558",
+            "display": "Spiritual Counselling"
+        },
+        {
+            "value": "559",
+            "display": "Women's Health"
+        },
+        {
+            "value": "560",
+            "display": "Men's Health"
+        },
+        {
+            "value": "561",
+            "display": "Health Education/Awareness Program"
+        },
+        {
+            "value": "562",
+            "display": "Test Message"
+        },
+        {
+            "value": "563",
+            "display": "Remedial Massage"
+        },
+        {
+            "value": "564",
+            "display": "Adolescent Mental Health Services"
+        },
+        {
+            "value": "565",
+            "display": "Youth Drop In/Assistance/Support"
+        },
+        {
+            "value": "566",
+            "display": "Aboriginal Health Worker"
+        },
+        {
+            "value": "567",
+            "display": "Women's Health Clinic"
+        },
+        {
+            "value": "568",
+            "display": "Men's Health Clinic"
+        },
+        {
+            "value": "569",
+            "display": "Migrant Health Clinic"
+        },
+        {
+            "value": "570",
+            "display": "Refugee Health Clinic"
+        },
+        {
+            "value": "571",
+            "display": "Aboriginal Health Clinic"
+        },
+        {
+            "value": "572",
+            "display": "Nurse Practitioner Lead Clinic/s"
+        },
+        {
+            "value": "573",
+            "display": "Nurse Lead Clinic/s"
+        },
+        {
+            "value": "574",
+            "display": "Culturally Tailored Support Groups"
+        },
+        {
+            "value": "575",
+            "display": "Culturally Tailored Health Promotion"
+        },
+        {
+            "value": "576",
+            "display": "Rehabilitation"
+        },
+        {
+            "value": "577",
+            "display": "Education Information/Referral"
+        },
+        {
+            "value": "580",
+            "display": "Social Work"
+        },
+        {
+            "value": "581",
+            "display": "Haematology"
+        },
+        {
+            "value": "582",
+            "display": "Maternity Shared Car"
+        },
+        {
+            "value": "583",
+            "display": "Rehabilitation Servi"
+        },
+        {
+            "value": "584",
+            "display": "Cranio-sacral Therapy"
+        },
+        {
+            "value": "585",
+            "display": "Prosthetics & Orthotics"
+        },
+        {
+            "value": "589",
+            "display": "Home Medicine Review"
+        },
+        {
+            "value": "590",
+            "display": "GPAH - Medical"
+        },
+        {
+            "value": "591",
+            "display": "Music Therapy"
+        },
+        {
+            "value": "593",
+            "display": "Falls Prevention"
+        },
+        {
+            "value": "599",
+            "display": "Accommodation/Tenancy"
+        },
+        {
+            "value": "600",
+            "display": "Assess-Skill, Ability, Needs"
+        },
+        {
+            "value": "601",
+            "display": "Assist Access/Maintain Employ"
+        },
+        {
+            "value": "602",
+            "display": "Assist Prod-Pers Care/Safety"
+        },
+        {
+            "value": "603",
+            "display": "Assist-Integrate School/Ed"
+        },
+        {
+            "value": "604",
+            "display": "Assist-Life Stage, Transition"
+        },
+        {
+            "value": "605",
+            "display": "Assist-Personal Activities"
+        },
+        {
+            "value": "606",
+            "display": "Assist-Travel/Transport"
+        },
+        {
+            "value": "607",
+            "display": "Assistive Equip-General Tasks"
+        },
+        {
+            "value": "608",
+            "display": "Assistive Equip-Recreation"
+        },
+        {
+            "value": "609",
+            "display": "Assistive Prod-Household Task"
+        },
+        {
+            "value": "610",
+            "display": "Behavior Support"
+        },
+        {
+            "value": "611",
+            "display": "Comms & Info Equipment"
+        },
+        {
+            "value": "612",
+            "display": "Community Nursing Care"
+        },
+        {
+            "value": "613",
+            "display": "Daily Tasks/Shared Living"
+        },
+        {
+            "value": "614",
+            "display": "Development-Life Skills"
+        },
+        {
+            "value": "615",
+            "display": "Early Childhood Supports"
+        },
+        {
+            "value": "616",
+            "display": "Equipment Special Assess Setup"
+        },
+        {
+            "value": "617",
+            "display": "Hearing Equipment"
+        },
+        {
+            "value": "618",
+            "display": "Home Modification"
+        },
+        {
+            "value": "619",
+            "display": "Household Tasks"
+        },
+        {
+            "value": "620",
+            "display": "Interpret/Translate"
+        },
+        {
+            "value": "621",
+            "display": "Other Innovative Supports"
+        },
+        {
+            "value": "622",
+            "display": "Participate Community"
+        },
+        {
+            "value": "623",
+            "display": "Personal Mobility Equipment"
+        },
+        {
+            "value": "624",
+            "display": "Physical Wellbeing"
+        },
+        {
+            "value": "625",
+            "display": "Plan Management"
+        },
+        {
+            "value": "626",
+            "display": "Therapeutic Supports"
+        },
+        {
+            "value": "627",
+            "display": "Training-Travel Independence"
+        },
+        {
+            "value": "628",
+            "display": "Vehicle modifications"
+        },
+        {
+            "value": "629",
+            "display": "Vision Equipment"
+        }
+    ]
+}

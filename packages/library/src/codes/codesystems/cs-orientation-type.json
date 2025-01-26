@@ -1,0 +1,17 @@
+{
+    "id": "orientation-type",
+    "name": "OrientationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/orientation-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sense",
+            "display": "Sense orientation of referenceSeq"
+        },
+        {
+            "value": "antisense",
+            "display": "Antisense orientation of referenceSeq"
+        }
+    ]
+}

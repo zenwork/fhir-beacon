@@ -1,0 +1,8 @@
+{
+    "id": "medication-codes",
+    "name": "SNOMEDCTMedicationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medication-codes",
+    "valid": true,
+    "choices": []
+}

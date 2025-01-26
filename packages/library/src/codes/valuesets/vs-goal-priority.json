@@ -1,0 +1,21 @@
+{
+    "id": "goal-priority",
+    "name": "GoalPriority",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/goal-priority",
+    "valid": true,
+    "choices": [
+        {
+            "value": "high-priority",
+            "display": "High Priority"
+        },
+        {
+            "value": "medium-priority",
+            "display": "Medium Priority"
+        },
+        {
+            "value": "low-priority",
+            "display": "Low Priority"
+        }
+    ]
+}

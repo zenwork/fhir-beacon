@@ -1,0 +1,29 @@
+{
+    "id": "questionnaire-answers-status",
+    "name": "QuestionnaireResponseStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/questionnaire-answers-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "amended",
+            "display": "Amended"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "medicinal-product-contact-type",
+    "name": "ProductContactType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-contact-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ProposedMAH",
+            "display": "Proposed Marketing Authorization Holder/Person"
+        },
+        {
+            "value": "ProcedureContactDuring",
+            "display": "Person/Company authorised for Communication during procedure"
+        },
+        {
+            "value": "ProcedureContactAfter",
+            "display": "Person/Company authorised for Communication after procedure"
+        },
+        {
+            "value": "QPPV",
+            "display": "Qualified Person Responsible for Pharmacovigilance"
+        },
+        {
+            "value": "PVEnquiries",
+            "display": "Pharmacovigilance Enquiry Information"
+        }
+    ]
+}

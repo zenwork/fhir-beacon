@@ -1,0 +1,8 @@
+{
+    "id": "allergen-class",
+    "name": "CodesForAllergenClasses",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/allergen-class",
+    "valid": true,
+    "choices": []
+}

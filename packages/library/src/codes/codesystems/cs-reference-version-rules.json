@@ -1,0 +1,21 @@
+{
+    "id": "reference-version-rules",
+    "name": "ReferenceVersionRules",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/reference-version-rules",
+    "valid": true,
+    "choices": [
+        {
+            "value": "either",
+            "display": "Either Specific or independent"
+        },
+        {
+            "value": "independent",
+            "display": "Version independent"
+        },
+        {
+            "value": "specific",
+            "display": "Version Specific"
+        }
+    ]
+}

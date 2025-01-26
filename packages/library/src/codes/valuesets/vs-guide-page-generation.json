@@ -1,0 +1,24 @@
+{
+    "id": "guide-page-generation",
+    "name": "GuidePageGeneration",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "html",
+            "display": "HTML"
+        },
+        {
+            "value": "markdown",
+            "display": "Markdown"
+        },
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "generated",
+            "display": "Generated"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "coverage-financial-exception",
+    "name": "ExampleCoverageFinancialExceptionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/coverage-financial-exception",
+    "valid": true,
+    "choices": [
+        {
+            "value": "retired",
+            "display": "Retired"
+        },
+        {
+            "value": "foster",
+            "display": "Foster child"
+        }
+    ]
+}

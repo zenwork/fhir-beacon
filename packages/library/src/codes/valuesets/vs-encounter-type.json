@@ -1,0 +1,25 @@
+{
+    "id": "encounter-type",
+    "name": "EncounterType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ADMS",
+            "display": "Annual diabetes mellitus screening"
+        },
+        {
+            "value": "BD/BM-clin",
+            "display": "Bone drilling/bone marrow punction in clinic"
+        },
+        {
+            "value": "CCS60",
+            "display": "Infant colon screening - 60 minutes"
+        },
+        {
+            "value": "OKI",
+            "display": "Outpatient Kenacort injection"
+        }
+    ]
+}

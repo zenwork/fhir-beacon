@@ -1,0 +1,32 @@
+{
+    "id": "action-selection-behavior",
+    "name": "ActionSelectionBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "any",
+            "display": "Any"
+        },
+        {
+            "value": "all",
+            "display": "All"
+        },
+        {
+            "value": "all-or-none",
+            "display": "All Or None"
+        },
+        {
+            "value": "exactly-one",
+            "display": "Exactly One"
+        },
+        {
+            "value": "at-most-one",
+            "display": "At Most One"
+        },
+        {
+            "value": "one-or-more",
+            "display": "One Or More"
+        }
+    ]
+}

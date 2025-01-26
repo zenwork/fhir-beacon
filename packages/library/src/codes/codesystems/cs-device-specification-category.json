@@ -1,0 +1,37 @@
+{
+    "id": "device-specification-category",
+    "name": "FHIRDeviceSpecializationCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/device-specification-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "communication",
+            "display": "Communication"
+        },
+        {
+            "value": "performance",
+            "display": "Performance"
+        },
+        {
+            "value": "measurement",
+            "display": "Measurement"
+        },
+        {
+            "value": "risk-class",
+            "display": "Risk Class"
+        },
+        {
+            "value": "electrical",
+            "display": "Electrical"
+        },
+        {
+            "value": "material",
+            "display": "Material"
+        },
+        {
+            "value": "exchange",
+            "display": "Exchange"
+        }
+    ]
+}

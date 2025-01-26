@@ -1,0 +1,37 @@
+{
+    "id": "encounter-diet",
+    "name": "EncounterDiet",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-diet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "vegetarian",
+            "display": "Vegetarian"
+        },
+        {
+            "value": "dairy-free",
+            "display": "Dairy Free"
+        },
+        {
+            "value": "nut-free",
+            "display": "Nut Free"
+        },
+        {
+            "value": "gluten-free",
+            "display": "Gluten Free"
+        },
+        {
+            "value": "vegan",
+            "display": "Vegan"
+        },
+        {
+            "value": "halal",
+            "display": "Halal"
+        },
+        {
+            "value": "kosher",
+            "display": "Kosher"
+        }
+    ]
+}
