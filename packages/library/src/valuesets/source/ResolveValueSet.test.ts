@@ -19,7 +19,7 @@ describe('ResolveValueSet', () => {
     it('should resolve nothing when nothing passed', async () => {
 
       const skipUrl = vi.fn().mockReturnValue(false)
-      const result = await resolveIncludesOrExclude([], 'include', false, skipUrl)
+      const result = await resolveIncludesOrExclude('id', [], 'include', false, skipUrl)
 
       expect(result).toEqual([])
       expect(skipUrl).not.toHaveBeenCalled() // skipUrl should not be called in this case
@@ -36,7 +36,7 @@ describe('ResolveValueSet', () => {
       ]
       global.fetch = vi.fn()
       const skipUrl = vi.fn().mockImplementation((id: string) => /example\.com/.test(id))
-      const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
+      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
 
       expect(result).toEqual([[]])
       expect(skipUrl).toHaveBeenCalledTimes(1)
@@ -70,7 +70,7 @@ describe('ResolveValueSet', () => {
       ]
 
       const skipUrl = vi.fn().mockImplementation((id: string) => /foobar\.com/.test(id))
-      const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
+      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
 
       expect(result).toEqual([[]])
       expect(skipUrl).toHaveBeenCalledTimes(1)
@@ -92,7 +92,7 @@ describe('ResolveValueSet', () => {
       ]
 
       const skipUrl = vi.fn().mockReturnValue(false)
-      const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
+      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
 
       expect(result).toEqual([
                                [

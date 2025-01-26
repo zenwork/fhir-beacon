@@ -36,9 +36,17 @@ export async function resolveValueSet(vs: ValueSetData,
 
 
   return Promise.all([
-                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.include ?? [], 'include', debug, skipUrl))
+                       Promise.resolve(resolveIncludesOrExclude(vs.id ?? 'n/a',
+                                                                vs.compose?.include ?? [],
+                                                                'include',
+                                                                debug,
+                                                                skipUrl))
                               .then(r => r.flat()),
-                       Promise.resolve(resolveIncludesOrExclude(vs.compose?.exclude ?? [], 'exclude', debug, skipUrl))
+                       Promise.resolve(resolveIncludesOrExclude(vs.id ?? 'n/a',
+                                                                vs.compose?.exclude ?? [],
+                                                                'exclude',
+                                                                debug,
+                                                                skipUrl))
                               .then(r => r.flat())
 
                      ])
@@ -60,7 +68,8 @@ export async function resolveValueSet(vs: ValueSetData,
 
 }
 
-export async function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeData[],
+export async function resolveIncludesOrExclude(id: string,
+                                               segment: ValueSetIncludeExcludeData[],
                                                variant: 'include' | 'exclude' = 'include',
                                                debug: boolean,
                                                skipUrl: (url: string) => boolean): Promise<ResolvedValue[][]> {
@@ -71,7 +80,7 @@ export async function resolveIncludesOrExclude(segment: ValueSetIncludeExcludeDa
   const urlsToResolve: { uri: string, resolved: boolean }[] = []
 
   for (let idx = 0; idx < segment.length; idx++) {
-    promises.push(resolve(segment[idx], idx, debug, skipUrl, urlsToResolve, variant))
+    promises.push(resolve(id, segment[idx], idx, debug, skipUrl, urlsToResolve, variant))
   }
 
   const maxTime: number = 600_000
@@ -105,7 +114,7 @@ function assertOk(inc: ValueSetIncludeExcludeData, idx: number): void {
   }
 }
 
-function resolve(segment: ValueSetIncludeExcludeData,
+function resolve(id: string, segment: ValueSetIncludeExcludeData,
                  idx: number,
                  debug: boolean,
                  skipUrl: (url: string) => boolean,
@@ -118,14 +127,14 @@ function resolve(segment: ValueSetIncludeExcludeData,
     assertOk(segment, idx)
 
     if (segment.concept && segment.concept.length > 0) {
-      resolveConcepts(segment.concept, debug)
+      resolveConcepts(id, segment.concept, debug)
         .then(r => {
           resolve(r)
         })
         .catch((r) => reject(r))
 
     } else if (segment.system) {
-      resolveChildSystem(segment.system, urlsToResolve, skipUrl, debug)
+      resolveChildSystem(id, segment.system, urlsToResolve, skipUrl, debug)
         .then(r => {
           if (r !== null) {
             resolve(r)
@@ -137,7 +146,7 @@ function resolve(segment: ValueSetIncludeExcludeData,
 
     } else if (segment.valueSet && segment.valueSet.length > 0) {
       const resolvedConcepts: ResolvedValue[] = []
-      Promise.all(segment.valueSet.map(vs => resolveChildValueSet(vs, skipUrl, debug, urlsToResolve)))
+      Promise.all(segment.valueSet.map(vs => resolveChildValueSet(id, vs, skipUrl, debug, urlsToResolve)))
              .then((all: (ResolvedSet | null)[]) => all.filter(v => v !== null))
              .then((valid: ResolvedSet[]) => valid.map(v => v!.compose[variant].concept))
              .then((conceptsArrays: ResolvedValue[][]) => conceptsArrays.flat())
@@ -150,13 +159,13 @@ function resolve(segment: ValueSetIncludeExcludeData,
   })
 }
 
-function resolveConcepts(inc: ValueSetConceptData[], debug: boolean): Promise<ResolvedValue[]> {
-  if (debug) console.log(`resolved [${inc.length}] from self`)
+function resolveConcepts(id: string, inc: ValueSetConceptData[], debug: boolean): Promise<ResolvedValue[]> {
+  if (debug) console.log(`resolved [${inc.length}] from self: ${id}`)
   return Promise.resolve(inc.map(c => ({ code: c.code, display: c.display ?? 'n/a', definition: 'n/a' })))
 }
 
 
-function resolveChildSystem(system: URI,
+function resolveChildSystem(id: string, system: URI,
                             urlsToResolve: { uri: string; resolved: boolean }[],
                             skipUrl: (url: string) => boolean,
                             debug: boolean): Promise<ResolvedValue[] | null> {
@@ -168,7 +177,7 @@ function resolveChildSystem(system: URI,
     return fetchIt({ url: url, debug })
       .then((json: ValueSetData | CodeSystemData | unknown) => {
               if (isCodeSystem(json)) {
-                if (debug) console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
+                if (debug) console.log(`resolved [${json.concept.length}] from : ${url} - for : ${id}`)
                 concepts.push(...json.concept
                                      .map((c: Record<string, unknown>) =>
                                             ({
@@ -190,7 +199,7 @@ function resolveChildSystem(system: URI,
   return Promise.resolve(null)
 }
 
-function resolveChildValueSet(valueSetUri: URI,
+function resolveChildValueSet(id: string, valueSetUri: URI,
                               skipUrl: (url: string) => boolean,
                               debug: boolean,
                               urlsToResolve: { uri: string; resolved: boolean }[]): Promise<ResolvedSet | null> {
@@ -200,7 +209,7 @@ function resolveChildValueSet(valueSetUri: URI,
     const httpsUri: string = `${valueSetUri}`.replace(/http:/, 'https:')
     urlsToResolve.push({ uri: httpsUri, resolved: false })
 
-    if (debug) console.log('resolving [' + httpsUri + '] value set')
+    if (debug) console.log(`resolving [${httpsUri}] value set for: ${id}`)
 
     return fetchIt({ url: httpsUri, debug })
       .then((json: ValueSetData | CodeSystemData | unknown) => {
