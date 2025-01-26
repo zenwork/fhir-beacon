@@ -41,7 +41,7 @@ describe('ValueSetProcessor', () => {
 
   })
 
-  test('should process one', { timeout: 180_000 }, async () => {
+  test.runIf(process.env.EXPENSIVE)('should process one', { timeout: 180_000 }, async () => {
 
     const criteria: Criteria = (id: string) => {
       return id === 'valueset-week-of-month.json'
