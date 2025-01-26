@@ -30,7 +30,7 @@ export class FSStore implements ValueSetStore {
 
                    const encoder = new TextEncoder() // Built-in API for text encoding
                    const uint8Array = encoder.encode(JSON.stringify(choices, null, 2))
-
+                   console.log('writing', choices.id, choices.type)
                    let promise: Promise<void>
                    switch (choices.type) {
                      case 'CodeSystem':

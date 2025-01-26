@@ -43,4 +43,17 @@ describe('ValueSets', () => {
 
                                       // return await new Promise(res => setTimeout(res, 130_000))
                                     })
+
+  test.runIf(process.env.EXPENSIVE)('should get everything related to a single file',
+                                    { timeout: 800_000 },
+                                    async () => {
+                                      return await ValueSetsFactory
+                                        .singleSource(`${process.cwd()}/../data/r5/definitions.json/valuesets.json`,
+                                                      `${process.cwd()}/./generation/valuesets`,
+                                                      url => exclusions.some(skip => skip.test(url))
+                                        )
+                                        .processAll(true)
+
+                                      // return await new Promise(res => setTimeout(res, 130_000))
+                                    })
 })

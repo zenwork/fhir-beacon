@@ -3,7 +3,7 @@ import {CodeSystemConceptData, CodeSystemData, ResolvedSet, ResolvedValue} from 
 
 
 
-export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = false): Promise<ResolvedSet> {
+export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = false): Promise<ResolvedSet[]> {
 
   if (isBlank(vs.name)) {
     throw new Error('CodeSystem name is required for code generation'
@@ -22,7 +22,8 @@ export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = fal
 
   return Promise.all([Promise.resolve(resolveIncludesOrExclude(vs.id ?? 'n/a', vs.concept ?? [], debug))])
                 .then((r: ResolvedValue[][]) => {
-                  return ({
+                  return ([
+                    {
                     origin: vs,
                     id: vs.id ?? 'unknown',
                     type: vs.resourceType ?? 'unknown',
@@ -33,7 +34,8 @@ export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = fal
                       include: { concept: r[0] },
                       exclude: { concept: [] }
                     }
-                  } as ResolvedSet)
+                    } as ResolvedSet
+                  ])
                 })
 
 

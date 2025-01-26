@@ -32,46 +32,48 @@ export class ValueSetProcessor {
   constructor(source: ValueSetSource | LoadableStore) {
     this.#source = source
     if (isLoadableStore(this.#source)) {
-      this.#source.load()
       this.#ready = this.#source.isLoaded()
     }
   }
 
-  process(id: string, debug?: boolean): Promise<Choices> {
+  process(id: string, debug?: boolean): Promise<Choices[]> {
 
     return this.#ready
                .then(() =>
                        this.#source
                            .resolve(id, debug)
-                           .then((resolved: ResolvedSet) => {
+                           .then((resolvedSets: ResolvedSet[]) => {
+                             return resolvedSets.map(set => {
 
-                             if (isResolutionError(resolved.origin)) {
-                               return {
-                                 id: resolved.id,
-                                 name: resolved.name,
-                                 type: resolved.type,
-                                 choices: [],
-                                 valid: false,
-                                 origin: resolved.origin
+                               if (isResolutionError(set.origin)) {
+                                 return {
+                                   id: set.id,
+                                   name: set.name,
+                                   type: set.type,
+                                   choices: [],
+                                   valid: false,
+                                   origin: set.origin
+                                 }
                                }
-                             }
 
-                             const reducedSet: ResolvedValue[] = removeValues(resolved.compose.include.concept,
-                                                                              resolved.compose.exclude.concept)
+                               const reducedSet: ResolvedValue[] = removeValues(set.compose.include.concept,
+                                                                                set.compose.exclude.concept)
 
-                             const choices: Choice[] =
-                               reducedSet.map(c => ({
-                                 value: c.code,
-                                 display: c.display
-                               }))
+                               const choices: Choice[] =
+                                 reducedSet.map(c => ({
+                                   value: c.code,
+                                   display: c.display
+                                 }))
 
-                             return {
-                               id: resolved.id,
-                               name: resolved.name,
-                               type: resolved.type,
-                               valid: true,
-                               choices
-                             } as Choices
+                               return {
+                                 id: set.id,
+                                 name: set.name,
+                                 type: set.type,
+                                 valid: true,
+                                 choices
+                               } as Choices
+
+                             })
                            }))
   }
 
@@ -87,14 +89,14 @@ export class ValueSetProcessor {
     const ids: string[] = await this.#ready.then(() => this.#source.allIds())
 
     const results: Choices[] = []
-    let promises: Promise<Choices>[] = []
+    let promises: Promise<Choices[]>[] = []
     for (const id of ids) {
       try {
         // console.log(`starting processing: ${id}`)
         promises.push(this.process(id, debug))
         if (promises.length >= 16) {
           // console.log(`waiting on processing`)
-          const r = await Promise.all(promises)
+          const r = (await Promise.all(promises)).flat()
           results.push(...r)
           promises = []
           // console.log(`next batch:`)
@@ -104,7 +106,7 @@ export class ValueSetProcessor {
         throw new Error(`Failed to process valueset: ${id} - ` + e)
       }
     }
-    const r = await Promise.all(promises)
+    const r: Choices[] = (await Promise.all(promises)).flat()
     results.push(...r)
 
     //console.log('returning results')

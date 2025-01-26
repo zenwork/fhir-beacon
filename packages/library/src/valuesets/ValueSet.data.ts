@@ -1,5 +1,6 @@
 import {
   AttachmentData,
+  BundleData,
   Canonical,
   Code,
   CodeableConceptData,
@@ -207,7 +208,7 @@ export type Choices = {
 }
 
 export interface ValueSetSource {
-  resolve(source: string, debug?: boolean): Promise<ResolvedSet>
+  resolve(source: string, debug?: boolean): Promise<ResolvedSet[]>
   cacheAll(debug?: boolean): Promise<boolean>
   allIds(): Promise<string[]>
 }
@@ -218,11 +219,11 @@ export interface ValueSetStore {
 
 export interface LoadableStore extends ValueSetSource {
   isLoaded(): Promise<boolean>
-  load(): Promise<boolean>
+  loadDir(): Promise<boolean>
 }
 
 export function isLoadableStore(source: ValueSetSource | LoadableStore): source is LoadableStore {
-  return (source as LoadableStore).load !== undefined
+  return (source as LoadableStore).loadDir !== undefined
 }
 
 export function isResolutionError(origin: ValueSetData | ResolutionError): origin is ResolutionError {
@@ -235,6 +236,10 @@ export function isResource(origin: unknown): origin is ResourceData {
 
 export function isValueSet(origin: unknown): origin is ValueSetData {
   return (origin as ValueSetData).resourceType === 'ValueSet'
+}
+
+export function isBundle(origin: unknown): origin is BundleData {
+  return (origin as BundleData).resourceType === 'Bundle'
 }
 
 export function isCodeSystem(origin: unknown): origin is CodeSystemData {

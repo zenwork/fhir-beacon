@@ -18,7 +18,7 @@ export class ValueSets {
   async processAll(debug: boolean = false): Promise<Choices[]> {
     return this.processor
                .processAll(debug)
-               .then(sets => {
+               .then((sets: Choices[]) => {
                  return Promise
                    .all(sets
                           .filter(set => set.type
@@ -36,13 +36,15 @@ export class ValueSets {
                })
   }
 
+  // todo: the link between id and single file is broken
   async process(id: string): Promise<void> {
     return this.processor
                .process(id)
-               .then(choices => this.store.write(choices))
+               .then((choices: Choices[]) => Promise.all(choices.map(choice => this.store.write(choice))))
   }
 
-  async get(id: string): Promise<Choices> {
+  // todo: the link between id and single file is broken
+  async get(id: string): Promise<Choices[]> {
     return this.processor.process(id)
   }
 
@@ -58,6 +60,24 @@ export class ValueSetsFactory {
     const fsSource: LoadableStore = !regex
                                     ? new FSSource(source, undefined, skipUrl)
                                     : new FSSource(source, file => regex.test(file), skipUrl)
+
+    fsSource.loadDir()
+
+    const processor: ValueSetProcessor = new ValueSetProcessor(fsSource)
+
+    const store: ValueSetStore = new FSStore(target)
+
+    return new ValueSets(processor, store)
+
+  }
+
+  static singleSource(file: string,
+                      target: string,
+                      skipUrl: (url: string) => boolean = () => false): ValueSets {
+
+    const fsSource = new FSSource(file, undefined, skipUrl)
+
+    fsSource.loadfile()
 
     const processor: ValueSetProcessor = new ValueSetProcessor(fsSource)
 

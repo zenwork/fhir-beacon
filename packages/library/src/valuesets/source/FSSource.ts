@@ -1,5 +1,9 @@
-import {readdir, readFile, realpath} from 'node:fs/promises'
+import {Stats}                              from 'node:fs'
+import {lstat, readdir, readFile, realpath} from 'node:fs/promises'
+
+import path from 'path'
 import {
+  isBundle,
   isCodeSystem,
   isResource,
   isValueSet,
@@ -7,18 +11,21 @@ import {
   ResolvedSet,
   ValueSetData,
   ValueSetSource
-}                                    from '../ValueSet.data'
+}           from '../ValueSet.data'
 
 import {FetchError}        from './FetchError'
+import {resolveBundle}     from './ResolveBundle'
 import {resolveCodeSystem} from './ResolveCodeSystem'
 import {resolveValueSet}   from './ResolveValueSet'
 
 
 
-function empty(source: string,
-               path: string,
-               error: string,
-               type: 'CodeSystem' | 'ValueSet' | 'unknown', err?: FetchError): ResolvedSet {
+export function empty(source: string,
+                      path: string,
+                      error: string,
+                      type: 'CodeSystem' | 'ValueSet' | 'unknown',
+                      err?: FetchError,
+                      isError: boolean = true): ResolvedSet {
   // console.error({path: path, source: source, error: error, errmsg: err?.message, body: err?.body ?? '', status:
   // err?.status ?? null, statusText: err?.statusText ?? null, url: err?.url ?? null})
   return {
@@ -30,7 +37,7 @@ function empty(source: string,
     origin: {
       path: path,
       source: source,
-      error: error,
+      error: (isError ? error : undefined),
       errmsg: err?.message,
       body: err?.body ?? '',
       status: err?.status ?? null,
@@ -59,6 +66,7 @@ export class FSSource implements ValueSetSource, LoadableStore {
   #loaded: boolean | null = null
   #files: string[] = []
   #cache: Map<string, ResolvedSet> = new Map()
+  #basePath: string = ''
 
   constructor(path: string, criteria: Criteria | undefined, public skipUrl: (url: string) => boolean) {
     this.#criteria = criteria ?? matchAll
@@ -69,12 +77,14 @@ export class FSSource implements ValueSetSource, LoadableStore {
     return this.isLoaded().then(() => this.#files)
   }
 
-  load(): Promise<boolean> {
+  loadDir(): Promise<boolean> {
 
     if (this.#loaded) return this.isLoaded()
 
+    this.#basePath = this.#path
+
     try {
-      readdir(this.#path)
+      readdir(this.#basePath)
         .then(files => {
           for (const file of files) {
             if (this.#criteria(file)) {
@@ -87,6 +97,36 @@ export class FSSource implements ValueSetSource, LoadableStore {
     } catch (err) {
       console.error(err)
       this.#loaded = false
+    }
+
+    return this.isLoaded()
+
+  }
+
+  loadfile(): Promise<boolean> {
+
+    if (this.#loaded) return this.isLoaded()
+
+    try {
+      lstat(this.#path)
+        .then((stats: Stats) => {
+          if (stats.isFile()) {
+            console.log(`loading valuesets: ${this.#loaded} - ${this.#files.length} - ${this.#path}`)
+            this.#loaded = true
+
+            this.#files.push(path.basename(this.#path))
+
+            this.#basePath = path.dirname(this.#path)
+
+          } else {
+            this.#loaded = false
+            throw new Error(`path is not a file: ${this.#path}`)
+          }
+        })
+
+
+    } catch (err) {
+      console.error(err)
     }
 
     return this.isLoaded()
@@ -115,51 +155,58 @@ export class FSSource implements ValueSetSource, LoadableStore {
     return this.#files.some(f => f.indexOf(name) > -1)
   }
 
-  async resolve(source: string, debug: boolean = false): Promise<ResolvedSet> {
+  async resolve(source: string, debug: boolean = false): Promise<ResolvedSet[]> {
 
     if (this.exists(source)) {
       try {
 
+        //todo: this caching will no longer work
         if (this.#cache.has(source)) {
           console.log('cache hit')
-          return this.#cache.get(source)!
+          return [this.#cache.get(source)!]
         }
 
-        const fullpath: string = `${this.#path}/${source}`
+        const fullpath: string = `${this.#basePath}/${source}`
         if (debug) console.log(`Reading ${fullpath}`)
 
         return realpath(fullpath)
           .then(path => readFile(path, { encoding: 'utf8' }))
           .then(data => JSON.parse(data) as ValueSetData)
           .then(json => {
+            if (isBundle(json)) return resolveBundle(json, this.skipUrl, debug)
             if (isValueSet(json)) return resolveValueSet(json, this.skipUrl, debug)
             if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
             if (isResource(json)) { // @ts-ignore
-              return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
+              return [empty(source, this.#basePath, `error: unsupported resource type`, json.resourceType)]
             }
             throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json).replace(/"/g, '\''))
           })
-          .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
-          .then(() => {
-            const rs: ResolvedSet = this.#cache.get(source)!
+          .then((resolvedValueSet: ResolvedSet[]) => {
+            resolvedValueSet.map(rvs => this.#cache.set(rvs.id, rvs))
+            return resolvedValueSet
+          })
+          .then((rvs) => {
+            const rs: ResolvedSet[] = rvs.map(s => this.#cache.get(s.id)!)
             //console.log(`returning cached valueset: ${rs.id} - ${rs.name}`)
             return rs!
           })
           .catch(error => {
-            return empty(source,
-                         this.#path,
+            return [
+              empty(source,
+                    this.#basePath,
                          `Failed to read and resolve ValueSet for source [${source}]. Details: ${error}`,
                          'unknown',
-                         error)
+                    error)
+            ]
           })
 
       } catch (e) {
         //console.error('url2:',e.constructor.name,(e as FetchError).message,(typeof e ),(e as FetchError).url)
-        return empty(source, this.#path, `read and resolved failed: ${e}`, 'unknown', e as FetchError)
+        return [empty(source, this.#basePath, `read and resolved failed: ${e}`, 'unknown', e as FetchError)]
       }
 
     }
-    return empty(source, this.#path, `source "${source}" does not exist`, 'unknown')
+    return [empty(source, this.#basePath, `source "${source}" does not exist`, 'unknown')]
 
 
   }
@@ -170,8 +217,8 @@ export class FSSource implements ValueSetSource, LoadableStore {
       .all<boolean>(
         this.#files.map(f => {
           return this.resolve(f, debug)
-                     .then(r => {
-                       this.#cache.set(f, r)
+                     .then((sets: ResolvedSet[]) => {
+                       sets.map((set: ResolvedSet) => this.#cache.set(set.id, set))
                        return true
                      })
         }))

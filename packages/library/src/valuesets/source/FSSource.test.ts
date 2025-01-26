@@ -11,7 +11,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
 
   test('should read a dir', async () => {
     const source: FSSource = new FSSource(exampleData, undefined, () => false)
-    const result: boolean = await source.load()
+    const result: boolean = await source.loadDir()
     expect(result).to.be.true
     expect(source.size()).to.equal(2824)
     expect(source.exists('valueset-transport-intent.json')).to.be.true
@@ -21,7 +21,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
        { timeout: 30000 },
        async () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
-         await source.load()
+         await source.loadDir()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-transport-intent.json', false)
 
@@ -38,7 +38,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
        { timeout: 30000 },
        async () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
-         await source.load()
+         await source.loadDir()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-week-of-month.json', false)
 
@@ -56,7 +56,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
        { timeout: 30000 },
        async () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
-         await source.load()
+         await source.loadDir()
 
          const valueSet: ResolvedSet = await source.resolve('valueset-definition-topic.json')
 
@@ -72,7 +72,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
        { timeout: 30000 },
        async () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
-         await source.load()
+         await source.loadDir()
 
          try {
            await source.resolve('valueset-participation-role-type.json')
@@ -88,7 +88,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
        { timeout: 30000 },
        async () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
-         await source.load()
+         await source.loadDir()
 
          try {
            await source.resolve('foo.json')

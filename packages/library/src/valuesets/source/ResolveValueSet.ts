@@ -17,7 +17,7 @@ import {resolveCodeSystem} from './ResolveCodeSystem'
 
 export async function resolveValueSet(vs: ValueSetData,
                                       skipUrl: (url: string) => boolean,
-                                      debug: boolean = false): Promise<ResolvedSet> {
+                                      debug: boolean = false): Promise<ResolvedSet[]> {
 
   if (isBlank(vs.name)) {
     throw new Error('ValueSet name is required for code generation'
@@ -51,7 +51,8 @@ export async function resolveValueSet(vs: ValueSetData,
 
                      ])
                 .then((r: ResolvedValue[][]) => {
-                  return ({
+                  return [
+                    {
                     origin: vs,
                     id: vs.id ?? 'unknown',
                     type: vs.resourceType ?? 'unknown',
@@ -62,7 +63,8 @@ export async function resolveValueSet(vs: ValueSetData,
                       include: { concept: r[0] },
                       exclude: { concept: r[1] }
                     }
-                  } as ResolvedSet)
+                    } as ResolvedSet
+                  ]
                 })
 
 
@@ -147,7 +149,8 @@ function resolve(id: string, segment: ValueSetIncludeExcludeData,
     } else if (segment.valueSet && segment.valueSet.length > 0) {
       const resolvedConcepts: ResolvedValue[] = []
       Promise.all(segment.valueSet.map(vs => resolveChildValueSet(id, vs, skipUrl, debug, urlsToResolve)))
-             .then((all: (ResolvedSet | null)[]) => all.filter(v => v !== null))
+             .then((all: (ResolvedSet[] | null)[]) => all.filter(v => v !== null))
+             .then(sets => sets.flat())
              .then((valid: ResolvedSet[]) => valid.map(v => v!.compose[variant].concept))
              .then((conceptsArrays: ResolvedValue[][]) => conceptsArrays.flat())
              .then(r => {
@@ -202,7 +205,7 @@ function resolveChildSystem(id: string, system: URI,
 function resolveChildValueSet(id: string, valueSetUri: URI,
                               skipUrl: (url: string) => boolean,
                               debug: boolean,
-                              urlsToResolve: { uri: string; resolved: boolean }[]): Promise<ResolvedSet | null> {
+                              urlsToResolve: { uri: string; resolved: boolean }[]): Promise<ResolvedSet[] | null> {
 
   if (resolvable(valueSetUri, skipUrl)) {
 
