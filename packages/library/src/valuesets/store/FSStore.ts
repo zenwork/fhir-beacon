@@ -40,7 +40,9 @@ export class FSStore implements ValueSetStore {
                        promise = writeFile(`${this.#choices}/vs-${choices.id}.json`, uint8Array, { signal })
                        break
                      default:
-                       promise = writeFile(`${this.#choices}/er-${choices.id.replace('.json', '')}-${String(errCount++)
+                       promise = writeFile(`${this.#choices}/er-${choices.id.replace('.json', '')
+                                                                         .replace('https', '')
+                                                                         .replace(/[:/.]/g, '_')}-${String(errCount++)
                          .padStart(4, '0')}.json`, uint8Array, { signal })
                        break
                    }

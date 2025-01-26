@@ -11,6 +11,7 @@ import {
   ValueSetIncludeExcludeData
 }                          from '../ValueSet.data'
 import {fetchIt}           from './Fetch'
+import {FetchError}        from './FetchError'
 import {resolveCodeSystem} from './ResolveCodeSystem'
 
 
@@ -63,6 +64,23 @@ export async function resolveValueSet(vs: ValueSetData,
                       include: { concept: r[0] },
                       exclude: { concept: r[1] }
                     }
+                    } as ResolvedSet
+                  ]
+                })
+                .catch((err: FetchError | unknown) => {
+                  const ferr: FetchError = err as FetchError
+                  return [
+                    {
+                      origin: vs,
+                      id: ferr.url ?? 'unknown',
+                      type: 'unknown',
+                      name: vs.name ?? 'unknown',
+                      status: ferr.status,
+                      version: vs.version ?? 'unknown',
+                      compose: {
+                        include: { concept: [] },
+                        exclude: { concept: [] }
+                      }
                     } as ResolvedSet
                   ]
                 })
@@ -138,13 +156,11 @@ function resolve(id: string, segment: ValueSetIncludeExcludeData,
     } else if (segment.system) {
       resolveChildSystem(id, segment.system, urlsToResolve, skipUrl, debug)
         .then(r => {
-          if (r !== null) {
             resolve(r)
-          } else {
-            reject(`Failed to resolve system: ${segment.system}`)
-          }
         })
-        .catch((r) => reject(r))
+        .catch((r) => {
+          reject(r)
+        })
 
     } else if (segment.valueSet && segment.valueSet.length > 0) {
       const resolvedConcepts: ResolvedValue[] = []
@@ -171,7 +187,7 @@ function resolveConcepts(id: string, inc: ValueSetConceptData[], debug: boolean)
 function resolveChildSystem(id: string, system: URI,
                             urlsToResolve: { uri: string; resolved: boolean }[],
                             skipUrl: (url: string) => boolean,
-                            debug: boolean): Promise<ResolvedValue[] | null> {
+                            debug: boolean): Promise<ResolvedValue[]> {
 
   if (resolvable(system, skipUrl)) {
     const url: string = convert(`${system}`.replace(/http:/, 'https:'))
@@ -191,21 +207,25 @@ function resolveChildSystem(id: string, system: URI,
                                      )
                 )
                 urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
-                return concepts
               }
-              throw Error(`Unknown value set type: ${(json as { resourceType: string }).resourceType}`)
+                return concepts
+        // throw Error(`Unknown value set type: ${(json as { resourceType: string }).resourceType}`)
             }
       )
+      .then(resolved => {
+        urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
+        return resolved
+      })
 
   }
 
-  return Promise.resolve(null)
+  return Promise.resolve([])
 }
 
 function resolveChildValueSet(id: string, valueSetUri: URI,
                               skipUrl: (url: string) => boolean,
                               debug: boolean,
-                              urlsToResolve: { uri: string; resolved: boolean }[]): Promise<ResolvedSet[] | null> {
+                              urlsToResolve: { uri: string; resolved: boolean }[]): Promise<ResolvedSet[]> {
 
   if (resolvable(valueSetUri, skipUrl)) {
 
@@ -232,7 +252,7 @@ function resolveChildValueSet(id: string, valueSetUri: URI,
       })
   }
 
-  return Promise.resolve(null)
+  return Promise.resolve([])
 }
 
 function resolvable(vs: string, skipUrl: (url: string) => boolean): boolean {

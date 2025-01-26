@@ -77,13 +77,6 @@ export class ValueSetProcessor {
                            }))
   }
 
-  // public async processAll(debug: boolean = false): Promise<Choices[]> {
-  //
-  //   const ids: string[] = await this.#ready.then(() => this.#source.allIds())
-  //
-  //   return Promise.all(ids.map(id => this.process(id, debug)))
-  //
-  // }
 
   public async processAll(debug: boolean = false): Promise<Choices[]> {
     const ids: string[] = await this.#ready.then(() => this.#source.allIds())
@@ -119,85 +112,3 @@ export class ValueSetProcessor {
 
   }
 }
-
-/**
- * Processes a list of IDs in batches, awaiting the completion of each batch before starting the next one.
- *
- * @param ids - The list of string IDs to process.
- * @param batchSize - The number of IDs to process in a single batch.
- * @param processor - The function to process an individual ID. It should return a Promise.
- * @returns A Promise that resolves to an array of all the processed results.
- */
-
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
-async function processInBatches<T>(
-  ids: string[],
-  batchSize: number,
-  processor: (id: string) => Promise<T>
-): Promise<T[]> {
-  const results: T[] = []
-
-  for (let i = 0; i < ids.length; i += batchSize) {
-    // Take the next batch of IDs
-    const batch = ids.slice(i, i + batchSize)
-
-    // Process all IDs in the batch concurrently
-    const batchResults = await Promise.all(batch.map(processor))
-
-    // Append the batch results to the overall results
-    results.push(...batchResults)
-  }
-
-  return results
-}
-
-/**
- * Utility function to pause execution for a specified number of milliseconds.
- *
- * @param ms - The number of milliseconds to sleep.
- * @returns A Promise that resolves after the given time.
- */
-// function sleep(ms: number): Promise<void> {
-//   return new Promise((resolve) => setTimeout(resolve, ms))
-// }
-
-/**
- * Processes a list of IDs in batches, with a pause between each batch.
- *
- * @param ids - The list of string IDs to process.
- * @param batchSize - The number of IDs to process in a single batch.
- * @param processor - The function to process an individual ID. It should return a Promise.
- * @param pauseDuration - The number of milliseconds to pause between batches.
- * @returns A Promise that resolves to an array of all the processed results.
- */
-/*
- async function processInBatchesWithPause<T>(
- ids: string[],
- batchSize: number,
- processor: (id: string) => Promise<T>,
- pauseDuration: number
- ): Promise<T[]> {
- console.log(ids.length, batchSize, pauseDuration)
- const results: T[] = []
-
- for (let i = 0; i < ids.length; i += batchSize) {
-
- // Take the next batch of IDs
- const batch = ids.slice(i, i + batchSize)
- console.log('next batch', i, i + batchSize)
-
- // Process all IDs in the batch concurrently
- const batchResults = await Promise.all(batch.map(processor))
-
- // Append the batch results to the overall results
- results.push(...batchResults)
-
- // Pause between batches (only if there are more batches to process)
- if (i + batchSize < ids.length) {
- await sleep(pauseDuration) // Pause for the specified duration
- }
- }
-
- return results
- }
- */

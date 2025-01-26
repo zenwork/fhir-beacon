@@ -37,10 +37,11 @@ export class ValueSets {
   }
 
   // todo: the link between id and single file is broken
-  async process(id: string): Promise<void> {
+  async process(id: string): Promise<boolean> {
     return this.processor
                .process(id)
                .then((choices: Choices[]) => Promise.all(choices.map(choice => this.store.write(choice))))
+               .then(all => all.every(b => b))
   }
 
   // todo: the link between id and single file is broken
