@@ -1,0 +1,24 @@
+{
+    "id": "identity-assuranceLevel",
+    "name": "IdentityAssuranceLevel",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "level1",
+            "display": "Level 1"
+        },
+        {
+            "value": "level2",
+            "display": "Level 2"
+        },
+        {
+            "value": "level3",
+            "display": "Level 3"
+        },
+        {
+            "value": "level4",
+            "display": "Level 4"
+        }
+    ]
+}

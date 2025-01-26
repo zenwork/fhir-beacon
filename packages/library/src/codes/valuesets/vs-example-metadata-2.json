@@ -1,0 +1,20 @@
+{
+    "id": "example-metadata-2",
+    "name": "ExampleMetadata",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "A",
+            "display": "A"
+        },
+        {
+            "value": "B",
+            "display": "B"
+        },
+        {
+            "value": "C",
+            "display": "C"
+        }
+    ]
+}

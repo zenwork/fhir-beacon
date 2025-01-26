@@ -1,0 +1,29 @@
+{
+    "id": "version-algorithm",
+    "name": "VersionAlgorithm",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/version-algorithm",
+    "valid": true,
+    "choices": [
+        {
+            "value": "semver",
+            "display": "SemVer"
+        },
+        {
+            "value": "integer",
+            "display": "Integer"
+        },
+        {
+            "value": "alpha",
+            "display": "Alphabetical"
+        },
+        {
+            "value": "date",
+            "display": "Date"
+        },
+        {
+            "value": "natural",
+            "display": "Natural"
+        }
+    ]
+}

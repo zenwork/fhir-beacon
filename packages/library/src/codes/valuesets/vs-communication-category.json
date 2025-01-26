@@ -1,0 +1,25 @@
+{
+    "id": "communication-category",
+    "name": "CommunicationCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/communication-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "alert",
+            "display": "Alert"
+        },
+        {
+            "value": "notification",
+            "display": "Notification"
+        },
+        {
+            "value": "reminder",
+            "display": "Reminder"
+        },
+        {
+            "value": "instruction",
+            "display": "Instruction"
+        }
+    ]
+}

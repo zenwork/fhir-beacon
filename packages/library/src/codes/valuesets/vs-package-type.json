@@ -1,0 +1,20 @@
+{
+    "id": "package-type",
+    "name": "PackageType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MedicinalProductPack",
+            "display": "Medicinal product pack"
+        },
+        {
+            "value": "RawMaterialPackage",
+            "display": "Raw material package"
+        },
+        {
+            "value": "Shipping-TransportContainer",
+            "display": "Shipping or transport container"
+        }
+    ]
+}

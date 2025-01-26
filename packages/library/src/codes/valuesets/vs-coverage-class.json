@@ -1,0 +1,53 @@
+{
+    "id": "coverage-class",
+    "name": "CoverageClassCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/coverage-class",
+    "valid": true,
+    "choices": [
+        {
+            "value": "group",
+            "display": "Group"
+        },
+        {
+            "value": "subgroup",
+            "display": "SubGroup"
+        },
+        {
+            "value": "plan",
+            "display": "Plan"
+        },
+        {
+            "value": "subplan",
+            "display": "SubPlan"
+        },
+        {
+            "value": "class",
+            "display": "Class"
+        },
+        {
+            "value": "subclass",
+            "display": "SubClass"
+        },
+        {
+            "value": "sequence",
+            "display": "Sequence"
+        },
+        {
+            "value": "rxbin",
+            "display": "RX BIN"
+        },
+        {
+            "value": "rxpcn",
+            "display": "RX PCN"
+        },
+        {
+            "value": "rxid",
+            "display": "RX Id"
+        },
+        {
+            "value": "rxgroup",
+            "display": "RX Group"
+        }
+    ]
+}

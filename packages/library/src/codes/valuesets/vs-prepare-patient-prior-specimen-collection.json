@@ -1,0 +1,8 @@
+{
+    "id": "prepare-patient-prior-specimen-collection",
+    "name": "PreparePatient",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/prepare-patient-prior-specimen-collection",
+    "valid": true,
+    "choices": []
+}

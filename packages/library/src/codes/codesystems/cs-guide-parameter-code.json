@@ -1,0 +1,49 @@
+{
+    "id": "guide-parameter-code",
+    "name": "GuideParameterCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/guide-parameter-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "apply",
+            "display": "Apply Metadata Value"
+        },
+        {
+            "value": "path-resource",
+            "display": "Resource Path"
+        },
+        {
+            "value": "path-pages",
+            "display": "Pages Path"
+        },
+        {
+            "value": "path-tx-cache",
+            "display": "Terminology Cache Path"
+        },
+        {
+            "value": "expansion-parameter",
+            "display": "Expansion Profile"
+        },
+        {
+            "value": "rule-broken-links",
+            "display": "Broken Links Rule"
+        },
+        {
+            "value": "generate-xml",
+            "display": "Generate XML"
+        },
+        {
+            "value": "generate-json",
+            "display": "Generate JSON"
+        },
+        {
+            "value": "generate-turtle",
+            "display": "Generate Turtle"
+        },
+        {
+            "value": "html-template",
+            "display": "HTML Template"
+        }
+    ]
+}

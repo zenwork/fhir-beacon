@@ -1,0 +1,237 @@
+{
+    "id": "doc-section-codes",
+    "name": "DocumentSectionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/doc-section-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "10154-3",
+            "display": "n/a"
+        },
+        {
+            "value": "10157-6",
+            "display": "n/a"
+        },
+        {
+            "value": "10160-0",
+            "display": "n/a"
+        },
+        {
+            "value": "10164-2",
+            "display": "n/a"
+        },
+        {
+            "value": "10183-2",
+            "display": "n/a"
+        },
+        {
+            "value": "10184-0",
+            "display": "n/a"
+        },
+        {
+            "value": "10187-3",
+            "display": "n/a"
+        },
+        {
+            "value": "10210-3",
+            "display": "n/a"
+        },
+        {
+            "value": "10216-0",
+            "display": "n/a"
+        },
+        {
+            "value": "10218-6",
+            "display": "n/a"
+        },
+        {
+            "value": "10218-6",
+            "display": "n/a"
+        },
+        {
+            "value": "10223-6",
+            "display": "n/a"
+        },
+        {
+            "value": "10222-8",
+            "display": "n/a"
+        },
+        {
+            "value": "11329-0",
+            "display": "n/a"
+        },
+        {
+            "value": "11348-0",
+            "display": "n/a"
+        },
+        {
+            "value": "11369-6",
+            "display": "n/a"
+        },
+        {
+            "value": "57852-6",
+            "display": "n/a"
+        },
+        {
+            "value": "11493-4",
+            "display": "n/a"
+        },
+        {
+            "value": "11535-2",
+            "display": "n/a"
+        },
+        {
+            "value": "11537-8",
+            "display": "n/a"
+        },
+        {
+            "value": "18776-5",
+            "display": "n/a"
+        },
+        {
+            "value": "18841-7",
+            "display": "n/a"
+        },
+        {
+            "value": "29299-5",
+            "display": "n/a"
+        },
+        {
+            "value": "29545-1",
+            "display": "n/a"
+        },
+        {
+            "value": "29549-3",
+            "display": "n/a"
+        },
+        {
+            "value": "29554-3",
+            "display": "n/a"
+        },
+        {
+            "value": "29762-2",
+            "display": "n/a"
+        },
+        {
+            "value": "30954-2",
+            "display": "n/a"
+        },
+        {
+            "value": "42344-2",
+            "display": "n/a"
+        },
+        {
+            "value": "42346-7",
+            "display": "n/a"
+        },
+        {
+            "value": "42348-3",
+            "display": "n/a"
+        },
+        {
+            "value": "42349-1",
+            "display": "n/a"
+        },
+        {
+            "value": "46240-8",
+            "display": "n/a"
+        },
+        {
+            "value": "46241-6",
+            "display": "n/a"
+        },
+        {
+            "value": "46264-8",
+            "display": "n/a"
+        },
+        {
+            "value": "47420-5",
+            "display": "n/a"
+        },
+        {
+            "value": "47519-4",
+            "display": "n/a"
+        },
+        {
+            "value": "48765-2",
+            "display": "n/a"
+        },
+        {
+            "value": "48768-6",
+            "display": "n/a"
+        },
+        {
+            "value": "51848-0",
+            "display": "n/a"
+        },
+        {
+            "value": "55109-3",
+            "display": "n/a"
+        },
+        {
+            "value": "55122-6",
+            "display": "n/a"
+        },
+        {
+            "value": "59768-2",
+            "display": "n/a"
+        },
+        {
+            "value": "59769-0",
+            "display": "n/a"
+        },
+        {
+            "value": "59770-8",
+            "display": "n/a"
+        },
+        {
+            "value": "59771-6",
+            "display": "n/a"
+        },
+        {
+            "value": "59772-4",
+            "display": "n/a"
+        },
+        {
+            "value": "59773-2",
+            "display": "n/a"
+        },
+        {
+            "value": "59775-7",
+            "display": "n/a"
+        },
+        {
+            "value": "59776-5",
+            "display": "n/a"
+        },
+        {
+            "value": "61149-1",
+            "display": "n/a"
+        },
+        {
+            "value": "61150-9",
+            "display": "n/a"
+        },
+        {
+            "value": "61150-9",
+            "display": "n/a"
+        },
+        {
+            "value": "69730-0",
+            "display": "n/a"
+        },
+        {
+            "value": "8648-8",
+            "display": "n/a"
+        },
+        {
+            "value": "8653-8",
+            "display": "n/a"
+        },
+        {
+            "value": "8716-3",
+            "display": "n/a"
+        }
+    ]
+}

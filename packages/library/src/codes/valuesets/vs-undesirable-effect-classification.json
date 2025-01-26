@@ -1,0 +1,8 @@
+{
+    "id": "undesirable-effect-classification",
+    "name": "UndesirableEffectClassification",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/undesirable-effect-classification",
+    "valid": true,
+    "choices": []
+}

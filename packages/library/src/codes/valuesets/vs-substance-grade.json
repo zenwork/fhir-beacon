@@ -1,0 +1,28 @@
+{
+    "id": "substance-grade",
+    "name": "SubstanceGrade",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "USP-NF",
+            "display": "USP/NF United States Pharmacopeia (USP) and the National Formulary (NF)"
+        },
+        {
+            "value": "Ph.Eur",
+            "display": "European Pharmacopoeia"
+        },
+        {
+            "value": "JP",
+            "display": "Japanese Pharmacopoeia"
+        },
+        {
+            "value": "BP",
+            "display": "British Pharmacopoeia"
+        },
+        {
+            "value": "CompanyStandard",
+            "display": "Company Standard"
+        }
+    ]
+}

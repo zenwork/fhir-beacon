@@ -1,0 +1,64 @@
+{
+    "id": "medicinal-product-pediatric-use",
+    "name": "PediatricUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "InUtero",
+            "display": "In utero"
+        },
+        {
+            "value": "PretermNewborn",
+            "display": "Preterm newborn infants (0 – 27 days)"
+        },
+        {
+            "value": "TermNewborn",
+            "display": "Term newborn infants (0 – 27 days)"
+        },
+        {
+            "value": "Infants",
+            "display": "Infants and toddlers (28 days – 23 months)"
+        },
+        {
+            "value": "Children",
+            "display": "Children (2 to < 12 years)"
+        },
+        {
+            "value": "Adolescents",
+            "display": "Adolescents (12 to < 18 years)"
+        },
+        {
+            "value": "Adults",
+            "display": "Adults (18 to < 65 years)"
+        },
+        {
+            "value": "Elderly",
+            "display": "Elderly (≥ 65 years)"
+        },
+        {
+            "value": "Neonate",
+            "display": "Neonate"
+        },
+        {
+            "value": "PediatricPopulation",
+            "display": "Pediatric Population (< 18 years)"
+        },
+        {
+            "value": "All",
+            "display": "All"
+        },
+        {
+            "value": "Prepubertal",
+            "display": "Prepubertal children (2 years to onset of puberty)"
+        },
+        {
+            "value": "AdultsAndElderly",
+            "display": "Adult and elderly population (> 18 years)"
+        },
+        {
+            "value": "PubertalAndPostpubertal",
+            "display": "Pubertal and postpubertal adolescents (onset of puberty to < 18 years)"
+        }
+    ]
+}

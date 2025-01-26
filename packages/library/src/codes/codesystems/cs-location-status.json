@@ -1,0 +1,21 @@
+{
+    "id": "location-status",
+    "name": "LocationStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/location-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "suspended",
+            "display": "Suspended"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        }
+    ]
+}

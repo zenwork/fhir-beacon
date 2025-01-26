@@ -1,0 +1,17 @@
+{
+    "id": "subscriptiontopic-cr-behavior",
+    "name": "CriteriaNotExistsBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/subscriptiontopic-cr-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "test-passes",
+            "display": "Test passes"
+        },
+        {
+            "value": "test-fails",
+            "display": "Test fails"
+        }
+    ]
+}

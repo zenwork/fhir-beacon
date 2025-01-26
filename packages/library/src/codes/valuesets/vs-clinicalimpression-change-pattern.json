@@ -1,0 +1,21 @@
+{
+    "id": "clinicalimpression-change-pattern",
+    "name": "ClinicalImpressionChangePatter",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/clinicalimpression-change-pattern",
+    "valid": true,
+    "choices": [
+        {
+            "value": "230993007",
+            "display": "n/a"
+        },
+        {
+            "value": "385633008",
+            "display": "n/a"
+        },
+        {
+            "value": "260388006",
+            "display": "n/a"
+        }
+    ]
+}

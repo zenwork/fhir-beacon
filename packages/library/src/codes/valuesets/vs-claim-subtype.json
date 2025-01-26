@@ -1,0 +1,17 @@
+{
+    "id": "claim-subtype",
+    "name": "ExampleClaimSubTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-subtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ortho",
+            "display": "Orthodontic Claim"
+        },
+        {
+            "value": "emergency",
+            "display": "Emergency Claim"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "product-status",
+    "name": "ProductStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

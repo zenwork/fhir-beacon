@@ -1,0 +1,20 @@
+{
+    "id": "linkage-type",
+    "name": "LinkageType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "source",
+            "display": "Source of Truth"
+        },
+        {
+            "value": "alternate",
+            "display": "Alternate Record"
+        },
+        {
+            "value": "historical",
+            "display": "Historical/Obsolete Record"
+        }
+    ]
+}

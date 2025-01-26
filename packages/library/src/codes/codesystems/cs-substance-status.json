@@ -1,0 +1,21 @@
+{
+    "id": "substance-status",
+    "name": "FHIRSubstanceStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

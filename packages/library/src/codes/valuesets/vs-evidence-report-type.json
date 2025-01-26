@@ -1,0 +1,24 @@
+{
+    "id": "evidence-report-type",
+    "name": "EvidenceReportType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "classification",
+            "display": "Classification"
+        },
+        {
+            "value": "search-results",
+            "display": "Search Results"
+        },
+        {
+            "value": "resources-compiled",
+            "display": "Resource Compilation"
+        },
+        {
+            "value": "text-structured",
+            "display": "Structured Text"
+        }
+    ]
+}

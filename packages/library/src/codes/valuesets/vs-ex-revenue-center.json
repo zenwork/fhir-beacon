@@ -1,0 +1,21 @@
+{
+    "id": "ex-revenue-center",
+    "name": "ExampleRevenueCenterCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-revenue-center",
+    "valid": true,
+    "choices": [
+        {
+            "value": "0010",
+            "display": "Vision Clinic"
+        },
+        {
+            "value": "0011",
+            "display": "Dental Clinic"
+        },
+        {
+            "value": "1001",
+            "display": "Emergency"
+        }
+    ]
+}

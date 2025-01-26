@@ -1,0 +1,29 @@
+{
+    "id": "measure-type",
+    "name": "MeasureType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measure-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "process",
+            "display": "Process"
+        },
+        {
+            "value": "outcome",
+            "display": "Outcome"
+        },
+        {
+            "value": "structure",
+            "display": "Structure"
+        },
+        {
+            "value": "patient-reported-outcome",
+            "display": "Patient Reported Outcome"
+        },
+        {
+            "value": "composite",
+            "display": "Composite"
+        }
+    ]
+}

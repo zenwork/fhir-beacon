@@ -1,0 +1,41 @@
+{
+    "id": "care-team-category",
+    "name": "CareTeamCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/care-team-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "LA27975-4",
+            "display": "Event-focused care team"
+        },
+        {
+            "value": "LA27976-2",
+            "display": "Encounter-focused care team"
+        },
+        {
+            "value": "LA27977-0",
+            "display": "Episode of care-focused care team"
+        },
+        {
+            "value": "LA27978-8",
+            "display": "Condition-focused care team"
+        },
+        {
+            "value": "LA28865-6",
+            "display": "Longitudinal care-coordination focused care team"
+        },
+        {
+            "value": "LA28866-4",
+            "display": "Home & Community Based Services (HCBS)-focused care team"
+        },
+        {
+            "value": "LA27980-4",
+            "display": "Clinical research-focused care team"
+        },
+        {
+            "value": "LA28867-2",
+            "display": "Public health-focused care team"
+        }
+    ]
+}

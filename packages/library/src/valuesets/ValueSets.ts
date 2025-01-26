@@ -29,6 +29,7 @@ export class ValueSets {
                                          === 'unknown')
                           .map(set => this.store.write(set))
                    )
+                   .then(() => this.store.writeMeta(sets))
                    .then(() => sets)
                    .catch((e) => {
                      throw new Error(`processing failed: ${e}`)

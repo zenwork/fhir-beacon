@@ -1,0 +1,21 @@
+{
+    "id": "contract-term-subtype",
+    "name": "ContractTermSubtypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-term-subtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "condition",
+            "display": "Condition"
+        },
+        {
+            "value": "warranty",
+            "display": "Warranty"
+        },
+        {
+            "value": "innominate",
+            "display": "Innominate"
+        }
+    ]
+}

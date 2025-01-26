@@ -1,0 +1,21 @@
+{
+    "id": "testscript-scope-conformance-codes",
+    "name": "TestScriptScopeConformanceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/testscript-scope-conformance-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "required",
+            "display": "Required"
+        },
+        {
+            "value": "optional",
+            "display": "Optional"
+        },
+        {
+            "value": "strict",
+            "display": "Strict"
+        }
+    ]
+}

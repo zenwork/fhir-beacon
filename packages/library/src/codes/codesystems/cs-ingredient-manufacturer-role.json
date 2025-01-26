@@ -1,0 +1,21 @@
+{
+    "id": "ingredient-manufacturer-role",
+    "name": "IngredientManufacturerRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/ingredient-manufacturer-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "allowed",
+            "display": "Manufacturer is specifically allowed for this ingredient"
+        },
+        {
+            "value": "possible",
+            "display": "Manufacturer is known to make this ingredient in general"
+        },
+        {
+            "value": "actual",
+            "display": "Manufacturer actually makes this particular ingredient"
+        }
+    ]
+}

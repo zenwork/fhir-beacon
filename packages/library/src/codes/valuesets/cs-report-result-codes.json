@@ -1,0 +1,20 @@
+{
+    "id": "report-result-codes",
+    "name": "TestReportResult",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "pending",
+            "display": "Pending"
+        }
+    ]
+}

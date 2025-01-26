@@ -1,0 +1,20 @@
+{
+    "id": "search-entry-mode",
+    "name": "SearchEntryMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "match",
+            "display": "Match"
+        },
+        {
+            "value": "include",
+            "display": "Include"
+        },
+        {
+            "value": "outcome",
+            "display": "Outcome"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "substance-stereochemistry",
+    "name": "SubstanceStereochemistry",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ConstitutionalIsomer",
+            "display": "constitutional isomer"
+        },
+        {
+            "value": "Stereoisomer",
+            "display": "stereoisomer"
+        },
+        {
+            "value": "Enantiomer",
+            "display": "enantiomer"
+        }
+    ]
+}

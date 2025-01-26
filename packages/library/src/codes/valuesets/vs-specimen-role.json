@@ -1,0 +1,44 @@
+{
+    "id": "specimen-role",
+    "name": "SpecimenRole",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "b",
+            "display": "Blind Sample"
+        },
+        {
+            "value": "c",
+            "display": "Calibrator"
+        },
+        {
+            "value": "e",
+            "display": "Electronic QC"
+        },
+        {
+            "value": "f",
+            "display": "Filler Organization Proficiency"
+        },
+        {
+            "value": "o",
+            "display": "Operator Proficiency"
+        },
+        {
+            "value": "p",
+            "display": "Patient"
+        },
+        {
+            "value": "q",
+            "display": "Control specimen"
+        },
+        {
+            "value": "r",
+            "display": "Replicate (of patient sample as a control)"
+        },
+        {
+            "value": "v",
+            "display": "Verifying Calibrator"
+        }
+    ]
+}

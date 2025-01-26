@@ -1,0 +1,21 @@
+{
+    "id": "allergy-intolerance-criticality",
+    "name": "AllergyIntoleranceCriticality",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/allergy-intolerance-criticality",
+    "valid": true,
+    "choices": [
+        {
+            "value": "low",
+            "display": "Low Risk"
+        },
+        {
+            "value": "high",
+            "display": "High Risk"
+        },
+        {
+            "value": "unable-to-assess",
+            "display": "Unable to Assess Risk"
+        }
+    ]
+}

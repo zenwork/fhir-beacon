@@ -1,0 +1,21 @@
+{
+    "id": "linkage-type",
+    "name": "LinkageType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/linkage-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "source",
+            "display": "Source of Truth"
+        },
+        {
+            "value": "alternate",
+            "display": "Alternate Record"
+        },
+        {
+            "value": "historical",
+            "display": "Historical/Obsolete Record"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "benefit-network",
+    "name": "NetworkTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/benefit-network",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in",
+            "display": "In Network"
+        },
+        {
+            "value": "out",
+            "display": "Out of Network"
+        }
+    ]
+}

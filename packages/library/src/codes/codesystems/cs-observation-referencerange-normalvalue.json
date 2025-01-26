@@ -1,0 +1,17 @@
+{
+    "id": "observation-referencerange-normalvalue",
+    "name": "ObservationReferenceRangeNormalValue",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/observation-referencerange-normalvalue",
+    "valid": true,
+    "choices": [
+        {
+            "value": "negative",
+            "display": "Negative"
+        },
+        {
+            "value": "absent",
+            "display": "Absent"
+        }
+    ]
+}

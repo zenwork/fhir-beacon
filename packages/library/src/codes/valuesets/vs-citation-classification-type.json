@@ -1,0 +1,20 @@
+{
+    "id": "citation-classification-type",
+    "name": "CitationClassificationType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "citation-source",
+            "display": "Citation Source"
+        },
+        {
+            "value": "medline-owner",
+            "display": "MEDLINE Citation Owner"
+        },
+        {
+            "value": "fevir-platform-use",
+            "display": "FEvIR Platform Use"
+        }
+    ]
+}

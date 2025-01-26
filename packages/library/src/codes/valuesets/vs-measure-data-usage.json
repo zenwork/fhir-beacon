@@ -1,0 +1,17 @@
+{
+    "id": "measure-data-usage",
+    "name": "MeasureDataUsage",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measure-data-usage",
+    "valid": true,
+    "choices": [
+        {
+            "value": "supplemental-data",
+            "display": "Supplemental Data"
+        },
+        {
+            "value": "risk-adjustment-factor",
+            "display": "Risk Adjustment Factor"
+        }
+    ]
+}

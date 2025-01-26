@@ -1,0 +1,17 @@
+{
+    "id": "testscript-profile-origin-types",
+    "name": "TestScriptProfileOriginType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/testscript-profile-origin-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "FHIR-Client",
+            "display": "FHIR Client"
+        },
+        {
+            "value": "FHIR-SDC-FormFiller",
+            "display": "FHIR SDC FormFiller"
+        }
+    ]
+}

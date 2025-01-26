@@ -1,0 +1,25 @@
+{
+    "id": "contributor-type",
+    "name": "ContributorType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contributor-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "author",
+            "display": "Author"
+        },
+        {
+            "value": "editor",
+            "display": "Editor"
+        },
+        {
+            "value": "reviewer",
+            "display": "Reviewer"
+        },
+        {
+            "value": "endorser",
+            "display": "Endorser"
+        }
+    ]
+}

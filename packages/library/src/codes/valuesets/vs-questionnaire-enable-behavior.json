@@ -1,0 +1,16 @@
+{
+    "id": "questionnaire-enable-behavior",
+    "name": "EnableWhenBehavior",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "all",
+            "display": "All"
+        },
+        {
+            "value": "any",
+            "display": "Any"
+        }
+    ]
+}

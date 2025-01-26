@@ -1,0 +1,25 @@
+{
+    "id": "immunization-recommendation-date-criterion",
+    "name": "ImmunizationRecommendationDateCriterionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-recommendation-date-criterion",
+    "valid": true,
+    "choices": [
+        {
+            "value": "30981-5",
+            "display": "n/a"
+        },
+        {
+            "value": "30980-7",
+            "display": "n/a"
+        },
+        {
+            "value": "59777-3",
+            "display": "n/a"
+        },
+        {
+            "value": "59778-1",
+            "display": "n/a"
+        }
+    ]
+}

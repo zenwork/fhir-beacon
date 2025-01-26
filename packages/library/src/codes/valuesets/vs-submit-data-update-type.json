@@ -1,0 +1,16 @@
+{
+    "id": "submit-data-update-type",
+    "name": "SubmitDataUpdateType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "incremental",
+            "display": "Incremental"
+        },
+        {
+            "value": "snapshot",
+            "display": "Snapshot"
+        }
+    ]
+}

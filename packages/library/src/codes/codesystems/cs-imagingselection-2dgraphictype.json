@@ -1,0 +1,29 @@
+{
+    "id": "imagingselection-2dgraphictype",
+    "name": "ImagingSelection2DGraphicType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/imagingselection-2dgraphictype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "point",
+            "display": "POINT"
+        },
+        {
+            "value": "polyline",
+            "display": "POLYLINE"
+        },
+        {
+            "value": "interpolated",
+            "display": "INTERPOLATED"
+        },
+        {
+            "value": "circle",
+            "display": "CIRCLE"
+        },
+        {
+            "value": "ellipse",
+            "display": "ELLIPSE"
+        }
+    ]
+}

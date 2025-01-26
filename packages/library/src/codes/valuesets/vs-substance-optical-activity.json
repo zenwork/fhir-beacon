@@ -1,0 +1,16 @@
+{
+    "id": "substance-optical-activity",
+    "name": "OpticalActivity",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "+",
+            "display": "dextrorotary"
+        },
+        {
+            "value": "-",
+            "display": "levorotary"
+        }
+    ]
+}

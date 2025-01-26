@@ -1,0 +1,17 @@
+{
+    "id": "medication-ingredientstrength",
+    "name": "MedicationIngredientStrengthCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medication-ingredientstrength",
+    "valid": true,
+    "choices": [
+        {
+            "value": "qs",
+            "display": "QS"
+        },
+        {
+            "value": "trace",
+            "display": "Trace"
+        }
+    ]
+}

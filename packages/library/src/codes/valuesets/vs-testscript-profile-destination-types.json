@@ -1,0 +1,25 @@
+{
+    "id": "testscript-profile-destination-types",
+    "name": "TestScriptProfileDestinationType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/testscript-profile-destination-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "FHIR-Server",
+            "display": "FHIR Server"
+        },
+        {
+            "value": "FHIR-SDC-FormManager",
+            "display": "FHIR SDC FormManager"
+        },
+        {
+            "value": "FHIR-SDC-FormProcessor",
+            "display": "FHIR SDC FormProcessor"
+        },
+        {
+            "value": "FHIR-SDC-FormReceiver",
+            "display": "FHIR SDC FormReceiver"
+        }
+    ]
+}

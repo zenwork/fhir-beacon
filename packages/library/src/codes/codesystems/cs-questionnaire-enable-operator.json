@@ -1,0 +1,37 @@
+{
+    "id": "questionnaire-enable-operator",
+    "name": "QuestionnaireItemOperator",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/questionnaire-enable-operator",
+    "valid": true,
+    "choices": [
+        {
+            "value": "exists",
+            "display": "Exists"
+        },
+        {
+            "value": "=",
+            "display": "Equals"
+        },
+        {
+            "value": "!=",
+            "display": "Not Equals"
+        },
+        {
+            "value": ">",
+            "display": "Greater Than"
+        },
+        {
+            "value": "<",
+            "display": "Less Than"
+        },
+        {
+            "value": ">=",
+            "display": "Greater or Equals"
+        },
+        {
+            "value": "<=",
+            "display": "Less or Equals"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "verificationresult-validation-type",
+    "name": "ValidationType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-validation-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "nothing",
+            "display": "Nothing"
+        },
+        {
+            "value": "primary",
+            "display": "Primary Source"
+        },
+        {
+            "value": "multiple",
+            "display": "Multiple Sources"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "address-type",
+    "name": "AddressType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "postal",
+            "display": "Postal"
+        },
+        {
+            "value": "physical",
+            "display": "Physical"
+        },
+        {
+            "value": "both",
+            "display": "Postal & Physical"
+        }
+    ]
+}

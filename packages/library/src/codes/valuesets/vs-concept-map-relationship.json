@@ -1,0 +1,16 @@
+{
+    "id": "concept-map-relationship",
+    "name": "ConceptMapRelationship",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "related-to",
+            "display": "Related To"
+        },
+        {
+            "value": "not-related-to",
+            "display": "Not Related To"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "http-verb",
+    "name": "HTTPVerb",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/http-verb",
+    "valid": true,
+    "choices": [
+        {
+            "value": "GET",
+            "display": "GET"
+        },
+        {
+            "value": "HEAD",
+            "display": "HEAD"
+        },
+        {
+            "value": "POST",
+            "display": "POST"
+        },
+        {
+            "value": "PUT",
+            "display": "PUT"
+        },
+        {
+            "value": "DELETE",
+            "display": "DELETE"
+        },
+        {
+            "value": "PATCH",
+            "display": "PATCH"
+        }
+    ]
+}

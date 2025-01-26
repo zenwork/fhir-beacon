@@ -1,0 +1,21 @@
+{
+    "id": "coverage-kind",
+    "name": "Kind",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/coverage-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        },
+        {
+            "value": "self-pay",
+            "display": "Self-pay"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

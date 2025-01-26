@@ -1,0 +1,17 @@
+{
+    "id": "payment-status",
+    "name": "PaymentStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/payment-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "paid",
+            "display": "Paid"
+        },
+        {
+            "value": "cleared",
+            "display": "Cleared"
+        }
+    ]
+}

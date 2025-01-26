@@ -1,0 +1,65 @@
+{
+    "id": "provenance-history-record-activity",
+    "name": "ProvenanceHistoryRecordActivityCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/provenance-history-record-activity",
+    "valid": true,
+    "choices": [
+        {
+            "value": "CREATE",
+            "display": "Created"
+        },
+        {
+            "value": "UPDATE",
+            "display": "Updated"
+        },
+        {
+            "value": "DELETE",
+            "display": "Deleted"
+        },
+        {
+            "value": "ABORT",
+            "display": "Stopped/Ended/Aborted"
+        },
+        {
+            "value": "HOLD",
+            "display": "Held"
+        },
+        {
+            "value": "RELEASE",
+            "display": "Released"
+        },
+        {
+            "value": "CANCEL",
+            "display": "Cancelled"
+        },
+        {
+            "value": "ACTIVATE",
+            "display": "Activated"
+        },
+        {
+            "value": "SUSPEND",
+            "display": "Suspended"
+        },
+        {
+            "value": "RESUME",
+            "display": "n/a"
+        },
+        {
+            "value": "COMPLETE",
+            "display": "Completed"
+        },
+        {
+            "value": "NULLIFY",
+            "display": "Mark Entered-in-error"
+        },
+        {
+            "value": "OBSOLETE",
+            "display": "Replaced"
+        },
+        {
+            "value": "REACTIVATE",
+            "display": "Reactivated"
+        }
+    ]
+}

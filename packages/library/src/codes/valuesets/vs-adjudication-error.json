@@ -1,0 +1,17 @@
+{
+    "id": "adjudication-error",
+    "name": "AdjudicationErrorCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adjudication-error",
+    "valid": true,
+    "choices": [
+        {
+            "value": "a001",
+            "display": "Missing Identifier"
+        },
+        {
+            "value": "a002",
+            "display": "Missing Creation Date"
+        }
+    ]
+}

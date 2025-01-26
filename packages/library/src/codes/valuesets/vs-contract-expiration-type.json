@@ -1,0 +1,12 @@
+{
+    "id": "contract-expiration-type",
+    "name": "ContractResourceExpirationTypeCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "breach",
+            "display": "Breach"
+        }
+    ]
+}

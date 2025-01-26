@@ -1,0 +1,28 @@
+{
+    "id": "identifier-use",
+    "name": "IdentifierUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "usual",
+            "display": "Usual"
+        },
+        {
+            "value": "official",
+            "display": "Official"
+        },
+        {
+            "value": "temp",
+            "display": "Temp"
+        },
+        {
+            "value": "secondary",
+            "display": "Secondary"
+        },
+        {
+            "value": "old",
+            "display": "Old"
+        }
+    ]
+}

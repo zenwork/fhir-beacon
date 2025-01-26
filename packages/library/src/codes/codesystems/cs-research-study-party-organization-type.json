@@ -1,0 +1,33 @@
+{
+    "id": "research-study-party-organization-type",
+    "name": "ResearchStudyPartyOrganizationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-party-organization-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "nih",
+            "display": "NIH"
+        },
+        {
+            "value": "fda",
+            "display": "FDA"
+        },
+        {
+            "value": "government",
+            "display": "Government"
+        },
+        {
+            "value": "nonprofit",
+            "display": "Nonprofit"
+        },
+        {
+            "value": "academic",
+            "display": "Academic"
+        },
+        {
+            "value": "industry",
+            "display": "Industry"
+        }
+    ]
+}

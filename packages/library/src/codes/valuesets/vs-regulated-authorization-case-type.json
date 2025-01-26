@@ -1,0 +1,96 @@
+{
+    "id": "regulated-authorization-case-type",
+    "name": "RegulatedAuthorizationCaseType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "InitialMAA",
+            "display": "Initial Marketing Authorization Application"
+        },
+        {
+            "value": "Variation",
+            "display": "Variation"
+        },
+        {
+            "value": "LineExtension",
+            "display": "Line Extension"
+        },
+        {
+            "value": "PSUR",
+            "display": "Periodic Safety Update Report"
+        },
+        {
+            "value": "Renewal",
+            "display": "Renewal"
+        },
+        {
+            "value": "Follow-up",
+            "display": "Follow-up Measure"
+        },
+        {
+            "value": "100000155699",
+            "display": "Specific Obligation"
+        },
+        {
+            "value": "AnnualReassessment",
+            "display": "Annual Reassessment"
+        },
+        {
+            "value": "UrgentSafetyRestriction",
+            "display": "Urgent Safety Restriction"
+        },
+        {
+            "value": "PaediatricSubmission",
+            "display": "Paediatric Submission"
+        },
+        {
+            "value": "TransferMA",
+            "display": "Transfer of a marketing authorization"
+        },
+        {
+            "value": "LiftingSuspension",
+            "display": "Lifting of a Suspension"
+        },
+        {
+            "value": "Withdrawal",
+            "display": "Withdrawal"
+        },
+        {
+            "value": "Reformatting",
+            "display": "Reformatting"
+        },
+        {
+            "value": "RMP",
+            "display": "Risk Management Plan"
+        },
+        {
+            "value": "ReviewSuspension",
+            "display": "Review of a Suspension of MA"
+        },
+        {
+            "value": "SupplementalInformation",
+            "display": "Supplemental Information"
+        },
+        {
+            "value": "RepeatUse",
+            "display": "Repeat Use Procedure"
+        },
+        {
+            "value": "SignalDetection",
+            "display": "Signal detection"
+        },
+        {
+            "value": "FLU",
+            "display": "FLU STRAIN UPDATE"
+        },
+        {
+            "value": "PANDEMIC",
+            "display": "PANDEMIC UPDATE"
+        },
+        {
+            "value": "Orphan",
+            "display": "Orphan Designation Application"
+        }
+    ]
+}

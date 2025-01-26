@@ -1,0 +1,17 @@
+{
+    "id": "biologicallyderived-product-status",
+    "name": "BiologicallyDerivedProductStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/biologicallyderived-product-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "unavailable",
+            "display": "Unavailable"
+        }
+    ]
+}

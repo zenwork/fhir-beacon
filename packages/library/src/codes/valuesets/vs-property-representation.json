@@ -1,0 +1,28 @@
+{
+    "id": "property-representation",
+    "name": "PropertyRepresentation",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "xmlAttr",
+            "display": "XML Attribute"
+        },
+        {
+            "value": "xmlText",
+            "display": "XML Text"
+        },
+        {
+            "value": "typeAttr",
+            "display": "Type Attribute"
+        },
+        {
+            "value": "cdaText",
+            "display": "CDA Text Format"
+        },
+        {
+            "value": "xhtml",
+            "display": "XHTML"
+        }
+    ]
+}

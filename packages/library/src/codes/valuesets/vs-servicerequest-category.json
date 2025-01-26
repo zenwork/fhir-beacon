@@ -1,0 +1,29 @@
+{
+    "id": "servicerequest-category",
+    "name": "ServiceRequestCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/servicerequest-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "108252007",
+            "display": "Laboratory procedure"
+        },
+        {
+            "value": "363679005",
+            "display": "Imaging"
+        },
+        {
+            "value": "409063005",
+            "display": "Counselling"
+        },
+        {
+            "value": "409073007",
+            "display": "Education"
+        },
+        {
+            "value": "387713003",
+            "display": "Surgical procedure"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "formularyitem-status",
+    "name": "FormularyItemStatusCodes",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        }
+    ]
+}

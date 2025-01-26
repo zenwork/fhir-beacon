@@ -1,0 +1,17 @@
+{
+    "id": "substance-source-material-species",
+    "name": "SubstanceSourceMaterialSpecies",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-source-material-species",
+    "valid": true,
+    "choices": [
+        {
+            "value": "GinkgoBiloba",
+            "display": "Ginkgo biloba"
+        },
+        {
+            "value": "OleaEuropaea",
+            "display": "Olea europaea"
+        }
+    ]
+}

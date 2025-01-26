@@ -1,0 +1,45 @@
+{
+    "id": "measure-population",
+    "name": "MeasurePopulationType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measure-population",
+    "valid": true,
+    "choices": [
+        {
+            "value": "initial-population",
+            "display": "Initial Population"
+        },
+        {
+            "value": "numerator",
+            "display": "Numerator"
+        },
+        {
+            "value": "numerator-exclusion",
+            "display": "Numerator Exclusion"
+        },
+        {
+            "value": "denominator",
+            "display": "Denominator"
+        },
+        {
+            "value": "denominator-exclusion",
+            "display": "Denominator Exclusion"
+        },
+        {
+            "value": "denominator-exception",
+            "display": "Denominator Exception"
+        },
+        {
+            "value": "measure-population",
+            "display": "Measure Population"
+        },
+        {
+            "value": "measure-population-exclusion",
+            "display": "Measure Population Exclusion"
+        },
+        {
+            "value": "measure-observation",
+            "display": "Measure Observation"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "substance-stereochemistry",
+    "name": "SubstanceStereochemistry",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-stereochemistry",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ConstitutionalIsomer",
+            "display": "constitutional isomer"
+        },
+        {
+            "value": "Stereoisomer",
+            "display": "stereoisomer"
+        },
+        {
+            "value": "Enantiomer",
+            "display": "enantiomer"
+        }
+    ]
+}

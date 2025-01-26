@@ -1,0 +1,17 @@
+{
+    "id": "claim-exception",
+    "name": "ExceptionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-exception",
+    "valid": true,
+    "choices": [
+        {
+            "value": "student",
+            "display": "Student (Fulltime)"
+        },
+        {
+            "value": "disabled",
+            "display": "Disabled"
+        }
+    ]
+}

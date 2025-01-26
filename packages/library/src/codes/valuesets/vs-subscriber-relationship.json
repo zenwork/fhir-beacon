@@ -1,0 +1,37 @@
+{
+    "id": "subscriber-relationship",
+    "name": "SubscriberRelationshipCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/subscriber-relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "child",
+            "display": "Child"
+        },
+        {
+            "value": "parent",
+            "display": "Parent"
+        },
+        {
+            "value": "spouse",
+            "display": "Spouse"
+        },
+        {
+            "value": "common",
+            "display": "Common Law Spouse"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        },
+        {
+            "value": "self",
+            "display": "Self"
+        },
+        {
+            "value": "injured",
+            "display": "Injured Party"
+        }
+    ]
+}

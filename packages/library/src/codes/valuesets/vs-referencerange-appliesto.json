@@ -1,0 +1,145 @@
+{
+    "id": "referencerange-appliesto",
+    "name": "ObservationReferenceRangeAppliesToCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/referencerange-appliesto",
+    "valid": true,
+    "choices": [
+        {
+            "value": "2131-1",
+            "display": "n/a"
+        },
+        {
+            "value": "1002-5",
+            "display": "American Indian or Alaska Native"
+        },
+        {
+            "value": "2028-9",
+            "display": "Asian"
+        },
+        {
+            "value": "2054-5",
+            "display": "Black or African American"
+        },
+        {
+            "value": "2076-8",
+            "display": "Native Hawaiian or Other Pacific Islander"
+        },
+        {
+            "value": "2106-3",
+            "display": "White"
+        },
+        {
+            "value": "2131-1",
+            "display": "Other Race"
+        },
+        {
+            "value": "1002-5",
+            "display": "American Indian or Alaska Native"
+        },
+        {
+            "value": "2028-9",
+            "display": "Asian"
+        },
+        {
+            "value": "2054-5",
+            "display": "Black or African American"
+        },
+        {
+            "value": "2076-8",
+            "display": "Native Hawaiian or Other Pacific Islander"
+        },
+        {
+            "value": "2106-3",
+            "display": "White"
+        },
+        {
+            "value": "2131-1",
+            "display": "Other Race"
+        },
+        {
+            "value": "1002-5",
+            "display": "American Indian or Alaska Native"
+        },
+        {
+            "value": "2028-9",
+            "display": "Asian"
+        },
+        {
+            "value": "2054-5",
+            "display": "Black or African American"
+        },
+        {
+            "value": "2076-8",
+            "display": "Native Hawaiian or Other Pacific Islander"
+        },
+        {
+            "value": "2106-3",
+            "display": "White"
+        },
+        {
+            "value": "2131-1",
+            "display": "Other Race"
+        },
+        {
+            "value": "1002-5",
+            "display": "American Indian or Alaska Native"
+        },
+        {
+            "value": "2028-9",
+            "display": "Asian"
+        },
+        {
+            "value": "2054-5",
+            "display": "Black or African American"
+        },
+        {
+            "value": "2076-8",
+            "display": "Native Hawaiian or Other Pacific Islander"
+        },
+        {
+            "value": "2106-3",
+            "display": "White"
+        },
+        {
+            "value": "2131-1",
+            "display": "Other Race"
+        },
+        {
+            "value": "1002-5",
+            "display": "American Indian or Alaska Native"
+        },
+        {
+            "value": "2028-9",
+            "display": "Asian"
+        },
+        {
+            "value": "2054-5",
+            "display": "Black or African American"
+        },
+        {
+            "value": "2076-8",
+            "display": "Native Hawaiian or Other Pacific Islander"
+        },
+        {
+            "value": "2106-3",
+            "display": "White"
+        },
+        {
+            "value": "2131-1",
+            "display": "Other Race"
+        },
+        {
+            "value": "248153007",
+            "display": "n/a"
+        },
+        {
+            "value": "248152002",
+            "display": "n/a"
+        },
+        {
+            "value": "77386006",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "id": "organization-role",
+    "name": "OrganizationAffiliationRole",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "provider",
+            "display": "Provider"
+        },
+        {
+            "value": "agency",
+            "display": "Agency"
+        },
+        {
+            "value": "research",
+            "display": "Research"
+        },
+        {
+            "value": "payer",
+            "display": "Payer"
+        },
+        {
+            "value": "diagnostics",
+            "display": "Diagnostics"
+        },
+        {
+            "value": "supplier",
+            "display": "Supplier"
+        },
+        {
+            "value": "HIE/HIO",
+            "display": "HIE/HIO"
+        },
+        {
+            "value": "member",
+            "display": "Member"
+        }
+    ]
+}

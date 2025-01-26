@@ -1,0 +1,21 @@
+{
+    "id": "nutrient-code",
+    "name": "NutrientModifierCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/nutrient-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "33463005",
+            "display": "Fluid"
+        },
+        {
+            "value": "39972003",
+            "display": "Sodium"
+        },
+        {
+            "value": "88480006",
+            "display": "Potassium"
+        }
+    ]
+}

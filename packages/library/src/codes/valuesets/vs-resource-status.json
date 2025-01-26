@@ -1,0 +1,132 @@
+{
+    "id": "resource-status",
+    "name": "CanonicalStatusCodesForFHIRResources",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "error",
+            "display": "error"
+        },
+        {
+            "value": "proposed",
+            "display": "proposed"
+        },
+        {
+            "value": "planned",
+            "display": "planned"
+        },
+        {
+            "value": "draft",
+            "display": "draft"
+        },
+        {
+            "value": "requested",
+            "display": "requested"
+        },
+        {
+            "value": "received",
+            "display": "received"
+        },
+        {
+            "value": "declined",
+            "display": "declined"
+        },
+        {
+            "value": "accepted",
+            "display": "accepted"
+        },
+        {
+            "value": "arrived",
+            "display": "arrived"
+        },
+        {
+            "value": "active",
+            "display": "active"
+        },
+        {
+            "value": "suspended",
+            "display": "suspended"
+        },
+        {
+            "value": "failed",
+            "display": "failed"
+        },
+        {
+            "value": "replaced",
+            "display": "replaced"
+        },
+        {
+            "value": "complete",
+            "display": "complete"
+        },
+        {
+            "value": "inactive",
+            "display": "inactive"
+        },
+        {
+            "value": "abandoned",
+            "display": "abandoned"
+        },
+        {
+            "value": "unknown",
+            "display": "unknown"
+        },
+        {
+            "value": "unconfirmed",
+            "display": "unconfirmed"
+        },
+        {
+            "value": "confirmed",
+            "display": "confirmed"
+        },
+        {
+            "value": "resolved",
+            "display": "resolved"
+        },
+        {
+            "value": "refuted",
+            "display": "refuted"
+        },
+        {
+            "value": "differential",
+            "display": "differential"
+        },
+        {
+            "value": "partial",
+            "display": "partial"
+        },
+        {
+            "value": "busy-unavailable",
+            "display": "busy-unavailable"
+        },
+        {
+            "value": "free",
+            "display": "free"
+        },
+        {
+            "value": "on-target",
+            "display": "on-target"
+        },
+        {
+            "value": "ahead-of-target",
+            "display": "ahead-of-target"
+        },
+        {
+            "value": "behind-target",
+            "display": "behind-target"
+        },
+        {
+            "value": "not-ready",
+            "display": "not-ready"
+        },
+        {
+            "value": "transduc-discon",
+            "display": "transduc-discon"
+        },
+        {
+            "value": "hw-discon",
+            "display": "hw-discon"
+        }
+    ]
+}

@@ -50,6 +50,7 @@ export class ValueSetProcessor {
                                    id: set.id,
                                    name: set.name,
                                    type: set.type,
+                                   system: set.system,
                                    choices: [],
                                    valid: false,
                                    origin: set.origin
@@ -69,6 +70,7 @@ export class ValueSetProcessor {
                                  id: set.id,
                                  name: set.name,
                                  type: set.type,
+                                 system: set.system,
                                  valid: true,
                                  choices
                                } as Choices

@@ -1,0 +1,8 @@
+{
+    "id": "care-plan-category",
+    "name": "CarePlanCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/care-plan-category",
+    "valid": true,
+    "choices": []
+}

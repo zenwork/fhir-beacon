@@ -1,0 +1,20 @@
+{
+    "id": "observation-range-category",
+    "name": "ObservationRangeCategory",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reference",
+            "display": "reference range"
+        },
+        {
+            "value": "critical",
+            "display": "critical range"
+        },
+        {
+            "value": "absolute",
+            "display": "absolute range"
+        }
+    ]
+}

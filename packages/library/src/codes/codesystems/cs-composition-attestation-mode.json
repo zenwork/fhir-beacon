@@ -1,0 +1,25 @@
+{
+    "id": "composition-attestation-mode",
+    "name": "CompositionAttestationMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/composition-attestation-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "personal",
+            "display": "Personal"
+        },
+        {
+            "value": "professional",
+            "display": "Professional"
+        },
+        {
+            "value": "legal",
+            "display": "Legal"
+        },
+        {
+            "value": "official",
+            "display": "Official"
+        }
+    ]
+}

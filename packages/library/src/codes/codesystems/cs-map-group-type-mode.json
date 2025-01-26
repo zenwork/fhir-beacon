@@ -1,0 +1,17 @@
+{
+    "id": "map-group-type-mode",
+    "name": "StructureMapGroupTypeMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/map-group-type-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "types",
+            "display": "Default for Type Combination"
+        },
+        {
+            "value": "type-and-types",
+            "display": "Default for type + combination"
+        }
+    ]
+}

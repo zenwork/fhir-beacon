@@ -1,0 +1,28 @@
+{
+    "id": "deviceassociation-operationstatus",
+    "name": "FHIRDeviceAssociationOperationStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "on",
+            "display": "On"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "standby",
+            "display": "Stand By"
+        },
+        {
+            "value": "defective",
+            "display": "Stand By"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

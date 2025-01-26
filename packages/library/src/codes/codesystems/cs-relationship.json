@@ -1,0 +1,29 @@
+{
+    "id": "relationship",
+    "name": "BeneficiaryRelationshipCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Self"
+        },
+        {
+            "value": "2",
+            "display": "Spouse"
+        },
+        {
+            "value": "3",
+            "display": "Child"
+        },
+        {
+            "value": "4",
+            "display": "Common Law Spouse"
+        },
+        {
+            "value": "5",
+            "display": "Other"
+        }
+    ]
+}

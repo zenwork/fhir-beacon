@@ -1,0 +1,49 @@
+{
+    "id": "specimen-collection",
+    "name": "SpecimenCollection",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/specimen-collection",
+    "valid": true,
+    "choices": [
+        {
+            "value": "129316008",
+            "display": "Aspiration - action"
+        },
+        {
+            "value": "129314006",
+            "display": "Biopsy - action"
+        },
+        {
+            "value": "129300006",
+            "display": "Puncture - action"
+        },
+        {
+            "value": "129304002",
+            "display": "Excision - action"
+        },
+        {
+            "value": "129323009",
+            "display": "Scraping - action"
+        },
+        {
+            "value": "73416001",
+            "display": "Urine specimen collection, clean catch"
+        },
+        {
+            "value": "225113003",
+            "display": "Timed urine collection"
+        },
+        {
+            "value": "70777001",
+            "display": "Urine specimen collection, catheterized"
+        },
+        {
+            "value": "386089008",
+            "display": "Collection of coughed sputum"
+        },
+        {
+            "value": "278450005",
+            "display": "Finger-prick sampling"
+        }
+    ]
+}

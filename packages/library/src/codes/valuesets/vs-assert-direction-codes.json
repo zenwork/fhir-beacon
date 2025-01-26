@@ -1,0 +1,16 @@
+{
+    "id": "assert-direction-codes",
+    "name": "AssertionDirectionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "response",
+            "display": "response"
+        },
+        {
+            "value": "request",
+            "display": "request"
+        }
+    ]
+}

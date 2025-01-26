@@ -1,0 +1,24 @@
+{
+    "id": "request-priority",
+    "name": "RequestPriority",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "routine",
+            "display": "Routine"
+        },
+        {
+            "value": "urgent",
+            "display": "Urgent"
+        },
+        {
+            "value": "asap",
+            "display": "ASAP"
+        },
+        {
+            "value": "stat",
+            "display": "STAT"
+        }
+    ]
+}

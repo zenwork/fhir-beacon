@@ -1,0 +1,81 @@
+{
+    "id": "relatedperson-relationshiptype",
+    "name": "PatientRelationshipType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "WIT",
+            "display": "n/a"
+        },
+        {
+            "value": "NOT",
+            "display": "n/a"
+        },
+        {
+            "value": "ECON",
+            "display": "n/a"
+        },
+        {
+            "value": "NOK",
+            "display": "n/a"
+        },
+        {
+            "value": "GUARD",
+            "display": "n/a"
+        },
+        {
+            "value": "DEPEN",
+            "display": "n/a"
+        },
+        {
+            "value": "EMP",
+            "display": "n/a"
+        },
+        {
+            "value": "GUAR",
+            "display": "n/a"
+        },
+        {
+            "value": "CAREGIVER",
+            "display": "n/a"
+        },
+        {
+            "value": "E",
+            "display": "n/a"
+        },
+        {
+            "value": "O",
+            "display": "n/a"
+        },
+        {
+            "value": "U",
+            "display": "n/a"
+        },
+        {
+            "value": "INTPRTER",
+            "display": "n/a"
+        },
+        {
+            "value": "POWATT",
+            "display": "n/a"
+        },
+        {
+            "value": "DPOWATT",
+            "display": "n/a"
+        },
+        {
+            "value": "HPOWATT",
+            "display": "n/a"
+        },
+        {
+            "value": "SPOWATT",
+            "display": "n/a"
+        },
+        {
+            "value": "BILL",
+            "display": "n/a"
+        }
+    ]
+}

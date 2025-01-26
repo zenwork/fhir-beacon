@@ -1,0 +1,21 @@
+{
+    "id": "payment-type",
+    "name": "PaymentTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/payment-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "payment",
+            "display": "Payment"
+        },
+        {
+            "value": "adjustment",
+            "display": "Adjustment"
+        },
+        {
+            "value": "advance",
+            "display": "Advance"
+        }
+    ]
+}

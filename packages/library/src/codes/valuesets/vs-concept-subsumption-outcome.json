@@ -1,0 +1,24 @@
+{
+    "id": "concept-subsumption-outcome",
+    "name": "ConceptSubsumptionOutcome",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "equivalent",
+            "display": "Equivalent"
+        },
+        {
+            "value": "subsumes",
+            "display": "Subsumes"
+        },
+        {
+            "value": "subsumed-by",
+            "display": "Subsumed-By"
+        },
+        {
+            "value": "not-subsumed",
+            "display": "Not-Subsumed"
+        }
+    ]
+}

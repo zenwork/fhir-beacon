@@ -1,0 +1,17 @@
+{
+    "id": "adjudication-reason",
+    "name": "AdjudicationReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adjudication-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ar001",
+            "display": "Not covered"
+        },
+        {
+            "value": "ar002",
+            "display": "Plan Limit Reached"
+        }
+    ]
+}

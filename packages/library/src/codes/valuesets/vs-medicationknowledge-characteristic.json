@@ -1,0 +1,41 @@
+{
+    "id": "medicationknowledge-characteristic",
+    "name": "MedicationKnowledgeCharacteristicCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medicationknowledge-characteristic",
+    "valid": true,
+    "choices": [
+        {
+            "value": "imprintcd",
+            "display": "Imprint Code"
+        },
+        {
+            "value": "size",
+            "display": "Size"
+        },
+        {
+            "value": "shape",
+            "display": "Shape"
+        },
+        {
+            "value": "color",
+            "display": "Color"
+        },
+        {
+            "value": "coating",
+            "display": "Coating"
+        },
+        {
+            "value": "scoring",
+            "display": "Scoring"
+        },
+        {
+            "value": "logo",
+            "display": "Logo"
+        },
+        {
+            "value": "image",
+            "display": "Image"
+        }
+    ]
+}

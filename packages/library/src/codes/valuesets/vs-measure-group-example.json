@@ -1,0 +1,16 @@
+{
+    "id": "measure-group-example",
+    "name": "MeasureGroupExample",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary-rate",
+            "display": "Primary Rate"
+        },
+        {
+            "value": "secondary-rate",
+            "display": "Secondary Rate"
+        }
+    ]
+}

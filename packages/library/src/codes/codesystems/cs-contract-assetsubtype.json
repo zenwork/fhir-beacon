@@ -1,0 +1,13 @@
+{
+    "id": "contract-assetsubtype",
+    "name": "ContractAssetSubtype",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-asset-subtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "participation",
+            "display": "Participation"
+        }
+    ]
+}

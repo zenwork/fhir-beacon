@@ -1,0 +1,40 @@
+{
+    "id": "biologicallyderivedproductdispense-status",
+    "name": "BiologicallyDerivedProductDispenseCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preparation",
+            "display": "Preparation"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "allocated",
+            "display": "Allocated"
+        },
+        {
+            "value": "issued",
+            "display": "Issued"
+        },
+        {
+            "value": "unfulfilled",
+            "display": "Unfulfilled"
+        },
+        {
+            "value": "returned",
+            "display": "Returned"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "message-events",
+    "name": "MessageEvent",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/message-events",
+    "valid": true,
+    "choices": []
+}

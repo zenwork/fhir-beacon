@@ -1,0 +1,29 @@
+{
+    "id": "rejection-criteria",
+    "name": "RejectionCriterion",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/rejection-criteria",
+    "valid": true,
+    "choices": [
+        {
+            "value": "hemolized",
+            "display": "hemolized specimen"
+        },
+        {
+            "value": "insufficient",
+            "display": "insufficient specimen volume"
+        },
+        {
+            "value": "broken",
+            "display": "broken specimen container"
+        },
+        {
+            "value": "clotted",
+            "display": "specimen clotted"
+        },
+        {
+            "value": "wrong-temperature",
+            "display": "specimen temperature inappropriate"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "servicerequest-orderdetail-parameter-code",
+    "name": "ServiceRequestOrderDetailParameterCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/servicerequest-orderdetail-parameter-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "catheter-insertion",
+            "display": "Catheter Insertion"
+        },
+        {
+            "value": "body-elevation",
+            "display": "Body Elevation"
+        },
+        {
+            "value": "device-configuration",
+            "display": "Device Configuration"
+        },
+        {
+            "value": "device-settings",
+            "display": "Device Settings"
+        }
+    ]
+}

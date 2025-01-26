@@ -1,0 +1,25 @@
+{
+    "id": "provenance-history-agent-type",
+    "name": "ProvenanceEventHistoryAgentRoleCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/provenance-history-agent-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "AUT",
+            "display": "Author"
+        },
+        {
+            "value": "INF",
+            "display": "Informant"
+        },
+        {
+            "value": "VRF",
+            "display": "Verifier"
+        },
+        {
+            "value": "ENT",
+            "display": "Data Enterer"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "specimen-combined",
+    "name": "SpecimenCombined",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/specimen-combined",
+    "valid": true,
+    "choices": [
+        {
+            "value": "grouped",
+            "display": "Grouped"
+        },
+        {
+            "value": "pooled",
+            "display": "Pooled"
+        }
+    ]
+}

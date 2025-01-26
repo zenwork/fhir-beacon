@@ -1,0 +1,28 @@
+{
+    "id": "appointmentresponse-status",
+    "name": "AppointmentResponseStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "declined",
+            "display": "Declined"
+        },
+        {
+            "value": "tentative",
+            "display": "Tentative"
+        },
+        {
+            "value": "needs-action",
+            "display": "Needs Action"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in error"
+        }
+    ]
+}

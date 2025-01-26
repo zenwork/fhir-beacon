@@ -1,0 +1,21 @@
+{
+    "id": "supplydelivery-supplyitemtype",
+    "name": "SupplyDeliverySupplyItemType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/supplydelivery-supplyitemtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "biologicallyderivedproduct",
+            "display": "Biologically Derived Product"
+        }
+    ]
+}

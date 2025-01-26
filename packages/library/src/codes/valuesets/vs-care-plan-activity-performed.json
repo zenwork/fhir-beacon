@@ -1,0 +1,8 @@
+{
+    "id": "care-plan-activity-performed",
+    "name": "CarePlanActivityPerformed",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/care-plan-activity-performed",
+    "valid": true,
+    "choices": []
+}

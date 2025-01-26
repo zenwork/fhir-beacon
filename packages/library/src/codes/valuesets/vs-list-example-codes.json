@@ -1,0 +1,45 @@
+{
+    "id": "list-example-codes",
+    "name": "ExampleUseCodesForList",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/list-example-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "alerts",
+            "display": "Alerts"
+        },
+        {
+            "value": "adverserxns",
+            "display": "Adverse Reactions"
+        },
+        {
+            "value": "allergies",
+            "display": "Allergies"
+        },
+        {
+            "value": "medications",
+            "display": "Medication List"
+        },
+        {
+            "value": "problems",
+            "display": "Problem List"
+        },
+        {
+            "value": "worklist",
+            "display": "Worklist"
+        },
+        {
+            "value": "waiting",
+            "display": "Waiting List"
+        },
+        {
+            "value": "protocols",
+            "display": "Protocols"
+        },
+        {
+            "value": "plans",
+            "display": "Care Plans"
+        }
+    ]
+}

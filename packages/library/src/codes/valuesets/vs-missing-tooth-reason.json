@@ -1,0 +1,25 @@
+{
+    "id": "missing-tooth-reason",
+    "name": "MissingToothReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/missing-tooth-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "e",
+            "display": "E"
+        },
+        {
+            "value": "c",
+            "display": "C"
+        },
+        {
+            "value": "u",
+            "display": "U"
+        },
+        {
+            "value": "o",
+            "display": "O"
+        }
+    ]
+}

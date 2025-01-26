@@ -1,0 +1,20 @@
+{
+    "id": "message-transport",
+    "name": "MessageTransport",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "http",
+            "display": "HTTP"
+        },
+        {
+            "value": "ftp",
+            "display": "FTP"
+        },
+        {
+            "value": "mllp",
+            "display": "MLLP"
+        }
+    ]
+}

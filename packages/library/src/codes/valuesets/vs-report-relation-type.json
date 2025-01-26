@@ -1,0 +1,40 @@
+{
+    "id": "report-relation-type",
+    "name": "ReportRelationshipType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "amends",
+            "display": "Amends"
+        },
+        {
+            "value": "appends",
+            "display": "Appends"
+        },
+        {
+            "value": "transforms",
+            "display": "Transforms"
+        },
+        {
+            "value": "replacedWith",
+            "display": "Replaced With"
+        },
+        {
+            "value": "amendedWith",
+            "display": "Amended With"
+        },
+        {
+            "value": "appendedWith",
+            "display": "Appended With"
+        },
+        {
+            "value": "transformedWith",
+            "display": "Transformed With"
+        }
+    ]
+}

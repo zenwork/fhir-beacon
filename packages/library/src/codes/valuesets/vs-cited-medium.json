@@ -1,0 +1,32 @@
+{
+    "id": "cited-medium",
+    "name": "CitedMedium",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "internet",
+            "display": "Internet"
+        },
+        {
+            "value": "print",
+            "display": "Print"
+        },
+        {
+            "value": "offline-digital-storage",
+            "display": "Offline Digital Storage"
+        },
+        {
+            "value": "internet-without-issue",
+            "display": "Internet without issue"
+        },
+        {
+            "value": "print-without-issue",
+            "display": "Print without issue"
+        },
+        {
+            "value": "offline-digital-storage-without-issue",
+            "display": "Offline Digital Storage without issue"
+        }
+    ]
+}

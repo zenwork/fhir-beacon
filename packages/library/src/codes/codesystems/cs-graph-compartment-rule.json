@@ -1,0 +1,25 @@
+{
+    "id": "graph-compartment-rule",
+    "name": "GraphCompartmentRule",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/graph-compartment-rule",
+    "valid": true,
+    "choices": [
+        {
+            "value": "identical",
+            "display": "Identical"
+        },
+        {
+            "value": "matching",
+            "display": "Matching"
+        },
+        {
+            "value": "different",
+            "display": "Different"
+        },
+        {
+            "value": "custom",
+            "display": "Custom"
+        }
+    ]
+}

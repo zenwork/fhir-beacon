@@ -1,0 +1,25 @@
+{
+    "id": "conditional-read-status",
+    "name": "ConditionalReadStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conditional-read-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "not-supported",
+            "display": "Not Supported"
+        },
+        {
+            "value": "modified-since",
+            "display": "If-Modified-Since"
+        },
+        {
+            "value": "not-match",
+            "display": "If-None-Match"
+        },
+        {
+            "value": "full-support",
+            "display": "Full Support"
+        }
+    ]
+}

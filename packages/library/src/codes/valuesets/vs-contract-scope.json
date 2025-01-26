@@ -1,0 +1,12 @@
+{
+    "id": "contract-scope",
+    "name": "ContractResourceScopeCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

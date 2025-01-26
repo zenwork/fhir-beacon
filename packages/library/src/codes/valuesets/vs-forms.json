@@ -1,0 +1,17 @@
+{
+    "id": "forms",
+    "name": "FormCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/forms",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Form #1"
+        },
+        {
+            "value": "2",
+            "display": "Form #1"
+        }
+    ]
+}

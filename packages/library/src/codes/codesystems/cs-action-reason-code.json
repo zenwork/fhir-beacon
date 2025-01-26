@@ -1,0 +1,29 @@
+{
+    "id": "action-reason-code",
+    "name": "ActionReasonCode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-reason-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "off-pathway",
+            "display": "Off pathway"
+        },
+        {
+            "value": "risk-assessment",
+            "display": "Risk assessment"
+        },
+        {
+            "value": "care-gap",
+            "display": "Care gap detected"
+        },
+        {
+            "value": "drug-drug-interaction",
+            "display": "Drug-drug interaction"
+        },
+        {
+            "value": "quality-measure",
+            "display": "Quality measure"
+        }
+    ]
+}

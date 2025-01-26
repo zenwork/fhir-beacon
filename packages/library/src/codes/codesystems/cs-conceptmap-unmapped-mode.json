@@ -1,0 +1,21 @@
+{
+    "id": "conceptmap-unmapped-mode",
+    "name": "ConceptMapGroupUnmappedMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conceptmap-unmapped-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "use-source-code",
+            "display": "Use Provided Source Code"
+        },
+        {
+            "value": "fixed",
+            "display": "Fixed Code"
+        },
+        {
+            "value": "other-map",
+            "display": "Other Map"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "id": "location-characteristic",
+    "name": "LocationCharacteristic",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "wheelchair",
+            "display": "Wheelchair accessible"
+        },
+        {
+            "value": "has-translation",
+            "display": "translation services available"
+        },
+        {
+            "value": "has-oxy-nitro",
+            "display": "oxygen/nitrogen available"
+        },
+        {
+            "value": "has-neg-press",
+            "display": "negative pressure rooms available"
+        },
+        {
+            "value": "has-iso-ward",
+            "display": "isolation ward"
+        },
+        {
+            "value": "has-icu",
+            "display": "has ICU"
+        }
+    ]
+}

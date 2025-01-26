@@ -1,0 +1,20 @@
+{
+    "id": "undesirable-effect-frequency",
+    "name": "UndesirablEffectFrequency",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Common",
+            "display": "Common"
+        },
+        {
+            "value": "Uncommon",
+            "display": "Uncommon"
+        },
+        {
+            "value": "Rare",
+            "display": "Rare"
+        }
+    ]
+}

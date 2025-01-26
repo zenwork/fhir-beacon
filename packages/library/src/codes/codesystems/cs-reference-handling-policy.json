@@ -1,0 +1,29 @@
+{
+    "id": "reference-handling-policy",
+    "name": "ReferenceHandlingPolicy",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/reference-handling-policy",
+    "valid": true,
+    "choices": [
+        {
+            "value": "literal",
+            "display": "Literal References"
+        },
+        {
+            "value": "logical",
+            "display": "Logical References"
+        },
+        {
+            "value": "resolves",
+            "display": "Resolves References"
+        },
+        {
+            "value": "enforced",
+            "display": "Reference Integrity Enforced"
+        },
+        {
+            "value": "local",
+            "display": "Local References Only"
+        }
+    ]
+}

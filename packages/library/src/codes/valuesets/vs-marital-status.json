@@ -1,0 +1,49 @@
+{
+    "id": "marital-status",
+    "name": "MaritalStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/marital-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "A",
+            "display": "Annulled"
+        },
+        {
+            "value": "D",
+            "display": "Divorced"
+        },
+        {
+            "value": "I",
+            "display": "Interlocutory"
+        },
+        {
+            "value": "L",
+            "display": "Legally Separated"
+        },
+        {
+            "value": "M",
+            "display": "Married"
+        },
+        {
+            "value": "P",
+            "display": "Polygamous"
+        },
+        {
+            "value": "T",
+            "display": "Domestic partner"
+        },
+        {
+            "value": "U",
+            "display": "unmarried"
+        },
+        {
+            "value": "W",
+            "display": "Widowed"
+        },
+        {
+            "value": "UNK",
+            "display": "n/a"
+        }
+    ]
+}

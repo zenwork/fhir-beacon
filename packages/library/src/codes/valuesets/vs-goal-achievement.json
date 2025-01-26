@@ -1,0 +1,21 @@
+{
+    "id": "goal-achievement",
+    "name": "GoalAchievementStatus",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/goal-achievement",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "achieved",
+            "display": "Achieved"
+        },
+        {
+            "value": "not-achieved",
+            "display": "Not Achieved"
+        }
+    ]
+}

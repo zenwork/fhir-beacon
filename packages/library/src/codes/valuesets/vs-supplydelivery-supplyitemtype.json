@@ -1,0 +1,20 @@
+{
+    "id": "supplydelivery-supplyitemtype",
+    "name": "SupplyDeliverySupplyItemType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "biologicallyderivedproduct",
+            "display": "Biologically Derived Product"
+        }
+    ]
+}

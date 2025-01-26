@@ -1,0 +1,33 @@
+{
+    "id": "compartment-type",
+    "name": "CompartmentType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/compartment-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Patient",
+            "display": "Patient"
+        },
+        {
+            "value": "Encounter",
+            "display": "Encounter"
+        },
+        {
+            "value": "RelatedPerson",
+            "display": "RelatedPerson"
+        },
+        {
+            "value": "Practitioner",
+            "display": "Practitioner"
+        },
+        {
+            "value": "Device",
+            "display": "Device"
+        },
+        {
+            "value": "EpisodeOfCare",
+            "display": "EpisodeOfCare"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "fm-status",
+    "name": "FinancialResourceStatusCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

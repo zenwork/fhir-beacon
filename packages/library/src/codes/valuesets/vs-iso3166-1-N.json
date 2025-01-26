@@ -1,0 +1,8 @@
+{
+    "id": "iso3166-1-N",
+    "name": "Iso31661N",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/iso3166-1-N",
+    "valid": true,
+    "choices": []
+}

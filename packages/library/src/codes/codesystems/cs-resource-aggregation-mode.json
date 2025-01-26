@@ -1,0 +1,17 @@
+{
+    "id": "resource-aggregation-mode",
+    "name": "AggregationMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/resource-aggregation-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "contained",
+            "display": "Contained"
+        },
+        {
+            "value": "referenced",
+            "display": "Referenced"
+        }
+    ]
+}

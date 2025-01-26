@@ -1,0 +1,45 @@
+{
+    "id": "ingredient-role",
+    "name": "IngredientRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/ingredient-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "100000072072",
+            "display": "Active"
+        },
+        {
+            "value": "100000072073",
+            "display": "Adjuvant"
+        },
+        {
+            "value": "100000072082",
+            "display": "Excipient"
+        },
+        {
+            "value": "100000136065",
+            "display": "Starting material for excipient"
+        },
+        {
+            "value": "100000136066",
+            "display": "Solvent / Diluent"
+        },
+        {
+            "value": "100000136178",
+            "display": "Raw materials used in the manufacture of the product"
+        },
+        {
+            "value": "100000136179",
+            "display": "Starting material for active substance"
+        },
+        {
+            "value": "100000136561",
+            "display": "Overage"
+        },
+        {
+            "value": "200000003427",
+            "display": "bioenhancer"
+        }
+    ]
+}

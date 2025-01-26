@@ -1,0 +1,28 @@
+{
+    "id": "imagingstudy-status",
+    "name": "ImagingStudyStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registered",
+            "display": "Registered"
+        },
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

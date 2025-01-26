@@ -1,0 +1,16 @@
+{
+    "id": "restful-capability-mode",
+    "name": "RestfulCapabilityMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "client",
+            "display": "Client"
+        },
+        {
+            "value": "server",
+            "display": "Server"
+        }
+    ]
+}

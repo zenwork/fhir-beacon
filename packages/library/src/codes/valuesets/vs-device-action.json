@@ -1,0 +1,8 @@
+{
+    "id": "device-action",
+    "name": "ProcedureDeviceActionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/device-action",
+    "valid": true,
+    "choices": []
+}

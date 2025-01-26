@@ -1,0 +1,25 @@
+{
+    "id": "research-study-focus-type",
+    "name": "ResearchStudyFocusType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-focus-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "medication",
+            "display": "Medication"
+        },
+        {
+            "value": "device",
+            "display": "Device"
+        },
+        {
+            "value": "intervention",
+            "display": "Intervention"
+        },
+        {
+            "value": "factor",
+            "display": "Factor"
+        }
+    ]
+}

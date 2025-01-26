@@ -1,0 +1,8 @@
+{
+    "id": "diet-type",
+    "name": "DietCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/diet-type",
+    "valid": true,
+    "choices": []
+}

@@ -1,0 +1,16 @@
+{
+    "id": "encounter-diagnosis-use",
+    "name": "EncounterDiagnosisUse",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "working",
+            "display": "Working"
+        },
+        {
+            "value": "final",
+            "display": "Final"
+        }
+    ]
+}

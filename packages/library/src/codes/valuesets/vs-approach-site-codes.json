@@ -1,0 +1,8 @@
+{
+    "id": "approach-site-codes",
+    "name": "SNOMEDCTAnatomicalStructureAdministrationSites",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/approach-site-codes",
+    "valid": true,
+    "choices": []
+}

@@ -1,0 +1,41 @@
+{
+    "id": "immunization-status-reason",
+    "name": "ImmunizationStatusReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "IMMUNE",
+            "display": "n/a"
+        },
+        {
+            "value": "MEDPREC",
+            "display": "n/a"
+        },
+        {
+            "value": "OSTOCK",
+            "display": "n/a"
+        },
+        {
+            "value": "PATOBJ",
+            "display": "n/a"
+        },
+        {
+            "value": "PHILISOP",
+            "display": "n/a"
+        },
+        {
+            "value": "RELIG",
+            "display": "n/a"
+        },
+        {
+            "value": "VACEFF",
+            "display": "n/a"
+        },
+        {
+            "value": "VACSAF",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "measure-improvement-notation",
+    "name": "MeasureImprovementNotation",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measure-improvement-notation",
+    "valid": true,
+    "choices": [
+        {
+            "value": "increase",
+            "display": "Increased score indicates improvement"
+        },
+        {
+            "value": "decrease",
+            "display": "Decreased score indicates improvement"
+        }
+    ]
+}

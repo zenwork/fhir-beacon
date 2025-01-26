@@ -1,0 +1,77 @@
+{
+    "id": "request-resource-types",
+    "name": "RequestResourceTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/request-resource-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Appointment",
+            "display": "n/a"
+        },
+        {
+            "value": "AppointmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "CarePlan",
+            "display": "n/a"
+        },
+        {
+            "value": "Claim",
+            "display": "n/a"
+        },
+        {
+            "value": "CommunicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationRecommendation",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionOrder",
+            "display": "n/a"
+        },
+        {
+            "value": "RequestOrchestration",
+            "display": "n/a"
+        },
+        {
+            "value": "ServiceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "Task",
+            "display": "n/a"
+        },
+        {
+            "value": "Transport",
+            "display": "n/a"
+        },
+        {
+            "value": "VisionPrescription",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "id": "location-form",
+    "name": "LocationForm",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/location-form",
+    "valid": true,
+    "choices": [
+        {
+            "value": "si",
+            "display": "Site"
+        },
+        {
+            "value": "bu",
+            "display": "Building"
+        },
+        {
+            "value": "wi",
+            "display": "Wing"
+        },
+        {
+            "value": "wa",
+            "display": "Ward"
+        },
+        {
+            "value": "lvl",
+            "display": "Level"
+        },
+        {
+            "value": "co",
+            "display": "Corridor"
+        },
+        {
+            "value": "ro",
+            "display": "Room"
+        },
+        {
+            "value": "bd",
+            "display": "Bed"
+        },
+        {
+            "value": "ve",
+            "display": "Vehicle"
+        },
+        {
+            "value": "ho",
+            "display": "House"
+        },
+        {
+            "value": "ca",
+            "display": "Cabinet"
+        },
+        {
+            "value": "rd",
+            "display": "Road"
+        },
+        {
+            "value": "area",
+            "display": "Area"
+        },
+        {
+            "value": "jdn",
+            "display": "Jurisdiction"
+        },
+        {
+            "value": "vi",
+            "display": "Virtual"
+        }
+    ]
+}

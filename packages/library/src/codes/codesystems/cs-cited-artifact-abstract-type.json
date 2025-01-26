@@ -1,0 +1,53 @@
+{
+    "id": "cited-artifact-abstract-type",
+    "name": "CitedArtifactAbstractType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/cited-artifact-abstract-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary-human-use",
+            "display": "Primary human use"
+        },
+        {
+            "value": "primary-machine-use",
+            "display": "Primary machine use"
+        },
+        {
+            "value": "truncated",
+            "display": "Truncated"
+        },
+        {
+            "value": "short-abstract",
+            "display": "Short abstract"
+        },
+        {
+            "value": "long-abstract",
+            "display": "Long abstract"
+        },
+        {
+            "value": "plain-language",
+            "display": "Plain language"
+        },
+        {
+            "value": "different-publisher",
+            "display": "Different publisher for abstract"
+        },
+        {
+            "value": "language",
+            "display": "Different language"
+        },
+        {
+            "value": "autotranslated",
+            "display": "Different language derived from autotranslation"
+        },
+        {
+            "value": "duplicate-pmid",
+            "display": "Different text in additional Medline entry"
+        },
+        {
+            "value": "earlier-abstract",
+            "display": "Different text in an earlier version"
+        }
+    ]
+}

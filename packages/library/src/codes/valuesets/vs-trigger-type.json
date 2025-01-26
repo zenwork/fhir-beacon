@@ -1,0 +1,28 @@
+{
+    "id": "trigger-type",
+    "name": "TriggerType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "named-event",
+            "display": "Named Event"
+        },
+        {
+            "value": "periodic",
+            "display": "Periodic"
+        },
+        {
+            "value": "data-changed",
+            "display": "Data Changed"
+        },
+        {
+            "value": "data-accessed",
+            "display": "Data Accessed"
+        },
+        {
+            "value": "data-access-ended",
+            "display": "Data Access Ended"
+        }
+    ]
+}

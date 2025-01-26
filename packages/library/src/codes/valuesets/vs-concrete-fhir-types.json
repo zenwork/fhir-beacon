@@ -1,0 +1,1061 @@
+{
+    "id": "concrete-fhir-types",
+    "name": "ConcreteFHIRTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/concrete-fhir-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Account",
+            "display": "n/a"
+        },
+        {
+            "value": "ActivityDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ActorDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Address",
+            "display": "n/a"
+        },
+        {
+            "value": "Address",
+            "display": "n/a"
+        },
+        {
+            "value": "AdministrableProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "AdverseEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "Age",
+            "display": "n/a"
+        },
+        {
+            "value": "Age",
+            "display": "n/a"
+        },
+        {
+            "value": "AllergyIntolerance",
+            "display": "n/a"
+        },
+        {
+            "value": "Annotation",
+            "display": "n/a"
+        },
+        {
+            "value": "Annotation",
+            "display": "n/a"
+        },
+        {
+            "value": "Appointment",
+            "display": "n/a"
+        },
+        {
+            "value": "AppointmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ArtifactAssessment",
+            "display": "n/a"
+        },
+        {
+            "value": "Attachment",
+            "display": "n/a"
+        },
+        {
+            "value": "Attachment",
+            "display": "n/a"
+        },
+        {
+            "value": "AuditEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "Availability",
+            "display": "n/a"
+        },
+        {
+            "value": "Availability",
+            "display": "n/a"
+        },
+        {
+            "value": "base64Binary",
+            "display": "n/a"
+        },
+        {
+            "value": "Basic",
+            "display": "n/a"
+        },
+        {
+            "value": "Binary",
+            "display": "n/a"
+        },
+        {
+            "value": "BiologicallyDerivedProduct",
+            "display": "n/a"
+        },
+        {
+            "value": "BiologicallyDerivedProductDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "BodyStructure",
+            "display": "n/a"
+        },
+        {
+            "value": "boolean",
+            "display": "n/a"
+        },
+        {
+            "value": "Bundle",
+            "display": "n/a"
+        },
+        {
+            "value": "canonical",
+            "display": "n/a"
+        },
+        {
+            "value": "CapabilityStatement",
+            "display": "n/a"
+        },
+        {
+            "value": "CarePlan",
+            "display": "n/a"
+        },
+        {
+            "value": "CareTeam",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItem",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItemDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Citation",
+            "display": "n/a"
+        },
+        {
+            "value": "Claim",
+            "display": "n/a"
+        },
+        {
+            "value": "ClaimResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalImpression",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalUseDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "code",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeableConcept",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeableConcept",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeableReference",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeableReference",
+            "display": "n/a"
+        },
+        {
+            "value": "CodeSystem",
+            "display": "n/a"
+        },
+        {
+            "value": "Coding",
+            "display": "n/a"
+        },
+        {
+            "value": "Coding",
+            "display": "n/a"
+        },
+        {
+            "value": "Communication",
+            "display": "n/a"
+        },
+        {
+            "value": "CommunicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "CompartmentDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Composition",
+            "display": "n/a"
+        },
+        {
+            "value": "ConceptMap",
+            "display": "n/a"
+        },
+        {
+            "value": "Condition",
+            "display": "n/a"
+        },
+        {
+            "value": "ConditionDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Consent",
+            "display": "n/a"
+        },
+        {
+            "value": "ContactDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "ContactDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "ContactPoint",
+            "display": "n/a"
+        },
+        {
+            "value": "ContactPoint",
+            "display": "n/a"
+        },
+        {
+            "value": "Contract",
+            "display": "n/a"
+        },
+        {
+            "value": "Contributor",
+            "display": "n/a"
+        },
+        {
+            "value": "Contributor",
+            "display": "n/a"
+        },
+        {
+            "value": "Count",
+            "display": "n/a"
+        },
+        {
+            "value": "Count",
+            "display": "n/a"
+        },
+        {
+            "value": "Coverage",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "DataRequirement",
+            "display": "n/a"
+        },
+        {
+            "value": "DataRequirement",
+            "display": "n/a"
+        },
+        {
+            "value": "date",
+            "display": "n/a"
+        },
+        {
+            "value": "dateTime",
+            "display": "n/a"
+        },
+        {
+            "value": "decimal",
+            "display": "n/a"
+        },
+        {
+            "value": "DetectedIssue",
+            "display": "n/a"
+        },
+        {
+            "value": "Device",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceAssociation",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceMetric",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceUsage",
+            "display": "n/a"
+        },
+        {
+            "value": "DiagnosticReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Distance",
+            "display": "n/a"
+        },
+        {
+            "value": "Distance",
+            "display": "n/a"
+        },
+        {
+            "value": "DocumentReference",
+            "display": "n/a"
+        },
+        {
+            "value": "Dosage",
+            "display": "n/a"
+        },
+        {
+            "value": "Dosage",
+            "display": "n/a"
+        },
+        {
+            "value": "Duration",
+            "display": "n/a"
+        },
+        {
+            "value": "Duration",
+            "display": "n/a"
+        },
+        {
+            "value": "ElementDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ElementDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Encounter",
+            "display": "n/a"
+        },
+        {
+            "value": "EncounterHistory",
+            "display": "n/a"
+        },
+        {
+            "value": "Endpoint",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "EpisodeOfCare",
+            "display": "n/a"
+        },
+        {
+            "value": "EventDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Evidence",
+            "display": "n/a"
+        },
+        {
+            "value": "EvidenceReport",
+            "display": "n/a"
+        },
+        {
+            "value": "EvidenceVariable",
+            "display": "n/a"
+        },
+        {
+            "value": "ExampleScenario",
+            "display": "n/a"
+        },
+        {
+            "value": "ExplanationOfBenefit",
+            "display": "n/a"
+        },
+        {
+            "value": "Expression",
+            "display": "n/a"
+        },
+        {
+            "value": "Expression",
+            "display": "n/a"
+        },
+        {
+            "value": "ExtendedContactDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "ExtendedContactDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "Extension",
+            "display": "n/a"
+        },
+        {
+            "value": "Extension",
+            "display": "n/a"
+        },
+        {
+            "value": "FamilyMemberHistory",
+            "display": "n/a"
+        },
+        {
+            "value": "Flag",
+            "display": "n/a"
+        },
+        {
+            "value": "FormularyItem",
+            "display": "n/a"
+        },
+        {
+            "value": "GenomicStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "Goal",
+            "display": "n/a"
+        },
+        {
+            "value": "GraphDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Group",
+            "display": "n/a"
+        },
+        {
+            "value": "GuidanceResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "HealthcareService",
+            "display": "n/a"
+        },
+        {
+            "value": "HumanName",
+            "display": "n/a"
+        },
+        {
+            "value": "HumanName",
+            "display": "n/a"
+        },
+        {
+            "value": "id",
+            "display": "n/a"
+        },
+        {
+            "value": "Identifier",
+            "display": "n/a"
+        },
+        {
+            "value": "Identifier",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingSelection",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "Immunization",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationEvaluation",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationRecommendation",
+            "display": "n/a"
+        },
+        {
+            "value": "ImplementationGuide",
+            "display": "n/a"
+        },
+        {
+            "value": "Ingredient",
+            "display": "n/a"
+        },
+        {
+            "value": "instant",
+            "display": "n/a"
+        },
+        {
+            "value": "InsurancePlan",
+            "display": "n/a"
+        },
+        {
+            "value": "integer",
+            "display": "n/a"
+        },
+        {
+            "value": "integer64",
+            "display": "n/a"
+        },
+        {
+            "value": "InventoryItem",
+            "display": "n/a"
+        },
+        {
+            "value": "InventoryReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Invoice",
+            "display": "n/a"
+        },
+        {
+            "value": "Library",
+            "display": "n/a"
+        },
+        {
+            "value": "Linkage",
+            "display": "n/a"
+        },
+        {
+            "value": "List",
+            "display": "n/a"
+        },
+        {
+            "value": "Location",
+            "display": "n/a"
+        },
+        {
+            "value": "ManufacturedItemDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "markdown",
+            "display": "n/a"
+        },
+        {
+            "value": "MarketingStatus",
+            "display": "n/a"
+        },
+        {
+            "value": "MarketingStatus",
+            "display": "n/a"
+        },
+        {
+            "value": "Measure",
+            "display": "n/a"
+        },
+        {
+            "value": "MeasureReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Medication",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationAdministration",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationKnowledge",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationStatement",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicinalProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageHeader",
+            "display": "n/a"
+        },
+        {
+            "value": "Meta",
+            "display": "n/a"
+        },
+        {
+            "value": "Meta",
+            "display": "n/a"
+        },
+        {
+            "value": "MolecularSequence",
+            "display": "n/a"
+        },
+        {
+            "value": "MonetaryComponent",
+            "display": "n/a"
+        },
+        {
+            "value": "MonetaryComponent",
+            "display": "n/a"
+        },
+        {
+            "value": "Money",
+            "display": "n/a"
+        },
+        {
+            "value": "Money",
+            "display": "n/a"
+        },
+        {
+            "value": "NamingSystem",
+            "display": "n/a"
+        },
+        {
+            "value": "Narrative",
+            "display": "n/a"
+        },
+        {
+            "value": "Narrative",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionIntake",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionOrder",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionProduct",
+            "display": "n/a"
+        },
+        {
+            "value": "Observation",
+            "display": "n/a"
+        },
+        {
+            "value": "ObservationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "oid",
+            "display": "n/a"
+        },
+        {
+            "value": "OperationDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "OperationOutcome",
+            "display": "n/a"
+        },
+        {
+            "value": "Organization",
+            "display": "n/a"
+        },
+        {
+            "value": "OrganizationAffiliation",
+            "display": "n/a"
+        },
+        {
+            "value": "PackagedProductDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ParameterDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "ParameterDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "Parameters",
+            "display": "n/a"
+        },
+        {
+            "value": "Patient",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentNotice",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentReconciliation",
+            "display": "n/a"
+        },
+        {
+            "value": "Period",
+            "display": "n/a"
+        },
+        {
+            "value": "Period",
+            "display": "n/a"
+        },
+        {
+            "value": "Permission",
+            "display": "n/a"
+        },
+        {
+            "value": "Person",
+            "display": "n/a"
+        },
+        {
+            "value": "PlanDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "positiveInt",
+            "display": "n/a"
+        },
+        {
+            "value": "Practitioner",
+            "display": "n/a"
+        },
+        {
+            "value": "PractitionerRole",
+            "display": "n/a"
+        },
+        {
+            "value": "Procedure",
+            "display": "n/a"
+        },
+        {
+            "value": "ProductShelfLife",
+            "display": "n/a"
+        },
+        {
+            "value": "ProductShelfLife",
+            "display": "n/a"
+        },
+        {
+            "value": "Provenance",
+            "display": "n/a"
+        },
+        {
+            "value": "Quantity",
+            "display": "n/a"
+        },
+        {
+            "value": "Quantity",
+            "display": "n/a"
+        },
+        {
+            "value": "Questionnaire",
+            "display": "n/a"
+        },
+        {
+            "value": "QuestionnaireResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "Range",
+            "display": "n/a"
+        },
+        {
+            "value": "Range",
+            "display": "n/a"
+        },
+        {
+            "value": "Ratio",
+            "display": "n/a"
+        },
+        {
+            "value": "Ratio",
+            "display": "n/a"
+        },
+        {
+            "value": "RatioRange",
+            "display": "n/a"
+        },
+        {
+            "value": "RatioRange",
+            "display": "n/a"
+        },
+        {
+            "value": "Reference",
+            "display": "n/a"
+        },
+        {
+            "value": "Reference",
+            "display": "n/a"
+        },
+        {
+            "value": "RegulatedAuthorization",
+            "display": "n/a"
+        },
+        {
+            "value": "RelatedArtifact",
+            "display": "n/a"
+        },
+        {
+            "value": "RelatedArtifact",
+            "display": "n/a"
+        },
+        {
+            "value": "RelatedPerson",
+            "display": "n/a"
+        },
+        {
+            "value": "RequestOrchestration",
+            "display": "n/a"
+        },
+        {
+            "value": "Requirements",
+            "display": "n/a"
+        },
+        {
+            "value": "ResearchStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "ResearchSubject",
+            "display": "n/a"
+        },
+        {
+            "value": "RiskAssessment",
+            "display": "n/a"
+        },
+        {
+            "value": "SampledData",
+            "display": "n/a"
+        },
+        {
+            "value": "SampledData",
+            "display": "n/a"
+        },
+        {
+            "value": "Schedule",
+            "display": "n/a"
+        },
+        {
+            "value": "SearchParameter",
+            "display": "n/a"
+        },
+        {
+            "value": "ServiceRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "Signature",
+            "display": "n/a"
+        },
+        {
+            "value": "Signature",
+            "display": "n/a"
+        },
+        {
+            "value": "Slot",
+            "display": "n/a"
+        },
+        {
+            "value": "Specimen",
+            "display": "n/a"
+        },
+        {
+            "value": "SpecimenDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "string",
+            "display": "n/a"
+        },
+        {
+            "value": "StructureDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "StructureMap",
+            "display": "n/a"
+        },
+        {
+            "value": "Subscription",
+            "display": "n/a"
+        },
+        {
+            "value": "SubscriptionStatus",
+            "display": "n/a"
+        },
+        {
+            "value": "SubscriptionTopic",
+            "display": "n/a"
+        },
+        {
+            "value": "Substance",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceNucleicAcid",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstancePolymer",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceProtein",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceReferenceInformation",
+            "display": "n/a"
+        },
+        {
+            "value": "SubstanceSourceMaterial",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyDelivery",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyRequest",
+            "display": "n/a"
+        },
+        {
+            "value": "Task",
+            "display": "n/a"
+        },
+        {
+            "value": "TerminologyCapabilities",
+            "display": "n/a"
+        },
+        {
+            "value": "TestPlan",
+            "display": "n/a"
+        },
+        {
+            "value": "TestReport",
+            "display": "n/a"
+        },
+        {
+            "value": "TestScript",
+            "display": "n/a"
+        },
+        {
+            "value": "time",
+            "display": "n/a"
+        },
+        {
+            "value": "Timing",
+            "display": "n/a"
+        },
+        {
+            "value": "Timing",
+            "display": "n/a"
+        },
+        {
+            "value": "Transport",
+            "display": "n/a"
+        },
+        {
+            "value": "TriggerDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "TriggerDefinition",
+            "display": "n/a"
+        },
+        {
+            "value": "unsignedInt",
+            "display": "n/a"
+        },
+        {
+            "value": "uri",
+            "display": "n/a"
+        },
+        {
+            "value": "url",
+            "display": "n/a"
+        },
+        {
+            "value": "UsageContext",
+            "display": "n/a"
+        },
+        {
+            "value": "UsageContext",
+            "display": "n/a"
+        },
+        {
+            "value": "uuid",
+            "display": "n/a"
+        },
+        {
+            "value": "ValueSet",
+            "display": "n/a"
+        },
+        {
+            "value": "VerificationResult",
+            "display": "n/a"
+        },
+        {
+            "value": "VirtualServiceDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "VirtualServiceDetail",
+            "display": "n/a"
+        },
+        {
+            "value": "VisionPrescription",
+            "display": "n/a"
+        },
+        {
+            "value": "xhtml",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "contract-subtype",
+    "name": "ContractSubtypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-subtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "disclosure-ca",
+            "display": "Disclosure-CA"
+        },
+        {
+            "value": "disclosure-us",
+            "display": "Disclosure-US"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "id": "units-of-time",
+    "name": "UnitsOfTime",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/units-of-time",
+    "valid": true,
+    "choices": [
+        {
+            "value": "s",
+            "display": "second"
+        },
+        {
+            "value": "min",
+            "display": "minute"
+        },
+        {
+            "value": "h",
+            "display": "hour"
+        },
+        {
+            "value": "d",
+            "display": "day"
+        },
+        {
+            "value": "wk",
+            "display": "week"
+        },
+        {
+            "value": "mo",
+            "display": "month"
+        },
+        {
+            "value": "a",
+            "display": "year"
+        }
+    ]
+}

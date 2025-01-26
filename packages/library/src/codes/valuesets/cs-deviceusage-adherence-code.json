@@ -1,0 +1,20 @@
+{
+    "id": "deviceusage-adherence-code",
+    "name": "DeviceUsageAdherenceCode",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "always",
+            "display": "Always"
+        },
+        {
+            "value": "never",
+            "display": "Never"
+        },
+        {
+            "value": "sometimes",
+            "display": "Sometimes"
+        }
+    ]
+}

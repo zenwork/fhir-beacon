@@ -1,0 +1,8 @@
+{
+    "id": "specimen-processing-method",
+    "name": "SpecimenProcessingMethod",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/specimen-processing-method",
+    "valid": true,
+    "choices": []
+}

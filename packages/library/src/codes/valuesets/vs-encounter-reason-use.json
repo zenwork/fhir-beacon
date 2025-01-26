@@ -1,0 +1,28 @@
+{
+    "id": "encounter-reason-use",
+    "name": "EncounterReasonUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "CC",
+            "display": "Chief Complaint"
+        },
+        {
+            "value": "HC",
+            "display": "Health Concern"
+        },
+        {
+            "value": "AD",
+            "display": "Admitting Diagnosis"
+        },
+        {
+            "value": "RV",
+            "display": "Reason for Visit"
+        },
+        {
+            "value": "HM",
+            "display": "Health Maintenance (including screening)"
+        }
+    ]
+}

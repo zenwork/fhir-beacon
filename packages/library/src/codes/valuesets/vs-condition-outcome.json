@@ -1,0 +1,8 @@
+{
+    "id": "condition-outcome",
+    "name": "ConditionOutcomeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-outcome",
+    "valid": true,
+    "choices": []
+}

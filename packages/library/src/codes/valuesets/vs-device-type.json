@@ -1,0 +1,122 @@
+{
+    "id": "device-type",
+    "name": "DeviceType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/device-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "528391",
+            "display": "Blood Pressure Cuff"
+        },
+        {
+            "value": "528404",
+            "display": "Body Composition Analyzer"
+        },
+        {
+            "value": "528425",
+            "display": "Cardiovascular Device"
+        },
+        {
+            "value": "528402",
+            "display": "Coagulation meter"
+        },
+        {
+            "value": "528409",
+            "display": "Continuous Glucose Monitor"
+        },
+        {
+            "value": "528390",
+            "display": "Electro cardiograph"
+        },
+        {
+            "value": "528457",
+            "display": "Generic 20601 Device"
+        },
+        {
+            "value": "528401",
+            "display": "Glucose Monitor"
+        },
+        {
+            "value": "528455",
+            "display": "Independent Activity/Living Hub"
+        },
+        {
+            "value": "528403",
+            "display": "Insulin Pump"
+        },
+        {
+            "value": "528405",
+            "display": "Peak Flow meter"
+        },
+        {
+            "value": "528388",
+            "display": "Pulse Oximeter"
+        },
+        {
+            "value": "528397",
+            "display": "Respiration rate"
+        },
+        {
+            "value": "528408",
+            "display": "Sleep Apnea Breathing Equipment"
+        },
+        {
+            "value": "528426",
+            "display": "Strength Equipment"
+        },
+        {
+            "value": "528392",
+            "display": "Thermometer"
+        },
+        {
+            "value": "528399",
+            "display": "Weight Scale"
+        },
+        {
+            "value": "38017",
+            "display": "Dry salt inhalation therapy device"
+        },
+        {
+            "value": "38663",
+            "display": "Flexible video nephroscope"
+        },
+        {
+            "value": "42347",
+            "display": "Dental implant, endosseous, partially-embedded"
+        },
+        {
+            "value": "46352",
+            "display": "Bare-metal intracranial vascular stent"
+        },
+        {
+            "value": "47264",
+            "display": "Dual-chamber implantable pacemaker, demand"
+        },
+        {
+            "value": "62163",
+            "display": "Intrauterine cannula, reusable"
+        },
+        {
+            "value": "62260",
+            "display": "Air-conduction hearing aid acoustic tube"
+        },
+        {
+            "value": "62423",
+            "display": "Spinal cord/peripheral nerve implantable analgesic electrical stimulation system lead, wired connection",
+            
+        },
+        {
+            "value": "62414",
+            "display": "Blue-light phototherapy lamp, home-use"
+        },
+        {
+            "value": "64587",
+            "display": "Uncoated knee femur prosthesis, ceramic"
+        },
+        {
+            "value": "64992",
+            "display": "ADAMTS13 activity IVD, kit, chemiluminescent immunoassay"
+        }
+    ]
+}

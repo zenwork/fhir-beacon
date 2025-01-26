@@ -1,0 +1,25 @@
+{
+    "id": "guide-page-generation",
+    "name": "GuidePageGeneration",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/guide-page-generation",
+    "valid": true,
+    "choices": [
+        {
+            "value": "html",
+            "display": "HTML"
+        },
+        {
+            "value": "markdown",
+            "display": "Markdown"
+        },
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "generated",
+            "display": "Generated"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "research-study-classifiers",
+    "name": "ResearchStudyClassifiers",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fda-regulated-drug",
+            "display": "FDA regulated drug"
+        },
+        {
+            "value": "fda-regulated-device",
+            "display": "FDA regulated device"
+        },
+        {
+            "value": "mpg-paragraph-23b",
+            "display": "MPG Paragraph 23b"
+        },
+        {
+            "value": "irb-exempt",
+            "display": "IRB-exempt"
+        }
+    ]
+}

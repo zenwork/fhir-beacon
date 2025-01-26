@@ -1,0 +1,29 @@
+{
+    "id": "biologicallyderivedproductdispense-origin-relationship",
+    "name": "BiologicallyDerivedProductDispenseOriginRelationship",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/biologicallyderivedproductdispense-origin-relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "autologous",
+            "display": "Autologous"
+        },
+        {
+            "value": "related",
+            "display": "Related"
+        },
+        {
+            "value": "directed",
+            "display": "Directed"
+        },
+        {
+            "value": "allogeneic",
+            "display": "Allogeneic"
+        },
+        {
+            "value": "xenogenic",
+            "display": "Xenogenic"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "metric-category",
+    "name": "DeviceMetricCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/metric-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "measurement",
+            "display": "Measurement"
+        },
+        {
+            "value": "setting",
+            "display": "Setting"
+        },
+        {
+            "value": "calculation",
+            "display": "Calculation"
+        },
+        {
+            "value": "unspecified",
+            "display": "Unspecified"
+        }
+    ]
+}

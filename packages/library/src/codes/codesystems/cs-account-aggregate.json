@@ -1,0 +1,21 @@
+{
+    "id": "account-aggregate",
+    "name": "AccountAggregate",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/account-aggregate",
+    "valid": true,
+    "choices": [
+        {
+            "value": "patient",
+            "display": "Patient"
+        },
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        },
+        {
+            "value": "total",
+            "display": "Total"
+        }
+    ]
+}

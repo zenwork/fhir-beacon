@@ -1,0 +1,33 @@
+{
+    "id": "adverse-event-causality-assess",
+    "name": "AdverseEventCausalityAssessment",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-causality-assess",
+    "valid": true,
+    "choices": [
+        {
+            "value": "certain",
+            "display": "Certain"
+        },
+        {
+            "value": "probably-likely",
+            "display": "Probably/Likely"
+        },
+        {
+            "value": "possible",
+            "display": "Possible"
+        },
+        {
+            "value": "unlikely",
+            "display": "Unlikely"
+        },
+        {
+            "value": "conditional-classified",
+            "display": "Conditional/Classified"
+        },
+        {
+            "value": "unassessable-unclassifiable",
+            "display": "Unassessable/Unclassifiable"
+        }
+    ]
+}

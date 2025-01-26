@@ -1,0 +1,16 @@
+{
+    "id": "medication-ingredientstrength",
+    "name": "MedicationIngredientStrengthCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "qs",
+            "display": "QS"
+        },
+        {
+            "value": "trace",
+            "display": "Trace"
+        }
+    ]
+}

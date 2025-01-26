@@ -1,0 +1,17 @@
+{
+    "id": "type-derivation-rule",
+    "name": "TypeDerivationRule",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/type-derivation-rule",
+    "valid": true,
+    "choices": [
+        {
+            "value": "specialization",
+            "display": "Specialization"
+        },
+        {
+            "value": "constraint",
+            "display": "Constraint"
+        }
+    ]
+}

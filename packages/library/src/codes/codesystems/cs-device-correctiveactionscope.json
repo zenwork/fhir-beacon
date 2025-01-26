@@ -1,0 +1,21 @@
+{
+    "id": "device-correctiveactionscope",
+    "name": "DeviceCorrectiveActionScope",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/device-correctiveactionscope",
+    "valid": true,
+    "choices": [
+        {
+            "value": "model",
+            "display": "Model"
+        },
+        {
+            "value": "lot-numbers",
+            "display": "Lot Numbers"
+        },
+        {
+            "value": "serial-numbers",
+            "display": "Serial Numbers"
+        }
+    ]
+}

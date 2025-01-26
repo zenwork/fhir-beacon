@@ -1,0 +1,24 @@
+{
+    "id": "link-type",
+    "name": "LinkType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "replaced-by",
+            "display": "Replaced-by"
+        },
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "refer",
+            "display": "Refer"
+        },
+        {
+            "value": "seealso",
+            "display": "See also"
+        }
+    ]
+}

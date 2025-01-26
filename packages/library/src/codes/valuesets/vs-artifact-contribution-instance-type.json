@@ -1,0 +1,20 @@
+{
+    "id": "artifact-contribution-instance-type",
+    "name": "ArtifactContributionInstanceType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reviewed",
+            "display": "Reviewed"
+        },
+        {
+            "value": "approved",
+            "display": "Approved"
+        },
+        {
+            "value": "edited",
+            "display": "Edited"
+        }
+    ]
+}

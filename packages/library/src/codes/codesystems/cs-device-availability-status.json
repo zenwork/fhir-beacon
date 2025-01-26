@@ -1,0 +1,25 @@
+{
+    "id": "device-availability-status",
+    "name": "FHIRDeviceAvailabilityStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/device-availability-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lost",
+            "display": "Lost"
+        },
+        {
+            "value": "damaged",
+            "display": "Damaged"
+        },
+        {
+            "value": "destroyed",
+            "display": "Destroyed"
+        },
+        {
+            "value": "available",
+            "display": "Available"
+        }
+    ]
+}

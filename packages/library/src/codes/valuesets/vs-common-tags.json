@@ -1,0 +1,17 @@
+{
+    "id": "common-tags",
+    "name": "CommonTags",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/common-tags",
+    "valid": true,
+    "choices": [
+        {
+            "value": "actionable",
+            "display": "Actionable"
+        },
+        {
+            "value": "SUBSETTED",
+            "display": "subsetted"
+        }
+    ]
+}

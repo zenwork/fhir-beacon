@@ -1,0 +1,16 @@
+{
+    "id": "substance-source-material-species",
+    "name": "SourceMaterialSpecies",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "GinkgoBiloba",
+            "display": "Ginkgo biloba"
+        },
+        {
+            "value": "OleaEuropaea",
+            "display": "Olea europaea"
+        }
+    ]
+}

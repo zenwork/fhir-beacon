@@ -1,0 +1,29 @@
+{
+    "id": "device-versiontype",
+    "name": "DeviceVersionType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/device-versiontype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "531974",
+            "display": "Hardware revision"
+        },
+        {
+            "value": "531975",
+            "display": "Software revision"
+        },
+        {
+            "value": "531976",
+            "display": "Firmware revision"
+        },
+        {
+            "value": "531977",
+            "display": "Protocol revision"
+        },
+        {
+            "value": "532352",
+            "display": "Continua version"
+        }
+    ]
+}

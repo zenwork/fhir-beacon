@@ -1,0 +1,24 @@
+{
+    "id": "enrollment-outcome",
+    "name": "EnrollmentOutcome",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "queued",
+            "display": "Queued"
+        },
+        {
+            "value": "complete",
+            "display": "Processing Complete"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "partial",
+            "display": "Partial Processing"
+        }
+    ]
+}

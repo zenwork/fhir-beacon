@@ -1,0 +1,21 @@
+{
+    "id": "medication-status",
+    "name": "MedicationStatusCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medication-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "operation-parameter-scope",
+    "name": "OperationParameterScope",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/operation-parameter-scope",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "system",
+            "display": "System"
+        }
+    ]
+}

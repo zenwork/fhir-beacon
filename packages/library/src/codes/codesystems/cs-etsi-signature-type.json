@@ -1,0 +1,33 @@
+{
+    "id": "etsi-signature-type",
+    "name": "ETSISignatureTypeCodes",
+    "type": "CodeSystem",
+    "system": "http://uri.etsi.org/01903/v1.2.2",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ProofOfOrigin",
+            "display": "Proof of origin"
+        },
+        {
+            "value": "ProofOfReceipt",
+            "display": "Proof of receipt"
+        },
+        {
+            "value": "ProofOfDelivery",
+            "display": "Proof of delivery"
+        },
+        {
+            "value": "ProofOfSender",
+            "display": "Proof of sender"
+        },
+        {
+            "value": "ProofOfapproval",
+            "display": "Proof of approval"
+        },
+        {
+            "value": "ProofOfCreation",
+            "display": "Proof of creation"
+        }
+    ]
+}

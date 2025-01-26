@@ -1,0 +1,13 @@
+{
+    "id": "contract-actionstatus",
+    "name": "ContractActionStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-action-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        }
+    ]
+}

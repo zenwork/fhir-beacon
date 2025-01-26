@@ -1,0 +1,29 @@
+{
+    "id": "contact-point-use",
+    "name": "ContactPointUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contact-point-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "home",
+            "display": "Home"
+        },
+        {
+            "value": "work",
+            "display": "Work"
+        },
+        {
+            "value": "temp",
+            "display": "Temp"
+        },
+        {
+            "value": "old",
+            "display": "Old"
+        },
+        {
+            "value": "mobile",
+            "display": "Mobile"
+        }
+    ]
+}

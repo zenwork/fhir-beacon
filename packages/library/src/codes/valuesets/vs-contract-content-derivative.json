@@ -1,0 +1,25 @@
+{
+    "id": "contract-content-derivative",
+    "name": "ContractContentDerivationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-content-derivative",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registration",
+            "display": "Content Registration"
+        },
+        {
+            "value": "retrieval",
+            "display": "Content Retrieval"
+        },
+        {
+            "value": "statement",
+            "display": "Content Statement"
+        },
+        {
+            "value": "shareable",
+            "display": "Shareable Content"
+        }
+    ]
+}

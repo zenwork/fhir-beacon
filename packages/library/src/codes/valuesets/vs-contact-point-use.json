@@ -1,0 +1,28 @@
+{
+    "id": "contact-point-use",
+    "name": "ContactPointUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "home",
+            "display": "Home"
+        },
+        {
+            "value": "work",
+            "display": "Work"
+        },
+        {
+            "value": "temp",
+            "display": "Temp"
+        },
+        {
+            "value": "old",
+            "display": "Old"
+        },
+        {
+            "value": "mobile",
+            "display": "Mobile"
+        }
+    ]
+}

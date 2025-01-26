@@ -1,0 +1,17 @@
+{
+    "id": "operation-kind",
+    "name": "OperationKind",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/operation-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "operation",
+            "display": "Operation"
+        },
+        {
+            "value": "query",
+            "display": "Query"
+        }
+    ]
+}

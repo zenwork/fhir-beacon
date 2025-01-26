@@ -1,0 +1,16 @@
+{
+    "id": "consent-content-class",
+    "name": "ConsentContentClass",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "http://hl7.org/fhir/StructureDefinition/lipidprofile",
+            "display": "Lipid Lab Report"
+        },
+        {
+            "value": "application/hl7-cda+xml",
+            "display": "CDA Documents"
+        }
+    ]
+}

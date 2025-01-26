@@ -1,0 +1,25 @@
+{
+    "id": "claim-outcome",
+    "name": "ClaimProcessingOutcomeCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/claim-outcome",
+    "valid": true,
+    "choices": [
+        {
+            "value": "queued",
+            "display": "Queued"
+        },
+        {
+            "value": "complete",
+            "display": "Processing Complete"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "partial",
+            "display": "Partial Processing"
+        }
+    ]
+}

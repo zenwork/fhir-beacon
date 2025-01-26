@@ -1,0 +1,24 @@
+{
+    "id": "permission-status",
+    "name": "PermissionStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        }
+    ]
+}

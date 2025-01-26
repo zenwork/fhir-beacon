@@ -1,0 +1,44 @@
+{
+    "id": "certainty-type",
+    "name": "EvidenceCertaintyType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Overall",
+            "display": "Overall certainty"
+        },
+        {
+            "value": "RiskOfBias",
+            "display": "Risk of bias"
+        },
+        {
+            "value": "Inconsistency",
+            "display": "Inconsistency"
+        },
+        {
+            "value": "Indirectness",
+            "display": "Indirectness"
+        },
+        {
+            "value": "Imprecision",
+            "display": "Imprecision"
+        },
+        {
+            "value": "PublicationBias",
+            "display": "Publication bias"
+        },
+        {
+            "value": "DoseResponseGradient",
+            "display": "Dose response gradient"
+        },
+        {
+            "value": "PlausibleConfounding",
+            "display": "Plausible confounding"
+        },
+        {
+            "value": "LargeEffect",
+            "display": "Large effect"
+        }
+    ]
+}

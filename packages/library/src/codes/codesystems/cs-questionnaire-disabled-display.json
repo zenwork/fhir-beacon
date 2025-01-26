@@ -1,0 +1,17 @@
+{
+    "id": "questionnaire-disabled-display",
+    "name": "QuestionnaireItemDisabledDisplay",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/questionnaire-disabled-display",
+    "valid": true,
+    "choices": [
+        {
+            "value": "hidden",
+            "display": "Hidden"
+        },
+        {
+            "value": "protected",
+            "display": "Protected"
+        }
+    ]
+}

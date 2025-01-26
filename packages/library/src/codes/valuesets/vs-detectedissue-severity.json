@@ -1,0 +1,20 @@
+{
+    "id": "detectedissue-severity",
+    "name": "DetectedIssueSeverity",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "high",
+            "display": "High"
+        },
+        {
+            "value": "moderate",
+            "display": "Moderate"
+        },
+        {
+            "value": "low",
+            "display": "Low"
+        }
+    ]
+}

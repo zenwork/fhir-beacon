@@ -1,0 +1,17 @@
+{
+    "id": "referencerange-meaning",
+    "name": "ObservationReferenceRangeMeaningCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/referencerange-meaning",
+    "valid": true,
+    "choices": [
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "endocrine",
+            "display": "Endocrine"
+        }
+    ]
+}

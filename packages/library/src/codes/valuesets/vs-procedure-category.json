@@ -1,0 +1,37 @@
+{
+    "id": "procedure-category",
+    "name": "ProcedureCategoryCodesSNOMEDCT",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/procedure-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "24642003",
+            "display": "n/a"
+        },
+        {
+            "value": "409063005",
+            "display": "n/a"
+        },
+        {
+            "value": "409073007",
+            "display": "n/a"
+        },
+        {
+            "value": "387713003",
+            "display": "n/a"
+        },
+        {
+            "value": "103693007",
+            "display": "n/a"
+        },
+        {
+            "value": "46947000",
+            "display": "n/a"
+        },
+        {
+            "value": "410606002",
+            "display": "n/a"
+        }
+    ]
+}

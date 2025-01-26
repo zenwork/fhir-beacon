@@ -1,0 +1,37 @@
+{
+    "id": "transport-status-reason",
+    "name": "TransportStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/transport-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "declined-by-patient",
+            "display": "Declined by patient"
+        },
+        {
+            "value": "refused-by-recipient",
+            "display": "Refused by recipient"
+        },
+        {
+            "value": "patient-not-available",
+            "display": "Patient not available"
+        },
+        {
+            "value": "specimen-not-available",
+            "display": "Specimen not available"
+        },
+        {
+            "value": "wrong-request-data",
+            "display": "Wrong request data"
+        },
+        {
+            "value": "in-route-accident",
+            "display": "In route accident"
+        },
+        {
+            "value": "request-not-acknowledged",
+            "display": "Request not acknowledged"
+        }
+    ]
+}

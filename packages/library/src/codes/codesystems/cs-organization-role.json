@@ -1,0 +1,41 @@
+{
+    "id": "organization-role",
+    "name": "OrganizationAffiliationRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/organization-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "provider",
+            "display": "Provider"
+        },
+        {
+            "value": "agency",
+            "display": "Agency"
+        },
+        {
+            "value": "research",
+            "display": "Research"
+        },
+        {
+            "value": "payer",
+            "display": "Payer"
+        },
+        {
+            "value": "diagnostics",
+            "display": "Diagnostics"
+        },
+        {
+            "value": "supplier",
+            "display": "Supplier"
+        },
+        {
+            "value": "HIE/HIO",
+            "display": "HIE/HIO"
+        },
+        {
+            "value": "member",
+            "display": "Member"
+        }
+    ]
+}

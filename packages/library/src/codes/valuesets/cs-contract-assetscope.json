@@ -1,0 +1,12 @@
+{
+    "id": "contract-assetscope",
+    "name": "ContractAssetScope",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "thing",
+            "display": "Thing"
+        }
+    ]
+}

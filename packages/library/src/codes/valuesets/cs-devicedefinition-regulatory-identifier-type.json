@@ -1,0 +1,20 @@
+{
+    "id": "devicedefinition-regulatory-identifier-type",
+    "name": "DeviceRegulatoryIdentifierType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "basic",
+            "display": "Basic"
+        },
+        {
+            "value": "master",
+            "display": "Master"
+        },
+        {
+            "value": "license",
+            "display": "License"
+        }
+    ]
+}

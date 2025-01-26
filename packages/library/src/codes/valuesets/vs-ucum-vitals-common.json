@@ -1,0 +1,57 @@
+{
+    "id": "ucum-vitals-common",
+    "name": "VitalSignsUnits",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ucum-vitals-common",
+    "valid": true,
+    "choices": [
+        {
+            "value": "%",
+            "display": "percent"
+        },
+        {
+            "value": "cm",
+            "display": "centimeter"
+        },
+        {
+            "value": "[in_i]",
+            "display": "inch (international)"
+        },
+        {
+            "value": "kg",
+            "display": "kilogram"
+        },
+        {
+            "value": "g",
+            "display": "gram"
+        },
+        {
+            "value": "[lb_av]",
+            "display": "pound (US and British)"
+        },
+        {
+            "value": "Cel",
+            "display": "degree Celsius"
+        },
+        {
+            "value": "[degF]",
+            "display": "degree Fahrenheit"
+        },
+        {
+            "value": "mm[Hg]",
+            "display": "millimeter of mercury"
+        },
+        {
+            "value": "/min",
+            "display": "per minute"
+        },
+        {
+            "value": "kg/m2",
+            "display": "kilogram / (meter ^ 2)"
+        },
+        {
+            "value": "m2",
+            "display": "square meter"
+        }
+    ]
+}

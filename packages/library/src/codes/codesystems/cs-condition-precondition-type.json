@@ -1,0 +1,17 @@
+{
+    "id": "condition-precondition-type",
+    "name": "ConditionPreconditionType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/condition-precondition-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sensitive",
+            "display": "Sensitive"
+        },
+        {
+            "value": "specific",
+            "display": "Specific"
+        }
+    ]
+}

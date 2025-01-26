@@ -41,6 +41,12 @@ export class Observation extends DomainResource<ObservationData> {
 
   }
 
+
+  public validate(data: ObservationData, validations: Validations, _fetched: boolean): void {
+    validations.validateCode({ key: 'status', code: data.status, id: 'cs-observation-status' })
+    validations.validateCodeableConcept({ key: 'category', value: data.category, id: 'vs-observation-category' })
+  }
+
   public renderAny(config: DisplayConfig,
                    data: Decorated<ObservationData>,
                    validations: Validations): TemplateResult[] {
@@ -98,7 +104,11 @@ export class Observation extends DomainResource<ObservationData> {
                       config
                   }
           )}
-          <fhir-primitive key="status" .value=${data.status} .type=${PrimitiveType.code}></fhir-primitive>
+          <fhir-primitive key="status"
+                          .value=${data.status}
+                          .type=${PrimitiveType.code}
+                          errormessage=${validations.errFor('status')}
+          ></fhir-primitive>
           ${wrap(
                   {
                       key: 'category',
@@ -281,12 +291,12 @@ export class Observation extends DomainResource<ObservationData> {
                       )
                   ]
           )}
-          <fhir-codeable-concept key="dataAbsentReason" .data=${data.dataAbsentReason} ></fhir-codeable-concept>
+          <fhir-codeable-concept key="dataAbsentReason" .data=${data.dataAbsentReason}></fhir-codeable-concept>
           ${wrap({
                      key: 'interpretation',
                      collection: data.interpretation ?? [],
                      generator: (d, l) => html`
-                         <fhir-codeable-concept key=${l} .data=${d} ></fhir-codeable-concept>`,
+                         <fhir-codeable-concept key=${l} .data=${d}></fhir-codeable-concept>`,
                      config
                  }
           )}
@@ -294,16 +304,18 @@ export class Observation extends DomainResource<ObservationData> {
                      key: 'note',
                      collection: data.note ?? [],
                      generator: (d, l) => html`
-                         <fhir-annotation key=${l} .data=${d} ></fhir-annotation>`,
+                         <fhir-annotation key=${l} .data=${d}></fhir-annotation>`,
                      config
                  }
           )}
-          <fhir-codeable-concept key="bodySite" .data=${data.bodySite} ></fhir-codeable-concept>
+          <fhir-codeable-concept key="bodySite" .data=${data.bodySite}></fhir-codeable-concept>
           <fhir-reference key="bodyStructure" .data=${data.bodyStructure}></fhir-reference>
-          <fhir-codeable-concept key="method" .data=${data.method} ></fhir-codeable-concept>
+          <fhir-codeable-concept key="method" .data=${data.method}></fhir-codeable-concept>
           <fhir-reference key="specimen" .data=${data.specimen}></fhir-reference>
           <fhir-reference key="device" .data=${data.device}></fhir-reference>
-          <fhir-observation-reference-range key="referenceRange" .data=${data.referenceRange}></fhir-observation-reference-range>
+          <fhir-observation-reference-range key="referenceRange"
+                                            .data=${data.referenceRange}
+          ></fhir-observation-reference-range>
           ${wrap({
                      key: 'hasMember',
                      collection: data.hasMember ?? [],
@@ -328,7 +340,7 @@ export class Observation extends DomainResource<ObservationData> {
                      config
                  }
           )}
-          
+
 
       `
     ]

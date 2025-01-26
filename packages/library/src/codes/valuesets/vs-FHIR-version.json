@@ -1,0 +1,100 @@
+{
+    "id": "FHIR-version",
+    "name": "FHIRVersion",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "0.01",
+            "display": "0.01"
+        },
+        {
+            "value": "0.05",
+            "display": "0.05"
+        },
+        {
+            "value": "0.06",
+            "display": "0.06"
+        },
+        {
+            "value": "0.11",
+            "display": "0.11"
+        },
+        {
+            "value": "0.0",
+            "display": "0.0"
+        },
+        {
+            "value": "0.4",
+            "display": "0.4"
+        },
+        {
+            "value": "0.5",
+            "display": "0.5"
+        },
+        {
+            "value": "1.0",
+            "display": "1.0"
+        },
+        {
+            "value": "1.1",
+            "display": "1.1"
+        },
+        {
+            "value": "1.4",
+            "display": "1.4"
+        },
+        {
+            "value": "1.6",
+            "display": "1.6"
+        },
+        {
+            "value": "1.8",
+            "display": "1.8"
+        },
+        {
+            "value": "3.0",
+            "display": "3.0"
+        },
+        {
+            "value": "3.3",
+            "display": "3.3"
+        },
+        {
+            "value": "3.5",
+            "display": "3.5"
+        },
+        {
+            "value": "4.0",
+            "display": "4.0"
+        },
+        {
+            "value": "4.1",
+            "display": "4.1"
+        },
+        {
+            "value": "4.2",
+            "display": "4.2"
+        },
+        {
+            "value": "4.3",
+            "display": "4.3"
+        },
+        {
+            "value": "4.4",
+            "display": "4.4"
+        },
+        {
+            "value": "4.5",
+            "display": "4.5"
+        },
+        {
+            "value": "4.6",
+            "display": "4.6"
+        },
+        {
+            "value": "5.0",
+            "display": "5.0"
+        }
+    ]
+}

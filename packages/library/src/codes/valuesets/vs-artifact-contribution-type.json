@@ -1,0 +1,64 @@
+{
+    "id": "artifact-contribution-type",
+    "name": "ArtifactContributionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "conceptualization",
+            "display": "Conceptualization"
+        },
+        {
+            "value": "data-curation",
+            "display": "Data curation"
+        },
+        {
+            "value": "formal-analysis",
+            "display": "Formal analysis"
+        },
+        {
+            "value": "funding-acquisition",
+            "display": "Funding acquisition"
+        },
+        {
+            "value": "investigation",
+            "display": "Investigation"
+        },
+        {
+            "value": "methodology",
+            "display": "Methodology"
+        },
+        {
+            "value": "project-administration",
+            "display": "Project administration"
+        },
+        {
+            "value": "resources",
+            "display": "Resources"
+        },
+        {
+            "value": "software",
+            "display": "Software"
+        },
+        {
+            "value": "supervision",
+            "display": "Supervision"
+        },
+        {
+            "value": "validation",
+            "display": "Validation"
+        },
+        {
+            "value": "visualization",
+            "display": "Visualization"
+        },
+        {
+            "value": "writing-original-draft",
+            "display": "Writing - original draft"
+        },
+        {
+            "value": "writing-review-editing",
+            "display": "Writing - review & editing"
+        }
+    ]
+}

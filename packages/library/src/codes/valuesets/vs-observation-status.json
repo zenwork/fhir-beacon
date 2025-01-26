@@ -1,0 +1,36 @@
+{
+    "id": "observation-status",
+    "name": "ObservationStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registered",
+            "display": "Registered"
+        },
+        {
+            "value": "preliminary",
+            "display": "Preliminary"
+        },
+        {
+            "value": "final",
+            "display": "Final"
+        },
+        {
+            "value": "amended",
+            "display": "Amended"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

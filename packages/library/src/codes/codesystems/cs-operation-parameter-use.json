@@ -1,0 +1,17 @@
+{
+    "id": "operation-parameter-use",
+    "name": "OperationParameterUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/operation-parameter-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in",
+            "display": "In"
+        },
+        {
+            "value": "out",
+            "display": "Out"
+        }
+    ]
+}

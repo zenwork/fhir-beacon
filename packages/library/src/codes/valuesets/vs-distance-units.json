@@ -1,0 +1,29 @@
+{
+    "id": "distance-units",
+    "name": "CommonUCUMCodesForDistance",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/distance-units",
+    "valid": true,
+    "choices": [
+        {
+            "value": "nm",
+            "display": "nanometers"
+        },
+        {
+            "value": "um",
+            "display": "micrometers"
+        },
+        {
+            "value": "mm",
+            "display": "millimeters"
+        },
+        {
+            "value": "m",
+            "display": "meters"
+        },
+        {
+            "value": "km",
+            "display": "kilometers"
+        }
+    ]
+}

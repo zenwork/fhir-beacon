@@ -1,0 +1,20 @@
+{
+    "id": "measure-stratifier-example",
+    "name": "MeasureStratifierExample",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "age",
+            "display": "Age"
+        },
+        {
+            "value": "gender",
+            "display": "Gender"
+        },
+        {
+            "value": "region",
+            "display": "Region"
+        }
+    ]
+}

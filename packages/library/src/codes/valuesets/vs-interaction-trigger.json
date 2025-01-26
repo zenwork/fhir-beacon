@@ -1,0 +1,21 @@
+{
+    "id": "interaction-trigger",
+    "name": "InteractionTrigger",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/interaction-trigger",
+    "valid": true,
+    "choices": [
+        {
+            "value": "create",
+            "display": "n/a"
+        },
+        {
+            "value": "update",
+            "display": "n/a"
+        },
+        {
+            "value": "delete",
+            "display": "n/a"
+        }
+    ]
+}

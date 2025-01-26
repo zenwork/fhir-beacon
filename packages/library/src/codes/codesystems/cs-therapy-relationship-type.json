@@ -1,0 +1,49 @@
+{
+    "id": "therapy-relationship-type",
+    "name": "TherapyRelationshipType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/therapy-relationship-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "contraindicated-only-with",
+            "display": "Only contraindicated if the other therapy is given"
+        },
+        {
+            "value": "contraindicated-except-with",
+            "display": "Contraindicated unless the other therapy is given"
+        },
+        {
+            "value": "indicated-only-with",
+            "display": "Indicated only when the other therapy is given (co-occurrent)"
+        },
+        {
+            "value": "indicated-except-with",
+            "display": "Indicated except when the other therapy is given"
+        },
+        {
+            "value": "indicated-only-after",
+            "display": "Indicated only if the other therapy is planned to be given afterwards (prep)"
+        },
+        {
+            "value": "indicated-only-before",
+            "display": "Indicated only if the other therapy was given before (follow-up)"
+        },
+        {
+            "value": "replace-other-therapy",
+            "display": "Indicated to replace the other therapy"
+        },
+        {
+            "value": "replace-other-therapy-contraindicated",
+            "display": "Indicated to replace the other contraindicated therapy"
+        },
+        {
+            "value": "replace-other-therapy-not-tolerated",
+            "display": "Indicated to replace the other therapy not well tolerated by patient"
+        },
+        {
+            "value": "replace-other-therapy-not-effective",
+            "display": "Indicated to replace the other therapy not effective on patient"
+        }
+    ]
+}

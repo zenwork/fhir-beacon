@@ -1,0 +1,60 @@
+{
+    "id": "title-type",
+    "name": "TitleType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primary",
+            "display": "Primary title"
+        },
+        {
+            "value": "official",
+            "display": "Official title"
+        },
+        {
+            "value": "scientific",
+            "display": "Scientific title"
+        },
+        {
+            "value": "plain-language",
+            "display": "Plain language title"
+        },
+        {
+            "value": "subtitle",
+            "display": "Subtitle"
+        },
+        {
+            "value": "short-title",
+            "display": "Short title"
+        },
+        {
+            "value": "acronym",
+            "display": "Acronym"
+        },
+        {
+            "value": "earlier-title",
+            "display": "Different text in an earlier version"
+        },
+        {
+            "value": "language",
+            "display": "Different language"
+        },
+        {
+            "value": "autotranslated",
+            "display": "Different language derived from autotranslation"
+        },
+        {
+            "value": "human-use",
+            "display": "Human use"
+        },
+        {
+            "value": "machine-use",
+            "display": "Machine use"
+        },
+        {
+            "value": "duplicate-uid",
+            "display": "Different text for the same object with a different identifier"
+        }
+    ]
+}

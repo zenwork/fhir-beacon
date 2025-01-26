@@ -1,0 +1,33 @@
+{
+    "id": "communication-topic",
+    "name": "CommunicationTopic",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/communication-topic",
+    "valid": true,
+    "choices": [
+        {
+            "value": "prescription-refill-request",
+            "display": "Prescription Refill Request"
+        },
+        {
+            "value": "progress-update",
+            "display": "Progress Update"
+        },
+        {
+            "value": "report-labs",
+            "display": "Report Labs"
+        },
+        {
+            "value": "appointment-reminder",
+            "display": "Appointment Reminder"
+        },
+        {
+            "value": "phone-consult",
+            "display": "Phone Consult"
+        },
+        {
+            "value": "summary-report",
+            "display": "Summary Report"
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "id": "medicationrequest-status-reason",
+    "name": "MedicationRequestStatusReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medicationrequest-status-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "altchoice",
+            "display": "Try another treatment first"
+        },
+        {
+            "value": "clarif",
+            "display": "Prescription requires clarification"
+        },
+        {
+            "value": "drughigh",
+            "display": "Drug level too high"
+        },
+        {
+            "value": "hospadm",
+            "display": "Admission to hospital"
+        },
+        {
+            "value": "labint",
+            "display": "Lab interference issues"
+        },
+        {
+            "value": "non-avail",
+            "display": "Patient not available"
+        },
+        {
+            "value": "preg",
+            "display": "Parent is pregnant/breast feeding"
+        },
+        {
+            "value": "salg",
+            "display": "Allergy"
+        },
+        {
+            "value": "sddi",
+            "display": "Drug interacts with another drug"
+        },
+        {
+            "value": "sdupther",
+            "display": "Duplicate therapy"
+        },
+        {
+            "value": "sintol",
+            "display": "Suspected intolerance"
+        },
+        {
+            "value": "surg",
+            "display": "Patient scheduled for surgery."
+        },
+        {
+            "value": "washout",
+            "display": "Waiting for old drug to wash out"
+        }
+    ]
+}

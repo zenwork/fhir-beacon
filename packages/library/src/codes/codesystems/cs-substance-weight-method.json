@@ -1,0 +1,41 @@
+{
+    "id": "substance-weight-method",
+    "name": "SubstanceWeightMethod",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-weight-method",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SDS-PAGE",
+            "display": "SDS-PAGE (sodium dodecyl sulfate-polyacrylamide gel electrophoresis)"
+        },
+        {
+            "value": "Calculated",
+            "display": "calculated"
+        },
+        {
+            "value": "LighScattering",
+            "display": "light scattering"
+        },
+        {
+            "value": "Viscosity",
+            "display": "viscosity"
+        },
+        {
+            "value": "GelPermeationCentrifugation",
+            "display": "gel permeation centrifugation"
+        },
+        {
+            "value": "End-groupAnalysis",
+            "display": "End-group analysis"
+        },
+        {
+            "value": "End-groupTitration",
+            "display": "End-group titration"
+        },
+        {
+            "value": "Size-ExclusionChromatography",
+            "display": "Size-exclusion chromatography"
+        }
+    ]
+}

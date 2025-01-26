@@ -1,0 +1,20 @@
+{
+    "id": "operation-parameter-scope",
+    "name": "OperationParameterScope",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "system",
+            "display": "System"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "research-study-arm-type",
+    "name": "ResearchStudyArmType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-arm-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active-comparator",
+            "display": "Active Comparator"
+        },
+        {
+            "value": "placebo-comparator",
+            "display": "Placebo Comparator"
+        },
+        {
+            "value": "sham-comparator",
+            "display": "Sham Comparator"
+        },
+        {
+            "value": "no-intervention",
+            "display": "No Intervention"
+        },
+        {
+            "value": "experimental",
+            "display": "Experimental"
+        },
+        {
+            "value": "other-arm-type",
+            "display": "Other Arm Type"
+        }
+    ]
+}

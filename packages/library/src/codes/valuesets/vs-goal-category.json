@@ -1,0 +1,29 @@
+{
+    "id": "goal-category",
+    "name": "GoalCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/goal-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "dietary",
+            "display": "Dietary"
+        },
+        {
+            "value": "safety",
+            "display": "Safety"
+        },
+        {
+            "value": "behavioral",
+            "display": "Behavioral"
+        },
+        {
+            "value": "nursing",
+            "display": "Nursing"
+        },
+        {
+            "value": "physiotherapy",
+            "display": "Physiotherapy"
+        }
+    ]
+}

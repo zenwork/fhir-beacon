@@ -1,0 +1,108 @@
+{
+    "id": "study-design",
+    "name": "StudyDesign",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SEVCO:01001",
+            "display": "Interventional research"
+        },
+        {
+            "value": "SEVCO:01002",
+            "display": "Observational research"
+        },
+        {
+            "value": "SEVCO:01010",
+            "display": "Comparative study design"
+        },
+        {
+            "value": "SEVCO:01023",
+            "display": "Non-comparative study design"
+        },
+        {
+            "value": "SEVCO:01022",
+            "display": "Population-based design"
+        },
+        {
+            "value": "SEVCO:01027",
+            "display": "Cross sectional data collection "
+        },
+        {
+            "value": "SEVCO:01028",
+            "display": "Longitudinal data collection"
+        },
+        {
+            "value": "SEVCO:01045",
+            "display": "Primary data collection"
+        },
+        {
+            "value": "SEVCO:01026",
+            "display": "Real world data collection"
+        },
+        {
+            "value": "SEVCO:01049",
+            "display": "Secondary data collection from prior research"
+        },
+        {
+            "value": "SEVCO:01042",
+            "display": "Secondary data collection from a registry"
+        },
+        {
+            "value": "SEVCO:01051",
+            "display": "Multisite data collection"
+        },
+        {
+            "value": "SEVCO:01086",
+            "display": "Quantitative analysis"
+        },
+        {
+            "value": "SEVCO:01087",
+            "display": "Qualitative analysis"
+        },
+        {
+            "value": "SEVCO:01060",
+            "display": "Blinding of study participants"
+        },
+        {
+            "value": "SEVCO:01061",
+            "display": "Blinding of intervention providers"
+        },
+        {
+            "value": "SEVCO:01062",
+            "display": "Blinding of outcome assessors"
+        },
+        {
+            "value": "SEVCO:01063",
+            "display": "Blinding of data analysts"
+        },
+        {
+            "value": "SEVCO:01064",
+            "display": "Allocation concealment"
+        },
+        {
+            "value": "SEVCO:01043",
+            "display": "Multicentric"
+        },
+        {
+            "value": "SEVCO:01052",
+            "display": "Includes patient-reported outcome"
+        },
+        {
+            "value": "SEVCO:01053",
+            "display": "Includes patient-centered outcome"
+        },
+        {
+            "value": "SEVCO:01054",
+            "display": "Includes disease-oriented outcome"
+        },
+        {
+            "value": "SEVCO:01085",
+            "display": "Includes process measure"
+        },
+        {
+            "value": "SEVCO:01089",
+            "display": "Study Goal"
+        }
+    ]
+}

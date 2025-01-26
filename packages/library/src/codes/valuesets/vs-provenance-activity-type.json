@@ -1,0 +1,37 @@
+{
+    "id": "provenance-activity-type",
+    "name": "ProvenanceActivityType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/provenance-activity-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "amend",
+            "display": "n/a"
+        },
+        {
+            "value": "originate",
+            "display": "n/a"
+        },
+        {
+            "value": "merge",
+            "display": "n/a"
+        },
+        {
+            "value": "deidentify",
+            "display": "n/a"
+        },
+        {
+            "value": "receive",
+            "display": "n/a"
+        },
+        {
+            "value": "transform",
+            "display": "n/a"
+        },
+        {
+            "value": "verify",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "consent-provision-type",
+    "name": "ConsentProvisionType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "deny",
+            "display": "Deny"
+        },
+        {
+            "value": "permit",
+            "display": "Permit"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "interaction-type",
+    "name": "InteractionType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/interaction-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "drug-drug",
+            "display": "drug to drug interaction"
+        },
+        {
+            "value": "drug-food",
+            "display": "drug to food interaction"
+        },
+        {
+            "value": "drug-test",
+            "display": "drug to laboratory test interaction"
+        },
+        {
+            "value": "other",
+            "display": "other interaction"
+        }
+    ]
+}

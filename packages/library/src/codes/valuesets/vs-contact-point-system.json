@@ -1,0 +1,36 @@
+{
+    "id": "contact-point-system",
+    "name": "ContactPointSystem",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "phone",
+            "display": "Phone"
+        },
+        {
+            "value": "fax",
+            "display": "Fax"
+        },
+        {
+            "value": "email",
+            "display": "Email"
+        },
+        {
+            "value": "pager",
+            "display": "Pager"
+        },
+        {
+            "value": "url",
+            "display": "URL"
+        },
+        {
+            "value": "sms",
+            "display": "SMS"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

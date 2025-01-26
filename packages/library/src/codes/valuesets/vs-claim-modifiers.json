@@ -1,0 +1,33 @@
+{
+    "id": "claim-modifiers",
+    "name": "ModifierTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-modifiers",
+    "valid": true,
+    "choices": [
+        {
+            "value": "a",
+            "display": "Repair of prior service or installation"
+        },
+        {
+            "value": "b",
+            "display": "Temporary service or installation"
+        },
+        {
+            "value": "c",
+            "display": "TMJ treatment"
+        },
+        {
+            "value": "e",
+            "display": "Implant or associated with an implant"
+        },
+        {
+            "value": "rooh",
+            "display": "Rush or Outside of office hours"
+        },
+        {
+            "value": "x",
+            "display": "None"
+        }
+    ]
+}

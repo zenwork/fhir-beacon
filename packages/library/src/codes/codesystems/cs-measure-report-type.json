@@ -1,0 +1,25 @@
+{
+    "id": "measure-report-type",
+    "name": "MeasureReportType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-report-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "individual",
+            "display": "Individual"
+        },
+        {
+            "value": "subject-list",
+            "display": "Subject List"
+        },
+        {
+            "value": "summary",
+            "display": "Summary"
+        },
+        {
+            "value": "data-exchange",
+            "display": "Data Exchange"
+        }
+    ]
+}

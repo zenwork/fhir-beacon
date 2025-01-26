@@ -1,0 +1,12 @@
+{
+    "id": "asset-availability",
+    "name": "ContractResourceAssetAvailiabilityCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lease",
+            "display": "Lease"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "id": "administration-subpotent-reason",
+    "name": "MedicationAdministrationSubpotentReason",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "partialdose",
+            "display": "Partial Dose"
+        },
+        {
+            "value": "coldchainbreak",
+            "display": "Cold Chain Break"
+        },
+        {
+            "value": "recall",
+            "display": "Manufacturer Recall"
+        },
+        {
+            "value": "adversestorage",
+            "display": "Adverse Storage"
+        },
+        {
+            "value": "expired",
+            "display": "Expired Product"
+        }
+    ]
+}

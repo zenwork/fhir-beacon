@@ -1,0 +1,17 @@
+{
+    "id": "immunization-program-eligibility",
+    "name": "ImmunizationProgramEligibility",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-program-eligibility",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ineligible",
+            "display": "Not Eligible"
+        },
+        {
+            "value": "uninsured",
+            "display": "Uninsured"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "report-result-codes",
+    "name": "TestReportResult",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/report-result-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "pending",
+            "display": "Pending"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "undesirable-effect-frequency",
+    "name": "UndesirablEffectFrequency",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/undesirable-effect-frequency",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Common",
+            "display": "Common"
+        },
+        {
+            "value": "Uncommon",
+            "display": "Uncommon"
+        },
+        {
+            "value": "Rare",
+            "display": "Rare"
+        }
+    ]
+}

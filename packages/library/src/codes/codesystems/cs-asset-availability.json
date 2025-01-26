@@ -1,0 +1,13 @@
+{
+    "id": "asset-availability",
+    "name": "ContractAssetAvailability",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/asset-availability",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lease",
+            "display": "Lease"
+        }
+    ]
+}

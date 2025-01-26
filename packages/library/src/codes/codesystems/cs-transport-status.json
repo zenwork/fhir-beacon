@@ -1,0 +1,33 @@
+{
+    "id": "transport-status",
+    "name": "TransportStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/transport-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "abandoned",
+            "display": "Abandoned"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

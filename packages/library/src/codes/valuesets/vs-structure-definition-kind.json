@@ -1,0 +1,24 @@
+{
+    "id": "structure-definition-kind",
+    "name": "StructureDefinitionKind",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "primitive-type",
+            "display": "Primitive Data Type"
+        },
+        {
+            "value": "complex-type",
+            "display": "Complex Data Type"
+        },
+        {
+            "value": "resource",
+            "display": "Resource"
+        },
+        {
+            "value": "logical",
+            "display": "Logical"
+        }
+    ]
+}

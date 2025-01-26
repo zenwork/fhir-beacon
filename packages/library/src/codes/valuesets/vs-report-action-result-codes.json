@@ -1,0 +1,28 @@
+{
+    "id": "report-action-result-codes",
+    "name": "TestReportActionResult",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "skip",
+            "display": "Skip"
+        },
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        }
+    ]
+}

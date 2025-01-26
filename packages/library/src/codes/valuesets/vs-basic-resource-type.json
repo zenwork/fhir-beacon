@@ -1,0 +1,73 @@
+{
+    "id": "basic-resource-type",
+    "name": "BasicResourceTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/basic-resource-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "consent",
+            "display": "Consent"
+        },
+        {
+            "value": "referral",
+            "display": "Referral"
+        },
+        {
+            "value": "advevent",
+            "display": "Adverse Event"
+        },
+        {
+            "value": "aptmtreq",
+            "display": "Appointment Request"
+        },
+        {
+            "value": "transfer",
+            "display": "Transfer"
+        },
+        {
+            "value": "diet",
+            "display": "Diet"
+        },
+        {
+            "value": "adminact",
+            "display": "Administrative Activity"
+        },
+        {
+            "value": "exposure",
+            "display": "Exposure"
+        },
+        {
+            "value": "investigation",
+            "display": "Investigation"
+        },
+        {
+            "value": "account",
+            "display": "Account"
+        },
+        {
+            "value": "invoice",
+            "display": "Invoice"
+        },
+        {
+            "value": "adjudicat",
+            "display": "Invoice Adjudication"
+        },
+        {
+            "value": "predetreq",
+            "display": "Pre-determination Request"
+        },
+        {
+            "value": "predetermine",
+            "display": "Predetermination"
+        },
+        {
+            "value": "study",
+            "display": "Study"
+        },
+        {
+            "value": "protocol",
+            "display": "Protocol"
+        }
+    ]
+}

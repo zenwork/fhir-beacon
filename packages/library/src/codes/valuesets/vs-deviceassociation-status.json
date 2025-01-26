@@ -1,0 +1,28 @@
+{
+    "id": "deviceassociation-status",
+    "name": "DeviceAssociationCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "implanted",
+            "display": "Implanted"
+        },
+        {
+            "value": "explanted",
+            "display": "Explanted"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "attached",
+            "display": "Attached"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

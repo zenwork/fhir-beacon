@@ -1,0 +1,17 @@
+{
+    "id": "vision-eye-codes",
+    "name": "VisionEyes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/vision-eye-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "right",
+            "display": "Right Eye"
+        },
+        {
+            "value": "left",
+            "display": "Left Eye"
+        }
+    ]
+}

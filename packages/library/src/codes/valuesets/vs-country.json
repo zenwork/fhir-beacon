@@ -1,0 +1,8 @@
+{
+    "id": "country",
+    "name": "CountryValueSet",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/country",
+    "valid": true,
+    "choices": []
+}

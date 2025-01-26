@@ -1,0 +1,21 @@
+{
+    "id": "substance-name-type",
+    "name": "SubstanceNameType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-name-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Systematic",
+            "display": "systematic"
+        },
+        {
+            "value": "Scientific",
+            "display": "scientific"
+        },
+        {
+            "value": "Brand",
+            "display": "brand"
+        }
+    ]
+}

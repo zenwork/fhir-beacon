@@ -1,0 +1,172 @@
+{
+    "id": "fhir-old-types",
+    "name": "FHIROldTypes",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "BodySite",
+            "display": "BodySite"
+        },
+        {
+            "value": "CatalogEntry",
+            "display": "CatalogEntry"
+        },
+        {
+            "value": "Conformance",
+            "display": "Conformance"
+        },
+        {
+            "value": "DataElement",
+            "display": "DataElement"
+        },
+        {
+            "value": "DeviceComponent",
+            "display": "DeviceComponent"
+        },
+        {
+            "value": "DeviceUseRequest",
+            "display": "DeviceUseRequest"
+        },
+        {
+            "value": "DeviceUseStatement",
+            "display": "DeviceUseStatement"
+        },
+        {
+            "value": "DiagnosticOrder",
+            "display": "DiagnosticOrder"
+        },
+        {
+            "value": "DocumentManifest",
+            "display": "DocumentManifest"
+        },
+        {
+            "value": "EffectEvidenceSynthesis",
+            "display": "EffectEvidenceSynthesis"
+        },
+        {
+            "value": "EligibilityRequest",
+            "display": "EligibilityRequest"
+        },
+        {
+            "value": "EligibilityResponse",
+            "display": "EligibilityResponse"
+        },
+        {
+            "value": "ExpansionProfile",
+            "display": "ExpansionProfile"
+        },
+        {
+            "value": "ImagingManifest",
+            "display": "ImagingManifest"
+        },
+        {
+            "value": "ImagingObjectSelection",
+            "display": "ImagingObjectSelection"
+        },
+        {
+            "value": "Media",
+            "display": "Media"
+        },
+        {
+            "value": "MedicationOrder",
+            "display": "MedicationOrder"
+        },
+        {
+            "value": "MedicationUsage",
+            "display": "MedicationUsage"
+        },
+        {
+            "value": "MedicinalProduct",
+            "display": "MedicinalProduct"
+        },
+        {
+            "value": "MedicinalProductAuthorization",
+            "display": "MedicinalProductAuthorization"
+        },
+        {
+            "value": "MedicinalProductContraindication",
+            "display": "MedicinalProductContraindication"
+        },
+        {
+            "value": "MedicinalProductIndication",
+            "display": "MedicinalProductIndication"
+        },
+        {
+            "value": "MedicinalProductIngredient",
+            "display": "MedicinalProductIngredient"
+        },
+        {
+            "value": "MedicinalProductInteraction",
+            "display": "MedicinalProductInteraction"
+        },
+        {
+            "value": "MedicinalProductManufactured",
+            "display": "MedicinalProductManufactured"
+        },
+        {
+            "value": "MedicinalProductPackaged",
+            "display": "MedicinalProductPackaged"
+        },
+        {
+            "value": "MedicinalProductPharmaceutical",
+            "display": "MedicinalProductPharmaceutical"
+        },
+        {
+            "value": "MedicinalProductUndesirableEffect",
+            "display": "MedicinalProductUndesirableEffect"
+        },
+        {
+            "value": "Order",
+            "display": "Order"
+        },
+        {
+            "value": "OrderResponse",
+            "display": "OrderResponse"
+        },
+        {
+            "value": "ProcedureRequest",
+            "display": "ProcedureRequest"
+        },
+        {
+            "value": "ProcessRequest",
+            "display": "ProcessRequest"
+        },
+        {
+            "value": "ProcessResponse",
+            "display": "ProcessResponse"
+        },
+        {
+            "value": "ReferralRequest",
+            "display": "ReferralRequest"
+        },
+        {
+            "value": "RequestGroup",
+            "display": "RequestGroup"
+        },
+        {
+            "value": "ResearchDefinition",
+            "display": "ResearchDefinition"
+        },
+        {
+            "value": "ResearchElementDefinition",
+            "display": "ResearchElementDefinition"
+        },
+        {
+            "value": "RiskEvidenceSynthesis",
+            "display": "RiskEvidenceSynthesis"
+        },
+        {
+            "value": "Sequence",
+            "display": "Sequence"
+        },
+        {
+            "value": "ServiceDefinition",
+            "display": "ServiceDefinition"
+        },
+        {
+            "value": "SubstanceSpecification",
+            "display": "SubstanceSpecification"
+        }
+    ]
+}

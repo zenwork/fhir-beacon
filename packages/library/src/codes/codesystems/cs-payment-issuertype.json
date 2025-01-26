@@ -1,0 +1,17 @@
+{
+    "id": "payment-issuertype",
+    "name": "PaymentIssuerTypeCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/payment-issuertype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "patient",
+            "display": "Patient"
+        },
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        }
+    ]
+}

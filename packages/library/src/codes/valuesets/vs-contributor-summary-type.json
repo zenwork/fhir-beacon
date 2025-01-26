@@ -1,0 +1,36 @@
+{
+    "id": "contributor-summary-type",
+    "name": "ContributorSummaryType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "author-string",
+            "display": "Author string"
+        },
+        {
+            "value": "contributorship-list",
+            "display": "Contributorship list"
+        },
+        {
+            "value": "contributorship-statement",
+            "display": "Contributorship statement"
+        },
+        {
+            "value": "acknowledgement-list",
+            "display": "Acknowledgment list"
+        },
+        {
+            "value": "acknowledgment-statement",
+            "display": "Acknowledgment statement"
+        },
+        {
+            "value": "funding-statement",
+            "display": "Funding statement"
+        },
+        {
+            "value": "competing-interests-statement",
+            "display": "Competing interests statement"
+        }
+    ]
+}

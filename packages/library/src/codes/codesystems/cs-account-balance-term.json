@@ -1,0 +1,29 @@
+{
+    "id": "account-balance-term",
+    "name": "AccountBalanceTerm",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/account-balance-term",
+    "valid": true,
+    "choices": [
+        {
+            "value": "current",
+            "display": "Current"
+        },
+        {
+            "value": "30",
+            "display": "30 day"
+        },
+        {
+            "value": "60",
+            "display": "60 day"
+        },
+        {
+            "value": "90",
+            "display": "90 day"
+        },
+        {
+            "value": "120",
+            "display": "120 day"
+        }
+    ]
+}

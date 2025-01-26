@@ -1,0 +1,21 @@
+{
+    "id": "benefit-term",
+    "name": "BenefitTermCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/benefit-term",
+    "valid": true,
+    "choices": [
+        {
+            "value": "annual",
+            "display": "Annual"
+        },
+        {
+            "value": "day",
+            "display": "Day"
+        },
+        {
+            "value": "lifetime",
+            "display": "Lifetime"
+        }
+    ]
+}

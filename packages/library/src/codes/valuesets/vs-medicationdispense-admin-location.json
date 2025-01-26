@@ -1,0 +1,20 @@
+{
+    "id": "medicationdispense-admin-location",
+    "name": "MedicationDispenseAdministrationLocationCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "inpatient",
+            "display": "Inpatient"
+        },
+        {
+            "value": "outpatient",
+            "display": "Outpatient"
+        },
+        {
+            "value": "community",
+            "display": "Community"
+        }
+    ]
+}

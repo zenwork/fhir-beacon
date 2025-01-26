@@ -1,0 +1,21 @@
+{
+    "id": "medication-dose-aid",
+    "name": "MedicationDoseAid",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/medication-dose-aid",
+    "valid": true,
+    "choices": [
+        {
+            "value": "blisterpack",
+            "display": "Blister Pack"
+        },
+        {
+            "value": "dosette",
+            "display": "Dosette"
+        },
+        {
+            "value": "sachets",
+            "display": "Sachets"
+        }
+    ]
+}

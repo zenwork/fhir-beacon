@@ -1,0 +1,8 @@
+{
+    "id": "substance-codes",
+    "name": "SNOMEDCTSubstanceCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/substance-codes",
+    "valid": true,
+    "choices": []
+}

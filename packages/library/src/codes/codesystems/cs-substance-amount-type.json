@@ -1,0 +1,25 @@
+{
+    "id": "substance-amount-type",
+    "name": "SubstanceAmountType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-amount-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Average",
+            "display": "Average"
+        },
+        {
+            "value": "Approximately",
+            "display": "Approximately"
+        },
+        {
+            "value": "LessThan",
+            "display": "Less Than"
+        },
+        {
+            "value": "MoreThan",
+            "display": "More Than"
+        }
+    ]
+}

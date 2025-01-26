@@ -186,6 +186,7 @@ export type ResolvedSet = {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   origin: ValueSetData | ResolutionError | any, // should also include code system
   name: string,
+  system: string,
   version: string,
   status: string,
   compose: {
@@ -203,6 +204,7 @@ export type Choices = {
   id: string,
   type: 'CodeSystem' | 'ValueSet' | 'unknown' | string,
   name: string,
+  system: string,
   choices: Choice[]
   valid: boolean
 }
@@ -215,6 +217,7 @@ export interface ValueSetSource {
 
 export interface ValueSetStore {
   write(valueSet: Choices): Promise<void>
+  writeMeta(sets: Choices[]): Promise<void>
 }
 
 export interface LoadableStore extends ValueSetSource {

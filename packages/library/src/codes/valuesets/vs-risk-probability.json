@@ -1,0 +1,29 @@
+{
+    "id": "risk-probability",
+    "name": "RiskProbability",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/risk-probability",
+    "valid": true,
+    "choices": [
+        {
+            "value": "negligible",
+            "display": "Negligible likelihood"
+        },
+        {
+            "value": "low",
+            "display": "Low likelihood"
+        },
+        {
+            "value": "moderate",
+            "display": "Moderate likelihood"
+        },
+        {
+            "value": "high",
+            "display": "High likelihood"
+        },
+        {
+            "value": "certain",
+            "display": "Certain"
+        }
+    ]
+}

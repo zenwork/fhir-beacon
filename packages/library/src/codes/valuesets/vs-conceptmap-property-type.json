@@ -1,0 +1,36 @@
+{
+    "id": "conceptmap-property-type",
+    "name": "ConceptMapPropertyType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Coding",
+            "display": "Coding (external reference)"
+        },
+        {
+            "value": "string",
+            "display": "string"
+        },
+        {
+            "value": "integer",
+            "display": "integer"
+        },
+        {
+            "value": "boolean",
+            "display": "boolean"
+        },
+        {
+            "value": "dateTime",
+            "display": "dateTime"
+        },
+        {
+            "value": "decimal",
+            "display": "decimal"
+        },
+        {
+            "value": "code",
+            "display": "code"
+        }
+    ]
+}

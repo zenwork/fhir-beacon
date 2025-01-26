@@ -1,0 +1,21 @@
+{
+    "id": "service-provision-conditions",
+    "name": "ServiceProvisionConditions",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/service-provision-conditions",
+    "valid": true,
+    "choices": [
+        {
+            "value": "free",
+            "display": "Free"
+        },
+        {
+            "value": "disc",
+            "display": "Discounts Available"
+        },
+        {
+            "value": "cost",
+            "display": "Fees apply"
+        }
+    ]
+}

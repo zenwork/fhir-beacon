@@ -1,0 +1,53 @@
+{
+    "id": "encounter-discharge-disposition",
+    "name": "DischargeDisposition",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-discharge-disposition",
+    "valid": true,
+    "choices": [
+        {
+            "value": "home",
+            "display": "Home"
+        },
+        {
+            "value": "alt-home",
+            "display": "Alternative home"
+        },
+        {
+            "value": "other-hcf",
+            "display": "Other healthcare facility"
+        },
+        {
+            "value": "hosp",
+            "display": "Hospice"
+        },
+        {
+            "value": "long",
+            "display": "Long-term care"
+        },
+        {
+            "value": "aadvice",
+            "display": "Left against advice"
+        },
+        {
+            "value": "exp",
+            "display": "Expired"
+        },
+        {
+            "value": "psy",
+            "display": "Psychiatric hospital"
+        },
+        {
+            "value": "rehab",
+            "display": "Rehabilitation"
+        },
+        {
+            "value": "snf",
+            "display": "Skilled nursing facility"
+        },
+        {
+            "value": "oth",
+            "display": "Other"
+        }
+    ]
+}

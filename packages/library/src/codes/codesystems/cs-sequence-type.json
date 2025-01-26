@@ -1,0 +1,21 @@
+{
+    "id": "sequence-type",
+    "name": "SequenceType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/sequence-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "aa",
+            "display": "AA Sequence"
+        },
+        {
+            "value": "dna",
+            "display": "DNA Sequence"
+        },
+        {
+            "value": "rna",
+            "display": "RNA Sequence"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "system-restful-interaction",
+    "name": "SystemRestfulInteraction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/system-restful-interaction",
+    "valid": true,
+    "choices": [
+        {
+            "value": "transaction",
+            "display": "n/a"
+        },
+        {
+            "value": "batch",
+            "display": "n/a"
+        },
+        {
+            "value": "search-system",
+            "display": "n/a"
+        },
+        {
+            "value": "history-system",
+            "display": "n/a"
+        }
+    ]
+}

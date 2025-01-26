@@ -1,0 +1,37 @@
+{
+    "id": "contributor-role",
+    "name": "ContributorRole",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contributor-role",
+    "valid": true,
+    "choices": [
+        {
+            "value": "publisher",
+            "display": "Publisher"
+        },
+        {
+            "value": "author",
+            "display": "Author/Creator"
+        },
+        {
+            "value": "reviewer",
+            "display": "Reviewer"
+        },
+        {
+            "value": "endorser",
+            "display": "Endorser"
+        },
+        {
+            "value": "editor",
+            "display": "Editor"
+        },
+        {
+            "value": "informant",
+            "display": "Informant"
+        },
+        {
+            "value": "funder",
+            "display": "Funder"
+        }
+    ]
+}

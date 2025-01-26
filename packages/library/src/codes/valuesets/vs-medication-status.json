@@ -1,0 +1,20 @@
+{
+    "id": "medication-status",
+    "name": "MedicationStatusCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

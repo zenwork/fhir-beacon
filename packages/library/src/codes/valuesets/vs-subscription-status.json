@@ -1,0 +1,28 @@
+{
+    "id": "subscription-status",
+    "name": "SubscriptionStatusCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "requested",
+            "display": "Requested"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "off",
+            "display": "Off"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

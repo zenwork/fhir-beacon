@@ -1,0 +1,8 @@
+{
+    "id": "supply-item",
+    "name": "SNOMEDCTSupplyItem",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/supply-item",
+    "valid": true,
+    "choices": []
+}

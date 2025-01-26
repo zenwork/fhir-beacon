@@ -1,0 +1,25 @@
+{
+    "id": "specimen-status",
+    "name": "SpecimenStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/specimen-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "available",
+            "display": "Available"
+        },
+        {
+            "value": "unavailable",
+            "display": "Unavailable"
+        },
+        {
+            "value": "unsatisfactory",
+            "display": "Unsatisfactory"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

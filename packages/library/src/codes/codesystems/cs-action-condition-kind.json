@@ -1,0 +1,21 @@
+{
+    "id": "action-condition-kind",
+    "name": "ActionConditionKind",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-condition-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "applicability",
+            "display": "Applicability"
+        },
+        {
+            "value": "start",
+            "display": "Start"
+        },
+        {
+            "value": "stop",
+            "display": "Stop"
+        }
+    ]
+}

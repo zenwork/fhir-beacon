@@ -1,0 +1,44 @@
+{
+    "id": "action-code",
+    "name": "ActionCode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "send-message",
+            "display": "Send a message"
+        },
+        {
+            "value": "collect-information",
+            "display": "Collect information"
+        },
+        {
+            "value": "prescribe-medication",
+            "display": "Prescribe a medication"
+        },
+        {
+            "value": "recommend-immunization",
+            "display": "Recommend an immunization"
+        },
+        {
+            "value": "order-service",
+            "display": "Order a service"
+        },
+        {
+            "value": "propose-diagnosis",
+            "display": "Propose a diagnosis"
+        },
+        {
+            "value": "record-detected-issue",
+            "display": "Record a detected issue"
+        },
+        {
+            "value": "record-inference",
+            "display": "Record an inference"
+        },
+        {
+            "value": "report-flag",
+            "display": "Report a flag"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "conceptmap-attribute-type",
+    "name": "ConceptMapAttributeType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/conceptmap-attribute-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "code",
+            "display": "code"
+        },
+        {
+            "value": "Coding",
+            "display": "Coding"
+        },
+        {
+            "value": "string",
+            "display": "string"
+        },
+        {
+            "value": "boolean",
+            "display": "boolean"
+        },
+        {
+            "value": "Quantity",
+            "display": "Quantity"
+        }
+    ]
+}

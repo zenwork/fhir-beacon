@@ -1,0 +1,24 @@
+{
+    "id": "graph-compartment-rule",
+    "name": "GraphCompartmentRule",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "identical",
+            "display": "Identical"
+        },
+        {
+            "value": "matching",
+            "display": "Matching"
+        },
+        {
+            "value": "different",
+            "display": "Different"
+        },
+        {
+            "value": "custom",
+            "display": "Custom"
+        }
+    ]
+}

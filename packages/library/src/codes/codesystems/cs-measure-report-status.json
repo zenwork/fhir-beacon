@@ -1,0 +1,21 @@
+{
+    "id": "measure-report-status",
+    "name": "MeasureReportStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-report-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "complete",
+            "display": "Complete"
+        },
+        {
+            "value": "pending",
+            "display": "Pending"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        }
+    ]
+}

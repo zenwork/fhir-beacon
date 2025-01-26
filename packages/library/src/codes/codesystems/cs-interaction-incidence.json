@@ -1,0 +1,17 @@
+{
+    "id": "interaction-incidence",
+    "name": "InteractionIncidence",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/interaction-incidence",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Theoretical",
+            "display": "Theoretical"
+        },
+        {
+            "value": "Observed",
+            "display": "Observed"
+        }
+    ]
+}

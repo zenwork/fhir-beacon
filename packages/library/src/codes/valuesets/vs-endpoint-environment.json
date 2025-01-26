@@ -1,0 +1,28 @@
+{
+    "id": "endpoint-environment",
+    "name": "EndpointEnvironment",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "prod",
+            "display": "Production"
+        },
+        {
+            "value": "staging",
+            "display": "Staging"
+        },
+        {
+            "value": "dev",
+            "display": "Development"
+        },
+        {
+            "value": "test",
+            "display": "Test"
+        },
+        {
+            "value": "train",
+            "display": "Training"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "capability-statement-kind",
+    "name": "CapabilityStatementKind",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/capability-statement-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "capability",
+            "display": "Capability"
+        },
+        {
+            "value": "requirements",
+            "display": "Requirements"
+        }
+    ]
+}

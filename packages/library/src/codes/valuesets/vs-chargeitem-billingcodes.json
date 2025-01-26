@@ -1,0 +1,21 @@
+{
+    "id": "chargeitem-billingcodes",
+    "name": "ChargeItemCode",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/chargeitem-billingcodes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1100",
+            "display": "Unvorhergesehene Inanspruchnahme"
+        },
+        {
+            "value": "1210",
+            "display": "Notfallpauschale"
+        },
+        {
+            "value": "1320",
+            "display": "Grundpauschale"
+        }
+    ]
+}

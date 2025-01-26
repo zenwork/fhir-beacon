@@ -1,0 +1,13 @@
+{
+    "id": "timing-abbreviation",
+    "name": "TimingAbbreviation",
+    "type": "CodeSystem",
+    "system": "http://terminology.hl7.org/CodeSystem/timing-abbreviation",
+    "valid": true,
+    "choices": [
+        {
+            "value": "C",
+            "display": "Continuous (frequency)"
+        }
+    ]
+}

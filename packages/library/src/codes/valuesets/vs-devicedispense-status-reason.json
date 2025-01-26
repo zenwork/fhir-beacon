@@ -1,0 +1,32 @@
+{
+    "id": "devicedispense-status-reason",
+    "name": "DeviceDispenseStatusReasonCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "out-of-stock",
+            "display": "Out of Stock"
+        },
+        {
+            "value": "off-market",
+            "display": "Off market"
+        },
+        {
+            "value": "contraindication",
+            "display": "Contraindication"
+        },
+        {
+            "value": "incompatible-device",
+            "display": "Incompatible device"
+        },
+        {
+            "value": "order-expired",
+            "display": "Order expired"
+        },
+        {
+            "value": "verbal-order",
+            "display": "Verbal order"
+        }
+    ]
+}

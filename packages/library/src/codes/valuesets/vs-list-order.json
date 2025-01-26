@@ -1,0 +1,41 @@
+{
+    "id": "list-order",
+    "name": "ListOrderCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/list-order",
+    "valid": true,
+    "choices": [
+        {
+            "value": "user",
+            "display": "Sorted by User"
+        },
+        {
+            "value": "system",
+            "display": "Sorted by System"
+        },
+        {
+            "value": "event-date",
+            "display": "Sorted by Event Date"
+        },
+        {
+            "value": "entry-date",
+            "display": "Sorted by Item Date"
+        },
+        {
+            "value": "priority",
+            "display": "Sorted by Priority"
+        },
+        {
+            "value": "alphabetic",
+            "display": "Sorted Alphabetically"
+        },
+        {
+            "value": "category",
+            "display": "Sorted by Category"
+        },
+        {
+            "value": "patient",
+            "display": "Sorted by Patient"
+        }
+    ]
+}

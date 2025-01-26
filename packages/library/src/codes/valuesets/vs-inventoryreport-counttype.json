@@ -1,0 +1,16 @@
+{
+    "id": "inventoryreport-counttype",
+    "name": "InventoryCountType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "snapshot",
+            "display": "Snapshot"
+        },
+        {
+            "value": "difference",
+            "display": "Difference"
+        }
+    ]
+}

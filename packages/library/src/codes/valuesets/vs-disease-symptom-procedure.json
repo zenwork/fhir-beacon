@@ -1,0 +1,8 @@
+{
+    "id": "disease-symptom-procedure",
+    "name": "DiseaseSymptomProcedure",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/disease-symptom-procedure",
+    "valid": true,
+    "choices": []
+}

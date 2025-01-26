@@ -1,0 +1,41 @@
+{
+    "id": "adjudication",
+    "name": "AdjudicationValueCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adjudication",
+    "valid": true,
+    "choices": [
+        {
+            "value": "submitted",
+            "display": "Submitted Amount"
+        },
+        {
+            "value": "copay",
+            "display": "CoPay"
+        },
+        {
+            "value": "eligible",
+            "display": "Eligible Amount"
+        },
+        {
+            "value": "deductible",
+            "display": "Deductible"
+        },
+        {
+            "value": "unallocdeduct",
+            "display": "Unallocated Deductible"
+        },
+        {
+            "value": "eligpercent",
+            "display": "Eligible %"
+        },
+        {
+            "value": "tax",
+            "display": "Tax"
+        },
+        {
+            "value": "benefit",
+            "display": "Benefit Amount"
+        }
+    ]
+}

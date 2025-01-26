@@ -1,0 +1,21 @@
+{
+    "id": "medicationrequest-course-of-therapy",
+    "name": "MedicationRequestCourseOfTherapyCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medicationrequest-course-of-therapy",
+    "valid": true,
+    "choices": [
+        {
+            "value": "continuous",
+            "display": "Continuous long term therapy"
+        },
+        {
+            "value": "acute",
+            "display": "Short course (acute) therapy"
+        },
+        {
+            "value": "seasonal",
+            "display": "Seasonal"
+        }
+    ]
+}

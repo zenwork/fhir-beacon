@@ -1,0 +1,8 @@
+{
+    "id": "questionnaire-answers",
+    "name": "QuestionnaireAnswerCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/questionnaire-answers",
+    "valid": true,
+    "choices": []
+}

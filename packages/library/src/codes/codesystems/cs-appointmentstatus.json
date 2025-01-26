@@ -1,0 +1,49 @@
+{
+    "id": "appointmentstatus",
+    "name": "AppointmentStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/appointmentstatus",
+    "valid": true,
+    "choices": [
+        {
+            "value": "proposed",
+            "display": "Proposed"
+        },
+        {
+            "value": "pending",
+            "display": "Pending"
+        },
+        {
+            "value": "booked",
+            "display": "Booked"
+        },
+        {
+            "value": "arrived",
+            "display": "Arrived"
+        },
+        {
+            "value": "fulfilled",
+            "display": "Fulfilled"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "noshow",
+            "display": "No Show"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in error"
+        },
+        {
+            "value": "checked-in",
+            "display": "Checked In"
+        },
+        {
+            "value": "waitlist",
+            "display": "Waitlisted"
+        }
+    ]
+}

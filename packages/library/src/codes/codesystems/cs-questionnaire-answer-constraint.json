@@ -1,0 +1,21 @@
+{
+    "id": "questionnaire-answer-constraint",
+    "name": "QuestionnaireAnswerConstraint",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/questionnaire-answer-constraint",
+    "valid": true,
+    "choices": [
+        {
+            "value": "optionsOnly",
+            "display": "Options only"
+        },
+        {
+            "value": "optionsOrType",
+            "display": "Options or 'type'"
+        },
+        {
+            "value": "optionsOrString",
+            "display": "Options or string"
+        }
+    ]
+}

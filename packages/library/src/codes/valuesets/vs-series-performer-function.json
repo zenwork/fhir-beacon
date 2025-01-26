@@ -1,0 +1,29 @@
+{
+    "id": "series-performer-function",
+    "name": "ImagingStudySeriesPerformerFunction",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/series-performer-function",
+    "valid": true,
+    "choices": [
+        {
+            "value": "CON",
+            "display": "consultant"
+        },
+        {
+            "value": "VRF",
+            "display": "verifier"
+        },
+        {
+            "value": "PRF",
+            "display": "performer"
+        },
+        {
+            "value": "SPRF",
+            "display": "secondary performer"
+        },
+        {
+            "value": "REF",
+            "display": "referrer"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "id": "imagingselection-3dgraphictype",
+    "name": "ImagingSelection3DGraphicType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "point",
+            "display": "POINT"
+        },
+        {
+            "value": "multipoint",
+            "display": "MULTIPOINT"
+        },
+        {
+            "value": "polyline",
+            "display": "POLYLINE"
+        },
+        {
+            "value": "polygon",
+            "display": "POLYGON"
+        },
+        {
+            "value": "ellipse",
+            "display": "ELLIPSE"
+        },
+        {
+            "value": "ellipsoid",
+            "display": "ELLIPSOID"
+        }
+    ]
+}

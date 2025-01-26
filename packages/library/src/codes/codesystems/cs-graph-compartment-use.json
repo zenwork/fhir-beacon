@@ -1,0 +1,17 @@
+{
+    "id": "graph-compartment-use",
+    "name": "GraphCompartmentUse",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/graph-compartment-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "where",
+            "display": "Where"
+        },
+        {
+            "value": "requires",
+            "display": "requires"
+        }
+    ]
+}

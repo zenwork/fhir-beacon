@@ -1,0 +1,49 @@
+{
+    "id": "procedure-followup",
+    "name": "ProcedureFollowUpCodesSNOMEDCT",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/procedure-followup",
+    "valid": true,
+    "choices": [
+        {
+            "value": "18949003",
+            "display": "n/a"
+        },
+        {
+            "value": "30549001",
+            "display": "n/a"
+        },
+        {
+            "value": "241031001",
+            "display": "n/a"
+        },
+        {
+            "value": "35963001",
+            "display": "n/a"
+        },
+        {
+            "value": "225164002",
+            "display": "n/a"
+        },
+        {
+            "value": "447346005",
+            "display": "n/a"
+        },
+        {
+            "value": "229506003",
+            "display": "n/a"
+        },
+        {
+            "value": "274441001",
+            "display": "n/a"
+        },
+        {
+            "value": "394725008",
+            "display": "n/a"
+        },
+        {
+            "value": "359825008",
+            "display": "n/a"
+        }
+    ]
+}

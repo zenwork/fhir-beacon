@@ -1,0 +1,32 @@
+{
+    "id": "http-verb",
+    "name": "HTTPVerb",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "GET",
+            "display": "GET"
+        },
+        {
+            "value": "HEAD",
+            "display": "HEAD"
+        },
+        {
+            "value": "POST",
+            "display": "POST"
+        },
+        {
+            "value": "PUT",
+            "display": "PUT"
+        },
+        {
+            "value": "DELETE",
+            "display": "DELETE"
+        },
+        {
+            "value": "PATCH",
+            "display": "PATCH"
+        }
+    ]
+}

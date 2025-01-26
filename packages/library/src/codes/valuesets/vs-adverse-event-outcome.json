@@ -1,0 +1,8 @@
+{
+    "id": "adverse-event-outcome",
+    "name": "AdverseEventOutcome",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-outcome",
+    "valid": true,
+    "choices": []
+}

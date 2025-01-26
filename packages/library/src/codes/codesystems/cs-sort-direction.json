@@ -1,0 +1,17 @@
+{
+    "id": "sort-direction",
+    "name": "SortDirection",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/sort-direction",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ascending",
+            "display": "Ascending"
+        },
+        {
+            "value": "descending",
+            "display": "Descending"
+        }
+    ]
+}

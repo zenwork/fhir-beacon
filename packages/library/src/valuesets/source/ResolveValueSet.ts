@@ -54,16 +54,17 @@ export async function resolveValueSet(vs: ValueSetData,
                 .then((r: ResolvedValue[][]) => {
                   return [
                     {
-                    origin: vs,
-                    id: vs.id ?? 'unknown',
-                    type: vs.resourceType ?? 'unknown',
-                    name: vs.name ?? 'unknown',
-                    status: vs.status,
-                    version: vs.version ?? 'unknown',
-                    compose: {
-                      include: { concept: r[0] },
-                      exclude: { concept: r[1] }
-                    }
+                      origin: vs,
+                      id: vs.id ?? 'unknown',
+                      type: vs.resourceType ?? 'unknown',
+                      name: vs.name ?? 'unknown',
+                      system: vs.url ?? 'unknown',
+                      status: vs.status,
+                      version: vs.version ?? 'unknown',
+                      compose: {
+                        include: { concept: r[0] },
+                        exclude: { concept: r[1] }
+                      }
                     } as ResolvedSet
                   ]
                 })
@@ -75,6 +76,7 @@ export async function resolveValueSet(vs: ValueSetData,
                       id: ferr.url ?? 'unknown',
                       type: 'unknown',
                       name: vs.name ?? 'unknown',
+                      system: vs.url ?? 'unknown',
                       status: ferr.status,
                       version: vs.version ?? 'unknown',
                       compose: {
@@ -156,7 +158,7 @@ function resolve(id: string, segment: ValueSetIncludeExcludeData,
     } else if (segment.system) {
       resolveChildSystem(id, segment.system, urlsToResolve, skipUrl, debug)
         .then(r => {
-            resolve(r)
+          resolve(r)
         })
         .catch((r) => {
           reject(r)
@@ -200,15 +202,15 @@ function resolveChildSystem(id: string, system: URI,
                 concepts.push(...json.concept
                                      .map((c: Record<string, unknown>) =>
                                             ({
-                                               code: c.code as string,
-                                               display: c.display as string ?? 'n/a',
-                                               definition: c.definition as string ?? 'n/a'
+                                              code: c.code as string,
+                                              display: c.display as string ?? 'n/a',
+                                              definition: c.definition as string ?? 'n/a'
                                             })
                                      )
                 )
                 urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
               }
-                return concepts
+        return concepts
         // throw Error(`Unknown value set type: ${(json as { resourceType: string }).resourceType}`)
             }
       )

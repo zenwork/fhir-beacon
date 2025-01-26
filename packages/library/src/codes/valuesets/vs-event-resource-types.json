@@ -1,0 +1,181 @@
+{
+    "id": "event-resource-types",
+    "name": "EventResourceTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/event-resource-types",
+    "valid": true,
+    "choices": [
+        {
+            "value": "AdverseEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "AuditEvent",
+            "display": "n/a"
+        },
+        {
+            "value": "ChargeItem",
+            "display": "n/a"
+        },
+        {
+            "value": "ClaimResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ClinicalImpression",
+            "display": "n/a"
+        },
+        {
+            "value": "Communication",
+            "display": "n/a"
+        },
+        {
+            "value": "Composition",
+            "display": "n/a"
+        },
+        {
+            "value": "Consent",
+            "display": "n/a"
+        },
+        {
+            "value": "Contract",
+            "display": "n/a"
+        },
+        {
+            "value": "Coverage",
+            "display": "n/a"
+        },
+        {
+            "value": "CoverageEligibilityResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "DetectedIssue",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "DeviceUsage",
+            "display": "n/a"
+        },
+        {
+            "value": "DiagnosticReport",
+            "display": "n/a"
+        },
+        {
+            "value": "DocumentReference",
+            "display": "n/a"
+        },
+        {
+            "value": "Encounter",
+            "display": "n/a"
+        },
+        {
+            "value": "EnrollmentResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "EpisodeOfCare",
+            "display": "n/a"
+        },
+        {
+            "value": "ExplanationOfBenefit",
+            "display": "n/a"
+        },
+        {
+            "value": "FamilyMemberHistory",
+            "display": "n/a"
+        },
+        {
+            "value": "GenomicStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "GuidanceResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingSelection",
+            "display": "n/a"
+        },
+        {
+            "value": "ImagingStudy",
+            "display": "n/a"
+        },
+        {
+            "value": "Immunization",
+            "display": "n/a"
+        },
+        {
+            "value": "ImmunizationEvaluation",
+            "display": "n/a"
+        },
+        {
+            "value": "InventoryReport",
+            "display": "n/a"
+        },
+        {
+            "value": "Invoice",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationAdministration",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationDispense",
+            "display": "n/a"
+        },
+        {
+            "value": "MedicationStatement",
+            "display": "n/a"
+        },
+        {
+            "value": "MessageHeader",
+            "display": "n/a"
+        },
+        {
+            "value": "NutritionIntake",
+            "display": "n/a"
+        },
+        {
+            "value": "Observation",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentNotice",
+            "display": "n/a"
+        },
+        {
+            "value": "PaymentReconciliation",
+            "display": "n/a"
+        },
+        {
+            "value": "Procedure",
+            "display": "n/a"
+        },
+        {
+            "value": "Provenance",
+            "display": "n/a"
+        },
+        {
+            "value": "QuestionnaireResponse",
+            "display": "n/a"
+        },
+        {
+            "value": "RiskAssessment",
+            "display": "n/a"
+        },
+        {
+            "value": "SupplyDelivery",
+            "display": "n/a"
+        },
+        {
+            "value": "Transport",
+            "display": "n/a"
+        }
+    ]
+}

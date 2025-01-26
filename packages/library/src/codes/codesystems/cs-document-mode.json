@@ -1,0 +1,17 @@
+{
+    "id": "document-mode",
+    "name": "DocumentMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/document-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "producer",
+            "display": "Producer"
+        },
+        {
+            "value": "consumer",
+            "display": "Consumer"
+        }
+    ]
+}

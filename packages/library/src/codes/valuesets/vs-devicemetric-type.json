@@ -1,0 +1,8 @@
+{
+    "id": "devicemetric-type",
+    "name": "DeviceMetricAndComponentTypes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/devicemetric-type",
+    "valid": true,
+    "choices": []
+}

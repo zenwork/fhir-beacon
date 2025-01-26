@@ -1,0 +1,28 @@
+{
+    "id": "conceptmap-attribute-type",
+    "name": "ConceptMapAttributeType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "code",
+            "display": "code"
+        },
+        {
+            "value": "Coding",
+            "display": "Coding"
+        },
+        {
+            "value": "string",
+            "display": "string"
+        },
+        {
+            "value": "boolean",
+            "display": "boolean"
+        },
+        {
+            "value": "Quantity",
+            "display": "Quantity"
+        }
+    ]
+}

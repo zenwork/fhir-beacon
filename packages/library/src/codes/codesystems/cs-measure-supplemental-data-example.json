@@ -1,0 +1,25 @@
+{
+    "id": "measure-supplemental-data-example",
+    "name": "MeasureSupplementalDataExample",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-supplemental-data-example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "age",
+            "display": "Age"
+        },
+        {
+            "value": "gender",
+            "display": "Gender"
+        },
+        {
+            "value": "ethnicity",
+            "display": "Ethnicity"
+        },
+        {
+            "value": "payer",
+            "display": "Payer"
+        }
+    ]
+}

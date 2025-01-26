@@ -1,0 +1,17 @@
+{
+    "id": "payment-adjustment-reason",
+    "name": "PaymentAdjustmentReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/payment-adjustment-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "a001",
+            "display": "Prior Payment Reversal"
+        },
+        {
+            "value": "a002",
+            "display": "Prior Overpayment"
+        }
+    ]
+}

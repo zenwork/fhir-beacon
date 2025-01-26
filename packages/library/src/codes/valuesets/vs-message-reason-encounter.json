@@ -1,0 +1,33 @@
+{
+    "id": "message-reason-encounter",
+    "name": "ExampleMessageReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/message-reason-encounter",
+    "valid": true,
+    "choices": [
+        {
+            "value": "admit",
+            "display": "Admit"
+        },
+        {
+            "value": "discharge",
+            "display": "Discharge"
+        },
+        {
+            "value": "absent",
+            "display": "Absent"
+        },
+        {
+            "value": "return",
+            "display": "Returned"
+        },
+        {
+            "value": "moved",
+            "display": "Moved"
+        },
+        {
+            "value": "edit",
+            "display": "Edit"
+        }
+    ]
+}

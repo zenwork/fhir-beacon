@@ -1,0 +1,29 @@
+{
+    "id": "report-action-result-codes",
+    "name": "TestReportActionResult",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/report-action-result-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "skip",
+            "display": "Skip"
+        },
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        }
+    ]
+}

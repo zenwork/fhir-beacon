@@ -1,0 +1,8 @@
+{
+    "id": "reason-medication-status-codes",
+    "name": "SNOMEDCTDrugTherapyStatusCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/reason-medication-status-codes",
+    "valid": true,
+    "choices": []
+}

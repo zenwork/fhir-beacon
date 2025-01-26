@@ -1,0 +1,28 @@
+{
+    "id": "product-intended-use",
+    "name": "ProductIntendedUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Prevention",
+            "display": "Prevention"
+        },
+        {
+            "value": "Treatment",
+            "display": "Treatment"
+        },
+        {
+            "value": "Alleviation",
+            "display": "Alleviation"
+        },
+        {
+            "value": "Diagnosis",
+            "display": "Diagnosis"
+        },
+        {
+            "value": "Monitoring",
+            "display": "Monitoring"
+        }
+    ]
+}

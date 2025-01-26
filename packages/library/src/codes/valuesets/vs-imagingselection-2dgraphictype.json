@@ -1,0 +1,28 @@
+{
+    "id": "imagingselection-2dgraphictype",
+    "name": "ImagingSelection2DGraphicType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "point",
+            "display": "POINT"
+        },
+        {
+            "value": "polyline",
+            "display": "POLYLINE"
+        },
+        {
+            "value": "interpolated",
+            "display": "INTERPOLATED"
+        },
+        {
+            "value": "circle",
+            "display": "CIRCLE"
+        },
+        {
+            "value": "ellipse",
+            "display": "ELLIPSE"
+        }
+    ]
+}

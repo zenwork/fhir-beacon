@@ -1,0 +1,92 @@
+{
+    "id": "medicationdispense-status-reason",
+    "name": "MedicationDispenseStatusReasonCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "frr01",
+            "display": "Order Stopped"
+        },
+        {
+            "value": "frr02",
+            "display": "Stale-dated Order"
+        },
+        {
+            "value": "frr03",
+            "display": "Incomplete data"
+        },
+        {
+            "value": "frr04",
+            "display": "Product unavailable"
+        },
+        {
+            "value": "frr05",
+            "display": "Ethical/religious"
+        },
+        {
+            "value": "frr06",
+            "display": "Unable to provide care"
+        },
+        {
+            "value": "altchoice",
+            "display": "Try another treatment first"
+        },
+        {
+            "value": "clarif",
+            "display": "Prescription/Request requires clarification"
+        },
+        {
+            "value": "drughigh",
+            "display": "Drug level too high"
+        },
+        {
+            "value": "hospadm",
+            "display": "Admission to hospital"
+        },
+        {
+            "value": "labint",
+            "display": "Lab interference issues"
+        },
+        {
+            "value": "non-avail",
+            "display": "Patient not available"
+        },
+        {
+            "value": "preg",
+            "display": "Patient is pregnant or breastfeeding"
+        },
+        {
+            "value": "saig",
+            "display": "Allergy"
+        },
+        {
+            "value": "sddi",
+            "display": "Drug interacts with another drug"
+        },
+        {
+            "value": "sdupther",
+            "display": "Duplicate therapy"
+        },
+        {
+            "value": "sintol",
+            "display": "Suspected intolerance"
+        },
+        {
+            "value": "surg",
+            "display": "Patient scheduled for surgery"
+        },
+        {
+            "value": "washout",
+            "display": "Washout"
+        },
+        {
+            "value": "outofstock",
+            "display": "Drug not available - out of stock"
+        },
+        {
+            "value": "offmarket",
+            "display": "Drug not available - off market"
+        }
+    ]
+}

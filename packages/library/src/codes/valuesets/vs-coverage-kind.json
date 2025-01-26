@@ -1,0 +1,20 @@
+{
+    "id": "coverage-kind",
+    "name": "Kind",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        },
+        {
+            "value": "self-pay",
+            "display": "Self-pay"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

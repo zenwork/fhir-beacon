@@ -1,0 +1,33 @@
+{
+    "id": "price-component-type",
+    "name": "PriceComponentType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/price-component-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "base",
+            "display": "base price"
+        },
+        {
+            "value": "surcharge",
+            "display": "surcharge"
+        },
+        {
+            "value": "deduction",
+            "display": "deduction"
+        },
+        {
+            "value": "discount",
+            "display": "discount"
+        },
+        {
+            "value": "tax",
+            "display": "tax"
+        },
+        {
+            "value": "informational",
+            "display": "informational"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "condition-code",
+    "name": "ConditionProblemDiagnosisCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/condition-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "160245001",
+            "display": "No current problems or disability"
+        }
+    ]
+}

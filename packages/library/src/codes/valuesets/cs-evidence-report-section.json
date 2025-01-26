@@ -1,0 +1,120 @@
+{
+    "id": "evidence-report-section",
+    "name": "ReportSectionType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Evidence",
+            "display": "Evidence Results"
+        },
+        {
+            "value": "Intervention-group-alone-Evidence",
+            "display": "Evidence Results for the intervention exposure only"
+        },
+        {
+            "value": "Intervention-vs-Control-Evidence",
+            "display": "Evidence Results for comparison of Intervention and Control"
+        },
+        {
+            "value": "Control-group-alone-Evidence",
+            "display": "Evidence Results for the control exposure only"
+        },
+        {
+            "value": "EvidenceVariable",
+            "display": "Evidence Variables used"
+        },
+        {
+            "value": "EvidenceVariable-observed",
+            "display": "Evidence Variables actually observed"
+        },
+        {
+            "value": "EvidenceVariable-intended",
+            "display": "Evidence Variables intended for interpretation"
+        },
+        {
+            "value": "EvidenceVariable-population",
+            "display": "Evidence Variable in variable role Population"
+        },
+        {
+            "value": "EvidenceVariable-exposure",
+            "display": "Evidence Variable in variable role Exposure"
+        },
+        {
+            "value": "EvidenceVariable-outcome",
+            "display": "Evidence Variable in variable role Outcome (MeasuredVariable)"
+        },
+        {
+            "value": "Efficacy-outcomes",
+            "display": "Efficacy-outcomes"
+        },
+        {
+            "value": "Harms-outcomes",
+            "display": "Harms outcomes"
+        },
+        {
+            "value": "SampleSize",
+            "display": "Sample Size"
+        },
+        {
+            "value": "References",
+            "display": "References"
+        },
+        {
+            "value": "Assertion",
+            "display": "Assertion"
+        },
+        {
+            "value": "Reasons",
+            "display": "Reasons"
+        },
+        {
+            "value": "Certainty-of-Evidence",
+            "display": "Certainty of Evidence"
+        },
+        {
+            "value": "Evidence-Classifier",
+            "display": "Evidence Classifier section"
+        },
+        {
+            "value": "Warnings",
+            "display": "Warnings"
+        },
+        {
+            "value": "Text-Summary",
+            "display": "Text Summary"
+        },
+        {
+            "value": "SummaryOfBodyOfEvidenceFindings",
+            "display": "Summary of Body of Evidence Findings"
+        },
+        {
+            "value": "SummaryOfIndividualStudyFindings",
+            "display": "Summary of Individual Study Findings"
+        },
+        {
+            "value": "Header",
+            "display": "Header"
+        },
+        {
+            "value": "Tables",
+            "display": "Tables"
+        },
+        {
+            "value": "Table",
+            "display": "Table"
+        },
+        {
+            "value": "Row-Headers",
+            "display": "Row Headers"
+        },
+        {
+            "value": "Column-Header",
+            "display": "Column Header"
+        },
+        {
+            "value": "Column-Headers",
+            "display": "Column Headers"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "substance-representation-type",
+    "name": "SubstanceRepresentationType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Systematic",
+            "display": "systematic"
+        },
+        {
+            "value": "Scientific",
+            "display": "scientific"
+        },
+        {
+            "value": "Brand",
+            "display": "brand"
+        }
+    ]
+}

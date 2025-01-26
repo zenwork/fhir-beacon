@@ -1,0 +1,33 @@
+{
+    "id": "communication-not-done-reason",
+    "name": "CommunicationNotDoneReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/communication-not-done-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        },
+        {
+            "value": "system-error",
+            "display": "System Error"
+        },
+        {
+            "value": "invalid-phone-number",
+            "display": "Invalid Phone Number"
+        },
+        {
+            "value": "recipient-unavailable",
+            "display": "Recipient Unavailable"
+        },
+        {
+            "value": "family-objection",
+            "display": "Family Objection"
+        },
+        {
+            "value": "patient-objection",
+            "display": "Patient Objection"
+        }
+    ]
+}

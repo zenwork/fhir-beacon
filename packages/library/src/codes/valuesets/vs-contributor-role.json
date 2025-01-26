@@ -1,0 +1,36 @@
+{
+    "id": "contributor-role",
+    "name": "ContributorRole",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "publisher",
+            "display": "Publisher"
+        },
+        {
+            "value": "author",
+            "display": "Author/Creator"
+        },
+        {
+            "value": "reviewer",
+            "display": "Reviewer"
+        },
+        {
+            "value": "endorser",
+            "display": "Endorser"
+        },
+        {
+            "value": "editor",
+            "display": "Editor"
+        },
+        {
+            "value": "informant",
+            "display": "Informant"
+        },
+        {
+            "value": "funder",
+            "display": "Funder"
+        }
+    ]
+}

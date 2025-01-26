@@ -1,0 +1,57 @@
+{
+    "id": "benefit-type",
+    "name": "BenefitTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/benefit-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "benefit",
+            "display": "Benefit"
+        },
+        {
+            "value": "deductible",
+            "display": "Deductible"
+        },
+        {
+            "value": "visit",
+            "display": "Visit"
+        },
+        {
+            "value": "room",
+            "display": "Room"
+        },
+        {
+            "value": "copay",
+            "display": "Copayment per service"
+        },
+        {
+            "value": "copay-percent",
+            "display": "Copayment Percent per service"
+        },
+        {
+            "value": "copay-maximum",
+            "display": "Copayment maximum per service"
+        },
+        {
+            "value": "vision-exam",
+            "display": "Vision Exam"
+        },
+        {
+            "value": "vision-glasses",
+            "display": "Vision Glasses"
+        },
+        {
+            "value": "vision-contacts",
+            "display": "Vision Contacts Coverage"
+        },
+        {
+            "value": "medical-primarycare",
+            "display": "Medical Primary Health Coverage"
+        },
+        {
+            "value": "pharmacy-dispense",
+            "display": "Pharmacy Dispense Coverage"
+        }
+    ]
+}

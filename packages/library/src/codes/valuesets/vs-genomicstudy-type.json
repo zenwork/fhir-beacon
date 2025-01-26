@@ -1,0 +1,56 @@
+{
+    "id": "genomicstudy-type",
+    "name": "GenomicStudyType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "alt-splc",
+            "display": "Alternative splicing detection"
+        },
+        {
+            "value": "chromatin",
+            "display": "Chromatin conformation"
+        },
+        {
+            "value": "cnv",
+            "display": "CNV detection"
+        },
+        {
+            "value": "epi-alt-hist",
+            "display": "Epigenetic Alterations - histone modifications"
+        },
+        {
+            "value": "epi-alt-dna",
+            "display": "Epigenetic Alterations -DNA methylation"
+        },
+        {
+            "value": "fam-var-segr",
+            "display": "Familial variant segregation"
+        },
+        {
+            "value": "func-var",
+            "display": "Functional variation detection"
+        },
+        {
+            "value": "gene-expression",
+            "display": "Gene expression profiling"
+        },
+        {
+            "value": "post-trans-mod",
+            "display": "Post-translational Modification Identification"
+        },
+        {
+            "value": "snp",
+            "display": "SNP Detection"
+        },
+        {
+            "value": "str",
+            "display": "STR count"
+        },
+        {
+            "value": "struc-var",
+            "display": "Structural variation detection"
+        }
+    ]
+}

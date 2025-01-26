@@ -1,0 +1,69 @@
+{
+    "id": "bodystructure-relative-location",
+    "name": "BodystructureLocationQualifier",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/bodystructure-relative-location",
+    "valid": true,
+    "choices": [
+        {
+            "value": "7771000",
+            "display": "Left (qualifier value)"
+        },
+        {
+            "value": "24028007",
+            "display": "Right (qualifier value)"
+        },
+        {
+            "value": "51440002",
+            "display": "Bilateral"
+        },
+        {
+            "value": "46053002",
+            "display": "Distal"
+        },
+        {
+            "value": "255554000",
+            "display": "Dorsal"
+        },
+        {
+            "value": "264147007",
+            "display": "Plantar"
+        },
+        {
+            "value": "261183002",
+            "display": "Upper"
+        },
+        {
+            "value": "261122009",
+            "display": "Lower"
+        },
+        {
+            "value": "255561001",
+            "display": "Medial"
+        },
+        {
+            "value": "49370004",
+            "display": "Lateral"
+        },
+        {
+            "value": "264217000",
+            "display": "Superior"
+        },
+        {
+            "value": "261089000",
+            "display": "Inferior"
+        },
+        {
+            "value": "255551008",
+            "display": "Posterior"
+        },
+        {
+            "value": "351726001",
+            "display": "Below"
+        },
+        {
+            "value": "352730000",
+            "display": "Above"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "list-empty-reason",
+    "name": "ListEmptyReasons",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/list-empty-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "nilknown",
+            "display": "Nil Known"
+        },
+        {
+            "value": "notasked",
+            "display": "Not Asked"
+        },
+        {
+            "value": "withheld",
+            "display": "Information Withheld"
+        },
+        {
+            "value": "unavailable",
+            "display": "Unavailable"
+        },
+        {
+            "value": "notstarted",
+            "display": "Not Started"
+        },
+        {
+            "value": "closed",
+            "display": "Closed"
+        }
+    ]
+}

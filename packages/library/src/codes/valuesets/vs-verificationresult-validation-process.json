@@ -1,0 +1,33 @@
+{
+    "id": "verificationresult-validation-process",
+    "name": "ValidationProcess",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-validation-process",
+    "valid": true,
+    "choices": [
+        {
+            "value": "edit-check",
+            "display": "edit check"
+        },
+        {
+            "value": "valueset",
+            "display": "value set"
+        },
+        {
+            "value": "primary",
+            "display": "primary source"
+        },
+        {
+            "value": "multi",
+            "display": "multiple sources"
+        },
+        {
+            "value": "standalone",
+            "display": "standalone"
+        },
+        {
+            "value": "in-context",
+            "display": "in context"
+        }
+    ]
+}

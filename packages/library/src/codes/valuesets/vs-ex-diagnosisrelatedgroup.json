@@ -1,0 +1,25 @@
+{
+    "id": "ex-diagnosisrelatedgroup",
+    "name": "ExampleDiagnosisRelatedGroupCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-diagnosisrelatedgroup",
+    "valid": true,
+    "choices": [
+        {
+            "value": "100",
+            "display": "Normal Vaginal Delivery"
+        },
+        {
+            "value": "101",
+            "display": "Appendectomy - uncomplicated"
+        },
+        {
+            "value": "300",
+            "display": "Tooth abscess"
+        },
+        {
+            "value": "400",
+            "display": "Head trauma - concussion"
+        }
+    ]
+}

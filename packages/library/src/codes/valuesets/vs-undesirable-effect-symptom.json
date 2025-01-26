@@ -1,0 +1,8 @@
+{
+    "id": "undesirable-effect-symptom",
+    "name": "UndesirableEffectSymptom",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/undesirable-effect-symptom",
+    "valid": true,
+    "choices": []
+}

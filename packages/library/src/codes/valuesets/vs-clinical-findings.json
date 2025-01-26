@@ -1,0 +1,8 @@
+{
+    "id": "clinical-findings",
+    "name": "SNOMEDCTClinicalFindings",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/clinical-findings",
+    "valid": true,
+    "choices": []
+}

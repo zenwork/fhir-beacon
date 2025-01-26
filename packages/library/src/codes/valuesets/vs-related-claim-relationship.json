@@ -1,0 +1,17 @@
+{
+    "id": "related-claim-relationship",
+    "name": "ExampleRelatedClaimRelationshipCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/related-claim-relationship",
+    "valid": true,
+    "choices": [
+        {
+            "value": "prior",
+            "display": "Prior Claim"
+        },
+        {
+            "value": "associated",
+            "display": "Associated Claim"
+        }
+    ]
+}

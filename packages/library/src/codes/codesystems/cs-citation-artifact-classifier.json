@@ -1,0 +1,133 @@
+{
+    "id": "citation-artifact-classifier",
+    "name": "CitationArtifactClassifier",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/citation-artifact-classifier",
+    "valid": true,
+    "choices": [
+        {
+            "value": "audio",
+            "display": "Audio file"
+        },
+        {
+            "value": "D001877",
+            "display": "Book"
+        },
+        {
+            "value": "cds-artifact",
+            "display": "Clinical Decision Support Artifact"
+        },
+        {
+            "value": "D016420",
+            "display": "Comment"
+        },
+        {
+            "value": "common-share",
+            "display": "Common Share"
+        },
+        {
+            "value": "D019991",
+            "display": "Database"
+        },
+        {
+            "value": "D064886",
+            "display": "Dataset"
+        },
+        {
+            "value": "dataset-unpublished",
+            "display": "Dataset Unpublished"
+        },
+        {
+            "value": "Electronic",
+            "display": "Electronic"
+        },
+        {
+            "value": "Electronic-eCollection",
+            "display": "Electronic-eCollection"
+        },
+        {
+            "value": "Electronic-Print",
+            "display": "Electronic-Print"
+        },
+        {
+            "value": "executable-app",
+            "display": "Executable app"
+        },
+        {
+            "value": "fhir-resource",
+            "display": "FHIR Resource"
+        },
+        {
+            "value": "image",
+            "display": "Image file"
+        },
+        {
+            "value": "interactive-form",
+            "display": "Interactive Form"
+        },
+        {
+            "value": "D016428",
+            "display": "Journal Article"
+        },
+        {
+            "value": "D016422",
+            "display": "Letter"
+        },
+        {
+            "value": "machine-code",
+            "display": "Machine code"
+        },
+        {
+            "value": "medline-base",
+            "display": "Medline Base"
+        },
+        {
+            "value": "prediction-model",
+            "display": "Prediction Model"
+        },
+        {
+            "value": "D000076942",
+            "display": "Preprint"
+        },
+        {
+            "value": "Print",
+            "display": "Print"
+        },
+        {
+            "value": "Print-Electronic",
+            "display": "Print Electronic"
+        },
+        {
+            "value": "project-specific",
+            "display": "Project Specific"
+        },
+        {
+            "value": "protocol",
+            "display": "Protocol"
+        },
+        {
+            "value": "pseudocode",
+            "display": "PseudoCode"
+        },
+        {
+            "value": "D016425",
+            "display": "Published Erratum"
+        },
+        {
+            "value": "standard-specification",
+            "display": "Standard Specification"
+        },
+        {
+            "value": "terminology",
+            "display": "Terminology"
+        },
+        {
+            "value": "D059040",
+            "display": "Video-Audio Media"
+        },
+        {
+            "value": "webpage",
+            "display": "Webpage"
+        }
+    ]
+}

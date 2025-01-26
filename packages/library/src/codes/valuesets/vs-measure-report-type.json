@@ -1,0 +1,24 @@
+{
+    "id": "measure-report-type",
+    "name": "MeasureReportType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "individual",
+            "display": "Individual"
+        },
+        {
+            "value": "subject-list",
+            "display": "Subject List"
+        },
+        {
+            "value": "summary",
+            "display": "Summary"
+        },
+        {
+            "value": "data-exchange",
+            "display": "Data Exchange"
+        }
+    ]
+}

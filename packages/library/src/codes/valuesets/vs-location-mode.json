@@ -1,0 +1,16 @@
+{
+    "id": "location-mode",
+    "name": "LocationMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "kind",
+            "display": "Kind"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "narrative-status",
+    "name": "NarrativeStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "generated",
+            "display": "Generated"
+        },
+        {
+            "value": "extensions",
+            "display": "Extensions"
+        },
+        {
+            "value": "additional",
+            "display": "Additional"
+        },
+        {
+            "value": "empty",
+            "display": "Empty"
+        }
+    ]
+}

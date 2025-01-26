@@ -1,0 +1,17 @@
+{
+    "id": "action-cardinality-behavior",
+    "name": "ActionCardinalityBehavior",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/action-cardinality-behavior",
+    "valid": true,
+    "choices": [
+        {
+            "value": "single",
+            "display": "Single"
+        },
+        {
+            "value": "multiple",
+            "display": "Multiple"
+        }
+    ]
+}

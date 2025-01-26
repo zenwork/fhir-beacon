@@ -1,0 +1,213 @@
+{
+    "id": "audit-event-outcome-detail",
+    "name": "AuditEventOutcomeDetail",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/audit-event-outcome-detail",
+    "valid": true,
+    "choices": [
+        {
+            "value": "DELETE_MULTIPLE_MATCHES",
+            "display": "Error: Multiple matches exist for the conditional delete"
+        },
+        {
+            "value": "MSG_AUTH_REQUIRED",
+            "display": "You must authenticate before you can use this service"
+        },
+        {
+            "value": "MSG_BAD_FORMAT",
+            "display": "Bad Syntax: \"%s\" must be a %s'"
+        },
+        {
+            "value": "MSG_BAD_SYNTAX",
+            "display": "Bad Syntax in %s"
+        },
+        {
+            "value": "MSG_CANT_PARSE_CONTENT",
+            "display": "Unable to parse feed (entry content type = \"%s\")"
+        },
+        {
+            "value": "MSG_CANT_PARSE_ROOT",
+            "display": "Unable to parse feed (root element name = \"%s\")"
+        },
+        {
+            "value": "MSG_CREATED",
+            "display": "New resource created"
+        },
+        {
+            "value": "MSG_DATE_FORMAT",
+            "display": "The Date value %s is not in the correct format (Xml Date Format required)"
+        },
+        {
+            "value": "MSG_DELETED",
+            "display": "This resource has been deleted"
+        },
+        {
+            "value": "MSG_DELETED_DONE",
+            "display": "Resource deleted"
+        },
+        {
+            "value": "MSG_DELETED_ID",
+            "display": "The resource \"%s\" has been deleted"
+        },
+        {
+            "value": "MSG_DUPLICATE_ID",
+            "display": "Duplicate Id %s for resource type %s"
+        },
+        {
+            "value": "MSG_ERROR_PARSING",
+            "display": "Error parsing resource Xml (%s)"
+        },
+        {
+            "value": "MSG_EXTERNAL_FAIL",
+            "display": "Unable to resolve external reference to resource %s"
+        },
+        {
+            "value": "MSG_ID_INVALID",
+            "display": "Id \"%s\" has an invalid character \"%s\""
+        },
+        {
+            "value": "MSG_ID_TOO_LONG",
+            "display": "Id \"%s\" too long (length limit 36)"
+        },
+        {
+            "value": "MSG_INVALID_ID",
+            "display": "Id not accepted"
+        },
+        {
+            "value": "MSG_JSON_OBJECT",
+            "display": "Json Source for a resource should start with an object"
+        },
+        {
+            "value": "MSG_LOCAL_FAIL",
+            "display": "Unable to resolve local reference to resource %s"
+        },
+        {
+            "value": "MSG_NO_EXIST",
+            "display": "Resource Id \"%s\" does not exist"
+        },
+        {
+            "value": "MSG_NO_MATCH",
+            "display": "No Resource found matching the query \"%s\""
+        },
+        {
+            "value": "MSG_NO_MODULE",
+            "display": "No module could be found to handle the request \"%s\""
+        },
+        {
+            "value": "MSG_NO_SUMMARY",
+            "display": "No Summary for this resource"
+        },
+        {
+            "value": "MSG_OP_NOT_ALLOWED",
+            "display": "Operation %s not allowed for resource %s (due to local configuration)"
+        },
+        {
+            "value": "MSG_PARAM_CHAINED",
+            "display": "Unknown chained parameter name \"%s\""
+        },
+        {
+            "value": "MSG_PARAM_INVALID",
+            "display": "Parameter \"%s\" content is invalid"
+        },
+        {
+            "value": "MSG_PARAM_MODIFIER_INVALID",
+            "display": "Parameter \"%s\" modifier is invalid"
+        },
+        {
+            "value": "MSG_PARAM_NO_REPEAT",
+            "display": "Parameter \"%s\" is not allowed to repeat"
+        },
+        {
+            "value": "MSG_PARAM_UNKNOWN",
+            "display": "Parameter \"%s\" not understood"
+        },
+        {
+            "value": "MSG_RESOURCE_EXAMPLE_PROTECTED",
+            "display": "Resources with identity \"example\" cannot be deleted (for testing/training purposes)"
+        },
+        {
+            "value": "MSG_RESOURCE_ID_FAIL",
+            "display": "unable to allocate resource id"
+        },
+        {
+            "value": "MSG_RESOURCE_ID_MISMATCH",
+            "display": "Resource Id Mismatch"
+        },
+        {
+            "value": "MSG_RESOURCE_ID_MISSING",
+            "display": "Resource Id Missing"
+        },
+        {
+            "value": "MSG_RESOURCE_NOT_ALLOWED",
+            "display": "Not allowed to submit a resource for this operation"
+        },
+        {
+            "value": "MSG_RESOURCE_REQUIRED",
+            "display": "A resource is required"
+        },
+        {
+            "value": "MSG_RESOURCE_TYPE_MISMATCH",
+            "display": "Resource Type Mismatch"
+        },
+        {
+            "value": "MSG_SORT_UNKNOWN",
+            "display": "Unknown sort parameter name \"%s\""
+        },
+        {
+            "value": "MSG_TRANSACTION_DUPLICATE_ID",
+            "display": "Duplicate Identifier in transaction: %s"
+        },
+        {
+            "value": "MSG_TRANSACTION_MISSING_ID",
+            "display": "Missing Identifier in transaction - an entry.id must be provided"
+        },
+        {
+            "value": "MSG_UNHANDLED_NODE_TYPE",
+            "display": "Unhandled xml node type \"%s\""
+        },
+        {
+            "value": "MSG_UNKNOWN_CONTENT",
+            "display": "Unknown Content (%s) at %s"
+        },
+        {
+            "value": "MSG_UNKNOWN_OPERATION",
+            "display": "unknown FHIR http operation"
+        },
+        {
+            "value": "MSG_UNKNOWN_TYPE",
+            "display": "Resource Type \"%s\" not recognised"
+        },
+        {
+            "value": "MSG_UPDATED",
+            "display": "existing resource updated"
+        },
+        {
+            "value": "MSG_VERSION_AWARE",
+            "display": "Version aware updates are required for this resource"
+        },
+        {
+            "value": "MSG_VERSION_AWARE_CONFLICT",
+            "display": "Update Conflict (server current version = \"%s\", client version referenced = \"%s\")"
+        },
+        {
+            "value": "MSG_VERSION_AWARE_URL",
+            "display": "Version specific URL not recognised"
+        },
+        {
+            "value": "MSG_WRONG_NS",
+            "display": "This does not appear to be a FHIR element or resource (wrong namespace \"%s\")"
+        },
+        {
+            "value": "SEARCH_MULTIPLE",
+            "display": "Error: Multiple matches exist for %s search parameters \"%s\""
+        },
+        {
+            "value": "SEARCH_NONE",
+            "display": "Error: no processable search found for %s search parameters \"%s\""
+        },
+        {
+            "value": "UPDATE_MULTIPLE_MATCHES",
+            "display": "Error: Multiple matches exist for the conditional update"
+        }
+    ]
+}

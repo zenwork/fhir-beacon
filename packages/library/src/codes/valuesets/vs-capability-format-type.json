@@ -1,0 +1,32 @@
+{
+    "id": "capability-format-type",
+    "name": "CapabilityFormatType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "xml",
+            "display": "XML"
+        },
+        {
+            "value": "json",
+            "display": "JSON"
+        },
+        {
+            "value": "ttl",
+            "display": "TTL"
+        },
+        {
+            "value": "application/fhir+json",
+            "display": "n/a"
+        },
+        {
+            "value": "application/fhir+xml",
+            "display": "n/a"
+        },
+        {
+            "value": "application/fhir+ttl",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "therapy",
+    "name": "Therapy",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/therapy",
+    "valid": true,
+    "choices": []
+}

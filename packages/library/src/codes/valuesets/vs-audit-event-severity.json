@@ -1,0 +1,40 @@
+{
+    "id": "audit-event-severity",
+    "name": "AuditEventSeverity",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "emergency",
+            "display": "Emergency"
+        },
+        {
+            "value": "alert",
+            "display": "Alert"
+        },
+        {
+            "value": "critical",
+            "display": "Critical"
+        },
+        {
+            "value": "error",
+            "display": "Error"
+        },
+        {
+            "value": "warning",
+            "display": "Warning"
+        },
+        {
+            "value": "notice",
+            "display": "Notice"
+        },
+        {
+            "value": "informational",
+            "display": "Informational"
+        },
+        {
+            "value": "debug",
+            "display": "Debug"
+        }
+    ]
+}

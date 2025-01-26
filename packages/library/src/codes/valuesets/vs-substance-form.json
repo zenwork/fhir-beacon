@@ -1,0 +1,16 @@
+{
+    "id": "substance-form",
+    "name": "SubstanceForm",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "salt",
+            "display": "Salt of substance"
+        },
+        {
+            "value": "base",
+            "display": "Base of substance"
+        }
+    ]
+}

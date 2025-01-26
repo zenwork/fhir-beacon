@@ -1,0 +1,17 @@
+{
+    "id": "immunization-reason",
+    "name": "ImmunizationReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "429060002",
+            "display": "n/a"
+        },
+        {
+            "value": "14747002",
+            "display": "n/a"
+        }
+    ]
+}

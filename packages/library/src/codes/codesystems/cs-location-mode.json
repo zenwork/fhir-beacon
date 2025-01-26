@@ -1,0 +1,17 @@
+{
+    "id": "location-mode",
+    "name": "LocationMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/location-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "instance",
+            "display": "Instance"
+        },
+        {
+            "value": "kind",
+            "display": "Kind"
+        }
+    ]
+}

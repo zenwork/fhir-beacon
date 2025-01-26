@@ -1,0 +1,20 @@
+{
+    "id": "example-supplement",
+    "name": "CholCodeLegacyStatus",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "chol-mmol",
+            "display": "n/a"
+        },
+        {
+            "value": "chol-mass",
+            "display": "n/a"
+        },
+        {
+            "value": "chol",
+            "display": "n/a"
+        }
+    ]
+}

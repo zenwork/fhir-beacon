@@ -1,0 +1,16 @@
+{
+    "id": "adverse-event-actuality",
+    "name": "AdverseEventActuality",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "actual",
+            "display": "Adverse Event"
+        },
+        {
+            "value": "potential",
+            "display": "Potential Adverse Event"
+        }
+    ]
+}

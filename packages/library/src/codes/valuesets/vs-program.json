@@ -1,0 +1,189 @@
+{
+    "id": "program",
+    "name": "Program",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/program",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Acquired Brain Injury (ABI) Program"
+        },
+        {
+            "value": "2",
+            "display": "ABI Slow To Recover (ABI STR) Program"
+        },
+        {
+            "value": "3",
+            "display": "Access Programs"
+        },
+        {
+            "value": "4",
+            "display": "Adult and Further Education (ACFE) Program"
+        },
+        {
+            "value": "5",
+            "display": "Adult Day Activity and Support Services (ADASS) Program"
+        },
+        {
+            "value": "6",
+            "display": "Adult Day Care Program"
+        },
+        {
+            "value": "7",
+            "display": "ATSS (Adult Training Support Service)"
+        },
+        {
+            "value": "8",
+            "display": "Community Aged Care Packages (CACP)"
+        },
+        {
+            "value": "9",
+            "display": "Care Coordination & Supplementary Services (CCSS)"
+        },
+        {
+            "value": "10",
+            "display": "Cognitive Dementia Memory Service (CDAMS)"
+        },
+        {
+            "value": "11",
+            "display": "ChildFIRST"
+        },
+        {
+            "value": "12",
+            "display": "Children's Contact Services"
+        },
+        {
+            "value": "13",
+            "display": "Community Visitors Scheme"
+        },
+        {
+            "value": "14",
+            "display": "CPP (Community Partners Program)"
+        },
+        {
+            "value": "15",
+            "display": "Closing the Gap (CTG)"
+        },
+        {
+            "value": "16",
+            "display": "Coordinated Veterans' Care (CVC) Program"
+        },
+        {
+            "value": "17",
+            "display": "Day Program"
+        },
+        {
+            "value": "18",
+            "display": "Drop In Program"
+        },
+        {
+            "value": "19",
+            "display": "Early Years Program"
+        },
+        {
+            "value": "20",
+            "display": "Employee Assistance Program"
+        },
+        {
+            "value": "21",
+            "display": "Home And Community Care (HACC)"
+        },
+        {
+            "value": "22",
+            "display": "Hospital Admission Risk Program (HARP)"
+        },
+        {
+            "value": "23",
+            "display": "Hospital in the Home (HITH) Program"
+        },
+        {
+            "value": "24",
+            "display": "ICTP (Intensive Community Treatment Program)"
+        },
+        {
+            "value": "25",
+            "display": "IFSS (Intensive Family Support Program)"
+        },
+        {
+            "value": "26",
+            "display": "JPET (Job Placement, Education and Training)"
+        },
+        {
+            "value": "27",
+            "display": "Koori Juvenile Justice Program"
+        },
+        {
+            "value": "28",
+            "display": "Language Literacy and Numeracy Program"
+        },
+        {
+            "value": "29",
+            "display": "Life Skills Program"
+        },
+        {
+            "value": "30",
+            "display": "LMP (Lifestyle Modification Program)"
+        },
+        {
+            "value": "31",
+            "display": "MedsCheck Program"
+        },
+        {
+            "value": "32",
+            "display": "Methadone/Buprenorphine Program"
+        },
+        {
+            "value": "33",
+            "display": "National Disabilities Insurance Scheme (NDIS)"
+        },
+        {
+            "value": "34",
+            "display": "National Diabetes Services Scheme (NDSS)"
+        },
+        {
+            "value": "35",
+            "display": "Needle/Syringe Program"
+        },
+        {
+            "value": "36",
+            "display": "nPEP Program"
+        },
+        {
+            "value": "37",
+            "display": "Personal Support Program"
+        },
+        {
+            "value": "38",
+            "display": "Partners in Recovery (PIR) Program"
+        },
+        {
+            "value": "39",
+            "display": "Pre-employment Program"
+        },
+        {
+            "value": "40",
+            "display": "Reconnect Program"
+        },
+        {
+            "value": "41",
+            "display": "Sexual Abuse Counselling and Prevention Program (SACPP)"
+        },
+        {
+            "value": "42",
+            "display": "Social Support Programs"
+        },
+        {
+            "value": "43",
+            "display": "Supported Residential Service (SRS)"
+        },
+        {
+            "value": "44",
+            "display": "Tasmanian Aboriginal Centre (TAC)"
+        },
+        {
+            "value": "45",
+            "display": "Victim's Assistance Program"
+        }
+    ]
+}

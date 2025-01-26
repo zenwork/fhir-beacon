@@ -1,0 +1,81 @@
+{
+    "id": "identifier-type",
+    "name": "IdentifierTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/identifier-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "DL",
+            "display": "n/a"
+        },
+        {
+            "value": "PPN",
+            "display": "n/a"
+        },
+        {
+            "value": "BRN",
+            "display": "n/a"
+        },
+        {
+            "value": "MR",
+            "display": "n/a"
+        },
+        {
+            "value": "MCN",
+            "display": "n/a"
+        },
+        {
+            "value": "EN",
+            "display": "n/a"
+        },
+        {
+            "value": "TAX",
+            "display": "n/a"
+        },
+        {
+            "value": "NIIP",
+            "display": "n/a"
+        },
+        {
+            "value": "PRN",
+            "display": "n/a"
+        },
+        {
+            "value": "MD",
+            "display": "n/a"
+        },
+        {
+            "value": "DR",
+            "display": "n/a"
+        },
+        {
+            "value": "ACSN",
+            "display": "n/a"
+        },
+        {
+            "value": "UDI",
+            "display": "n/a"
+        },
+        {
+            "value": "SNO",
+            "display": "n/a"
+        },
+        {
+            "value": "SB",
+            "display": "n/a"
+        },
+        {
+            "value": "PLAC",
+            "display": "n/a"
+        },
+        {
+            "value": "FILL",
+            "display": "n/a"
+        },
+        {
+            "value": "JHN",
+            "display": "n/a"
+        }
+    ]
+}

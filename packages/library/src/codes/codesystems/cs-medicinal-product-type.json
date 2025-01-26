@@ -1,0 +1,17 @@
+{
+    "id": "medicinal-product-type",
+    "name": "MedicinalProductType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/medicinal-product-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MedicinalProduct",
+            "display": "Medicinal Product"
+        },
+        {
+            "value": "InvestigationalProduct",
+            "display": "Investigational Medicinal Product"
+        }
+    ]
+}

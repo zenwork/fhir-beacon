@@ -1,0 +1,37 @@
+{
+    "id": "deviceusage-status",
+    "name": "DeviceUsageStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/deviceusage-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "not-done",
+            "display": "Not done"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "intended",
+            "display": "Intended"
+        },
+        {
+            "value": "stopped",
+            "display": "Stopped"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        }
+    ]
+}

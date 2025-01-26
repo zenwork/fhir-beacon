@@ -1,0 +1,28 @@
+{
+    "id": "quantity-comparator",
+    "name": "QuantityComparator",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "<",
+            "display": "Less than"
+        },
+        {
+            "value": "<=",
+            "display": "Less or Equal to"
+        },
+        {
+            "value": ">=",
+            "display": "Greater or Equal to"
+        },
+        {
+            "value": ">",
+            "display": "Greater than"
+        },
+        {
+            "value": "ad",
+            "display": "Sufficient to achieve this total quantity"
+        }
+    ]
+}

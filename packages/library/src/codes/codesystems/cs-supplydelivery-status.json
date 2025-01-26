@@ -1,0 +1,25 @@
+{
+    "id": "supplydelivery-status",
+    "name": "SupplyDeliveryStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/supplydelivery-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "completed",
+            "display": "Delivered"
+        },
+        {
+            "value": "abandoned",
+            "display": "Abandoned"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

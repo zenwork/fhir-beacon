@@ -1,0 +1,20 @@
+{
+    "id": "medication-statement-adherence",
+    "name": "MedicationStatementAdherenceCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "taking",
+            "display": "Taking"
+        },
+        {
+            "value": "not-taking",
+            "display": "Not Taking"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "endpoint-payload-type",
+    "name": "EndpointPayloadType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/endpoint-payload-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "any",
+            "display": "Any"
+        },
+        {
+            "value": "none",
+            "display": "None"
+        }
+    ]
+}

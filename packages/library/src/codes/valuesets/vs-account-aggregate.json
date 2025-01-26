@@ -1,0 +1,20 @@
+{
+    "id": "account-aggregate",
+    "name": "AccountAggregate",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "patient",
+            "display": "Patient"
+        },
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        },
+        {
+            "value": "total",
+            "display": "Total"
+        }
+    ]
+}

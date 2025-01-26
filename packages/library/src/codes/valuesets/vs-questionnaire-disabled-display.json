@@ -1,0 +1,16 @@
+{
+    "id": "questionnaire-disabled-display",
+    "name": "QuestionnaireItemDisabledDisplay",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "hidden",
+            "display": "Hidden"
+        },
+        {
+            "value": "protected",
+            "display": "Protected"
+        }
+    ]
+}

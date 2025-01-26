@@ -1,0 +1,21 @@
+{
+    "id": "list-status",
+    "name": "ListStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/list-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "current",
+            "display": "Current"
+        },
+        {
+            "value": "retired",
+            "display": "Retired"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered In Error"
+        }
+    ]
+}

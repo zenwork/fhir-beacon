@@ -1,0 +1,17 @@
+{
+    "id": "immunization-recommendation-reason",
+    "name": "ImmunizationRecommendationReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-recommendation-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "77176002",
+            "display": "n/a"
+        },
+        {
+            "value": "77386006",
+            "display": "n/a"
+        }
+    ]
+}

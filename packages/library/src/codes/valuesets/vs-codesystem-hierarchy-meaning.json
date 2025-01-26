@@ -1,0 +1,24 @@
+{
+    "id": "codesystem-hierarchy-meaning",
+    "name": "CodeSystemHierarchyMeaning",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "grouped-by",
+            "display": "Grouped By"
+        },
+        {
+            "value": "is-a",
+            "display": "Is-A"
+        },
+        {
+            "value": "part-of",
+            "display": "Part Of"
+        },
+        {
+            "value": "classified-with",
+            "display": "Classified With"
+        }
+    ]
+}

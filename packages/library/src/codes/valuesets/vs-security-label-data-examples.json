@@ -1,0 +1,29 @@
+{
+    "id": "security-label-data-examples",
+    "name": "SecurityLabelDataExamples",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/security-label-data-examples",
+    "valid": true,
+    "choices": [
+        {
+            "value": "N",
+            "display": "n/a"
+        },
+        {
+            "value": "R",
+            "display": "n/a"
+        },
+        {
+            "value": "ETH",
+            "display": "n/a"
+        },
+        {
+            "value": "PSY",
+            "display": "n/a"
+        },
+        {
+            "value": "STD",
+            "display": "n/a"
+        }
+    ]
+}

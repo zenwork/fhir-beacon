@@ -1,0 +1,32 @@
+{
+    "id": "deviceusage-adherence-reason",
+    "name": "DeviceUsageAdherenceReason",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lost",
+            "display": "Lost"
+        },
+        {
+            "value": "stolen",
+            "display": "Stolen"
+        },
+        {
+            "value": "prescribed",
+            "display": "Prescribed"
+        },
+        {
+            "value": "broken",
+            "display": "Broken"
+        },
+        {
+            "value": "burned",
+            "display": "Burned"
+        },
+        {
+            "value": "forgot",
+            "display": "Forgot"
+        }
+    ]
+}

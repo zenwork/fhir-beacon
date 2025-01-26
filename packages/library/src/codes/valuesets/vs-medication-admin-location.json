@@ -1,0 +1,21 @@
+{
+    "id": "medication-admin-location",
+    "name": "MedicationAdministrationLocationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/medication-admin-location",
+    "valid": true,
+    "choices": [
+        {
+            "value": "inpatient",
+            "display": "Inpatient"
+        },
+        {
+            "value": "outpatient",
+            "display": "Outpatient"
+        },
+        {
+            "value": "community",
+            "display": "Community"
+        }
+    ]
+}

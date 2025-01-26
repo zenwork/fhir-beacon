@@ -1,0 +1,16 @@
+{
+    "id": "type-derivation-rule",
+    "name": "TypeDerivationRule",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "specialization",
+            "display": "Specialization"
+        },
+        {
+            "value": "constraint",
+            "display": "Constraint"
+        }
+    ]
+}

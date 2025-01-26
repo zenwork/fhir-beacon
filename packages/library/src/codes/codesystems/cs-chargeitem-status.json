@@ -1,0 +1,37 @@
+{
+    "id": "chargeitem-status",
+    "name": "ChargeItemStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/chargeitem-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "planned",
+            "display": "Planned"
+        },
+        {
+            "value": "billable",
+            "display": "Billable"
+        },
+        {
+            "value": "not-billable",
+            "display": "Not billable"
+        },
+        {
+            "value": "aborted",
+            "display": "Aborted"
+        },
+        {
+            "value": "billed",
+            "display": "Billed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "id": "flag-category",
+    "name": "FlagCategory",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/flag-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "diet",
+            "display": "Diet"
+        },
+        {
+            "value": "drug",
+            "display": "Drug"
+        },
+        {
+            "value": "lab",
+            "display": "Lab"
+        },
+        {
+            "value": "admin",
+            "display": "Administrative"
+        },
+        {
+            "value": "contact",
+            "display": "Subject Contact"
+        },
+        {
+            "value": "clinical",
+            "display": "Clinical"
+        },
+        {
+            "value": "behavioral",
+            "display": "Behavioral"
+        },
+        {
+            "value": "research",
+            "display": "Research"
+        },
+        {
+            "value": "advance-directive",
+            "display": "Advance Directive"
+        },
+        {
+            "value": "safety",
+            "display": "Safety"
+        }
+    ]
+}

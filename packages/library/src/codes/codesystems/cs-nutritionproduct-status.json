@@ -1,0 +1,21 @@
+{
+    "id": "nutritionproduct-status",
+    "name": "NutritionProductStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/nutritionproduct-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "inactive",
+            "display": "Inactive"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

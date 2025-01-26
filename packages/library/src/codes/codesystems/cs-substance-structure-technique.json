@@ -1,0 +1,29 @@
+{
+    "id": "substance-structure-technique",
+    "name": "SubstanceStructureTechnique",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-structure-technique",
+    "valid": true,
+    "choices": [
+        {
+            "value": "X-Ray",
+            "display": "X-ray"
+        },
+        {
+            "value": "HPLC",
+            "display": "HPLC"
+        },
+        {
+            "value": "NMR",
+            "display": "NMR"
+        },
+        {
+            "value": "PeptideMapping",
+            "display": "Peptide mapping"
+        },
+        {
+            "value": "LigandBindingAssay",
+            "display": "Ligand binding assay"
+        }
+    ]
+}

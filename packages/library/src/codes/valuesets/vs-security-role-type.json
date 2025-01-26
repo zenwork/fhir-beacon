@@ -1,0 +1,8 @@
+{
+    "id": "security-role-type",
+    "name": "SecurityRoleType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/security-role-type",
+    "valid": true,
+    "choices": []
+}

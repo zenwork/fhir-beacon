@@ -1,0 +1,20 @@
+{
+    "id": "medication-dose-aid",
+    "name": "MedicationDoseAids",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "blisterpack",
+            "display": "Blister Pack"
+        },
+        {
+            "value": "dosette",
+            "display": "Dosette"
+        },
+        {
+            "value": "sachets",
+            "display": "Sachets"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "id": "search-param-type",
+    "name": "SearchParamType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/search-param-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "number",
+            "display": "Number"
+        },
+        {
+            "value": "date",
+            "display": "Date/DateTime"
+        },
+        {
+            "value": "string",
+            "display": "String"
+        },
+        {
+            "value": "token",
+            "display": "Token"
+        },
+        {
+            "value": "reference",
+            "display": "Reference"
+        },
+        {
+            "value": "composite",
+            "display": "Composite"
+        },
+        {
+            "value": "quantity",
+            "display": "Quantity"
+        },
+        {
+            "value": "uri",
+            "display": "URI"
+        },
+        {
+            "value": "special",
+            "display": "Special"
+        }
+    ]
+}

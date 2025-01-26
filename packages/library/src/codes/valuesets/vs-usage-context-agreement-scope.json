@@ -1,0 +1,32 @@
+{
+    "id": "usage-context-agreement-scope",
+    "name": "UsageContextAgreementScope",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "realm-base",
+            "display": "Realm Base"
+        },
+        {
+            "value": "knowledge",
+            "display": "Knowledge"
+        },
+        {
+            "value": "domain",
+            "display": "Domain"
+        },
+        {
+            "value": "community",
+            "display": "Community"
+        },
+        {
+            "value": "system-design",
+            "display": "System Design"
+        },
+        {
+            "value": "system-implementation",
+            "display": "System Implementation"
+        }
+    ]
+}

@@ -24,16 +24,17 @@ export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = fal
                 .then((r: ResolvedValue[][]) => {
                   return ([
                     {
-                    origin: vs,
-                    id: vs.id ?? 'unknown',
-                    type: vs.resourceType ?? 'unknown',
-                    name: vs.name ?? 'unknown',
-                    status: vs.status,
-                    version: vs.version ?? 'unknown',
-                    compose: {
-                      include: { concept: r[0] },
-                      exclude: { concept: [] }
-                    }
+                      origin: vs,
+                      id: vs.id ?? 'unknown',
+                      type: vs.resourceType ?? 'unknown',
+                      name: vs.name ?? 'unknown',
+                      system: vs.url ?? 'unknown',
+                      status: vs.status,
+                      version: vs.version ?? 'unknown',
+                      compose: {
+                        include: { concept: r[0] },
+                        exclude: { concept: [] }
+                      }
                     } as ResolvedSet
                   ])
                 })

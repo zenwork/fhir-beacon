@@ -1,0 +1,53 @@
+{
+    "id": "permitted-data-type",
+    "name": "ObservationDataType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/permitted-data-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Quantity",
+            "display": "Quantity"
+        },
+        {
+            "value": "CodeableConcept",
+            "display": "CodeableConcept"
+        },
+        {
+            "value": "string",
+            "display": "string"
+        },
+        {
+            "value": "boolean",
+            "display": "boolean"
+        },
+        {
+            "value": "integer",
+            "display": "integer"
+        },
+        {
+            "value": "Range",
+            "display": "Range"
+        },
+        {
+            "value": "Ratio",
+            "display": "Ratio"
+        },
+        {
+            "value": "SampledData",
+            "display": "SampledData"
+        },
+        {
+            "value": "time",
+            "display": "time"
+        },
+        {
+            "value": "dateTime",
+            "display": "dateTime"
+        },
+        {
+            "value": "Period",
+            "display": "Period"
+        }
+    ]
+}

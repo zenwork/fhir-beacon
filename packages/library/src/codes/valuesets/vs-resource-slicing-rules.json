@@ -1,0 +1,20 @@
+{
+    "id": "resource-slicing-rules",
+    "name": "SlicingRules",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "closed",
+            "display": "Closed"
+        },
+        {
+            "value": "open",
+            "display": "Open"
+        },
+        {
+            "value": "openAtEnd",
+            "display": "Open at End"
+        }
+    ]
+}

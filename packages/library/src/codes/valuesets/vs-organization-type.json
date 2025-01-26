@@ -1,0 +1,57 @@
+{
+    "id": "organization-type",
+    "name": "OrganizationType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/organization-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "prov",
+            "display": "Healthcare Provider"
+        },
+        {
+            "value": "dept",
+            "display": "Hospital Department"
+        },
+        {
+            "value": "team",
+            "display": "Organizational team"
+        },
+        {
+            "value": "govt",
+            "display": "Government"
+        },
+        {
+            "value": "ins",
+            "display": "Insurance Company"
+        },
+        {
+            "value": "pay",
+            "display": "Payer"
+        },
+        {
+            "value": "edu",
+            "display": "Educational Institute"
+        },
+        {
+            "value": "reli",
+            "display": "Religious Institution"
+        },
+        {
+            "value": "crs",
+            "display": "Clinical Research Sponsor"
+        },
+        {
+            "value": "cg",
+            "display": "Community Group"
+        },
+        {
+            "value": "bus",
+            "display": "Non-Healthcare Business or Corporation"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        }
+    ]
+}

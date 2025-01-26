@@ -1,0 +1,57 @@
+{
+    "id": "container-cap",
+    "name": "ContainerCap",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/container-cap",
+    "valid": true,
+    "choices": [
+        {
+            "value": "red",
+            "display": "red cap"
+        },
+        {
+            "value": "yellow",
+            "display": "yellow cap"
+        },
+        {
+            "value": "dark-yellow",
+            "display": "dark yellow cap"
+        },
+        {
+            "value": "grey",
+            "display": "grey cap"
+        },
+        {
+            "value": "light-blue",
+            "display": "light blue cap"
+        },
+        {
+            "value": "black",
+            "display": "black cap"
+        },
+        {
+            "value": "green",
+            "display": "green cap"
+        },
+        {
+            "value": "light-green",
+            "display": "light green cap"
+        },
+        {
+            "value": "lavender",
+            "display": "lavender cap"
+        },
+        {
+            "value": "brown",
+            "display": "brown cap"
+        },
+        {
+            "value": "white",
+            "display": "white cap"
+        },
+        {
+            "value": "pink",
+            "display": "pink cap"
+        }
+    ]
+}

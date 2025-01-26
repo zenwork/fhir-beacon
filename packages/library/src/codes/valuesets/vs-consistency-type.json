@@ -1,0 +1,25 @@
+{
+    "id": "consistency-type",
+    "name": "FluidConsistencyTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/consistency-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "439031000124108",
+            "display": "honey thick liquid"
+        },
+        {
+            "value": "439021000124105",
+            "display": "nectar thick liquid"
+        },
+        {
+            "value": "439041000124103",
+            "display": "spoon thick liquid"
+        },
+        {
+            "value": "439081000124109",
+            "display": "thin liquid"
+        }
+    ]
+}

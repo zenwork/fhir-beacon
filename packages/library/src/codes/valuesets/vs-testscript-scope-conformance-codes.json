@@ -1,0 +1,20 @@
+{
+    "id": "testscript-scope-conformance-codes",
+    "name": "TestScriptScopeConformanceType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "required",
+            "display": "Required"
+        },
+        {
+            "value": "optional",
+            "display": "Optional"
+        },
+        {
+            "value": "strict",
+            "display": "Strict"
+        }
+    ]
+}

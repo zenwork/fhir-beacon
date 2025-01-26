@@ -1,0 +1,25 @@
+{
+    "id": "inventoryreport-status",
+    "name": "InventoryReportStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/inventoryreport-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "requested",
+            "display": "Requested"
+        },
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

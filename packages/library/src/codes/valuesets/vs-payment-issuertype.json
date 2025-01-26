@@ -1,0 +1,16 @@
+{
+    "id": "payment-issuertype",
+    "name": "PaymentIssuerType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "patient",
+            "display": "Patient"
+        },
+        {
+            "value": "insurance",
+            "display": "Insurance"
+        }
+    ]
+}

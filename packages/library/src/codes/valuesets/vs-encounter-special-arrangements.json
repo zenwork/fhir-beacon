@@ -1,0 +1,29 @@
+{
+    "id": "encounter-special-arrangements",
+    "name": "SpecialArrangements",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-special-arrangements",
+    "valid": true,
+    "choices": [
+        {
+            "value": "wheel",
+            "display": "Wheelchair"
+        },
+        {
+            "value": "add-bed",
+            "display": "Additional bedding"
+        },
+        {
+            "value": "int",
+            "display": "Interpreter"
+        },
+        {
+            "value": "att",
+            "display": "Attendant"
+        },
+        {
+            "value": "dog",
+            "display": "Guide dog"
+        }
+    ]
+}

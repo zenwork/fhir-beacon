@@ -1,0 +1,68 @@
+{
+    "id": "search-modifier-code",
+    "name": "SearchModifierCode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "missing",
+            "display": "Missing"
+        },
+        {
+            "value": "exact",
+            "display": "Exact"
+        },
+        {
+            "value": "contains",
+            "display": "Contains"
+        },
+        {
+            "value": "not",
+            "display": "Not"
+        },
+        {
+            "value": "text",
+            "display": "Text"
+        },
+        {
+            "value": "in",
+            "display": "In"
+        },
+        {
+            "value": "not-in",
+            "display": "Not In"
+        },
+        {
+            "value": "below",
+            "display": "Below"
+        },
+        {
+            "value": "above",
+            "display": "Above"
+        },
+        {
+            "value": "type",
+            "display": "Type"
+        },
+        {
+            "value": "identifier",
+            "display": "Identifier"
+        },
+        {
+            "value": "of-type",
+            "display": "Of Type"
+        },
+        {
+            "value": "code-text",
+            "display": "Code Text"
+        },
+        {
+            "value": "text-advanced",
+            "display": "Text Advanced"
+        },
+        {
+            "value": "iterate",
+            "display": "Iterate"
+        }
+    ]
+}

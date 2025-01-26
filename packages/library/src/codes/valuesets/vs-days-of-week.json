@@ -1,0 +1,36 @@
+{
+    "id": "days-of-week",
+    "name": "DaysOfWeek",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "mon",
+            "display": "Monday"
+        },
+        {
+            "value": "tue",
+            "display": "Tuesday"
+        },
+        {
+            "value": "wed",
+            "display": "Wednesday"
+        },
+        {
+            "value": "thu",
+            "display": "Thursday"
+        },
+        {
+            "value": "fri",
+            "display": "Friday"
+        },
+        {
+            "value": "sat",
+            "display": "Saturday"
+        },
+        {
+            "value": "sun",
+            "display": "Sunday"
+        }
+    ]
+}

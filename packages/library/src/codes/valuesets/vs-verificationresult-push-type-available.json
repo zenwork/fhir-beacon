@@ -1,0 +1,21 @@
+{
+    "id": "verificationresult-push-type-available",
+    "name": "PushTypeAvailable",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/verificationresult-push-type-available",
+    "valid": true,
+    "choices": [
+        {
+            "value": "specific",
+            "display": "Specific requested changes"
+        },
+        {
+            "value": "any",
+            "display": "Any changes"
+        },
+        {
+            "value": "source",
+            "display": "As defined by source"
+        }
+    ]
+}

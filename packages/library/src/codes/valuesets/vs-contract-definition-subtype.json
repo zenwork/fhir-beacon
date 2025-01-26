@@ -1,0 +1,12 @@
+{
+    "id": "contract-definition-subtype",
+    "name": "ContractResourceDefinitionSubtypeCodes",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "temp",
+            "display": "Temporary Value"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "measurement-property",
+    "name": "CodesForProductCharacteristics",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measurement-property",
+    "valid": true,
+    "choices": []
+}

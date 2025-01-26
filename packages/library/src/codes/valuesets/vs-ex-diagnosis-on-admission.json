@@ -1,0 +1,21 @@
+{
+    "id": "ex-diagnosis-on-admission",
+    "name": "ExampleDiagnosisOnAdmissionCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-diagnosis-on-admission",
+    "valid": true,
+    "choices": [
+        {
+            "value": "yes",
+            "display": "Yes"
+        },
+        {
+            "value": "no",
+            "display": "No"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

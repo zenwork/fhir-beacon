@@ -1,0 +1,21 @@
+{
+    "id": "measure-stratifier-example",
+    "name": "MeasureStratifierExample",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/measure-stratifier-example",
+    "valid": true,
+    "choices": [
+        {
+            "value": "age",
+            "display": "Age"
+        },
+        {
+            "value": "gender",
+            "display": "Gender"
+        },
+        {
+            "value": "region",
+            "display": "Region"
+        }
+    ]
+}

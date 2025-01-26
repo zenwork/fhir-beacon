@@ -1,0 +1,8 @@
+{
+    "id": "substance-code",
+    "name": "SubstanceCode",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/substance-code",
+    "valid": true,
+    "choices": []
+}

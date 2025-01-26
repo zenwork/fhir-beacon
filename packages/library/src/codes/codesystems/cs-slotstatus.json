@@ -1,0 +1,29 @@
+{
+    "id": "slotstatus",
+    "name": "SlotStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/slotstatus",
+    "valid": true,
+    "choices": [
+        {
+            "value": "busy",
+            "display": "Busy"
+        },
+        {
+            "value": "free",
+            "display": "Free"
+        },
+        {
+            "value": "busy-unavailable",
+            "display": "Busy (Unavailable)"
+        },
+        {
+            "value": "busy-tentative",
+            "display": "Busy (Tentative)"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in error"
+        }
+    ]
+}

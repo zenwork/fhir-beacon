@@ -1,0 +1,25 @@
+{
+    "id": "ex-program-code",
+    "name": "ExampleProgramReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-program-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "as",
+            "display": "Child Asthma"
+        },
+        {
+            "value": "hd",
+            "display": "Hemodialysis"
+        },
+        {
+            "value": "auscr",
+            "display": "Autism Screening"
+        },
+        {
+            "value": "none",
+            "display": "None"
+        }
+    ]
+}

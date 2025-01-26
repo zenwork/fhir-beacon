@@ -1,0 +1,21 @@
+{
+    "id": "observation-range-category",
+    "name": "ObservationRangeCategory",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/observation-range-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "reference",
+            "display": "reference range"
+        },
+        {
+            "value": "critical",
+            "display": "critical range"
+        },
+        {
+            "value": "absolute",
+            "display": "absolute range"
+        }
+    ]
+}

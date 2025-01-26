@@ -1,0 +1,13 @@
+{
+    "id": "contract-decision-mode",
+    "name": "ContractDecisionMode",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/contract-decision-mode",
+    "valid": true,
+    "choices": [
+        {
+            "value": "policy",
+            "display": "Policy"
+        }
+    ]
+}

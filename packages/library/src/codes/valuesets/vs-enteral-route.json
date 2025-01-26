@@ -1,0 +1,45 @@
+{
+    "id": "enteral-route",
+    "name": "EnteralRouteCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/enteral-route",
+    "valid": true,
+    "choices": [
+        {
+            "value": "PO",
+            "display": "n/a"
+        },
+        {
+            "value": "EFT",
+            "display": "n/a"
+        },
+        {
+            "value": "ENTINSTL",
+            "display": "n/a"
+        },
+        {
+            "value": "GT",
+            "display": "n/a"
+        },
+        {
+            "value": "NGT",
+            "display": "n/a"
+        },
+        {
+            "value": "OGT",
+            "display": "n/a"
+        },
+        {
+            "value": "GJT",
+            "display": "n/a"
+        },
+        {
+            "value": "JJTINSTL",
+            "display": "n/a"
+        },
+        {
+            "value": "OJJ",
+            "display": "n/a"
+        }
+    ]
+}

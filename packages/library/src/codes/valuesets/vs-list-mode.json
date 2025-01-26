@@ -1,0 +1,20 @@
+{
+    "id": "list-mode",
+    "name": "ListMode",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "working",
+            "display": "Working List"
+        },
+        {
+            "value": "snapshot",
+            "display": "Snapshot List"
+        },
+        {
+            "value": "changes",
+            "display": "Change List"
+        }
+    ]
+}

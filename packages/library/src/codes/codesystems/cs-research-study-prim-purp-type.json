@@ -1,0 +1,41 @@
+{
+    "id": "research-study-prim-purp-type",
+    "name": "ResearchStudyPrimaryPurposeType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/research-study-prim-purp-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "treatment",
+            "display": "Treatment"
+        },
+        {
+            "value": "prevention",
+            "display": "Prevention"
+        },
+        {
+            "value": "diagnostic",
+            "display": "Diagnostic"
+        },
+        {
+            "value": "supportive-care",
+            "display": "Supportive Care"
+        },
+        {
+            "value": "screening",
+            "display": "Screening"
+        },
+        {
+            "value": "health-services-research",
+            "display": "Health Services Research"
+        },
+        {
+            "value": "basic-science",
+            "display": "Basic Science"
+        },
+        {
+            "value": "device-feasibility",
+            "display": "Device Feasibility"
+        }
+    ]
+}

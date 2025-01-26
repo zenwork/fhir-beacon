@@ -1,0 +1,21 @@
+{
+    "id": "adverse-event-causality-method",
+    "name": "AdverseEventCausalityMethod",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-causality-method",
+    "valid": true,
+    "choices": [
+        {
+            "value": "probability-scale",
+            "display": "Probability Scale"
+        },
+        {
+            "value": "bayesian",
+            "display": "Bayesian"
+        },
+        {
+            "value": "checklist",
+            "display": "Checklist"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "id": "task-status",
+    "name": "TaskStatus",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "Draft"
+        },
+        {
+            "value": "requested",
+            "display": "Requested"
+        },
+        {
+            "value": "received",
+            "display": "Received"
+        },
+        {
+            "value": "accepted",
+            "display": "Accepted"
+        },
+        {
+            "value": "rejected",
+            "display": "Rejected"
+        },
+        {
+            "value": "ready",
+            "display": "Ready"
+        },
+        {
+            "value": "cancelled",
+            "display": "Cancelled"
+        },
+        {
+            "value": "in-progress",
+            "display": "In Progress"
+        },
+        {
+            "value": "on-hold",
+            "display": "On Hold"
+        },
+        {
+            "value": "failed",
+            "display": "Failed"
+        },
+        {
+            "value": "completed",
+            "display": "Completed"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

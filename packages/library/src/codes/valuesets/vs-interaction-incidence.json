@@ -1,0 +1,16 @@
+{
+    "id": "interaction-incidence",
+    "name": "InteractionIncidence",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Theoretical",
+            "display": "Theoretical"
+        },
+        {
+            "value": "Observed",
+            "display": "Observed"
+        }
+    ]
+}

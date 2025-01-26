@@ -1,0 +1,25 @@
+{
+    "id": "subscription-channel-type",
+    "name": "SubscriptionChannelType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/subscription-channel-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "rest-hook",
+            "display": "Rest Hook"
+        },
+        {
+            "value": "websocket",
+            "display": "Websocket"
+        },
+        {
+            "value": "email",
+            "display": "Email"
+        },
+        {
+            "value": "message",
+            "display": "Message"
+        }
+    ]
+}

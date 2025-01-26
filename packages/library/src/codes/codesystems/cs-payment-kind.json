@@ -1,0 +1,25 @@
+{
+    "id": "payment-kind",
+    "name": "PaymentKindCodes",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/payment-kind",
+    "valid": true,
+    "choices": [
+        {
+            "value": "deposit",
+            "display": "Deposit on Account"
+        },
+        {
+            "value": "periodic-payment",
+            "display": "Periodic Payment"
+        },
+        {
+            "value": "online",
+            "display": "Online Bill Payment"
+        },
+        {
+            "value": "kiosk",
+            "display": "Kiosk Payment"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "device-availability-status",
+    "name": "FHIRDeviceAvailabilityStatus",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lost",
+            "display": "Lost"
+        },
+        {
+            "value": "damaged",
+            "display": "Damaged"
+        },
+        {
+            "value": "destroyed",
+            "display": "Destroyed"
+        },
+        {
+            "value": "available",
+            "display": "Available"
+        }
+    ]
+}

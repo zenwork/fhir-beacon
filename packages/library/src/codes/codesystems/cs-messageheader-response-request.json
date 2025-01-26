@@ -1,0 +1,25 @@
+{
+    "id": "messageheader-response-request",
+    "name": "MessageheaderResponseRequest",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/messageheader-response-request",
+    "valid": true,
+    "choices": [
+        {
+            "value": "always",
+            "display": "Always"
+        },
+        {
+            "value": "on-error",
+            "display": "Error/reject conditions only"
+        },
+        {
+            "value": "never",
+            "display": "Never"
+        },
+        {
+            "value": "on-success",
+            "display": "Successful completion only"
+        }
+    ]
+}

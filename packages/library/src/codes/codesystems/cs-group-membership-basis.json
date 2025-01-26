@@ -1,0 +1,17 @@
+{
+    "id": "group-membership-basis",
+    "name": "GroupMembershipBasis",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/group-membership-basis",
+    "valid": true,
+    "choices": [
+        {
+            "value": "definitional",
+            "display": "Definitional"
+        },
+        {
+            "value": "enumerated",
+            "display": "Enumerated"
+        }
+    ]
+}

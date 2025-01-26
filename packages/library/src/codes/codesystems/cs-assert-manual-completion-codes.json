@@ -1,0 +1,25 @@
+{
+    "id": "assert-manual-completion-codes",
+    "name": "AssertionManualCompletionType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/assert-manual-completion-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "fail",
+            "display": "Fail"
+        },
+        {
+            "value": "pass",
+            "display": "Pass"
+        },
+        {
+            "value": "skip",
+            "display": "Skip"
+        },
+        {
+            "value": "stop",
+            "display": "Stop"
+        }
+    ]
+}

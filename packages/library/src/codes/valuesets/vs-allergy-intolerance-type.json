@@ -1,0 +1,16 @@
+{
+    "id": "allergy-intolerance-type",
+    "name": "AllergyIntoleranceType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "allergy",
+            "display": "Allergy"
+        },
+        {
+            "value": "intolerance",
+            "display": "Intolerance"
+        }
+    ]
+}

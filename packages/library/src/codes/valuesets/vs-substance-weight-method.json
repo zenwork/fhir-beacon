@@ -1,0 +1,40 @@
+{
+    "id": "substance-weight-method",
+    "name": "WeightMethod",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "SDS-PAGE",
+            "display": "SDS-PAGE (sodium dodecyl sulfate-polyacrylamide gel electrophoresis)"
+        },
+        {
+            "value": "Calculated",
+            "display": "calculated"
+        },
+        {
+            "value": "LighScattering",
+            "display": "light scattering"
+        },
+        {
+            "value": "Viscosity",
+            "display": "viscosity"
+        },
+        {
+            "value": "GelPermeationCentrifugation",
+            "display": "gel permeation centrifugation"
+        },
+        {
+            "value": "End-groupAnalysis",
+            "display": "End-group analysis"
+        },
+        {
+            "value": "End-groupTitration",
+            "display": "End-group titration"
+        },
+        {
+            "value": "Size-ExclusionChromatography",
+            "display": "Size-exclusion chromatography"
+        }
+    ]
+}

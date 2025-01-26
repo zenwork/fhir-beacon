@@ -1,0 +1,12 @@
+{
+    "id": "contract-assettype",
+    "name": "ContractAssetType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "participation",
+            "display": "Participation"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "id": "claim-informationcategory",
+    "name": "ClaimInformationCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/claim-informationcategory",
+    "valid": true,
+    "choices": [
+        {
+            "value": "info",
+            "display": "Information"
+        },
+        {
+            "value": "discharge",
+            "display": "Discharge"
+        },
+        {
+            "value": "onset",
+            "display": "Onset"
+        },
+        {
+            "value": "related",
+            "display": "Related Services"
+        },
+        {
+            "value": "exception",
+            "display": "Exception"
+        },
+        {
+            "value": "material",
+            "display": "Materials Forwarded"
+        },
+        {
+            "value": "attachment",
+            "display": "Attachment"
+        },
+        {
+            "value": "missingtooth",
+            "display": "Missing Tooth"
+        },
+        {
+            "value": "prosthesis",
+            "display": "Prosthesis"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        },
+        {
+            "value": "hospitalized",
+            "display": "Hospitalized"
+        },
+        {
+            "value": "employmentimpacted",
+            "display": "EmploymentImpacted"
+        },
+        {
+            "value": "externalcause",
+            "display": "External Caause"
+        },
+        {
+            "value": "patientreasonforvisit",
+            "display": "Patient Reason for Visit"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "id": "specimen-combined",
+    "name": "SpecimenCombined",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "grouped",
+            "display": "Grouped"
+        },
+        {
+            "value": "pooled",
+            "display": "Pooled"
+        }
+    ]
+}

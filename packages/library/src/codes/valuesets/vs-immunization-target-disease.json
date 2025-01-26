@@ -1,0 +1,181 @@
+{
+    "id": "immunization-target-disease",
+    "name": "ImmunizationTargetDiseaseCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/immunization-target-disease",
+    "valid": true,
+    "choices": [
+        {
+            "value": "397428000",
+            "display": "n/a"
+        },
+        {
+            "value": "27836007",
+            "display": "n/a"
+        },
+        {
+            "value": "76902006",
+            "display": "n/a"
+        },
+        {
+            "value": "721764008",
+            "display": "n/a"
+        },
+        {
+            "value": "14189004",
+            "display": "n/a"
+        },
+        {
+            "value": "36989005",
+            "display": "n/a"
+        },
+        {
+            "value": "36653000",
+            "display": "n/a"
+        },
+        {
+            "value": "16814004",
+            "display": "n/a"
+        },
+        {
+            "value": "23511006",
+            "display": "n/a"
+        },
+        {
+            "value": "709410003",
+            "display": "n/a"
+        },
+        {
+            "value": "56717001",
+            "display": "n/a"
+        },
+        {
+            "value": "363354003",
+            "display": "n/a"
+        },
+        {
+            "value": "266113007",
+            "display": "n/a"
+        },
+        {
+            "value": "415822001",
+            "display": "n/a"
+        },
+        {
+            "value": "66071002",
+            "display": "n/a"
+        },
+        {
+            "value": "40468003",
+            "display": "n/a"
+        },
+        {
+            "value": "7111000119109",
+            "display": "n/a"
+        },
+        {
+            "value": "719590007",
+            "display": "n/a"
+        },
+        {
+            "value": "719865001",
+            "display": "n/a"
+        },
+        {
+            "value": "38907003",
+            "display": "n/a"
+        },
+        {
+            "value": "4740000",
+            "display": "n/a"
+        },
+        {
+            "value": "55735004",
+            "display": "n/a"
+        },
+        {
+            "value": "240613006",
+            "display": "n/a"
+        },
+        {
+            "value": "4834000",
+            "display": "n/a"
+        },
+        {
+            "value": "85904008",
+            "display": "n/a"
+        },
+        {
+            "value": "63650001",
+            "display": "n/a"
+        },
+        {
+            "value": "16541001",
+            "display": "n/a"
+        },
+        {
+            "value": "38362002",
+            "display": "n/a"
+        },
+        {
+            "value": "61462000",
+            "display": "n/a"
+        },
+        {
+            "value": "14168008",
+            "display": "n/a"
+        },
+        {
+            "value": "186772009",
+            "display": "n/a"
+        },
+        {
+            "value": "712986001",
+            "display": "n/a"
+        },
+        {
+            "value": "52947006",
+            "display": "n/a"
+        },
+        {
+            "value": "186788009",
+            "display": "n/a"
+        },
+        {
+            "value": "409498004",
+            "display": "n/a"
+        },
+        {
+            "value": "58750007",
+            "display": "n/a"
+        },
+        {
+            "value": "19265001",
+            "display": "n/a"
+        },
+        {
+            "value": "23502006",
+            "display": "n/a"
+        },
+        {
+            "value": "75702008",
+            "display": "n/a"
+        },
+        {
+            "value": "80612004",
+            "display": "n/a"
+        },
+        {
+            "value": "186747009",
+            "display": "n/a"
+        },
+        {
+            "value": "67924001",
+            "display": "n/a"
+        },
+        {
+            "value": "70090004",
+            "display": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "testscript-scope-phase-codes",
+    "name": "TestScriptScopePhaseType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "unit",
+            "display": "Unit"
+        },
+        {
+            "value": "integration",
+            "display": "Integration"
+        },
+        {
+            "value": "production",
+            "display": "Production"
+        }
+    ]
+}

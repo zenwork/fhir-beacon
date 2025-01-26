@@ -1,0 +1,17 @@
+{
+    "id": "lipid-ldl-codes",
+    "name": "LDLCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/lipid-ldl-codes",
+    "valid": true,
+    "choices": [
+        {
+            "value": "18262-6",
+            "display": "LDL Cholesterol (Assay)"
+        },
+        {
+            "value": "13457-7",
+            "display": "Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation"
+        }
+    ]
+}

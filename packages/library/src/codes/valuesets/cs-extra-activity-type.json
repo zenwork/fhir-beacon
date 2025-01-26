@@ -1,0 +1,20 @@
+{
+    "id": "extra-activity-type",
+    "name": "ExtraActivityType",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "aggregate",
+            "display": "aggregate"
+        },
+        {
+            "value": "compose",
+            "display": "compose"
+        },
+        {
+            "value": "label",
+            "display": "label"
+        }
+    ]
+}

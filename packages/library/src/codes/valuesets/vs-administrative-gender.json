@@ -1,0 +1,24 @@
+{
+    "id": "administrative-gender",
+    "name": "AdministrativeGender",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "male",
+            "display": "Male"
+        },
+        {
+            "value": "female",
+            "display": "Female"
+        },
+        {
+            "value": "other",
+            "display": "Other"
+        },
+        {
+            "value": "unknown",
+            "display": "Unknown"
+        }
+    ]
+}

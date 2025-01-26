@@ -1,0 +1,29 @@
+{
+    "id": "entformula-additive",
+    "name": "EnteralFormulaAdditiveTypeCode",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/entformula-additive",
+    "valid": true,
+    "choices": [
+        {
+            "value": "lipid",
+            "display": "Lipid"
+        },
+        {
+            "value": "protein",
+            "display": "Protein"
+        },
+        {
+            "value": "carbohydrate",
+            "display": "Carbohydrate"
+        },
+        {
+            "value": "fiber",
+            "display": "Fiber"
+        },
+        {
+            "value": "water",
+            "display": "Water"
+        }
+    ]
+}

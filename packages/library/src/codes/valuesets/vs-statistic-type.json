@@ -1,0 +1,97 @@
+{
+    "id": "statistic-type",
+    "name": "StatisticType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/statistic-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "absolute-MedianDiff",
+            "display": "Absolute Median Difference"
+        },
+        {
+            "value": "C25463",
+            "display": "Count"
+        },
+        {
+            "value": "0000301",
+            "display": "Covariance"
+        },
+        {
+            "value": "predictedRisk",
+            "display": "Predicted Risk"
+        },
+        {
+            "value": "descriptive",
+            "display": "Descriptive"
+        },
+        {
+            "value": "C93150",
+            "display": "Hazard Ratio"
+        },
+        {
+            "value": "C16726",
+            "display": "Incidence"
+        },
+        {
+            "value": "rate-ratio",
+            "display": "Incidence Rate Ratio"
+        },
+        {
+            "value": "C25564",
+            "display": "Maximum"
+        },
+        {
+            "value": "C53319",
+            "display": "Mean"
+        },
+        {
+            "value": "0000457",
+            "display": "Mean Difference"
+        },
+        {
+            "value": "C28007",
+            "display": "Median"
+        },
+        {
+            "value": "C25570",
+            "display": "Minimum"
+        },
+        {
+            "value": "C16932",
+            "display": "Odds Ratio"
+        },
+        {
+            "value": "C65172",
+            "display": "Pearson Correlation Coefficient"
+        },
+        {
+            "value": "C17010",
+            "display": "Prevalence"
+        },
+        {
+            "value": "C44256",
+            "display": "Proportion"
+        },
+        {
+            "value": "0000565",
+            "display": "Regression Coefficient"
+        },
+        {
+            "value": "C93152",
+            "display": "Relative Risk"
+        },
+        {
+            "value": "0000424",
+            "display": "Risk Difference"
+        },
+        {
+            "value": "C65171",
+            "display": "Spearman Rank-Order Correlation"
+        },
+        {
+            "value": "0000100",
+            "display": "Standardized Mean Difference"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "namingsystem-type",
+    "name": "NamingSystemType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/namingsystem-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "codesystem",
+            "display": "Code System"
+        },
+        {
+            "value": "identifier",
+            "display": "Identifier"
+        },
+        {
+            "value": "root",
+            "display": "Root"
+        }
+    ]
+}

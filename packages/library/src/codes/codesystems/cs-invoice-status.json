@@ -1,0 +1,29 @@
+{
+    "id": "invoice-status",
+    "name": "InvoiceStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/invoice-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "draft",
+            "display": "draft"
+        },
+        {
+            "value": "issued",
+            "display": "issued"
+        },
+        {
+            "value": "balanced",
+            "display": "balanced"
+        },
+        {
+            "value": "cancelled",
+            "display": "cancelled"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "entered in error"
+        }
+    ]
+}

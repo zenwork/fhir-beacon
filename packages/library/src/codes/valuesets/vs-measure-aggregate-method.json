@@ -1,0 +1,32 @@
+{
+    "id": "measure-aggregate-method",
+    "name": "MeasureAggregateMethod",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "sum",
+            "display": "Sum"
+        },
+        {
+            "value": "average",
+            "display": "Average"
+        },
+        {
+            "value": "median",
+            "display": "Median"
+        },
+        {
+            "value": "minimum",
+            "display": "Minimum"
+        },
+        {
+            "value": "maximum",
+            "display": "Maximum"
+        },
+        {
+            "value": "count",
+            "display": "Count"
+        }
+    ]
+}

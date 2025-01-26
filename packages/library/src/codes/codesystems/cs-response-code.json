@@ -1,0 +1,21 @@
+{
+    "id": "response-code",
+    "name": "ResponseType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/response-code",
+    "valid": true,
+    "choices": [
+        {
+            "value": "ok",
+            "display": "OK"
+        },
+        {
+            "value": "transient-error",
+            "display": "Transient Error"
+        },
+        {
+            "value": "fatal-error",
+            "display": "Fatal Error"
+        }
+    ]
+}

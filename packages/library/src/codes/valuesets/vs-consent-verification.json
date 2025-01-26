@@ -1,0 +1,17 @@
+{
+    "id": "consent-verification",
+    "name": "ConsentVerificationCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/consent-verification",
+    "valid": true,
+    "choices": [
+        {
+            "value": "family",
+            "display": "FamilyVerified"
+        },
+        {
+            "value": "validation",
+            "display": "Validation"
+        }
+    ]
+}

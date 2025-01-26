@@ -1,0 +1,16 @@
+{
+    "id": "characteristic-offset",
+    "name": "CharacteristicOffset",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "UNL",
+            "display": "Upper Normal Limit"
+        },
+        {
+            "value": "LNL",
+            "display": "Lower Normal Limit"
+        }
+    ]
+}

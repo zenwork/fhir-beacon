@@ -1,0 +1,21 @@
+{
+    "id": "package-type",
+    "name": "PackageType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/package-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "MedicinalProductPack",
+            "display": "Medicinal product pack"
+        },
+        {
+            "value": "RawMaterialPackage",
+            "display": "Raw material package"
+        },
+        {
+            "value": "Shipping-TransportContainer",
+            "display": "Shipping or transport container"
+        }
+    ]
+}

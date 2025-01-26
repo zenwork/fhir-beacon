@@ -1,0 +1,121 @@
+{
+    "id": "ex-benefitcategory",
+    "name": "BenefitCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/ex-benefitcategory",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Medical Care"
+        },
+        {
+            "value": "2",
+            "display": "Surgical"
+        },
+        {
+            "value": "3",
+            "display": "Consultation"
+        },
+        {
+            "value": "4",
+            "display": "Diagnostic XRay"
+        },
+        {
+            "value": "5",
+            "display": "Diagnostic Lab"
+        },
+        {
+            "value": "14",
+            "display": "Renal Supplies"
+        },
+        {
+            "value": "23",
+            "display": "Diagnostic Dental"
+        },
+        {
+            "value": "24",
+            "display": "Periodontics"
+        },
+        {
+            "value": "25",
+            "display": "Restorative"
+        },
+        {
+            "value": "26",
+            "display": "Endodontics"
+        },
+        {
+            "value": "27",
+            "display": "Maxillofacial Prosthetics"
+        },
+        {
+            "value": "28",
+            "display": "Adjunctive Dental Services"
+        },
+        {
+            "value": "30",
+            "display": "Health Benefit Plan Coverage"
+        },
+        {
+            "value": "35",
+            "display": "Dental Care"
+        },
+        {
+            "value": "36",
+            "display": "Dental Crowns"
+        },
+        {
+            "value": "37",
+            "display": "Dental Accident"
+        },
+        {
+            "value": "49",
+            "display": "Hospital Room and Board"
+        },
+        {
+            "value": "55",
+            "display": "Major Medical"
+        },
+        {
+            "value": "56",
+            "display": "Medically Related Transportation"
+        },
+        {
+            "value": "61",
+            "display": "In-vitro Fertilization"
+        },
+        {
+            "value": "62",
+            "display": "MRI Scan"
+        },
+        {
+            "value": "63",
+            "display": "Donor Procedures"
+        },
+        {
+            "value": "69",
+            "display": "Maternity"
+        },
+        {
+            "value": "76",
+            "display": "Renal Dialysis"
+        },
+        {
+            "value": "F1",
+            "display": "Medical Coverage"
+        },
+        {
+            "value": "F3",
+            "display": "Dental Coverage"
+        },
+        {
+            "value": "F4",
+            "display": "Hearing Coverage"
+        },
+        {
+            "value": "F6",
+            "display": "Vision Coverage"
+        }
+    ]
+}

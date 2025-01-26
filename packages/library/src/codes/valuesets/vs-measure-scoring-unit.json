@@ -1,0 +1,17 @@
+{
+    "id": "measure-scoring-unit",
+    "name": "MeasureScoringUnit",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/measure-scoring-unit",
+    "valid": true,
+    "choices": [
+        {
+            "value": "1",
+            "display": "Default units"
+        },
+        {
+            "value": "/1000.d",
+            "display": "per 1000 patient days"
+        }
+    ]
+}

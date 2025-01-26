@@ -1,0 +1,21 @@
+{
+    "id": "reaction-event-severity",
+    "name": "AllergyIntoleranceSeverity",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/reaction-event-severity",
+    "valid": true,
+    "choices": [
+        {
+            "value": "mild",
+            "display": "Mild"
+        },
+        {
+            "value": "moderate",
+            "display": "Moderate"
+        },
+        {
+            "value": "severe",
+            "display": "Severe"
+        }
+    ]
+}

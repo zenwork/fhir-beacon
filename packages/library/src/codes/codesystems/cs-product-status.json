@@ -1,0 +1,17 @@
+{
+    "id": "product-status",
+    "name": "ProductStatus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/product-status",
+    "valid": true,
+    "choices": [
+        {
+            "value": "active",
+            "display": "Active"
+        },
+        {
+            "value": "entered-in-error",
+            "display": "Entered in Error"
+        }
+    ]
+}

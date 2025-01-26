@@ -1,0 +1,21 @@
+{
+    "id": "devicedefinition-relationtype",
+    "name": "DeviceDefinitionRelationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/devicedefinition-relationtype",
+    "valid": true,
+    "choices": [
+        {
+            "value": "gateway",
+            "display": "Gateway"
+        },
+        {
+            "value": "replaces",
+            "display": "Replaces"
+        },
+        {
+            "value": "previous",
+            "display": "Previous"
+        }
+    ]
+}

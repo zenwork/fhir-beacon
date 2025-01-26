@@ -1,0 +1,24 @@
+{
+    "id": "research-study-reason-stopped",
+    "name": "ResearchStudyReasonStopped",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "accrual-goal-met",
+            "display": "Accrual Goal Met"
+        },
+        {
+            "value": "closed-due-to-toxicity",
+            "display": "Closed due to toxicity"
+        },
+        {
+            "value": "closed-due-to-lack-of-study-progress",
+            "display": "Closed due to lack of study progress"
+        },
+        {
+            "value": "temporarily-closed-per-study-design",
+            "display": "Temporarily closed per study design"
+        }
+    ]
+}

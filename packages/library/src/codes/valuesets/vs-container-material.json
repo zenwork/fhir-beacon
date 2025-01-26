@@ -1,0 +1,21 @@
+{
+    "id": "container-material",
+    "name": "ContainerMaterials",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/container-material",
+    "valid": true,
+    "choices": [
+        {
+            "value": "32039001",
+            "display": "glass"
+        },
+        {
+            "value": "61088005",
+            "display": "plastic"
+        },
+        {
+            "value": "425620007",
+            "display": "metal"
+        }
+    ]
+}

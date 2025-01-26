@@ -1,0 +1,8 @@
+{
+    "id": "additional-instruction-codes",
+    "name": "SNOMEDCTAdditionalDosageInstructions",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/additional-instruction-codes",
+    "valid": true,
+    "choices": []
+}

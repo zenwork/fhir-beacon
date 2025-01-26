@@ -1,0 +1,17 @@
+{
+    "id": "adverse-event-seriousness",
+    "name": "AdverseEventSeriousness",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/adverse-event-seriousness",
+    "valid": true,
+    "choices": [
+        {
+            "value": "non-serious",
+            "display": "Non-serious"
+        },
+        {
+            "value": "serious",
+            "display": "Serious"
+        }
+    ]
+}

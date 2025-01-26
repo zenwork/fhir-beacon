@@ -1,0 +1,16 @@
+{
+    "id": "graph-compartment-use",
+    "name": "GraphCompartmentUse",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "where",
+            "display": "Where"
+        },
+        {
+            "value": "requires",
+            "display": "requires"
+        }
+    ]
+}

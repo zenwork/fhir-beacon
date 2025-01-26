@@ -1,0 +1,28 @@
+{
+    "id": "medication-intended-performer-role",
+    "name": "MedicationIntendedPerformerRole",
+    "type": "CodeSystem",
+    "valid": true,
+    "choices": [
+        {
+            "value": "registerednurse",
+            "display": "Registered Nurse"
+        },
+        {
+            "value": "oncologynurse",
+            "display": "Oncology Nurse"
+        },
+        {
+            "value": "paincontrolnurse",
+            "display": "Pain Control Nurse"
+        },
+        {
+            "value": "physician",
+            "display": "Physician"
+        },
+        {
+            "value": "pharmacist",
+            "display": "Pharmacist"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "artifactassessment-information-type",
+    "name": "ArtifactAssessmentInformationType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/artifactassessment-information-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "comment",
+            "display": "Comment"
+        },
+        {
+            "value": "classifier",
+            "display": "Classifier"
+        },
+        {
+            "value": "rating",
+            "display": "Rating"
+        },
+        {
+            "value": "container",
+            "display": "Container"
+        },
+        {
+            "value": "response",
+            "display": "Response"
+        },
+        {
+            "value": "change-request",
+            "display": "Change Request"
+        }
+    ]
+}

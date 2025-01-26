@@ -1,0 +1,20 @@
+{
+    "id": "substance-source-material-type",
+    "name": "SourceMaterialType",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Animal",
+            "display": "animal"
+        },
+        {
+            "value": "Plant",
+            "display": "plant"
+        },
+        {
+            "value": "Mineral",
+            "display": "mineral"
+        }
+    ]
+}

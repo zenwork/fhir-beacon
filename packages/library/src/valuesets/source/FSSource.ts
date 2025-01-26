@@ -26,13 +26,13 @@ export function empty(source: string,
                       type: 'CodeSystem' | 'ValueSet' | 'unknown',
                       err?: FetchError,
                       isError: boolean = true): ResolvedSet {
-  // console.error({path: path, source: source, error: error, errmsg: err?.message, body: err?.body ?? '', status:
-  // err?.status ?? null, statusText: err?.statusText ?? null, url: err?.url ?? null})
+
   return {
     id: source,
     version: 'n/a',
     type: type,
     name: source,
+    system: source,
     status: 'error',
     origin: {
       path: path,

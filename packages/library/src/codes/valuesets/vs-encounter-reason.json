@@ -1,0 +1,8 @@
+{
+    "id": "encounter-reason",
+    "name": "EncounterReasonCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/encounter-reason",
+    "valid": true,
+    "choices": []
+}

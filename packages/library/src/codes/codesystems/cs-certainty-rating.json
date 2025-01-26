@@ -1,0 +1,73 @@
+{
+    "id": "certainty-rating",
+    "name": "EvidenceCertaintyRating",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/certainty-rating",
+    "valid": true,
+    "choices": [
+        {
+            "value": "high",
+            "display": "High quality"
+        },
+        {
+            "value": "moderate",
+            "display": "Moderate quality"
+        },
+        {
+            "value": "low",
+            "display": "Low quality"
+        },
+        {
+            "value": "very-low",
+            "display": "Very low quality"
+        },
+        {
+            "value": "no-concern",
+            "display": "no serious concern"
+        },
+        {
+            "value": "serious-concern",
+            "display": "serious concern"
+        },
+        {
+            "value": "very-serious-concern",
+            "display": "very serious concern"
+        },
+        {
+            "value": "extremely-serious-concern",
+            "display": "extremely serious concern"
+        },
+        {
+            "value": "present",
+            "display": "present"
+        },
+        {
+            "value": "absent",
+            "display": "absent"
+        },
+        {
+            "value": "no-change",
+            "display": "no change to rating"
+        },
+        {
+            "value": "downcode1",
+            "display": "reduce rating: -1"
+        },
+        {
+            "value": "downcode2",
+            "display": "reduce rating: -2"
+        },
+        {
+            "value": "downcode3",
+            "display": "reduce rating: -3"
+        },
+        {
+            "value": "upcode1",
+            "display": "increase rating: +1"
+        },
+        {
+            "value": "upcode2",
+            "display": "increase rating: +2"
+        }
+    ]
+}

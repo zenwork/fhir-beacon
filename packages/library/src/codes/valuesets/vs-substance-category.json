@@ -1,0 +1,37 @@
+{
+    "id": "substance-category",
+    "name": "SubstanceCategoryCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/substance-category",
+    "valid": true,
+    "choices": [
+        {
+            "value": "allergen",
+            "display": "Allergen"
+        },
+        {
+            "value": "biological",
+            "display": "Biological Substance"
+        },
+        {
+            "value": "body",
+            "display": "Body Substance"
+        },
+        {
+            "value": "chemical",
+            "display": "Chemical"
+        },
+        {
+            "value": "food",
+            "display": "Dietary Substance"
+        },
+        {
+            "value": "drug",
+            "display": "Drug or Medicament"
+        },
+        {
+            "value": "material",
+            "display": "Material"
+        }
+    ]
+}

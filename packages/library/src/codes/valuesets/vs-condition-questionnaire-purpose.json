@@ -1,0 +1,20 @@
+{
+    "id": "condition-questionnaire-purpose",
+    "name": "ConditionQuestionnairePurpose",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preadmit",
+            "display": "Pre-admit"
+        },
+        {
+            "value": "diff-diagnosis",
+            "display": "Diff Diagnosis"
+        },
+        {
+            "value": "outcome",
+            "display": "Outcome"
+        }
+    ]
+}

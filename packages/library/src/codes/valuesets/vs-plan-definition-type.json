@@ -1,0 +1,25 @@
+{
+    "id": "plan-definition-type",
+    "name": "PlanDefinitionType",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/plan-definition-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "order-set",
+            "display": "Order Set"
+        },
+        {
+            "value": "clinical-protocol",
+            "display": "Clinical Protocol"
+        },
+        {
+            "value": "eca-rule",
+            "display": "ECA Rule"
+        },
+        {
+            "value": "workflow-definition",
+            "display": "Workflow Definition"
+        }
+    ]
+}

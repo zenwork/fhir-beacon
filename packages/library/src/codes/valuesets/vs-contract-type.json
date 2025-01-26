@@ -1,0 +1,29 @@
+{
+    "id": "contract-type",
+    "name": "ContractTypeCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/contract-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "privacy",
+            "display": "Privacy"
+        },
+        {
+            "value": "disclosure",
+            "display": "Disclosure"
+        },
+        {
+            "value": "healthinsurance",
+            "display": "Health Insurance"
+        },
+        {
+            "value": "supply",
+            "display": "Supply Contract"
+        },
+        {
+            "value": "consent",
+            "display": "Consent"
+        }
+    ]
+}

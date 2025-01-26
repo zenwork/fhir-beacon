@@ -1,0 +1,17 @@
+{
+    "id": "supplyrequest-reason",
+    "name": "SupplyRequestReason",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/supplyrequest-reason",
+    "valid": true,
+    "choices": [
+        {
+            "value": "patient-care",
+            "display": "Patient Care"
+        },
+        {
+            "value": "ward-stock",
+            "display": "Ward Stock"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "substance-source-material-genus",
+    "name": "SubstanceSourceMaterialGenus",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/substance-source-material-genus",
+    "valid": true,
+    "choices": [
+        {
+            "value": "Mycobacterium",
+            "display": "Mycobacterium"
+        },
+        {
+            "value": "InfluenzavirusA",
+            "display": "Influenza A virus"
+        },
+        {
+            "value": "Ginkgo",
+            "display": "Ginkgo"
+        }
+    ]
+}

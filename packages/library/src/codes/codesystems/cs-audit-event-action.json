@@ -1,0 +1,29 @@
+{
+    "id": "audit-event-action",
+    "name": "AuditEventAction",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/audit-event-action",
+    "valid": true,
+    "choices": [
+        {
+            "value": "C",
+            "display": "Create"
+        },
+        {
+            "value": "R",
+            "display": "Read"
+        },
+        {
+            "value": "U",
+            "display": "Update"
+        },
+        {
+            "value": "D",
+            "display": "Delete"
+        },
+        {
+            "value": "E",
+            "display": "Execute"
+        }
+    ]
+}

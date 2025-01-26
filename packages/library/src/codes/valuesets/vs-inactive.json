@@ -1,0 +1,17 @@
+{
+    "id": "inactive",
+    "name": "ExampleInactive",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/inactive",
+    "valid": true,
+    "choices": [
+        {
+            "value": "_ActMoodCompletionTrack",
+            "display": "ActMoodCompletionTrack"
+        },
+        {
+            "value": "_ActMoodPredicate",
+            "display": "ActMoodPredicate"
+        }
+    ]
+}

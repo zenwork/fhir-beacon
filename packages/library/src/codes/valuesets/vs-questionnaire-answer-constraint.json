@@ -1,0 +1,20 @@
+{
+    "id": "questionnaire-answer-constraint",
+    "name": "QuestionnaireAnswerConstraint",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "optionsOnly",
+            "display": "Options only"
+        },
+        {
+            "value": "optionsOrType",
+            "display": "Options or 'type'"
+        },
+        {
+            "value": "optionsOrString",
+            "display": "Options or string"
+        }
+    ]
+}

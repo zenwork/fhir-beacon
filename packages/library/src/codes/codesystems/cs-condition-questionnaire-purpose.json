@@ -1,0 +1,21 @@
+{
+    "id": "condition-questionnaire-purpose",
+    "name": "ConditionQuestionnairePurpose",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/condition-questionnaire-purpose",
+    "valid": true,
+    "choices": [
+        {
+            "value": "preadmit",
+            "display": "Pre-admit"
+        },
+        {
+            "value": "diff-diagnosis",
+            "display": "Diff Diagnosis"
+        },
+        {
+            "value": "outcome",
+            "display": "Outcome"
+        }
+    ]
+}

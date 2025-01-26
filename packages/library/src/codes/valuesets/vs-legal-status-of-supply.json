@@ -1,0 +1,40 @@
+{
+    "id": "legal-status-of-supply",
+    "name": "LegalStatusOfSupply",
+    "type": "ValueSet",
+    "valid": true,
+    "choices": [
+        {
+            "value": "100000072076",
+            "display": "Medicinal product not subject to medical prescription"
+        },
+        {
+            "value": "100000072077",
+            "display": "Medicinal product on medical prescription for renewable or non-renewable delivery"
+        },
+        {
+            "value": "100000072078",
+            "display": "Medicinal product subject to restricted medical prescription"
+        },
+        {
+            "value": "100000072079",
+            "display": "Medicinal product on medical prescription for non-renewable delivery"
+        },
+        {
+            "value": "100000072084",
+            "display": "Medicinal product subject to medical prescription"
+        },
+        {
+            "value": "100000072085",
+            "display": "Medicinal product subject to special medical prescription"
+        },
+        {
+            "value": "100000072086",
+            "display": "Medicinal product on medical prescription for renewable delivery"
+        },
+        {
+            "value": "100000157313",
+            "display": "Medicinal product subject to special and restricted medical prescription"
+        }
+    ]
+}

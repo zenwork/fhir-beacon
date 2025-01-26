@@ -1,0 +1,17 @@
+{
+    "id": "submit-data-update-type",
+    "name": "SubmitDataUpdateType",
+    "type": "CodeSystem",
+    "system": "http://hl7.org/fhir/CodeSystem/submit-data-update-type",
+    "valid": true,
+    "choices": [
+        {
+            "value": "incremental",
+            "display": "Incremental"
+        },
+        {
+            "value": "snapshot",
+            "display": "Snapshot"
+        }
+    ]
+}
