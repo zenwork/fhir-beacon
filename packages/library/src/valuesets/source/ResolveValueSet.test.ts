@@ -34,7 +34,7 @@ describe('ResolveValueSet', () => {
           filter: []
         }
       ]
-
+      global.fetch = vi.fn()
       const skipUrl = vi.fn().mockImplementation((id: string) => /example\.com/.test(id))
       const result = await resolveIncludesOrExclude(segment, 'include', false, skipUrl)
 

@@ -37,9 +37,7 @@ export async function resolveValueSet(vs: ValueSetData,
 
   return Promise.all([
                        Promise.resolve(resolveIncludesOrExclude(vs.compose?.include ?? [], 'include', debug, skipUrl))
-                              .then(r => {
-                                return r.flat()
-                              }),
+                              .then(r => r.flat()),
                        Promise.resolve(resolveIncludesOrExclude(vs.compose?.exclude ?? [], 'exclude', debug, skipUrl))
                               .then(r => r.flat())
 
@@ -116,13 +114,12 @@ function resolve(segment: ValueSetIncludeExcludeData,
 
   return new Promise<ResolvedValue[]>((resolve, reject) => {
 
-    const resolvedConcepts: ResolvedValue[] = []
+
     assertOk(segment, idx)
 
     if (segment.concept && segment.concept.length > 0) {
       resolveConcepts(segment.concept, debug)
         .then(r => {
-          resolvedConcepts.push(...r)
           resolve(r)
         })
         .catch((r) => reject(r))
@@ -131,7 +128,6 @@ function resolve(segment: ValueSetIncludeExcludeData,
       resolveChildSystem(segment.system, urlsToResolve, skipUrl, debug)
         .then(r => {
           if (r !== null) {
-            resolvedConcepts.push(...r)
             resolve(r)
           } else {
             reject(`Failed to resolve system: ${segment.system}`)
@@ -140,7 +136,7 @@ function resolve(segment: ValueSetIncludeExcludeData,
         .catch((r) => reject(r))
 
     } else if (segment.valueSet && segment.valueSet.length > 0) {
-
+      const resolvedConcepts: ResolvedValue[] = []
       Promise.all(segment.valueSet.map(vs => resolveChildValueSet(vs, skipUrl, debug, urlsToResolve)))
              .then((all: (ResolvedSet | null)[]) => all.filter(v => v !== null))
              .then((valid: ResolvedSet[]) => valid.map(v => v!.compose[variant].concept))
@@ -170,17 +166,18 @@ function resolveChildSystem(system: URI,
     const concepts: ResolvedValue[] = []
     urlsToResolve.push({ uri: url, resolved: false })
     return fetchIt({ url: url, debug })
-
       .then((json: ValueSetData | CodeSystemData | unknown) => {
               if (isCodeSystem(json)) {
                 if (debug) console.log('resolved [' + json.concept.length + '] from remote code system: ' + ' ' + url)
-                json.concept
-                    .forEach((c: Record<string, unknown>) =>
-                               concepts.push({
+                concepts.push(...json.concept
+                                     .map((c: Record<string, unknown>) =>
+                                            ({
                                                code: c.code as string,
                                                display: c.display as string ?? 'n/a',
                                                definition: c.definition as string ?? 'n/a'
-                                             }))
+                                            })
+                                     )
+                )
                 urlsToResolve.forEach(u => { if (u.uri === url) u.resolved = true })
                 return concepts
               }
@@ -238,6 +235,9 @@ function resolvable(vs: string, skipUrl: (url: string) => boolean): boolean {
  * https://hl7.org/fhir/codesystem-action-participant-type.json
  */
 function convert(uri: string): string {
+  if (uri.startsWith('https://hl7.org/fhir/CodeSystem/')) {
+    return uri.replace('https://hl7.org/fhir/CodeSystem/', 'https://hl7.org/fhir/codesystem-') + '.json'
+  }
   if (uri.startsWith('https://hl7.org/fhir/')) {
     return uri.replace('https://hl7.org/fhir/', 'https://hl7.org/fhir/codesystem-') + '.json'
   }

@@ -18,8 +18,8 @@ import {
   URI,
   Url,
   UsageContextData
-}                                                                 from '../components'
-import {BackboneElementData, DomainResourceData, FhirElementData} from '../internal'
+}                                                                               from '../components'
+import {BackboneElementData, DomainResourceData, FhirElementData, ResourceData} from '../internal'
 
 
 
@@ -227,6 +227,10 @@ export function isLoadableStore(source: ValueSetSource | LoadableStore): source 
 
 export function isResolutionError(origin: ValueSetData | ResolutionError): origin is ResolutionError {
   return (origin as ResolutionError).error !== undefined
+}
+
+export function isResource(origin: unknown): origin is ResourceData {
+  return (origin as ResourceData).resourceType !== undefined
 }
 
 export function isValueSet(origin: unknown): origin is ValueSetData {

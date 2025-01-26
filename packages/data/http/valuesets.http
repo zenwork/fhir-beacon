@@ -15,5 +15,18 @@ Accept: application/json
 
 
 ###
-GET https://hl7.org/fhir/week-of-month
-Accept: application/json
+HEAD https://hl7.org/fhir/codesystem-metric-calibration-type.json
+User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"
+
+###
+GET https://hl7.org/fhir/codesystem-sid/ex-icd-10-procedures.json
+User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"
+
+
+###
+GET https://www.hl7.org/fhir/codesystem-icd-10-procedures.json
+User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"
+Prefer: 'return=representation'
+
+###
+GET https://hl7.org/fhir/codesystem-restful-capability-mode.json

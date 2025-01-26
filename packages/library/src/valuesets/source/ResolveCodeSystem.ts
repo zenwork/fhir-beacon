@@ -20,7 +20,7 @@ export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = fal
                     + ' (http://hl7.org/fhir/valueset-definitions.html#ValueSet.status)')
   }
 
-  return Promise.all([Promise.resolve(resolveIncludesOrExclude(vs.concept ?? [], debug))])
+  return Promise.all([Promise.resolve(resolveIncludesOrExclude(vs.id ?? 'n/a', vs.concept ?? [], debug))])
                 .then((r: ResolvedValue[][]) => {
                   return ({
                     origin: vs,
@@ -39,9 +39,9 @@ export async function resolveCodeSystem(vs: CodeSystemData, debug: boolean = fal
 
 }
 
-function resolveIncludesOrExclude(segment: CodeSystemConceptData[], debug: boolean): ResolvedValue[] {
+function resolveIncludesOrExclude(id: string, segment: CodeSystemConceptData[], debug: boolean): ResolvedValue[] {
 
-  if (debug) console.log('resolved [' + segment.length + '] from self')
+  if (debug) console.log('resolved [' + segment.length + `] from ${id}`)
   return segment.map(inc => ({ code: inc.code, display: inc.display ?? 'n/a', definition: 'n/a' }))
 
 }

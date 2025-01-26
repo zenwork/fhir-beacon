@@ -1,8 +1,17 @@
-import {readdir, readFile, realpath}                              from 'node:fs/promises'
-import {LoadableStore, ResolvedSet, ValueSetData, ValueSetSource} from '../ValueSet.data'
+import {readdir, readFile, realpath} from 'node:fs/promises'
+import {
+  isCodeSystem,
+  isResource,
+  isValueSet,
+  LoadableStore,
+  ResolvedSet,
+  ValueSetData,
+  ValueSetSource
+}                                    from '../ValueSet.data'
 
-import {FetchError}      from './FetchError'
-import {resolveValueSet} from './ResolveValueSet'
+import {FetchError}        from './FetchError'
+import {resolveCodeSystem} from './ResolveCodeSystem'
+import {resolveValueSet}   from './ResolveValueSet'
 
 
 
@@ -112,20 +121,22 @@ export class FSSource implements ValueSetSource, LoadableStore {
       try {
 
         if (this.#cache.has(source)) {
+          console.log('cache hit')
           return this.#cache.get(source)!
         }
 
         const fullpath: string = `${this.#path}/${source}`
         if (debug) console.log(`Reading ${fullpath}`)
+
         return realpath(fullpath)
           .then(path => readFile(path, { encoding: 'utf8' }))
           .then(data => JSON.parse(data) as ValueSetData)
           .then(json => {
             if (isValueSet(json)) return resolveValueSet(json, this.skipUrl, debug)
-            // if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
-            // if (isResource(json)) { // @ts-ignore
-            //   return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
-            // }
+            if (isCodeSystem(json)) return resolveCodeSystem(json, debug)
+            if (isResource(json)) { // @ts-ignore
+              return empty(source, this.#path, `error: unsupported resource type`, json.resourceType)
+            }
             throw new FetchError(`Read json is not usable`, fullpath, 0, 'OK', JSON.stringify(json).replace(/"/g, '\''))
           })
           .then(resolvedValueSet => this.#cache.set(source, resolvedValueSet))
@@ -188,9 +199,4 @@ export function valueSetCriteria(file: string): boolean {
 
 export function codesystemCriteria(file: string): boolean {
   return file.startsWith('codesystem')
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: type-guard
-function isValueSet(data: any): data is ValueSetData {
-  return data.resourceType === 'ValueSet'
 }

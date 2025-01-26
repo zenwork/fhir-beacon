@@ -23,20 +23,42 @@ const defaultOptions: Options = {
     'Accept': 'application/fhir+json;q=1.0, '
               + 'application/json+fhir;q=0.9, '
               + 'application/json+fhir;q=0.9, '
-              + '*/*;q=0.5'
+              + '*/*;q=0.5',
+    'Cache-Control': 'no-cache',
+    'Prefer': 'return=representation',
+    'Cookie': 'session_id=abc123; other_cookie=value',
+    '_Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    , 'Accept-Encoding': 'gzip, deflate, br, zstd'
+    , 'Accept-Language': 'en,en-CA;q=0.8,en-US;q=0.5,fr-CH;q=0.3'
+    , 'Connection': 'keep-alive'
+    , 'Host': 'hl7.org'
+    , 'Sec-Fetch-Dest': 'document'
+    , 'Sec-Fetch-Mode': 'navigate'
+    , 'Sec-Fetch-Site': 'none'
+    , 'Sec-Fetch-User': '?1'
+    , 'Sec-GPC': '1'
+    , 'Upgrade-Insecure-Requests': '1'
+    , 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0'
+
   },
   redirect: 'follow'
 
+
 }
+
+const cache: { [key: string]: ResolveResponse } = {}
 
 export async function fetchIt({
                                 url,
                                 options = defaultOptions,
-                                retries = 5,
+                                retries = 3,
                                 retryFactor = 1000,
-                                debug = false
+                                debug = true
                               }: ResolveRequest): Promise<ResolveResponse> {
 
+  if (cache[url]) {
+    return cache[url]
+  }
 
   for (let attempt = 1; attempt <= retries; attempt++) {
 
@@ -50,8 +72,10 @@ export async function fetchIt({
       let d: string = ''
 
       if (response.status >= 200 && response.status < 300) {
+
         try {
-          if (response.bodyUsed) {
+          // biome-ignore lint/correctness/noConstantCondition: <explanation>
+          if (response.bodyUsed || true) {
 
             d = await response.text()
 
@@ -62,6 +86,7 @@ export async function fetchIt({
             const parsedData = JSON.parse(d) as ResolveResponse
             if (parsedData instanceof Object) {
               logFetchRequest(id, response.status, response.statusText, 'n/a', url, debug)
+              cache[url] = parsedData
               return parsedData
             } else {
 
@@ -95,7 +120,7 @@ export async function fetchIt({
         if (!error.retryable) throw error
         if (attempt === retries) {
 
-          logFetchRequest(id, 'FAIL', 'MAX', '', url, error)
+          logFetchRequest(id, 'FAIL', 'MAX:' + error.status, '', url, error)
           throw new FetchError(
             `failed after reties: ${retries} - ${error.message}`,
             error.url,
