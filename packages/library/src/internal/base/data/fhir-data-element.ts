@@ -53,7 +53,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    * @type {T & {} | null}
    */
   @state()
-  declare extendedData: Decorated<T>
+  private extendedData: Decorated<T>
 
   //------------------------------------------------//
   /**
@@ -100,7 +100,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
     super()
     this.type = type
     this.data = NoDataObject as T
-    // this.extendedData = decorate(this.key, this.data, this.errors)
+    this.extendedData = decorate(this.key, this.data, this.errors)
     new DataContextConsumerController(this)
 
     this.addEventListener('bkn-input', (e) => {

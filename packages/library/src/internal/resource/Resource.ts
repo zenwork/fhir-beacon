@@ -58,7 +58,7 @@ export abstract class Resource<T extends ResourceData> extends BaseElement<T> {
     return super.render()
   }
 
-  private renderResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
+  private renderResourceStructure(_config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
           <fhir-meta label="meta" .data=${data.meta} .open=${false} summary></fhir-meta>

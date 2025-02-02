@@ -68,7 +68,7 @@ export class DeepKeyMap<K, V> {
    */
   get(key: K) {
     for (const entry of this.#entries) {
-      if (this.deepEquals(entry.key, key)) {
+      if (this.deepEquals(key, entry.key)) {
         return entry.value
       }
     }

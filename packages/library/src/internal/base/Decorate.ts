@@ -1,8 +1,8 @@
-import {ResourceData}                                  from '../resource/domain-resource.data'
-import {Decorated}                                     from './Decorate.types'
-import {FqkMap}                                        from './DeepKeyMap'
-import {FhirElementData}                               from './FhirElement.type'
-import {ErrorNodeKey, errors, FullyQualifiedKey, meta} from './Validations.type'
+import {ResourceData}    from '../resource/domain-resource.data'
+import {Decorated}       from './Decorate.types'
+import {FqkMap}          from './DeepKeyMap'
+import {FhirElementData} from './FhirElement.type'
+import {errors, meta}    from './Validations.type'
 
 
 
@@ -23,40 +23,27 @@ import {ErrorNodeKey, errors, FullyQualifiedKey, meta} from './Validations.type'
 export const NoDataObject: FhirElementData | ResourceData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
 
 export function decorate<T extends (FhirElementData | Decorated<FhirElementData>)>(
-  key: string,
+  _key?: string,
   data?: T,
-  errorMap?: FqkMap
+  _errorMap?: FqkMap
 ): Decorated<T> {
 
   const tempData: T | {} = (data && data !== NoDataObject) ? data : {}
 
-  const dataErrors: [FullyQualifiedKey, string[]][] = (data && errors in data)
-                                                      ? (data[errors] as FqkMap).entries()
-                                                      : []
+  // const dataErrors: [FullyQualifiedKey, string[]][] = (data && errors in data)
+  //                                                     ? (data[errors] as FqkMap).entries()
+  //                                                     : []
 
 
-  let injectedErrors: [FullyQualifiedKey, string[]][] = errorMap ? errorMap.entries() : []
-  if (key === 'category') console.log('err', key, data, injectedErrors)
-
-  injectedErrors = injectedErrors
-    .filter(e => {
-      const path: ErrorNodeKey[] | undefined = e[0].path
-      return (path && path.length > 0) ? path[0].node === key : false
-    })
-    .map(e => [
-      {
-        path: e[0].path!.slice(1),
-        key: e[0].key,
-        index: e[0].index
-      }, e[1]
-    ])
+  // const injectedErrors: [FullyQualifiedKey, string[]][] = errorMap ? errorMap.entries() : []
+  // if (key === 'category') console.log('err', key, data, injectedErrors)
 
 
-  const errs: FqkMap = new FqkMap([...dataErrors, ...injectedErrors])
+  // const errs: FqkMap = new FqkMap([...dataErrors, ])
 
   return {
     ...tempData,
-    [errors]: errs,
+    [errors]: new FqkMap(),
     //TODO: hide is not the right metadata... it's the likely wanted behaviour
     [meta]: { hide: data === NoDataObject }
   } as Decorated<T>
