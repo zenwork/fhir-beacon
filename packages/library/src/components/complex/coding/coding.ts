@@ -4,6 +4,8 @@ import {BaseElement, Validations} from '../../../internal'
 import {DisplayConfig}            from '../../../types'
 import {CodingData}               from './coding.data'
 
+
+
 @customElement('fhir-coding')
 export class Coding extends BaseElement<CodingData> {
 
@@ -16,7 +18,8 @@ export class Coding extends BaseElement<CodingData> {
     if (data.code) return data.code
   }
 
-  public override renderDisplay(config: DisplayConfig, data: CodingData): TemplateResult[] {
+  public override renderDisplay(_config: DisplayConfig, data: CodingData,
+                                validations: Validations): TemplateResult[] {
     return [
       html`
           <fhir-primitive
@@ -24,20 +27,29 @@ export class Coding extends BaseElement<CodingData> {
                   .value=${Coding.computeDisplay(data)}
                   .context=${data.display ? data.code : undefined}
                   .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
+                  .errormessage=${validations.messageFor({ path: [{ node: 'category' }], key: 'code', index: 0 })}
                   summary
           ></fhir-primitive >
       `
     ]
   }
 
-  public renderStructure(config: DisplayConfig, data: CodingData,
+  public renderStructure(_config: DisplayConfig, data: CodingData,
                          validations: Validations): TemplateResult[] {
     return [
       html`
           <fhir-primitive label="extension" .value=${data.extension} summary></fhir-primitive >
           <fhir-primitive label="version" .value=${data.version} summary></fhir-primitive >
           <fhir-primitive label="system" .value=${data.system} type="url" summary></fhir-primitive >
-          <fhir-primitive label="code" .value=${data.code} type="code" errormessage=${validations.errFor('code')} summary></fhir-primitive >
+          <fhir-primitive label="code"
+                          .value=${data.code}
+                          type="code"
+                          errormessage=${validations.messageFor({
+                                                                    path: [{ node: 'category' }],
+                                                                    key: 'code',
+                                                                    index: 0
+                                                                })} summary
+          ></fhir-primitive>
           <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
       `
     ]

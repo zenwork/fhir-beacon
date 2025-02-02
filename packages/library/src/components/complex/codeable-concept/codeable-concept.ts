@@ -1,11 +1,13 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElement, Decorated, errors} from '../../../internal'
-import {isDefined}            from '../../../shell'
-import {strap}                          from '../../../shell/layout/wrapper/strap'
-import {wrapLines}                      from '../../../shell/layout/wrapper/wrapLines'
-import {DisplayConfig}                  from '../../../types'
-import {CodeableConceptData}            from './codeable-concept.data'
+import {html, TemplateResult}                from 'lit'
+import {customElement}                       from 'lit/decorators.js'
+import {BaseElement, Decorated, Validations} from '../../../internal'
+import {isDefined}                           from '../../../shell'
+import {strap}                               from '../../../shell/layout/wrapper/strap'
+import {wrapLines}                           from '../../../shell/layout/wrapper/wrapLines'
+import {DisplayConfig}                       from '../../../types'
+import {CodeableConceptData}                 from './codeable-concept.data'
+
+
 
 @customElement('fhir-codeable-concept')
 export class CodeableConcept extends BaseElement<CodeableConceptData> {
@@ -13,7 +15,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     super('CodeableConcept')
   }
 
-  public renderDisplay(config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
+  public renderDisplay(_config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
 
     return [
       wrapLines(this.key,
@@ -31,7 +33,10 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
 
   }
 
-  public renderStructure(config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig,
+                         data: Decorated<CodeableConceptData>,
+                         validations: Validations): TemplateResult[] {
+
     return [
       strap({
               key: 'coding',
@@ -40,7 +45,11 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
               generator: (code, label) => html`
                   <fhir-coding key="coding"
                                label="${label}"
-                               .errors=${data[errors]}
+                               .errors=${validations.sliceForFQK({
+                                                                     path: [{ node: 'category' }],
+                                                                     key: 'code',
+                                                                     index: 0
+                                                                 })}
                                .data=${code}
                                summary
                   ></fhir-coding>`,

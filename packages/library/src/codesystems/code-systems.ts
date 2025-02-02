@@ -4,7 +4,7 @@ import {CodeSystemAddressUse}         from './CodeSystem-address-use'
 import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
 import {CodeSystemIdentifierUse}      from './CodeSystem-identifier-use'
 import {CodeSystemQuantityComparator} from './CodeSystem-quantity-comparator'
-import {CodeSystemSlotStatus} from './Codesystem-slotstatus'
+import {CodeSystemSlotStatus}         from './Codesystem-slotstatus'
 import {ValueSetAgeUnits}             from './ValueSet-age-units'
 import {ValueSetDistanceUnits}        from './ValueSet-distance-units'
 import {ValueSetDurationUnits}        from './ValueSet-duration-units'
@@ -44,11 +44,14 @@ export const FhirIdentifierType = extractValueSet(ValueSetIdentifierType)
 export const FhirUcumUnits = extractValueSet(ValueSetUcumCommon)
 const valueSets: ValueSet[] = [FhirUcumUnits, FhirIdentifierType, FhirAges, FhirDuration, FhirDistances]
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function extract(concepts: any[], types: FhirType[]) {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const extracted = concepts.map((c: any) => {
 
     let kind = ''
     let abstract = false
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     c.property?.forEach((p: any) => {
       if (p.code === 'kind') kind = p.valueCode
       if (p.code === 'abstract-type') abstract = true
@@ -66,11 +69,13 @@ function extract(concepts: any[], types: FhirType[]) {
 }
 
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function extractCodingSystem(cs: any): ValueSet {
 
   return {
     id: cs.id,
     url: cs.url,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     concepts: cs.concept.map((c: any) => ({
       url: cs.url,
       system: cs.url,
@@ -81,11 +86,13 @@ function extractCodingSystem(cs: any): ValueSet {
   }
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function extractValueSet(vs: any): ValueSet {
   const include = vs.compose.include[0]
   return {
     id: vs.id,
     url: vs.url,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     concepts: include.concept.map((c: any) => ({
       url: vs.url,
       system: include.system,
@@ -95,6 +102,11 @@ function extractValueSet(vs: any): ValueSet {
   }
 }
 
+/**
+ *
+ * @deprecated Should be replaced with new implementation: Codes
+ * @see Codes
+ */
 export function useSystem(url?: Id): ValueSet {
 
   return url

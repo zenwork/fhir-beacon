@@ -54,12 +54,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
-            ${validations.errFor('comparator::sqty-1') ? html`
+            ${validations.messageFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
-                                .value=${(data as any).comparator}
+                                .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                                .errormessage=${validations.messageFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
         `
       ]
@@ -104,7 +104,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                           type="code"
                           summary
                           .choices=${system?.concepts}
-                          .errormessage=${validations.errFor('code')}
+                          .errormessage=${validations.messageFor('code')}
           ></fhir-primitive>
           <fhir-primitive key="unit"
                           .value=${data.unit}
@@ -114,7 +114,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     ]
   }
 
-  public renderStructure(config: DisplayConfig,
+  public renderStructure(_config: DisplayConfig,
                          data: QuantityData | SimpleQuantityData,
                          validations: Validations): TemplateResult[] {
 
@@ -136,12 +136,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         html`
             <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
             <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
-            ${validations.errFor('comparator::sqty-1') ? html`
+            ${validations.messageFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
-                                .value=${(data as any).comparator}
+                                .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                                .errormessage=${validations.messageFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
             <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
             <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>
@@ -161,27 +161,27 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, fetched: boolean) {
+  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, _fetched: boolean) {
     if (this.simple && !isSimpleQuantity(data)) {
-      validations.addErr({
-                           key: 'comparator::sqty-1',
-                           err: `${this.type}:${this.key}: comparator should not be present`
+      validations.add({
+                        fqk: { path: [{ node: 'comparator::sqty-1' }] },
+                        message: `${this.type}:${this.key}: comparator should not be present`
                          })
 
     }
 
     if (!hasAllOrNone(data, ['code', 'system'])) {
-      validations.addErr({
-                           key: this.type + '::qty-3',
-                           err: `${this.type}: code and system should be set or none of the two`
+      validations.add({
+                        fqk: { path: [{ node: this.type + '::qty-3' }] },
+                        message: `${this.type}: code and system should be set or none of the two`
                          })
     }
 
     const system = useSystem(data.system)
     if (system && !system.concepts.find((v: Value) => v.code === data.code)) {
-      validations.addErr({
-                           key: 'code',
-                           err: `${this.type}: code ${data.code} is not valid for system: ${data.system}`
+      validations.add({
+                        fqk: { path: [{ node: 'code' }] },
+                        message: `${this.type}: code ${data.code} is not valid for system: ${data.system}`
                          })
     }
 

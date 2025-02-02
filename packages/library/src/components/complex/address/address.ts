@@ -32,15 +32,15 @@ export class Address extends BaseElement<AddressData> {
     return [
       html`
           <fhir-primitive
-                  label="use"
+                  key="use"
                   .value=${address_use.concepts.filter(v => v.code === data.use)[0]?.display ?? data.use}
-                  errormessage=${vldtns.errFor('use')}
+                  .errormessage=${vldtns.messageFor('use')}
                   summary
           ></fhir-primitive >
           <fhir-primitive
-                  label="type"
+                  key="type"
                   .value=${address_type.concepts.filter(v => v.code === data.type)[0]?.display ?? data.type}
-                  errormessage=${vldtns.errFor('type')}
+                  .errormessage=${vldtns.messageFor('type')}
                   summary
           ></fhir-primitive >
           ${hasSome(data.line, this.verbose)
@@ -72,14 +72,14 @@ export class Address extends BaseElement<AddressData> {
                   label="use"
                   .value=${data.use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.errFor('use')}
+                  errormessage=${vldtns.messageFor('use')}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   label="type"
                   .value=${data.type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.errFor('type')}
+                  errormessage=${vldtns.messageFor('type')}
                   summary
           ></fhir-primitive >
           <fhir-primitive label="text"
@@ -122,7 +122,7 @@ export class Address extends BaseElement<AddressData> {
                   key="use"
                   .value=${data.use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.errFor('use')}
+                  errormessage=${vldtns.messageFor('use')}
                   .choices=${address_use.concepts}
                   summary
           ></fhir-primitive>
@@ -130,7 +130,7 @@ export class Address extends BaseElement<AddressData> {
                   key="type"
                   .value=${data.type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.errFor('type')}
+                  errormessage=${vldtns.messageFor('type')}
                   .choices=${address_type.concepts}
                   summary
           ></fhir-primitive>
@@ -178,23 +178,24 @@ export class Address extends BaseElement<AddressData> {
   }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(data: AddressData, validations: Validations, fetched: boolean): void {
+  public validate(data: AddressData, validations: Validations, _fetched: boolean): void {
 
 
     if (data.use) {
       if (!address_use.concepts.some(c => c.code == data.use)) {
-        validations.addErr({
-                             key: 'use',
-                             err: 'address use is not one of accepted: ' + FhirAddressUse.map(c => c.code).join(', ')
+        validations.add({
+                          fqk: { path: [{ node: 'use' }] },
+                          message: 'address use is not one of accepted: ' + FhirAddressUse.map(c => c.code).join(', ')
                     })
       }
     }
 
     if (data.type) {
       if (!address_type.concepts.some(c => c.code == data.type)) {
-        validations.addErr({
-                             key: 'type',
-                             err: 'address type is not one of accepted: ' + FhirAddressTypes.map(c => c.code).join(', ')
+        validations.add({
+                          fqk: { path: [{ node: 'type' }] },
+                          message: 'address type is not one of accepted: ' + FhirAddressTypes.map(c => c.code)
+                                                                                             .join(', ')
                     })
       }
     }

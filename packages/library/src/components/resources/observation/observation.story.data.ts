@@ -13,6 +13,17 @@ export const data = {
     }
   ],
   status: 'final',
+  category: [
+    {
+      coding: [
+        {
+          system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+          code: 'vital-signss',
+          display: 'Vital Signs'
+        }
+      ]
+    }
+  ],
   code: {
     coding: [
       {

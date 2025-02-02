@@ -65,7 +65,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display}
                               .link=${data.reference}
-                              .errormessage=${validation.errFor('*')}
+                              .errormessage=${validation.messageFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -76,7 +76,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display ? data.display : data.reference}
                               .link=${data.reference}
-                              .errormessage=${validation.errFor('*')}
+                              .errormessage=${validation.messageFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -96,7 +96,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display || data.display || data.reference || 'undefined'}
                               .link=${data.reference}
-                              .errormessage=${validation.errFor('*')}
+                              .errormessage=${validation.messageFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -108,7 +108,7 @@ export class Reference extends BaseElement<ReferenceData> {
                                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                                       .value=${data.display || data.display || data.reference || 'undefined'}
                                       .link=${data.reference}
-                                      .errormessage=${validation.errFor('*')}
+                                      .errormessage=${validation.messageFor('*')}
                                       summary
                               ></fhir-primitive >
                           `
@@ -128,10 +128,14 @@ export class Reference extends BaseElement<ReferenceData> {
    * @param validations
    * @protected
    */
-  public renderStructure(config: DisplayConfig, data: ReferenceData, validations: Validations): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig, data: ReferenceData, validations: Validations): TemplateResult[] {
     return [
       html`
-          <fhir-primitive label="reference" .value=${data.reference} .errormessage=${validations.errFor('reference')} summary></fhir-primitive >
+          <fhir-primitive label="reference"
+                          .value=${data.reference}
+                          .errormessage=${validations.messageFor('reference')}
+                          summary
+          ></fhir-primitive>
           <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
           <fhir-identifier
                   label="identifier"
@@ -143,7 +147,7 @@ export class Reference extends BaseElement<ReferenceData> {
     ]
   }
 
-  public renderEditableDisplay(config: DisplayConfig,
+  public renderEditableDisplay(_config: DisplayConfig,
                                data: Decorated<ReferenceData>,
                                validations: Validations): TemplateResult[] {
     //TODO: need better way to pass complex errors. Error message can not be passed to identifier
@@ -151,7 +155,7 @@ export class Reference extends BaseElement<ReferenceData> {
       html`
           <fhir-primitive key="reference"
                           .value=${data.reference}
-                          .errormessage=${validations.errFor('*')}
+                          .errormessage=${validations.messageFor('*')}
                           summary
           ></fhir-primitive>
           <fhir-primitive type=${PrimitiveType.uri_type}
@@ -167,7 +171,7 @@ export class Reference extends BaseElement<ReferenceData> {
           <fhir-primitive key="display"
                           .value=${data.display}
                           summary
-                          .errormessage=${validations.errFor('*')}
+                          .errormessage=${validations.messageFor('*')}
           ></fhir-primitive>
       `
     ]
@@ -192,15 +196,15 @@ export class Reference extends BaseElement<ReferenceData> {
           this.mappedResource = this.containedData.find(r => '#' + r.id === this.data.reference)
 
           if (this.mappedResource) {
-            validations.remErr('*')
+            validations.rmAll()
           }
         }
 
       } else {
         if (this.referenceType === ReferenceType.contained && !this.mappedResource) {
-          validations.addErr({
-                               key: '*',
-                               err: 'ref-1: Does not have a contained resource when reference starts with #'
+          validations.add({
+                            fqk: { path: [{ node: '*' }] },
+                            message: 'ref-1: Does not have a contained resource when reference starts with #'
                              })
           this.referenceType = ReferenceType.unknown
         }
@@ -216,9 +220,9 @@ export class Reference extends BaseElement<ReferenceData> {
         [d => !isBlank(d.identifier), ReferenceType.identifier],
         [d => !isBlank(d.display), ReferenceType.display],
         otherwise(() => {
-          validations.addErr({
-                               key: '*',
-                               err: 'Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).'
+          validations.add({
+                            fqk: { path: [{ node: '*' }] },
+                            message: 'Ref-2: At least one of reference, identifier and display SHALL be present (unless an extension is provided).'
                              })
           return ReferenceType.unknown
         })
@@ -226,9 +230,9 @@ export class Reference extends BaseElement<ReferenceData> {
     }
 
     if (this.referenceType == ReferenceType.extension) {
-      validations.addErr({
-                           key: '*',
-                           err: 'Support for reference extensions is not implemented yet.'
+      validations.add({
+                        fqk: { path: [{ node: '*' }] },
+                        message: 'Support for reference extensions is not implemented yet.'
                          })
     }
 

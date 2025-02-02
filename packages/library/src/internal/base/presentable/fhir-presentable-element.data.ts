@@ -1,7 +1,11 @@
 import {html, TemplateResult} from 'lit'
 import {DisplayConfig}        from '../../../types'
+import {Decorated}            from '../Decorate.types'
+import {FhirElementData}      from '../FhirElement.type'
 
-import {Decorated, FhirElementData, Validations} from '../Decorate'
+import {Validations} from '../Validations.type'
+
+
 
 export type GenKey = 'header' | 'body' | 'footer'
 

@@ -4,7 +4,8 @@ import {customElement}                              from 'lit/decorators.js'
 import {BaseElement, Decorated, oneOf, Validations} from '../../../internal'
 import {DisplayConfig}                              from '../../../types'
 import {PrimitiveType}                              from '../../primitive/type-converters/type-converters'
-import {AnnotationData}                             from './annotation.data'
+import {ReferenceData}                              from '../../special'
+import {AnnotationData, AuthorFhirString}           from './annotation.data'
 
 
 
@@ -16,23 +17,23 @@ export class Annotation extends BaseElement<AnnotationData> {
   public validate(data: AnnotationData, validations: Validations): void {
 
     if (data.authorString && data.authorReference) {
-      validations.addErr({
-                           key: this.type + '::author[x]',
-                           err: 'can only have one of authorString or authorReference'
+      validations.add({
+                        fqk: { path: [{ node: this.type + '::author[x]' }] },
+                        message: 'can only have one of authorString or authorReference'
                          })
     }
   }
 
-  public renderDisplay(config: DisplayConfig,
+  public renderDisplay(_config: DisplayConfig,
                        data: Decorated<AnnotationData>,
-                       validations: Validations): TemplateResult[] {
+                       _validations: Validations): TemplateResult[] {
     return this.renderAll(data)
   }
 
 
-  public renderStructure(config: DisplayConfig,
+  public renderStructure(_config: DisplayConfig,
                          data: Decorated<AnnotationData>,
-                         validations: Validations): TemplateResult[] {
+                         _validations: Validations): TemplateResult[] {
     return this.renderAll(data)
   }
 
@@ -43,7 +44,7 @@ export class Annotation extends BaseElement<AnnotationData> {
                          [
                                 {
                                   data: data.authorReference,
-                                  html: (d: any) => html`
+                                  html: (d: ReferenceData) => html`
                                       <fhir-reference key="authorReference"
                                                       label="author"
                                                       .data=${d}
@@ -52,7 +53,7 @@ export class Annotation extends BaseElement<AnnotationData> {
                                 },
                                 {
                                   data: data.authorString,
-                                  html: (d: any) => html`
+                                  html: (d: AuthorFhirString) => html`
                                       <fhir-primitive key="authorString"
                                                       label="author"
                                                       .value=${d}

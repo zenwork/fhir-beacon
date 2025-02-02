@@ -12,6 +12,7 @@ import vs_referencerange_appliesto   from './valuesets/vs-referencerange-applies
 
 
 export class Codes {
+
   #map: Map<CodeIds, Choices> = new Map()
 
   constructor() {
@@ -22,7 +23,9 @@ export class Codes {
     this.#map.set('vs-data-absent-reason', vs_data_absent_reason)
     this.#map.set('cs-observation-status', cs_observation_status)
   }
+
   get(id: CodeIds): Choices | undefined {
     return this.#map.get(id) as Choices
   }
+
 }

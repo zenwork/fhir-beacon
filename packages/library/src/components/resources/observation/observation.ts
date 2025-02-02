@@ -43,20 +43,26 @@ export class Observation extends DomainResource<ObservationData> {
 
 
   public validate(data: ObservationData, validations: Validations, _fetched: boolean): void {
-    validations.validateCode({ key: 'status', code: data.status, id: 'cs-observation-status' })
-    validations.validateCodeableConcept({ key: 'category', value: data.category, id: 'vs-observation-category' })
+    validations.inspectCode({ key: 'status', code: data.status, id: 'cs-observation-status' })
+    validations.inspectCodeableConcept({
+                                         key: 'category',
+                                         concept: data.category,
+                                         bindingId: 'vs-observation-category'
+                                       })
+
   }
 
   public renderAny(config: DisplayConfig,
                    data: Decorated<ObservationData>,
                    validations: Validations): TemplateResult[] {
+
     return [
       html`
           ${identifiers(data.identifier ?? [], config)}
 
           ${oneOf(this,
                   'instantiate[x]',
-                  validations.errFor('instantiate[x]'),
+                  validations.messageFor('instantiate[x]'),
                   [
                       choice(data.instantiatesCanonical,
                              (d: Canonical) => html`
@@ -107,14 +113,25 @@ export class Observation extends DomainResource<ObservationData> {
           <fhir-primitive key="status"
                           .value=${data.status}
                           .type=${PrimitiveType.code}
-                          errormessage=${validations.errFor('status')}
+                          errormessage=${validations.messageFor('status')}
           ></fhir-primitive>
           ${wrap(
                   {
                       key: 'category',
                       collection: data.category ?? [],
-                      generator: (d, l) => html`
-                          <fhir-codeable-concept label=${l} .data=${d}></fhir-codeable-concept>`,
+                      generator: (d, l, k, i) => html`
+                          <fhir-codeable-concept key=${k}
+                                                 label=${l}
+                                                 .data=${d}
+                                                 .errors=${validations.sliceForFQK({
+                                                                                       path: [
+                                                                                           {
+                                                                                               node: 'category',
+                                                                                               index: i
+                                                                                           }
+                                                                                       ]
+                                                                                   })}
+                          ></fhir-codeable-concept>`,
                       config
                   }
           )}
@@ -132,7 +149,7 @@ export class Observation extends DomainResource<ObservationData> {
           <fhir-reference key='encounter' .data=${data.encounter}></fhir-reference>
           ${oneOf(this,
                   'effective[x]',
-                  validations.errFor('effective[x]'),
+                  validations.messageFor('effective[x]'),
                   [
                       choice(data.effectiveDateTime,
                              (d: DateTime) => html`
@@ -178,7 +195,7 @@ export class Observation extends DomainResource<ObservationData> {
           )}
           ${oneOf(this,
                   'value[x]',
-                  validations.errFor('value[x]'),
+                  validations.messageFor('value[x]'),
                   [
                       choice(data.valueQuantity,
                              (d: QuantityData) => html`

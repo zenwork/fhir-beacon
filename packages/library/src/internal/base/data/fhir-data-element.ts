@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {PropertyValues} from 'lit'
-import {
-  property,
-  state
-}                                                                                                 from 'lit/decorators.js'
-import {
-  PrimitiveInputEvent,
-  PrimitiveInvalidEvent
-}                       from '../../../components/primitive'
-import {DataContextConsumerController, FhirDataContext}                                           from '../../contexts'
-import {
-  BeaconDataError
-}                                                                                                 from '../../errors/beacon-data-error'
+import {PropertyValues}                                                  from 'lit'
+import {property, state}                                                 from 'lit/decorators.js'
+import {PrimitiveInputEvent, PrimitiveInvalidEvent, PrimitiveValidEvent} from '../../../components/primitive'
+import {DataContextConsumerController, FhirDataContext}                  from '../../contexts'
+import {BeaconDataError}                                                 from '../../errors/beacon-data-error'
 import {
   ConfigurableElement
-}                       from '../configurable/fhir-configurable-element'
-import {DataHandling}                                                                             from '../DataHandling'
-import {decorate, Decorated, Errors, FhirElementData, NoDataObject, Validations, ValidationsImpl} from '../Decorate'
+}                                                                        from '../configurable/fhir-configurable-element'
+import {DataHandling}                                                    from '../DataHandling'
+import {decorate, NoDataObject}                                          from '../Decorate'
+import {Decorated}                                                       from '../Decorate.types'
+import {FqkMap}                                                          from '../DeepKeyMap'
+import {FhirElementData}                                                 from '../FhirElement.type'
+import {ValidationsImpl}                                                 from '../Validations.impl'
+import {FullyQualifiedKey, Validations}                                  from '../Validations.type'
 
 
 
@@ -29,7 +26,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
   implements DataHandling<T> {
 
   /**
-   * The key the element is known as in its parent data strucuture
+   * The key the element is known as in its parent data structure
    *
    * @type {string}
    * @default ''
@@ -56,7 +53,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    * @type {T & {} | null}
    */
   @state()
-  public extendedData: Decorated<T> = decorate()
+  declare extendedData: Decorated<T>
 
   //------------------------------------------------//
   /**
@@ -78,8 +75,8 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    *
    * @type {ValidationErrors} An array of objects representing validation errors.
    */
-  @property({ reflect: false })
-  public errors: Errors = {}
+  @property({ reflect: false, attribute: false, type: FqkMap })
+  public errors: FqkMap = new FqkMap()
 
   @state()
   public declare dataContext: FhirDataContext
@@ -97,47 +94,44 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
   //------------------------------------------------//
 
-  private invalids: Set<string> = new Set()
+  private invalids: Set<FullyQualifiedKey> = new Set()
 
   protected constructor(type: string) {
     super()
     this.type = type
     this.data = NoDataObject as T
-    this.extendedData = decorate(this.data)
+    // this.extendedData = decorate(this.key, this.data, this.errors)
     new DataContextConsumerController(this)
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    this.addEventListener('bkn-input', (e: PrimitiveInputEvent) => {
-      e.stopImmediatePropagation()
-      if (e.key && this.data) {
-        this.edited(this.data, e.key, e.oldValue, e.newValue)
+    this.addEventListener('bkn-input', (e) => {
+      const event = e as PrimitiveInputEvent
+      event.stopImmediatePropagation()
+      if (event.key && this.data) {
+        this.edited(this.data, event.key, event.oldValue, event.newValue)
         this.requestUpdate('data')
       }
     })
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    this.addEventListener('bkn-invalid', (e: PrimitiveInvalidEvent) => {
-      e.stopImmediatePropagation()
-      this.invalids.add(e.key)
-      // console.log(this.type, '-> added invalids', this.invalids)
+    this.addEventListener('bkn-invalid', (e) => {
+      const event = e as PrimitiveInvalidEvent
+      event.stopImmediatePropagation()
+      this.invalids.add(event.key)
     })
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    this.addEventListener('bkn-valid', (e: PrimitiveValidEvent) => {
-      e.stopImmediatePropagation()
-      this.invalids.delete(e.key)
+
+    this.addEventListener('bkn-valid', (e) => {
+      const event = e as PrimitiveValidEvent
+      event.stopImmediatePropagation()
+      this.invalids.delete({ path: [{ node: event.key }] })
       // console.log(this.type, 'removed invalids', this.invalids)
     })
   }
 
   public prepare() {
     this.invalids.clear()
-    return decorate(this.data)
+    return decorate(this.key, this.data, this.errors)
   }
 
-  public shouldFetch(changes: PropertyValues): boolean {
+  public shouldFetch(_changes: PropertyValues): boolean {
     return !!this.dataContext && !!this.dataPath
   }
 
@@ -149,7 +143,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
     throw new BeaconDataError(`unable to fetch data for: ${dataPath}`)
   }
 
-  public abstract validate(data: T, validations: Validations, fetched: boolean): void
+  public abstract validate(data: T, validations: ValidationsImpl<T>, fetched: boolean): void
 
   public abstract decorate(data: Decorated<T>, validations: Validations, fetched: boolean): void
 
@@ -170,11 +164,12 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    *
    * @param data contained data structure that can be edited
    * @param key identity of changed data
-   * @param oldValue old value
+   * @param _oldValue old value
    * @param newValue new value
    * @protected
    */
-  protected edited(data: T, key: string, oldValue: unknown, newValue: unknown) {
+  protected edited(data: T, key: string, _oldValue: unknown, newValue: unknown) {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     (data as Record<string, any>)[key] = newValue
   }
 
@@ -200,9 +195,11 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
     if (changes.has('data') && this.shouldPrepare()) {
       this.extendedData = this.prepare()
-      const validations = new ValidationsImpl(this.extendedData)
+      const validations = new ValidationsImpl<T>(this.extendedData)
       this.validate(this.extendedData, validations, this.#fetched)
-      if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>, validations, this.#fetched)
+      if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>,
+                                                    validations,
+                                                    this.#fetched)
       this.isPrepared(this.data, this.extendedData)
     }
 

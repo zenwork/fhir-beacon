@@ -1,9 +1,9 @@
 import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
 import {DisplayConfig, DisplayMode}          from '../../types'
+import {FhirElementData}                     from '../base'
 
 import {FhirDataElement}                   from '../base/data/fhir-data-element'
-import {FhirElementData} from '../base/Decorate'
 import {FhirPresentableElement}            from '../base/presentable/fhir-presentable-element'
 import {dataContext, displayConfigContext} from './context'
 
@@ -46,6 +46,7 @@ export class DataContextConsumerController<T extends FhirElementData> implements
 
   }
 
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: unused
   hostUpdated() {}
 
 }
@@ -93,8 +94,7 @@ export class DisplayContextConsumerController<T extends FhirElementData> impleme
                         })
   }
 
-  public hostConnected(): void {
-
-  }
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: unused
+  public hostConnected(): void {}
 
 }

@@ -15,7 +15,7 @@ export class Identifier extends BaseElement<IdentifierData> {
 
   constructor() {super('Identifier')}
 
-  public renderDisplay(config: DisplayConfig,
+  public renderDisplay(_config: DisplayConfig,
                        data: Decorated<IdentifierData>,
                        validations: Validations): TemplateResult[] {
 
@@ -25,7 +25,7 @@ export class Identifier extends BaseElement<IdentifierData> {
           <fhir-codeable-concept key="type"
                                  label="type"
                                  .data=${data.type}
-                                 .errors=${validations.errFor('type')}
+                                 .errors=${validations.messageFor('type')}
                                  summary
           ></fhir-codeable-concept>
           <fhir-period key="period" .data=${data.period} summary></fhir-period>
@@ -33,13 +33,13 @@ export class Identifier extends BaseElement<IdentifierData> {
     ]
   }
 
-  public renderStructure(config: DisplayConfig,
+  public renderStructure(_config: DisplayConfig,
                          data: Decorated<IdentifierData>,
                          validations: Validations): TemplateResult[] {
       return [
         html`
             <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use}
-                            errormessage=${validations.errFor('use')} summary
+                            errormessage=${validations.messageFor('use')} summary
             ></fhir-primitive>
             <fhir-codeable-concept label="type" .data=${data.type}
                                    .errors=${data[errors]} summary
@@ -51,14 +51,15 @@ export class Identifier extends BaseElement<IdentifierData> {
       ]
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(data: IdentifierData, validations: Validations, fetched: boolean): void {
+
+  public validate(data: IdentifierData, validations: Validations, _fetched: boolean): void {
 
     if (data.use) {
       if (!FhirIdentifierUse.find(c => c.code === data.use)) {
-        validations.addErr({
-                             key: 'use',
-                             err: 'identifier use is not one of accepted: ' + FhirAddressUse.map(c => c.code).join(', ')
+        validations.add({
+                          fqk: { path: [{ node: 'use' }] },
+                          message: 'identifier use is not one of accepted: ' + FhirAddressUse.map(c => c.code)
+                                                                                             .join(', ')
                            })
       }
     }
@@ -68,10 +69,13 @@ export class Identifier extends BaseElement<IdentifierData> {
       const codings: CodingData[] = data.type.coding
       codings.filter(coding => !values.find(v => v.code === coding.code))
              .forEach((_, index) => {
-               validations.addErr({
-                                    parent: ['type', 'coding', index + ''],
-                                    key: 'code',
-                                    err: 'identifier type is not one of accepted: ' + values.map(c => c.code).join(', ')
+               validations.add({
+                                 fqk: {
+                                   path: [{ node: 'type' }, { node: 'coding', index: index }],
+                                   key: 'code'
+                                 },
+                                 message: 'identifier type is not one of accepted: ' + values.map(c => c.code)
+                                                                                             .join(', ')
                                   })
 
              })

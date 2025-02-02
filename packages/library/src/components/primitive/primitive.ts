@@ -2,7 +2,6 @@ import {consume}                                       from '@lit/context'
 import {SlInput, SlSwitch}                             from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
-import {choose}                                        from 'lit/directives/choose.js'
 import {Value}                                         from '../../codesystems'
 import {ConfigurableElement}                           from '../../internal/base/configurable/fhir-configurable-element'
 import {dataContext, FhirDataContext}                  from '../../internal/contexts'
@@ -10,36 +9,11 @@ import {textHostStyles}                                from '../../styles'
 import {DisplayMode}                                   from '../../types'
 import {isBlank}                                       from '../../utilities'
 import {mustRender}                                    from '../mustRender'
-import {DateTime}                                      from './primitive.data'
+import {PrimitiveValidator}                            from './primitive.validator'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
-import {PrimitiveInvalidEvent}                         from './primitiveInvalidEvent'
-import {PrimitiveValidEvent}                           from './primitiveValidEvent'
 import {componentStyles}                               from './primitve.styles'
-import {
-  PrimitiveType,
-  toBase64,
-  toBoolean,
-  toCanonical,
-  toCode,
-  toDate,
-  toDatetime,
-  toDecimal,
-  toFhirString,
-  toId,
-  toInstant,
-  toInteger,
-  toInteger64,
-  toLink,
-  toMarkdown,
-  toPositiveInt,
-  toTime,
-  toType,
-  toUnsignedInt,
-  toUri,
-  toUrl,
-  valueOrError
-}                                                      from './type-converters'
-import {asDateTime, asReadable}                        from './type-presenters'
+import {PrimitiveType}                                 from './type-converters'
+import {asReadable}                                    from './type-presenters'
 
 
 
@@ -107,17 +81,23 @@ export class Primitive extends ConfigurableElement {
   public required: boolean = false
 
   @state()
-  private error: boolean = false
+  public error: boolean = false
 
   @state()
-  private presentableValue: unknown = ''
+  public presentableValue: unknown = ''
 
   @state()
-  private presentableError: string = ''
+  public presentableError: string = ''
 
   @state()
-  private presentableTypeError: string = ''
+  public presentableTypeError: string = ''
 
+  private validator: PrimitiveValidator
+
+  constructor() {
+    super()
+    this.validator = new PrimitiveValidator(this)
+  }
 
   /**
    *
@@ -126,75 +106,14 @@ export class Primitive extends ConfigurableElement {
    */
   protected willUpdate(changed: PropertyValues) {
     super.willUpdate(changed)
-
-    // override value with valuePath
-    if (changed.has('valuePath') && this.contextData) {
-      if (!isBlank(this.value) && this.valuePath) {
-        console.warn('primitive: valuePath is overriding value attribute. Do not set both')
-      }
-
-      try {
-        this.value = this.contextData.getAt(this.valuePath)
-      } catch {
-        console.log(`unable to retrieve value-path: ${this.valuePath}`)
-        this.value = `unable to retrieve value-path: ${this.valuePath}`
-        this.type = PrimitiveType.forced_error
-      }
-    }
-
-    const watchedHaveChanged = changed.has('value') || changed.has('type') || changed.has('required')
-    if (watchedHaveChanged) {
-      if (!isBlank(this.value) && this.type) {
-        this.presentableValue = ''
-        this.presentableError = ''
-        this.presentableTypeError = ''
-        choose(this.type, [
-          [PrimitiveType.base64, () => this.validOrError(toBase64, this.value)],
-          [PrimitiveType.boolean, () => this.validOrError(toBoolean, this.value)],
-          [PrimitiveType.code, () => this.validOrError(toCode, this.value)],
-          [PrimitiveType.canonical, () => this.validOrError(toCanonical, this.value)],
-          [PrimitiveType.date, () => this.validOrError(toDate, this.value)],
-          [PrimitiveType.datetime, () => this.validOrError(toDatetime, this.value)],
-          [PrimitiveType.decimal, () => this.validOrError(toDecimal, this.value)],
-          [PrimitiveType.fhir_string, () => this.validOrError(toFhirString, this.value)],
-          [PrimitiveType.forced_error, () => (this.presentableValue = this.value) && (this.error = true)],
-          [PrimitiveType.id, () => this.validOrError(toId, this.value)],
-          [PrimitiveType.instant, () => this.validOrError(toInstant, this.value)],
-          [PrimitiveType.integer, () => this.validOrError(toInteger, this.value)],
-          [PrimitiveType.integer64, () => this.validOrError(toInteger64, this.value)],
-          [PrimitiveType.link, () => this.validOrError(toLink, this.value)],
-          [PrimitiveType.markdown, () => this.validOrError(toMarkdown, this.value)],
-          [PrimitiveType.none, () => (this.presentableValue = this.value) && (this.error = false)],
-          [PrimitiveType.positiveInt, () => this.validOrError(toPositiveInt, this.value)],
-          [PrimitiveType.string_reference, () => this.validOrError(toType, this.value)],
-          [PrimitiveType.unsigned_int, () => this.validOrError(toUnsignedInt, this.value)],
-          [PrimitiveType.time, () => this.validOrError(toTime, this.value)],
-          [PrimitiveType.uri, () => this.validOrError(toUri, this.value)],
-          [PrimitiveType.uri_type, () => this.validOrError(toType, this.value)],
-          [PrimitiveType.url, () => this.validOrError(toUrl, this.value)]
-        ])
-      }
-    }
-
-
-    if (isBlank(this.value) && this.required) {
-      this.error = true
-      if (this.showerror) {
-        this.presentableError = 'Error: this property is required'
-      }
-      const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, 'Error: this property is required')
-      this.dispatchEvent(event)
-    }
-
-
-    if (changed.has('errormessage')) {
-      if (!isBlank(this.errormessage)) {
-        this.presentableError = this.errormessage
-        this.error = true
-        const event = new PrimitiveInvalidEvent(this.key, this.value, this.type, this.presentableError)
-        this.dispatchEvent(event)
-      }
-    }
+    this.validator
+        .validate({
+                    valuePathChanged: changed.has('valuePath'),
+                    valueChanged: changed.has('value'),
+                    typeChanged: changed.has('type'),
+                    requiredChanged: changed.has('required'),
+                    errormessageChanged: changed.has('errormessage')
+                  })
   }
 
 
@@ -224,6 +143,7 @@ export class Primitive extends ConfigurableElement {
    */
   // TODO: should be able to put link on value OR on context
   private renderValid(): TemplateResult {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const elements: any[] = []
 
     if (this.getLabel()) elements.push(html`
@@ -327,7 +247,7 @@ export class Primitive extends ConfigurableElement {
   }
 
   private handleChange = (e: Event) => {
-    console.log(e)
+
     const oldValue = this.value
 
     if (e.type === 'sl-input') {
@@ -391,43 +311,8 @@ export class Primitive extends ConfigurableElement {
            : html``
   }
 
-  /**
-   *
-   * @param fn
-   * @param original
-   */
-  private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
-    const parsedValue = valueOrError(fn, original)
 
-    if (!isBlank(parsedValue.val)) {
-      this.presentableValue = this.present(parsedValue.val)
-      this.error = false
-      const event = new PrimitiveValidEvent(this.key, original, this.type)
-      this.dispatchEvent(event)
-    }
 
-    if (parsedValue.err) {
-      this.presentableTypeError = parsedValue.err
-      this.error = true
-      const event = new PrimitiveInvalidEvent(this.key, original, this.type, parsedValue.err || this.presentableError)
-      this.dispatchEvent(event)
-    }
-  }
-
-  /**
-   *
-   * @param val
-   * @private
-   */
-  private present(val: unknown): unknown {
-    choose(this.type, [
-      [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
-      [PrimitiveType.instant, () => (val = asDateTime(val as DateTime))],
-      [PrimitiveType.uri_type, () => (val = asReadable(val as string))],
-      [PrimitiveType.uri_type, () => (val = String(val))]
-    ])
-    return val
-  }
 
 }
 

@@ -5,6 +5,8 @@ import {AddressData}                  from '../../resources'
 import {Address}                      from './address'
 import {data}                         from './address.story.data'
 
+
+
 describe('Address', () => {
 
   it('renders correctly', async () => {

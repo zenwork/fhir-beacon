@@ -23,7 +23,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
          await source.loadDir()
 
-         const valueSet: ResolvedSet = await source.resolve('valueset-transport-intent.json', false)
+         const valueSet: ResolvedSet = (await source.resolve('valueset-transport-intent.json', false))[0]
 
          expect(valueSet.id).to.equal('transport-intent')
          expect(valueSet.name).to.equal('TransportIntent')
@@ -40,7 +40,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
          await source.loadDir()
 
-         const valueSet: ResolvedSet = await source.resolve('valueset-week-of-month.json', false)
+         const valueSet: ResolvedSet = (await source.resolve('valueset-week-of-month.json', false))[0]
 
          // console.log(JSON.stringify(valueSet,null,2))
          expect(valueSet.id).to.equal('week-of-month')
@@ -58,7 +58,7 @@ describe.runIf(process.env.EXPENSIVE)('FSSource', () => {
          const source: FSSource = new FSSource(exampleData, undefined, () => false)
          await source.loadDir()
 
-         const valueSet: ResolvedSet = await source.resolve('valueset-definition-topic.json')
+         const valueSet: ResolvedSet = (await source.resolve('valueset-definition-topic.json'))[0]
 
          expect(valueSet.id).to.equal('definition-topic')
          expect(valueSet.name).to.equal('DefinitionTopic')

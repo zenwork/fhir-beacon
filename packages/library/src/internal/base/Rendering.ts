@@ -1,7 +1,9 @@
-import {PropertyValues} from 'lit'
-import {DisplayConfig}  from '../../types'
+import {PropertyValues}  from 'lit'
+import {DisplayConfig}   from '../../types'
+import {Decorated}       from './Decorate.types'
+import {FhirElementData} from './FhirElement.type'
 
-import {Decorated, FhirElementData} from './Decorate'
+
 
 /**
  * Represents an element that can be presented in a user interface.

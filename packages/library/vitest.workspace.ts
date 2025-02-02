@@ -22,16 +22,17 @@ export default defineWorkspace([
       setupFiles: './vitest.setup.ts',
       include: ['src/**/*.spec.ts'],
       browser: {
+        provider: 'playwright',
+        instances: [
+          {
+            'browser': 'chromium'
+          }
+        ],
         enabled: true,
         headless: headless,
-        name: 'chromium',
         screenshotFailures: true,
-
-        provider: 'playwright',
         viewport: { width: 1000, height: 800 },
-        instances: [
-          { browser: 'chromium' }
-        ]
+
       },
       typecheck: {
         enabled: true,
