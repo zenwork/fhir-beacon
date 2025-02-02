@@ -33,7 +33,7 @@ import {
 
 
 @customElement('fhir-observation-component')
-export class ObservationReferenceRange extends Backbone<ObservationComponentData> {
+export class ObservationComponent extends Backbone<ObservationComponentData> {
   constructor() {
     super('ObservationComponent')
   }
