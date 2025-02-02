@@ -53,7 +53,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    * @type {T & {} | null}
    */
   @state()
-  private extendedData: Decorated<T>
+  public declare extendedData: Decorated<T>
 
   //------------------------------------------------//
   /**
