@@ -1,11 +1,11 @@
-import {Codes}           from '../../codes/Codes'
-import {CodeIds}         from '../../codes/types'
-import {CodingData}      from '../../components'
-import {Choices}         from '../../valuesets/ValueSet.data'
-import {reindex, sort}   from './ArraySortingFunction'
-import {Decorated}       from './Decorate.types'
-import {FqkMap}          from './DeepKeyMap'
-import {FhirElementData} from './FhirElement.type'
+import {Codes}                           from '../../codes/Codes'
+import {CodeIds}                         from '../../codes/types'
+import {CodeableConceptData, CodingData} from '../../components'
+import {Choices}                         from '../../valuesets/ValueSet.data'
+import {reindex, sort}                   from './ArraySortingFunction'
+import {Decorated}                       from './Decorate.types'
+import {FqkMap}                          from './DeepKeyMap'
+import {FhirElementData}                 from './FhirElement.type'
 import {
   CodeableConceptIdPair,
   CodeIdPair,
@@ -15,7 +15,7 @@ import {
   KeyBase,
   KeyErrorPair,
   Validations
-}                        from './Validations.type'
+}                                        from './Validations.type'
 
 
 
@@ -31,64 +31,44 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
 
   public messageFor(key: FullyQualifiedKey | string, delimiter: string = ';'): string | undefined {
     let error: string[] | undefined
+
     if (typeof key === 'string') {
       error = this.#data[errors].get({ path: [{ node: key }] })
     } else {
       error = this.#data[errors].get(key)
     }
+
     if (Array.isArray(error) && error.length > 0) return error.join(delimiter)
+
     return undefined
   }
-
-  // public mapForKey(key: string): DeepKeyMap<FullyQualifiedKey, string[]> {
-  //   if (!key) return new DeepKeyMap<FullyQualifiedKey, string[]>()
-  //
-  //   const keys: FullyQualifiedKey[] = []
-  //   for (const fqk of this.#data[errors].keys()) {
-  //     if (fqk.key === key) keys.push(fqk)
-  //   }
-  //   //todo: need deep copy
-  //   const entries: [FullyQualifiedKey, string[]][]
-  //     = keys.map(fqk => ([fqk, (this.#data[errors].get(fqk) ?? []) as string[]]))
-  //
-  //   return new DeepKeyMap<FullyQualifiedKey, string[]>(entries)
-  // }
-
-  // public mapForPath(path: string[]): DeepKeyMap<FullyQualifiedKey, string[]> {
-  //   if (path.length === 0) return new DeepKeyMap<FullyQualifiedKey, string[]>()
-  //
-  //   const keys: FullyQualifiedKey[] = []
-  //   for (const fqk of this.#data[errors].keys()) {
-  //     if (path.every((val, index) => fqk.path
-  //                                    && fqk.path[index] === val)) {
-  //       keys.push(fqk)
-  //     }
-  //   }
-  //   //todo: need deep copy
-  //   const entries: [FullyQualifiedKey, string[]][]
-  //     = keys.map(fqk => ([fqk, (this.#data[errors].get(fqk) ?? []) as string[]]))
-  //
-  //   return new DeepKeyMap<FullyQualifiedKey, string[]>(entries)
-  // }
 
   public sliceForFQK(sliceKey: FullyQualifiedKey): FqkMap {
     if (!sliceKey) return new FqkMap()
 
     const matchingKeys: FullyQualifiedKey[] = []
-    const storeKeys: FullyQualifiedKey[] = this.#data[errors].keys()
-    for (const storeKey of storeKeys) {
-      if (matches(sliceKey, storeKey)) matchingKeys.push(storeKey)
+    try {
+
+      const storeKeys: FullyQualifiedKey[] = this.#data[errors].keys()
+
+      for (const storeKey of storeKeys) {
+        if (matches(sliceKey, storeKey)) matchingKeys.push(storeKey)
+      }
+
+      const entries: [FullyQualifiedKey, string[]][]
+        = matchingKeys.map(fqk => {
+        return ([slice(fqk), (this.#data[errors].get(fqk) ?? []) as string[]])
+      })
+
+      return new FqkMap(reindex(sort(entries)))
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.error(e.name, e.message, e.stack)
+      } else {
+        console.error(e)
+      }
+      return new FqkMap()
     }
-
-    const entries: [FullyQualifiedKey, string[]][]
-      = matchingKeys.map(fqk => {
-      return ([slice(fqk), (this.#data[errors].get(fqk) ?? []) as string[]])
-    })
-
-    // console.log('\nentries')
-    // console.log('key\n', entries.map(e => e[0].path), '\nvalues\n', entries.map(e => e[1]))
-
-    return new FqkMap(reindex(sort(entries)))
   }
 
   public add({ fqk, message }: KeyErrorPair): void {
@@ -139,7 +119,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
         this.add(
           {
             fqk: { path: [{ node: key, index: i }, { node: 'coding' }, { node: 'code' }], key: 'binding' },
-            message: `${coding.code} is not a valid ${bindingId} code. Valid codes are: ${choices}`
+            message: `${coding.code} not in: ${bindingId}. Valid: ${choices}`
           }
         )
       }
@@ -147,11 +127,15 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
     }
 
     if (concept) {
-      if (concept instanceof Array) {
-        concept.forEach(validateOne)
-      } else {
-        validateOne(concept.coding as CodingData, 0)
+
+      if (isCodeableConceptArray(concept)) {
+        concept.forEach((cconcept) => cconcept.coding.forEach(validateOne))
       }
+
+      if (isCodeableConcept(concept)) {
+        concept.coding.forEach(validateOne)
+      }
+
     }
 
     return false
@@ -195,7 +179,7 @@ export function matches(sliceKey: FullyQualifiedKey, storeKey: FullyQualifiedKey
 
                                                       const storeNode: ErrorNodeKey = storeKey.path[index]
 
-                                                      const nodeMatch: boolean = storeNode.node === p.node
+      const nodeMatch: boolean = storeNode ? storeNode.node === p.node : false
                                                       const indexMatch: boolean = p.index !== undefined && (storeNode.index
                                                                                                             === undefined
                                                                                                             && p.index
@@ -234,4 +218,13 @@ export function matches(sliceKey: FullyQualifiedKey, storeKey: FullyQualifiedKey
     // ',JSON.stringify(sliceKey),'|||',JSON.stringify(storeKey))
   }
   return matches
+}
+
+
+function isCodeableConcept(value: CodeableConceptData | CodeableConceptData[]): value is CodeableConceptData {
+  return !!value && !Array.isArray(value) && 'coding' in value
+}
+
+function isCodeableConceptArray(value: CodeableConceptData | CodeableConceptData[]): value is CodeableConceptData[] {
+  return !!value && Array.isArray(value) && value.every(c => 'coding' in c)
 }

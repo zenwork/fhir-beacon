@@ -1,11 +1,10 @@
-import {beforeEach, describe, expect, it, vi}                   from 'vitest'
-import {CodeableConceptData}                                    from '../../components'
-import {Choices}                                                from '../../valuesets/ValueSet.data'
-import {Decorated}                                              from './Decorate.types'
-import {FqkMap}                                                 from './DeepKeyMap'
-import {FhirElementData}                                        from './FhirElement.type'
-import {ValidationsImpl}                                        from './Validations.impl'
-import {errors, type FullyQualifiedKey, meta, type Validations} from './Validations.type'
+import {beforeEach, describe, expect, it, vi}                                 from 'vitest'
+import {CodeableConceptData}                                                  from '../../components'
+import {Decorated}                                                            from './Decorate.types'
+import {FqkMap}                                                               from './DeepKeyMap'
+import {FhirElementData}                                                      from './FhirElement.type'
+import {ValidationsImpl}                                                      from './Validations.impl'
+import {errors, type FullyQualifiedKey, KeyErrorPair, meta, type Validations} from './Validations.type'
 
 
 
@@ -14,12 +13,11 @@ describe('ValidationsImpl', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    // biome-ignore lint/correctness/noUnusedVariables: <explanation>
-    const { validations, mockCodeMethod } = createValidationImpl()
+    const { validations } = createValidationImpl()
     val = validations
   })
 
-  describe('errFor', () => {
+  describe('message for', () => {
     it('should return undefined if no errors exist for the given key', () => {
       const key: FullyQualifiedKey = { path: [{ node: 'nonexistent' }] }
       expect(val.messageFor(key)).toBeUndefined()
@@ -63,63 +61,6 @@ describe('ValidationsImpl', () => {
       expect(val.messageFor(key, ', ')).toEqual(errorMessage + ', ' + errorMessage2)
     })
 
-    // it('should return all errors associated with key + index values', () => {
-    //
-    //   const errorMessage = 'array index 0 error message'
-    //   const fqk0: FullyQualifiedKey = { key: 'testKey', index: 0 }
-    //   val.add({ fqk: fqk0, message: errorMessage })
-    //
-    //   const errorMessage2 = 'array index 1 error message'
-    //   const fqk1: FullyQualifiedKey = { key: 'testKey', index: 1 }
-    //   val.add({ fqk: fqk1, message: errorMessage2 })
-    //
-    //
-    //   expect(val.mapForKey('testKey').get(fqk0)![0]).toEqual(errorMessage)
-    //   expect(val.mapForKey('testKey').get(fqk1)![0]).toEqual(errorMessage2)
-    // })
-    //
-    // it('should return all errors associated with path', () => {
-    //
-    //   const errorMessage = 'error message A'
-    //   const fqk0: FullyQualifiedKey = { path: ['foo'], key: 'testKeyA' }
-    //   val.add({ fqk: fqk0, message: errorMessage })
-    //
-    //   const errorMessage2 = 'error message B'
-    //   const fqk1: FullyQualifiedKey = { path: ['foo'], key: 'testKeyB' }
-    //   val.add({ fqk: fqk1, message: errorMessage2 })
-    //
-    //   expect(val.mapForPath(['foo']).get(fqk0)![0]).toEqual(errorMessage)
-    //   expect(val.mapForPath(['foo']).get(fqk1)![0]).toEqual(errorMessage2)
-    //   expect(val.mapForPath(['foo', 'bar']).keys()).toEqual([])
-    //   expect(val.mapForPath([]).keys()).toEqual([])
-    // })
-
-    // it('should return all errors associated with fully qualified keys', () => {
-    //
-    //   const errorMessage = 'error message A'
-    //   const fqk0: FullyQualifiedKey = { path: ['foo'], key: 'testKey' }
-    //   val.add({ fqk: fqk0, message: errorMessage })
-    //
-    //   const errorMessageB1 = 'error message B1'
-    //   const fqk1: FullyQualifiedKey = { path: ['foo'], key: 'testKeyB', index: 0 }
-    //   val.add({ fqk: fqk1, message: errorMessageB1 })
-    //
-    //   const errorMessageB2 = 'error message B2'
-    //   const fqk2: FullyQualifiedKey = { path: ['foo'], key: 'testKeyB', index: 1 }
-    //   val.add({ fqk: fqk2, message: errorMessageB2 })
-    //
-    //   const errorMessageC = 'error message C'
-    //   const fqk3: FullyQualifiedKey = { path: ['foo', 'bar'], key: 'testKey' }
-    //   val.add({ fqk: fqk3, message: errorMessageC })
-    //
-    //   const entries: DeepKeyMap<FullyQualifiedKey, string[]> = val.mapForPath(['foo'])
-    //   expect(entries.get(fqk0)![0]).toEqual(errorMessage)
-    //   expect(entries.get(fqk1)![0]).toEqual(errorMessageB1)
-    //   expect(entries.get(fqk2)![0]).toEqual(errorMessageB2)
-    //   expect(entries.get(fqk3)![0]).toEqual(errorMessageC)
-    //   expect(val.mapForPath(['foo', 'bar']).keys()).toHaveLength(1)
-    //   expect(val.mapForPath([]).keys()).toEqual([])
-    // })
 
     it('should concatenate multiple error messages with a semicolon', () => {
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'A' })
@@ -132,7 +73,8 @@ describe('ValidationsImpl', () => {
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'A' })
       expect(val.messageFor('testKey')).toEqual('A')
     })
-
+  })
+  describe('slicing', () => {
     it('should slice map for fqk', () => {
       val.add({ fqk: { path: [{ node: 'to' }, { node: 'testKey', index: 0 }], key: 'err' }, message: 'A' })
       val.add({ fqk: { path: [{ node: 'to' }, { node: 'testKey', index: 1 }], key: 'err', index: 0 }, message: 'B1' })
@@ -180,6 +122,31 @@ describe('ValidationsImpl', () => {
 
   })
 
+  describe('codeable concept', () => {
+    it('should validate a codeable concept', () => {
+
+      val.inspectCodeableConcept({
+                                   key: 'test',
+                                   concept: {
+                                     coding: [
+                                       {
+                                         system: 'http://hl7.org/fhir/sid/ex-icd-10-procedures',
+                                         code: '123000'
+                                       }
+                                     ],
+                                     text: 'general headache'
+                                   },
+                                   bindingId: 'cs-icd-10-procedures'
+                                 })
+
+
+      const all: KeyErrorPair[] = val.all()
+      expect(all).toHaveLength(1)
+      expect(all[0].message).toEqual('123000 not in: cs-icd-10-procedures. Valid: 123001, 123002, 123003')
+
+    })
+  })
+
 })
 
 
@@ -196,26 +163,26 @@ function mockDecorated(): Decorated<MockData> {
   }
 }
 
-const testChoices: Choices = {
-  id: 'numbers',
-  name: 'Numbers',
-  type: 'CodeSystem',
-  system: 'http://system.com/numbers',
-  valid: true,
-  choices: [
-    { value: '1', display: 'one' },
-    { value: '2', display: 'two' },
-    { value: '3', display: 'threee' }
-  ]
-} as Choices
+// const testChoices: Choices = {
+//   id: 'numbers',
+//   name: 'Numbers',
+//   type: 'CodeSystem',
+//   system: 'http://system.com/numbers',
+//   valid: true,
+//   choices: [
+//     { value: '1', display: 'one' },
+//     { value: '2', display: 'two' },
+//     { value: '3', display: 'threee' }
+//   ]
+// } as Choices
 
 // Helper function to create a new ValidationsImpl instance
 const createValidationImpl = () => {
 
   const validations = new ValidationsImpl(mockDecorated())
   // biome-ignore lint/suspicious/noExplicitAny: vite mocking
-  const mockCodeMethod = vi.spyOn(validations as any, 'code')
-                           .mockReturnValue(testChoices)
+  // const mockCodeMethod = vi.spyOn(validations as any, 'code')
+  //                          .mockReturnValue(testChoices)
 
-  return { validations, mockCodeMethod }
+  return { validations }
 }

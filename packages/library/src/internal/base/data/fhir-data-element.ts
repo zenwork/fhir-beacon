@@ -32,7 +32,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    * @default ''
    */
   @property({ reflect: true })
-  public key: string = ''
+  public key: string = 'nokey'
 
   /**
    * Element data

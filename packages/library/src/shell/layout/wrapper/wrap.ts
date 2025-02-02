@@ -37,6 +37,7 @@ export function wrap<T>({
                         }: WrapConfig<T>
 ): TemplateResult {
 
+
   if(config.mode === DisplayMode.structure) {
     return strap({key, pluralBase, collection, generator, summary, config})
   }

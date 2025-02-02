@@ -1,9 +1,7 @@
 import {html, TemplateResult}                from 'lit'
 import {customElement}                       from 'lit/decorators.js'
 import {BaseElement, Decorated, Validations} from '../../../internal'
-import {isDefined}                           from '../../../shell'
-import {strap}                               from '../../../shell/layout/wrapper/strap'
-import {wrapLines}                           from '../../../shell/layout/wrapper/wrapLines'
+import {isDefined, wrap}                     from '../../../shell'
 import {DisplayConfig}                       from '../../../types'
 import {CodeableConceptData}                 from './codeable-concept.data'
 
@@ -15,47 +13,50 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     super('CodeableConcept')
   }
 
-  public renderDisplay(_config: DisplayConfig, data: Decorated<CodeableConceptData>): TemplateResult[] {
+  public renderDisplay(config: DisplayConfig,
+                       data: Decorated<CodeableConceptData>,
+                       validations: Validations): TemplateResult[] {
 
     return [
-      wrapLines(this.key,
-                      'coding',
-                      data.coding ?? [],
-                      this.verbose,
-                      (data, label, key) => html`
-                          <fhir-coding key=${key} .label=${label} .data=${data} summary headless></fhir-coding>`,
-                      true,
-                      this.summaryonly
+      wrap({
+             key: this.key,
+             collection: data.coding ?? [],
+             generator: (d, l, k, i) =>
+               html`
+                   <fhir-coding key=${k}
+                                .label=${l}
+                                .data=${d}
+                                .errors=${validations.sliceForFQK({ path: [{ node: 'coding', index: i }] })}
+                                summary
+                                headless
+                   ></fhir-coding>`,
+             config
+           }
       ),
       (isDefined(data.coding) && !this.verbose) ? html`` : html`
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`
     ]
 
+
   }
 
-  public renderStructure(_config: DisplayConfig,
+  public renderStructure(config: DisplayConfig,
                          data: Decorated<CodeableConceptData>,
                          validations: Validations): TemplateResult[] {
 
     return [
-      strap({
-              key: 'coding',
-              pluralBase: 'coding',
-              collection: data.coding ?? [],
-              generator: (code, label) => html`
-                  <fhir-coding key="coding"
-                               label="${label}"
-                               .errors=${validations.sliceForFQK({
-                                                                     path: [{ node: 'category' }],
-                                                                     key: 'code',
-                                                                     index: 0
-                                                                 })}
-                               .data=${code}
-                               summary
-                  ></fhir-coding>`,
-              summary: true,
-              config: this.getDisplayConfig()
-            }
+      wrap({
+             key: 'coding',
+             collection: data.coding ?? [],
+             generator: (code, l, k, i) => html`
+                 <fhir-coding key=${k}
+                              label=${l}
+                              .errors=${validations.sliceForFQK({ path: [{ node: 'coding', index: i }] })}
+                              .data=${code}
+                              summary
+                 ></fhir-coding>`,
+             config
+           }
       ),
       (isDefined(data.coding) && !this.verbose) ? html`` : html`
           <fhir-primitive key="text" .value=${data.text} summary></fhir-primitive>`

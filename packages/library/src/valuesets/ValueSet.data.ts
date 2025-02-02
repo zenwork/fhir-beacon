@@ -204,7 +204,8 @@ export type Choices = {
   id: string,
   type: 'CodeSystem' | 'ValueSet' | 'unknown' | string,
   name: string,
-  system: string,
+  // TODO: should not be optional. Should be in vs and cs choice files
+  system?: string,
   choices: Choice[]
   valid: boolean
 }

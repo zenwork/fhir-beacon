@@ -30,20 +30,9 @@ export function decorate<T extends (FhirElementData | Decorated<FhirElementData>
 
   const tempData: T | {} = (data && data !== NoDataObject) ? data : {}
 
-  // const dataErrors: [FullyQualifiedKey, string[]][] = (data && errors in data)
-  //                                                     ? (data[errors] as FqkMap).entries()
-  //                                                     : []
-
-
-  // const injectedErrors: [FullyQualifiedKey, string[]][] = errorMap ? errorMap.entries() : []
-  // if (key === 'category') console.log('err', key, data, injectedErrors)
-
-
-  // const errs: FqkMap = new FqkMap([...dataErrors, ])
-
   return {
     ...tempData,
-    [errors]: new FqkMap(),
+    [errors]: _errorMap ?? new FqkMap(),
     //TODO: hide is not the right metadata... it's the likely wanted behaviour
     [meta]: { hide: data === NoDataObject }
   } as Decorated<T>

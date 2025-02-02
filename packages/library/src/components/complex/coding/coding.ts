@@ -18,8 +18,10 @@ export class Coding extends BaseElement<CodingData> {
     if (data.code) return data.code
   }
 
-  public override renderDisplay(_config: DisplayConfig, data: CodingData,
+  public override renderDisplay(_config: DisplayConfig,
+                                data: CodingData,
                                 validations: Validations): TemplateResult[] {
+
     return [
       html`
           <fhir-primitive
@@ -27,7 +29,7 @@ export class Coding extends BaseElement<CodingData> {
                   .value=${Coding.computeDisplay(data)}
                   .context=${data.display ? data.code : undefined}
                   .link=${(data.system && data.code) ? data.system + '/' + data.code : undefined}
-                  .errormessage=${validations.messageFor({ path: [{ node: 'category' }], key: 'code', index: 0 })}
+                  .errormessage=${validations.messageFor({ path: [{ node: 'code' }] })}
                   summary
           ></fhir-primitive >
       `
@@ -44,11 +46,8 @@ export class Coding extends BaseElement<CodingData> {
           <fhir-primitive label="code"
                           .value=${data.code}
                           type="code"
-                          errormessage=${validations.messageFor({
-                                                                    path: [{ node: 'category' }],
-                                                                    key: 'code',
-                                                                    index: 0
-                                                                })} summary
+                          .errormessage=${validations.messageFor({ path: [{ node: 'code' }] })}
+                          summary
           ></fhir-primitive>
           <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive >
       `

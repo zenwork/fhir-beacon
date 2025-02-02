@@ -25,7 +25,7 @@ export class Identifier extends BaseElement<IdentifierData> {
           <fhir-codeable-concept key="type"
                                  label="type"
                                  .data=${data.type}
-                                 .errors=${validations.messageFor('type')}
+                                 .errors=${validations.sliceForFQK({ path: [{ node: 'type' }] })}
                                  summary
           ></fhir-codeable-concept>
           <fhir-period key="period" .data=${data.period} summary></fhir-period>
