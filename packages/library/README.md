@@ -25,7 +25,7 @@ easily adopt the FHIR metamodel as is, without having to implement a separate ma
 4. `resources or fragments` - use the library to render complete resources or any fragments
 5. `composable, decomposable, and extendable` - use the library differently in different contexts
 6. `fast prototyping` - use 4 default view-modes through-out the development process (display, structural, narrative,
-   jason)
+   json)
 7. `customize` - extend existing FHIR element to change what you need or support your FHIR extensions 
 8. `create` - build components from scratch with a FHIR-ready toolkit 
 

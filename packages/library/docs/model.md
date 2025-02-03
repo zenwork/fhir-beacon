@@ -127,11 +127,7 @@ classDiagram
     Ratio --|> BaseElement
     Etc2 --|> BaseElement
 
-classDef base fill: #922, stroke:#944, stroke-width:2px;
-classDef prim fill: #722, stroke:#944, stroke-width:2px;
-classDef res fill: #c22,stroke:#944, stroke-width:2px;
-classDef cmp fill: #f22, stroke:#944, stroke-width:2px;
-classDef dep fill: #549, stroke:#944, stroke-width:2px;
+
 
 
 ```
