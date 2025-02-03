@@ -8,6 +8,7 @@ A FHIR data library for the frontend.
 The library provides a collection of web components for working with FHIR data in the browser. 
 - [storybook catalog app](https://fhir-beacon.deno.dev)
 - [read more docs](./packages/library/README.md)
+- [the model](./packages/library/docs/model.md)
 ### [`app`](./packages/app/README.md) 
 A showcase application for demonstrating the integration use-cases.
 - [use-case showcase app](https://fhir-beacon-app.deno.dev)
