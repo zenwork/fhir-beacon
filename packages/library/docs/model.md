@@ -2,145 +2,11 @@
 
 ## FHIR element model
 
-### as a template
-
-```html
-
-<fhir-medication></fhir-medication>
-
-```    
-
 ### object model
 
 ```mermaid
 ---
-title: Fhir Element Model
-config:
-  theme: neutral
-  class:
-    hideEmptyMembersBox: true
----
-classDiagram
-    direction BT
-
-    namespace lit {
-        class LitElement:::dep
-    }
-
-    namespace FhirBeaconCore {
-        class ConfigurableElement["&lt;&lt;abstract&gt;&gt;\nConfigurableElement"]:::base
-        class BaseElement["&lt;&lt;abstract&gt;&gt;\nBaseElement"]:::base
-    }
-
-    namespace CustomElements {
-        class CodeableConcept["&lt;fhir-codeable-concept&gt;"]:::cmp
-        class HumanName["&lt;fhir-human-name&gt;"]:::cmp
-        class Ratio["&lt;fhir-ratio&gt;"]:::cmp
-        class Etc2["..."]:::cmp
-    }
-
-    ConfigurableElement --|> LitElement
-    BaseElement --|> ConfigurableElement
-    BaseElement <--* BaseElement: as custom-element
-    CodeableConcept --|> BaseElement
-    HumanName --|> BaseElement
-    Ratio --|> BaseElement
-    Etc2 --|> BaseElement
-
-
-```
-
-```mermaid
----
-title: Fhir Element Model
-config:
-  theme: neutral
-  class:
-    hideEmptyMembersBox: true
----
-classDiagram
-    direction BT
-
-    namespace lit {
-        class LitElement:::dep
-    }
-
-    namespace FhirBeaconCore {
-        class ConfigurableElement["&lt;&lt;abstract&gt;&gt;\nConfigurableElement"]:::base
-        class BaseElement["&lt;&lt;abstract&gt;&gt;\nBaseElement"]:::base
-        class Resource["&lt;&lt;abstract&gt;&gt;\nResource"]:::base
-        class DomainResource["&lt;&lt;abstract&gt;&gt;\nDomainResource"]:::base
-        class Backbone["&lt;&lt;abstract&gt;&gt;\nBackbone"]:::base
-        class Primitive["&lt;fhir-primitive&gt;"]:::prim
-    }
-
-    ConfigurableElement --|> LitElement
-    BaseElement --|> ConfigurableElement
-    Resource --|> BaseElement
-    DomainResource --|> Resource
-    Backbone --|> BaseElement
-
-
-```
-
-```mermaid
----
-title: Fhir Element Model
-config:
-  theme: neutral
-  class:
-    hideEmptyMembersBox: true
----
-classDiagram
-    direction BT
-
-    namespace lit {
-        class LitElement:::dep
-    }
-
-    namespace FhirBeaconCore {
-        class ConfigurableElement["&lt;&lt;abstract&gt;&gt;\nConfigurableElement"]:::base
-        class BaseElement["&lt;&lt;abstract&gt;&gt;\nBaseElement"]:::base
-        class Resource["&lt;&lt;abstract&gt;&gt;\nResource"]:::base
-        class DomainResource["&lt;&lt;abstract&gt;&gt;\nDomainResource"]:::base
-        class Backbone["&lt;&lt;abstract&gt;&gt;\nBackbone"]:::base
-    }
-
-    namespace CustomElements {
-        class Patient["&lt;fhir-patient&gt;"]:::res
-        class Observation["&lt;fhir-observation&gt;"]:::res
-        class Medication["&lt;fhir-medication&gt;"]:::res
-        class Etc["..."]:::res
-
-        class AppointmentRecTmplt["&lt;fhir-appointment-recurrence-template&gt;"]:::res
-        class MedicationIngredient["&lt;fhir-medication-ingredient&gt;"]:::res
-        class ObservationRefRange["&lt;fhir-observation-refference-range&gt;"]:::res
-        class Etc3["..."]:::res
-    }
-
-    ConfigurableElement --|> LitElement
-    BaseElement --|> ConfigurableElement
-    Resource --|> BaseElement
-    DomainResource --|> Resource
-    Backbone --|> BaseElement
-    DomainResource *--> Backbone: as custom-element
-    BaseElement <--* BaseElement: as custom-element
-    Medication --|> DomainResource
-    Patient --|> DomainResource
-    Observation --|> DomainResource
-    Etc --|> DomainResource
-    AppointmentRecTmplt --|> Backbone
-    MedicationIngredient --|> Backbone
-    ObservationRefRange --|> Backbone
-    Etc3 --|> Backbone
-
-
-
-```
-
- ```mermaid
----
-title: Fhir Element Model
+title: Core Model
 config:
   theme: neutral
   class:
@@ -182,9 +48,76 @@ classDiagram
 
 ```
 
+
 ```mermaid
 ---
 title: Fhir Element Model
+config:
+  theme: neutral
+  class:
+    hideEmptyMembersBox: true
+---
+classDiagram
+    direction TB
+
+    namespace FhirBeaconCore {
+        class BaseElement["&lt;&lt;abstract&gt;&gt;\nBaseElement"]:::base
+        class Resource["&lt;&lt;abstract&gt;&gt;\nResource"]:::base
+        class DomainResource["&lt;&lt;abstract&gt;&gt;\nDomainResource"]:::base
+        class Backbone["&lt;&lt;abstract&gt;&gt;\nBackbone"]:::base
+
+        class Primitive["&lt;fhir-primitive&gt;"]:::prim
+    }
+
+    Resource --|> BaseElement
+    DomainResource --|> Resource
+    Backbone --|> BaseElement
+
+
+```
+
+```mermaid
+---
+title: Complex Elements
+config:
+  theme: neutral
+  class:
+    hideEmptyMembersBox: true
+---
+classDiagram
+    direction BT
+
+    namespace lit {
+        class LitElement:::dep
+    }
+
+    namespace FhirBeaconCore {
+        class ConfigurableElement["&lt;&lt;abstract&gt;&gt;\nConfigurableElement"]:::base
+        class BaseElement["&lt;&lt;abstract&gt;&gt;\nBaseElement"]:::base
+    }
+
+    namespace FhirModelElements {
+        class CodeableConcept["&lt;fhir-codeable-concept&gt;"]:::cmp
+        class HumanName["&lt;fhir-human-name&gt;"]:::cmp
+        class Ratio["&lt;fhir-ratio&gt;"]:::cmp
+        class Etc2["..."]:::cmp
+    }
+
+    ConfigurableElement --|> LitElement
+    BaseElement --|> ConfigurableElement
+    BaseElement <--* BaseElement: as custom-element
+    CodeableConcept --|> BaseElement
+    HumanName --|> BaseElement
+    Ratio --|> BaseElement
+    Etc2 --|> BaseElement
+
+
+```
+
+
+```mermaid
+---
+title: Resource Elements
 config:
   theme: neutral
   class:
@@ -206,21 +139,15 @@ classDiagram
     }
 
     namespace CustomElements {
-        class CodeableConcept["&lt;fhir-codeable-concept&gt;"]:::cmp
-        class HumanName["&lt;fhir-human-name&gt;"]:::cmp
-        class Ratio["&lt;fhir-ratio&gt;"]:::cmp
-        class Etc2["..."]:::cmp
-
         class Patient["&lt;fhir-patient&gt;"]:::res
         class Observation["&lt;fhir-observation&gt;"]:::res
         class Medication["&lt;fhir-medication&gt;"]:::res
         class Etc["..."]:::res
+
         class AppointmentRecTmplt["&lt;fhir-appointment-recurrence-template&gt;"]:::res
         class MedicationIngredient["&lt;fhir-medication-ingredient&gt;"]:::res
         class ObservationRefRange["&lt;fhir-observation-refference-range&gt;"]:::res
         class Etc3["..."]:::res
-
-        class Primitive["&lt;fhir-primitive&gt;"]:::prim
     }
 
     ConfigurableElement --|> LitElement
@@ -228,23 +155,16 @@ classDiagram
     Resource --|> BaseElement
     DomainResource --|> Resource
     Backbone --|> BaseElement
-    Primitive --|> ConfigurableElement
-    AppointmentRecTmplt --|> Backbone
-    MedicationIngredient --|> Backbone
-    ObservationRefRange --|> Backbone
-    Etc3 --|> Backbone
     DomainResource *--> Backbone: as custom-element
-    Primitive <--* BaseElement: as custom-element
     BaseElement <--* BaseElement: as custom-element
     Medication --|> DomainResource
     Patient --|> DomainResource
     Observation --|> DomainResource
     Etc --|> DomainResource
-    CodeableConcept --|> BaseElement
-    HumanName --|> BaseElement
-    Ratio --|> BaseElement
-    Etc2 --|> BaseElement
-
+    AppointmentRecTmplt --|> Backbone
+    MedicationIngredient --|> Backbone
+    ObservationRefRange --|> Backbone
+    Etc3 --|> Backbone
 
 
 
