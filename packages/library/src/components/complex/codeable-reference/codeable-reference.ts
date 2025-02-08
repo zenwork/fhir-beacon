@@ -25,7 +25,7 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
   public renderDisplay(_: DisplayConfig, data: CodeableReferenceData, validations: Validations): TemplateResult[] {
     return oneOf(this,
                  '',
-                 validations.messageFor(this.type + '::' + this.key),
+                 validations.msgFor(this.type + '::' + this.key),
                  [
                       {
                         data: data.concept,

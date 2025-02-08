@@ -58,7 +58,7 @@ export class ObservationComponent extends Backbone<ObservationComponentData> {
           <fhir-codeable-concept key="code" .data=${data.code} required></fhir-codeable-concept>
           ${oneOf(this,
                   'value[x]',
-                  validations.messageFor('value[x]'),
+                  validations.msgFor('value[x]'),
                   [
                       choice(data.valueQuantity,
                              (d: QuantityData) => html`

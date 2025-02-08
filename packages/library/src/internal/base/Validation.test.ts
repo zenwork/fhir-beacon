@@ -20,7 +20,7 @@ describe('ValidationsImpl', () => {
   describe('message for', () => {
     it('should return undefined if no errors exist for the given key', () => {
       const key: FullyQualifiedKey = { path: [{ node: 'nonexistent' }] }
-      expect(val.messageFor(key)).toBeUndefined()
+      expect(val.msgFor(key)).toBeUndefined()
     })
 
     it('should return the error message associated with the given baseless key', () => {
@@ -29,14 +29,14 @@ describe('ValidationsImpl', () => {
 
       val.add({ fqk: key, message: errorMessage })
 
-      expect(val.messageFor(key)).toEqual(errorMessage)
+      expect(val.msgFor(key)).toEqual(errorMessage)
     })
 
     it('should return the error message associated with a key as string', () => {
       const key: FullyQualifiedKey = { path: [{ node: 'key' }] }
       const errorMessage = 'Test error message'
       val.add({ fqk: key, message: errorMessage })
-      expect(val.messageFor('key')).toEqual(errorMessage)
+      expect(val.msgFor('key')).toEqual(errorMessage)
     })
 
 
@@ -46,7 +46,7 @@ describe('ValidationsImpl', () => {
 
       val.add({ fqk: key, message: errorMessage })
 
-      expect(val.messageFor(key)).toEqual(errorMessage)
+      expect(val.msgFor(key)).toEqual(errorMessage)
     })
 
     it('should return the one concatenated error message associated with the given full key', () => {
@@ -58,7 +58,7 @@ describe('ValidationsImpl', () => {
       val.add({ fqk: key, message: errorMessage2 })
 
 
-      expect(val.messageFor(key, ', ')).toEqual(errorMessage + ', ' + errorMessage2)
+      expect(val.msgFor(key, ', ')).toEqual(errorMessage + ', ' + errorMessage2)
     })
 
 
@@ -66,12 +66,12 @@ describe('ValidationsImpl', () => {
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'A' })
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'B' })
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'C' })
-      expect(val.messageFor({ path: [{ node: 'testKey' }] }, '\n')).toEqual('A\nB\nC')
+      expect(val.msgFor({ path: [{ node: 'testKey' }] }, '\n')).toEqual('A\nB\nC')
     })
 
     it('should resolve simple key string to fqk', () => {
       val.add({ fqk: { path: [{ node: 'testKey' }] }, message: 'A' })
-      expect(val.messageFor('testKey')).toEqual('A')
+      expect(val.msgFor('testKey')).toEqual('A')
     })
   })
   describe('slicing', () => {
@@ -126,7 +126,7 @@ describe('ValidationsImpl', () => {
     it('should validate a codeable concept', () => {
 
       val.inspectCodeableConcept({
-                                   key: 'test',
+                                   node: 'test',
                                    concept: {
                                      coding: [
                                        {
@@ -141,8 +141,9 @@ describe('ValidationsImpl', () => {
 
 
       const all: KeyErrorPair[] = val.all()
+      // console.log(all)
       expect(all).toHaveLength(1)
-      expect(all[0].message).toEqual('123000 not in: cs-icd-10-procedures. Valid: 123001, 123002, 123003')
+      expect(all[0].message).toEqual('code \'123000\' not in: cs-icd-10-procedures. Valid: 123001, 123002, 123003')
 
     })
   })

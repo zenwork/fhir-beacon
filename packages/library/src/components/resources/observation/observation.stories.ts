@@ -36,3 +36,37 @@ export const Structure: Story = {
     headless: true
   }
 }
+
+export const WithErrors: Story = {
+  args: {
+    data: {
+      ...data,
+      status: 'not found',
+      category: [
+        {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+              code: 'vital-signss',
+              display: 'Vital Signs'
+            }
+          ]
+        }
+      ],
+      dataAbsentReason: {
+        coding: [
+          {
+            system: 'http://terminology.hl7.org/CodeSystem/data-absent-reason',
+            code: 'null',
+            display: 'null'
+          }
+        ],
+        text: 'null'
+      }
+    },
+    showerror: true,
+    verbose: true,
+    open: true,
+    headless: true
+  }
+}

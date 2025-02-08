@@ -82,7 +82,7 @@ export function wrap<T>({
                              (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)}`
         }
 
-        return html` ${map(collection, (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)} `
+        return html`${map(collection, (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)} `
       }
 
       if (config.verbose && config.mode === DisplayMode.display) {

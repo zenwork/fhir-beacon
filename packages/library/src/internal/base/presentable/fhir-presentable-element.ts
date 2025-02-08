@@ -100,6 +100,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       if (this.mustRender()) {
         this.willRender(this.config(), this.extendedData, changes)
         this.templateGenerators = NullGenerators()
+        // const val: ValidationsImpl<D> = new ValidationsImpl(this.extendedData)
+        // const rootErr: FullyQualifiedKey = {path:[{node: '_root'}]}
+        // if(val.has(rootErr) && this.showerror) {
+        //   this.templateGenerators.structure.header.push(()=>[html`<fhir-error
+        // text="${val.messageFor(rootErr)}"></fhir-error>`])
+        // this.templateGenerators.display.header.push(()=>[html`<fhir-error
+        // text="${val.messageFor(rootErr)}"></fhir-error>`]) }
         this.templateGenerators.structure.header.push(this.renderBaseElement)
         if (this.override()) {
           this.templateGenerators.override.body.push(this.renderOverride)
@@ -154,7 +161,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   protected getLabel() {
     let label = this.type
 
-    if (this.key && !this.label) {
+    if (this.key && !this.label && this.key !== 'nokey') {
       label = this.key
     } else if (this.label) {
       label = this.label

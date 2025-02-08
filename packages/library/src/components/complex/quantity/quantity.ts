@@ -54,12 +54,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
-            ${validations.messageFor('comparator::sqty-1') ? html`
+            ${validations.msgFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
                                 .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.messageFor('comparator::sqty-1')}
+                                .errormessage=${validations.msgFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
         `
       ]
@@ -104,7 +104,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                           type="code"
                           summary
                           .choices=${system?.concepts}
-                          .errormessage=${validations.messageFor('code')}
+                          .errormessage=${validations.msgFor('code')}
           ></fhir-primitive>
           <fhir-primitive key="unit"
                           .value=${data.unit}
@@ -136,12 +136,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         html`
             <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
             <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
-            ${validations.messageFor('comparator::sqty-1') ? html`
+            ${validations.msgFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
                                 .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.messageFor('comparator::sqty-1')}
+                                .errormessage=${validations.msgFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
             <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
             <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>

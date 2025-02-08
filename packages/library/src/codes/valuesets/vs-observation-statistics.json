@@ -1,7 +1,8 @@
 {
     "id": "observation-statistics",
     "name": "StatisticsCode",
-    "type": "CodeSystem",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-statistics",
     "valid": true,
     "choices": [
         {

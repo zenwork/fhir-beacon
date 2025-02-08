@@ -2,6 +2,7 @@
     "id": "observation-status",
     "name": "ObservationStatus",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-status",
     "valid": true,
     "choices": [
         {

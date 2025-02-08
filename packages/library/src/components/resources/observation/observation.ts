@@ -43,11 +43,16 @@ export class Observation extends DomainResource<ObservationData> {
 
 
   public validate(data: ObservationData, validations: Validations, _fetched: boolean): void {
-    validations.inspectCode({ key: 'status', code: data.status, id: 'cs-observation-status' })
+    validations.inspectCode({ node: 'status', code: data.status, id: 'cs-observation-status' })
     validations.inspectCodeableConcept({
-                                         key: 'category',
+                                         node: 'category',
                                          concept: data.category,
                                          bindingId: 'vs-observation-category'
+                                       })
+    validations.inspectCodeableConcept({
+                                         node: 'dataAbsentReason',
+                                         concept: data.dataAbsentReason,
+                                         bindingId: 'vs-data-absent-reason'
                                        })
 
   }
@@ -62,7 +67,7 @@ export class Observation extends DomainResource<ObservationData> {
 
           ${oneOf(this,
                   'instantiate[x]',
-                  validations.messageFor('instantiate[x]'),
+                  validations.msgFor('instantiate[x]'),
                   [
                       choice(data.instantiatesCanonical,
                              (d: Canonical) => html`
@@ -113,7 +118,7 @@ export class Observation extends DomainResource<ObservationData> {
           <fhir-primitive key="status"
                           .value=${data.status}
                           .type=${PrimitiveType.code}
-                          errormessage=${validations.messageFor('status')}
+                          errormessage=${validations.msgFor('status')}
           ></fhir-primitive>
           ${wrap(
                   {
@@ -149,7 +154,7 @@ export class Observation extends DomainResource<ObservationData> {
           <fhir-reference key='encounter' .data=${data.encounter}></fhir-reference>
           ${oneOf(this,
                   'effective[x]',
-                  validations.messageFor('effective[x]'),
+                  validations.msgFor('effective[x]'),
                   [
                       choice(data.effectiveDateTime,
                              (d: DateTime) => html`
@@ -195,7 +200,7 @@ export class Observation extends DomainResource<ObservationData> {
           )}
           ${oneOf(this,
                   'value[x]',
-                  validations.messageFor('value[x]'),
+                  validations.msgFor('value[x]'),
                   [
                       choice(data.valueQuantity,
                              (d: QuantityData) => html`
@@ -308,7 +313,11 @@ export class Observation extends DomainResource<ObservationData> {
                       )
                   ]
           )}
-          <fhir-codeable-concept key="dataAbsentReason" .data=${data.dataAbsentReason}></fhir-codeable-concept>
+          <fhir-codeable-concept
+                  key="dataAbsentReason"
+                  .data=${data.dataAbsentReason}
+                  .errors=${validations.sliceForFQK({ path: [{ node: 'dataAbsentReason' }] })}
+          ></fhir-codeable-concept>
           ${wrap({
                      key: 'interpretation',
                      collection: data.interpretation ?? [],

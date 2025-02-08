@@ -34,13 +34,13 @@ export class Address extends BaseElement<AddressData> {
           <fhir-primitive
                   key="use"
                   .value=${address_use.concepts.filter(v => v.code === data.use)[0]?.display ?? data.use}
-                  .errormessage=${vldtns.messageFor('use')}
+                  .errormessage=${vldtns.msgFor('use')}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   key="type"
                   .value=${address_type.concepts.filter(v => v.code === data.type)[0]?.display ?? data.type}
-                  .errormessage=${vldtns.messageFor('type')}
+                  .errormessage=${vldtns.msgFor('type')}
                   summary
           ></fhir-primitive >
           ${hasSome(data.line, this.verbose)
@@ -72,14 +72,14 @@ export class Address extends BaseElement<AddressData> {
                   label="use"
                   .value=${data.use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.messageFor('use')}
+                  errormessage=${vldtns.msgFor('use')}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   label="type"
                   .value=${data.type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.messageFor('type')}
+                  errormessage=${vldtns.msgFor('type')}
                   summary
           ></fhir-primitive >
           <fhir-primitive label="text"
@@ -122,7 +122,7 @@ export class Address extends BaseElement<AddressData> {
                   key="use"
                   .value=${data.use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.messageFor('use')}
+                  errormessage=${vldtns.msgFor('use')}
                   .choices=${address_use.concepts}
                   summary
           ></fhir-primitive>
@@ -130,7 +130,7 @@ export class Address extends BaseElement<AddressData> {
                   key="type"
                   .value=${data.type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.messageFor('type')}
+                  errormessage=${vldtns.msgFor('type')}
                   .choices=${address_type.concepts}
                   summary
           ></fhir-primitive>

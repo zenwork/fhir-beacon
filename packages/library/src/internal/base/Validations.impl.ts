@@ -29,7 +29,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
     return new FqkMap(this.#data[errors].entries())
   }
 
-  public messageFor(key: FullyQualifiedKey | string, delimiter: string = ';'): string | undefined {
+  public msgFor(key: FullyQualifiedKey | string, delimiter: string = ';'): string | undefined {
     let error: string[] | undefined
 
     if (typeof key === 'string') {
@@ -76,6 +76,10 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
     this.#data[errors].get(fqk)!.push(message)
   }
 
+  public has(path: FullyQualifiedKey): boolean {
+    return this.#data[errors].has(path)
+  }
+
   public rm(key: FullyQualifiedKey): boolean {
     return this.#data[errors].delete(key)
   }
@@ -86,7 +90,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
     return true
   }
 
-  public inspectCode({ key, code, id }: { key: KeyBase } & CodeIdPair): boolean {
+  public inspectCode({ node, code, id }: { node: KeyBase } & CodeIdPair): boolean {
     const codes = this.code(id)
     if (codes) {
       const valid: boolean = codes.choices.some(choice => code === choice.value)
@@ -94,8 +98,8 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         const choiceList: any = codes.choices.map(c => c.value).join(', ')
         this.add({
-                   fqk: { path: [{ node: key }] },
-                   message: `${code} is not a valid ${id} code. Valid codes are: ${choiceList}`
+                   fqk: { path: [{ node: node }] },
+                   message: `'${code}' is not a valid ${id} code. Valid codes are: ${choiceList}`
                  })
       }
       return valid
@@ -103,25 +107,46 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
     return false
   }
 
-  public inspectCodeableConcept({ key, concept, bindingId }: { key: KeyBase } & CodeableConceptIdPair): boolean {
+  public inspectCodeableConcept({ node, concept, bindingId }: { node: KeyBase } & CodeableConceptIdPair): boolean {
 
     const codes = this.code(bindingId)
 
     const validateOne = (coding: CodingData, i: number) => {
-      const valid: boolean =
-        codes.choices.some(choice => {
-          return coding.code === choice.value
-                 && coding.system === codes.system
-        })
 
-      if (!valid) {
+      const code: string | undefined = coding.code
+      const system: string | undefined = coding.system
+
+      const validSystem: boolean = system === codes.system
+      const validCode: boolean = codes.choices.some(choice => code === choice.value)
+
+      if (!validCode) {
         const choices: string = codes.choices.map(c => c.value).join(', ')
-        this.add(
-          {
-            fqk: { path: [{ node: key, index: i }, { node: 'coding' }, { node: 'code' }], key: 'binding' },
-            message: `${coding.code} not in: ${bindingId}. Valid: ${choices}`
-          }
-        )
+        let err: ErrorNodeKey
+
+        if (i === 0) {
+          err = { node: node }
+        } else {
+          err = { node: node, index: i }
+        }
+
+        this.add({
+                   fqk: { path: [err, { node: 'coding' }, { node: 'code' }], key: 'binding' },
+                   message: `code '${code}' not in: ${bindingId}. Valid: ${choices}`
+                 })
+      }
+
+      if (!validSystem) {
+        let err: ErrorNodeKey
+        if (i === 0) {
+          err = { node: node }
+        } else {
+          err = { node: node, index: i }
+        }
+
+        this.add({
+                   fqk: { path: [err, { node: 'coding' }, { node: 'system' }], key: 'binding' },
+                   message: `'${system}' is not a valid system for ${bindingId}. Valid: ${codes.system}`
+                 })
       }
 
     }
@@ -147,6 +172,10 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
       .entries()
       .flatMap(([fqk, messages]) => messages.map(message => ({ fqk, message }))
       )
+  }
+
+  public choices(id: CodeIds): Choices {
+    return this.#codes.get(id)!
   }
 
   private allFor(fqks: FullyQualifiedKey[]): KeyErrorPair[] {

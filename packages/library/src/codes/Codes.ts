@@ -1,8 +1,8 @@
-import {Choices} from '../valuesets/ValueSet.data'
+import {Choices}            from '../valuesets/ValueSet.data'
+import cs_icd_10_procedures from './codesystems/cs-icd-10-procedures.json' with {type: 'json'}
 
 import cs_observation_status from './codesystems/cs-observation-status.json'
 import {CodeIds}             from './types'
-import cs_icd_10_procedures  from './valuesets/cs-icd-10-procedures.json' with {type: 'json'}
 
 import vs_data_absent_reason         from './valuesets/vs-data-absent-reason.json' with {type: 'json'}
 import vs_observation_category       from './valuesets/vs-observation-category.json' with {type: 'json'}

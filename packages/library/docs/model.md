@@ -8,7 +8,9 @@
 ---
 title: Core Model
 config:
-  theme: neutral
+  theme: base
+  themeVariables:
+    primaryTextColor: #fff
   class:
     hideEmptyMembersBox: true
 ---

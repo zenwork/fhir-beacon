@@ -65,7 +65,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display}
                               .link=${data.reference}
-                              .errormessage=${validation.messageFor('*')}
+                              .errormessage=${validation.msgFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -76,7 +76,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display ? data.display : data.reference}
                               .link=${data.reference}
-                              .errormessage=${validation.messageFor('*')}
+                              .errormessage=${validation.msgFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -96,7 +96,7 @@ export class Reference extends BaseElement<ReferenceData> {
                               label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                               .value=${data.display || data.display || data.reference || 'undefined'}
                               .link=${data.reference}
-                              .errormessage=${validation.messageFor('*')}
+                              .errormessage=${validation.msgFor('*')}
                               summary
                       ></fhir-primitive >`
               ],
@@ -108,7 +108,7 @@ export class Reference extends BaseElement<ReferenceData> {
                                       label=${data.type ? asReadable(data.type.toString()) : 'reference'}
                                       .value=${data.display || data.display || data.reference || 'undefined'}
                                       .link=${data.reference}
-                                      .errormessage=${validation.messageFor('*')}
+                                      .errormessage=${validation.msgFor('*')}
                                       summary
                               ></fhir-primitive >
                           `
@@ -133,7 +133,7 @@ export class Reference extends BaseElement<ReferenceData> {
       html`
           <fhir-primitive label="reference"
                           .value=${data.reference}
-                          .errormessage=${validations.messageFor('reference')}
+                          .errormessage=${validations.msgFor('reference')}
                           summary
           ></fhir-primitive>
           <fhir-primitive type=${PrimitiveType.uri_type} label="type" .value=${data.type} summary></fhir-primitive >
@@ -155,7 +155,7 @@ export class Reference extends BaseElement<ReferenceData> {
       html`
           <fhir-primitive key="reference"
                           .value=${data.reference}
-                          .errormessage=${validations.messageFor('*')}
+                          .errormessage=${validations.msgFor('*')}
                           summary
           ></fhir-primitive>
           <fhir-primitive type=${PrimitiveType.uri_type}
@@ -171,7 +171,7 @@ export class Reference extends BaseElement<ReferenceData> {
           <fhir-primitive key="display"
                           .value=${data.display}
                           summary
-                          .errormessage=${validations.messageFor('*')}
+                          .errormessage=${validations.msgFor('*')}
           ></fhir-primitive>
       `
     ]

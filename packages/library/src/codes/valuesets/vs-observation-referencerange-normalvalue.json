@@ -1,7 +1,8 @@
 {
     "id": "observation-referencerange-normalvalue",
-    "name": "ObservationReferenceRangeNormalValue",
-    "type": "CodeSystem",
+    "name": "ObservationReferenceRangeNormalValueCodes",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-referencerange-normalvalue",
     "valid": true,
     "choices": [
         {

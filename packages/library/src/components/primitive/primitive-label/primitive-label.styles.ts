@@ -1,5 +1,7 @@
 import {css} from 'lit'
 
+
+
 export const componentStyles = css`
   :host {
     padding-left: var(--sl-spacing-2x-small);
@@ -16,7 +18,7 @@ export const componentStyles = css`
   /* TODO: variants should be formalised */
   .error {
     font-style: italic;
-
+    text-decoration: underline wavy var(--sl-color-danger-600);
   }
 
 `

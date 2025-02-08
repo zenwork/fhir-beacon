@@ -252,7 +252,6 @@ export class Primitive extends ConfigurableElement {
 
     if (e.type === 'sl-input') {
       if (e.target instanceof SlInput && e.target.type === 'date') {
-        console.log('foo')
         this.value = (e.target as SlInput).valueAsDate?.toISOString() ?? ''
       } else {
         this.value = (e.target as SlInput).value
@@ -283,6 +282,7 @@ export class Primitive extends ConfigurableElement {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
     if (this.presentableError) errors.push(this.presentableError)
+
     return !isBlank(this.value) || this.verbose || this.required
            ? html`
                 <li>
@@ -296,6 +296,11 @@ export class Primitive extends ConfigurableElement {
                             link=${this.link}
                             variant="error"
                     ></fhir-value>
+                    ${this.context
+                      ? html`
+                        <fhir-context .text="${this.context}"></fhir-context>
+        `
+                      : nothing}
                     ${this.mode === DisplayMode.structure
                       ? html`
                                 <fhir-badge-group ?required=${this.required} ?summary=${this.summary}

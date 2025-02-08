@@ -31,7 +31,7 @@ export class TimingRepeat extends Backbone<TimingRepeatData> {
       html`
           ${oneOf(this,
                   'bounds[x]',
-                  validations.messageFor('bound[x]'), [
+                  validations.msgFor('bound[x]'), [
                       choice(
                         data.boundsDuration,
                         (d:QuantityData)=>html`

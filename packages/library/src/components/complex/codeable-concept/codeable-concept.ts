@@ -13,13 +13,22 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
     super('CodeableConcept')
   }
 
+
+  public validate(_data: CodeableConceptData, _validations: Validations, _fetched: boolean): void {
+    super.validate(_data, _validations, _fetched)
+
+    if (_validations.all().length > 0) {
+      _validations.add({ fqk: { path: [{ node: '_root' }] }, message: 'validation error' })
+    }
+  }
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<CodeableConceptData>,
                        validations: Validations): TemplateResult[] {
 
+
     return [
       wrap({
-             key: this.key,
+             key: 'code',
              collection: data.coding ?? [],
              generator: (d, l, k, i) =>
                html`

@@ -39,7 +39,7 @@ export class Identifier extends BaseElement<IdentifierData> {
       return [
         html`
             <fhir-primitive label="use" type=${PrimitiveType.code} .value=${data.use}
-                            errormessage=${validations.messageFor('use')} summary
+                            errormessage=${validations.msgFor('use')} summary
             ></fhir-primitive>
             <fhir-codeable-concept label="type" .data=${data.type}
                                    .errors=${data[errors]} summary

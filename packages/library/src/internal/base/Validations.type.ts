@@ -1,5 +1,6 @@
 import {CodeIds}                   from '../../codes/types'
 import {Code, CodeableConceptData} from '../../components'
+import {Choices}                   from '../../valuesets/ValueSet.data'
 import {FqkMap}                    from './DeepKeyMap'
 
 
@@ -32,17 +33,18 @@ export type CodeableConceptIdPair = {
 
 export interface Validations {
 
-  messageFor(key: FullyQualifiedKey | string, delimiter?: string): string | undefined
+  msgFor(key: FullyQualifiedKey | string, delimiter?: string): string | undefined
   mapForAll(): FqkMap
-  // mapForKey(key: string): DeepKeyMap<FullyQualifiedKey, string[]>
+
   sliceForFQK(key: FullyQualifiedKey): FqkMap
-  // mapForPath(path: string[]): DeepKeyMap<FullyQualifiedKey, string[]>
+  has(path: FullyQualifiedKey): boolean
   add(err: KeyErrorPair): void
   rm(key: FullyQualifiedKey): boolean
   rmAll(): boolean
-
-  inspectCode(props: { key: KeyBase } & CodeIdPair): boolean
-  inspectCodeableConcept(props: { key: KeyBase } & CodeableConceptIdPair): void
-
   all(): KeyErrorPair[]
+
+  inspectCode(props: { node: string } & CodeIdPair): boolean
+  inspectCodeableConcept(props: { node: string } & CodeableConceptIdPair): void
+
+  choices(id: CodeIds): Choices
 }

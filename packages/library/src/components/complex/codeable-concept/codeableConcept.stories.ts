@@ -1,8 +1,10 @@
 import {Meta, StoryObj}                       from '@storybook/web-components'
 import {html}                                 from 'lit'
 import {ifDefined}                            from 'lit-html/directives/if-defined.js'
+import {CodeIds}                              from '../../../../src/codes/types'
 import {renderTemplateInShell, ShellArgs}     from '../../../../stories/storybook-utils'
 import {decorate, Decorated, ValidationsImpl} from '../../../internal'
+import {Choices}                              from '../../../valuesets/ValueSet.data'
 import {CodeableConceptData}                  from './codeable-concept.data'
 
 
@@ -71,6 +73,7 @@ export const Structure: Story = {
   }
 }
 
+
 export const WithError: Story = {
   args: {
     data: {
@@ -87,11 +90,7 @@ export const WithError: Story = {
   },
   render: (args: ShellArgs) => {
 
-    const concept: Decorated<CodeableConceptData> = decorate('_root', args.data as CodeableConceptData, undefined)
-    const validations = new ValidationsImpl(concept)
-    const bindingId = 'cs-icd-10-procedures'
-    validations.inspectCodeableConcept({ key: '_root', concept, bindingId })
-
+    const [validations, concept, _choices] = prepare(args.data as CodeableConceptData, 'cs-icd-10-procedures')
 
     return html`
         <fhir-shell
@@ -104,7 +103,7 @@ export const WithError: Story = {
         >
             <fhir-codeable-concept label="codeable concept with binding on 'cs-icd-10-procedures'"
                                    key="procedure"
-                                   .data=${args.data}
+                                   .data=${concept}
                                    summary
                                    ?headless=${args.headless}
                                    .errors=${validations.sliceForFQK({ path: [{ node: '_root' }] })}
@@ -113,4 +112,14 @@ export const WithError: Story = {
 
     `
   }
+}
+
+function prepare(data: CodeableConceptData, bindingId: CodeIds):
+  [ValidationsImpl<CodeableConceptData>, Decorated<CodeableConceptData>, Choices] {
+
+  const concept: Decorated<CodeableConceptData> = decorate('_root', data, undefined)
+  const validations = new ValidationsImpl(concept)
+  validations.inspectCodeableConcept({ node: '_root', concept: concept, bindingId: bindingId })
+  return [validations, concept, validations.choices(bindingId)]
+
 }

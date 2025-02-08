@@ -18,7 +18,7 @@ export const data = {
       coding: [
         {
           system: 'http://terminology.hl7.org/CodeSystem/observation-category',
-          code: 'vital-signss',
+          code: 'vital-signs',
           display: 'Vital Signs'
         }
       ]
