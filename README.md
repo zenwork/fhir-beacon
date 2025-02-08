@@ -100,6 +100,25 @@ classDiagram
 
 ```
 
+## Packages
+
+### [`library`](./packages/library/README.md)
+The library provides a collection of web components for working with FHIR data in the browser.
+- [storybook catalog app](https://fhir-beacon.deno.dev)
+- [read more docs](./packages/library/README.md)
+- [the model](./packages/library/docs/model.md)
+### [`app`](./packages/app/README.md)
+A showcase application for demonstrating the integration use-cases.
+- [use-case showcase app](https://fhir-beacon-app.deno.dev)
+- [read more](./packages/app/README.md)
+
+### `data`
+Development and testing time data. It mostly contains FHIR reference data.
+
+### `server`
+Development and testing time configuration for running HAPI FHIR server in docker.
+
+
 ## Background
 
 I started this project to learn FHIR and give myself a reason to read through the FHIR specification in the spring of
@@ -140,28 +159,6 @@ shared qualities of the FHIR metamodel and the "HTML-JS-CSS-Browser Api" stack g
 - FHIR and HTML is composable, decomposable, and extendable.
 - FHIR and HTML are designed for interoperability
   and [progressive enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement)
-
-## Usage
-
-[Go to the library package docs](./packages/library/README.md)
-
-## Packages
-
-### [`library`](./packages/library/README.md)
-The library provides a collection of web components for working with FHIR data in the browser. 
-- [storybook catalog app](https://fhir-beacon.deno.dev)
-- [read more docs](./packages/library/README.md)
-- [the model](./packages/library/docs/model.md)
-### [`app`](./packages/app/README.md) 
-A showcase application for demonstrating the integration use-cases.
-- [use-case showcase app](https://fhir-beacon-app.deno.dev)
-- [read more](./packages/app/README.md)
-
-### `data` 
-Development and testing time data. It mostly contains FHIR reference data. 
-
-### `server` 
-Development and testing time configuration for running HAPI FHIR server in docker. 
 
 ## Development Notes:
 
