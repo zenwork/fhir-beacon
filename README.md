@@ -9,17 +9,17 @@ I started this project to learn FHIR and give myself a reason to read through th
 frontends, healthcare organisation integrations, and adapters to legacy protocols such as SOAP and Syslog. In other
 words... lots of moving parts.
 
-I don't quite rememeber when this learning project took on a life of its own!
+I don't quite remember when this learning project took on a life of its own!
 
 One of the big questions is to decide where the data protocol boundaries should be. So I needed to understand FHIR
 better. I have worked for decades on many data interoperability problems in various sectors. Some problems are the same
 and some are different. One of the common problems is that data modelling language is highly correlated to the layers of
 a system and to the technology/language used.
-The [Object-relational impedence mismatch](https://en.wikipedia.org/wiki/Object%E2%80%93relational_impedance_mismatch)
+The [Object-relational impedance mismatch](https://en.wikipedia.org/wiki/Object%E2%80%93relational_impedance_mismatch)
 is a well known problem that leads to all sorts of technology/framework/tooling solutions to try and resolve what is
 ultimately a hard problem. There are diminishing returns on introducing marshalling, indirection, mapping tools. This
 can be further aggravated in service-oriented architectures where data is travelling through many layers written with
-different langauges running on different technology. We already have enough of a problem dealling with the domain's
+different langauges running on different technology. We already have enough of a problem dealing with the domain's
 interoperability problems, the legacy technologies of the sector, as well as the extremely complex nature data
 governance in digital health care.
 
@@ -27,12 +27,12 @@ Along the way I attended a couple of FHIR DevDays conferences and listened to ev
 digital healthcare topics to help my organisation design the architecture of our new EPR.
 
 My thinking then solidified: The FHIR interoperability standard defines a metamodel that is portable across
-organisations, systems, and even technology or programming language boundaries. It then follows that we should be able
-to use it anywhere as is. A developer should be able to look at the core FHIR specification, a profile, an IG and
-unambiguously map it to the FHIR documentation.
+organisations, systems, and even technology or programming language boundaries. It follows then that we should be able
+to use it anywhere "AS IS". A developer should be able to look at the core FHIR specification, a profile, an IG and
+unambiguously map it to their code.
 
-A project emerged: How could a library of browser components components that mapped idiomatically to the FHIR standard
-look like. How could the metamodel be supported so that a base `<fhir-observation>` component could be extended to
+A project emerged: How would a library of browser components components that mapped idiomatically to the FHIR standard
+look like. How could the FHIR metamodel be supported so that a base `<fhir-observation>` component could be extended to
 support extensions, profiles, and ultimately IGs. I was not sure if all of this was possible(and still not) but the
 shared qualities of the FHIR metamodel and the "HTML-JS-CSS-Browser Api" stack gave me hope:
 
@@ -98,7 +98,7 @@ Many ideas have evolved over time and I have not taken the time to refactor ever
 
 ### Future goals:
 - reach feature completeness for primitives, metadata, special and complex datatype
-- reach featrure completness for formats and display-depth
+- reach feature completeness for formats and display-depth
 - support for FHIR path
 - first attempt at supporting profiling and IGs
 - focus on developer experience when using the library in a project.
