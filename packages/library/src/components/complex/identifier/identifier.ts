@@ -57,7 +57,8 @@ export class Identifier extends BaseElement<IdentifierData> {
       if (!useSystem('http://hl7.org/fhir/identifier-use').choices.find(c => c.value === data.use)) {
         validations.add({
                           fqk: { path: [{ node: 'use' }] },
-                          message: 'identifier use is not one of accepted: ' + useSystem('http://hl7.org/fhir/address-use')
+                          message: 'identifier use is not one of accepted: ' + useSystem(
+                            'http://hl7.org/fhir/address-use')
                             .choices.map(c => c.value).join(', ')
                            })
       }
@@ -73,7 +74,8 @@ export class Identifier extends BaseElement<IdentifierData> {
                                    path: [{ node: 'type' }, { node: 'coding', index: index }],
                                    key: 'code'
                                  },
-                                 message: 'identifier type is not one of accepted: ' + values.map(c => c.value).join(', ')
+                                 message: 'identifier type is not one of accepted: ' + values.map(c => c.value).join(
+                                   ', ')
                                   })
 
              })

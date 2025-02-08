@@ -1,29 +1,29 @@
 {
-  "id": "address-use",
-  "name": "AddressUse",
-  "type": "ValueSet",
-  "system": "http://hl7.org/fhir/ValueSet/address-use",
-  "valid": true,
-  "choices": [
-    {
-      "value": "home",
-      "display": "Home"
-    },
-    {
-      "value": "work",
-      "display": "Work"
-    },
-    {
-      "value": "temp",
-      "display": "Temporary"
-    },
-    {
-      "value": "old",
-      "display": "Old / Incorrect"
-    },
-    {
-      "value": "billing",
-      "display": "Billing"
-    }
-  ]
+    "id": "address-use",
+    "name": "AddressUse",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/address-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "home",
+            "display": "Home"
+        },
+        {
+            "value": "work",
+            "display": "Work"
+        },
+        {
+            "value": "temp",
+            "display": "Temporary"
+        },
+        {
+            "value": "old",
+            "display": "Old / Incorrect"
+        },
+        {
+            "value": "billing",
+            "display": "Billing"
+        }
+    ]
 }

@@ -1,8 +1,8 @@
 import {choose}                from 'lit-html/directives/choose.js'
 import {FhirDataContext}       from '../../internal/contexts/FhirContextData'
-import {isBlank}         from '../../utilities'
-import {Choice} from '../../valuesets/ValueSet.data'
-import {DateTime}        from './primitive.data'
+import {isBlank}               from '../../utilities'
+import {Choice}                from '../../valuesets/ValueSet.data'
+import {DateTime}              from './primitive.data'
 import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
 import {PrimitiveValidEvent}   from './primitiveValidEvent'
 import {

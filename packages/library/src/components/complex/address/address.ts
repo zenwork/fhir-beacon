@@ -1,12 +1,12 @@
-import {html, nothing, TemplateResult}               from 'lit'
-import {customElement}                               from 'lit/decorators.js'
-import {useSystem}                                   from '../../../codes/use-system'
-import {BaseElement, Decorated, Validations}         from '../../../internal'
-import {hasSome, strapLines, wrapLines}              from '../../../shell'
-import {DisplayConfig}                               from '../../../types'
-import {hasOnly}                                     from '../../../utilities'
-import {PrimitiveType}                               from '../../primitive'
-import {AddressData}                                 from '../../resources'
+import {html, nothing, TemplateResult}       from 'lit'
+import {customElement}                       from 'lit/decorators.js'
+import {useSystem}                           from '../../../codes/use-system'
+import {BaseElement, Decorated, Validations} from '../../../internal'
+import {hasSome, strapLines, wrapLines}      from '../../../shell'
+import {DisplayConfig}                       from '../../../types'
+import {hasOnly}                             from '../../../utilities'
+import {PrimitiveType}                       from '../../primitive'
+import {AddressData}                         from '../../resources'
 
 
 
@@ -185,7 +185,8 @@ export class Address extends BaseElement<AddressData> {
       if (!address_use.choices.some(c => c.value == data.use)) {
         validations.add({
                           fqk: { path: [{ node: 'use' }] },
-                          message: 'address use is not one of accepted: ' + useSystem('http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
+                          message: 'address use is not one of accepted: '
+                                   + useSystem('http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
                     })
       }
     }
@@ -194,7 +195,8 @@ export class Address extends BaseElement<AddressData> {
       if (!address_type.choices.some(c => c.value == data.type)) {
         validations.add({
                           fqk: { path: [{ node: 'type' }] },
-                          message: 'address type is not one of accepted: ' + useSystem('http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
+                          message: 'address type is not one of accepted: ' + useSystem(
+                            'http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
                     })
       }
     }

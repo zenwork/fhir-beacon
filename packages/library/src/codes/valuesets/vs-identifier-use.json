@@ -1,29 +1,29 @@
 {
-  "id": "identifier-use",
-  "name": "IdentifierUse",
-  "type": "ValueSet",
-  "system": "http://hl7.org/fhir/ValueSet/identifier-use",
-  "valid": true,
-  "choices": [
-    {
-      "value": "usual",
-      "display": "Usual"
-    },
-    {
-      "value": "official",
-      "display": "Official"
-    },
-    {
-      "value": "temp",
-      "display": "Temp"
-    },
-    {
-      "value": "secondary",
-      "display": "Secondary"
-    },
-    {
-      "value": "old",
-      "display": "Old"
-    }
-  ]
+    "id": "identifier-use",
+    "name": "IdentifierUse",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/identifier-use",
+    "valid": true,
+    "choices": [
+        {
+            "value": "usual",
+            "display": "Usual"
+        },
+        {
+            "value": "official",
+            "display": "Official"
+        },
+        {
+            "value": "temp",
+            "display": "Temp"
+        },
+        {
+            "value": "secondary",
+            "display": "Secondary"
+        },
+        {
+            "value": "old",
+            "display": "Old"
+        }
+    ]
 }

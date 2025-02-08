@@ -3,13 +3,13 @@ import cs_address_type      from './codesystems/cs-address-type.json' with {type
 import cs_address_use       from './codesystems/cs-address-use.json' with {type: 'json'}
 import cs_icd_10_procedures from './codesystems/cs-icd-10-procedures.json' with {type: 'json'}
 import cs_identifier_use    from './codesystems/cs-identifier-use.json' with {type: 'json'}
-import cs_quantity_comparator    from './codesystems/cs-quantity-comparator.json' with {type: 'json'}
 
-import cs_observation_status from './codesystems/cs-observation-status.json'
-import cs_slotstatus         from './codesystems/cs-slotstatus.json' with {type: 'json'}
-import cs_v3_orderableDrugForm         from './codesystems/cs-v3-orderableDrugForm.json' with {type: 'json'}
-import {CodeIds}             from './types'
-import vs_age_units          from './valuesets/vs-age-units.json' with {type: 'json'}
+import cs_observation_status   from './codesystems/cs-observation-status.json'
+import cs_quantity_comparator  from './codesystems/cs-quantity-comparator.json' with {type: 'json'}
+import cs_slotstatus           from './codesystems/cs-slotstatus.json' with {type: 'json'}
+import cs_v3_orderableDrugForm from './codesystems/cs-v3-orderableDrugForm.json' with {type: 'json'}
+import {CodeIds}               from './types'
+import vs_age_units            from './valuesets/vs-age-units.json' with {type: 'json'}
 
 import vs_data_absent_reason         from './valuesets/vs-data-absent-reason.json' with {type: 'json'}
 import vs_distance_unit              from './valuesets/vs-distance-units.json' with {type: 'json'}

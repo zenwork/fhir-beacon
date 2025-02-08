@@ -36,7 +36,13 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
-                ${data.comparator ? html`<span slot="before"> ${useSystem('http://hl7.org/fhir/ValueSet/quantity-comparator').choices.find(c=>c.value ===data.comparator)?.display.toLowerCase()} </span>` : nothing}
+                ${data.comparator ? html`<span slot="before"> ${useSystem(
+                        'http://hl7.org/fhir/ValueSet/quantity-comparator')
+                        .choices
+                        .find(c => c.value
+                                   === data.comparator)
+                        ?.display
+                        .toLowerCase()} </span>` : nothing}
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
         `
