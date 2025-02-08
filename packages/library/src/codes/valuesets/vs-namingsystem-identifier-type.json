@@ -1,32 +1,33 @@
 {
-    "id": "namingsystem-identifier-type",
-    "name": "NamingSystemIdentifierType",
-    "type": "ValueSet",
-    "valid": true,
-    "choices": [
-        {
-            "value": "oid",
-            "display": "OID"
-        },
-        {
-            "value": "uuid",
-            "display": "UUID"
-        },
-        {
-            "value": "uri",
-            "display": "URI"
-        },
-        {
-            "value": "iri-stem",
-            "display": "IRI stem"
-        },
-        {
-            "value": "v2csmnemonic",
-            "display": "V2CSMNemonic"
-        },
-        {
-            "value": "other",
-            "display": "Other"
-        }
-    ]
+  "id": "namingsystem-identifier-type",
+  "name": "NamingSystemIdentifierType",
+  "type": "ValueSet",
+  "system": "http://hl7.org/fhir/ValueSet/namingsystem-identifier-type",
+  "valid": true,
+  "choices": [
+    {
+      "value": "oid",
+      "display": "OID"
+    },
+    {
+      "value": "uuid",
+      "display": "UUID"
+    },
+    {
+      "value": "uri",
+      "display": "URI"
+    },
+    {
+      "value": "iri-stem",
+      "display": "IRI stem"
+    },
+    {
+      "value": "v2csmnemonic",
+      "display": "V2CSMNemonic"
+    },
+    {
+      "value": "other",
+      "display": "Other"
+    }
+  ]
 }

@@ -1,28 +1,29 @@
 {
-    "id": "quantity-comparator",
-    "name": "QuantityComparator",
-    "type": "ValueSet",
-    "valid": true,
-    "choices": [
-        {
-            "value": "<",
-            "display": "Less than"
-        },
-        {
-            "value": "<=",
-            "display": "Less or Equal to"
-        },
-        {
-            "value": ">=",
-            "display": "Greater or Equal to"
-        },
-        {
-            "value": ">",
-            "display": "Greater than"
-        },
-        {
-            "value": "ad",
-            "display": "Sufficient to achieve this total quantity"
-        }
-    ]
+  "id": "quantity-comparator",
+  "name": "QuantityComparator",
+  "type": "ValueSet",
+  "system": "http://hl7.org/fhir/ValueSet/quantity-comparator",
+  "valid": true,
+  "choices": [
+    {
+      "value": "<",
+      "display": "Less than"
+    },
+    {
+      "value": "<=",
+      "display": "Less or Equal to"
+    },
+    {
+      "value": ">=",
+      "display": "Greater or Equal to"
+    },
+    {
+      "value": ">",
+      "display": "Greater than"
+    },
+    {
+      "value": "ad",
+      "display": "Sufficient to achieve this total quantity"
+    }
+  ]
 }

@@ -1,7 +1,6 @@
 import {html, TemplateResult}                        from 'lit'
 import {customElement}                               from 'lit/decorators.js'
-import {FhirAddressUse, FhirIdentifierUse}           from '../../../codesystems'
-import {ValueSetIdentifierType}                      from '../../../codesystems/ValueSet-identifier-type'
+import {useSystem}                                   from '../../../codes/use-system'
 import {BaseElement, Decorated, errors, Validations} from '../../../internal'
 import {DisplayConfig}                               from '../../../types'
 import {PrimitiveType}                               from '../../primitive/type-converters/type-converters'
@@ -55,27 +54,26 @@ export class Identifier extends BaseElement<IdentifierData> {
   public validate(data: IdentifierData, validations: Validations, _fetched: boolean): void {
 
     if (data.use) {
-      if (!FhirIdentifierUse.find(c => c.code === data.use)) {
+      if (!useSystem('http://hl7.org/fhir/identifier-use').choices.find(c => c.value === data.use)) {
         validations.add({
                           fqk: { path: [{ node: 'use' }] },
-                          message: 'identifier use is not one of accepted: ' + FhirAddressUse.map(c => c.code)
-                                                                                             .join(', ')
+                          message: 'identifier use is not one of accepted: ' + useSystem('http://hl7.org/fhir/address-use')
+                            .choices.map(c => c.value).join(', ')
                            })
       }
     }
 
     if (data.type?.coding) {
-      const values = ValueSetIdentifierType.compose.include[0].concept
+      const values = useSystem('http://hl7.org/fhir/ValueSet/identifier-type').choices
       const codings: CodingData[] = data.type.coding
-      codings.filter(coding => !values.find(v => v.code === coding.code))
+      codings.filter(coding => !values.find(v => v.value === coding.code))
              .forEach((_, index) => {
                validations.add({
                                  fqk: {
                                    path: [{ node: 'type' }, { node: 'coding', index: index }],
                                    key: 'code'
                                  },
-                                 message: 'identifier type is not one of accepted: ' + values.map(c => c.code)
-                                                                                             .join(', ')
+                                 message: 'identifier type is not one of accepted: ' + values.map(c => c.value).join(', ')
                                   })
 
              })

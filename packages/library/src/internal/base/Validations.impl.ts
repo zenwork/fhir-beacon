@@ -175,7 +175,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
   }
 
   public choices(id: CodeIds): Choices {
-    return this.#codes.get(id)!
+    return this.#codes.getById(id)!
   }
 
   private allFor(fqks: FullyQualifiedKey[]): KeyErrorPair[] {
@@ -191,7 +191,7 @@ export class ValidationsImpl<D extends FhirElementData> implements Validations {
   }
 
   private code(id: CodeIds): Choices {
-    return this.#codes.get(id)!
+    return this.#codes.getById(id)!
   }
 }
 

@@ -1,8 +1,8 @@
 import {choose}                from 'lit-html/directives/choose.js'
-import {Value}                 from '../../codesystems'
 import {FhirDataContext}       from '../../internal/contexts/FhirContextData'
-import {isBlank}               from '../../utilities'
-import {DateTime}              from './primitive.data'
+import {isBlank}         from '../../utilities'
+import {Choice} from '../../valuesets/ValueSet.data'
+import {DateTime}        from './primitive.data'
 import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
 import {PrimitiveValidEvent}   from './primitiveValidEvent'
 import {
@@ -39,7 +39,7 @@ export type PrimitiveValueHost = {
   value?: string,
   valuePath?: string,
   type: PrimitiveType,
-  choices?: Value[],
+  choices?: Choice[],
   error: boolean,
   presentableValue: unknown,
   presentableError: string,

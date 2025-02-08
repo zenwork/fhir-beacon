@@ -66,7 +66,6 @@ export class Patient extends DomainResource<PatientData> {
                          {
                              data: data.deceasedBoolean,
                              html: (d, n, e) => {
-                                 console.log('deceasedBoolean', d)
                                  return html`
                                      <fhir-primitive key="deceasedBoolean"
                                                      label=${n}

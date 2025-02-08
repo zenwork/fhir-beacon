@@ -1,33 +1,33 @@
 {
-    "id": "device-productidentifierinudi",
-    "name": "DeviceProductionIdentifierInUDI",
-    "type": "CodeSystem",
-    "system": "http://hl7.org/fhir/device-productidentifierinudi",
-    "valid": true,
-    "choices": [
-        {
-            "value": "lot-number",
-            "display": "Lot Number"
-        },
-        {
-            "value": "manufactured-date",
-            "display": "Manufactured date"
-        },
-        {
-            "value": "serial-number",
-            "display": "Serial Number"
-        },
-        {
-            "value": "expiration-date",
-            "display": "Expiration date"
-        },
-        {
-            "value": "biological-source",
-            "display": "Biological source"
-        },
-        {
-            "value": "software-version",
-            "display": "Software Version"
-        }
-    ]
+  "id": "device-productidentifierinudi",
+  "name": "DeviceProductionIdentifierInUDI",
+  "type": "CodeSystem",
+  "system": "http://hl7.org/fhir/device-productidentifierinudi",
+  "valid": true,
+  "choices": [
+    {
+      "value": "lot-number",
+      "display": "Lot Number"
+    },
+    {
+      "value": "manufactured-date",
+      "display": "Manufactured date"
+    },
+    {
+      "value": "serial-number",
+      "display": "Serial Number"
+    },
+    {
+      "value": "expiration-date",
+      "display": "Expiration date"
+    },
+    {
+      "value": "biological-source",
+      "display": "Biological source"
+    },
+    {
+      "value": "software-version",
+      "display": "Software Version"
+    }
+  ]
 }

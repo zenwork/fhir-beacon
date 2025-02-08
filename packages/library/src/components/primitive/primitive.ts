@@ -2,12 +2,12 @@ import {consume}                                       from '@lit/context'
 import {SlInput, SlSwitch}                             from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
-import {Value}                                         from '../../codesystems'
 import {ConfigurableElement}                           from '../../internal/base/configurable/fhir-configurable-element'
 import {dataContext, FhirDataContext}                  from '../../internal/contexts'
 import {textHostStyles}                                from '../../styles'
 import {DisplayMode}                                   from '../../types'
 import {isBlank}                                       from '../../utilities'
+import {Choice}                                        from '../../valuesets/ValueSet.data'
 import {mustRender}                                    from '../mustRender'
 import {PrimitiveValidator}                            from './primitive.validator'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
@@ -48,7 +48,7 @@ export class Primitive extends ConfigurableElement {
   declare valuePath: string
 
   @property({ type: Array })
-  declare choices: Value[]
+  declare choices: Choice[]
 
   @property()
   declare link: string
@@ -153,8 +153,8 @@ export class Primitive extends ConfigurableElement {
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
-                             : this.presentableValue} 
-                      link=${this.link} 
+                             : this.presentableValue}
+                      link=${this.link}
                       .variant=${this.variant}
           >
               <span slot="before"><slot name="before"></slot></span>
@@ -222,7 +222,7 @@ export class Primitive extends ConfigurableElement {
           <fhir-system-choice
                   id=${this.key}
                   .value=${this.value}
-                  .valuesets=${this.choices.map(choice => ({ value: choice.code, label: choice.display }))}
+                  .valuesets=${this.choices.map(choice => ({ value: choice.value, label: choice.display }))}
                   label=${this.getLabel()}
                   error=${errors.join(' | ')}
                   @fhir-change=${this.handleChange}
@@ -298,8 +298,8 @@ export class Primitive extends ConfigurableElement {
                     ></fhir-value>
                     ${this.context
                       ? html`
-                        <fhir-context .text="${this.context}"></fhir-context>
-        `
+                                <fhir-context .text="${this.context}"></fhir-context>
+                            `
                       : nothing}
                     ${this.mode === DisplayMode.structure
                       ? html`
@@ -315,8 +315,6 @@ export class Primitive extends ConfigurableElement {
                 </li>`
            : html``
   }
-
-
 
 
 }

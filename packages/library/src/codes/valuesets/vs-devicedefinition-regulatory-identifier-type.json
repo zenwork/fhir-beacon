@@ -1,8 +1,8 @@
 {
   "id": "devicedefinition-regulatory-identifier-type",
-  "name": "DeviceRegulatoryIdentifierType",
-  "type": "CodeSystem",
-  "system": "http://hl7.org/fhir/devicedefinition-regulatory-identifier-type",
+  "name": "DeviceDefinitionRegulatoryIdentifierType",
+  "type": "ValueSet",
+  "system": "http://hl7.org/fhir/ValueSet/devicedefinition-regulatory-identifier-type",
   "valid": true,
   "choices": [
     {
