@@ -18,7 +18,7 @@ export class Narrative extends BaseElement<NarrativeData> {
     super('Narrative')
   }
 
-  public renderNarrative(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+  public renderNarrative(_config: DisplayConfig, data: NarrativeData): TemplateResult[] {
     return [
       html`
           <div id="formatted-narrative" part="narrative-styling">
@@ -42,7 +42,7 @@ export class Narrative extends BaseElement<NarrativeData> {
     ]
   }
 
-  public renderStructure(config: DisplayConfig, data: NarrativeData): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig, data: NarrativeData): TemplateResult[] {
     return [
       html`
           <fhir-primitive label="status" .value=${data.status}></fhir-primitive >
@@ -77,6 +77,7 @@ export class Narrative extends BaseElement<NarrativeData> {
       this.shadowRoot!.adoptedStyleSheets = [...this.shadowRoot!.adoptedStyleSheets, constructableSheet]
     }
   }
+
   protected updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties)
     if (_changedProperties.has('data') && this.data !== NoDataObject) {

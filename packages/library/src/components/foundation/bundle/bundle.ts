@@ -1,12 +1,16 @@
-import {html, nothing, TemplateResult}                  from 'lit'
-import {customElement}                                  from 'lit/decorators.js'
-import {BaseElement, Decorated}                         from '../../../internal'
-import {renderResourceComponent}                        from '../../../internal/resource/renderResourceComponent'
-import {hasSome, isDefined}                             from '../../../shell/layout/directives'
-import {renderBackboneCollection, renderSingleBackbone} from '../../../shell/layout/renderBackboneCollection'
-import {DisplayConfig}                                  from '../../../types'
-import {PrimitiveType}                                  from '../../primitive/type-converters/type-converters'
-import {BundleData}                                     from './bundle.data'
+import {html, nothing, TemplateResult}                           from 'lit'
+import {customElement}                                           from 'lit/decorators.js'
+import {FhirType, FhirTypes}                                     from '../../../fhirtypes'
+import {BaseElement, Decorated, DomainResourceData, Validations} from '../../../internal'
+import {
+  renderResourceComponent
+}                                                                from '../../../internal/resource/renderResourceComponent'
+import {wrap}                                                    from '../../../shell'
+import {hasSome, isDefined}                                      from '../../../shell/layout/directives'
+import {renderBackboneCollection, renderSingleBackbone}          from '../../../shell/layout/renderBackboneCollection'
+import {DisplayConfig}                                           from '../../../types'
+import {PrimitiveType}                                           from '../../primitive/type-converters/type-converters'
+import {BundleData}                                              from './bundle.data'
 
 
 
@@ -145,4 +149,49 @@ export class Bundle extends BaseElement<BundleData> {
       `
     ]
   }
+
+
+  public renderNarrative(config: DisplayConfig,
+                         data: Decorated<BundleData>,
+                         _validations: Validations): TemplateResult[] {
+    if (data.entry && data.entry.length > 0) {
+      return [
+        html`
+            <fhir-wrapper label=${this.getLabel()} ?headless=${this.headless}>
+                ${wrap({
+                           key: 'entry',
+                           collection: data.entry,
+                           generator: (d, l, k, i) => {
+                               if (isDomainResource(d.resource)) {
+                                   return html`
+                                       <fhir-label text="${l}: ${d.resource.resourceType}"></fhir-label>
+                                       <fhir-narrative
+                                               .data=${d.resource.text}
+                                               .mode=${config.mode}
+                                       ></fhir-narrative>
+
+                                   `
+                               } else return html``
+                           },
+                           config
+                       })
+                }
+            </fhir-wrapper>
+        `
+      ]
+    }
+
+    return [html``]
+  }
+}
+
+export function isDomainResource(val: unknown): val is DomainResourceData {
+  if (typeof val !== 'object' || val === null || !('resourceType' in val)) {
+    return false
+  }
+  const type: FhirType | undefined = FhirTypes.find(t => t.code === (val as { resourceType: string }).resourceType)
+  const isResource: boolean = type?.kind === 'resource'
+  const hasTextProp: boolean = typeof val === 'object' && true && 'text' in val && !!(val as { text: unknown }).text
+
+  return isResource || hasTextProp
 }
