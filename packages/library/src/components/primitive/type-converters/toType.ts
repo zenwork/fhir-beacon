@@ -1,5 +1,6 @@
-import {FhirTypes}         from '../../../codesystems/code-systems'
+import {FhirTypes}         from '../../.././fhirtypes/code-systems'
 import {toPrimitive, Type} from './type-converters'
+
 
 
 export const toType: toPrimitive<string, Type> = (value: string): Type => {

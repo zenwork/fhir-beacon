@@ -2,6 +2,7 @@
     "id": "observation-triggeredbytype",
     "name": "TriggeredBytype",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-triggeredbytype",
     "valid": true,
     "choices": [
         {

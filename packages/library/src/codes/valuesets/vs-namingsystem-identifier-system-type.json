@@ -325,6 +325,7 @@
             "value": "NNxxx",
             "display": "National Person Identifier where the xxx is the ISO table 3166 3-character (alphabetic) country code",
             
+            
         },
         {
             "value": "NP",

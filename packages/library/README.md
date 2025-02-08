@@ -20,12 +20,12 @@ easily adopt the FHIR metamodel as is, without having to implement a separate ma
 ## Design Philosophy?
 1. `idiomatic` - UI markup that easily reflect the core FHIR documentation 
 2. `local-first` - data validation without a backend; leverages web-APIs for state-management
-3. `framework-agnostic` - the library is can be used in any framework, plain JS, or in statically generated single 
+3. `framework-agnostic` - the library can be used in any framework, plain JS, or in statically generated single
    HTML file.
 4. `resources or fragments` - use the library to render complete resources or any fragments
 5. `composable, decomposable, and extendable` - use the library differently in different contexts
 6. `fast prototyping` - use 4 default view-modes through-out the development process (display, structural, narrative,
-   jason)
+   json)
 7. `customize` - extend existing FHIR element to change what you need or support your FHIR extensions 
 8. `create` - build components from scratch with a FHIR-ready toolkit 
 
@@ -66,7 +66,7 @@ function render(data:TimingData, config:DisplayConfig){
                  <fhir-primitive key=${k} label=${l} .value=${d} .type=${PrimitiveType.datetime} summary ></fhir-primitive>`,
                  config
           })}
-          <fhir-timing-repeat key="repeat" .data=${data.repeat}></fhir-timing-repeat>
+          <fhir-timing key="repeat" .data=${data.repeat}></fhir-timing>
           <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
   `
 }

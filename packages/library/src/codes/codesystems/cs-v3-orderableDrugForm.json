@@ -1,0 +1,653 @@
+{
+    "id": "v3-orderableDrugForm",
+    "name": "OrderableDrugForm",
+    "type": "CodeSystem",
+    "system": "http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm",
+    "valid": true,
+    "choices": [
+        {
+            "value": "_AdministrableDrugForm",
+            "display": "AdministrableDrugForm"
+        },
+        {
+            "value": "_DispensableDrugForm",
+            "display": "DispensableDrugForm"
+        },
+        {
+            "value": "APPFUL",
+            "display": "Applicatorful"
+        },
+        {
+            "value": "DROP",
+            "display": "Drops"
+        },
+        {
+            "value": "PUFF",
+            "display": "Puff"
+        },
+        {
+            "value": "SCOOP",
+            "display": "Scoops"
+        },
+        {
+            "value": "SPRY",
+            "display": "Sprays"
+        },
+        {
+            "value": "_GasDrugForm",
+            "display": "GasDrugForm"
+        },
+        {
+            "value": "_GasLiquidMixture",
+            "display": "GasLiquidMixture"
+        },
+        {
+            "value": "_GasSolidSpray",
+            "display": "GasSolidSpray"
+        },
+        {
+            "value": "_Liquid",
+            "display": "Liquid"
+        },
+        {
+            "value": "_LiquidLiquidEmulsion",
+            "display": "LiquidLiquidEmulsion"
+        },
+        {
+            "value": "_LiquidSolidSuspension",
+            "display": "LiquidSolidSuspension"
+        },
+        {
+            "value": "_SolidDrugForm",
+            "display": "SolidDrugForm"
+        },
+        {
+            "value": "GASINHL",
+            "display": "Gas for Inhalation"
+        },
+        {
+            "value": "AER",
+            "display": "Aerosol"
+        },
+        {
+            "value": "DERMSPRY",
+            "display": "Dermal Spray"
+        },
+        {
+            "value": "FOAM",
+            "display": "Foam"
+        },
+        {
+            "value": "RECSPRY",
+            "display": "Rectal Spray"
+        },
+        {
+            "value": "VAGSPRY",
+            "display": "Vaginal Spray"
+        },
+        {
+            "value": "INHL",
+            "display": "Inhalant"
+        },
+        {
+            "value": "PWDSPRY",
+            "display": "Powder Spray"
+        },
+        {
+            "value": "SPRYADAPT",
+            "display": "Spray with Adaptor"
+        },
+        {
+            "value": "LIQCLN",
+            "display": "Liquid Cleanser"
+        },
+        {
+            "value": "OIL",
+            "display": "Oil"
+        },
+        {
+            "value": "SOL",
+            "display": "Solution"
+        },
+        {
+            "value": "CRM",
+            "display": "Cream"
+        },
+        {
+            "value": "LTN",
+            "display": "Lotion"
+        },
+        {
+            "value": "OINT",
+            "display": "Ointment"
+        },
+        {
+            "value": "GEL",
+            "display": "Gel"
+        },
+        {
+            "value": "PASTE",
+            "display": "Paste"
+        },
+        {
+            "value": "SUSP",
+            "display": "Suspension"
+        },
+        {
+            "value": "BAR",
+            "display": "Bar"
+        },
+        {
+            "value": "BEAD",
+            "display": "Beads"
+        },
+        {
+            "value": "CAKE",
+            "display": "Cake"
+        },
+        {
+            "value": "CEMENT",
+            "display": "Cement"
+        },
+        {
+            "value": "CRYS",
+            "display": "Crystals"
+        },
+        {
+            "value": "DISK",
+            "display": "Disk"
+        },
+        {
+            "value": "FLAKE",
+            "display": "Flakes"
+        },
+        {
+            "value": "GRAN",
+            "display": "Granules"
+        },
+        {
+            "value": "GUM",
+            "display": "ChewingGum"
+        },
+        {
+            "value": "PAD",
+            "display": "Pad"
+        },
+        {
+            "value": "PATCH",
+            "display": "Patch"
+        },
+        {
+            "value": "PELLET",
+            "display": "Pellet"
+        },
+        {
+            "value": "PILL",
+            "display": "Pill"
+        },
+        {
+            "value": "POWD",
+            "display": "Powder"
+        },
+        {
+            "value": "SUPP",
+            "display": "Suppository"
+        },
+        {
+            "value": "SWAB",
+            "display": "Swab"
+        },
+        {
+            "value": "WAFER",
+            "display": "Wafer"
+        },
+        {
+            "value": "BAINHL",
+            "display": "Breath Activated Inhaler"
+        },
+        {
+            "value": "INHLSOL",
+            "display": "Inhalant Solution"
+        },
+        {
+            "value": "MDINHL",
+            "display": "Metered Dose Inhaler"
+        },
+        {
+            "value": "NASSPRY",
+            "display": "Nasal Spray"
+        },
+        {
+            "value": "BARSOAP",
+            "display": "Bar Soap"
+        },
+        {
+            "value": "CHEWBAR",
+            "display": "Chewable Bar"
+        },
+        {
+            "value": "MEDBAR",
+            "display": "Medicated Bar Soap"
+        },
+        {
+            "value": "SRBUCTAB",
+            "display": "Sustained Release Buccal Tablet"
+        },
+        {
+            "value": "ORCAP",
+            "display": "Oral Capsule"
+        },
+        {
+            "value": "NASCRM",
+            "display": "Nasal Cream"
+        },
+        {
+            "value": "OPCRM",
+            "display": "Ophthalmic Cream"
+        },
+        {
+            "value": "ORCRM",
+            "display": "Oral Cream"
+        },
+        {
+            "value": "OTCRM",
+            "display": "Otic Cream"
+        },
+        {
+            "value": "RECCRM",
+            "display": "Rectal Cream"
+        },
+        {
+            "value": "TOPCRM",
+            "display": "Topical Cream"
+        },
+        {
+            "value": "VAGCRM",
+            "display": "Vaginal Cream"
+        },
+        {
+            "value": "NDROP",
+            "display": "Nasal Drops"
+        },
+        {
+            "value": "OPDROP",
+            "display": "Ophthalmic Drops"
+        },
+        {
+            "value": "ORDROP",
+            "display": "Oral Drops"
+        },
+        {
+            "value": "OTDROP",
+            "display": "Otic Drops"
+        },
+        {
+            "value": "ERECTAB",
+            "display": "Extended Release Enteric Coated Tablet"
+        },
+        {
+            "value": "ERENTCAP",
+            "display": "Extended Release Enteric Coated Capsule"
+        },
+        {
+            "value": "ERCAP12",
+            "display": "12 Hour Extended Release Capsule"
+        },
+        {
+            "value": "ERCAP24",
+            "display": "24 Hour Extended Release Capsule"
+        },
+        {
+            "value": "ERECCAP",
+            "display": "Extended Release Enteric Coated Capsule"
+        },
+        {
+            "value": "ERSUSP12",
+            "display": "12 Hour Extended-Release Suspension"
+        },
+        {
+            "value": "ERSUSP24",
+            "display": "24 Hour Extended Release Suspension"
+        },
+        {
+            "value": "ERTAB12",
+            "display": "12 Hour Extended Release Tablet"
+        },
+        {
+            "value": "ERTAB24",
+            "display": "24 Hour Extended Release Tablet"
+        },
+        {
+            "value": "FOAMAPL",
+            "display": "Foam with Applicator"
+        },
+        {
+            "value": "RECFORM",
+            "display": "Rectal foam"
+        },
+        {
+            "value": "VAGFOAM",
+            "display": "Vaginal foam"
+        },
+        {
+            "value": "GELAPL",
+            "display": "Gel with Applicator"
+        },
+        {
+            "value": "NASGEL",
+            "display": "Nasal Gel"
+        },
+        {
+            "value": "OPGEL",
+            "display": "Ophthalmic Gel"
+        },
+        {
+            "value": "OTGEL",
+            "display": "Otic Gel"
+        },
+        {
+            "value": "TOPGEL",
+            "display": "Topical Gel"
+        },
+        {
+            "value": "URETHGEL",
+            "display": "Urethral Gel"
+        },
+        {
+            "value": "VAGGEL",
+            "display": "Vaginal Gel"
+        },
+        {
+            "value": "BAINHLPWD",
+            "display": "Breath Activated Powder Inhaler"
+        },
+        {
+            "value": "INHLPWD",
+            "display": "Inhalant Powder"
+        },
+        {
+            "value": "MDINHLPWD",
+            "display": "Metered Dose Powder Inhaler"
+        },
+        {
+            "value": "NASINHL",
+            "display": "Nasal Inhalant"
+        },
+        {
+            "value": "ORINHL",
+            "display": "Oral Inhalant"
+        },
+        {
+            "value": "DOUCHE",
+            "display": "Douche"
+        },
+        {
+            "value": "ENEMA",
+            "display": "Enema"
+        },
+        {
+            "value": "OPIRSOL",
+            "display": "Ophthalmic Irrigation Solution"
+        },
+        {
+            "value": "LIQSOAP",
+            "display": "Medicated Liquid Soap"
+        },
+        {
+            "value": "SHMP",
+            "display": "Shampoo"
+        },
+        {
+            "value": "TOPLTN",
+            "display": "Topical Lotion"
+        },
+        {
+            "value": "TOPOIL",
+            "display": "Topical Oil"
+        },
+        {
+            "value": "NASOINT",
+            "display": "Nasal Ointment"
+        },
+        {
+            "value": "OINTAPL",
+            "display": "Ointment with Applicator"
+        },
+        {
+            "value": "OPOINT",
+            "display": "Ophthalmic Ointment"
+        },
+        {
+            "value": "OTOINT",
+            "display": "Otic Ointment"
+        },
+        {
+            "value": "RECOINT",
+            "display": "Rectal Ointment"
+        },
+        {
+            "value": "TOPOINT",
+            "display": "Topical Ointment"
+        },
+        {
+            "value": "VAGOINT",
+            "display": "Vaginal Ointment"
+        },
+        {
+            "value": "ELIXIR",
+            "display": "Elixir"
+        },
+        {
+            "value": "RINSE",
+            "display": "Mouthwash/Rinse"
+        },
+        {
+            "value": "SYRUP",
+            "display": "Syrup"
+        },
+        {
+            "value": "ENTCAP",
+            "display": "Enteric Coated Capsule"
+        },
+        {
+            "value": "ERCAP",
+            "display": "Extended Release Capsule"
+        },
+        {
+            "value": "ERSUSP",
+            "display": "Extended-Release Suspension"
+        },
+        {
+            "value": "BUCTAB",
+            "display": "Buccal Tablet"
+        },
+        {
+            "value": "CAPLET",
+            "display": "Caplet"
+        },
+        {
+            "value": "CHEWTAB",
+            "display": "Chewable Tablet"
+        },
+        {
+            "value": "CPTAB",
+            "display": "Coated Particles Tablet"
+        },
+        {
+            "value": "DISINTAB",
+            "display": "Disintegrating Tablet"
+        },
+        {
+            "value": "DRTAB",
+            "display": "Delayed Release Tablet"
+        },
+        {
+            "value": "ECTAB",
+            "display": "Enteric Coated Tablet"
+        },
+        {
+            "value": "ERTAB",
+            "display": "Extended Release Tablet"
+        },
+        {
+            "value": "ORTROCHE",
+            "display": "Lozenge/Oral Troche"
+        },
+        {
+            "value": "SLTAB",
+            "display": "Sublingual Tablet"
+        },
+        {
+            "value": "MEDPAD",
+            "display": "Medicated Pad"
+        },
+        {
+            "value": "PUD",
+            "display": "Pudding"
+        },
+        {
+            "value": "TPASTE",
+            "display": "Toothpaste"
+        },
+        {
+            "value": "TPATCH",
+            "display": "Transdermal Patch"
+        },
+        {
+            "value": "CAP",
+            "display": "Capsule"
+        },
+        {
+            "value": "TAB",
+            "display": "Tablet"
+        },
+        {
+            "value": "TOPPWD",
+            "display": "Topical Powder"
+        },
+        {
+            "value": "IPSOL",
+            "display": "Intraperitoneal Solution"
+        },
+        {
+            "value": "IRSOL",
+            "display": "Irrigation Solution"
+        },
+        {
+            "value": "IVSOL",
+            "display": "Intravenous Solution"
+        },
+        {
+            "value": "ORALSOL",
+            "display": "Oral Solution"
+        },
+        {
+            "value": "RECSOL",
+            "display": "Rectal Solution"
+        },
+        {
+            "value": "TOPSOL",
+            "display": "Topical Solution"
+        },
+        {
+            "value": "RECSUPP",
+            "display": "Rectal Suppository"
+        },
+        {
+            "value": "URETHSUPP",
+            "display": "Urethral suppository"
+        },
+        {
+            "value": "VAGSUPP",
+            "display": "Vaginal Suppository"
+        },
+        {
+            "value": "ITSUSP",
+            "display": "Intrathecal Suspension"
+        },
+        {
+            "value": "OPSUSP",
+            "display": "Ophthalmic Suspension"
+        },
+        {
+            "value": "ORSUSP",
+            "display": "Oral Suspension"
+        },
+        {
+            "value": "OTSUSP",
+            "display": "Otic Suspension"
+        },
+        {
+            "value": "RECSUSP",
+            "display": "Rectal Suspension"
+        },
+        {
+            "value": "MEDSWAB",
+            "display": "Medicated swab"
+        },
+        {
+            "value": "ORTAB",
+            "display": "Oral Tablet"
+        },
+        {
+            "value": "VAGTAB",
+            "display": "Vaginal Tablet"
+        },
+        {
+            "value": "RECPWD",
+            "display": "Rectal Powder"
+        },
+        {
+            "value": "VAGPWD",
+            "display": "Vaginal Powder"
+        },
+        {
+            "value": "LIN",
+            "display": "Liniment"
+        },
+        {
+            "value": "MUCTOPSOL",
+            "display": "Mucous Membrane Topical Solution"
+        },
+        {
+            "value": "TINC",
+            "display": "Tincture"
+        },
+        {
+            "value": "TPATH16",
+            "display": "16 Hour Transdermal Patch"
+        },
+        {
+            "value": "TPATH24",
+            "display": "24 Hour Transdermal Patch"
+        },
+        {
+            "value": "TPATH2WK",
+            "display": "Biweekly Transdermal Patch"
+        },
+        {
+            "value": "TPATH72",
+            "display": "72 Hour Transdermal Patch"
+        },
+        {
+            "value": "TPATHWK",
+            "display": "Weekly Transdermal Patch"
+        },
+        {
+            "value": "VAGCRMAPL",
+            "display": "Vaginal Cream with Applicator"
+        },
+        {
+            "value": "VAGFOAMAPL",
+            "display": "Vaginal foam with applicator"
+        },
+        {
+            "value": "VGELAPL",
+            "display": "Vaginal Gel with Applicator"
+        },
+        {
+            "value": "VAGOINTAPL",
+            "display": "Vaginal Ointment with Applicator"
+        }
+    ]
+}

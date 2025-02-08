@@ -1,7 +1,0 @@
-{
-    "id": "message-events",
-    "name": "MessageEvent",
-    "type": "CodeSystem",
-    "valid": true,
-    "choices": []
-}

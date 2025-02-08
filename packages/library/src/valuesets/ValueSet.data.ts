@@ -202,9 +202,10 @@ export type ResolvedSet = {
 export type Choice = { value: string, display: string }
 export type Choices = {
   id: string,
-  type: 'CodeSystem' | 'ValueSet' | 'unknown' | string,
+  type: 'CodeSystem' | 'ValueSet' | 'fhir-beacon' | 'unknown' | string,
   name: string,
-  system: string,
+  // TODO: should not be optional. Should be in vs and cs choice files
+  system?: string,
   choices: Choice[]
   valid: boolean
 }

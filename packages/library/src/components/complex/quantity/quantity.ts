@@ -1,19 +1,16 @@
-import {html, nothing, TemplateResult}                                    from 'lit'
-import {customElement, property}                                          from 'lit/decorators.js'
-import {when}                                                             from 'lit/directives/when.js'
-import {FhirAges, FhirDistances, FhirDuration, systems, useSystem, Value} from '../../../codesystems/code-systems'
-import {BaseElement, Decorated, Validations}                              from '../../../internal'
-import {hostStyles}                                                       from '../../../styles'
-import {DisplayConfig}                                                    from '../../../types'
-import {hasAllOrNone}                                                     from '../../../utilities/hasAllOrNone'
-import {isWholeNumber}                                                    from '../../../utilities/isWhole'
-import {
-  asQuantityComparator,
-  quantityComparatorChoices
-}                                                                         from '../../primitive/type-presenters/asQuantityComparator'
-import {QuantityData, QuantityVariations, SimpleQuantityData}             from './quantity.data'
-import {componentStyles}                                                  from './quantity.styles'
-import {isQuantity, isSimpleQuantity}                                     from './quantity.type-guards'
+import {html, nothing, TemplateResult}                        from 'lit'
+import {customElement, property}                              from 'lit/decorators.js'
+import {when}                                                 from 'lit/directives/when.js'
+import {systemChoices, useSystem}                             from '../../../codes/use-system'
+import {BaseElement, Decorated, Validations}                  from '../../../internal'
+import {hostStyles}                                           from '../../../styles'
+import {DisplayConfig}                                        from '../../../types'
+import {hasAllOrNone}                                         from '../../../utilities/hasAllOrNone'
+import {isWholeNumber}                                        from '../../../utilities/isWhole'
+import {Choice, Choices}                                      from '../../../valuesets/ValueSet.data'
+import {QuantityData, QuantityVariations, SimpleQuantityData} from './quantity.data'
+import {componentStyles}                                      from './quantity.styles'
+import {isQuantity, isSimpleQuantity}                         from './quantity.type-guards'
 
 
 
@@ -39,8 +36,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
       return [
         html`
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
-                ${data.comparator ? html`<span slot="before"> ${asQuantityComparator(data.comparator)
-                        .display
+                ${data.comparator ? html`<span slot="before"> ${useSystem(
+                        'http://hl7.org/fhir/ValueSet/quantity-comparator')
+                        .choices
+                        .find(c => c.value
+                                   === data.comparator)
+                        ?.display
                         .toLowerCase()} </span>` : nothing}
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
@@ -54,12 +55,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
             <fhir-primitive .label=${this.label} .value=${displayValue} .type=${type} summary>
                 ${after ? html`<span slot="after"> ${after} </span>` : nothing}
             </fhir-primitive>
-            ${validations.errFor('comparator::sqty-1') ? html`
+            ${validations.msgFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
-                                .value=${(data as any).comparator}
+                                .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                                .errormessage=${validations.msgFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
         `
       ]
@@ -79,7 +80,8 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                                validations: Validations): TemplateResult[] {
 
     const system = useSystem(data.system)
-    const sys = systems()
+    const comparators: Choices = useSystem('http://hl7.org/fhir/quantity-comparator')
+    const sysChoices = systemChoices()
 
     return [
       html`
@@ -93,18 +95,23 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
                                       .value=${(data as QuantityData).comparator}
                                       type="code"
                                       summary
-                                      .choices=${quantityComparatorChoices()}
+                                      .choices=${comparators.choices}
 
                       ></fhir-primitive>`
           )}
 
-          <fhir-primitive key="system" .value=${data.system} type="uri" summary .choices=${sys}></fhir-primitive>
+          <fhir-primitive key="system"
+                          .value=${data.system}
+                          type="uri"
+                          summary
+                          .choices=${sysChoices.choices}
+          ></fhir-primitive>
           <fhir-primitive key="code"
                           .value=${data.code}
                           type="code"
                           summary
-                          .choices=${system?.concepts}
-                          .errormessage=${validations.errFor('code')}
+                          .choices=${system?.choices}
+                          .errormessage=${validations.msgFor('code')}
           ></fhir-primitive>
           <fhir-primitive key="unit"
                           .value=${data.unit}
@@ -114,7 +121,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     ]
   }
 
-  public renderStructure(config: DisplayConfig,
+  public renderStructure(_config: DisplayConfig,
                          data: QuantityData | SimpleQuantityData,
                          validations: Validations): TemplateResult[] {
 
@@ -136,12 +143,12 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
         html`
             <fhir-primitive label="variation" .value=${this.variation}></fhir-primitive>
             <fhir-primitive label="value" .value=${data.value} type="decimal" summary></fhir-primitive>
-            ${validations.errFor('comparator::sqty-1') ? html`
+            ${validations.msgFor('comparator::sqty-1') ? html`
                 <fhir-primitive label="comparator"
-                                .value=${(data as any).comparator}
+                                .value=${(data as QuantityData).comparator}
                                 type="code"
                                 summary
-                                .errormessage=${validations.errFor('comparator::sqty-1')}
+                                .errormessage=${validations.msgFor('comparator::sqty-1')}
                 ></fhir-primitive>` : nothing}
             <fhir-primitive label="unit" .value=${data.unit} summary></fhir-primitive>
             <fhir-primitive label="system" .value=${data.system} type="uri" summary></fhir-primitive>
@@ -161,27 +168,27 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, fetched: boolean) {
+  public validate(data: QuantityData | SimpleQuantityData, validations: Validations, _fetched: boolean) {
     if (this.simple && !isSimpleQuantity(data)) {
-      validations.addErr({
-                           key: 'comparator::sqty-1',
-                           err: `${this.type}:${this.key}: comparator should not be present`
+      validations.add({
+                        fqk: { path: [{ node: 'comparator::sqty-1' }] },
+                        message: `${this.type}:${this.key}: comparator should not be present`
                          })
 
     }
 
     if (!hasAllOrNone(data, ['code', 'system'])) {
-      validations.addErr({
-                           key: this.type + '::qty-3',
-                           err: `${this.type}: code and system should be set or none of the two`
+      validations.add({
+                        fqk: { path: [{ node: this.type + '::qty-3' }] },
+                        message: `${this.type}: code and system should be set or none of the two`
                          })
     }
 
     const system = useSystem(data.system)
-    if (system && !system.concepts.find((v: Value) => v.code === data.code)) {
-      validations.addErr({
-                           key: 'code',
-                           err: `${this.type}: code ${data.code} is not valid for system: ${data.system}`
+    if (system && !system.choices.find((c: Choice) => c.value === data.code)) {
+      validations.add({
+                        fqk: { path: [{ node: 'code' }] },
+                        message: `${this.type}: code ${data.code} is not valid for system: ${data.system}`
                          })
     }
 
@@ -203,8 +210,9 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     const isBlankOrUcum = !data.system || data.system.toString() === 'http://unitsofmeasure.org'
 
     // rule: dis-1
+    const distanceUnits: Choices = useSystem('http://hl7.org/fhir/ValueSet/distance-units')
     if (data.unit
-        && FhirDistances.concepts.find(d => data.code === d.code && data.system === d.url)) {
+        && distanceUnits.choices.find(d => data.code === d.value && data.system === distanceUnits.system)) {
       this.variation = QuantityVariations.distance
     }
 
@@ -218,16 +226,18 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
     // TODO: There is no guaranteed way to distinguish between a duration and an age. Is this a bug or a feature?
     // rule: drt-1
+    const durations: Choices = useSystem('http://hl7.org/fhir/ValueSet/duration-units')
     if ((!data.value || data.code)
-        && FhirDuration.concepts.find(d => data.code === d.code && data.system === d.system)
+        && durations.choices.find(d => data.code === d.value)
         && isBlankOrUcum
     ) {
       this.variation = QuantityVariations.duration
     }
 
     // rule: age-1
+    const ageUnits: Choices = useSystem('http://hl7.org/fhir/ValueSet/age-units')
     if (data.value && data.value > 0
-        && FhirAges.concepts.find(a => data.code === a.code && data.system === a.url)) {
+        && ageUnits.choices.find(a => data.code === a.value && data.system === ageUnits.system)) {
       this.variation = QuantityVariations.age
     }
     return data as Decorated<QuantityData> | Decorated<SimpleQuantityData>
@@ -243,8 +253,8 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
     if (key === 'code') {
       const system = useSystem(data.system)
       if (system) {
-        const concept = system.concepts.find((d) => d.code === newValue)
-        if (concept) data.unit = concept.display || concept.code
+        const choice = system.choices.find((c) => c.value === newValue)
+        if (choice) data.unit = choice.display || choice.value
       }
     }
   }

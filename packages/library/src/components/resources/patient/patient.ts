@@ -61,12 +61,11 @@ export class Patient extends DomainResource<PatientData> {
           ></fhir-primitive>
           ${oneOf(this,
                   'deceased[x]',
-                  validations.errFor('deceased[x]'),
+                  validations.msgFor('deceased[x]'),
                   [
                          {
                              data: data.deceasedBoolean,
                              html: (d, n, e) => {
-                                 console.log('deceasedBoolean', d)
                                  return html`
                                      <fhir-primitive key="deceasedBoolean"
                                                      label=${n}
@@ -103,7 +102,7 @@ export class Patient extends DomainResource<PatientData> {
 
           ${oneOf(this,
                   'multipleBirth[x]',
-                  validations.errFor('multipleBirth[x]'),
+                  validations.msgFor('multipleBirth[x]'),
                   [
                          {
                              data: data.multipleBirthBoolean,

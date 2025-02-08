@@ -56,4 +56,17 @@ describe('ValueSets', () => {
 
                                       //await new Promise(res => setTimeout(res, 200_000))
                                     })
+
+  test.runIf(process.env.EXPENSIVE)('should get everything related to some regex',
+                                    { timeout: 800_000 },
+                                    async () => {
+                                      return ValueSetsFactory
+                                        .fs(`${process.cwd()}/../data/r5/other-definitions`,
+                                            `${process.cwd()}/./generation/drug`,
+                                            /Drug/
+                                        )
+                                        .processAll(false)
+
+                                      //await new Promise(res => setTimeout(res, 200_000))
+                                    })
 })

@@ -1,0 +1,93 @@
+{
+    "id": "observation-statistics",
+    "name": "StatisticsCode",
+    "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-statistics",
+    "valid": true,
+    "choices": [
+        {
+            "value": "average",
+            "display": "Average"
+        },
+        {
+            "value": "maximum",
+            "display": "Maximum"
+        },
+        {
+            "value": "minimum",
+            "display": "Minimum"
+        },
+        {
+            "value": "count",
+            "display": "Count"
+        },
+        {
+            "value": "total-count",
+            "display": "Total Count"
+        },
+        {
+            "value": "median",
+            "display": "Median"
+        },
+        {
+            "value": "std-dev",
+            "display": "Standard Deviation"
+        },
+        {
+            "value": "sum",
+            "display": "Sum"
+        },
+        {
+            "value": "variance",
+            "display": "Variance"
+        },
+        {
+            "value": "20-percent",
+            "display": "20th Percentile"
+        },
+        {
+            "value": "80-percent",
+            "display": "80th Percentile"
+        },
+        {
+            "value": "4-lower",
+            "display": "Lower Quartile"
+        },
+        {
+            "value": "4-upper",
+            "display": "Upper Quartile"
+        },
+        {
+            "value": "4-dev",
+            "display": "Quartile Deviation"
+        },
+        {
+            "value": "5-1",
+            "display": "1st Quintile"
+        },
+        {
+            "value": "5-2",
+            "display": "2nd Quintile"
+        },
+        {
+            "value": "5-3",
+            "display": "3rd Quintile"
+        },
+        {
+            "value": "5-4",
+            "display": "4th Quintile"
+        },
+        {
+            "value": "skew",
+            "display": "Skew"
+        },
+        {
+            "value": "kurtosis",
+            "display": "Kurtosis"
+        },
+        {
+            "value": "regression",
+            "display": "Regression"
+        }
+    ]
+}

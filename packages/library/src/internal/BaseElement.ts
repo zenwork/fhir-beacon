@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {PropertyValues, TemplateResult} from 'lit'
 import {DisplayConfig}                  from '../types'
+import {Decorated, FhirElementData}     from './base'
 
-import {Decorated, FhirElementData, Validations} from './base/Decorate'
-import {FhirPresentableElement}                  from './base/presentable/fhir-presentable-element'
-import {EmptyResult}                             from './base/presentable/fhir-presentable-element.data'
+import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'
+import {EmptyResult}            from './base/presentable/fhir-presentable-element.data'
+import {Validations}            from './base/Validations.type'
 
 
 // import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'
@@ -28,7 +29,7 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @return errors found
    * @protected
    */
-  public validate(data: D, validations: Validations, fetched: boolean): void {
+  public validate(_data: D, _validations: Validations, _fetched: boolean): void {
     // override to add validations
   }
 
@@ -40,8 +41,8 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @param fetched
    * @return The converted data of the same type as the input data.
    */
-  public decorate(data: Decorated<D>, validations: Validations, fetched: boolean): void {
-
+  public decorate(_data: Decorated<D>, _validations: Validations, _fetched: boolean): void {
+    // override to add logigic
   }
 
   /**
@@ -61,7 +62,7 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    *   // Perform specific logic here when the data is ready
    * }
    */
-  public isPrepared(providedData: D, decoratedData: Decorated<D>): void {
+  public isPrepared(_providedData: D, _decoratedData: Decorated<D>): void {
     // override to add logic
   }
 
@@ -74,9 +75,9 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    *
    * @return {void} - This method does not return anything.
    */
-  public willRender(config: DisplayConfig,
-                    data: Decorated<D> | null,
-                    changes: PropertyValues): void {
+  public willRender(_config: DisplayConfig,
+                    _data: Decorated<D> | null,
+                    _changes: PropertyValues): void {
     // override to add logic
   }
 
@@ -87,9 +88,9 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @param data
    * @param validations
    */
-  public renderDisplay(config: DisplayConfig,
-                       data: Decorated<D>,
-                       validations: Validations): TemplateResult[] {
+  public renderDisplay(_config: DisplayConfig,
+                       _data: Decorated<D>,
+                       _validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -100,9 +101,9 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @param validations
    * @protected
    */
-  public renderNarrative(config: DisplayConfig,
-                         data: Decorated<D>,
-                         validations: Validations): TemplateResult[] {
+  public renderNarrative(_config: DisplayConfig,
+                         _data: Decorated<D>,
+                         _validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -113,9 +114,9 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @param data
    * @param validations
    */
-  public renderStructure(config: DisplayConfig,
-                         data: Decorated<D>,
-                         validations: Validations): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig,
+                         _data: Decorated<D>,
+                         _validations: Validations): TemplateResult[] {
     return EmptyResult
   }
 
@@ -133,9 +134,9 @@ export class BaseElement<D extends FhirElementData> extends FhirPresentableEleme
    * @return {void}
    *
    */
-  public hasRendered(config: DisplayConfig,
-                     data: Decorated<D> | null,
-                     haveChanged: PropertyValues): void {
+  public hasRendered(_config: DisplayConfig,
+                     _data: Decorated<D> | null,
+                     _haveChanged: PropertyValues): void {
     // override to add logic
   }
 

@@ -2,6 +2,7 @@
     "id": "search-comparator",
     "name": "SearchComparator",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/search-comparator",
     "valid": true,
     "choices": [
         {

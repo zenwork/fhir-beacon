@@ -18,9 +18,9 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     super(name)
   }
 
-  public renderNarrative(config: DisplayConfig,
+  public renderNarrative(_config: DisplayConfig,
                          data: Decorated<T>,
-                         validations: Validations): TemplateResult[] {
+                         _validations: Validations): TemplateResult[] {
     if (data.text) {
       return [
         html`
@@ -40,9 +40,10 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
     if (this.verbose && (!this.data || this.data === NoDataObject)) {
       this.extendedData[meta].hide = false
     }
+
   }
 
-  protected renderDomainResourceStructure(config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
+  protected renderDomainResourceStructure(_config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
     return [
       html`
           <fhir-narrative key="text" .data=${data.text} .open=${false}></fhir-narrative>

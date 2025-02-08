@@ -2,6 +2,7 @@
     "id": "observation-range-category",
     "name": "ObservationRangeCategory",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/observation-range-category",
     "valid": true,
     "choices": [
         {

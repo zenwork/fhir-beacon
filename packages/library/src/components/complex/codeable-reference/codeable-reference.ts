@@ -15,9 +15,9 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
 
   public validate(data: CodeableReferenceData, validations: Validations) {
     if (data.concept && data.reference) {
-      validations.addErr({
-                           key: this.type + '::' + this.key,
-                           err: 'can only have one of concept or reference'
+      validations.add({
+                        fqk: { path: [{ node: this.type + '::' + this.key }] },
+                        message: 'can only have one of concept or reference'
                          })
     }
   }
@@ -25,7 +25,7 @@ export class CodeableReference extends BaseElement<CodeableReferenceData> {
   public renderDisplay(_: DisplayConfig, data: CodeableReferenceData, validations: Validations): TemplateResult[] {
     return oneOf(this,
                  '',
-                 validations.errFor(this.type + '::' + this.key),
+                 validations.msgFor(this.type + '::' + this.key),
                  [
                       {
                         data: data.concept,

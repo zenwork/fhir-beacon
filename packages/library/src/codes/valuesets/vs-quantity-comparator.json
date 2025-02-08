@@ -2,6 +2,7 @@
     "id": "quantity-comparator",
     "name": "QuantityComparator",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/quantity-comparator",
     "valid": true,
     "choices": [
         {

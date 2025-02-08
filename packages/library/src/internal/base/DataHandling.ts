@@ -1,5 +1,9 @@
-import {PropertyValues}                          from 'lit'
-import {Decorated, FhirElementData, Validations} from './Decorate'
+import {PropertyValues}  from 'lit'
+import {Decorated}       from './Decorate.types'
+import {FhirElementData} from './FhirElement.type'
+import {Validations}     from './Validations.type'
+
+
 
 export interface DataHandling<D extends FhirElementData> {
   /**

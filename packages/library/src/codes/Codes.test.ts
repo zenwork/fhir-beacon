@@ -6,7 +6,7 @@ import {Codes}                  from './Codes'
 
 describe('Codes', () => {
   test('should return a set of choices', () => {
-    const choices: Choices | undefined = new Codes().get('vs-observation-interpretation')
+    const choices: Choices | undefined = new Codes().getById('vs-observation-interpretation')
     expect(choices).toBeDefined()
   })
 })

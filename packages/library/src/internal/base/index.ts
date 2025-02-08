@@ -4,8 +4,12 @@
 
 export * from './DataHandling'
 export * from './Decorate'
+export * from './Decorate.types'
+export * from './FhirElement.type'
 export * from './Rendering'
 export * from './Templating'
+export * from './Validations.type'
+export * from './Validations.impl'
 export * from './configurable/fhir-configurable-element'
 export * from './data/index'
 export * from './presentable/index'

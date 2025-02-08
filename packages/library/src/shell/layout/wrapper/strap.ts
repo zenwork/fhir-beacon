@@ -10,14 +10,16 @@ import {show}                       from '../show'
 
 export type Generators = 'fhir-identifier' | 'fhir-codeable-concept' | 'fhir-codeable-reference' | 'fhir-reference'
 
-export const generators: { [key: string]: { (data: any, label: string, key: Generators): TemplateResult } } = {
-  'fhir-identifier': (data: any, label: string, key: string) => html`
+export const generators: {
+  [key: string]: { (data: unknown, label: string, key: Generators, index: number): TemplateResult }
+} = {
+  'fhir-identifier': (data: unknown, label: string, key: string) => html`
       <fhir-identifier key=${key} label=${label} .data=${data} summary></fhir-identifier>`,
-  'fhir-codeable-concept': (data: any, label: string, key: string) => html`
+  'fhir-codeable-concept': (data: unknown, label: string, key: string) => html`
       <fhir-codeable-concept key=${key} label=${label} .data=${data} summary></fhir-codeable-concept>`,
-  'fhir-codeable-reference': (data: any, label: string, key: string) => html`
+  'fhir-codeable-reference': (data: unknown, label: string, key: string) => html`
       <fhir-codeable-reference key=${key} label=${label} .data=${data} summary></fhir-codeable-reference>`,
-  'fhir-reference': (data: any, label: string, key: string) => html`
+  'fhir-reference': (data: unknown, label: string, key: string) => html`
       <fhir-reference key=${key} label=${label} .data=${data} summary></fhir-reference>`
 
 }
@@ -26,7 +28,7 @@ type WrapperConfig<T> = {
   key?: string,
   pluralBase?: string,
   collection: T[],
-  generator: { (data: T, label: string, key: string): TemplateResult }
+  generator: { (data: T, label: string, key: string, index: number): TemplateResult }
     | Generators,
   summary?: boolean,
   config: DisplayConfig
@@ -75,7 +77,8 @@ export function strap<T>({
                             ?open=${config.open}
                             ?summaryonly=${config.summaryonly}
               >
-                  ${map(collection, (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key))}
+                  ${map(collection,
+                        (data: T, index: number) => generator(data, label + ' ' + show(index + 1), key, index))}
               </fhir-wrapper>
           `
         }
@@ -87,7 +90,7 @@ export function strap<T>({
                           ?open=${config.open}
                           ?summaryonly=${config.summaryonly}
             >
-                ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
+                ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key, index))}
             </fhir-wrapper>
         `
       }
@@ -100,7 +103,7 @@ export function strap<T>({
                           ?open=${config.open}
                           ?summaryonly=${config.summaryonly}
             >
-                ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key))}
+                ${map(collection, (data: T, index: number) => generator(data, show(index + 1), key, index))}
             </fhir-wrapper>
         `
 
@@ -109,7 +112,7 @@ export function strap<T>({
       if (config.verbose && config.mode === DisplayMode.structure) {
         return html`
             <fhir-wrapper label="${label}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
-               ${generator(null as unknown as T, '*', key)}
+               ${generator(null as unknown as T, '*', key, 0)}
             </fhir-wrapper>`
       }
     }

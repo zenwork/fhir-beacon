@@ -1,5 +1,7 @@
 import {JSONPath}        from 'jsonpath-plus'
-import {FhirElementData} from '../base/Decorate'
+import {FhirElementData} from '../base/FhirElement.type'
+
+
 
 export interface FhirDataContext {
 
@@ -11,7 +13,7 @@ export interface FhirDataContext {
 
 export class FhirDataContextImpl implements FhirDataContext {
 
-  declare _data: any
+  declare _data: {} & FhirElementData
 
   public get data(): {} & FhirElementData {
     return this._data

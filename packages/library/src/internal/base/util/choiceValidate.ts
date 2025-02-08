@@ -1,6 +1,9 @@
 import {isBlank}            from '../../../utilities'
 import {DomainResourceData} from '../../resource'
-import {Validations} from '../Decorate'
+
+import {Validations} from '../Validations.type'
+
+
 
 /**
  * Validates that only one of the given keys in the data object is populated.
@@ -22,7 +25,10 @@ export function choiceValidate<DR extends DomainResourceData>(data: DR,
   })
 
   if (count > 1) {
-    validations.addErr({ key: name, err: `Only one of the choices should be present for ${name}` })
+    validations.add({
+                      fqk: { path: [{ node: name }] },
+                      message: `Only one of the choices should be present for ${name}`
+                    })
   }
 
 }

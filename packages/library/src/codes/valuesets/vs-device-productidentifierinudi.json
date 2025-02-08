@@ -2,6 +2,7 @@
     "id": "device-productidentifierinudi",
     "name": "DeviceProductionIdentifierInUDI",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/device-productidentifierinudi",
     "valid": true,
     "choices": [
         {

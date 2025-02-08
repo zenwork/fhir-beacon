@@ -2,6 +2,7 @@
     "id": "identifier-use",
     "name": "IdentifierUse",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/identifier-use",
     "valid": true,
     "choices": [
         {

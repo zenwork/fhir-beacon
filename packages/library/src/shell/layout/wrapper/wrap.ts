@@ -11,7 +11,7 @@ type WrapConfig<T> = {
   key?: string,
   pluralBase?: string,
   collection: T[],
-  generator: { (data: T, label: string, key: string): TemplateResult } | Generators,
+  generator: { (data: T, label: string, key: string, index: number): TemplateResult } | Generators,
   summary?: boolean,
   config: DisplayConfig
 }
@@ -37,6 +37,7 @@ export function wrap<T>({
                         }: WrapConfig<T>
 ): TemplateResult {
 
+
   if(config.mode === DisplayMode.structure) {
     return strap({key, pluralBase, collection, generator, summary, config})
   }
@@ -59,7 +60,7 @@ export function wrap<T>({
               <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
                   ${map(collection,
                         (data: T, idx) => html`
-                            ${generator(data, `${pluralBase || key} ${idx + 1}`, key)}
+                            ${generator(data, `${pluralBase || key} ${idx + 1}`, key, idx)}
                         `)}
               </fhir-wrapper>
           `
@@ -69,7 +70,7 @@ export function wrap<T>({
             <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
                 ${map(collection,
                       (data: T, idx) => html`
-                          ${generator(data, `${idx + 1}`, key)}
+                          ${generator(data, `${idx + 1}`, key, idx)}
                       `)}
             </fhir-wrapper>
         `
@@ -77,10 +78,11 @@ export function wrap<T>({
 
       if (hasOnlyOne(collection)) {
         if (config.verbose) {
-          return html` ${map(collection, (data: T) => html` ${generator(data, pluralBase || key, key)} `)}`
+          return html` ${map(collection,
+                             (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)}`
         }
 
-        return html` ${map(collection, (data: T) => html` ${generator(data, pluralBase || key, key)} `)} `
+        return html`${map(collection, (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)} `
       }
 
       if (config.verbose && config.mode === DisplayMode.display) {

@@ -33,7 +33,7 @@ import {
 
 
 @customElement('fhir-observation-component')
-export class ObservationReferenceRange extends Backbone<ObservationComponentData> {
+export class ObservationComponent extends Backbone<ObservationComponentData> {
   constructor() {
     super('ObservationComponent')
   }
@@ -58,7 +58,7 @@ export class ObservationReferenceRange extends Backbone<ObservationComponentData
           <fhir-codeable-concept key="code" .data=${data.code} required></fhir-codeable-concept>
           ${oneOf(this,
                   'value[x]',
-                  validations.errFor('value[x]'),
+                  validations.msgFor('value[x]'),
                   [
                       choice(data.valueQuantity,
                              (d: QuantityData) => html`

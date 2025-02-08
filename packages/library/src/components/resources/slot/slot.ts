@@ -1,15 +1,16 @@
 import {html, TemplateResult}      from 'lit'
 import {customElement}             from 'lit/decorators.js'
-import {useSystem, ValueSet}       from '../../../codesystems'
+import {useSystem}                 from '../../../codes/use-system'
 import {Decorated, DomainResource} from '../../../internal'
 import {strap, wrap}               from '../../../shell'
 import {DisplayConfig}             from '../../../types'
+import {Choices}                   from '../../../valuesets/ValueSet.data'
 import {PrimitiveType}             from '../../primitive'
 import {SlotData}                  from './slot.data'
 
 
 
-const statuses: ValueSet = useSystem('http://hl7.org/fhir/slotstatus')
+const statuses: Choices = useSystem('http://hl7.org/fhir/slotstatus')
 
 @customElement('fhir-slot')
 export class Slot extends DomainResource<SlotData> {
@@ -56,7 +57,7 @@ export class Slot extends DomainResource<SlotData> {
                           type=${PrimitiveType.code}"
                           summary
                           required
-                          .choices=${statuses.concepts}
+                          .choices=${statuses.choices}
           ></fhir-primitive>
           <fhir-primitive key="start"
                           .value=${data.start}

@@ -2,6 +2,7 @@
     "id": "address-type",
     "name": "AddressType",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/address-type",
     "valid": true,
     "choices": [
         {

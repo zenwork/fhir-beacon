@@ -220,7 +220,7 @@ export const frontPageData = {
   ],
   batch: {
     lotNumber: '12345',
-    expirationDate: '2019.10-31'
+    expirationDate: '2019.10.31'
   }
 }
 export const synthiaData = {

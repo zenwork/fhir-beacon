@@ -18,7 +18,7 @@ export class Bundle extends BaseElement<BundleData> {
   }
 
 
-  public renderDisplay(config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
+  public renderDisplay(_config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
     return [
       html`
           <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >
@@ -55,7 +55,7 @@ export class Bundle extends BaseElement<BundleData> {
 
   }
 
-  public renderStructure(config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig, data: Decorated<BundleData>): TemplateResult[] {
     return [
       html`
           <fhir-identifier label="identifier" .data=${data.identifier}></fhir-identifier >

@@ -2,6 +2,7 @@
     "id": "namingsystem-identifier-type",
     "name": "NamingSystemIdentifierType",
     "type": "ValueSet",
+    "system": "http://hl7.org/fhir/ValueSet/namingsystem-identifier-type",
     "valid": true,
     "choices": [
         {
