@@ -7,13 +7,21 @@
 ```mermaid
 ---
 title: Core Model
-config:
-  theme: base
-  themeVariables:
-    primaryTextColor: #fff
-  class:
-    hideEmptyMembersBox: true
 ---
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+          'lineColor': 'blue',
+          'primaryColor': '#BB2528',
+          'primaryTextColor': '#fff',
+          'primaryBorderColor': '#7C0000',
+          'lineColor': '#F8B229',
+          'secondaryColor': '#006100',
+          'tertiaryColor': '#fff'
+    }
+  }
+}%%
 classDiagram
     direction BT
 
@@ -59,6 +67,20 @@ config:
   class:
     hideEmptyMembersBox: true
 ---
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+          'lineColor': 'blue',
+          'primaryColor': '#BB2528',
+          'primaryTextColor': '#fff',
+          'primaryBorderColor': '#7C0000',
+          'lineColor': '#F8B229',
+          'secondaryColor': '#006100',
+          'tertiaryColor': '#fff'
+    }
+  }
+}%%
 classDiagram
     direction TB
 
@@ -86,6 +108,20 @@ config:
   class:
     hideEmptyMembersBox: true
 ---
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+          'lineColor': 'blue',
+          'primaryColor': '#BB2528',
+          'primaryTextColor': '#fff',
+          'primaryBorderColor': '#7C0000',
+          'lineColor': '#F8B229',
+          'secondaryColor': '#006100',
+          'tertiaryColor': '#fff'
+    }
+  }
+}%%
 classDiagram
     direction BT
 
@@ -125,6 +161,20 @@ config:
   class:
     hideEmptyMembersBox: true
 ---
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+          'lineColor': 'blue',
+          'primaryColor': '#BB2528',
+          'primaryTextColor': '#fff',
+          'primaryBorderColor': '#7C0000',
+          'lineColor': '#F8B229',
+          'secondaryColor': '#006100',
+          'tertiaryColor': '#fff'
+    }
+  }
+}%%
 classDiagram
     direction BT
 
@@ -196,6 +246,20 @@ title: FHIR Primitive Element Model
 config:
   theme: neutral
 ---
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+          'lineColor': 'blue',
+          'primaryColor': '#BB2528',
+          'primaryTextColor': '#fff',
+          'primaryBorderColor': '#7C0000',
+          'lineColor': '#F8B229',
+          'secondaryColor': '#006100',
+          'tertiaryColor': '#fff'
+    }
+  }
+}%%
 classDiagram
     direction BT
     fhir-primitive *--> "0..1" fhir-primitve-wrapper
