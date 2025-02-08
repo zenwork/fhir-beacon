@@ -118,18 +118,6 @@ Development and testing time data. It mostly contains FHIR reference data.
 ### `server`
 Development and testing time configuration for running HAPI FHIR server in docker.
 
-## Development Notes:
-
-This project is unstable and not entirely consistent at the moment. I am driven by exploration and experimentation
-at the moment. It is getting mature enough that it could be used in some specific contexts, but it's still today a
-one-person show!
-
-There's a backlog of issues where I am tracking work and ideas:  https://github.com/users/zenwork/projects/4
-
-There is nowhere near enough tests!
-
-Many ideas have evolved over time and I have not taken the time to refactor everything.  
-
 
 ## Background
 
@@ -172,6 +160,17 @@ shared qualities of the FHIR metamodel and the "HTML-JS-CSS-Browser Api" stack g
 - FHIR and HTML are designed for interoperability
   and [progressive enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement)
 
+## Development Notes:
+
+This project is unstable and not entirely consistent at the moment. I am driven by exploration and experimentation
+at the moment. It is getting mature enough that it could be used in some specific contexts, but it's still today a
+one-person show!
+
+There's a backlog of issues where I am tracking work and ideas:  https://github.com/users/zenwork/projects/4
+
+There is nowhere near enough tests!
+
+Many ideas have evolved over time and I have not taken the time to refactor everything.
 
 ### Goals reached to date:
 
