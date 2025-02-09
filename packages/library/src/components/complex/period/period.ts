@@ -5,13 +5,15 @@ import {DisplayConfig}                       from '../../../types'
 import {PrimitiveType}                       from '../../primitive/type-converters/type-converters'
 import {PeriodData}                          from './period.data'
 
+
+
 @customElement('fhir-period')
 export class Period extends BaseElement<PeriodData> {
 
   constructor() {super('Period')}
 
   // TODO: there is no good way to hide output without the conditional handling in renderDisplay
-  public renderDisplay(config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
+  public renderDisplay(_config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
 
     return (data.start || data.end) ? [
       html`
@@ -25,7 +27,7 @@ export class Period extends BaseElement<PeriodData> {
     ] : EmptyResult
   }
 
-  public renderStructure(config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
+  public renderStructure(_config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
     return [
       html`
           <fhir-primitive

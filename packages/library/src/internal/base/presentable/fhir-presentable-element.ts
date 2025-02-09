@@ -4,8 +4,8 @@ import {property}                                      from 'lit/decorators.js'
 
 
 import {mustRender}                              from '../../../components/mustRender'
+import {asReadable}                              from '../../../components/primitive/./type-formatters/asReadable'
 import {PrimitiveType}                           from '../../../components/primitive/type-converters/type-converters'
-import {asReadable}                              from '../../../components/primitive/type-presenters/asReadable'
 import {hasSome}                                 from '../../../shell/layout/directives'
 import {hostStyles}                              from '../../../styles'
 import {DisplayConfig, DisplayMode}              from '../../../types'

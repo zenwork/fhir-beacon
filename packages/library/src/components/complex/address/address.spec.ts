@@ -1,8 +1,8 @@
 import {html}                         from 'lit'
 import {assert, describe, expect, it} from 'vitest'
 import {fixture}                      from '../../../../tests/lit/lit-vitest-fixture'
-import {AddressData}                  from '../../resources'
 import {Address}                      from './address'
+import {AddressData}                  from './address.data'
 import {data}                         from './address.story.data'
 
 

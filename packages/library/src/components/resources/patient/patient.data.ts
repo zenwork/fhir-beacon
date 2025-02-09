@@ -1,53 +1,19 @@
-import {FhirElementData}                                            from '../../../internal'
-import {BackboneElementData}                                        from '../../../internal/resource/backbone.data'
-import {
-  DomainResourceData
-}                                                                   from '../../../internal/resource/domain-resource.data'
-import {AttachmentData}                                             from '../../complex'
-import {
-  CodeableConceptData
-}                                                                   from '../../complex/codeable-concept/codeable-concept.data'
-import {IdentifierData}                                             from '../../complex/identifier/identifier.data'
-import {PeriodData}                                                 from '../../complex/period/period.data'
-import {Code, DateTime, FhirDate, FhirString, Integer, PositiveInt} from '../../primitive/primitive.data'
-import {ReferenceData}                                              from '../../special/reference/reference.data'
+import {BackboneElementData}               from '../../../internal/resource/backbone.data'
+import {DomainResourceData}                from '../../../internal/resource/domain-resource.data'
+import {AttachmentData}                    from '../../complex'
+import {AddressData}                       from '../../complex/address/address.data'
+import {CodeableConceptData}               from '../../complex/codeable-concept/codeable-concept.data'
+import {ContactPointData}                  from '../../complex/contact-point/contact-point.data'
+import {HumanNameData}                     from '../../complex/human-name/human-name.data'
+import {IdentifierData}                    from '../../complex/identifier/identifier.data'
+import {PeriodData}                        from '../../complex/period/period.data'
+import {Code, DateTime, FhirDate, Integer} from '../../primitive/primitive.data'
+import {ReferenceData}                     from '../../special/reference/reference.data'
 
 
-
-export type HumanNameData = FhirElementData & {
-  use?: Code
-  text?: FhirString
-  family?: FhirString
-  given: FhirString[]
-  prefix: FhirString[]
-  suffix: FhirString[]
-  period?: PeriodData
-}
-
-export type ContactPointData = FhirElementData & {
-  system?: Code
-  value?: FhirString
-  use?: Code
-  rank?: PositiveInt
-  period?: PeriodData
-
-}
 
 export type DeceasedBoolean = boolean
 export type DeceasedDateTime = DateTime
-
-export type AddressData = FhirElementData & {
-  use?: Code
-  type?: Code
-  text?: FhirString
-  line: FhirString[]
-  city?: FhirString
-  district?: FhirString
-  state?: FhirString
-  postalCode?: FhirString
-  country?: FhirString
-  period?: PeriodData
-}
 
 
 export type PatientContactData = BackboneElementData & {

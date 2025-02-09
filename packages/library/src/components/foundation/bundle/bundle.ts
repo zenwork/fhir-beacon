@@ -161,7 +161,7 @@ export class Bundle extends BaseElement<BundleData> {
                 ${wrap({
                            key: 'entry',
                            collection: data.entry,
-                           generator: (d, l, k, i) => {
+                           generator: (d, l) => {
                                if (isDomainResource(d.resource)) {
                                    return html`
                                        <fhir-label text="${l}: ${d.resource.resourceType}"></fhir-label>
