@@ -11,8 +11,8 @@ import {ResourceData}            from '../../../internal/resource/domain-resourc
 import {renderResourceComponent} from '../../../internal/resource/renderResourceComponent'
 import {DisplayConfig}           from '../../../types'
 import {isBlank}                 from '../../../utilities'
+import {asReadable}              from '../../primitive/./type-formatters/asReadable'
 import {PrimitiveType}           from '../../primitive/type-converters/type-converters'
-import {asReadable}              from '../../primitive/type-presenters/asReadable'
 import {ReferenceData}           from './reference.data'
 
 

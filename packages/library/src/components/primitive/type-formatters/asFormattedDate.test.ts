@@ -4,6 +4,7 @@ import {asFormattedDate}      from './asFormattedDate'
 
 
 describe('asFormattedDate', () => {
+
   it('returns formatted string for YYYY-MM-DD ', () => {
     let formatted: string = asFormattedDate({ date: '1905-08-23' })
     expect(formatted).toBe('23.08.1905')

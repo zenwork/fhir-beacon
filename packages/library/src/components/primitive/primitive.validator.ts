@@ -2,6 +2,8 @@ import {choose}                from 'lit-html/directives/choose.js'
 import {FhirDataContext}       from '../../internal/contexts/FhirContextData'
 import {isBlank}               from '../../utilities'
 import {Choice}                from '../../valuesets/ValueSet.data'
+import {asDateTime}            from '././type-formatters/asDateTime'
+import {asReadable}            from '././type-formatters/asReadable'
 import {DateTime}              from './primitive.data'
 import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
 import {PrimitiveValidEvent}   from './primitiveValidEvent'
@@ -29,8 +31,6 @@ import {
   toUrl,
   valueOrError
 }                              from './type-converters'
-import {asDateTime}            from './type-presenters/asDateTime'
-import {asReadable}            from './type-presenters/asReadable'
 
 
 

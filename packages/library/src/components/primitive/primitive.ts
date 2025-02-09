@@ -13,7 +13,8 @@ import {PrimitiveValidator}                            from './primitive.validat
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {componentStyles}                               from './primitve.styles'
 import {PrimitiveType}                                 from './type-converters'
-import {asReadable}                                    from './type-presenters'
+import {asReadable}                                    from './type-formatters'
+import {format}                                        from './type-formatters/format'
 
 
 
@@ -153,7 +154,7 @@ export class Primitive extends ConfigurableElement {
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
-                             : this.presentableValue}
+                             : format(this.presentableValue, this.type)}
                       link=${this.link}
                       .variant=${this.variant}
           >
