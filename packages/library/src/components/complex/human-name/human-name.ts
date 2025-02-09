@@ -5,7 +5,7 @@ import {Decorated, EmptyResult} from '../../../internal/base'
 import {strap, wrap}            from '../../../shell'
 import {DisplayConfig}          from '../../../types'
 import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
-import {HumanNameData}          from '../../resources/patient/patient.data'
+import {HumanNameData}          from './human-name.data'
 
 
 

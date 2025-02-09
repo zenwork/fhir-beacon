@@ -2,22 +2,26 @@ import {FhirDate, Time} from '../primitive.data'
 
 
 
-export type DateFormatProps = {
+export type TimeFormatProps = {
   time: Time
   hourSeparator?: string
   minuteSeparator?: string,
   format?: '24h' | '12h',
+  shape?: 'H' | 'HM' | 'HMS' | undefined
 }
 
 export function asFormattedTime({
                                   time,
                                   hourSeparator = ':',
                                   minuteSeparator = ':',
-                                  format = '24h'
-                                }: DateFormatProps): string {
+                                  format = '24h',
+                                  shape = undefined
+                                }: TimeFormatProps): string {
 
   const timeParts = parseTimeParts(time)
-  const shape = getShape(timeParts)
+  const timeShape: 'H' | 'HM' | 'HMS' = getShape(timeParts)
+  const shapeOverride = shape && shape.length < timeShape.length ? shape : timeShape
+
   const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 
@@ -40,7 +44,7 @@ export function asFormattedTime({
   const second = getFormattedPart(formattedParts, 'second', format)
   const dayPeriod = getFormattedPart(formattedParts, 'dayPeriod', format)
 
-  return formatTimeParts(shape, hourSeparator, minuteSeparator, hour, minute, second, dayPeriod)
+  return formatTimeParts(shapeOverride, hourSeparator, minuteSeparator, hour, minute, second, dayPeriod)
 }
 
 

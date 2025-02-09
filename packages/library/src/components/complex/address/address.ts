@@ -6,7 +6,7 @@ import {hasSome, strapLines, wrapLines}      from '../../../shell'
 import {DisplayConfig}                       from '../../../types'
 import {hasOnly}                             from '../../../utilities'
 import {PrimitiveType}                       from '../../primitive'
-import {AddressData}                         from '../../resources'
+import {AddressData}                         from './address.data'
 
 
 

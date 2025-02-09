@@ -2,9 +2,6 @@ import {choose}                from 'lit-html/directives/choose.js'
 import {FhirDataContext}       from '../../internal/contexts/FhirContextData'
 import {isBlank}               from '../../utilities'
 import {Choice}                from '../../valuesets/ValueSet.data'
-import {asDateTime}            from '././type-formatters/asDateTime'
-import {asReadable}            from '././type-formatters/asReadable'
-import {DateTime}              from './primitive.data'
 import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
 import {PrimitiveValidEvent}   from './primitiveValidEvent'
 import {
@@ -170,7 +167,7 @@ export class PrimitiveValidator {
     // ${parsedValue.err}`)
     let validEvent: PrimitiveValidEvent | undefined = undefined
     if (!isBlank(parsedValue.val)) {
-      this.#host.presentableValue = this.present(parsedValue.val)
+      this.#host.presentableValue = parsedValue.val
       this.#host.error = false
       validEvent = new PrimitiveValidEvent(this.#host.key!, original, this.#host.type)
       // this.#host.dispatchEvent(validEvent)
@@ -191,26 +188,6 @@ export class PrimitiveValidator {
     } else if (validEvent !== undefined) {
       this.#host.dispatchEvent(validEvent)
     }
-  }
-
-
-  /**
-   *
-   * @param val
-   * @private
-   */
-  private present(val: unknown): unknown {
-    choose(this.#host.type, [
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      [PrimitiveType.datetime, () => (val = asDateTime(val as DateTime))],
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      [PrimitiveType.instant, () => (val = asDateTime(val as DateTime))],
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      [PrimitiveType.uri_type, () => (val = asReadable(val as string))],
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      [PrimitiveType.uri_type, () => (val = String(val))]
-    ])
-    return val
   }
 
 }

@@ -4,7 +4,9 @@ import {BaseElement}          from '../../../internal'
 import {Decorated}            from '../../../internal/base'
 import {DisplayConfig}        from '../../../types'
 import {PrimitiveType}        from '../../primitive/type-converters/type-converters'
-import {ContactPointData}     from '../../resources/patient/patient.data'
+import {ContactPointData}     from './contact-point.data'
+
+
 
 @customElement('fhir-contact-point')
 export class ContactPoint extends BaseElement<ContactPointData> {

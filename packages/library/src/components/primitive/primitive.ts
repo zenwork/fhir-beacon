@@ -154,7 +154,9 @@ export class Primitive extends ConfigurableElement {
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
-                             : format(this.presentableValue, this.type)}
+                             : this.mode !== DisplayMode.display
+                               ? this.presentableValue
+                               : format(this.presentableValue, this.type)}
                       link=${this.link}
                       .variant=${this.variant}
           >
