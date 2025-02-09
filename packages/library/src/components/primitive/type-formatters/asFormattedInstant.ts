@@ -47,12 +47,13 @@ export function asFormattedInstant({
   const month = getFormattedPart(formattedParts, 'month', format)
   const day = getFormattedPart(formattedParts, 'day', format)
 
-  const hour = getFormattedPart(formattedParts, 'hour', format)
+  let hour = getFormattedPart(formattedParts, 'hour', format)
   const minute = getFormattedPart(formattedParts, 'minute', format)
   const second = getFormattedPart(formattedParts, 'second', format)
   const milli = dateObj.getMilliseconds().toString().padStart(3, '0')
   const dayPeriod = getFormattedPart(formattedParts, 'dayPeriod', format)
 
+  if (hour === '24') hour = '00'
 
   return formatDateTimeParts(order,
                              shapeOverride,

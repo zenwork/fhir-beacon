@@ -39,14 +39,15 @@ export function asFormattedTime({
     hour12: format !== '24h'
   }).formatToParts(dateObj)
 
-  const hour = getFormattedPart(formattedParts, 'hour', format)
+  let hour = getFormattedPart(formattedParts, 'hour', format)
   const minute = getFormattedPart(formattedParts, 'minute', format)
   const second = getFormattedPart(formattedParts, 'second', format)
   const dayPeriod = getFormattedPart(formattedParts, 'dayPeriod', format)
 
+  if (hour === '24') hour = '00'
+
   return formatTimeParts(shapeOverride, hourSeparator, minuteSeparator, hour, minute, second, dayPeriod)
 }
-
 
 /** Parses the date parts from the input string */
 function parseTimeParts(date: FhirDate): string[] {
