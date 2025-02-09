@@ -28,7 +28,7 @@ export function asFormattedDate({
   )
 
   // Format the date parts using Intl.DateTimeFormat
-  const formattedParts = new Intl.DateTimeFormat(navigator.language, {
+  const formattedParts = new Intl.DateTimeFormat(navigator.language || 'en-US', {
     dateStyle: monthFormat,
     timeStyle: 'short',
     timeZone: localTimeZone,
