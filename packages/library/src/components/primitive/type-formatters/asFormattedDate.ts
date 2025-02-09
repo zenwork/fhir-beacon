@@ -27,13 +27,18 @@ export function asFormattedDate({
     dateParts[2] ? Number.parseInt(dateParts[2]) : 1
   )
 
+  const locale: string = navigator.language || 'en-US'
+
   // Format the date parts using Intl.DateTimeFormat
-  const formattedParts = new Intl.DateTimeFormat(navigator.language || 'en-US', {
-    dateStyle: monthFormat,
-    timeStyle: 'short',
-    timeZone: localTimeZone,
-    hour12: false
-  }).formatToParts(dateObj)
+  const formattedParts = new Intl.DateTimeFormat(
+    locale,
+    {
+      dateStyle: monthFormat,
+      timeStyle: 'short',
+      timeZone: localTimeZone,
+      hour12: false
+    }
+  ).formatToParts(dateObj)
 
   const year = dateParts[0] ?? getFormattedPart(formattedParts, 'year')
   const month = getFormattedPart(formattedParts, 'month')
