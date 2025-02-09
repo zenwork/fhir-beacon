@@ -35,6 +35,8 @@ jobs:
       - run: |
           cd packages/library
           npm ci
+          # Install full ICU support for Node.js
+          npm install full-icu
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
@@ -53,7 +55,12 @@ jobs:
       - name: Run tests
         run: |
           cd packages/library
-          npm run vitest 
+          # Export environment variables for locale and timezone
+          export NODE_ICU_DATA=node_modules/full-icu
+          export LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          export TZ=UTC
+          npm run vitest
 
       - name: Publish
         run: |
