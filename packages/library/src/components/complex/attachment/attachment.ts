@@ -1,9 +1,11 @@
 import {html, TemplateResult}   from 'lit'
 import {customElement}          from 'lit/decorators.js'
 import {BaseElement, Decorated} from '../../../internal'
-import {DisplayConfig}          from '../../../types'
+import {DisplayConfig}          from '../../../shell/types'
 import {PrimitiveType}          from '../../primitive'
 import {AttachmentData}         from './attachment.data'
+
+
 
 const { decimal, datetime, positiveInt, integer64, url, base64, code, none } = PrimitiveType
 

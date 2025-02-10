@@ -3,7 +3,7 @@ import {customElement}          from 'lit/decorators.js'
 import {BaseElement}            from '../../../internal'
 import {Decorated, EmptyResult} from '../../../internal/base'
 import {strap, wrap}            from '../../../shell'
-import {DisplayConfig}          from '../../../types'
+import {DisplayConfig}          from '../../../shell/types'
 import {PrimitiveType}          from '../../primitive/type-converters/type-converters'
 import {HumanNameData}          from './human-name.data'
 

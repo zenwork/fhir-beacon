@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
 import {PrimitiveType}        from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig}        from '../../types'
+import {DisplayConfig}        from '../../shell/types'
 import {ResourceData}         from './domain-resource.data'
 
 

@@ -1,4 +1,4 @@
-export * from './src/types'
+export *             from './src/shell/types'
 
 /* Core Stuff */
 export * from './src/internal/BaseElement'
@@ -22,3 +22,4 @@ export * from './src/components/special'
 export *               from './src/components/resources'
 export {systemChoices} from './src/codes/use-system'
 export {useSystem}     from './src/codes/use-system'
+export {DisplayMode} from './src/shell'

@@ -1,7 +1,7 @@
 import {html}                 from 'lit'
 import {describe, expect, it} from 'vitest'
 import {fixture}              from '../../../tests/lit/lit-vitest-fixture'
-import {DisplayMode}          from '../../types'
+import {DisplayMode}          from '../displayMode'
 import {Wrapper}              from './wrapper'
 import {wrap}                 from './wrapper/wrap'
 

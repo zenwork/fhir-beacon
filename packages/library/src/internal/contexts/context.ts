@@ -1,5 +1,5 @@
 import {createContext}   from '@lit/context'
-import {DisplayConfig}   from '../../types'
+import {DisplayConfig}   from '../../shell/types'
 import {ResourceData}    from '../resource'
 import {FhirDataContext} from './FhirContextData'
 

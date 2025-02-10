@@ -1,6 +1,6 @@
 import {TemplateResult} from 'lit'
 import {wrap}           from '../../../shell'
-import {DisplayConfig}  from '../../../types'
+import {DisplayConfig}  from '../../../shell/types'
 import {IdentifierData} from '../index'
 
 

@@ -1,9 +1,11 @@
 import {html, TemplateResult}   from 'lit'
 import {customElement}          from 'lit/decorators.js'
 import {BaseElement, Decorated} from '../../../internal'
-import {DisplayConfig}          from '../../../types'
+import {DisplayConfig}          from '../../../shell/types'
 import {PrimitiveType}          from '../../primitive'
 import {MoneyData}              from './money.data'
+
+
 
 @customElement('fhir-money')
 export class Money extends BaseElement<MoneyData> {

@@ -1,10 +1,6 @@
-export enum DisplayMode {
-  debug = 'debug',
-  display = 'display',
-  narrative = 'narrative',
-  override = 'override',
-  structure = 'structure'
-}
+import {DisplayMode} from './displayMode'
+
+
 
 export type DisplayConfig = {
   source: 'unknown' | 'shell' | 'resource'

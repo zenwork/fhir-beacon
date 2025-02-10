@@ -1,9 +1,11 @@
 import {html, TemplateResult}     from 'lit'
 import {customElement}            from 'lit/decorators.js'
 import {Backbone, Decorated}      from '../../../internal'
-import {DisplayConfig}            from '../../../types'
+import {DisplayConfig}            from '../../../shell/types'
 import {PrimitiveType}            from '../../primitive'
 import {PatientCommunicationData} from './patient.data'
+
+
 
 const { boolean } = PrimitiveType
 

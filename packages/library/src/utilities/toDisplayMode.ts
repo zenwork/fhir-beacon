@@ -1,4 +1,6 @@
-import {DisplayMode} from '../types'
+import {DisplayMode} from '../shell/displayMode'
+
+
 
 export function toDisplayMode(value: string | null): DisplayMode {
   return value ? <DisplayMode> value : DisplayMode.display

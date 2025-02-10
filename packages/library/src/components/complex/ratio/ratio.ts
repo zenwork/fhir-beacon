@@ -1,8 +1,8 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
 import {BaseElement}          from '../../../internal'
+import {DisplayConfig}        from '../../../shell/types'
 import {hostStyles}           from '../../../styles'
-import {DisplayConfig}        from '../../../types'
 
 import {RatioData} from './ratio.data'
 

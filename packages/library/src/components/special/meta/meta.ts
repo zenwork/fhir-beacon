@@ -3,9 +3,11 @@ import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {BaseElement}                   from '../../../internal'
 import {strap, wrap}                   from '../../../shell'
-import {DisplayConfig}                 from '../../../types'
+import {DisplayConfig}                 from '../../../shell/types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {MetaData}                      from './meta.data'
+
+
 
 @customElement('fhir-meta')
 export class Meta extends BaseElement<MetaData> {

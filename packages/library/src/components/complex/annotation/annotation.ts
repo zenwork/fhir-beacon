@@ -2,7 +2,7 @@
 import {html, TemplateResult}                       from 'lit'
 import {customElement}                              from 'lit/decorators.js'
 import {BaseElement, Decorated, oneOf, Validations} from '../../../internal'
-import {DisplayConfig}                              from '../../../types'
+import {DisplayConfig}                              from '../../../shell/types'
 import {PrimitiveType}                              from '../../primitive/type-converters/type-converters'
 import {ReferenceData}                              from '../../special'
 import {AnnotationData, AuthorFhirString}           from './annotation.data'

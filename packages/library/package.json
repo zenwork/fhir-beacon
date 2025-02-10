@@ -4,7 +4,12 @@
     "homepage": "https://zenwork.github.io/fhir-beacon/",
     "description": "FHIR web components",
     "type": "module",
-    "main": "index.ts",
+    "main": "dist/fhir-beacon.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist",
+        "build/web-types.json"
+    ],
     "scripts": {
         "generate-barrels": "barrelsby --delete --config autobarrel.json --location replace --noSemicolon --singleQuotes",
         "eslint": "eslint",
@@ -18,7 +23,8 @@
         "build-storybook": "storybook build",
         "tsc": "tsc",
         "tsc::watch": "tsc --watch",
-        "vite::build": "vite build",
+        "tsc::types": "tsc --emitDeclarationOnly",
+        "vite::build": "tsc && vite build && tsc --emitDeclarationOnly ",
         "vite::dev": "vite",
         "vite::preview": "vite preview",
         "vitest": "HEADLESS=true vitest run",
@@ -78,6 +84,9 @@
         "vite": "^6.0.7",
         "vitest": "^3.0.2",
         "@biomejs/biome": "^1.9.4"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "web-types": [
         "./build/sl-web-types.json",

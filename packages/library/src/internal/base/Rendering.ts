@@ -1,5 +1,5 @@
 import {PropertyValues}  from 'lit'
-import {DisplayConfig}   from '../../types'
+import {DisplayConfig}   from '../../shell/types'
 import {Decorated}       from './Decorate.types'
 import {FhirElementData} from './FhirElement.type'
 

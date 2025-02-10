@@ -1,6 +1,7 @@
 import {ContextConsumer, ContextRoot}        from '@lit/context'
 import {ReactiveController, ReactiveElement} from 'lit'
-import {DisplayConfig, DisplayMode}          from '../../types'
+import {DisplayMode}                         from '../../shell/displayMode'
+import {DisplayConfig}                       from '../../shell/types'
 import {FhirElementData}                     from '../base'
 
 import {FhirDataElement}                   from '../base/data/fhir-data-element'

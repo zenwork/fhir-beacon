@@ -2,7 +2,7 @@ import {html, TemplateResult}                from 'lit'
 import {customElement}                       from 'lit/decorators.js'
 import {BaseElement, Decorated, Validations} from '../../../internal'
 import {isDefined, wrap}                     from '../../../shell'
-import {DisplayConfig}                       from '../../../types'
+import {DisplayConfig}                       from '../../../shell/types'
 import {CodeableConceptData}                 from './codeable-concept.data'
 
 

@@ -2,7 +2,7 @@ import {html, TemplateResult}                                       from 'lit'
 import {customElement}                                              from 'lit/decorators.js'
 import {choice, Decorated, DomainResource, oneOf, Validations}      from '../../../internal'
 import {wrap}                                                       from '../../../shell'
-import {DisplayConfig}                                              from '../../../types'
+import {DisplayConfig}                                              from '../../../shell/types'
 import {
   AttachmentData,
   CodeableConceptData,

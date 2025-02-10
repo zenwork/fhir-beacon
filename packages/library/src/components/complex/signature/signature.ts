@@ -1,10 +1,12 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
 import {BaseElement}          from '../../../internal'
-import {DisplayConfig}        from '../../../types'
+import {DisplayConfig}        from '../../../shell/types'
 
 import {SignatureData} from '../../foundation/bundle/bundle.data'
 import {PrimitiveType} from '../../primitive/type-converters/type-converters'
+
+
 
 @customElement('fhir-signature')
 export class Signature extends BaseElement<SignatureData> {
