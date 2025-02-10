@@ -5,7 +5,14 @@
     "description": "FHIR web components",
     "type": "module",
     "main": "dist/fhir-beacon.js",
+    "module": "dist/fhir-beacon.js",
     "types": "dist/types/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/fhir-beacon.js",
+            "types": "./dist/types/index.d.ts"
+        }
+    },
     "files": [
         "dist",
         "build/web-types.json"
