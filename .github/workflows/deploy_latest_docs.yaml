@@ -2,12 +2,6 @@ name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
   workflow_call:
-    inputs:
-      artifact_name:
-        description: 'The name of the artifact to deploy to GitHub Pages'
-        required: false
-        default: 'build-artifacts'
-        type: string
 
 jobs:
   docs:
@@ -24,10 +18,10 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: build-docs
 
       - name: Verify Build Artifacts
-        run: ls -R ./
+        run: ls ./library/storybook-static
 
       # Step 2: Setup Pages
       - name: Setup Pages
@@ -38,4 +32,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: './library/storybook-static'
+          artifact_name: build-docs

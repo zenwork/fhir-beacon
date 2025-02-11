@@ -72,13 +72,20 @@ jobs:
           npm run build
 
       # Step 6: Save build outputs as artifacts
-      - name: Upload Build Artifacts
+      - name: Upload Library
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
+          name: build-library
           path: |
-            packages/**/dist
-            packages/**/storybook-static
+            packages/library/dist
+          retention-days: 5 # Keep artifacts for 5 days
+
+      - name: Upload Library Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-docs
+          path: |
+            packages/library/storybook-static
           retention-days: 5 # Keep artifacts for 5 days
 
   deploy_storybook:
@@ -87,7 +94,7 @@ jobs:
     uses: ./.github/workflows/deploy_latest_docs.yaml
     secrets: inherit
     with:
-      artifact_name: 'build-artifacts'
+      artifact_name: 'build-docs'
 
 #  deploy_app:
 #    needs: build
