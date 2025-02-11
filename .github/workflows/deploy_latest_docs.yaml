@@ -24,7 +24,10 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.artifact_name }}
+          name: build-artifacts
+
+      - name: Verify Build Artifacts
+        run: ls -R ./
 
       # Step 2: Setup Pages
       - name: Setup Pages
