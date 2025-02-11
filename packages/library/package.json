@@ -7,14 +7,9 @@
     "main": "dist/fhir-beacon.js",
     "module": "dist/fhir-beacon.js",
     "types": "dist/types/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/fhir-beacon.js",
-            "types": "./dist/types/index.d.ts"
-        }
-    },
+    
     "files": [
-        "dist",
+        "dist/**/*",
         "build/web-types.json"
     ],
     "scripts": {
@@ -31,7 +26,7 @@
         "tsc": "tsc",
         "tsc::watch": "tsc --watch",
         "tsc::types": "tsc --emitDeclarationOnly",
-        "vite::build": "tsc && vite build && tsc --emitDeclarationOnly ",
+        "vite::build": "vite build && tsc --emitDeclarationOnly",
         "vite::dev": "vite",
         "vite::preview": "vite preview",
         "vitest": "HEADLESS=true vitest run",

@@ -3,6 +3,8 @@
         "allowSyntheticDefaultImports": true,
         "declaration": true,
         "declarationDir": "./dist/types",
+        "declarationMap": true,
+        "emitDeclarationOnly": false,
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "importHelpers": true,
@@ -13,6 +15,7 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "outDir": "dist",
+        "paths": {"*": ["./src/*", "./tests/*", "./stories/*"]},
         "resolveJsonModule": true,
         "rootDir": "./",
         "skipLibCheck": true,
@@ -23,7 +26,10 @@
             "@vitest/browser/providers/playwright"
         ]
     },
-    "include": ["**/*.ts"],
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": ["node_modules", "dist"],
     "plugins": [
         {
             "name": "ts-lit-plugin",
