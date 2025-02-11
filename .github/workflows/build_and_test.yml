@@ -15,27 +15,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js
-      - name: Setup Node.js
+      - name: Install Deps (Cached)
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 23
+          cache: 'npm'
+          cache-dependency-path: packages/library/package-lock.json
+      - run: |
+          nmp install
+          cd packages/library
+          npm ci
+          # Install full ICU support for Node.js
+          npm install full-icu
+          cd ../app
+          npm install
 
-      # Step 3: Install dependencies for all packages
-      - name: Install Dependencies
-        run: npm install --workspaces
+      - name: Use playwright binaries cache
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-latest
 
-      # Step 4: Build the projects
-      - name: Build Packages
-        run: npm run build --workspaces
+      - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
+        name: Install playwright browsers
+        run: |
+          cd packages/library
+          npx playwright install --with-deps
 
-      # Step 5: Run tests for all packages
-      - name: Run Tests
-        run: npm test --workspaces
+      - name: Run tests
+        run: |
+          cd packages/library
+          # Export environment variables for locale and timezone
+          export NODE_ICU_DATA=node_modules/full-icu
+          export LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          export TZ=UTC
+          npm run vitest
+          cd ../app
+          npm run test
+
+      - name: Run Build
+        run: |
+          cd packages/library
+          npm run vite::build
+          cd ../app
+          npm run build
 
       # Step 6: Save build outputs as artifacts
       - name: Upload Build Artifacts
