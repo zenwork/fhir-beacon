@@ -2,6 +2,11 @@ name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
   workflow_call:
+    inputs:
+      artifact_name:
+        description: 'The name of the artifact to deploy to GitHub Pages'
+        required: true
+        type: string # Make this input required
 
 jobs:
   docs:
