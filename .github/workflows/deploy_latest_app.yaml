@@ -1,7 +1,7 @@
 name: "[CD] - DEPLOY LATEST APP"
 
 on:
-  workflow_run:
+  workflow_call:
     workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
     types:
       - completed
