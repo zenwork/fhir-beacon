@@ -2,10 +2,6 @@ name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
   workflow_call:
-    workflows: [ "[CI] - Build and Test All Packages" ]
-    types:
-      - completed
-
 
 jobs:
   docs:
