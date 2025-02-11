@@ -77,17 +77,15 @@ jobs:
   deploy_storybook:
     needs: build
     if: ${{ needs.build.result == 'success' }}
-    uses: ./.github/workflows/deploy_latest_docs.yaml
+    uses: deploy_latest_docs.yaml
     secrets: inherit
     with:
       artifact_name: 'build-artifacts'
 
-
-
   deploy_app:
     needs: [ build ]
     if: ${{ needs.build.result == 'success' }}
-    uses: ./.github/workflows/deploy_latest_app.yaml
+    uses: deploy_latest_app.yaml
     secrets: inherit
     with:
       artifact_name: 'build-artifacts'
