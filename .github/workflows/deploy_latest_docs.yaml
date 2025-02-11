@@ -3,9 +3,8 @@ name: "[CI] - DEPLOY LATEST DOCS"
 on:
   workflow_call:
     inputs:
-      artifact_name:
+      build-docs:
         description: 'storybook catalog'
-        name: 'build-docs'
         required: true
         type: string # Make this input required
 
@@ -38,4 +37,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifact_name: build-docs
+          artifact_name: ${{ inputs.build-docs }}
