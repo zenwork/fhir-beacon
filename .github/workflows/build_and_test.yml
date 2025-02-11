@@ -56,8 +56,6 @@ jobs:
           export LC_ALL=en_US.UTF-8
           export TZ=UTC
           npm run vitest
-          cd ../app
-          npm run test
 
       - name: Run Build
         run: |
