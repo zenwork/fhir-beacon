@@ -6,7 +6,8 @@
     "workspaces": ["packages/*"],
     "scripts": {
         "change": "npx changeset",
-        "release": "npx changeset version"
+        "release": "npx changeset version",
+        "clean": "rm -rf node_modules */node_modules */*/node_modules"
     },
     "repository": {
         "type": "git",

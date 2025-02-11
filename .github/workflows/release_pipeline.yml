@@ -1,9 +1,11 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [ "NonExistentWorkflow" ] # Workflow that does not exist
+    types:
+      - completed
+
 
 jobs:
   release:

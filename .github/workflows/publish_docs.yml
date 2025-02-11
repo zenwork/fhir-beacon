@@ -1,4 +1,4 @@
-name: "[CD] - STORYBOOK"
+name: "[CD] - PUBLISH DOCS"
 
 on:
   push:

@@ -1,0 +1,51 @@
+name: "[CD] - Publish Library"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Build, Publish, and Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23
+          registry-url: https://registry.npmjs.org
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install --workspaces --if-present
+
+      # Step 4: Build the library
+      - name: Build the Library
+        run: npm run build --workspaces --if-present
+
+      # Step 4: Build the library
+      - name: Build the Library
+        run: npm run test --workspaces --if-present
+
+      # Step 5: Check for pending Changesets and publish to npm
+      - name: Apply Changeset Versions and Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Token for npm
+        run: |
+          npx changeset version
+          npx changeset publish
+
+      # Step 6: Create GitHub Release
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token is automatically provided
+        uses: changesets/action@v2
+        with:
+          publish: false # Prevents it from triggering npm publish again

@@ -13,6 +13,9 @@
         "build/web-types.json"
     ],
     "scripts": {
+        "build": "vite build && tsc --emitDeclarationOnly && storybook build",
+        "start": "storybook dev -p 9999",
+        "test": "HEADLESS=true vitest run",
         "generate-barrels": "barrelsby --delete --config autobarrel.json --location replace --noSemicolon --singleQuotes",
         "eslint": "eslint",
         "eslint::fix": "eslint --fix",

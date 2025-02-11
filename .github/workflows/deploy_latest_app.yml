@@ -1,4 +1,4 @@
-name: "[CD] - APP"
+name: "[CD] - Deploy Latest APP"
 
 on:
   push:
