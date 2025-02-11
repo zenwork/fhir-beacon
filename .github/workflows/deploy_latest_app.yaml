@@ -2,9 +2,11 @@ name: "[CD] - DEPLOY LATEST APP"
 
 on:
   workflow_call:
-    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
-    types:
-      - completed
+    inputs:
+      artifact_name:
+        description: 'The name of the artifact to deploy to GitHub Pages'
+        required: false
+        default: 'build-artifacts'
 
 jobs:
   deploy:
@@ -16,8 +18,9 @@ jobs:
         working-directory: "./packages/app"
 
     permissions:
-      id-token: write
       contents: read
+      pages: write       # Gives access to publish to GitHub Pages
+      id-token: write    # Required for authenticating to GitHub Pages
 
     steps:
       # Step 1: Download build artifacts
