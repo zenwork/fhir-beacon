@@ -26,7 +26,7 @@ jobs:
           name: build-docs
 
       - name: Verify Build Artifacts
-        run: ls ./library/storybook-static
+        run: ls ./build-docs
 
       # Step 2: Setup Pages
       - name: Setup Pages
