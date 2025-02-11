@@ -1,100 +1,29 @@
 name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - '*'
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  checks: write
+  workflow_run:
+    workflows: [ "[CI] - Build and Test All Packages" ]
+    types:
+      - completed
 
 jobs:
-  publish:
-    name: Deploy Storybook (Pages)
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  docs:
+    name: Deploy Storybook to GitHub Pages
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Deps (Cached)
-        uses: actions/setup-node@v4
+      # Step 1: Download build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-          node-version: 21
-          cache: 'npm'
-          cache-dependency-path: packages/library/package-lock.json
-      - run: |
-          cd packages/library
-          npm ci
-          # Install full ICU support for Node.js
-          npm install full-icu
+          name: build-artifacts
 
-      - name: Use playwright binaries cache
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-latest
-
-      - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
-        name: Install playwright browsers
-        run: |
-          cd packages/library
-          npx playwright install --with-deps
-
-      - name: Run tests
-        run: |
-          cd packages/library
-          # Export environment variables for locale and timezone
-          export NODE_ICU_DATA=node_modules/full-icu
-          export LANG=en_US.UTF-8
-          export LC_ALL=en_US.UTF-8
-          export TZ=UTC
-          npm run vitest
-
-      - name: Run Build
-        run: |
-          cd packages/library
-          npm run vite::build
-
-      - name: Deploy
-        run: |
-          cd packages/library
-          npm run publish
-
+      # Step 2: Upload artifact to GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: './packages/library/storybook-static'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Deploy Docs to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Store test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-test-results
-          path: ./packages/library/results/*.xml
-
-      - name: Publish test results
-        uses: mikepenz/action-junit-report@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/results/*.xml'
+          path: './packages/library/storybook-static'

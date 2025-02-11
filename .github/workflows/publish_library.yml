@@ -1,51 +1,36 @@
 name: "[CD] - Publish Library"
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
+    types:
+      - completed
 
 jobs:
   release:
-    name: Build, Publish, and Create GitHub Release
+    name: Publish Library to NPM
     runs-on: ubuntu-latest
 
+    # Ensure it runs only on the main branch
+    if: ${{ github.ref == 'refs/heads/main' }}
+
     steps:
-      # Step 1: Check out your repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # Step 1: Download build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-          node-version: 23
-          registry-url: https://registry.npmjs.org
+          name: build-artifacts
 
-      # Step 3: Install dependencies
-      - name: Install Dependencies
-        run: npm install --workspaces --if-present
-
-      # Step 4: Build the library
-      - name: Build the Library
-        run: npm run build --workspaces --if-present
-
-      # Step 4: Build the library
-      - name: Build the Library
-        run: npm run test --workspaces --if-present
-
-      # Step 5: Check for pending Changesets and publish to npm
-      - name: Apply Changeset Versions and Publish
+      # Step 2: Publish the library to npm
+      - name: Publish Library to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Token for npm
-        run: |
-          npx changeset version
-          npx changeset publish
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish ./packages/library --access public
 
-      # Step 6: Create GitHub Release
+      # Step 3: Create GitHub Release
       - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token is automatically provided
         uses: changesets/action@v2
         with:
-          publish: false # Prevents it from triggering npm publish again
+          publish: false # Prevents duplicate npm publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,48 @@
+name: "[CI] - Build and Test All Packages"
+
+on:
+  workflow_dispatch: # Allows manual triggers
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    name: Build and Test Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # Step 3: Install dependencies for all packages
+      - name: Install Dependencies
+        run: npm install --workspaces
+
+      # Step 4: Build the projects
+      - name: Build Packages
+        run: npm run build --workspaces
+
+      # Step 5: Run tests for all packages
+      - name: Run Tests
+        run: npm test --workspaces
+
+      # Step 6: Save build outputs as artifacts
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            packages/**/dist
+            packages/**/storybook-static
+          retention-days: 5 # Keep artifacts for 5 days

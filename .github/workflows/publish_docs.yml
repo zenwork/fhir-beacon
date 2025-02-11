@@ -1,9 +1,10 @@
 name: "[CD] - PUBLISH DOCS"
 
 on:
-  push:
-    branches:
-      - "main"
+  workflow_run:
+    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -14,28 +15,17 @@ jobs:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository
 
+    # Ensure it runs only when triggered on the main branch
+    if: ${{ github.ref == 'refs/heads/main' }}
+
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
-
-      - name: Install Deno
-        uses: denoland/setup-deno@v1
+      # Step 1: Download build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-          deno-version: v1.x
+          name: build-artifacts
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install step
-        run: "npm install"
-        working-directory: ./packages/library
-
-      - name: Build step
-        run: "npm run storybook::build"
-        working-directory: ./packages/library
-
+      # Step 2: Upload to Deno Deploy
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:

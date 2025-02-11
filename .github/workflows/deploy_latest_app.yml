@@ -1,55 +1,32 @@
-name: "[CD] - Deploy Latest APP"
+name: "[CD] - DEPLOY LATEST APP"
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - '*'
+  workflow_run:
+    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
+    types:
+      - completed
 
 jobs:
   deploy:
     name: Deploy App (Deno Deploy)
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: "./packages/app"
 
     permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+      id-token: write
+      contents: read
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
-
-      - name: Install Deno
-        uses: denoland/setup-deno@v1
+      # Step 1: Download build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-          deno-version: v2.x
+          name: build-artifacts
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install Library
-        run: "npm install --verbose"
-        working-directory: ./packages/library
-
-      - name: Build Library
-        run: "npm run vite::build --verbose"
-        working-directory: ./packages/library
-
-      - name: Install App
-        run: "npm install --verbose"
-        working-directory: ./packages/app
-
-      - name: Build App
-        run: "pwd && npm run build --verbose"
-        working-directory: ./packages/app
-
+      # Step 2: Upload to Deno Deploy
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
