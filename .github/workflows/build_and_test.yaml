@@ -83,7 +83,7 @@ jobs:
   deploy_storybook:
     needs: build
     if: ${{ needs.build.result == 'success' }}
-    uses: zenwork/fhir-beacon/.github/workflows/deploy_latest_docs.yaml
+    uses: ./.github/workflows/deploy_latest_docs.yaml
     secrets: inherit
     with:
       artifact_name: 'build-artifacts'
