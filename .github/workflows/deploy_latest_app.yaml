@@ -7,6 +7,7 @@ on:
         description: 'The name of the artifact to deploy to GitHub Pages'
         required: false
         default: 'build-artifacts'
+        type: string
 
 jobs:
   deploy:
