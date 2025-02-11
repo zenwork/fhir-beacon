@@ -2,25 +2,33 @@ name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
   workflow_call:
+    inputs:
+      artifact_name:
+        description: 'The name of the artifact to deploy to GitHub Pages'
+        required: false
+        default: 'build-artifacts'
 
 jobs:
   docs:
     name: Deploy Storybook to GitHub Pages
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pages: write       # Gives access to publish to GitHub Pages
+      id-token: write    # Required for authenticating to GitHub Pages
+
     steps:
-      # Step 1: Download build artifacts
+      # Step 1: Download build artifacts from previous workflow
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: ${{ inputs.artifact_name }}
 
-      # Step 2: Upload artifact to GitHub Pages
+      # Step 2: Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # Step 3: Deploy Docs to GitHub Pages
       - name: Deploy Docs to GitHub Pages
         uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: './packages/library/storybook-static'
