@@ -1,7 +1,7 @@
 name: "[CI] - DEPLOY LATEST DOCS"
 
 on:
-  workflow_run:
+  workflow_call:
     workflows: [ "[CI] - Build and Test All Packages" ]
     types:
       - completed

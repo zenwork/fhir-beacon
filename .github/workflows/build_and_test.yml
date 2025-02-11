@@ -73,3 +73,9 @@ jobs:
             packages/**/dist
             packages/**/storybook-static
           retention-days: 5 # Keep artifacts for 5 days
+
+  deploy:
+    needs: [ build ]
+    if: needs.build.outputs.should_skip != 'true'
+    uses: ./.github/workflows/deploy_latest_docs.yml
+    secrets: inherit
