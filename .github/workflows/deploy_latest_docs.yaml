@@ -4,7 +4,8 @@ on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'The name of the artifact to deploy to GitHub Pages'
+        description: 'storybook catalog'
+        name: 'build-docs'
         required: true
         type: string # Make this input required
 
@@ -26,7 +27,7 @@ jobs:
           name: build-docs
 
       - name: Verify Build Artifacts
-        run: ls ./build-docs
+        run: ls ${{ inputs.build-docs }}
 
       # Step 2: Setup Pages
       - name: Setup Pages
