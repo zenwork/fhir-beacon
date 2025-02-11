@@ -9,6 +9,12 @@ on:
     branches:
       - '*'
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
 jobs:
   build:
     name: Build and Test Packages
@@ -77,10 +83,11 @@ jobs:
   deploy_storybook:
     needs: build
     if: ${{ needs.build.result == 'success' }}
-    uses: ./.github/workflows/deploy_latest_docs.yaml
+    uses: zenwork/fhir-beacon/.github/workflows/deploy_latest_docs.yaml
     secrets: inherit
     with:
       artifact_name: 'build-artifacts'
+
 
 
 #  deploy_app:
