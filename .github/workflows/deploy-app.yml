@@ -38,6 +38,10 @@ jobs:
         run: "npm install --verbose"
         working-directory: ./packages/library
 
+      - name: Build Library
+        run: "npm run vite::build --verbose"
+        working-directory: ./packages/library
+
       - name: Install App
         run: "npm install --verbose"
         working-directory: ./packages/app
