@@ -33,3 +33,6 @@ jobs:
       # Step 3: Deploy Docs to GitHub Pages
       - name: Deploy Docs to GitHub Pages
         uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: './packages/library/storybook-static'
