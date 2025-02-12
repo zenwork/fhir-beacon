@@ -12,8 +12,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    # Grant write permissions
     permissions:
-      contents: read
+      contents: write
       id-token: write
 
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -21,17 +22,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true # Use credentials for git push
 
       - name: Setup Node.js and Registry
         uses: actions/setup-node@v4
         with:
-          node-version: '23.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Debug Install
-        run: |
-          npm ci --workspaces --if-present
-          npm whoami
+      - name: Install Dependencies
+        run: npm ci --workspaces --if-present
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -47,3 +48,9 @@ jobs:
         run: |
           echo "Changeset Output:"
           ls -la .changeset
+
+      - name: Push Tags
+        run: |
+          git push origin --tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
