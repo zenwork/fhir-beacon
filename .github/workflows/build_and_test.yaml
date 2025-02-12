@@ -138,6 +138,9 @@ jobs:
 
   release_lib:
     name: Release Lib
+    permissions:
+      contents: write # Override permissions only for this job
+      id-token: write
     needs: [ publish_docs, deploy_app ]
     if: ${{ needs.publish_docs.result == 'success' && needs.deploy_app.result == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
