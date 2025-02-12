@@ -1,6 +1,6 @@
 {
     "name": "fhir-beacon",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "homepage": "https://zenwork.github.io/fhir-beacon/",
     "repository": {
         "url": "https://github.com/zenwork/fhir-beacon",
@@ -28,7 +28,7 @@
         "build": "vite build && tsc --emitDeclarationOnly && storybook build",
         "start": "storybook dev -p 9999",
         "test": "HEADLESS=true vitest run",
-        "publish": "npm run vite::build && npm publish --provenance --access public",
+        "publish": "npm run vite::build",
         "generate-barrels": "barrelsby --delete --config autobarrel.json --location replace --noSemicolon --singleQuotes",
         "eslint": "eslint",
         "eslint::fix": "eslint --fix",
