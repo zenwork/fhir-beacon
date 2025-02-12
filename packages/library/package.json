@@ -1,6 +1,6 @@
 {
     "name": "fhir-beacon",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "homepage": "https://zenwork.github.io/fhir-beacon/",
     "repository": {
         "url": "https://github.com/zenwork/fhir-beacon",
@@ -93,7 +93,8 @@
         "typescript-eslint": "^8.20.0",
         "vite": "^6.0.7",
         "vitest": "^3.0.2",
-        "@biomejs/biome": "^1.9.4"
+        "@biomejs/biome": "^1.9.4",
+        "@changesets/cli": "^2.27.12"
     },
     "publishConfig": {
         "access": "public"
