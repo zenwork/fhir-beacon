@@ -101,7 +101,7 @@ jobs:
             packages/app/dist
           retention-days: 5 # Keep artifacts for 5 days
 
-  deploy_storybook:
+  deploy_docs:
     needs: build
     if: ${{ needs.build.result == 'success' }}
     uses: ./.github/workflows/deploy_latest_docs.yaml
@@ -109,17 +109,17 @@ jobs:
     with:
       artifact_name: build-docs
 
-  publish_storybook:
-    needs: deploy_storybook
-    if: ${{ needs.deploy_storybook.result == 'success' &&  github.ref == 'refs/heads/main' }}
+  publish_docs:
+    needs: deploy_docs
+    if: ${{ needs.deploy_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/publish_docs.yaml
     secrets: inherit
     with:
       artifact_name: build-docs
 
   publish_lib:
-    needs: deploy_storybook
-    if: ${{ needs.publish_storybook.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    needs: publish_docs
+    if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/publish_library.yaml
     secrets: inherit
     with:
