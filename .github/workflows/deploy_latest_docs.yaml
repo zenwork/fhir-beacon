@@ -3,7 +3,7 @@ name: "[CI] - DEPLOY LATEST DOCS"
 on:
   workflow_call:
     inputs:
-      build-docs:
+      artifact_name:
         description: 'storybook catalog'
         required: true
         type: string # Make this input required
@@ -23,10 +23,10 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-docs
+          name: ${{ inputs.artifact_name }}
 
       - name: Verify Build Artifacts
-        run: ls ${{ inputs.build-docs }}
+        run: ls ${{ inputs.artifact_name }}
 
       # Step 2: Setup Pages
       - name: Setup Pages
@@ -37,4 +37,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifact_name: ${{ inputs.build-docs }}
+          artifact_name: ${{ inputs.artifact_name }}
