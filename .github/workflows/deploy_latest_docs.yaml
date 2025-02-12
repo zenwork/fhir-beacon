@@ -38,4 +38,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./storybook
+          path: './storybook'
