@@ -2,6 +2,11 @@
     "name": "fhir-beacon",
     "version": "0.0.1",
     "homepage": "https://zenwork.github.io/fhir-beacon/",
+    "repository": {
+        "url": "https://github.com/zenwork/fhir-beacon",
+        "type": "git",
+        "directory": "packages/library"
+    },
     "description": "FHIR web components",
     "type": "module",
     "main": "dist/fhir-beacon.js",
@@ -10,7 +15,8 @@
     
     "files": [
         "dist/**/*",
-        "build/web-types.json"
+        "build/web-types.json",
+        "README.md"
     ],
     "scripts": {
         "build": "vite build && tsc --emitDeclarationOnly && storybook build",
