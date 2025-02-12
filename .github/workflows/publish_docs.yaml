@@ -1,16 +1,16 @@
-name: "[CD] - PUBLISH DOCS TO DENO-DEPLOY"
+name: "[CD] - PUBLISH DOCS"
 
 on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'The name of the artifact to deploy to GitHub Pages'
+        description: 'build-docs'
         required: false
         type: string
 
 jobs:
   deploy:
-    name: Deploy Storybook (Deno Deploy)
+    name: Publish Docs
     runs-on: ubuntu-latest
 
     permissions:

@@ -1,16 +1,16 @@
-name: "[CD] - DEPLOY APP TO DENO-DEPLOY"
+name: "[CD] - DEPLOY APP"
 
 on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'The name of the artifact to deploy to GitHub Pages'
+        description: 'build-app'
         required: false
         type: string
 
 jobs:
   deploy:
-    name: Deploy App (Deno Deploy)
+    name: Deploy App
     runs-on: ubuntu-latest
 
     defaults:

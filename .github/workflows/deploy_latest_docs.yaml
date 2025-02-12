@@ -1,16 +1,16 @@
-name: "[CD] - DEPLOY DOCS TO PAGES"
+name: "[CD] - DEPLOY DOCS"
 
 on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'storybook catalog'
+        description: 'build-docs'
         required: true
         type: string # Make this input required
 
 jobs:
   docs:
-    name: Deploy Storybook to GitHub Pages
+    name: Deploy Docs to GitHub Pages
     runs-on: ubuntu-latest
 
     permissions:

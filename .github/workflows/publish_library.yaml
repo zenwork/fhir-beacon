@@ -1,16 +1,16 @@
-name: "[CD] - PUBLISH LIB TO NPM & GITHUB"
+name: "[CD] - PUBLISH LIB"
 
 on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'The name of the artifact to deploy to GitHub Pages'
+        description: 'build-library'
         required: false
         type: string
 
 jobs:
   release:
-    name: Publish Library to NPM
+    name: Publish Library to NPM & GITHUB
     runs-on: ubuntu-latest
 
     # Ensure it runs only on the main branch
