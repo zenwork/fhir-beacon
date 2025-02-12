@@ -120,7 +120,7 @@ jobs:
 
   publish_lib:
     name: Publish Lib
-    needs: publish_docs
+    needs: [ publish_docs,deploy_app ]
     if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/publish_library.yaml
     secrets: inherit
@@ -138,7 +138,7 @@ jobs:
 
   release_lib:
     name: Release Lib
-    needs: publish_lib
+    needs: [ publish_lib ]
     if: ${{ needs.publish_lib.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
