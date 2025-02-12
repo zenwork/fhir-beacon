@@ -140,7 +140,7 @@ jobs:
     name: Release Lib
     needs: publish_lib
     if: ${{ needs.publish_lib.result == 'success' &&  github.ref == 'refs/heads/main' }}
-    uses: ./.github/workflows/publish_library.yaml
+    uses: ./.github/workflows/release_library.yaml
     secrets: inherit
     with:
       artifact_name: build-library
