@@ -12,6 +12,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     # Ensure it runs only on the main branch
     if: ${{ github.ref == 'refs/heads/main' }}
 
@@ -25,9 +29,16 @@ jobs:
 
       # Step 2: Publish the library to npm
       - name: Publish Library to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+          cd library
+          npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish ./library --access public
+
 
       # Step 3: Create GitHub Release
       - name: Create GitHub Release
