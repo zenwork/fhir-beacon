@@ -3,7 +3,7 @@ import {customElement}                                      from 'lit/decorators
 import {choiceValidate, DomainResource, oneOf, Validations} from '../../../internal'
 import {wrap}                                               from '../../../shell/layout/wrapper/wrap'
 
-import {DisplayConfig} from '../../../types'
+import {DisplayConfig} from '../../../shell/types'
 import {identifiers}   from '../../complex/identifier/identifiers'
 import {PrimitiveType} from '../../primitive/type-converters/type-converters'
 import {PatientData}   from './patient.data'

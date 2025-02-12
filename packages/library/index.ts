@@ -1,9 +1,12 @@
-export * from './src/types'
+export *             from './src/shell/types'
 
 /* Core Stuff */
+export * from './src/internal'
 export * from './src/internal/BaseElement'
 export { BaseElement  } from './src/internal'
 export type { Generators  } from './src/internal'
+export * from './src/codes'
+export * from './src/fhirtypes'
 
 /* Customization API */
 export * from './src/internal/customization/fhir-context-element'
@@ -22,3 +25,4 @@ export * from './src/components/special'
 export *               from './src/components/resources'
 export {systemChoices} from './src/codes/use-system'
 export {useSystem}     from './src/codes/use-system'
+export {DisplayMode} from './src/shell'

@@ -7,7 +7,7 @@ import {
 }                                                        from '../../../shell'
 import {
   DisplayConfig
-}                                                        from '../../../types'
+}                                                        from '../../../shell/types'
 import {
   AttachmentData,
   CodeableConceptData,

@@ -1,0 +1,39 @@
+name: "[CD] - DEPLOY DOCS"
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'build-docs'
+        required: true
+        type: string # Make this input required
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write       # Gives access to publish to GitHub Pages
+      id-token: write    # Required for authenticating to GitHub Pages
+
+    steps:
+      # Step 1: Download build artifacts from previous workflow
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ./storybook
+
+      - name: Verify Build Artifacts
+        run: ls ./storybook
+
+      # Step 2: Setup Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Step 3: Deploy Docs to GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './storybook'

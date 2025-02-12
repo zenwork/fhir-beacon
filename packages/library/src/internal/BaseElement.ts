@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {PropertyValues, TemplateResult} from 'lit'
-import {DisplayConfig}                  from '../types'
+import {DisplayConfig}                  from '../shell/types'
 import {Decorated, FhirElementData}     from './base'
 
 import {FhirPresentableElement} from './base/presentable/fhir-presentable-element'

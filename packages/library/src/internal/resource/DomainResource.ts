@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig}                                 from '../../types'
+import {DisplayConfig}                                 from '../../shell/types'
 import {Decorated, meta, NoDataObject}                 from '../base'
 import {DomainResourceData, ResourceData}              from './domain-resource.data'
 import {renderResourceComponent}                       from './renderResourceComponent'

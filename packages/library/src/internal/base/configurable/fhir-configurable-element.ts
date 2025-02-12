@@ -1,9 +1,10 @@
-import {ContextConsumer}            from '@lit/context'
-import {LitElement}                 from 'lit'
-import {property, state}            from 'lit/decorators.js'
-import {DisplayConfig, DisplayMode} from '../../../types'
-import {toDisplayMode}              from '../../../utilities'
-import {displayConfigContext}       from '../../contexts'
+import {ContextConsumer}      from '@lit/context'
+import {LitElement}           from 'lit'
+import {property, state}      from 'lit/decorators.js'
+import {DisplayMode}          from '../../../shell/displayMode'
+import {DisplayConfig}        from '../../../shell/types'
+import {toDisplayMode}        from '../../../utilities'
+import {displayConfigContext} from '../../contexts'
 
 
 

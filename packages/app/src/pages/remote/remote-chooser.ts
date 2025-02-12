@@ -1,7 +1,6 @@
 import {SignalWatcher}                              from '@lit-labs/signals'
 import {SlDialog, SlInput, SlMenuItem}              from '@shoelace-style/shoelace'
-import {DisplayMode}                                from 'fhir-beacon'
-import {FhirElementData}                            from 'fhir-beacon/src/internal'
+import {DisplayMode, FhirElementData}               from 'fhir-beacon'
 
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
@@ -42,7 +41,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
       .edit sl-icon-button::part(base) {
         color: lightblue;
       }
-      
+
     `
   ]
 
@@ -153,7 +152,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
             ${filteredQueries ? filteredQueries.map(q => html`
                 <div style="display:flex">
                     <sl-menu-item .value=${q}
-                                  ?disabled=${this.state.selected.find(f => f.name === q.name)}
+                                  ?disabled=${this.state.selected.find((f: any) => f.name === q.name)}
                                   style="flex-grow: 1"
                     >
                         ${q.name}
@@ -181,7 +180,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
                     <div class="play">
                         <sl-icon-button
                                 name="play-fill"
-                                ?disabled=${this.state.selected.find(f => f.name === q.name)}
+                                ?disabled=${this.state.selected.find((f: any) => f.name === q.name)}
                                 @click=${() => {
                                     this.state.selected.push({
                                                                  name: q.name,
@@ -222,7 +221,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
 
                 this.state.storeRemote()
                     .then(() => this.saveDialog)
-                    .then((d) => d.hide())
+                    .then((d: any) => d.hide())
                     .then(() => this.requestUpdate())
             }}
             >Save
@@ -236,10 +235,11 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
     const setQuery = (e: InputEvent) => this.newQuery.query = (e.target as SlInput).value
 
     const addOrUpdateQuery = () => {
-      if (this.state.currentCollection.get().some(q => q.name === this.newQuery.name))
-        this.state.currentCollection.set(this.state.currentCollection.get().map(c => c.name === this.newQuery.name
-                                                                                     ? this.newQuery
-                                                                                     : c))
+      if (this.state.currentCollection.get().some((q: any) => q.name === this.newQuery.name))
+        this.state.currentCollection.set(this.state.currentCollection.get().map((c: any) => c.name
+                                                                                            === this.newQuery.name
+                                                                                            ? this.newQuery
+                                                                                            : c))
       else
         this.state.currentCollection.set(this.state.currentCollection.get().concat(this.newQuery))
 
@@ -253,7 +253,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
             <sl-input autofocus
                       placeholder="name"
                       required
-                      ?disabled=${this.state.currentCollection.get().some(c => c.name === this.newQuery.name)}
+                      ?disabled=${this.state.currentCollection.get().some((c: any) => c.name === this.newQuery.name)}
                       value=${this.newQuery.name}
                       @input=${setName}
             ></sl-input>

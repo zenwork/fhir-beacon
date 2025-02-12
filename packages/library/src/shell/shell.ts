@@ -2,8 +2,8 @@ import {ContextProvider}            from '@lit/context'
 import {LitElement, PropertyValues} from 'lit'
 import {customElement, property}    from 'lit/decorators.js'
 import {displayConfigContext}       from '../internal'
-import {DisplayMode}                from '../types'
 import {toDisplayMode}              from '../utilities'
+import {DisplayMode}                from './displayMode'
 
 
 

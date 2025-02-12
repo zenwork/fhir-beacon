@@ -1,8 +1,10 @@
 import {html, TemplateResult}      from 'lit'
 import {customElement}             from 'lit/decorators.js'
 import {Backbone, Decorated}       from '../../../../internal'
-import {DisplayConfig}             from '../../../../types'
+import {DisplayConfig}             from '../../../../shell/types'
 import {AccountRelatedAccountData} from '../account.data'
+
+
 
 @customElement('fhir-account-related-account')
 export class RelatedAccount extends Backbone<AccountRelatedAccountData> {

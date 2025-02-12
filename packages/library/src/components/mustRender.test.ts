@@ -1,6 +1,8 @@
 import {assert, describe, it} from 'vitest'
-import {DisplayMode}          from '../types'
+import {DisplayMode}          from '../shell/displayMode'
 import {mustRender}           from './mustRender'
+
+
 
 describe('MustRender', () => {
   it('should fail with no data and default', () => {

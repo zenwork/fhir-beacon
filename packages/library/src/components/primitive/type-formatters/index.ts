@@ -3,7 +3,8 @@
  */
 
 export * from './asFormattedDate'
-export * from './asFormattedDateTime'
+export {asFormattedDateTime} from './asFormattedDateTime'
+export *                     from './asFormattedInstant'
 export * from './asFormattedTime'
 export * from './asLink'
 export * from './asReadable'

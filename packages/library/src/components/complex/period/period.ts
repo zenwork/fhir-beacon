@@ -1,7 +1,7 @@
 import {html, nothing, TemplateResult}       from 'lit'
 import {customElement}                       from 'lit/decorators.js'
 import {BaseElement, Decorated, EmptyResult} from '../../../internal'
-import {DisplayConfig}                       from '../../../types'
+import {DisplayConfig}                       from '../../../shell/types'
 import {PrimitiveType}                       from '../../primitive/type-converters/type-converters'
 import {PeriodData}                          from './period.data'
 

@@ -1,0 +1,138 @@
+name: "[CI] - Build and Test All Packages"
+
+on:
+  workflow_dispatch: # Allows manual triggers
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Deps (Cached)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          cache: 'npm'
+          cache-dependency-path: packages/library/package-lock.json
+      - run: |
+          npm install
+          cd packages/library
+          npm ci
+          # Install full ICU support for Node.js
+          npm install full-icu
+          cd ../app
+          npm install
+
+      - name: Use playwright binaries cache
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-latest
+
+      - if: ${{steps.playwright-cache.outputs.cache-hit != 'true'}}
+        name: Install playwright browsers
+        run: |
+          cd packages/library
+          npx playwright install --with-deps
+
+      - name: Run tests
+        run: |
+          cd packages/library
+          # Export environment variables for locale and timezone
+          export NODE_ICU_DATA=node_modules/full-icu
+          export LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          export TZ=UTC
+          npm run vitest
+
+      - name: Run Build
+        run: |
+          cd packages/library
+          npm run vite::build
+          npm run storybook::build
+          cd ../app
+          npm run build
+
+      - name: Remove node_modules
+        run: |
+          cd packages/library
+          rm -rf node_modules
+
+      # Step 6: Save build outputs as artifacts
+      - name: Cache Library
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-library
+          path: |
+            packages/library
+          retention-days: 5 # Keep artifacts for 5 days
+
+      - name: Cache Library Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-docs
+          path: |
+            packages/library/storybook-static
+          retention-days: 5 # Keep artifacts for 5 days
+
+      - name: Cache App
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-app
+          path: |
+            packages/app/dist
+          retention-days: 5 # Keep artifacts for 5 days
+
+  deploy_docs:
+    name: Deploy Latest Docs
+    needs: build
+    if: ${{ needs.build.result == 'success' }}
+    uses: ./.github/workflows/deploy_latest_docs.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-docs
+
+  publish_docs:
+    name: Publish Docs
+    needs: deploy_docs
+    if: ${{ needs.deploy_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/publish_docs.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-docs
+
+  publish_lib:
+    name: Publish Lib
+    needs: publish_docs
+    if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/publish_library.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-library
+
+  deploy_app:
+    name: Deploy Latest App
+    needs: build
+    if: ${{ needs.build.result == 'success' }}
+    uses: ./.github/workflows/deploy_latest_app.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-app

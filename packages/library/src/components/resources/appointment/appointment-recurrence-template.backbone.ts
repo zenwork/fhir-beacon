@@ -2,9 +2,11 @@ import {html, TemplateResult}              from 'lit'
 import {customElement}                     from 'lit/decorators.js'
 import {Backbone, Decorated}               from '../../../internal'
 import {strap}                             from '../../../shell'
-import {DisplayConfig}                     from '../../../types'
+import {DisplayConfig}                     from '../../../shell/types'
 import {PrimitiveType}                     from '../../primitive'
 import {AppointmentRecurrenceTemplateData} from './appointment.data'
+
+
 
 @customElement('fhir-appointment-recurrence-template')
 export class AppointmentRecurrenceTemplateBackbone extends Backbone<AppointmentRecurrenceTemplateData> {

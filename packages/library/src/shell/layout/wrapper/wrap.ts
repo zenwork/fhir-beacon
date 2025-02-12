@@ -1,6 +1,7 @@
 import {html, TemplateResult}          from 'lit'
 import {map}                           from 'lit/directives/map.js'
-import {DisplayConfig, DisplayMode}    from '../../../types'
+import {DisplayMode}                   from '../../displayMode'
+import {DisplayConfig}                 from '../../types'
 import {hasMany, hasOnlyOne}           from '../directives'
 import {pluralize}                     from '../pluralize'
 import {Generators, generators, strap} from './strap'

@@ -3,9 +3,11 @@ import {customElement}                 from 'lit/decorators.js'
 import {map}                           from 'lit/directives/map.js'
 import {DomainResource}                from '../../../internal/resource/DomainResource'
 import {wrap}                          from '../../../shell'
-import {DisplayConfig}                 from '../../../types'
+import {DisplayConfig}                 from '../../../shell/types'
 import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
 import {SubstanceData}                 from './substance.data'
+
+
 
 @customElement('fhir-substance')
 export class Substance extends DomainResource<SubstanceData> {

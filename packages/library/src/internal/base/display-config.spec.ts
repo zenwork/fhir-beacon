@@ -8,7 +8,7 @@ import {
   data as annotationData
 }                                                                         from '../../components/complex/annotation/annotation.story.data'
 import {Shell}                                                            from '../../shell'
-import {DisplayMode}                                                      from '../../types'
+import {DisplayMode}                                                      from '../../shell/displayMode'
 
 
 

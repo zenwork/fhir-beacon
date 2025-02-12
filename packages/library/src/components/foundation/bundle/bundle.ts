@@ -8,7 +8,7 @@ import {
 import {wrap}                                                    from '../../../shell'
 import {hasSome, isDefined}                                      from '../../../shell/layout/directives'
 import {renderBackboneCollection, renderSingleBackbone}          from '../../../shell/layout/renderBackboneCollection'
-import {DisplayConfig}                                           from '../../../types'
+import {DisplayConfig}                                           from '../../../shell/types'
 import {PrimitiveType}                                           from '../../primitive/type-converters/type-converters'
 import {BundleData}                                              from './bundle.data'
 

@@ -1,0 +1,25 @@
+{
+    "name": "fhir-beacon",
+    "version": "0.1.0",
+    "description": "a library of web components for working with FHIR",
+    "private": true,
+    "workspaces": ["packages/*"],
+    "scripts": {
+        "change": "npx changeset",
+        "release": "npx changeset version",
+        "clean": "rm -rf node_modules */node_modules */*/node_modules"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com//zenwork/fhir-beacon.git"
+    },
+    "keywords": [
+        "fhir",
+        "web-component"
+    ],
+    "author": "Florian Hehlen",
+    "license": "MIT",
+    "devDependencies": {
+        "@changesets/cli": "^2.27.12"
+    }
+}

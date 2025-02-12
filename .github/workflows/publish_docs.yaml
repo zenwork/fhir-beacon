@@ -1,0 +1,36 @@
+name: "[CD] - PUBLISH DOCS"
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'build-docs'
+        required: false
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    # Ensure it runs only when triggered on the main branch
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    steps:
+      # Step 1: Download build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ./storybook
+
+      # Step 2: Upload to Deno Deploy
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "fhir-beacon"
+          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+          root: "./storybook"

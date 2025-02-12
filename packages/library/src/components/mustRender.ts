@@ -1,6 +1,6 @@
 import {NoDataObject} from '../internal/base/Decorate'
 import {meta}         from '../internal/base/Validations.type'
-import {DisplayMode}  from '../types'
+import {DisplayMode}  from '../shell/displayMode'
 import {isBlank}      from '../utilities'
 
 

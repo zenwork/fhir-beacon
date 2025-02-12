@@ -167,11 +167,12 @@ function resolve(id: string, segment: ValueSetIncludeExcludeData,
     } else if (segment.valueSet && segment.valueSet.length > 0) {
       const resolvedConcepts: ResolvedValue[] = []
       Promise.all(segment.valueSet.map(vs => resolveChildValueSet(id, vs, skipUrl, debug, urlsToResolve)))
-             .then((all: (ResolvedSet[] | null)[]) => all.filter(v => v !== null))
+             .then((all: ResolvedSet[][]) => all.filter(v => v !== null))
              .then(sets => sets.flat())
-             .then((valid: ResolvedSet[]) => valid.map(v => (v?.compose[variant].concept)
-                                                            ? v.compose[variant].concept
-                                                            : []))
+             .then((valid: ResolvedSet[]) => valid.map(v => {
+               const concept: ResolvedValue[] | null = v.compose[variant].concept
+               return concept ?? []
+             }))
              .then((conceptsArrays: ResolvedValue[][]) => conceptsArrays.flat())
              .then(r => {
                resolvedConcepts.push(...r)

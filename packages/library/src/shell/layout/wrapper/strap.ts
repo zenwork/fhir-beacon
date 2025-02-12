@@ -1,10 +1,11 @@
-import {html, TemplateResult}       from 'lit'
-import {map}                        from 'lit/directives/map.js'
-import {asReadable}                 from '../../../components'
-import {DisplayConfig, DisplayMode} from '../../../types'
-import {hasMany, hasOnlyOne}        from '../directives'
-import {pluralize}                  from '../pluralize'
-import {show}                       from '../show'
+import {html, TemplateResult} from 'lit'
+import {map}                  from 'lit/directives/map.js'
+import {asReadable}           from '../../../components'
+import {DisplayMode}          from '../../displayMode'
+import {DisplayConfig}        from '../../types'
+import {hasMany, hasOnlyOne}  from '../directives'
+import {pluralize}            from '../pluralize'
+import {show}                 from '../show'
 
 
 

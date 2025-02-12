@@ -1,0 +1,38 @@
+name: "[CD] - DEPLOY APP"
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'build-app'
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: "./packages/app"
+
+    permissions:
+      contents: read
+      pages: write       # Gives access to publish to GitHub Pages
+      id-token: write    # Required for authenticating to GitHub Pages
+
+    steps:
+      # Step 1: Download build artifacts from previous workflow
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ./app
+
+      # Step 2: Upload to Deno Deploy
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "fhir-beacon-app"
+          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+          root: "./app"

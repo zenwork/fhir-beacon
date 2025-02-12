@@ -1,9 +1,11 @@
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
 import {Backbone, Decorated}  from '../../../../internal'
-import {DisplayConfig}        from '../../../../types'
+import {DisplayConfig}        from '../../../../shell/types'
 import {PrimitiveType}        from '../../../primitive'
 import {AccountCoverageData}  from '../account.data'
+
+
 
 @customElement('fhir-account-coverage')
 export class Coverage extends Backbone<AccountCoverageData> {

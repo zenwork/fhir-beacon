@@ -4,4 +4,6 @@
 
 export * from './shell'
 export * from './shoelace-styled-element'
+export *             from './types'
 export * from './layout/index'
+export {DisplayMode} from './displayMode'
