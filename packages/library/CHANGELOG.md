@@ -1,5 +1,11 @@
 # fhir-beacon
 
+## 0.0.18
+
+### Patch Changes
+
+- minor change
+
 ## 0.0.17
 
 ### Patch Changes
