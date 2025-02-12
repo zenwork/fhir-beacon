@@ -88,6 +88,14 @@ jobs:
             packages/library/storybook-static
           retention-days: 5 # Keep artifacts for 5 days
 
+      - name: Upload App
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-app
+          path: |
+            packages/app/dist
+          retention-days: 5 # Keep artifacts for 5 days
+
   deploy_storybook:
     needs: build
     if: ${{ needs.build.result == 'success' }}
@@ -96,10 +104,10 @@ jobs:
     with:
       artifact_name: build-docs
 
-#  deploy_app:
-#    needs: build
-#    if: ${{ needs.build.result == 'success' }}
-#    uses: ./.github/workflows/deploy_latest_app.yaml
-#    secrets: inherit
-#    with:
-#      artifact_name: 'build-artifacts'
+  deploy_app:
+    needs: build
+    if: ${{ needs.build.result == 'success' }}
+    uses: ./.github/workflows/deploy_latest_app.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-app

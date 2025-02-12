@@ -6,7 +6,6 @@ on:
       artifact_name:
         description: 'The name of the artifact to deploy to GitHub Pages'
         required: false
-        default: 'build-artifacts'
         type: string
 
 jobs:
@@ -24,11 +23,12 @@ jobs:
       id-token: write    # Required for authenticating to GitHub Pages
 
     steps:
-      # Step 1: Download build artifacts
+      # Step 1: Download build artifacts from previous workflow
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: ${{ inputs.artifact_name }}
+          path: ./app
 
       # Step 2: Upload to Deno Deploy
       - name: Upload to Deno Deploy
@@ -36,4 +36,4 @@ jobs:
         with:
           project: "fhir-beacon-app"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
-          root: "./packages/app/dist"
+          root: "./app"
