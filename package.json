@@ -2,7 +2,7 @@
     "name": "fhir-beacon",
     "version": "0.1.0",
     "description": "a library of web components for working with FHIR",
-    "private": false,
+    "private": true,
     "workspaces": ["packages/*"],
     "scripts": {
         "change": "npx changeset",
