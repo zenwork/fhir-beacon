@@ -5,6 +5,12 @@ FHIR Beacon
 Open Source library for working with [FHIR](http://hl7.org/fhir/) data in the browser that enables web-developers to 
 easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer. 
 
+Add `fhir-beacon` to your project:
+
+```shell
+npm install fhir-beacon 
+```
+
 ## Features
 * default implementation of FHIR primitives, complex, resource as HTML custom elements
 * display view, editable form, metamodel view, narrative view, debug view modes for all elements
