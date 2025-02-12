@@ -1,5 +1,13 @@
 # app
 
+## 0.0.4
+
+### Patch Changes
+
+- force release
+- Updated dependencies
+    - fhir-beacon@0.0.15
+
 ## 0.0.3
 
 ### Patch Changes

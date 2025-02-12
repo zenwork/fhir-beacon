@@ -16,7 +16,6 @@ jobs:
       contents: read
       id-token: write
 
-    # Ensure it runs only on the main branch
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
@@ -29,12 +28,22 @@ jobs:
           node-version: '23.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: install
-        run: npm ci --workspaces --if-present
+      - name: Debug Install
+        run: |
+          npm ci --workspaces --if-present
+          npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release with Changesets
         uses: changesets/action@v1
         with:
-          publish: false # Prevents duplicate npm publish
+          publish: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Debug Changesets Output
+        run: |
+          echo "Changeset Output:"
+          ls -la .changeset
