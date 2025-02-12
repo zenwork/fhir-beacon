@@ -74,7 +74,6 @@ jobs:
       - name: Remove node_modules
         run: |
           cd packages/library
-          rm -rf node_modules
 
       # Step 6: Save build outputs as artifacts
       - name: Cache Library
