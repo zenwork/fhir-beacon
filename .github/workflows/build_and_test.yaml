@@ -118,14 +118,14 @@ jobs:
     with:
       artifact_name: build-docs
 
-  publish_lib:
-    name: Publish Lib
-    needs: [ publish_docs,deploy_app ]
-    if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
-    uses: ./.github/workflows/publish_library.yaml
-    secrets: inherit
-    with:
-      artifact_name: build-library
+  #  publish_lib:
+  #    name: Publish Lib
+  #    needs: [ publish_docs,deploy_app ]
+  #    if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
+  #    uses: ./.github/workflows/publish_library.yaml
+  #    secrets: inherit
+  #    with:
+  #      artifact_name: build-library
 
   deploy_app:
     name: Deploy Latest App
@@ -138,7 +138,7 @@ jobs:
 
   release_lib:
     name: Release Lib
-    needs: [ publish_lib ]
+    needs: [ publish_docs, deploy_app ]
     if: ${{ needs.publish_lib.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
