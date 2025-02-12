@@ -1,5 +1,0 @@
----
-"fhir-beacon": patch
----
-
-foo

@@ -1,6 +1,6 @@
 {
     "name": "app",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A starter kit for building PWAs!",
     "main": "index.js",
     "scripts": {
@@ -25,9 +25,9 @@
         "workbox-build": "^7.1.1",
         "workbox-core": "^7.1.0",
         "workbox-precaching": "^7.1.0",
-        "fhir-beacon": "0.0.10",
+        "fhir-beacon": "0.0.13",
         "browser-fs-access": "^0.35.0",
-        "signal-utils": "^0.21.1" ,
+        "signal-utils": "^0.21.1",
         "native-file-system-adapter": "^3.0.1"
     },
     "devDependencies": {

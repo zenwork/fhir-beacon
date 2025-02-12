@@ -1,18 +1,24 @@
 {
     "name": "fhir-beacon",
-    "version": "0.0.11",
+    "version": "0.0.13",
     "homepage": "https://zenwork.github.io/fhir-beacon/",
     "repository": {
         "url": "https://github.com/zenwork/fhir-beacon",
         "type": "git",
         "directory": "packages/library"
     },
+    "keywords": [
+        "fhir",
+        "web components",
+        "custom elements",
+        "lit",
+        "web"
+    ],
     "description": "FHIR web components",
     "type": "module",
     "main": "dist/fhir-beacon.js",
     "module": "dist/fhir-beacon.js",
     "types": "dist/types/index.d.ts",
-    
     "files": [
         "dist/**/*",
         "build/web-types.json",
