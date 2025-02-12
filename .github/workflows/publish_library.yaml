@@ -1,10 +1,12 @@
-name: "[CD] - Publish Library"
+name: "[CD] - PUBLISH LIB TO NPM & GITHUB"
 
 on:
   workflow_run:
-    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
-    types:
-      - completed
+    inputs:
+      artifact_name:
+        description: 'The name of the artifact to deploy to GitHub Pages'
+        required: false
+        type: string
 
 jobs:
   release:
@@ -19,13 +21,14 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: ${{ inputs.artifact_name }}
+          path: ./library
 
       # Step 2: Publish the library to npm
       - name: Publish Library to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish ./packages/library --access public
+        run: npm publish ./library --access public
 
       # Step 3: Create GitHub Release
       - name: Create GitHub Release

@@ -1,4 +1,4 @@
-name: "[CD] - DEPLOY LATEST APP"
+name: "[CD] - DEPLOY APP TO DENO-DEPLOY"
 
 on:
   workflow_call:

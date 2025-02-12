@@ -71,16 +71,21 @@ jobs:
           cd ../app
           npm run build
 
+      - name: Remove node_modules
+        run: |
+          cd packages/library
+          rm -rf node_modules
+
       # Step 6: Save build outputs as artifacts
-      - name: Upload Library
+      - name: Cache Library
         uses: actions/upload-artifact@v4
         with:
           name: build-library
           path: |
-            packages/library/dist
+            packages/library
           retention-days: 5 # Keep artifacts for 5 days
 
-      - name: Upload Library Docs
+      - name: Cache Library Docs
         uses: actions/upload-artifact@v4
         with:
           name: build-docs
@@ -88,7 +93,7 @@ jobs:
             packages/library/storybook-static
           retention-days: 5 # Keep artifacts for 5 days
 
-      - name: Upload App
+      - name: Cache App
         uses: actions/upload-artifact@v4
         with:
           name: build-app
@@ -103,6 +108,22 @@ jobs:
     secrets: inherit
     with:
       artifact_name: build-docs
+
+  publish_storybook:
+    needs: deploy_storybook
+    if: ${{ needs.deploy_storybook.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/publish_docs.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-docs
+
+  publish_lib:
+    needs: deploy_storybook
+    if: ${{ needs.publish_storybook.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/publish_library.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-library
 
   deploy_app:
     needs: build

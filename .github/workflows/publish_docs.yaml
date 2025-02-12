@@ -1,10 +1,12 @@
-name: "[CD] - PUBLISH DOCS"
+name: "[CD] - PUBLISH DOCS TO DENO-DEPLOY"
 
 on:
-  workflow_run:
-    workflows: [ "[CI] - Build and Test All Packages" ] # Triggered by the build workflow
-    types:
-      - completed
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'The name of the artifact to deploy to GitHub Pages'
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -23,7 +25,8 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: ${{ inputs.artifact_name }}
+          path: ./storybook
 
       # Step 2: Upload to Deno Deploy
       - name: Upload to Deno Deploy
@@ -31,4 +34,4 @@ jobs:
         with:
           project: "fhir-beacon"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
-          root: "./packages/library/storybook-static"
+          root: "./storybook"

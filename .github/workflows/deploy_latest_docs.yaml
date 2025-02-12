@@ -1,4 +1,4 @@
-name: "[CI] - DEPLOY LATEST DOCS"
+name: "[CD] - DEPLOY DOCS TO PAGES"
 
 on:
   workflow_call:
