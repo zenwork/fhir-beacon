@@ -37,8 +37,6 @@ jobs:
 
       - name: Create GitHub Release with Changesets
         uses: changesets/action@v1
-        with:
-          publish: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
