@@ -31,7 +31,7 @@ jobs:
 
       # Step 3: Create GitHub Release
       - name: Create GitHub Release
-        uses: changesets/action@v2
+        uses: changesets/action@v1
         with:
           publish: false # Prevents duplicate npm publish
         env:
