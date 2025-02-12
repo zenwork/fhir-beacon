@@ -9,8 +9,7 @@ on:
         type: string # Make this input required
 
 jobs:
-  docs:
-    name: Deploy Docs to GitHub Pages
+  deploy:
     runs-on: ubuntu-latest
 
     permissions:

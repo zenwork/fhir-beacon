@@ -9,8 +9,7 @@ on:
         type: string
 
 jobs:
-  release:
-    name: Publish Library to NPM & GITHUB
+  publish:
     runs-on: ubuntu-latest
 
     # Ensure it runs only on the main branch

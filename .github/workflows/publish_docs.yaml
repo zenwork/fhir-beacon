@@ -9,8 +9,7 @@ on:
         type: string
 
 jobs:
-  deploy:
-    name: Publish Docs
+  publish:
     runs-on: ubuntu-latest
 
     permissions:
