@@ -34,8 +34,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       # Step 3: Deploy Docs to GitHub Pages
-      - name: Deploy Docs to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           path: './storybook'
