@@ -20,27 +20,25 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
-      # Step 1: Download build artifacts
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact_name }}
           path: ./library
 
-      # Step 2: Publish the library to npm
-      - name: Publish Library to npm
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js and Registry
+        uses: actions/setup-node@v4
         with:
           node-version: '23.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: |
+
+      - name: Publish Library to npm
+        run: |
           cd library
           npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-
-      # Step 3: Create GitHub Release
       - name: Create GitHub Release
         uses: changesets/action@v1
         with:
