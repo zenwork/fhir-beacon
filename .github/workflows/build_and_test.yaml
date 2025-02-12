@@ -139,7 +139,7 @@ jobs:
   release_lib:
     name: Release Lib
     needs: [ publish_docs, deploy_app ]
-    if: ${{ needs.publish_lib.result == 'success' &&  github.ref == 'refs/heads/main' }}
+    if: ${{ needs.publish_docs.result == 'success' && needs.deploy_app.result == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
     with:
