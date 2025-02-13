@@ -32,7 +32,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
-        run: npm ci --workspace && npm run build --workspace=packages/library
+        run: npm ci --workspaces && npm run build --workspace=packages/library
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
