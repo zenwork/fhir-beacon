@@ -32,14 +32,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
-        run: npm ci --workspaces --if-present
+        run: |
+          npm ci --workspace=packages/library
+          npm vite::build --workspace=packages/library
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release with Changesets
         uses: changesets/action@v1
         with:
-          publish: npm publish --workspace=packages/library --if-present
+          publish: npm publish --workspace=packages/library
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
