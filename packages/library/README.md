@@ -5,8 +5,9 @@ FHIR Beacon
 Open Source library for working with [FHIR](http://hl7.org/fhir/) data in the browser that enables web-developers to 
 easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer. 
 
-* [Using Components](#components)
-* [FHIR Elements](#implemented)
+* [Using FHIR Elements](#components)
+* [Implemented FHIR Elements](#implemented)
+* [Create FHIR Elements](#extending)
 * [Styling narratives](#narrative)
 
 Setup
@@ -39,24 +40,28 @@ Preact, Angular, Vue, or vanilla JS.
 The library comes with web components for FHIR resources and other FHIR datatypes. By default
 
 ```typescript
-import {MedicationData}       from 'fhir-beacon'
-import {html, TemplateResult} from 'lit'
-
-
+import {DisplayMode, MedicationData} from 'fhir-beacon'
+import {html}                        from 'lit'
 
 export function render(medication: MedicationData) {
   return html`
           <fhir-medication 
                   label="patient (default)" 
-                  .data=${medication}></fhir-medication>
+                  .data=${medication}
+                  ></fhir-medication>
           <fhir-medication 
                   label="patient (summary)" 
-                  .data=${medication} 
-                  summaryonly></fhir-medication>
+                  .data=${medication}
+                  headless 
+                  summaryonly
+                  ></fhir-medication>
           <fhir-medication 
                   label="patient (verbose)" 
-                  .data=${medication} 
-                  verbose></fhir-medication>
+                  .data=${medication}
+                  .mode=${DisplayMode.structure} 
+                  verbose
+                  open
+                  ></fhir-medication>
   `
 }
 
@@ -89,25 +94,89 @@ Only some of the defined resources are currently implemented. The goal of this p
 implementation for all resources in the system.
 
 What is implemented:
-| Core/Base Classes | Complex Datatype Elements | Special Elements | Resource Elements |
+
+| Core/Base Classes | Complex Datatype Elements | Special Elements | Resource Elements  |
 |-------------------|---------------------------|------------------|--------------------|
 | `BaseElement`     | `fhir-address`            | `fhir-meta`      | `fhir-account`     |
 | `Resource`        | `fhir-annotation`         | `fhir-narrative` | `fhir-appointment` |
 | `DomeResource`    | `fhir-attachment`         | `fhir-reference` | `fhir-medication`  |
 | `BackboneElement` | `fhir-codeable-concept`   | `fhir-bundle`    | `fhir-observation` |
-| | `fhir-codeable-reference` | | `fhir-patient`     |
-| | `fhir-coding`             | `fhir-primitive` | `fhir-slot`        |
-| | `fhir-contact-point`      | | `fhir-substance`   |
-| | `fhir-human-name`         | | |
-| | `fhir-identifier`         | | |
-| | `fhir-money`              | | |
-| | `fhir-period`             | | |
-| | `fhir-quantity`           | | |
-| | `fhir-range`              | | |
-| | `fhir-ratio`              | | |
-| | `fhir-sampled-data`       | | |
-| | `fhir-signature`          | | |
-| | `fhir-timing`             | | |
+|                   | `fhir-codeable-reference` |                  | `fhir-patient`     |
+|                   | `fhir-coding`             | `fhir-primitive` | `fhir-slot`        |
+|                   | `fhir-contact-point`      |                  | `fhir-substance`   |
+|                   | `fhir-human-name`         |                  |                    |
+|                   | `fhir-identifier`         |                  |                    |
+|                   | `fhir-money`              |                  |                    |
+|                   | `fhir-period`             |                  |                    |
+|                   | `fhir-quantity`           |                  |                    |
+|                   | `fhir-range`              |                  |                    |
+|                   | `fhir-ratio`              |                  |                    |
+|                   | `fhir-sampled-data`       |                  |                    |
+|                   | `fhir-signature`          |                  |                    |
+|                   | `fhir-timing`             |                  |                    |
+
+### <a id="extending" ></a> Creating Your Own
+
+There are two ways to customised elements. You can implement your own with `BaseElement` or extend an existing eleemnt
+and overriding the parts you need.
+
+#### <a id="custom-element" ></a> Implement an Element
+
+When implementing your own component you need to extend `BaseElement`, `Resource`, or `DomResource`. You can also
+implement `Backbone` and a variety of utilities to manage the typical element metamodel aspects.
+
+Take a look at how [Observation](src/components/resources/observation/observation.ts) is implemented.
+
+#### <a id="custom-element" ></a> Extend an existing Element
+
+```typescript
+import {html}                   from 'lit'
+import {Address, PrimitiveType} from 'fhir-beacon'
+
+
+
+@customElement('my-address')
+export class MyAddress extends Address {
+
+
+  public renderDisplay(config: DisplayConfig,
+                       data: Decorated<AddressData>,
+                       vldtns: Validations): TemplateResult[] {
+    const fkq = { path: [{ node: 'state' }] }
+    if (vldtns.has(fkq)) {
+      return [
+        html`
+       <fhir-primitive 
+               key="state" 
+               .value=${data.state} 
+               .type=${PrimitiveType.fhir_string} 
+               .errormessage=${vldtns.msgFor(fkq)}
+       ></fhir-primitive>
+      `
+      ]
+    }
+    // render default implementation
+    return this.renderDisplay(config, data, vldtns)
+  }
+
+
+  public validate(data: AddressData, validations: Validations): void {
+    // do all existing validations
+    this.validate(data, validations)
+
+    // implement a custom validation
+    if (!data.state) {
+      validations.add({
+                        fqk: { path: [{ node: 'state' }] },
+                        message: 'state must be present'
+                      })
+
+    }
+
+  }
+}
+
+```
 
 ### <a id="narrative" ></a> Overriding Narrative Styling
 
