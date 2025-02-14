@@ -5,10 +5,161 @@ FHIR Beacon
 Open Source library for working with [FHIR](http://hl7.org/fhir/) data in the browser that enables web-developers to 
 easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer. 
 
+* [Using Components](#components)
+* [FHIR Elements](#implemented)
+* [Styling narratives](#narrative)
+
+Setup
+-----
+
 Add `fhir-beacon` to your project:
 
 ```shell
 npm install fhir-beacon 
+```
+
+The library uses components from the [shoelace library](https://shoelace.style/). So you need to add links in the
+`<head>` element of `index.html`.
+
+```html
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/themes/light.css"/>
+<script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/shoelace-autoloader.js"
+></script>
+```
+
+### <a id="components"></a> Using the Components
+
+All examples use lit-html template for rendering. This library works just as easily with React (>=v19 recommended),
+Preact, Angular, Vue, or vanilla JS.
+
+#### Using Existing Components
+
+The library comes with web components for FHIR resources and other FHIR datatypes. By default
+
+```typescript
+import {MedicationData}       from 'fhir-beacon'
+import {html, TemplateResult} from 'lit'
+
+
+
+export function render(medication: MedicationData) {
+  return html`
+          <fhir-medication 
+                  label="patient (default)" 
+                  .data=${medication}></fhir-medication>
+          <fhir-medication 
+                  label="patient (summary)" 
+                  .data=${medication} 
+                  summaryonly></fhir-medication>
+          <fhir-medication 
+                  label="patient (verbose)" 
+                  .data=${medication} 
+                  verbose></fhir-medication>
+  `
+}
+
+```
+
+#### Properties
+
+All FHIR elements have the same common attributes and exposed methods
+
+| Name          | Description                                                                                                                                                                                                 | default           |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| `data`        | The data to render as a string. **Note: using the `.data` method with JSON objects is more efficient**                                                                                                      |                   |
+| `key`         | identity of the element in the FHIR model. It ia recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element | element-type name |
+| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts)                                                                                | `display`         |
+| `label`       | User visible name or title for an element. Has no impact on any logic.                                                                                                                                      | `key`             |
+| `summaryonly` | Display only the FHIR-defined summary properties                                                                                                                                                            |                   |
+| `verbose`     | Display all properties of an element whether or not data is provided.                                                                                                                                       |                   |
+| `headless`    | Only display data. Essentially hides the label.                                                                                                                                                             | `false`           |
+| `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                                                                                                            | `false`           |
+
+#### Methods
+
+| Name   | Description                                                                          | default |
+|--------|--------------------------------------------------------------------------------------|---------|
+| `data` | The data to render. This should be FHIR JSON as specified in the JSON specification. |         |
+
+#### <a id="implemented" ></a>Implemented FHIR Elements
+
+Only some of the defined resources are currently implemented. The goal of this project is to provide a default
+implementation for all resources in the system.
+
+What is implemented:
+| Core/Base Classes | Complex Datatype Elements | Special Elements | Resource Elements |
+|-------------------|---------------------------|------------------|--------------------|
+| `BaseElement`     | `fhir-address`            | `fhir-meta`      | `fhir-account`     |
+| `Resource`        | `fhir-annotation`         | `fhir-narrative` | `fhir-appointment` |
+| `DomeResource`    | `fhir-attachment`         | `fhir-reference` | `fhir-medication`  |
+| `BackboneElement` | `fhir-codeable-concept`   | `fhir-bundle`    | `fhir-observation` |
+| | `fhir-codeable-reference` | | `fhir-patient`     |
+| | `fhir-coding`             | `fhir-primitive` | `fhir-slot`        |
+| | `fhir-contact-point`      | | `fhir-substance`   |
+| | `fhir-human-name`         | | |
+| | `fhir-identifier`         | | |
+| | `fhir-money`              | | |
+| | `fhir-period`             | | |
+| | `fhir-quantity`           | | |
+| | `fhir-range`              | | |
+| | `fhir-ratio`              | | |
+| | `fhir-sampled-data`       | | |
+| | `fhir-signature`          | | |
+| | `fhir-timing`             | | |
+
+### <a id="narrative" ></a> Overriding Narrative Styling
+
+Add a stylesheet with `id="fhir-beacon-narrative"` in your html `<head>` to
+align narrative html with your projects styles. The narrative's html is wrapped in shadow dom and can be targeted with
+the `#formatted-narrative` id. Styling narrative html fragments is unpredictable as html and css present unknowns.
+
+The example below uses [CSS nesting](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Using_CSS_nesting) to
+define all the styles to apply to the narrative.
+
+```html
+
+<style id="fhir-beacon-narrative">
+    /**
+     * Overrides styles to to change the appearance of 3rd-party narrative html.
+     * Setting id="fhir-beacon-narrative" above and top level class of #formatted-narrative is necessary to localise styles.
+     * The exact styling depends on the provided narrative
+     */
+    #formatted-narrative {
+        font-size: 1rem;
+        font-family: sans-serif;
+        border: 0.1rem solid gray;
+        border-radius: 10px;
+        margin: 1rem;
+        padding: 1rem;
+
+        div, div[xmlns] {
+            all: unset;
+            display: inline-block;
+            background: unset !important;
+            width: fit-content;
+
+            div, td, p, span {
+                background: unset !important;
+                border: unset !important;
+                line-height: 1.5rem;
+            }
+
+            b, h4, h5, h6 {
+                color: lightseagreen;
+            }
+
+            h1, h2, h3 {
+                color: #2aeae0;
+            }
+
+            td {
+                border-left: 0.1rem solid gray;
+            }
+        }
+    }
+</style>
 ```
 
 ## Features
