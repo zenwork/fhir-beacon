@@ -53,9 +53,9 @@ export class Narrative extends BaseElement<NarrativeData> {
     ]
   }
 
-  // protected createRenderRoot() {
-  //   return this
-  // }
+  /**
+   * Override narrative styling
+   */
   public async connectedCallback() {
     super.connectedCallback()
 
