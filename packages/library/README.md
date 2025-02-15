@@ -1,11 +1,13 @@
 FHIR Beacon
 ===========
 
-**_NOTE:_ This library is not ready for production. All feedback is welcome.**
+<span style="color:red; background:pink; border: red solid 0.1rem;padding:1rem; margin: 1rem, 0, 1rem,0">**_NOTE:_ This
+library is exploratory and not ready for production. All feedback is welcome. [read background](./background.md)
+**</span>
 
 Fhir Beacon is for working with [FHIR](http://hl7.org/fhir/) data in the browser without the need for a backend. It
-enables web-developers to easily adopt the FHIR metamodel as is, without having to implement a separate marshaling
-layer.
+enables web-developers to easily adopt the FHIR metamodel as is, without having to implement middleware or data
+mappings.
 
 * [Using FHIR Elements](#components)
 * [Implemented FHIR Elements](#implemented)
@@ -154,8 +156,6 @@ You can use primitives on their own without resouce elements.
 import {html}          from 'lit'
 import {PrimitiveType} from 'fhir-beacon'
 
-
-
 function render(data: QuantityData) {
   return html`
             <fhir-primitive key="value" .value=${data.value} type="decimal" summary></fhir-primitive>
@@ -231,6 +231,9 @@ implement `Backbone` and a variety of utilities to manage the typical element me
 Take a look at how [Observation](src/components/resources/observation/observation.ts) is implemented.
 
 #### <a id="custom-element" ></a> Extend an existing Element
+
+* read more about the component [model](docs/model.md)
+* read more about the component [lifecycle](docs/lifecycle.md)
 
 ```typescript
 import {html}                   from 'lit'
