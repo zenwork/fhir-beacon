@@ -190,25 +190,29 @@ function render(data: QuantityData) {
 
 When the `type` is set, primitive elements will be validated and converted to reader-friendly format
 
-| Implemented Validators |              |                  |              |
-|------------------------|--------------|------------------|--------------|
-| base64                 | decimal      | link             | unsigned_int |
-| boolean                | fhir_string  | markdown         | uri          |
-| canonical              | forced_error | none             | uri_type     |
-| code                   | id           | positiveInt      | url          |
-| date                   | instant      | string_reference |              |
-| datetime               | integer      | time             |              |
+### Implemented Validators
 
-| Implemented Formatters |          |
-|------------------------|----------|
-| date                   | uri      |
-| datetime               | uri_type |
-| forced_error           | url      |
-| instant                |          |
-| link                   |          |
-| time                   |          |
+|           |              |                  |              |
+|-----------|--------------|------------------|--------------|
+| base64    | decimal      | link             | unsigned_int |
+| boolean   | fhir_string  | markdown         | uri          |
+| canonical | forced_error | none             | uri_type     |
+| code      | id           | positiveInt      | url          |
+| date      | instant      | string_reference |              |
+| datetime  | integer      | time             |              |
 
-Primitive elements are made up of even smaller components that can also be used separately
+### Implemented Formatters
+
+|              |          |
+|--------------|----------|
+| date         | uri      |
+| datetime     | uri_type |
+| forced_error | url      |
+| instant      |          |
+| link         |          |
+| time         |          |
+
+Primitive elements are made up of even smaller components that can also be used separately.
 
 ```html
 
@@ -238,10 +242,17 @@ implement `Backbone` and a variety of utilities to manage the typical element me
 
 Take a look at how [Observation](src/components/resources/observation/observation.ts) is implemented.
 
+Many utilities are used to make it easy to deal with 'choice of', collections, and other FHIR modelling aspects. These
+can be found in a few places:
+
+* [utilities](./src/utilities) - documentation is missing at the moment
+* [valuesets and codesystems](./src/codes) - documentation is missing at the moment
+* [presentation](./src/shell) - documentation is missing at the moment
+
 #### <a id="custom-element" ></a> Extend an existing Element
 
 * read more about the component [model](docs/model.md)
-* read more about the component [lifecycle](docs/lifecycle.md)
+* read more about the component [state change lifecycle](docs/lifecycle.md)
 
 Here is a simple example of creating `<my-address>` by extending the exisitng Address implementation.
 ```typescript
@@ -293,6 +304,11 @@ export class MyAddress extends Address {
 ### <a id="validations" ></a> Validations and bindings
 
 The library provides facilities for validating and for binding value sets and coding systems.
+
+* [valuesets and codesystems](./src/codes) - These are ready to use with elements. Documentation is missing at the
+  moment
+* [code-gen to extract codes](./src/valuesets) - This is some unstable code-generation code to walk valuesets and code
+  systems to extract usable lists of choices for validation and for forms.
 
 > [!WARNING]
 > This feature is not yet stable enough... documentation comes soon.
