@@ -102,22 +102,27 @@ export function render(medication: MedicationData) {
 
 All FHIR elements have the same common attributes and exposed methods
 
-| Name          | Description                                                                                                                                                                                                 | default           |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
-| `data`        | The data to render as a string. **Note: using the `.data` method with JSON objects is more efficient**                                                                                                      |                   |
-| `key`         | identity of the element in the FHIR model. It ia recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element | element-type name |
-| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts)                                                                                | `display`         |
-| `label`       | User visible name or title for an element. Has no impact on any logic.                                                                                                                                      | `key`             |
-| `summaryonly` | Display only the FHIR-defined summary properties                                                                                                                                                            |                   |
-| `verbose`     | Display all properties of an element whether or not data is provided.                                                                                                                                       |                   |
-| `headless`    | Only display data. Essentially hides the label.                                                                                                                                                             | `false`           |
-| `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                                                                                                            | `false`           |
+| Name          | Description                                                                                                                                                                                                 | default        |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| `data`        | The data to render as a string. **Note: using the `.data` method with JSON objects is more efficient**                                                                                                      |                |
+| `key`         | identity of the element in the FHIR model. It ia recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element | element `type` |
+| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts)                                                                                | `display`      |
+| `label`       | User visible name or title for an element. Has no impact on any logic.                                                                                                                                      | `key`          |
+| `summary`     | element should be displayed when only summary should be shown                                                                                                                                               | `false`        |
+| `summaryonly` | Display only the FHIR-defined summary properties                                                                                                                                                            |                |
+| `required`    | data can not be blank.                                                                                                                                                                                      | `false`        |
+| `verbose`     | Display all properties of an element whether or not data is provided.                                                                                                                                       |                |
+| `headless`    | Only display data. Essentially hides the label.                                                                                                                                                             | `false`        |
+| `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                                                                                                            | `false`        |
 
 ### Methods
 
-| Name   | Description                                                                          | default |
-|--------|--------------------------------------------------------------------------------------|---------|
-| `data` | The data to render. This should be FHIR JSON as specified in the JSON specification. |         |
+| Name     | Description                                                                                             | default |
+|----------|---------------------------------------------------------------------------------------------------------|---------|
+| `data`   | The data to render. This should be FHIR JSON as specified in the JSON specification.                    |         |
+| `errors` | Errors associated with the provided data: requires instance [`FqkMap`](src/internal/base/DeepKeyMap.ts) |         |
+
+Note: errors and validation is not fully exposed to be used from user-land
 
 ### <a id="implemented" ></a>Implemented FHIR Elements
 
@@ -126,29 +131,32 @@ implementation for all resources in the system.
 
 What is implemented:
 
-| Core/Base Classes | Complex Datatype Elements | Special Elements | Resource Elements  |
-|-------------------|---------------------------|------------------|--------------------|
-| `BaseElement`     | `fhir-address`            | `fhir-meta`      | `fhir-account`     |
-| `Resource`        | `fhir-annotation`         | `fhir-narrative` | `fhir-appointment` |
-| `DomeResource`    | `fhir-attachment`         | `fhir-reference` | `fhir-medication`  |
-| `BackboneElement` | `fhir-codeable-concept`   | `fhir-bundle`    | `fhir-observation` |
-|                   | `fhir-codeable-reference` |                  | `fhir-patient`     |
-|                   | `fhir-coding`             | `fhir-primitive` | `fhir-slot`        |
-|                   | `fhir-contact-point`      |                  | `fhir-substance`   |
-|                   | `fhir-human-name`         |                  |                    |
-|                   | `fhir-identifier`         |                  |                    |
-|                   | `fhir-money`              |                  |                    |
-|                   | `fhir-period`             |                  |                    |
-|                   | `fhir-quantity`           |                  |                    |
-|                   | `fhir-range`              |                  |                    |
-|                   | `fhir-ratio`              |                  |                    |
-|                   | `fhir-sampled-data`       |                  |                    |
-|                   | `fhir-signature`          |                  |                    |
-|                   | `fhir-timing`             |                  |                    |
+| Core/Base Classes                                             | Complex Datatype Elements   | Special Elements   | Resource Elements    |
+|---------------------------------------------------------------|-----------------------------|--------------------|----------------------|
+| [`BaseElement`](./src/internal/BaseElement.ts)                | `<fhir-address>`            | `fhir-meta>`       | `<fhir-account>`     |
+| [`Resource`](./src/internal/resource/Resource.ts)             | `<fhir-annotation>`         | `<fhir-narrative>` | `<fhir-appointment>` |
+| [`DomainResource`](./src/internal/resource/DomainResource.ts) | `<fhir-attachment>`         | `<fhir-reference>` | `<fhir-medication>`  |
+| [`BackboneElement`](./src/internal/resource/Backbone.ts)      | `<fhir-codeable-concept>`   | `<fhir-bundle>`    | `<fhir-observation>` |
+|                                                               | `<fhir-codeable-reference>` |                    | `<fhir-patient>`     |
+|                                                               | `<fhir-coding>`             | `<fhir-primitive>` | `<fhir-slot>`        |
+|                                                               | `<fhir-contact-point>`      |                    | `<fhir-substance>`   |
+|                                                               | `<fhir-human-name>`         |                    |                      |
+|                                                               | `<fhir-identifier>`         |                    |                      |
+|                                                               | `<fhir-money>`              |                    |                      |
+|                                                               | `<fhir-period>`             |                    |                      |
+|                                                               | `<fhir-quantity>`           |                    |                      |
+|                                                               | `<fhir-range>`              |                    |                      |
+|                                                               | `<fhir-ratio>`              |                    |                      |
+|                                                               | `<fhir-sampled-data>`       |                    |                      |
+|                                                               | `<fhir-signature>`          |                    |                      |
+|                                                               | `<fhir-timing>`             |                    |                      |
+
+Go to component implemtation [source](./src/components)
 
 ## <a id="primitive" ></a> Using Primitives
 
-At the other end of the model is the `fhir-primitive` element. It is a single component that can be used to present all
+At the other end of the model is the `<fhir-primitive>` element. It is a single component that can be used to present
+all
 FHIR Primitive datatypes.
 
 You can use primitives on their own without resouce elements.
@@ -170,44 +178,47 @@ function render(data: QuantityData) {
 
 ### Primitive Attributes
 
-| Attribute      | Description                                                                                                                                                                                                 |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `key`          | identity of the element in the FHIR model. It is recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element |
-| `value`        | The value of the primitive.                                                                                                                                                                                 |
-| `type`         | The type of the primitive. When defined the value will be validated.                                                                                                                                        |
-| `summary`      | Display only the FHIR-defined summary properties                                                                                                                                                            |
-| `errormessage` | The error message to display if the primitive is invalid                                                                                                                                                    |
-| `error`        | The error to display if the primitive is invalid                                                                                                                                                            |
+| Attribute      | Description                                                                                                                                                                                                  | default |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `key`          | identity of the element in the FHIR model. It is recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element. |         |
+| `label`        | human-readable property description                                                                                                                                                                          | `key`   |
+| `type`         | The type of the primitive. When defined the value will be validated.                                                                                                                                         | `none`  |
+| `delimiter`    | seperator between label and key                                                                                                                                                                              | `:`     |
+| `value`        | The value of the primitive.                                                                                                                                                                                  |         |
+| `errormessage` | The error message to display if the primitive is invalid                                                                                                                                                     |         |
+| `link`         | url that should be applied as a link on the value                                                                                                                                                            |         |
+| `context`      | contextual information to display next to the value (ex: code)                                                                                                                                               |         |
+| `variant`      | value rendering styling variants to deal with large/long values: `error` \| `hide-overflow` \| `fixed-width`                                                                                                 |         |
+| `summary`      | Display only the FHIR-defined summary properties                                                                                                                                                             | `false` |
+| `required`     | value can not be blank.                                                                                                                                                                                      | `false` |
+| `translate`    | Translate value (not implemented yet)                                                                                                                                                                        | `false` |
+| `trialuse`     | Indicate that property is set to trial use (not implemented yet)                                                                                                                                             | `false` |
 
-Primitive elements will be validated if the type is set.
+| Methods   | Description                                      | type                                       |
+|-----------|--------------------------------------------------|--------------------------------------------|
+| `choices` | choices to use when property rendered in a form. | [Choice](./src/valuesets/ValueSet.data.ts) |
 
-| Primitive Types  |
-|------------------|
-| base64           |
-| boolean          |
-| canonical        |
-| code             |
-| date             |
-| datetime         |
-| decimal          |
-| fhir_string      |
-| forced_error     |
-| id               |
-| instant          |
-| integer          |
-| integer64        |
-| link             |
-| markdown         |
-| none             |
-| positiveInt      |
-| string_reference |
-| time             |
-| unsigned_int     |
-| uri              |
-| uri_type         | 
-| url              |  
+When the `type` is set, primitive elements will be validated and converted to reader-friendly format
 
-Primitive elements are made up of even smaller components that can be used separately
+| Implemented Validators |              |                  |              |
+|------------------------|--------------|------------------|--------------|
+| base64                 | decimal      | link             | unsigned_int |
+| boolean                | fhir_string  | markdown         | uri          |
+| canonical              | forced_error | none             | uri_type     |
+| code                   | id           | positiveInt      | url          |
+| date                   | instant      | string_reference |              |
+| datetime               | integer      | time             |              |
+
+| Implemented Formatters |          |
+|------------------------|----------|
+| date                   | uri      |
+| datetime               | uri_type |
+| forced_error           | url      |
+| instant                |          |
+| link                   |          |
+| time                   |          |
+
+Primitive elements are made up of even smaller components that can also be used separately
 
 ```html
 
@@ -218,6 +229,9 @@ Primitive elements are made up of even smaller components that can be used separ
 </fhir-primitive-wrapper>
 
 ```
+
+It is a goal of this project to eventually make these low-level visual elements easy to style, configure and even
+override.
 
 ### <a id="extending" ></a> Creating Your Own
 

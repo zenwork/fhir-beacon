@@ -7,7 +7,7 @@ FHIR-Beacon is an open source library for working with [FHIR](http://hl7.org/fhi
 web-developers to
 easily adopt the FHIR metamodel as is, without having to implement a separate marshaling layer.
 
-## Design Philosophy?
+## Design Philosophy
 
 1. `idiomatic` - UI markup that easily reflect the core FHIR documentation
 2. `local-first` - data validation without a backend; leverages web-APIs for state-management
