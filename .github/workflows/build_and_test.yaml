@@ -32,6 +32,7 @@ jobs:
           cache-dependency-path: packages/library/package-lock.json
       - run: |
           npm install
+          npm run changeset::check
           cd packages/library
           npm ci
           # Install full ICU support for Node.js
