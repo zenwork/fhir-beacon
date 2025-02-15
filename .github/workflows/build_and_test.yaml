@@ -26,6 +26,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch main branch
+        run: |
+          git fetch origin main:main
+
       - name: Install Deps (Cached)
         uses: actions/setup-node@v4
         with:
