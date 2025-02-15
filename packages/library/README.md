@@ -16,6 +16,7 @@ mappings.
 * [Use FHIR Primitives](#primitive)
 * [Validation & Bindings](#validations)
 * [Styling narratives](#narrative)
+* [Using the shell](#shell)
 
 ### Features
 
@@ -355,3 +356,37 @@ define all the styles to apply to the narrative.
     }
 </style>
 ```
+
+## <a id="shell" ></a> The Shell
+
+Resource and Domain Resources provide a context to all child properties. This context passes shared configuration to all
+elements. You can use the `<shir-shell>` to provide an arbitrary context for the display fragments contianing complex
+types and/or primitives.
+
+```typescript
+import {html} from 'lit'
+
+
+
+function render(data) {
+  return html`
+        <fhir-shell mode="structure" headless open >
+            <fhir-primitive key="id" .value=${data.id} type="integer"></fhir-ratio>
+            <fhir-ratio key="ratio" .data=${data.ratio}></fhir-ratio>
+            <fhir-range key="range" .data=${data.range}></fhir-ratio>
+        </fhir-shell>
+  `
+}
+
+```
+
+## Attributes
+
+| Name          | Description                                                                                                                  | default   |
+|---------------|------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts) | `display` |
+| `summaryonly` | Display only the FHIR-defined summary properties                                                                             |           |
+| `verbose`     | Display all properties of an element whether or not data is provided.                                                        |           |
+| `headless`    | Only display data. Essentially hides the label.                                                                              | `false`   |
+| `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                             | `false`   |
+| `input`       | show form                                                                                                                    | `false`   |
