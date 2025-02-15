@@ -1,28 +1,30 @@
 {
     "name": "fhir-beacon",
-    "version": "0.1.0",
-    "homepage": "https://zenwork.github.io/fhir-beacon/",
+    "version": "0.1.1",
+    "license": "MIT",
+    "homepage": "https://fhir-beacon.deno.dev",
     "repository": {
-        "url": "https://github.com/zenwork/fhir-beacon",
+        "url": "https://github.com/zenwork/fhir-beacon.git",
         "type": "git",
         "directory": "packages/library"
     },
-    "keywords": [
-        "fhir",
-        "web components",
-        "custom elements",
-        "lit",
-        "web"
-    ],
-    "description": "FHIR web components",
+    "author": "Florian Hehlen",
+    "description": "A library for working with FHIR data in the browser without the need for a backend.",
     "type": "module",
-    "main": "dist/fhir-beacon.js",
+    "browser": "dist/fhir-beacon.js",
     "module": "dist/fhir-beacon.js",
     "types": "dist/types/index.d.ts",
     "files": [
         "dist/**/*",
         "build/web-types.json",
         "README.md"
+    ],
+    "keywords": [
+        "fhir",
+        "web components",
+        "custom elements",
+        "lit",
+        "web"
     ],
     "scripts": {
         "build": "vite build && tsc --emitDeclarationOnly",

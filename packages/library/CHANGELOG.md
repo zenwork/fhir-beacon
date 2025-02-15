@@ -1,5 +1,11 @@
 # fhir-beacon
 
+## 0.1.1
+
+### Patch Changes
+
+- updated package.json metadata
+
 ## 0.1.0
 
 ### Minor Changes
