@@ -1,6 +1,8 @@
 import {Decimal}     from '../primitive.data'
 import {toPrimitive} from './type-converters'
 
+
+
 const regex = /^-?\d+(\.\d+)?([eE][+-]?\d+)?$/
 
 /**
@@ -28,7 +30,7 @@ export const toDecimal: toPrimitive<string, Decimal> = function (decimal: string
   const totalDigits = baseDigits.length + (exponentPart !== 0 ? Math.abs(exponentPart) : 0)
 
   if (totalDigits <= 18) {
-    return Number.parseFloat(decimal) as Decimal
+    return decimal as Decimal
     // return decimal
   }
 
@@ -37,5 +39,11 @@ export const toDecimal: toPrimitive<string, Decimal> = function (decimal: string
 }
 
 export function isDecimal(arg: unknown): arg is Decimal {
-  return typeof arg === 'number' && Number.isFinite(arg) && regex.test(arg.toString())
+  if (typeof arg === 'string') {
+    return Number.isFinite(Number.parseFloat(arg)) && regex.test(arg.toString())
+  }
+  if (typeof arg === 'number') {
+    return Number.isFinite(arg) && regex.test(arg.toString())
+  }
+  return false
 }

@@ -19,7 +19,7 @@ export type Url = string
 /**
  * Represents a decimal number with maximum of 18 digits.
  */
-export type Decimal = number
+export type Decimal = string
 
 export type Integer = number
 export type Integer64 = bigint

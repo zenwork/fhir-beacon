@@ -51,7 +51,7 @@ describe('Primitive Validator', () => {
     expect(host.error).to.be.false
     expect(host.presentableError).to.be.empty
     expect(host.presentableTypeError).to.be.empty
-    expect(host.presentableValue).toEqual(10.0)
+    expect(host.presentableValue).toEqual("10.0")
     expect(events.length).to.equal(1)
     expect(events[0].type).to.equal('bkn-valid')
   })
