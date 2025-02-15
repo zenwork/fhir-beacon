@@ -77,23 +77,8 @@ import {html}                        from 'lit'
 
 export function render(medication: MedicationData) {
   return html`
-          <fhir-medication 
-                  label="patient (default)" 
-                  .data=${medication}
-                  ></fhir-medication>
-          <fhir-medication 
-                  label="patient (summary)" 
-                  .data=${medication}
-                  headless 
-                  summaryonly
-                  ></fhir-medication>
-          <fhir-medication 
-                  label="patient (verbose)" 
-                  .data=${medication}
-                  .mode=${DisplayMode.structure} 
-                  verbose
-                  open
-                  ></fhir-medication>
+          <fhir-medication label="patient (verbose)" .data=${medication} .mode=${DisplayMode.structure} verbose open >
+          </fhir-medication>
   `
 }
 
@@ -253,6 +238,7 @@ Take a look at how [Observation](src/components/resources/observation/observatio
 * read more about the component [model](docs/model.md)
 * read more about the component [lifecycle](docs/lifecycle.md)
 
+Here is a simple example of creating `<my-address>` by extending the exisitng Address implementation.
 ```typescript
 import {html}                   from 'lit'
 import {Address, PrimitiveType} from 'fhir-beacon'
@@ -264,20 +250,19 @@ export class MyAddress extends Address {
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<AddressData>,
                        vldtns: Validations): TemplateResult[] {
+
     const fkq = { path: [{ node: 'state' }] }
+
     if (vldtns.has(fkq)) {
       return [
         html`
-       <fhir-primitive 
-               key="state" 
-               .value=${data.state} 
-               .type=${PrimitiveType.fhir_string} 
-               .errormessage=${vldtns.msgFor(fkq)}
-       ></fhir-primitive>
+       <fhir-primitive key="state" .value=${data.state} .type=${PrimitiveType.fhir_string} .errormessage=${vldtns.msgFor(
+          fkq)} >
+       </fhir-primitive>
       `
       ]
     }
-    // render default implementation
+    // render default implementation otherwise
     return this.renderDisplay(config, data, vldtns)
   }
 
