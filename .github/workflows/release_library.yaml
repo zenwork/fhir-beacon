@@ -31,12 +31,30 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Verify Release Preparation
+        id: verify_changesets
+        run: |
+          git fetch origin main
+
+          # Initialize release_ready as true
+          echo "release_ready=true" >> $GITHUB_ENV
+
+          # Check for unprocessed changeset markdown files
+          if [ "$(find .changeset -name '*-*-*.md' | wc -l)" -ne "0" ]; then
+            echo "Unprocessed changeset files with multiple dashes detected in the .changeset directory."
+            echo "release_ready=false" >> $GITHUB_ENV
+          fi
+
+          echo "Release preparation check complete."
+
       - name: Install Dependencies
+        if: ${{ env.release_ready == 'true' }}
         run: npm ci --workspaces && npm run build --workspace=packages/library
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release with Changesets
+        if: ${{ env.release_ready == 'true' }}
         uses: changesets/action@v1
         with:
           publish: npm publish --workspace=packages/library
@@ -45,12 +63,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Debug Changesets Output
+        if: ${{ env.release_ready == 'true' }}
         run: |
           echo "Changeset Output:"
           ls -la .changeset
 
       - name: Push Tags
+        if: ${{ env.release_ready == 'true' }}
         run: |
           git push origin --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Exit Early If Not Ready
+        if: ${{ env.release_ready != 'true' }}
+        run: |
+          echo "Release preparation failed. Either no version bump or unprocessed changeset files were detected."
