@@ -8,7 +8,7 @@ FHIR Beacon
 
 Fhir Beacon is for working with [FHIR](http://hl7.org/fhir/) data in the browser without the need for a backend. It
 enables web-developers to easily adopt the FHIR metamodel as is, without having to implement middleware or data
-mappings.
+mappings. FHIR Beacon is built with web-components and aspires to be framework-agnostic and impose as few dependencies.
 
 * 🧰 [Using FHIR Elements](#components)
 * ✅ [Implemented FHIR Elements](#implemented)
@@ -20,15 +20,15 @@ mappings.
 
 ### Features
 
-* default implementation of FHIR primitives, complex, resource as HTML custom elements
-* display view, editable form, metamodel view, narrative view, debug view modes for all elements
-* extend any element to support extensions and profiles
-* base classes, utilities to create custom FHIR elements that implements the metamodel (cardinality, bindings,
+* A default implementation of FHIR primitives, complex, and resource as HTML custom elements.
+* Display elements in view, editable form, metamodel view, narrative view, or debug view.
+* Extend any element to support extensions and profiles.
+* Base classes, utilities to create custom FHIR elements that implements the metamodel (cardinality, bindings,
   summary, constraints, etc.)
 
 ### Status
 
-* in full alpha mode.
+* in full ALPHA mode. see [background](./docs/background.md)
 * storybook catalog: https://fhir-beacon.deno.dev
 * use-case showcase: https://fhir-beacon-app.deno.dev
 
@@ -55,8 +55,10 @@ The library uses components from the [shoelace library](https://shoelace.style/)
 Finally, you need to import the library so that custom elements are registered in the browser. Do this in the `head` of
 the document or before the first Fhir Beacon element is rendered.
 
-Having to load everything is suboptimal. We will eventually make it possible to only load the parts of the library that
-you need.
+> [!IMPORTANT]
+> Having to load everything is suboptimal. We will eventually make it possible to only load the parts of the library
+> that
+> you need.
 
 ```typescript
 import 'fhir-beacon'
@@ -223,8 +225,11 @@ override.
 
 ### <a id="extending" ></a> Creating Your Own
 
-There are two ways to customised elements. You can implement your own with `BaseElement` or extend an existing eleemnt
+There are two ways to customised elements. You can implement your own with `BaseElement` or extend an existing element
 and overriding the parts you need.
+
+> [!IMPORTANT]
+> Re-use exisitng primitives and complex types. Only implement what you need.
 
 #### <a id="custom-element" ></a> Implement an Element
 
@@ -289,7 +294,8 @@ export class MyAddress extends Address {
 
 The library provides facilities for validating and for binding value sets and coding systems.
 
-Note: Feature is not yet stable enough... documentation comes soon.
+> [!WARNING]
+> This feature is not yet stable enough... documentation comes soon.
 
 ### <a id="narrative" ></a> Overriding Narrative Styling
 
