@@ -177,7 +177,7 @@ function render(data: QuantityData) {
 
 ```
 
-### Primitive Attributes
+### Properties
 
 | Attribute      | Description                                                                                                                                                                                                  | default |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
@@ -194,6 +194,8 @@ function render(data: QuantityData) {
 | `required`     | value can not be blank.                                                                                                                                                                                      | `false` |
 | `translate`    | Translate value (not implemented yet)                                                                                                                                                                        | `false` |
 | `trialuse`     | Indicate that property is set to trial use (not implemented yet)                                                                                                                                             | `false` |
+
+### Methods
 
 | Methods   | Description                                      | type                                       |
 |-----------|--------------------------------------------------|--------------------------------------------|
@@ -366,8 +368,6 @@ types and/or primitives.
 ```typescript
 import {html} from 'lit'
 
-
-
 function render(data) {
   return html`
         <fhir-shell mode="structure" headless open >
@@ -380,7 +380,7 @@ function render(data) {
 
 ```
 
-## Attributes
+## Properties
 
 | Name          | Description                                                                                                                  | default   |
 |---------------|------------------------------------------------------------------------------------------------------------------------------|-----------|
