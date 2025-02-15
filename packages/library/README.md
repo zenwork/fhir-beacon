@@ -10,20 +10,20 @@ Fhir Beacon is for working with [FHIR](http://hl7.org/fhir/) data in the browser
 enables web-developers to easily adopt the FHIR metamodel as is, without having to implement middleware or data
 mappings.
 
-* [Using FHIR Elements](#components)
-* [Implemented FHIR Elements](#implemented)
-* [Create FHIR Elements](#extending)
-* [Use FHIR Primitives](#primitive)
-* [Validation & Bindings](#validations)
-* [Styling narratives](#narrative)
-* [Using the shell](#shell)
+* 🧰 [Using FHIR Elements](#components)
+* ✅ [Implemented FHIR Elements](#implemented)
+* 🛠️ [Create FHIR Elements](#extending)
+* 🔤 [Use FHIR Primitives](#primitive)
+* ✨ [Validation & Bindings](#validations)
+* 🎨 [Styling narratives](#narrative)
+* 🖥️ [Using the shell](#shell)
 
 ### Features
 
 * default implementation of FHIR primitives, complex, resource as HTML custom elements
 * display view, editable form, metamodel view, narrative view, debug view modes for all elements
-* Extend any element to support extensions and profiles
-* Base classes, utilities to create custom FHIR elements that implements the metamodel (cardinality, bindings,
+* extend any element to support extensions and profiles
+* base classes, utilities to create custom FHIR elements that implements the metamodel (cardinality, bindings,
   summary, constraints, etc.)
 
 ### Status
@@ -90,23 +90,23 @@ All FHIR elements have the same common attributes and exposed methods
 
 | Name          | Description                                                                                                                                                                                                 | default        |
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
-| `data`        | The data to render as a string. **Note: using the `.data` method with JSON objects is more efficient**                                                                                                      |                |
+| `data`        | the data to render as a string. **Note: using the `.data` method with JSON objects is more efficient**                                                                                                      |                |
 | `key`         | identity of the element in the FHIR model. It ia recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element | element `type` |
-| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts)                                                                                | `display`      |
-| `label`       | User visible name or title for an element. Has no impact on any logic.                                                                                                                                      | `key`          |
+| `mode`        | the display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts)                                                                                | `display`      |
+| `label`       | user visible name or title for an element. Has no impact on any logic.                                                                                                                                      | `key`          |
 | `summary`     | element should be displayed when only summary should be shown                                                                                                                                               | `false`        |
-| `summaryonly` | Display only the FHIR-defined summary properties                                                                                                                                                            |                |
+| `summaryonly` | display only the FHIR-defined summary properties                                                                                                                                                            |                |
 | `required`    | data can not be blank.                                                                                                                                                                                      | `false`        |
-| `verbose`     | Display all properties of an element whether or not data is provided.                                                                                                                                       |                |
-| `headless`    | Only display data. Essentially hides the label.                                                                                                                                                             | `false`        |
+| `verbose`     | display all properties of an element whether or not data is provided.                                                                                                                                       |                |
+| `headless`    | only display data. Essentially hides the label.                                                                                                                                                             | `false`        |
 | `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                                                                                                            | `false`        |
 
 ### Methods
 
 | Name     | Description                                                                                             | default |
 |----------|---------------------------------------------------------------------------------------------------------|---------|
-| `data`   | The data to render. This should be FHIR JSON as specified in the JSON specification.                    |         |
-| `errors` | Errors associated with the provided data: requires instance [`FqkMap`](src/internal/base/DeepKeyMap.ts) |         |
+| `data`   | the data to render. This should be FHIR JSON as specified in the JSON specification.                    |         |
+| `errors` | errors associated with the provided data: requires instance [`FqkMap`](src/internal/base/DeepKeyMap.ts) |         |
 
 Note: errors and validation is not fully exposed to be used from user-land
 
@@ -168,17 +168,17 @@ function render(data: QuantityData) {
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `key`          | identity of the element in the FHIR model. It is recommended that it matches the property name in the FHIR model. It should be unique within one sibling-scope. Important for binding context to an element. |         |
 | `label`        | human-readable property description                                                                                                                                                                          | `key`   |
-| `type`         | The type of the primitive. When defined the value will be validated.                                                                                                                                         | `none`  |
+| `type`         | the type of the primitive. When defined the value will be validated.                                                                                                                                         | `none`  |
 | `delimiter`    | seperator between label and key                                                                                                                                                                              | `:`     |
-| `value`        | The value of the primitive.                                                                                                                                                                                  |         |
-| `errormessage` | The error message to display if the primitive is invalid                                                                                                                                                     |         |
+| `value`        | the value of the primitive.                                                                                                                                                                                  |         |
+| `errormessage` | the error message to display if the primitive is invalid                                                                                                                                                     |         |
 | `link`         | url that should be applied as a link on the value                                                                                                                                                            |         |
 | `context`      | contextual information to display next to the value (ex: code)                                                                                                                                               |         |
 | `variant`      | value rendering styling variants to deal with large/long values: `error` \| `hide-overflow` \| `fixed-width`                                                                                                 |         |
-| `summary`      | Display only the FHIR-defined summary properties                                                                                                                                                             | `false` |
+| `summary`      | display only the FHIR-defined summary properties                                                                                                                                                             | `false` |
 | `required`     | value can not be blank.                                                                                                                                                                                      | `false` |
-| `translate`    | Translate value (not implemented yet)                                                                                                                                                                        | `false` |
-| `trialuse`     | Indicate that property is set to trial use (not implemented yet)                                                                                                                                             | `false` |
+| `translate`    | translate value (not implemented yet)                                                                                                                                                                        | `false` |
+| `trialuse`     | indicate that property is set to trial use (not implemented yet)                                                                                                                                             | `false` |
 
 ### Methods
 
@@ -369,9 +369,9 @@ function render(data) {
 
 | Name          | Description                                                                                                                  | default   |
 |---------------|------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `mode`        | The display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts) | `display` |
-| `summaryonly` | Display only the FHIR-defined summary properties                                                                             |           |
-| `verbose`     | Display all properties of an element whether or not data is provided.                                                        |           |
-| `headless`    | Only display data. Essentially hides the label.                                                                              | `false`   |
+| `mode`        | the display mode: `display \| structure \| narrative \| debug \| override` see: [DisplayMode enum](src/shell/displayMode.ts) | `display` |
+| `summaryonly` | display only the FHIR-defined summary properties                                                                             |           |
+| `verbose`     | display all properties of an element whether or not data is provided.                                                        |           |
+| `headless`    | only display data. Essentially hides the label.                                                                              | `false`   |
 | `open`        | open all collapsed detail sections. This only has effect when `mode="structure"`                                             | `false`   |
 | `input`       | show form                                                                                                                    | `false`   |
