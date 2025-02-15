@@ -1,9 +1,10 @@
 FHIR Beacon
 ===========
 
-<span style="color:red; background:pink; border: red solid 0.1rem;padding:1rem; margin: 1rem 0 1rem 0; font-weight: bolder">
-NOTE: This library is exploratory and not ready for production. All feedback is welcome. <a src=r"./docs/background.md">read background</a>
-</span>
+> [!IMPORTANT]
+> This library is exploratory and not ready for production. All feedback is welcome.
+> read [background](./docs/background.md)
+
 
 Fhir Beacon is for working with [FHIR](http://hl7.org/fhir/) data in the browser without the need for a backend. It
 enables web-developers to easily adopt the FHIR metamodel as is, without having to implement middleware or data
