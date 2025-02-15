@@ -26,10 +26,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch main branch
-        run: |
-          git fetch origin main:main
-
       - name: Install Deps (Cached)
         uses: actions/setup-node@v4
         with:
@@ -38,13 +34,21 @@ jobs:
           cache-dependency-path: packages/library/package-lock.json
       - run: |
           npm install
+
+      - name: Changeset Check
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: |
+          git fetch origin main:main
           npm run changeset::check
+
+      - name: Setup
+        run: |
           cd packages/library
           npm ci
           # Install full ICU support for Node.js
           npm install full-icu
           cd ../app
-          npm install
+          npm install    
 
       - name: Use playwright binaries cache
         uses: actions/cache@v3
