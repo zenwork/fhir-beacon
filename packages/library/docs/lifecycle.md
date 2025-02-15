@@ -1,4 +1,4 @@
-# FHIR Element Lifecycle
+# FHIR State Lifecycle
 
 ## FHIR Base Element
 
