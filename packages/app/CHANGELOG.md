@@ -1,12 +1,19 @@
 # app
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [156552a]
+  - fhir-beacon@0.1.0
+
 ## 0.0.12
 
 ### Patch Changes
 
 - change
 - Updated dependencies
-    - fhir-beacon@0.0.23
+  - fhir-beacon@0.0.23
 
 ## 0.0.11
 
@@ -14,7 +21,7 @@
 
 - change
 - Updated dependencies
-    - fhir-beacon@0.0.22
+  - fhir-beacon@0.0.22
 
 ## 0.0.10
 
@@ -22,7 +29,7 @@
 
 - change
 - Updated dependencies
-    - fhir-beacon@0.0.21
+  - fhir-beacon@0.0.21
 
 ## 0.0.9
 
@@ -30,7 +37,7 @@
 
 - change
 - Updated dependencies
-    - fhir-beacon@0.0.20
+  - fhir-beacon@0.0.20
 
 ## 0.0.8
 
@@ -38,7 +45,7 @@
 
 - one more change
 - Updated dependencies
-    - fhir-beacon@0.0.19
+  - fhir-beacon@0.0.19
 
 ## 0.0.7
 
@@ -46,7 +53,7 @@
 
 - minor change
 - Updated dependencies
-    - fhir-beacon@0.0.18
+  - fhir-beacon@0.0.18
 
 ## 0.0.6
 
@@ -54,7 +61,7 @@
 
 - make a change
 - Updated dependencies
-    - fhir-beacon@0.0.17
+  - fhir-beacon@0.0.17
 
 ## 0.0.5
 
@@ -62,7 +69,7 @@
 
 - one more change
 - Updated dependencies
-    - fhir-beacon@0.0.16
+  - fhir-beacon@0.0.16
 
 ## 0.0.4
 
@@ -70,7 +77,7 @@
 
 - force release
 - Updated dependencies
-    - fhir-beacon@0.0.15
+  - fhir-beacon@0.0.15
 
 ## 0.0.3
 
@@ -78,7 +85,7 @@
 
 - force change
 - Updated dependencies
-    - fhir-beacon@0.0.14
+  - fhir-beacon@0.0.14
 
 ## 0.0.2
 
@@ -92,4 +99,4 @@
 - Updated dependencies [662c187]
 - Updated dependencies
 - Updated dependencies [662c187]
-    - fhir-beacon@0.0.13
+  - fhir-beacon@0.0.13
