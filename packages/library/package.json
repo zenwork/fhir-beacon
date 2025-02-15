@@ -1,6 +1,6 @@
 {
     "name": "fhir-beacon",
-    "version": "0.0.23",
+    "version": "0.1.0",
     "homepage": "https://zenwork.github.io/fhir-beacon/",
     "repository": {
         "url": "https://github.com/zenwork/fhir-beacon",
