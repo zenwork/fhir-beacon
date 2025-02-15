@@ -20,21 +20,33 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ inputs.artifact_name }}
-          path: ./library
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js and Registry
-        uses: actions/setup-node@v4
-        with:
-          node-version: '23.x'
-          registry-url: 'https://registry.npmjs.org'
+      # Step 1: Check for unprocessed changesets and prepare a condition
+      - name: Verify Release Preparation
+        id: changeset_check
+        run: |
+          # Check for unprocessed changeset markdown files with at least two dashes (-)
+          if [ "$(find .changeset -name '*-*-*.md' | wc -l)" -ne "0" ]; then
+            echo "Unprocessed changeset files with '*-*-*' detected. Setting failed condition."
+            echo "release_ready=false" >> $GITHUB_ENV
+          fi
 
+        # Default to true only if no issues are detected above
+        env:
+          release_ready: true
+
+      # Step 2: Conditionally continue based on the results of the verification step
       - name: Publish Library to npm
+        if: ${{ env.release_ready == 'true' }}
         run: |
           cd library
           npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Exit Early If Not Ready
+        if: ${{ env.release_ready != 'true' }}
+        run: |
+          echo "Either no version bump or unprocessed changeset files detected. Exiting."
