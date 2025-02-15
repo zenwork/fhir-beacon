@@ -5,6 +5,7 @@
     "private": true,
     "workspaces": ["packages/*"],
     "scripts": {
+        "changeset::check": "changeset status --since=main",
         "change": "npx changeset",
         "release": "npx changeset version",
         "clean": "rm -rf node_modules */node_modules */*/node_modules"
