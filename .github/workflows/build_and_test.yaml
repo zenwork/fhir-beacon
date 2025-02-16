@@ -135,7 +135,7 @@ jobs:
 
   publish_docs:
     name: Publish Docs
-    needs: deploy_docs
+    needs: build
     if: ${{ needs.build.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/publish_docs.yaml
     secrets: inherit
@@ -147,7 +147,7 @@ jobs:
     permissions:
       contents: write # Override permissions only for this job
       id-token: write
-    needs: [ publish_docs, deploy_app ]
+    needs: [ build ]
     if: ${{ needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
