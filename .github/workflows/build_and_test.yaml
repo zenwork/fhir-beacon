@@ -127,6 +127,10 @@ jobs:
 
           echo "Release preparation check complete."
 
+      - name: Set release_ready Output
+        id: set_release_ready
+        run: echo "release-ready=${{ env.release_ready }}" >> $GITHUB_OUTPUT
+
 
 
   deploy_docs:
@@ -171,7 +175,7 @@ jobs:
       contents: write # Override permissions only for this job
       id-token: write
     needs: [ build ]
-    if: ${{ env.release_ready != 'true' && needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.build.outputs.release-ready == 'true' && needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
     with:
