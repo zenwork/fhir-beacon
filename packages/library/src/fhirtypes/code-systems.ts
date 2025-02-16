@@ -1,4 +1,4 @@
-import {Choice}                    from 'valuesets'
+import { Choice } from '../valuesets/ValueSet.data'
 import {Code, FhirString, Id, URI} from '../components'
 import {CodeSystemFhirTypes}       from './CodeSystem-fhir-types'
 
