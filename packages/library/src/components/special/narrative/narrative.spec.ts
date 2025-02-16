@@ -4,6 +4,8 @@ import {fixture}                      from '../../../../tests/lit/lit-vitest-fix
 import {Narrative}                    from './narrative'
 import {NarrativeData}                from './narrative.data'
 
+
+
 describe('Narrative', () => {
 
   it('renders correctly but empty', async () => {
@@ -58,7 +60,7 @@ describe('Narrative', () => {
 
   })
 
-  it.skip('renders correctly in display mode', async () => {
+  it('renders correctly in display mode', async () => {
     const data: NarrativeData = {
       id: 'abc-123',
       div: `<h1>Sample</h1><p>Some content!!</p>`,
@@ -73,7 +75,7 @@ describe('Narrative', () => {
       'fhir-narrative').first()
 
     assert.ok(narrative.queryShadowByText('summary'))
-    assert.ok(narrative.queryShadow({ select: 'fhir-wrapper', expect: 1 }))
+    assert.ok(narrative.queryShadow({ select: 'fhir-wrapper', expect: 2 }))
     assert.ok(narrative.queryShadow({ select: 'h1', expect: 1 }))
     assert.ok(narrative.queryShadowByText('Sample'))
     assert.ok(narrative.queryShadow({ select: 'p', expect: 1 }))
