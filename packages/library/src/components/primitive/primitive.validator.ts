@@ -54,6 +54,7 @@ type changedProperties = {
   typeChanged?: boolean,
   requiredChanged?: boolean,
   errormessageChanged?: boolean,
+  choicesChanged?: boolean
 }
 
 export class PrimitiveValidator {
@@ -68,7 +69,8 @@ export class PrimitiveValidator {
              typeChanged = false,
              valuePathChanged = false,
              errormessageChanged = false,
-             requiredChanged = false
+             requiredChanged = false,
+             choicesChanged = false
            }: changedProperties): void {
 
     const value: string | undefined = this.value() as string | undefined
@@ -88,7 +90,7 @@ export class PrimitiveValidator {
       }
     }
 
-    const watchedHaveChanged = valueChanged || typeChanged || requiredChanged
+    const watchedHaveChanged = valueChanged || typeChanged || requiredChanged || choicesChanged
     if (watchedHaveChanged) {
 
       if (!isBlank(value) && this.#host.type) {
@@ -125,7 +127,6 @@ export class PrimitiveValidator {
       }
     }
 
-
     if (isBlank(value) && this.#host.required) {
       this.#host.error = true
       this.#host.presentableError = 'This property is required'
@@ -150,7 +151,6 @@ export class PrimitiveValidator {
       }
     }
 
-
   }
 
   private value(): unknown {
@@ -166,7 +166,11 @@ export class PrimitiveValidator {
 
     let validEvent: PrimitiveValidEvent | undefined = undefined
     if (!isBlank(parsedValue.val)) {
-      this.#host.presentableValue = parsedValue.val
+      if (this.#host.choices && this.#host.choices.length > 0) {
+        this.#host.presentableValue = this.#host.choices.find(choice => choice.value === parsedValue.val)!.display
+      } else {
+        this.#host.presentableValue = parsedValue.val
+      }
       this.#host.error = false
       validEvent = new PrimitiveValidEvent(this.#host.key!, original, this.#host.type)
     }

@@ -1,5 +1,7 @@
 import {defineProject} from 'vitest/config'
 
+
+
 export default defineProject({
     esbuild: false,
     test: {
@@ -14,6 +16,20 @@ export default defineProject({
       typecheck: {
         enabled: true,
         tsconfig: './tsconfig.json'
+      },
+      coverage: {
+        reporter: ['text', 'json', 'html'],
+        exclude: [
+          '**/node_modules/**',
+          '**/dist/**',
+          '**/generation/**',
+          '**/.{idea,git,cache,output,temp}/**',
+          '**/storybook-static/**',
+          '**/stories/**',
+          '**/tests/**'
+
+        ]
       }
+
     }
   })

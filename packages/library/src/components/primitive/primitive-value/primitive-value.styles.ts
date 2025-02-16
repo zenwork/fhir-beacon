@@ -1,5 +1,7 @@
 import {css} from 'lit'
 
+
+
 export const componentStyles = css`
   :host {
     padding-top: var(--sl-spacing-2x-small);
@@ -22,12 +24,17 @@ export const componentStyles = css`
     text-decoration: underline wavy var(--sl-color-danger-600);
   }
 
-  .fixed-width {
+  
+  .variant-checkbox {
+    
+  }
+  
+  .variant-fixed-width {
     max-width: 40rem;
     word-wrap: break-word;
   }
 
-  .hide-overflow {
+  .variant-hide-overflow {
     width: 30rem; /* set the initial width */
       height: 2rem; /* set the initial height */
       overflow: hidden; /* hide the overflowed text */
@@ -35,7 +42,7 @@ export const componentStyles = css`
       word-wrap: break-word;
   }
 
-  .hide-overflow:hover {
+  .variant-hide-overflow:hover {
       height: 12rem; /* expand to the full height on hover */
       overflow-y: scroll;
       overflow-x: hidden

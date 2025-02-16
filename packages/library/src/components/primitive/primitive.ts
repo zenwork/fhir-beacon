@@ -12,7 +12,7 @@ import {mustRender}                                    from '../mustRender'
 import {PrimitiveValidator}                            from './primitive.validator'
 import {PrimitiveInputEvent}                           from './primitiveInputEvent'
 import {componentStyles}                               from './primitve.styles'
-import {PrimitiveType}                                 from './type-converters'
+import {convertToPrimitiveType, PrimitiveType}         from './type-converters'
 import {asReadable}                                    from './type-formatters'
 import {format}                                        from './type-formatters/format'
 
@@ -101,9 +101,11 @@ export class Primitive extends ConfigurableElement {
   }
 
   /**
+   * Invoked before the component updates its properties.
+   * It validates the updates based on the properties that have changed.
    *
-   * @param changed
-   * @protected
+   * @param {PropertyValues} changed - Map of changed properties with their previous values.
+   * @return {void} No return value.
    */
   protected willUpdate(changed: PropertyValues) {
     super.willUpdate(changed)
@@ -113,14 +115,16 @@ export class Primitive extends ConfigurableElement {
                     valueChanged: changed.has('value'),
                     typeChanged: changed.has('type'),
                     requiredChanged: changed.has('required'),
-                    errormessageChanged: changed.has('errormessage')
+                    errormessageChanged: changed.has('errormessage'),
+                    choicesChanged: changed.has('choices')
                   })
   }
 
-
   /**
+   * Renders the appropriate template or content based on the current component's state and properties.
    *
-   * @protected
+   * @return {unknown} The rendered output, which could be an HTML template or other content, or an empty
+   *                   result if rendering conditions are not met.
    */
   protected render(): unknown {
     if (!mustRender(this.value, this.mode, this.verbose, this.summaryonly, this.summary, this.required)
@@ -139,11 +143,13 @@ export class Primitive extends ConfigurableElement {
 
 
   /**
+   * Renders when p[rovided value is valid. Displays FHIR data, incorporating labels, values, contexts,
+   * and additional structured elements based on the provided parameters.
    *
-   * @private
+   * @returns {TemplateResult} A lit-html template result containing the rendered elements.
    */
-  // TODO: should be able to put link on value OR on context
   private renderValid(): TemplateResult {
+
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const elements: any[] = []
 
@@ -151,6 +157,8 @@ export class Primitive extends ConfigurableElement {
         <fhir-label text=${this.getLabel()} delimiter=${this.delimiter}></fhir-label>`)
 
     if (!isBlank(this.value))
+      // console.log(this.value, this.presentableValue, this.showProvided, this.type, this.mode, this.verbose,
+      // this.summaryonly, this.summary, this.required)
       elements.push(html`
           <fhir-value text=${this.showProvided
                              ? this.value
@@ -178,13 +186,13 @@ export class Primitive extends ConfigurableElement {
         <li> ${elements}</li>` : html``
   }
 
-  private getLabel = () => {
-    let label = this.key
-    if (this.label) label = this.label
-
-    return asReadable(label, 'lower')
-  }
-
+  /**
+   * Renders an input element based on the type and configuration of the current object.
+   *
+   * Validation errors related to the input are displayed, if present.
+   *
+   * @returns {TemplateResult} A rendered Lit-html template representing the input element.
+   */
   private renderInput(): TemplateResult {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
@@ -254,38 +262,12 @@ export class Primitive extends ConfigurableElement {
     `
   }
 
-  private handleChange = (e: Event) => {
-
-    const oldValue = this.value
-
-    if (e.type === 'sl-input') {
-      if (e.target instanceof SlInput && e.target.type === 'date') {
-        this.value = (e.target as SlInput).valueAsDate?.toISOString() ?? ''
-      } else {
-        this.value = (e.target as SlInput).value
-      }
-    }
-
-    if (e.type === 'sl-change' && (e.target as SlSwitch).tagName === 'SL-SWITCH') {
-      this.value = (String(!this.value))
-    }
-
-    if (e.type === 'fhir-change') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      this.value = e.detail.value
-    }
-
-    if (oldValue === this.value) return
-
-    this.presentableValue = ''
-    this.error = false
-    this.errormessage = ''
-    this.dispatchEvent(new PrimitiveInputEvent(this.key, oldValue, this.value, this.type))
-
-  }
-
-
+  /**
+   * Generates a rendered error representation based on the current state and properties of the object.
+   *
+   * @returns {TemplateResult} A lit-html template representing the error state or an empty template if no rendering is
+   *   required.
+   */
   private renderError = (): TemplateResult => {
     const errors = []
     if (this.presentableTypeError) errors.push(this.presentableTypeError)
@@ -324,19 +306,63 @@ export class Primitive extends ConfigurableElement {
            : html``
   }
 
+  /**
+   * Handles change events and updates the internal state of the component based on the event type
+   * and target element's properties. The method processes events originating from various input
+   * types and updates the `value`, `presentableValue`, `error`, and `errormessage` fields.
+   * It also dispatches a custom event when the `value` changes.
+   *
+   * @param {Event} e - The event object triggered by user interaction or programmatic changes.
+   *                     The method processes this event to determine how to update the component state.
+   */
+  private handleChange = (e: Event) => {
 
-}
+    const oldValue = this.value
 
-/**
- * Converts the given value to its primitive type.
- *
- * @param {string | null} value - The value to be converted.
- * @return {PrimitiveType} - The converted value as a primitive type.
- */
-function convertToPrimitiveType(value: string | null): PrimitiveType {
-  if (!value || !Object.values(PrimitiveType).includes(value as PrimitiveType)) {
-    return PrimitiveType.none
+    if (e.type === 'sl-input') {
+      if (e.target instanceof SlInput && e.target.type === 'date') {
+        this.value = (e.target as SlInput).valueAsDate?.toISOString() ?? ''
+      } else {
+        this.value = (e.target as SlInput).value
+      }
+    }
+
+    if (e.type === 'sl-change' && (e.target as SlSwitch).tagName === 'SL-SWITCH') {
+      this.value = (String(!this.value))
+    }
+
+    if (e.type === 'fhir-change') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      this.value = e.detail.value
+    }
+
+    if (oldValue === this.value) return
+
+    this.presentableValue = ''
+    this.error = false
+    this.errormessage = ''
+    this.dispatchEvent(new PrimitiveInputEvent(this.key, oldValue, this.value, this.type))
+
   }
 
-  return value as PrimitiveType
+
+  /**
+   * Retrieves the label associated with the current context.
+   * If the "label" property is defined, it will be used. Otherwise, the "key" property
+   * is used as the label's default value.
+   *
+   * The resulting label is formatted into a readable string in lowercase form.
+   *
+   * @function
+   * @returns {string} A readable string representation of the label in lowercase format.
+   */
+  private getLabel = () => {
+    let label = this.key
+    if (this.label) label = this.label
+
+    return asReadable(label, 'lower')
+  }
+
+
 }

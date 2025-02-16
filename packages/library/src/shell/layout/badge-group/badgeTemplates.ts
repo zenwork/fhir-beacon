@@ -1,5 +1,7 @@
 import {html, TemplateResult} from 'lit'
 
+
+
 export enum BadgeType {resource, summary, constraint, required}
 
 export function badgeTemplates(badges: { type: BadgeType, label: string }[]): TemplateResult[] {
@@ -31,6 +33,6 @@ export function badgeTemplates(badges: { type: BadgeType, label: string }[]): Te
       }
     })
   }
-  console.log(new Error().stack)
+  // console.log(new Error().stack)
   return [html``]
 }
