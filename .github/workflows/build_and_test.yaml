@@ -131,8 +131,8 @@ jobs:
         id: set_release_ready
         run: echo "release-ready=${{ env.release_ready }}" >> $GITHUB_OUTPUT
 
-  outputs:
-    release-ready: ${{ steps.set_release_ready.outputs.release-ready }}
+    outputs:
+      release-ready: ${{ steps.set_release_ready.outputs.release-ready }}
 
 
 
