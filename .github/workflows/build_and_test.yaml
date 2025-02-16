@@ -116,7 +116,7 @@ jobs:
   deploy_docs:
     name: Deploy Latest Docs
     needs: build
-    if: ${{ needs.build.result == 'success' && github.ref !== 'refs/heads/main'}}
+    if: ${{ needs.build.result == 'success' && github.ref != 'refs/heads/main'}}
     uses: ./.github/workflows/deploy_latest_docs.yaml
     secrets: inherit
     with:
@@ -125,7 +125,7 @@ jobs:
   deploy_app:
     name: Deploy Latest App
     needs: build
-    if: ${{ needs.build.result == 'success' && github.ref !== 'refs/heads/main' }}
+    if: ${{ needs.build.result == 'success' && github.ref != 'refs/heads/main' }}
     uses: ./.github/workflows/deploy_latest_app.yaml
     secrets: inherit
     with:
