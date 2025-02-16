@@ -6,6 +6,8 @@ import {textHostStyles}                                 from '../../../styles/te
 import {isBlank}                                        from '../../../utilities/isBlank'
 import {componentStyles}                                from './primitive-value.styles'
 
+
+
 @customElement('fhir-value')
 export class PrimitiveValue extends ShoelaceStyledElement {
 
@@ -18,6 +20,13 @@ export class PrimitiveValue extends ShoelaceStyledElement {
   @property()
   public text = ''
 
+  /**
+   * Value representation variants.
+   * accepted values:
+   * - `fixed-width` - flow large blocks of text to a specific width
+   * - `hide-overflow` - collapse large blocks of text
+   * - `checkbox` - show a checkbox instead of text.
+   */
   @property()
   declare variant: string
 
@@ -35,8 +44,9 @@ export class PrimitiveValue extends ShoelaceStyledElement {
     const classes = {
       placeholder: this.variant === 'placeholder',
       error: this.variant === 'error',
-      'fixed-width': this.variant === 'fixed-width',
-      'hide-overflow': this.variant === 'hide-overflow'
+      'variant-fixed-width': this.variant === 'fixed-width',
+      'variant-hide-overflow': this.variant === 'hide-overflow',
+      'variant-checkbox': this.variant === 'checkbox'
     }
     return html`
       <div class="${classMap(classes)}">
@@ -45,6 +55,13 @@ export class PrimitiveValue extends ShoelaceStyledElement {
   }
 
   private computeValue = () => {
+    if (this.variant === 'checkbox') {
+      return html`
+          <slot name="before"></slot>
+          <sl-checkbox ?checked=${Boolean(this.text)} disabled size="small"></sl-checkbox>
+          <slot name="after"></slot>`
+    }
+
     if (this.link) {
       return html`
         <a href="${this.link}" target='_blank'>

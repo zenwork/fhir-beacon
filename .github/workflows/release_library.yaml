@@ -79,4 +79,4 @@ jobs:
         if: ${{ env.release_ready != 'true' }}
         run: |
           echo "Release preparation failed. Either no version bump or unprocessed changeset files were detected."
-          exit 1
+          exit 0

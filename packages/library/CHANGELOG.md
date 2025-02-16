@@ -1,5 +1,12 @@
 # fhir-beacon
 
+## 0.1.3
+
+### Patch Changes
+
+- e412876: added checkbox display for boolean primitves
+- 7c037a5: remove unecesary project files and dependencies
+
 ## 0.1.2
 
 ### Patch Changes
