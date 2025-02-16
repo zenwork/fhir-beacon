@@ -111,10 +111,26 @@ jobs:
             packages/app/dist
           retention-days: 5 # Keep artifacts for 5 days
 
+      - name: Verify Release Preparation
+        id: verify_changesets
+        run: |
+          git fetch origin main
+
+          # Initialize release_ready as true
+          echo "release_ready=true" >> $GITHUB_ENV
+
+          # Check for unprocessed changeset markdown files
+          if [ "$(find .changeset -name '*-*-*.md' | wc -l)" -ne "0" ]; then
+            echo "Unprocessed changeset files with multiple dashes detected in the .changeset directory."
+            echo "release_ready=false" >> $GITHUB_ENV
+          fi
+
+          echo "Release preparation check complete."
+
 
 
   deploy_docs:
-    name: Deploy Latest Docs
+    name: PR Docs
     needs: build
     if: ${{ needs.build.result == 'success' && github.ref != 'refs/heads/main'}}
     uses: ./.github/workflows/deploy_latest_docs.yaml
@@ -123,7 +139,7 @@ jobs:
       artifact_name: build-docs
 
   deploy_app:
-    name: Deploy Latest App
+    name: PR App
     needs: build
     if: ${{ needs.build.result == 'success' && github.ref != 'refs/heads/main' }}
     uses: ./.github/workflows/deploy_latest_app.yaml
@@ -131,10 +147,8 @@ jobs:
     with:
       artifact_name: build-app
 
-
-
   publish_docs:
-    name: Publish Docs
+    name: Prod Docs
     needs: build
     if: ${{ needs.build.result == 'success' &&  github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/publish_docs.yaml
@@ -142,24 +156,23 @@ jobs:
     with:
       artifact_name: build-docs
 
+  publish_app:
+    name: Prod App
+    needs: build
+    if: ${{ needs.build.result == 'success' && github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/deploy_latest_app.yaml
+    secrets: inherit
+    with:
+      artifact_name: build-app
+
   release_lib:
-    name: Release Lib
+    name: Prod Lib
     permissions:
       contents: write # Override permissions only for this job
       id-token: write
     needs: [ build ]
-    if: ${{ needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
+    if: ${{ env.release_ready != 'true' && needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
     with:
       artifact_name: build-library
-
-
-  #  publish_lib:
-  #    name: Publish Lib
-  #    needs: [ publish_docs,deploy_app ]
-  #    if: ${{ needs.publish_docs.result == 'success' &&  github.ref == 'refs/heads/main' }}
-  #    uses: ./.github/workflows/publish_library.yaml
-  #    secrets: inherit
-  #    with:
-  #      artifact_name: build-library
