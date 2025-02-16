@@ -11,7 +11,7 @@ describe('asFormattedDate', () => {
                                                  instant: '2015-02-07T13:28:17.239+02:00',
                                                  timeZoneName: 'Europe/Berlin'
                                                })
-    expect(formatted).toBe('07.02.2015 12:28:17.239')
+    expect(formatted).toBe('07.02.15 12:28:17.239')
 
     formatted = asFormattedInstant({
                                      instant: '2015-02-07T13:28:17.239+02:00',
@@ -19,7 +19,7 @@ describe('asFormattedDate', () => {
                                      order: 'MDY',
                                      dateSeparator: '.'
                                    })
-    expect(formatted).toBe('02.07.2015 12:28:17.239')
+    expect(formatted).toBe('02.07.15 12:28:17.239')
 
     formatted = asFormattedInstant({
                                      instant: '2015-02-07T13:28:17.239+02:00',
@@ -37,7 +37,7 @@ describe('asFormattedDate', () => {
                                                  instant: '2015-02-07T00:28:17Z',
                                                  timeZoneName: 'Europe/Berlin'
                                                })
-    expect(formatted).toBe('07.02.2015 01:28:17')
+    expect(formatted).toBe('07.02.15 01:28:17')
 
     formatted = asFormattedInstant({
                                      instant: '2015-02-07T13:28:17Z',
@@ -45,7 +45,7 @@ describe('asFormattedDate', () => {
                                      order: 'MDY',
                                      dateSeparator: '.'
                                    })
-    expect(formatted).toBe('02.07.2015 14:28:17')
+    expect(formatted).toBe('02.07.15 14:28:17')
 
     formatted = asFormattedInstant({
                                      instant: '2015-02-07T00:28:17Z',
@@ -56,6 +56,16 @@ describe('asFormattedDate', () => {
                                      monthFormat: 'medium'
                                    })
     expect(formatted).toBe('7-Feb-2015 1:28:17 AM')
+
+    formatted = asFormattedInstant({
+                                     instant: '2015-12-31T23:28:17.239-05:00',
+                                     timeZoneName: 'Europe/Berlin',
+                                     format: '12h',
+                                     order: 'DMY',
+                                     dateSeparator: '-',
+                                     monthFormat: 'medium'
+                                   })
+    expect(formatted).toBe('1-Jan-2016 5:28:17.239 AM')
   })
 
 

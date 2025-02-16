@@ -40,7 +40,7 @@ export function asFormattedDate({
     }
   ).formatToParts(dateObj)
 
-  const year = dateParts[0] ?? getFormattedPart(formattedParts, 'year')
+  const year = getFormattedPart(formattedParts, 'year')
   const month = getFormattedPart(formattedParts, 'month')
   const day = getFormattedPart(formattedParts, 'day')
 

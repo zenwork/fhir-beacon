@@ -1,5 +1,6 @@
 import {DateTime, FhirDate, Instant} from '../primitive.data'
 import {PrimitiveType}               from '../type-converters'
+import {asDecodedBase64}             from './asDecodedBase64'
 import {asFormattedDate}             from './asFormattedDate'
 import {asFormattedDateTime}         from './asFormattedDateTime'
 import {asFormattedInstant}          from './asFormattedInstant'
@@ -49,6 +50,7 @@ export function format(text: unknown, type: PrimitiveType) {
       return asReadable(text as string)
 
     case PrimitiveType.base64:
+      return asDecodedBase64(text as string)
     case PrimitiveType.boolean:
     case PrimitiveType.canonical:
     case PrimitiveType.code:

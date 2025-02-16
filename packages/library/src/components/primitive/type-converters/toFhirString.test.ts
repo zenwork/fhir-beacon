@@ -2,6 +2,8 @@ import {describe, expect, it} from 'vitest'
 import type {FhirString}      from '../primitive.data'
 import {toFhirString}         from './toFhirString'
 
+
+
 describe('toFhirString', () => {
   it('should convert a valid string to FhirString', () => {
     const input = 'valid string'
@@ -25,5 +27,9 @@ describe('toFhirString', () => {
       'String should not contain Unicode character points below 32, except for u0009, u000D and u000A')
   })
 
-  // Add more tests as necessary
+  it('should throw an error if string contains invalid Unicode characters', () => {
+    const input = ['valid string in array']
+    expect(() => toFhirString(input)).toThrow('Input must be a string')
+  })
+
 })

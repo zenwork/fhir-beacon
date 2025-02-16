@@ -1,10 +1,13 @@
 import {describe, expect, it} from 'vitest'
 import {toInteger}            from './toInteger'
 
+
+
 describe('toInteger', () => {
 
   it('should convert valid numbers within range to Integer', () => {
     expect(toInteger(123)).toBe(123)
+    expect(toInteger(1234)).toBe(1234)
     expect(toInteger(-123)).toBe(-123)
     expect(toInteger(0)).toBe(0)
     expect(toInteger(2_147_483_647)).toBe(2_147_483_647)

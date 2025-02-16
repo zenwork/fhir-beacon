@@ -43,7 +43,7 @@ export function asFormattedInstant({
   ).formatToParts(dateObj)
 
 
-  const year = instant.split('-')[0] ?? getFormattedPart(formattedParts, 'year', format)
+  const year = getFormattedPart(formattedParts, 'year', format)
   const month = getFormattedPart(formattedParts, 'month', format)
   const day = getFormattedPart(formattedParts, 'day', format)
 

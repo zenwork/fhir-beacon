@@ -15,9 +15,9 @@ export class Money extends BaseElement<MoneyData> {
   public renderDisplay(_: DisplayConfig, data: Decorated<MoneyData>): TemplateResult[] {
     return [
       html`
-          <fhir-primitive-wrapper part="base">
-              <fhir-label text="${this.getLabel()}"></fhir-label>&nbsp;
-              <fhir-primitive key="value" .value=${data.value} .type=${PrimitiveType.decimal} summary></fhir-primitive>
+          <fhir-primitive-wrapper >
+              <fhir-label text="amount"></fhir-label>&nbsp;
+              <fhir-primitive .value=${data.value} .type=${PrimitiveType.decimal} summary></fhir-primitive>
               <fhir-primitive .value=${data.currency} .type=${PrimitiveType.code}></fhir-primitive>
           </fhir-primitive-wrapper>
       `

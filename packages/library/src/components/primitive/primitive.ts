@@ -76,7 +76,7 @@ export class Primitive extends ConfigurableElement {
   public translate: boolean = false
 
   @property({ type: Boolean })
-  public trialuse: boolean = false
+  public  trialuse: boolean = false
 
   @property({ type: Boolean })
   public required: boolean = false
@@ -203,7 +203,12 @@ export class Primitive extends ConfigurableElement {
     }
 
     //TODO: this only works for date only fields. Does not work for time component.
-    if (this.type === PrimitiveType.datetime || this.type === PrimitiveType.instant) {
+    if (this.type
+        === PrimitiveType.date
+        || this.type
+        === PrimitiveType.datetime
+        || this.type
+        === PrimitiveType.instant) {
       return html`
           <sl-input name=${this.key}
                     .valueAsDate=${new Date(this.value)}

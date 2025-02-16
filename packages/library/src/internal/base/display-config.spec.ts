@@ -22,7 +22,7 @@ describe('DisplayConfig', () => {
 
       await aTimeout(1000)
 
-      const element = primitive.queryShadowByText('TypeError: decimal must be a valid number: abc')
+      const element = primitive.queryShadowByText('decimal must be a valid number: abc')
       expect(element).toBeVisible()
       //TODO: fix this test so it succeeds on github
       // expect(getComputedStyle(element!).backgroundColor).toEqual('rgb(252, 165, 165)')
