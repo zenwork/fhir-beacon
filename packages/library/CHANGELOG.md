@@ -1,5 +1,11 @@
 # fhir-beacon
 
+## 0.1.4
+
+### Patch Changes
+
+- cb95965: modified github workflows
+
 ## 0.1.3
 
 ### Patch Changes
