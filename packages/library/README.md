@@ -6,7 +6,7 @@ FHIR Beacon
 > read [background](./docs/background.md)
 
 
-Fhir Beacon is for working with [FHIR](http://hl7.org/fhir/) data in the browser without the need for a backend. It
+Fhir Beacon is for working with [FHIR r5](http://hl7.org/fhir/) data in the browser without the need for a backend. It
 enables web-developers to easily adopt the FHIR metamodel as is, without having to implement middleware or data
 mappings. FHIR Beacon is built with web-components and aspires to be framework-agnostic and impose as few dependencies.
 

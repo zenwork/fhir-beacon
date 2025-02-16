@@ -65,7 +65,7 @@ describe('Primitive Validator', () => {
 
     expect(host.error).to.be.true
     expect(host.presentableError).toEqual('')
-    expect(host.presentableTypeError).toEqual('TypeError: decimal must be a valid number: abc')
+    expect(host.presentableTypeError).toEqual('decimal must be a valid number: abc')
     expect(host.presentableValue).toEqual('abc')
     expect(events.length).to.equal(1)
     expect(events[0].type).to.equal('bkn-invalid')
@@ -97,7 +97,7 @@ describe('Primitive Validator', () => {
     validator.validate({ valueChanged: true, requiredChanged: true })
 
     expect(host.error).to.be.true
-    expect(host.presentableError).toEqual('Error: this property is required')
+    expect(host.presentableError).toEqual('This property is required')
     expect(host.presentableTypeError).toEqual('')
     expect(host.presentableValue).toEqual('')
     expect(events.length).to.equal(1)
@@ -126,4 +126,21 @@ describe('Primitive Validator', () => {
     expect(events[0].type).to.equal('bkn-valid')
   })
 
+  describe('corner cases', () => {
+    test('should show error when text is not text', () => {
+      const { host } = createMockPrimitive()
+      host.type = PrimitiveType.fhir_string
+      const value: {} = {}
+      host.value = value as string
+      const validator: PrimitiveValidator = new PrimitiveValidator(host)
+
+      validator.validate({ valueChanged: true })
+
+      expect(host.error).to.be.true
+      expect(host.presentableError).to.be.empty
+      expect(host.presentableTypeError).to.equal('Input must be a string')
+      expect(host.presentableValue).to.equal(value)
+
+    })
+  })
 })

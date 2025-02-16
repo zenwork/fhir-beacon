@@ -33,7 +33,7 @@ import {
 
 export type PrimitiveValueHost = {
   key?: string,
-  value?: string,
+  value?: unknown,
   valuePath?: string,
   type: PrimitiveType,
   choices?: Choice[],
@@ -71,7 +71,7 @@ export class PrimitiveValidator {
              requiredChanged = false
            }: changedProperties): void {
 
-    const value: string | undefined = this.value()
+    const value: string | undefined = this.value() as string | undefined
 
     // override value with valuePath
     if (valuePathChanged && this.#host.contextData) {
@@ -128,11 +128,11 @@ export class PrimitiveValidator {
 
     if (isBlank(value) && this.#host.required) {
       this.#host.error = true
-      this.#host.presentableError = 'Error: this property is required'
+      this.#host.presentableError = 'This property is required'
       const event = new PrimitiveInvalidEvent({ path: [{ node: this.#host.key || 'unknown' }] },
                                               value,
                                               this.#host.type,
-                                              'Error: this property is required')
+                                              'This property is required')
       this.#host.dispatchEvent(event)
     }
 
@@ -153,7 +153,7 @@ export class PrimitiveValidator {
 
   }
 
-  private value(): string | undefined {
+  private value(): unknown {
     return this.#host.value
   }
   /**
@@ -163,14 +163,12 @@ export class PrimitiveValidator {
    */
   private validOrError = <O, V>(fn: (original: O) => V, original: O) => {
     const parsedValue = valueOrError(fn, original)
-    //console.log(`validOrError: ${this.#host.key} ${this.#host.type} ${(this.value())} ${parsedValue.val}
-    // ${parsedValue.err}`)
+
     let validEvent: PrimitiveValidEvent | undefined = undefined
     if (!isBlank(parsedValue.val)) {
       this.#host.presentableValue = parsedValue.val
       this.#host.error = false
       validEvent = new PrimitiveValidEvent(this.#host.key!, original, this.#host.type)
-      // this.#host.dispatchEvent(validEvent)
     }
 
     let invalidEvent: PrimitiveInvalidEvent | undefined = undefined

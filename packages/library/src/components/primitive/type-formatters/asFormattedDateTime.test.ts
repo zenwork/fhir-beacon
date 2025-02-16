@@ -10,7 +10,7 @@ describe('asFormattedDateTime', () => {
                                                   datetime: '2015-02-07T13:28:17.239+02:00',
                                                   timeZoneName: 'Europe/Berlin'
                                                 })
-    expect(formatted).toBe('07.02.2015 12:28:17')
+    expect(formatted).toBe('07.02.15 12:28:17')
 
     formatted = asFormattedDateTime({
                                       datetime: '2015-02-07T13:28:17.239+02:00',
@@ -18,7 +18,7 @@ describe('asFormattedDateTime', () => {
                                       order: 'MDY',
                                       dateSeparator: '.'
                                     })
-    expect(formatted).toBe('02.07.2015 12:28:17')
+    expect(formatted).toBe('02.07.15 12:28:17')
 
     formatted = asFormattedDateTime({
                                       datetime: '2015-02-07T13:28:17.239+02:00',
@@ -35,10 +35,10 @@ describe('asFormattedDateTime', () => {
   it('returns formatted string for various forms', () => {
 
     let formatted: string = asFormattedDateTime({ datetime: '2015-02-07T00:28' })
-    expect(formatted).toBe('07.02.2015 00:28')
+    expect(formatted).toBe('07.02.15 00:28')
 
     formatted = asFormattedDateTime({ datetime: '2013-06-08T10:57:00' })
-    expect(formatted).toBe('08.06.2013 10:57:00')
+    expect(formatted).toBe('08.06.13 10:57:00')
 
     formatted = asFormattedDateTime({
                                       datetime: '2015-02-07T13',
@@ -47,7 +47,7 @@ describe('asFormattedDateTime', () => {
                                       dateSeparator: '.',
                                       format: '12h'
                                     })
-    expect(formatted).toBe('02.07.2015 1 PM')
+    expect(formatted).toBe('02.07.15 1 PM')
 
     formatted = asFormattedDateTime({
                                       datetime: '2015-02',

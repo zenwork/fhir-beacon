@@ -1,6 +1,6 @@
-import {Code, FhirString, Id, URI}    from '../components'
-import {CodeSystemFhirTypes}          from './CodeSystem-fhir-types'
-
+import {Choice}                    from 'valuesets'
+import {Code, FhirString, Id, URI} from '../components'
+import {CodeSystemFhirTypes}       from './CodeSystem-fhir-types'
 
 
 
@@ -10,6 +10,7 @@ export {CodeSystemFhirTypes}
  */
 export const FhirTypes: FhirType[] = extract(CodeSystemFhirTypes.concept, [])
 
+export const FhirTypeChoices: Choice[] = FhirTypes.map(t => ({ value: t.code, display: t.code }))
 
 //TODO: PERFORMANCE: should be done at build time
 export type FhirType = { code: string, kind: string, abstract: boolean, definition: string }

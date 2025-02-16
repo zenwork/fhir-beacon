@@ -5,6 +5,8 @@ import {Primitive}                          from './primitive'
 import {PrimitiveLabel}                     from './primitive-label'
 import {PrimitiveValue}                     from './primitive-value'
 
+
+
 describe('fhir Primitive', () => {
   describe('logic', () => {
 
@@ -83,7 +85,7 @@ describe('fhir Primitive', () => {
       expect(value!.text).to.equal('abc')
 
       const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
-      expect(div.textContent).to.equal('TypeError: decimal must be a valid number: abc')
+      expect(div.textContent).to.equal('decimal must be a valid number: abc')
 
     })
 
@@ -121,7 +123,7 @@ describe('fhir Primitive', () => {
       expect(label!.text).to.equal('code')
 
       const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
-      expect(div.textContent).to.equal('Error: Input must be a non-negative integer within the range 1 to'
+      expect(div.textContent).to.equal('Input must be a non-negative integer within the range 1 to'
                                        + ' 2,147,483,647 | must be less than 10')
 
     })
@@ -142,7 +144,7 @@ describe('fhir Primitive', () => {
       expect(label!.text).to.equal('required')
 
       const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
-      expect(div.textContent).to.equal('Error: this property is required')
+      expect(div.textContent).to.equal('This property is required')
 
     })
 
