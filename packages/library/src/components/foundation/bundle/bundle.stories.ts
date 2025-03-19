@@ -1,6 +1,8 @@
-import {StoryObj} from '@storybook/web-components'
-import {argtypes} from '../../../../stories/storybook-utils'
-import {data}     from './bundle.story.data'
+import {ArgTypes, StoryObj}   from '@storybook/web-components'
+import {html, TemplateResult} from 'lit'
+import {argtypes, ShellArgs}  from '../../../../stories/storybook-utils'
+import {data, masterDetail}   from './bundle.story.data'
+
 
 
 const path = 'Components/Foundation/Bundle'
@@ -33,4 +35,17 @@ export const Structure: Story = {
     verbose: true,
     open: true
   }
+}
+
+export const MasterDetail: Story = {
+  args: {
+    data: masterDetail,
+    mode: 'display',
+    showerror: false,
+    verbose: false,
+    open: false
+  },
+  render: (args: Partial<ArgTypes<ShellArgs>>): TemplateResult => html`
+        <fhir-bundle-everything .data=${args.data} ></fhir-bundle-everything>`
+
 }

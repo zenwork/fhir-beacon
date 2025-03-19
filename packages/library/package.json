@@ -55,7 +55,8 @@
         "@shoelace-style/shoelace": "^2.19.1",
         "axios": "^1.7.9",
         "jsonpath-plus": "^10.2.0",
-        "lit": "^3.2.1"
+        "lit": "^3.2.1",
+        "runtypes": "^7.0.4"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",

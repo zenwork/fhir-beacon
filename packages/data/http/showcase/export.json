@@ -65,6 +65,26 @@
                 "name": "account-104818",
                 "query": "https://hapi.fhir.org/baseR4/Account/104818/_history/1",
                 "data": null
+            },
+            {
+                "name": "patient-791203-bundle",
+                "query": "http://hapi.fhir.org/baseR5/Patient/791203/$everything",
+                "data": null
+            },
+            {
+                "name": "patient-bundle",
+                "query": "http://hapi.fhir.org/baseR5/Patient/silth-practice-2/$everything",
+                "data": null
+            },
+            {
+                "name": "patient-755008-everything",
+                "query": "http://hapi.fhir.org/baseR5/Patient/755008/$everything",
+                "data": null
+            },
+            {
+                "name": "patient-INSi2-3-2-1-INS-NIR-bundle",
+                "query": "http://hapi.fhir.org/baseR5/Patient/exemple-patient-INSi2-3-2-1-INS-NIR/$everything",
+                "data": null
             }
         ]
     },

@@ -11,17 +11,19 @@ import cs_v3_orderableDrugForm from './codesystems/cs-v3-orderableDrugForm.json'
 import {CodeIds}               from './types'
 import vs_age_units            from './valuesets/vs-age-units.json' with {type: 'json'}
 
-import vs_data_absent_reason         from './valuesets/vs-data-absent-reason.json' with {type: 'json'}
-import vs_distance_unit              from './valuesets/vs-distance-units.json' with {type: 'json'}
-import vs_duration_unit              from './valuesets/vs-duration-units.json' with {type: 'json'}
-import vs_identifier_type            from './valuesets/vs-identifier-type.json' with {type: 'json'}
-import vs_identifier_use             from './valuesets/vs-identifier-use.json' with {type: 'json'}
-import vs_observation_category       from './valuesets/vs-observation-category.json' with {type: 'json'}
-import vs_observation_interpretation from './valuesets/vs-observation-interpretation.json' with {type: 'json'}
-import vs_observation_methods        from './valuesets/vs-observation-methods.json' with {type: 'json'}
-import vs_quantity_comparator        from './valuesets/vs-quantity-comparator.json' with {type: 'json'}
-import vs_referencerange_appliesto   from './valuesets/vs-referencerange-appliesto.json' with {type: 'json'}
-import vs_ucum_common                from './valuesets/vs-ucum-common.json' with {type: 'json'}
+import vs_data_absent_reason          from './valuesets/vs-data-absent-reason.json' with {type: 'json'}
+import vs_distance_unit               from './valuesets/vs-distance-units.json' with {type: 'json'}
+import vs_duration_unit               from './valuesets/vs-duration-units.json' with {type: 'json'}
+import vs_identifier_type             from './valuesets/vs-identifier-type.json' with {type: 'json'}
+import vs_identifier_use              from './valuesets/vs-identifier-use.json' with {type: 'json'}
+import vs_observation_category        from './valuesets/vs-observation-category.json' with {type: 'json'}
+import vs_observation_interpretation  from './valuesets/vs-observation-interpretation.json' with {type: 'json'}
+import vs_observation_methods         from './valuesets/vs-observation-methods.json' with {type: 'json'}
+import vs_observation_status          from './valuesets/vs-observation-status.json' with {type: 'json'}
+import vs_observation_vitalsignresult from './valuesets/vs-observation-vitalsignresult.json' with {type: 'json'}
+import vs_quantity_comparator         from './valuesets/vs-quantity-comparator.json' with {type: 'json'}
+import vs_referencerange_appliesto    from './valuesets/vs-referencerange-appliesto.json' with {type: 'json'}
+import vs_ucum_common                 from './valuesets/vs-ucum-common.json' with {type: 'json'}
 
 
 
@@ -50,6 +52,8 @@ export class Codes {
     this.#map.set('vs-observation-category', vs_observation_category)
     this.#map.set('vs-observation-interpretation', vs_observation_interpretation)
     this.#map.set('vs-observation-methods', vs_observation_methods)
+    this.#map.set('vs-observation-status', vs_observation_status)
+    this.#map.set('vs-observation-vitalsignresult', vs_observation_vitalsignresult)
     this.#map.set('vs-quantity-comparator', vs_quantity_comparator)
     this.#map.set('vs-referencerange-appliesto', vs_referencerange_appliesto)
     this.#map.set('vs-ucum-common', vs_ucum_common)
@@ -80,4 +84,9 @@ export class Codes {
       choices: Array.from(this.#map.values()).map(v => ({ value: v.system, display: v.id } as Choice))
     } as Choices
   }
+}
+
+const codes = new Codes()
+export function useCodeChoices(id: CodeIds): Choices | undefined {
+  return codes.getById(id)
 }

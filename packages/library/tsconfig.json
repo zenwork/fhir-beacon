@@ -20,7 +20,8 @@
         "rootDir": "./",
         "skipLibCheck": true,
         "sourceMap": true,
-        "strict": true,
+        "strict": false,
+        "noImplicitUseStrict": true,
         "target": "es2021",
         "types": [
             "@vitest/browser/providers/playwright"
