@@ -1,4 +1,4 @@
-import {FhirElementData} from 'internal'
+import {FhirElementData} from 'internal/base/FhirElement.type'
 
 
 

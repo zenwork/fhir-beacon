@@ -59,6 +59,7 @@ export class SystemChoice extends LitElement {
       evt.stopImmediatePropagation()
     })
 
+    // @ts-ignore
     this.addEventListener('fhir-system-choice', async (evt: CustomEvent) => {
       const dropdown = this.renderRoot.querySelector('#dd') as SlDropdown
       if (dropdown) await dropdown.show()

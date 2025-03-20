@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {FhirDatatypeName}                                                from 'FhirDatatypeName'
-import {FhirResourceName}                                                from 'FhirResourceName'
 import {PropertyValues}                                                  from 'lit'
 import {property, state}                                                 from 'lit/decorators.js'
 import {PrimitiveInputEvent, PrimitiveInvalidEvent, PrimitiveValidEvent} from '../../../components/primitive'
+import {FhirDatatypeName}                                                from '../../../FhirDatatypeName'
+import {FhirResourceName}                                                from '../../../FhirResourceName'
 import {DataContextConsumerController, FhirDataContext}                  from '../../contexts'
 import {BeaconDataError}                                                 from '../../errors/beacon-data-error'
 import {

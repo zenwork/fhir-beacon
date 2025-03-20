@@ -1,7 +1,7 @@
-import {Decorated}            from 'internal'
 import {html, TemplateResult} from 'lit'
 import {customElement}        from 'lit/decorators.js'
-import {DisplayConfig}        from 'shell'
+import {Decorated}            from '../../../internal/base/Decorate.types'
+import {DisplayConfig}        from '../../../shell'
 import {Bundle}               from './bundle'
 import {BundleData}           from './bundle.data'
 
