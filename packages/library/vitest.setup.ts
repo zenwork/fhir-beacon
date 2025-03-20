@@ -102,10 +102,8 @@ Element.prototype.logShadow = function (): void {
     const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
     let data: string = ''
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     if (this.data) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       data = pad(JSON.stringify(this.data, null, 2))
     }
     console.log(`${tagAndAttributes}\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>`)
@@ -114,7 +112,7 @@ Element.prototype.logShadow = function (): void {
 
 
 Element.prototype.queryShadowByText = function <T extends Element>(text: string): T | null {
-  return shadowQueries.queryByShadowText(this as HTMLElement, text) as T | null
+  return shadowQueries.queryByShadowText(this as HTMLElement, text) as unknown as T | null
 }
 
 

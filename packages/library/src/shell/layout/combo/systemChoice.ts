@@ -59,8 +59,6 @@ export class SystemChoice extends LitElement {
       evt.stopImmediatePropagation()
     })
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     this.addEventListener('fhir-system-choice', async (evt: CustomEvent) => {
       const dropdown = this.renderRoot.querySelector('#dd') as SlDropdown
       if (dropdown) await dropdown.show()

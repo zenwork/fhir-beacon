@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {FhirTypeName}                                                    from 'FhirPrimitiveName'
+import {FhirDatatypeName}                                                from 'FhirDatatypeName'
+import {FhirResourceName}                                                from 'FhirResourceName'
 import {PropertyValues}                                                  from 'lit'
 import {property, state}                                                 from 'lit/decorators.js'
 import {PrimitiveInputEvent, PrimitiveInvalidEvent, PrimitiveValidEvent} from '../../../components/primitive'
@@ -97,7 +98,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
   private invalids: Set<FullyQualifiedKey> = new Set()
 
-  protected constructor(type: FhirTypeName) {
+  protected constructor(type: FhirDatatypeName | FhirResourceName | string) {
     super()
     this.type = type
     this.data = NoDataObject as T
