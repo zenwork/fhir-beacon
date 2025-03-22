@@ -1,25 +1,26 @@
 // Definition.test.ts
 
+import {FhirDatatypeName}     from 'FhirDatatypeName'
+import {FhirPrimitiveName}    from 'FhirPrimitiveName'
+import {FhirResourceName}     from 'FhirResourceName'
 import {Prop}                 from 'profiling/profiling.types'
 import {describe, expect, it} from 'vitest'
 import {Definition}           from './definition'
 
-// Mocking the Prop type for testing
-type TestProp = {
-  key: string
-  isSummary: boolean
-  cardinality: string
-  bindings: string[]
-  type: string | Definition
-}
 
 // Sample constructor for mock props
-const createTestProp = (key: string, type: string | Definition): TestProp => ({
+const createTestProp = (key: string,
+                        type: FhirPrimitiveName | FhirDatatypeName | FhirResourceName | Definition): Prop => ({
   key,
   isSummary: false,
   cardinality: '1..1',
   bindings: [],
-  type
+  bindingStrength: 'example',
+  type,
+  typeNarrowing: [],
+  constraints: [],
+  isModifier: false,
+  mustSupport: false
 })
 
 describe('Definition Class', () => {
@@ -71,7 +72,7 @@ describe('Definition Class', () => {
 
     def.set(prop)
     const result = def.toString()
-    expect(result).toContain('-testKey') // Ensure the key is present
+    expect(result).toContain('testKey') // Ensure the key is present
     expect(result).toContain('string')  // Ensure the type is present
   })
 

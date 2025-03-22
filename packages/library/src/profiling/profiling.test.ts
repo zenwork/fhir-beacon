@@ -13,13 +13,13 @@ describe('test', () => {
                                       props: [
                                         add.prop('foo', 'bar')
                                            .optional()
-                                           .boundBy('baz', 'biff'),
+                                           .boundBy(['baz', 'biff']),
                                         add.listOf('baz', 'biff')
                                            .optional(),
                                         add.prop('baz', 'biff'),
                                         add.backboneOf(define({
                                                                 name: 'stuff', props: [
-                                            add.prop('bkStuff', 'bar').optional().boundBy('a', 'b', 'c'),
+                                            add.prop('bkStuff', 'bar').optional().boundBy(['a', 'b', 'c']),
                                             add.prop('bkThing', 'foo').optional()
                                           ]
                                                               })).optional()

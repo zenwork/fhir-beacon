@@ -1,8 +1,8 @@
 import {describe, expect, it} from 'vitest'
-import {actionWith}           from './actionWith'
 import {define}               from './define'
 import {Definition}           from './definition'
-import {property}             from './property'
+import {prop}                 from './prop'
+import {set}                  from './set'
 
 
 
@@ -31,7 +31,7 @@ describe('define function tests', () => {
     const base = new Definition('BaseWithoutProps')
     const name = 'DefinitionWithProps'
 
-    const def = define({ name, base, props: [actionWith(property('testKey', 'string'))] })
+    const def = define({ name, base, props: [set(prop('testKey', 'string'))] })
 
 
     // Props should modify the resulting definition
@@ -58,7 +58,7 @@ describe('define function tests', () => {
     const def = define({
                          name: refineName,
                          base,
-                         props: [actionWith(property('key1', 'type1')).hasMany(), actionWith(property('key2', 'type2'))]
+                         props: [set(prop('key1', 'code')).hasMany(), set(prop('key2', 'code'))]
                        })
 
     expect(def.name).toBe(refineName)
@@ -71,7 +71,7 @@ describe('define function tests', () => {
                                                   isSummary: undefined,
                                                   key: 'key1',
                                                   mustSupport: undefined,
-                                                  type: 'type1'
+                                                  type: 'code'
                                                 })
     expect(def.props.get('key2')).toMatchObject({
                                                   bindings: [],
@@ -81,7 +81,7 @@ describe('define function tests', () => {
                                                   isSummary: undefined,
                                                   key: 'key2',
                                                   mustSupport: undefined,
-                                                  type: 'type2'
+                                                  type: 'code'
                                                 })
 
 

@@ -1,9 +1,10 @@
-import {Context}      from 'profiling/definition'
-import {Action, Prop} from 'profiling/profiling.types'
+import {CodeIds}                       from '../codes'
+import {Context}                       from './definition'
+import {Action, BindingStrength, Prop} from './profiling.types'
 
 
 
-export function actionWith(kv: Prop): Action {
+export function set(kv: Prop): Action {
 
   let context: Context | null = null
   let optional = false
@@ -22,12 +23,16 @@ export function actionWith(kv: Prop): Action {
         context.def.set({
                           key: kv.key,
                           type: kv.type ? kv.type : existing.type,
-                          bindings: kv.bindings.length > 0 ? kv.bindings : existing.bindings,
+                          bindings: (kv.bindings && Array.isArray(kv.bindings) && kv.bindings.length > 0) || kv.bindings
+                                    ? kv.bindings
+                                    : existing.bindings,
+                          bindingStrength: kv.bindingStrength ? kv.bindingStrength : existing.bindingStrength,
                           constraints: kv.constraints.length > 0 ? kv.constraints : existing.constraints,
                           cardinality: min + '..' + max,
                           mustSupport: kv.mustSupport ? kv.mustSupport : existing.mustSupport,
                           isModifier: kv.isModifier ? kv.isModifier : existing.isModifier,
-                          isSummary: kv.isSummary ? kv.isSummary : existing.isSummary
+                          isSummary: kv.isSummary ? kv.isSummary : existing.isSummary,
+                          typeNarrowing: kv.typeNarrowing ? kv.typeNarrowing : existing.typeNarrowing
                         })
       } else {
         context.def.set({ ...kv, cardinality: min + '..' + max })
@@ -45,8 +50,9 @@ export function actionWith(kv: Prop): Action {
       many = true
       return action as unknown as Action
     },
-    boundBy: (...binding: string[]): Action => {
+    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = 'example'): Action => {
       kv.bindings = binding
+      kv.bindingStrength = bindingStrength
       return action as unknown as Action
     },
     constrainedBy: (constraints: (() => { key: string, error: string })[]): Action => {

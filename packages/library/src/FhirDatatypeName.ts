@@ -33,7 +33,7 @@ export type FhirDatatypeName =
   | 'Range'
   | 'Ratio'
   | 'RatioRange'
-  | 'Ref'
+  | 'Reference'
   | 'RelatedArtifact'
   | 'SampledData'
   | 'Signature'

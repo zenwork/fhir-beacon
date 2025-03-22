@@ -1,8 +1,8 @@
 import {beforeEach, describe, expect, it} from 'vitest'
-import {actionWith}                       from './actionWith' // Adjust the import path as needed
 import {Context, Definition}              from './definition'
 import {InternalAction, Prop}             from './profiling.types'
-import {property}                         from './property'
+import {prop}                             from './prop'
+import {set}                              from './set' // Adjust the import path as needed
 
 
 // Tests
@@ -16,11 +16,11 @@ describe('actionWith', () => {
     // Reset the context and Prop object for each test
     def = new Definition('base', 'base')
     testContext = new Context('base', 'base', def)
-    kv = property('test-key', 'test-type')
+    kv = prop('test-key', 'code')
   })
 
   it('should initialize with proper default state', () => {
-    const action = actionWith(kv)
+    const action = set(kv)
 
     expect(action).toHaveProperty('setCtx')
     expect(action).toHaveProperty('run')
@@ -35,14 +35,14 @@ describe('actionWith', () => {
   })
 
   it('should set context via setCtx()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
 
     expect(() => (action as InternalAction).run()).not.toThrow()
   })
 
   it('should modify Prop based on "optional()"', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.optional()
     action.run()
@@ -50,7 +50,7 @@ describe('actionWith', () => {
   })
 
   it('should set "many" properly with hasMany()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.hasMany()
     action.run()
@@ -58,7 +58,7 @@ describe('actionWith', () => {
   })
 
   it('should adjust cardinality based on optional and hasMany', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.optional().hasMany()
     action.run()
@@ -66,16 +66,16 @@ describe('actionWith', () => {
   })
 
   it('should add bindings via boundBy()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     const bindings = ['binding1', 'binding2']
     action.setCtx(testContext)
-    action.boundBy(...bindings)
+    action.boundBy(bindings)
     action.run()
     expect(def.props.get('test-key').bindings).toEqual(bindings)
   })
 
   it('should add constraints via constrainedBy()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     const constraints = [
       () => ({ key: 'constraint1', error: 'error1' }),
       () => ({ key: 'constraint2', error: 'error2' })
@@ -87,7 +87,7 @@ describe('actionWith', () => {
   })
 
   it('should set "mustSupport" to true with mustSupport()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.mustSupport()
     action.run()
@@ -95,7 +95,7 @@ describe('actionWith', () => {
   })
 
   it('should set "isModifier" to true with isModifier()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.isModifier()
     action.run()
@@ -103,7 +103,7 @@ describe('actionWith', () => {
   })
 
   it('should set "isSummary" to true with isSummary()', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.isSummary()
     action.run()
@@ -111,7 +111,7 @@ describe('actionWith', () => {
   })
 
   it('should handle adding a new Prop to the context', () => {
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
     action.setCtx(testContext)
     action.run()
     expect(testContext.def.get(kv.key)).toMatchObject({
@@ -123,9 +123,11 @@ describe('actionWith', () => {
   it('should merge existing Prop from context', () => {
     const existingProp: Prop = {
       key: 'test-key',
-      type: 'test-type',
+      type: 'code',
+      typeNarrowing: [],
       cardinality: '0..1',
       bindings: ['existing-binding'],
+      bindingStrength: 'example',
       constraints: [],
       mustSupport: false,
       isModifier: false,
@@ -134,16 +136,16 @@ describe('actionWith', () => {
 
     testContext.def.set(existingProp)
 
-    const action = actionWith(kv) as InternalAction
+    const action = set(kv) as InternalAction
 
     action.setCtx(testContext)
-    action.boundBy('new-binding').hasMany()
+    action.boundBy(['new-binding']).hasMany()
     action.run()
 
     const result = testContext.def.get('test-key')
     expect(result).toMatchObject({
                                    key: 'test-key',
-                                   type: 'test-type',
+                                   type: 'code',
                                    cardinality: '1..*', // From the original kv
                                    bindings: ['new-binding'] // Overridden
                                  })
