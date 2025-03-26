@@ -9,6 +9,7 @@ export type FhirResourceName =
   | 'AppointmentResponse'
   | 'ArtifactAssessment'
   | 'AuditEvent'
+  | 'BackboneElement'
   | 'Basic'
   | 'Binary'
   | 'BiologicallyDerivedProduct'

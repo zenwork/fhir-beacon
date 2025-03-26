@@ -166,9 +166,11 @@ export class FhirResourceEnum {
   static VisionPrescription = new FhirResourceEnum('VisionPrescription')
 
   readonly value: FhirResourceName
+  readonly profileName: string
 
-  constructor(value: FhirResourceName) {
+  constructor(value: FhirResourceName, profile?: string) {
     this.value = value
+    this.profileName = profile
   }
   /**
    * Get all available FHIR resource names
@@ -211,10 +213,14 @@ export class FhirResourceEnum {
     )
   }
   toString() {
-    return this.value
+    return this.value + (this.profileName ? `/${this.profileName}` : '')
   }
   valueOf() {
     return this.value
+  }
+
+  profile(name: string) {
+    return new FhirResourceEnum(this.value, name)
   }
 }
 

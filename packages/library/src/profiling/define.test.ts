@@ -1,42 +1,45 @@
-import {describe, expect, it} from 'vitest'
-import {define}               from './define'
-import {Definition}           from './definition'
-import {prop}                 from './prop'
-import {set}                  from './set'
+import {describe, expect, it}                 from 'vitest'
+import {Basic, FhirResourceEnum, Observation} from '../FhirResourceEnum'
+import {define}                               from './define'
+import {Definition}                           from './definition'
+import {prop}                                 from './prop'
+import {set}                                  from './set'
 
 
 
 describe('define function tests', () => {
+  const name: FhirResourceEnum = new FhirResourceEnum('Basic')
+
   it('should create a definition with the provided name and no props or refine (default behavior)', () => {
-    const name = 'TestName'
+
     const def = define({ name })
 
     expect(def.name).toBe(name)
-    expect(def.refines).toBe(name) // Default refine is set to the same name
+    expect(def.name.profileName).toBe(name.profileName) // Default refine is set to the same name
     expect(def.props.size).toBe(0) // No props
   })
 
   it('should clone the refine definition and update the name', () => {
-    const refine = new Definition('RefineName')
-    const name = 'NewName'
-    const def = define({ name, base: refine })
+    const refine = new Definition(name)
 
-    expect(def.name).toBe(name)
-    expect(def.refines).toBe(refine.name) // refines is copied from the refine definition
+    const def = define({ name: name.profile('profile'), base: refine })
+
+    expect(def.name.value).toBe(name.value)
+    expect(def.name.profileName).toBe('profile') // refines is copied from the refine definition
     expect(def.props.size).toBe(0) // No props to apply
   })
 
   it('should apply props actions and modify the resulting definition', () => {
 
-    const base = new Definition('BaseWithoutProps')
-    const name = 'DefinitionWithProps'
+    const base = new Definition(name)
 
-    const def = define({ name, base, props: [set(prop('testKey', 'string'))] })
+
+    const def = define({ name: name.profile('profile'), base, props: [set(prop('testKey', 'string'))] })
 
 
     // Props should modify the resulting definition
-    expect(def.name).toBe(name)
-    expect(def.refines).toBe('BaseWithoutProps')
+    expect(def.name.value).toBe(name.value)
+    expect(def.name.profileName).toBe('profile')
     expect(def.props.get('testKey')).toMatchObject({
                                                      bindings: [],
                                                      cardinality: '1..1',
@@ -52,17 +55,16 @@ describe('define function tests', () => {
 
   it('should handle multiple props and properly invoke their actions', () => {
 
-    const baseName: string = 'base'
-    const refineName = 'profile'
-    const base = new Definition(baseName)
+
+    const base = new Definition(name)
     const def = define({
-                         name: refineName,
+                         name: name.profile('profile'),
                          base,
                          props: [set(prop('key1', 'code')).hasMany(), set(prop('key2', 'code'))]
                        })
 
-    expect(def.name).toBe(refineName)
-    expect(def.refines).toBe(baseName)
+    expect(def.name.value).toBe(name.value)
+    expect(def.name.profileName).toBe('profile')
     expect(def.props.get('key1')).toMatchObject({
                                                   bindings: [],
                                                   cardinality: '1..*',
@@ -88,21 +90,25 @@ describe('define function tests', () => {
   })
 
   it('should properly handle empty props array', () => {
-    const refine = new Definition('EmptyPropsTest')
-    const name = 'EmptyPropsDefinition'
+    const refine = new Definition(name)
     const def = define({ name, base: refine, props: [] })
 
-    expect(def.name).toBe(name)
-    expect(def.refines).toBe(refine.name)
+    expect(def.name.value).toBe(name.value)
+    expect(def.name.profileName).toBe(refine.name.profileName)
     expect(def.props.size).toBe(0)
   })
 
   it('should initialize with default refine when not provided', () => {
-    const name = 'DefaultRefineTest'
+    const name = new FhirResourceEnum('Basic')
     const def = define({ name })
 
-    expect(def.name).toBe(name)
-    expect(def.refines).toBe(name)
+    expect(def.name.value).toBe(name.value)
+    expect(def.name.profileName).toBe(name.profileName)
     expect(def.props.size).toBe(0)
+  })
+
+  it('should throw an error when the base names do not match', () => {
+    expect(() => define({ name: Observation.profile('foo'), base: new Definition(Basic) })).toThrow(
+      'Base name Basic does not match name Observation')
   })
 })

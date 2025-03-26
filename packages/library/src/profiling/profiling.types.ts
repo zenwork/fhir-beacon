@@ -14,7 +14,7 @@ export type  Action = {
   required: () => Action
   hasMany: () => Action
   boundBy: (binding: CodeIds | string[], strength?: BindingStrength) => Action
-  constrainedBy: (constraints: (() => { key: string, error: string })[]) => Action
+  constrainedBy: (constraints: ((v: unknown) => { key: string, error: string })[]) => Action
   mustSupport: () => Action
   isModifier: () => Action
   isSummary: () => Action
@@ -38,4 +38,4 @@ export type Prop = {
   isSummary: boolean | undefined,
 }
 
-export type DefineProps = { name: FhirResourceEnum | string, base?: Definition, props?: Action[] }
+export type DefineProps = { name: FhirResourceEnum, base?: Definition, props?: Action[] }

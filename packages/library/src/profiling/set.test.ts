@@ -1,3 +1,4 @@
+import {Basic}                            from '../FhirResourceEnum'
 import {beforeEach, describe, expect, it} from 'vitest'
 import {Example}                          from './BindingStrength'
 import {Context, Definition}              from './definition'
@@ -15,8 +16,8 @@ describe('actionWith', () => {
 
   beforeEach(() => {
     // Reset the context and Prop object for each test
-    def = new Definition('base', 'base')
-    testContext = new Context('base', 'base', def)
+    def = new Definition(Basic)
+    testContext = new Context(Basic, def)
     kv = prop('test-key', 'code')
   })
 

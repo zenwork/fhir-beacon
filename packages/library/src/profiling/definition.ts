@@ -6,13 +6,11 @@ import {CodeIds}          from '../codes'
 
 export class Definition {
 
-  name: FhirResourceEnum | string
-  refines: FhirResourceEnum | string | null
+  name: FhirResourceEnum
   props = new Map<string, Prop>()
 
-  constructor(name: FhirResourceEnum | string = 'unknown', refines?: FhirResourceEnum | string) {
+  constructor(name: FhirResourceEnum ) {
     this.name = name
-    this.refines = refines ?? name
   }
 
   set(kv: Prop) {
@@ -24,7 +22,7 @@ export class Definition {
   }
 
   clone(): Definition {
-    const def = new Definition(String(this.name), String(this.refines))
+    const def = new Definition(this.name)
     this.props.forEach((v, k) => def.set({ ...v, key: k }))
     return def
   }
@@ -35,6 +33,7 @@ export class Definition {
                      const k: string = (indent + '' + v.key).padEnd(30, ' ')
                      const s: string = v.isSummary ? '∑ ' : '  '
                      const c: string = v.cardinality.padEnd(15, ' ')
+                     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                      let b: any = ''
                      if (Array.isArray(v.bindings) && v.bindings.length > 0) {
                        b = ` (bind: ${v.bindings.join(',')})`
@@ -43,7 +42,6 @@ export class Definition {
                        b = ` (bind: ${code} ${v.bindingStrength})`
                      }
                      if (v.type instanceof Definition) {
-                       const t: Definition = v.type
                        return `${k}${s}${c}BACKBONE${b}\n` + v.type.toString(indent + '    ')
                      }
                      let t: string
@@ -57,12 +55,12 @@ export class Definition {
   }
 
   toJSON() {
-    let props = {}
+    const props = {}
+    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.props.forEach((v, k) => props[k] = v)
 
     return {
       name: this.name,
-      refines: this.refines,
       props: props
     }
   }
@@ -71,7 +69,6 @@ export class Definition {
 }
 
 export class Context {
-  constructor(public name: FhirResourceEnum | string,
-              public refines: FhirResourceEnum | string = '',
+  constructor(public name: FhirResourceEnum ,
               public def: Definition) {}
 }
