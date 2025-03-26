@@ -74,3 +74,27 @@ export class FhirPrimitiveNameEnum {
 
 // Make the enum immutable
 Object.freeze(FhirPrimitiveNameEnum)
+
+export const {
+  base64Binary,
+  boolean,
+  canonical,
+  code,
+  date,
+  dateTime,
+  decimal,
+  id,
+  instant,
+  integer,
+  integer64,
+  markdown,
+  oid,
+  positiveInt,
+  string,
+  time,
+  unsignedInt,
+  uri,
+  url,
+  uuid,
+  xhtml
+} = FhirPrimitiveNameEnum

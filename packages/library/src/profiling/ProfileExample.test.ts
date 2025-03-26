@@ -1,47 +1,48 @@
-import {describe, it}          from 'vitest'
-import {FhirDatatypeNameEnum}  from '../FhirDatatypeEnum'
-import {FhirPrimitiveNameEnum} from '../FhirPrimitiveEnum'
-import {FhirResourceNameEnum}  from '../FhirResourceNameEnum'
-import {add}                   from './add'
-import {define}                from './define'
-
-
-
-const { Identifier, Reference, CodeableConcept } = FhirDatatypeNameEnum
-const { code } = FhirPrimitiveNameEnum
-const {
+import {describe, it}                           from 'vitest'
+import {CodeableConcept, Identifier, Reference} from '../FhirDatatypeEnum'
+import {FhirPrimitiveNameEnum}                  from '../FhirPrimitiveEnum'
+import {
   CarePlan,
+  Device,
   DeviceRequest,
+  Encounter,
+  Group,
+  ImagingStudy,
+  Immunization,
   ImmunizationRecommendation,
-  MedicationRequest,
-  NutritionOrder,
-  ServiceRequest,
+  Location,
   MedicationAdministration,
   MedicationDispense,
+  MedicationRequest,
   MedicationStatement,
-  Procedure,
-  Immunization,
-  ImagingStudy,
+  NutritionOrder,
+  Observation,
   Patient,
-  Group,
-  Device,
-  Location,
-  Encounter
-} = FhirResourceNameEnum
+  Procedure,
+  ServiceRequest
+}                                               from '../FhirResourceEnum'
+import {add}                                    from './add'
+import {Preferred, Required}                    from './BindingStrength'
+import {define}                                 from './define'
+
+
+
+const { code } = FhirPrimitiveNameEnum
+
 
 describe('profileDefinition', () => {
   it('should be tested', () => {
 
     const observation = define({
-                                 name: 'Observation',
+                                 name: Observation,
                                  props: [
 
-                                   add.zeroToN('identifier', Identifier)
+                                   add.listOf('identifier', Identifier)
                                       .isSummary(),
 
-                                   add.zeroToN('basedOn',
-                                               Reference,
-                                               [
+                                   add.listOf('basedOn',
+                                              Reference,
+                                              [
                                                  CarePlan,
                                                  DeviceRequest,
                                                  ImmunizationRecommendation,
@@ -50,9 +51,9 @@ describe('profileDefinition', () => {
                                                  ServiceRequest
                                                ]).isSummary(),
 
-                                   add.zeroToN('partOF',
-                                               Reference,
-                                               [
+                                   add.listOf('partOf',
+                                              Reference,
+                                              [
                                                  MedicationAdministration,
                                                  MedicationDispense,
                                                  MedicationStatement,
@@ -61,28 +62,29 @@ describe('profileDefinition', () => {
                                                  ImagingStudy
                                                ]).isSummary(),
 
-                                   add.one('status', code)
-                                      .boundBy('vs-observation-status', 'required')
+                                   add.oneOf('status', code)
+                                      .boundBy('vs-observation-status', Required)
                                       .isSummary(),
 
-                                   add.zeroToN('category', CodeableConcept)
-                                      .boundBy('vs-observation-category', 'preferred'),
+                                   add.listOf('category', CodeableConcept)
+                                      .boundBy('vs-observation-category', Preferred),
 
-                                   add.one('code', CodeableConcept)
+                                   add.oneOf('code', CodeableConcept)
                                       .boundBy('vs-observation-codes'),
 
-                                   add.one('subject', Reference,
-                                           [Patient, Group, Device, Location])
+                                   add.oneOf('subject', Reference,
+                                             [Patient, Group, Device, Location])
                                       .optional(),
 
-                                   add.zeroToN('focus', Reference),
+                                   add.listOf('focus', Reference),
 
-                                   add.one('encounter', Reference, [Encounter])
+                                   add.oneOf('encounter', Reference, [Encounter])
                                       .optional()
                                       .isSummary()
 
                                  ]
                                })
+
 
     console.log(observation.toString())
 

@@ -1,6 +1,7 @@
-import {CodeIds}                       from '../codes'
-import {Context}                       from './definition'
-import {Action, BindingStrength, Prop} from './profiling.types'
+import {CodeIds}                  from '../codes'
+import {BindingStrength, Example} from './BindingStrength'
+import {Context}                  from './definition'
+import {Action, Prop}             from './profiling.types'
 
 
 
@@ -50,7 +51,7 @@ export function set(kv: Prop): Action {
       many = true
       return action as unknown as Action
     },
-    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = 'example'): Action => {
+    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): Action => {
       kv.bindings = binding
       kv.bindingStrength = bindingStrength
       return action as unknown as Action

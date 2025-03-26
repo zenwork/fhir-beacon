@@ -1,15 +1,16 @@
-import {Prop}    from 'profiling/profiling.types'
-import {CodeIds} from '../codes'
+import {FhirResourceEnum} from 'FhirResourceEnum'
+import {Prop}             from 'profiling/profiling.types'
+import {CodeIds}          from '../codes'
 
 
 
 export class Definition {
 
-  name: string
-  refines: string | null
+  name: FhirResourceEnum | string
+  refines: FhirResourceEnum | string | null
   props = new Map<string, Prop>()
 
-  constructor(name: string = 'unknown', refines?: string) {
+  constructor(name: FhirResourceEnum | string = 'unknown', refines?: FhirResourceEnum | string) {
     this.name = name
     this.refines = refines ?? name
   }
@@ -70,5 +71,7 @@ export class Definition {
 }
 
 export class Context {
-  constructor(public name: string, public refines: string = '', public def: Definition) {}
+  constructor(public name: FhirResourceEnum | string,
+              public refines: FhirResourceEnum | string = '',
+              public def: Definition) {}
 }

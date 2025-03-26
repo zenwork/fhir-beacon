@@ -5,6 +5,7 @@ import {FhirPrimitiveName}    from 'FhirPrimitiveName'
 import {FhirResourceName}     from 'FhirResourceName'
 import {Prop}                 from 'profiling/profiling.types'
 import {describe, expect, it} from 'vitest'
+import {Example}              from './BindingStrength'
 import {Definition}           from './definition'
 
 
@@ -15,7 +16,7 @@ const createTestProp = (key: string,
   isSummary: false,
   cardinality: '1..1',
   bindings: [],
-  bindingStrength: 'example',
+  bindingStrength: Example,
   type,
   typeNarrowing: [],
   constraints: [],

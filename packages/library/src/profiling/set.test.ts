@@ -1,4 +1,5 @@
 import {beforeEach, describe, expect, it} from 'vitest'
+import {Example}                          from './BindingStrength'
 import {Context, Definition}              from './definition'
 import {InternalAction, Prop}             from './profiling.types'
 import {prop}                             from './prop'
@@ -127,7 +128,7 @@ describe('actionWith', () => {
       typeNarrowing: [],
       cardinality: '0..1',
       bindings: ['existing-binding'],
-      bindingStrength: 'example',
+      bindingStrength: Example,
       constraints: [],
       mustSupport: false,
       isModifier: false,

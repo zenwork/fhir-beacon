@@ -1,8 +1,9 @@
-import {FhirDatatypeName}      from '../FhirDatatypeName'
-import {FhirPrimitiveName}     from '../FhirPrimitiveName'
-import {FhirResourceName}      from '../FhirResourceName'
-import {Definition}            from './definition'
-import {BindingStrength, Prop} from './profiling.types'
+import {FhirDatatypeName}         from '../FhirDatatypeName'
+import {FhirPrimitiveName}        from '../FhirPrimitiveName'
+import {FhirResourceName}         from '../FhirResourceName'
+import {BindingStrength, Example} from './BindingStrength'
+import {Definition}               from './definition'
+import {Prop}                     from './profiling.types'
 
 
 
@@ -13,7 +14,7 @@ export function prop(key: string,
                      typeNarrowing: NarrowableNames[] = [],
                      cardinality: string = '1..1',
                      bindings: string[] = [],
-                     bindingStrength: BindingStrength = 'example',
+                     bindingStrength: BindingStrength = Example,
                      constraints: (() => { key: string, error: string })[] = [],
                      mustSupport: boolean | undefined = undefined,
                      isModifier: boolean | undefined = undefined,
