@@ -1,16 +1,17 @@
-import {Prop}                 from 'profiling/profiling.types'
+import {DomainResourceData}   from 'internal'
+import {DefProperty}          from 'profiling/definition/types'
 import {describe, expect, it} from 'vitest'
-import {FhirDatatypeName}     from '../FhirDatatypeName'
-import {FhirPrimitiveName}    from '../FhirPrimitiveName'
-import {FhirResourceEnum}     from '../FhirResourceEnum'
-import {FhirResourceName}     from '../FhirResourceName'
+import {FhirDatatypeName}     from '../../FhirDatatypeName'
+import {FhirPrimitiveName}    from '../../FhirPrimitiveName'
+import {FhirResourceEnum}     from '../../FhirResourceEnum'
+import {FhirResourceName}     from '../../FhirResourceName'
 import {Example}              from './BindingStrength'
 import {Definition}           from './definition'
 
 
 // Sample constructor for mock props
-const createTestProp = (key: string,
-                        type: FhirPrimitiveName | FhirDatatypeName | FhirResourceName | Definition): Prop => ({
+const createTestProp = <T>(key: string,
+                           type: FhirPrimitiveName | FhirDatatypeName | FhirResourceName | Definition<T>): DefProperty<T> => ({
   key,
   isSummary: false,
   cardinality: '1..1',
@@ -35,8 +36,9 @@ describe('Definition Class', () => {
   })
 
   it('should set and retrieve a property', () => {
-    const def = new Definition(name)
-    const prop: Prop = createTestProp('testKey', 'string') as Prop
+    const def = new Definition<DomainResourceData>(name)
+    const prop: DefProperty<DomainResourceData> = createTestProp<DomainResourceData>('testKey',
+                                                                                     'string') as DefProperty<DomainResourceData>
 
     def.set(prop)
     expect(def.get('testKey')).toEqual(prop)
@@ -44,9 +46,9 @@ describe('Definition Class', () => {
   })
 
   it('should clone the Definition object', () => {
-    const def = new Definition(name)
-    const prop1: Prop = createTestProp('key1', 'string') as Prop
-    const prop2: Prop = createTestProp('key2', 'string') as Prop
+    const def = new Definition<DomainResourceData>(name)
+    const prop1: DefProperty<DomainResourceData> = createTestProp('key1', 'string') as DefProperty<DomainResourceData>
+    const prop2: DefProperty<DomainResourceData> = createTestProp('key2', 'string') as DefProperty<DomainResourceData>
 
     def.set(prop1)
     def.set(prop2)
@@ -61,8 +63,8 @@ describe('Definition Class', () => {
   })
 
   it('should generate indented string representation with toString()', () => {
-    const def = new Definition(name)
-    const prop: Prop = createTestProp('testKey', 'string') as Prop
+    const def = new Definition<DomainResourceData>(name)
+    const prop: DefProperty<DomainResourceData> = createTestProp('testKey', 'string') as DefProperty<DomainResourceData>
 
     def.set(prop)
     const result = def.toString()
@@ -71,8 +73,8 @@ describe('Definition Class', () => {
   })
 
   it('should convert the Definition object to JSON', () => {
-    const def = new Definition(name.profile('testProfile'))
-    const prop: Prop = createTestProp('testKey', 'string') as Prop
+    const def = new Definition<DomainResourceData>(name.profile('testProfile'))
+    const prop: DefProperty<DomainResourceData> = createTestProp('testKey', 'string') as DefProperty<DomainResourceData>
 
     def.set(prop)
 

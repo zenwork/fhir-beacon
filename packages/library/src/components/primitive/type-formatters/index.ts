@@ -4,9 +4,9 @@
 
 export * from './asDecodedBase64'
 export * from './asFormattedDate'
-export * from './asFormattedDateTime'
-export type {DateTimeFormatProps} from './asFormattedInstant'
-export *                          from './asFormattedInstant'
+export {asFormattedDateTime} from './asFormattedDateTime'
+export *                     from './asFormattedInstant'
+export *                     from './asFormattedInstant'
 export * from './asFormattedTime'
 export * from './asLink'
 export * from './asReadable'

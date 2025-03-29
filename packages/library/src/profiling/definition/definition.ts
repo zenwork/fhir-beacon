@@ -1,33 +1,34 @@
-import {FhirResourceEnum} from 'FhirResourceEnum'
-import {Prop}             from 'profiling/profiling.types'
-import {CodeIds}          from '../codes'
+import {FhirResourceEnum}                    from 'FhirResourceEnum'
+import {DefConstraintAssertion, DefProperty} from 'profiling/definition/types'
+import {CodeIds}                             from '../../codes'
 
 
 
-export class Definition {
+export class Definition<T> {
 
   name: FhirResourceEnum
-  props = new Map<string, Prop>()
+  props = new Map<string, DefProperty<T>>()
+  constraints: DefConstraintAssertion<T>[] = []
 
   constructor(name: FhirResourceEnum ) {
     this.name = name
   }
 
-  set(kv: Prop) {
+  set(kv: DefProperty<T>) {
     this.props.set(kv.key, kv)
   }
 
-  get(key: string): Prop | null {
+  get(key: string): DefProperty<T> | null {
     return this.props.get(key) || null
   }
 
-  clone(): Definition {
-    const def = new Definition(this.name)
+  clone(): Definition<T> {
+    const def = new Definition<T>(this.name)
     this.props.forEach((v, k) => def.set({ ...v, key: k }))
     return def
   }
 
-  toString(indent: string = '\t') {
+  toString(indent: string = '\t'): string {
     return `${Array.from(this.props.values())
                    .map(v => {
                      const k: string = (indent + '' + v.key).padEnd(30, ' ')
@@ -54,8 +55,8 @@ export class Definition {
                    }).join('\n')}`
   }
 
-  toJSON() {
-    const props = {}
+  toJSON(): object {
+    const props: Record<string, DefProperty<T>> = {}
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.props.forEach((v, k) => props[k] = v)
 
@@ -68,7 +69,6 @@ export class Definition {
 
 }
 
-export class Context {
-  constructor(public name: FhirResourceEnum ,
-              public def: Definition) {}
+export class Context<T> {
+  constructor(public name: FhirResourceEnum, public def: Definition<T>) {}
 }

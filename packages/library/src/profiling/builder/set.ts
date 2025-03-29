@@ -1,26 +1,27 @@
-import {CodeIds}                  from '../codes'
-import {BindingStrength, Example} from './BindingStrength'
-import {Context}                  from './definition'
-import {Action, Prop}             from './profiling.types'
+import {DefConstraintAssertion, DefProperty} from 'profiling/definition/types'
+import {CodeIds}                             from '../../codes'
+import {Builder}                             from '../define.types'
+import {BindingStrength, Example}            from '../definition/BindingStrength'
+import {Context}                             from '../definition/definition'
 
 
 
-export function set(kv: Prop): Action {
+export function set<T>(kv: DefProperty<T>): Builder<T> {
 
-  let context: Context | null = null
+  let context: Context<T> | null = null
   let optional = false
   let many = false
 
   const action = {
-    setCtx: (ctx) => {context = ctx},
+    setCtx: (ctx: Context<T>) => {context = ctx},
     run: () => {
       kv.key = `${kv.key}`
       let min = kv.cardinality.split('..')[0]
       let max = kv.cardinality.split('..')[1]
       if (optional) min = '0'
       if (many) max = '*'
-      const existing: Prop = context.def.get(kv.key)
-      if (existing) {
+      const existing: DefProperty<T> | null = context!.def.get(kv.key)
+      if (existing && context) {
         context.def.set({
                           key: kv.key,
                           type: kv.type ? kv.type : existing.type,
@@ -35,44 +36,44 @@ export function set(kv: Prop): Action {
                           isSummary: kv.isSummary ? kv.isSummary : existing.isSummary,
                           typeNarrowing: kv.typeNarrowing ? kv.typeNarrowing : existing.typeNarrowing
                         })
-      } else {
+      } else if (context) {
         context.def.set({ ...kv, cardinality: min + '..' + max })
       }
     },
-    optional: (): Action => {
+    optional: (): Builder<T> => {
       optional = true
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    required: (): Action => {
+    required: (): Builder<T> => {
       optional = false
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    hasMany: (): Action => {
+    hasMany: (): Builder<T> => {
       many = true
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): Action => {
+    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): Builder<T> => {
       kv.bindings = binding
       kv.bindingStrength = bindingStrength
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    constrainedBy: (constraints: (() => { key: string, error: string })[]): Action => {
+    constrainedBy: (constraints: DefConstraintAssertion<T>[]): Builder<T> => {
       kv.constraints = constraints
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    mustSupport: (): Action => {
+    mustSupport: (): Builder<T> => {
       kv.mustSupport = true
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    isModifier: (): Action => {
+    isModifier: (): Builder<T> => {
       kv.isModifier = true
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     },
-    isSummary: (): Action => {
+    isSummary: (): Builder<T> => {
       kv.isSummary = true
-      return action as unknown as Action
+      return action as unknown as Builder<T>
     }
   }
 
-  return action as unknown as Action
+  return action as unknown as Builder<T>
 }

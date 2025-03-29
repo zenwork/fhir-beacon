@@ -4,6 +4,8 @@ import {FhirResourceName} from 'FhirResourceName'
 
 /**
  * Enum class representing FHIR resource types
+ * TODO: bind data models to these enums so we get something like `new
+ * FhirResourceEnum<AccountData>('Account','AccountData')`
  */
 export class FhirResourceEnum {
   static Account = new FhirResourceEnum('Account')
@@ -170,20 +172,20 @@ export class FhirResourceEnum {
 
   constructor(value: FhirResourceName, profile?: string) {
     this.value = value
-    this.profileName = profile
+    this.profileName = profile ?? ''
   }
   /**
    * Get all available FHIR resource names
    * @returns {FhirResourceEnum[]} Array of all resource names
    */
-  static values() {
+  static values(): FhirResourceEnum[] {
     return Object.values(this).filter(value => value instanceof FhirResourceEnum)
   }
   /**
    * Get all available FHIR resource names as strings
    * @returns {string[]} Array of all resource names as strings
    */
-  static valueStrings() {
+  static valueStrings(): string[] {
     return this.values().map(v => v.toString())
   }
   /**
@@ -191,15 +193,15 @@ export class FhirResourceEnum {
    * @param {string} value - The string to check
    * @returns {boolean} True if the value is a valid resource name
    */
-  static isValid(value) {
-    return this.valueStrings().includes(value)
+  static isValid(value: unknown) {
+    return this.valueStrings().includes(String(value))
   }
   /**
    * Get an enum by its string value
    * @param {string} value - The string value to look up
    * @returns {FhirResourceEnum|undefined} The enum value or undefined if not found
    */
-  static fromString(value) {
+  static fromString(value: string) {
     return this.values().find(v => v.toString() === value)
   }
   /**
@@ -207,14 +209,16 @@ export class FhirResourceEnum {
    * @param {string} prefix - The prefix to filter by
    * @returns {FhirResourceEnum[]} Array of resource enum values starting with the given prefix
    */
-  static getByPrefix(prefix) {
+  static getByPrefix(prefix: string) {
     return this.values().filter(resource =>
                                   resource.toString().startsWith(prefix)
     )
   }
+
   toString() {
     return this.value + (this.profileName ? `/${this.profileName}` : '')
   }
+
   valueOf() {
     return this.value
   }
@@ -222,6 +226,7 @@ export class FhirResourceEnum {
   profile(name: string) {
     return new FhirResourceEnum(this.value, name)
   }
+
 }
 
 // Make the enum immutable

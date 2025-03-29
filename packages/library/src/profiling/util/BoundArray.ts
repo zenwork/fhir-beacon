@@ -1,4 +1,4 @@
-export class BoundedArray {
+export class BoundArray {
 
   private readonly min: number
   private readonly max: number
@@ -104,7 +104,7 @@ export class BoundedArray {
 
 // Example Usage
 try {
-  const mySet = new BoundedArray(1, 5) // min 1, max 5
+  const mySet = new BoundArray(1, 5) // min 1, max 5
   mySet.add(10)
   console.log(mySet.getArray()) // [10]
 

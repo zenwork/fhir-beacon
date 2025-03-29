@@ -45,7 +45,7 @@ export class FhirPrimitiveNameEnum {
    * Get all available FHIR primitive datatype names as strings
    * @returns {string[]} Array of all primitive datatype names as strings
    */
-  static valueStrings() {
+  static valueStrings(): string[] {
     return this.values().map(v => v.toString())
   }
   /**
@@ -53,17 +53,18 @@ export class FhirPrimitiveNameEnum {
    * @param {string} value - The string to check
    * @returns {boolean} True if the value is a valid primitive datatype name
    */
-  static isValid(value) {
-    return this.valueStrings().includes(value)
+  static isValid(value: unknown): boolean {
+    return this.valueStrings().includes(String(value))
   }
   /**
    * Get an enum by its string value
    * @param {string} value - The string value to look up
    * @returns {FhirPrimitiveNameEnum|undefined} The enum value or undefined if not found
    */
-  static fromString(value) {
+  static fromString(value: string): FhirPrimitiveNameEnum | undefined {
     return this.values().find(v => v.toString() === value)
   }
+
   toString() {
     return this.value
   }
