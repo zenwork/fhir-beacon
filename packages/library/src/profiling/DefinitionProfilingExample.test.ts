@@ -100,21 +100,22 @@ describe('profileDefinition', () => {
                                                       ])
                                                       .isSummary(),
 
-                                                    add.optionOf<ObservationData>('status', code)
+                                                    add.oneOf<ObservationData>('status', code)
                                                       .boundBy('vs-observation-status', Required)
                                                       .isSummary(),
 
-                                                    add.optionOf<ObservationData>('category', CodeableConcept)
+                                                    add.optionalListOf<ObservationData>('category', CodeableConcept)
                                                       .boundBy('vs-observation-category', Preferred),
 
                                                     add.oneOf<ObservationData>('code', CodeableConcept).boundBy(
-                                                      'vs-observation-codes'),
+                                                      'vs-observation-codes').isSummary(),
 
                                                     add.optionOf<ObservationData>('subject',
                                                                                   Reference,
-                                                                                  [Patient, Group, Device, Location]),
+                                                                                  [Patient, Group, Device, Location])
+                                                       .isSummary(),
 
-                                                    add.optionalListOf('focus', Reference),
+                                                    add.optionalListOf<ObservationData>('focus', Reference).isSummary(),
 
                                                     add.optionOf<ObservationData>('encounter', Reference, [Encounter]).isSummary(),
 
@@ -137,17 +138,17 @@ describe('profileDefinition', () => {
                                                                                         ])
                                                        .isSummary(),
 
-                                                    add.choiceOf<ObservationData>('value', 'Quantity', Quantity).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'CodeableConcept', CodeableConcept).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'String', string).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Boolean', boolean).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Integer', integer).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Range', Range).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Ratio', Ratio).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'SampledData', SampledData).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Time', time).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'DateTime', dateTime).optional(),
-                                                    add.choiceOf<ObservationData>('value', 'Period', Period).optional(),
+                                                    add.choiceOf<ObservationData>('value', 'Quantity', Quantity).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'CodeableConcept', CodeableConcept).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'String', string).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Boolean', boolean).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Integer', integer).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Range', Range).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Ratio', Ratio).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'SampledData', SampledData).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Time', time).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'DateTime', dateTime).optional().isSummary(),
+                                                    add.choiceOf<ObservationData>('value', 'Period', Period).optional().isSummary(),
 
                                                     add.optionOf<ObservationData>('dataAbsentReason', CodeableConcept)
                                                        .boundBy('vs-data-absent-reason', Extensible),
@@ -155,7 +156,7 @@ describe('profileDefinition', () => {
                                                       'vs-observation-interpretation',
                                                       Extensible),
                                                     add.optionalListOf<ObservationData>('note', Annotation).optional(),
-                                                    add.oneOf<ObservationData>('bodySite', CodeableConcept).boundBy('vs-body-site', Example),
+                                                    add.optionOf<ObservationData>('bodySite', CodeableConcept).boundBy('vs-body-site', Example),
                                                     add.optionOf<ObservationData>('method', CodeableConcept).boundBy('vs-observation-methods',
                                                                                                                      Example),
                                                     add.optionOf<ObservationData>('specimen', Reference, [Specimen]),
@@ -197,26 +198,38 @@ describe('profileDefinition', () => {
                                                       define<ObservationData>({
                                                                                 type: new ResourceDef('ObservationComponent'),
                                                                                 props: [
-                                                                                  add.oneOf<ObservationData>('code', CodeableConcept),
+                                                                                  add.oneOf<ObservationData>('code', CodeableConcept).isSummary(),
 
                                                                                   add.choiceOf<ObservationData>('value', 'Quantity', Quantity)
-                                                                                     .optional(),
+                                                                                     .optional().isSummary(),
                                                                                   add.choiceOf<ObservationData>('value',
                                                                                                                 'CodeableConcept',
-                                                                                                                CodeableConcept).optional(),
-                                                                                  add.choiceOf<ObservationData>('value', 'String', string).optional(),
+                                                                                                                CodeableConcept)
+                                                                                     .optional()
+                                                                                     .isSummary(),
+                                                                                  add.choiceOf<ObservationData>('value', 'String', string)
+                                                                                     .optional()
+                                                                                     .isSummary(),
                                                                                   add.choiceOf<ObservationData>('value', 'Boolean', boolean)
-                                                                                     .optional(),
+                                                                                     .optional().isSummary(),
                                                                                   add.choiceOf<ObservationData>('value', 'Integer', integer)
-                                                                                     .optional(),
-                                                                                  add.choiceOf<ObservationData>('value', 'Range', Range).optional(),
-                                                                                  add.choiceOf<ObservationData>('value', 'Ratio', Ratio).optional(),
+                                                                                     .optional().isSummary(),
+                                                                                  add.choiceOf<ObservationData>('value', 'Range', Range)
+                                                                                     .optional()
+                                                                                     .isSummary(),
+                                                                                  add.choiceOf<ObservationData>('value', 'Ratio', Ratio)
+                                                                                     .optional()
+                                                                                     .isSummary(),
                                                                                   add.choiceOf<ObservationData>('value', 'SampledData', SampledData)
-                                                                                     .optional(),
-                                                                                  add.choiceOf<ObservationData>('value', 'Time', time).optional(),
+                                                                                     .optional().isSummary(),
+                                                                                  add.choiceOf<ObservationData>('value', 'Time', time)
+                                                                                     .optional()
+                                                                                     .isSummary(),
                                                                                   add.choiceOf<ObservationData>('value', 'DateTime', dateTime)
-                                                                                     .optional(),
-                                                                                  add.choiceOf<ObservationData>('value', 'Period', Period).optional(),
+                                                                                     .optional().isSummary(),
+                                                                                  add.choiceOf<ObservationData>('value', 'Period', Period)
+                                                                                     .optional()
+                                                                                     .isSummary(),
 
                                                                                   add.optionOf<ObservationData>('dataAbsentReason', CodeableConcept)
                                                                                      .boundBy('vs-data-absent-reason', Extensible),
@@ -249,7 +262,7 @@ describe('profileDefinition', () => {
                                                                                   ).optional()
                                                                                 ]
                                                                               })
-                                                    ).optional()
+                                                    ).optional().isSummary()
 
                                                   ]
                                                 })
