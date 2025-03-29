@@ -1,19 +1,19 @@
 import {describe, it}                                from 'vitest'
-import {Address, CodeableConcept, HumanName, Timing} from '../FhirDatatypeEnum'
-import {FhirResourceEnum, Observation}               from '../FhirResourceEnum'
+import {Address, CodeableConcept, HumanName, Timing} from '../DatatypeDef'
+import {Observation, ResourceDef}                    from '../ResourceDef'
 import {DomainResourceData}                          from '../internal'
 import {add}                                         from './builder/add'
 import {define}                                      from './define'
-import {Definition}                                  from './definition/definition'
+import {StructureDefinition}                         from './definition/StructureDefinition'
 
 
 
 describe('test', () => {
   it('test', () => {
 
-    const base: Definition<DomainResourceData> =
+    const base: StructureDefinition<DomainResourceData> =
       define({
-               name: Observation,
+               type: Observation,
                props: [
                  add.oneOf('foo', HumanName)
                     .optional()
@@ -21,24 +21,21 @@ describe('test', () => {
                  add.listOf('baz', Address)
                     .optional(),
                  add.oneOf('baz', CodeableConcept),
-                 add.backboneOf(define({
-                                         name: new FhirResourceEnum(
-                                           'BackboneElement'),
-                                         props: [
-                                           add.oneOf('bkStuff',
-                                                     CodeableConcept)
-                                              .optional()
-                                              .boundBy(['a', 'b', 'c']),
-                                           add.oneOf('bkThing', Timing)
-                                              .optional()
-                                         ]
-                                       })).optional()
+                 add.backboneOf('backboneKey', define({
+                                                        type: new ResourceDef('ObservationFoo'),
+                                                        props: [
+                                                          add.oneOf('bkStuff', CodeableConcept)
+                                                             .optional()
+                                                             .isSummary(),
+                                                          add.oneOf('bkThing', Timing).optional()
+                                                        ]
+                                                      })).optional()
                ]
              })
 
-    const profile: Definition<DomainResourceData> =
+    const profile: StructureDefinition<DomainResourceData> =
       define({
-               name: Observation.profile('profile'),
+               type: Observation.profile('profile'),
                base: base,
                props: [
                  add.oneOf<DomainResourceData>('foo', HumanName)
@@ -50,9 +47,9 @@ describe('test', () => {
                                      })
                                    ]),
                  add.oneOf<DomainResourceData>('baz', Address).isSummary(),
-                 add.backboneOf<DomainResourceData>(define({
-                                                             name: new FhirResourceEnum(
-                                                               'BackboneElement'),
+                 add.backboneOf<DomainResourceData>('backboneKey', define({
+                                                                            type: new ResourceDef(
+                                                                              'ObservationFoo'),
                                                              props: [
                                                                add.oneOf('bkStuff',
                                                                          CodeableConcept)
@@ -65,10 +62,10 @@ describe('test', () => {
              })
 
 
-    console.log(base.name.toString())
+    console.log(base.type.toString())
     console.log(base.toString())
     console.log()
-    console.log(profile.name.toString())
+    console.log(profile.type.toString())
     console.log(profile.toString())
     // console.log(JSON.stringify(profile, null, 2))
 

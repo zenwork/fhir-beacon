@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {PropertyValues}                                                  from 'lit'
 import {property, state}                                                 from 'lit/decorators.js'
+import {DatatypeName}                                                    from '../../../DatatypeName'
+import {ResourceName}                                                    from '../../../ResourceName'
 import {PrimitiveInputEvent, PrimitiveInvalidEvent, PrimitiveValidEvent} from '../../../components/primitive'
-import {FhirDatatypeName}                                                from '../../../FhirDatatypeName'
-import {FhirResourceName}                                                from '../../../FhirResourceName'
 import {DataContextConsumerController, FhirDataContext}                  from '../../contexts'
 import {BeaconDataError}                                                 from '../../errors/beacon-data-error'
-import {
-  ConfigurableElement
-}                                                                        from '../configurable/fhir-configurable-element'
 import {DataHandling}                                                    from '../DataHandling'
-import {decorate, NoDataObject}                                          from '../Decorate'
+import {NoDataObject, decorate }                                          from '../Decorate'
 import {Decorated}                                                       from '../Decorate.types'
 import {FqkMap}                                                          from '../DeepKeyMap'
 import {FhirElementData}                                                 from '../FhirElement.type'
 import {ValidationsImpl}                                                 from '../Validations.impl'
 import {FullyQualifiedKey, Validations}                                  from '../Validations.type'
+import {ConfigurableElement}                                             from '../configurable/fhir-configurable-element'
 
 
 
@@ -98,7 +96,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
   private invalids: Set<FullyQualifiedKey> = new Set()
 
-  protected constructor(type: FhirDatatypeName | FhirResourceName | string) {
+  protected constructor(type: DatatypeName | ResourceName | string) {
     super()
     this.type = type
     this.data = NoDataObject as T

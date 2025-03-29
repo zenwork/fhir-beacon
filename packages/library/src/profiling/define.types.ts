@@ -1,8 +1,8 @@
-import {DefConstraintAssertion} from 'profiling/definition/types'
-import {FhirResourceEnum}       from '../FhirResourceEnum'
-import {CodeIds}                from '../codes'
-import {BindingStrength}        from './definition/BindingStrength'
-import {Context, Definition}    from './definition/definition'
+import {ResourceDef}                  from '../ResourceDef'
+import {CodeIds}                      from '../codes'
+import {BindingStrength}              from './definition/BindingStrength'
+import {Context, StructureDefinition} from './definition/StructureDefinition'
+import {DefConstraintAssertion}       from './definition/types'
 
 
 
@@ -23,8 +23,8 @@ export type InternalBuilder<T> = Builder<T> & {
 }
 
 export type DefineBuilderProps<T> = {
-  name: FhirResourceEnum,
-  base?: Definition<T>,
+  type: ResourceDef,
+  base?: StructureDefinition<T>,
   constraints?: DefConstraintAssertion<T>[],
   props?: Builder<T>[]
 }

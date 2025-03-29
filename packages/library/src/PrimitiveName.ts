@@ -1,4 +1,4 @@
-export type FhirPrimitiveName =
+export type PrimitiveName =
   | 'base64Binary'
   | 'boolean'
   | 'canonical'

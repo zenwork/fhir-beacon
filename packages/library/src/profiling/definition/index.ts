@@ -3,5 +3,5 @@
  */
 
 export * from './BindingStrength'
-export * from './definition'
+export * from './StructureDefinition'
 export * from './types'

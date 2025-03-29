@@ -1,12 +1,12 @@
-import {DefConstraintAssertion, DefProperty} from 'profiling/definition/types'
+import {DefConstraintAssertion, PropertyDef} from 'profiling/definition/types'
 import {CodeIds}                             from '../../codes'
 import {Builder}                             from '../define.types'
 import {BindingStrength, Example}            from '../definition/BindingStrength'
-import {Context}                             from '../definition/definition'
+import {Context}                             from '../definition/StructureDefinition'
 
 
 
-export function set<T>(kv: DefProperty<T>): Builder<T> {
+export function set<T>(def: PropertyDef<T>): Builder<T> {
 
   let context: Context<T> | null = null
   let optional = false
@@ -15,29 +15,33 @@ export function set<T>(kv: DefProperty<T>): Builder<T> {
   const action = {
     setCtx: (ctx: Context<T>) => {context = ctx},
     run: () => {
-      kv.key = `${kv.key}`
-      let min = kv.cardinality.split('..')[0]
-      let max = kv.cardinality.split('..')[1]
+      def.key = `${def.key}`
+      let min = def.cardinality.split('..')[0]
+      let max = def.cardinality.split('..')[1]
       if (optional) min = '0'
       if (many) max = '*'
-      const existing: DefProperty<T> | null = context!.def.get(kv.key)
+      const existing: PropertyDef<T> | null = context!.def.get(def.choice + def.key)
       if (existing && context) {
         context.def.set({
-                          key: kv.key,
-                          type: kv.type ? kv.type : existing.type,
-                          bindings: (kv.bindings && Array.isArray(kv.bindings) && kv.bindings.length > 0) || kv.bindings
-                                    ? kv.bindings
+                          key: def.key,
+                          type: def.type ? def.type : existing.type,
+                          bindings: (def.bindings && Array.isArray(def.bindings) && def.bindings.length > 0)
+                                    || def.bindings
+                                    ? def.bindings
                                     : existing.bindings,
-                          bindingStrength: kv.bindingStrength ? kv.bindingStrength : existing.bindingStrength,
-                          constraints: kv.constraints.length > 0 ? kv.constraints : existing.constraints,
+                          bindingStrength: def.bindingStrength ? def.bindingStrength : existing.bindingStrength,
+                          constraints: def.constraints.length > 0 ? def.constraints : existing.constraints,
+                          choice: def.choice ? def.choice : existing.choice,
                           cardinality: min + '..' + max,
-                          mustSupport: kv.mustSupport ? kv.mustSupport : existing.mustSupport,
-                          isModifier: kv.isModifier ? kv.isModifier : existing.isModifier,
-                          isSummary: kv.isSummary ? kv.isSummary : existing.isSummary,
-                          typeNarrowing: kv.typeNarrowing ? kv.typeNarrowing : existing.typeNarrowing
+                          mustSupport: def.mustSupport ? def.mustSupport : existing.mustSupport,
+                          isModifier: def.isModifier ? def.isModifier : existing.isModifier,
+                          isSummary: def.isSummary ? def.isSummary : existing.isSummary,
+                          typeNarrowing: def.typeNarrowing ? def.typeNarrowing : existing.typeNarrowing,
+                          subdefs: def.subdefs ? def.subdefs : existing.subdefs
                         })
       } else if (context) {
-        context.def.set({ ...kv, cardinality: min + '..' + max })
+        // console.log(def)
+        context.def.set({ ...def, cardinality: min + '..' + max })
       }
     },
     optional: (): Builder<T> => {
@@ -53,24 +57,24 @@ export function set<T>(kv: DefProperty<T>): Builder<T> {
       return action as unknown as Builder<T>
     },
     boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): Builder<T> => {
-      kv.bindings = binding
-      kv.bindingStrength = bindingStrength
+      def.bindings = binding
+      def.bindingStrength = bindingStrength
       return action as unknown as Builder<T>
     },
     constrainedBy: (constraints: DefConstraintAssertion<T>[]): Builder<T> => {
-      kv.constraints = constraints
+      def.constraints = constraints
       return action as unknown as Builder<T>
     },
     mustSupport: (): Builder<T> => {
-      kv.mustSupport = true
+      def.mustSupport = true
       return action as unknown as Builder<T>
     },
     isModifier: (): Builder<T> => {
-      kv.isModifier = true
+      def.isModifier = true
       return action as unknown as Builder<T>
     },
     isSummary: (): Builder<T> => {
-      kv.isSummary = true
+      def.isSummary = true
       return action as unknown as Builder<T>
     }
   }

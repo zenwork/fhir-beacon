@@ -1,34 +1,35 @@
-import {DefConstraintAssertion, DefProperty} from 'profiling/definition/types'
-import {FhirDatatypeName}                    from '../../FhirDatatypeName'
-import {FhirPrimitiveName}                   from '../../FhirPrimitiveName'
-import {FhirResourceName}                    from '../../FhirResourceName'
-import {BindingStrength, Example}            from '../definition/BindingStrength'
-import {Definition}                          from '../definition/definition'
+import {BindingStrength, Example}                                       from '../definition/BindingStrength'
+import {DefConstraintAssertion, NarrowableNames, PropertyDef, TypeName} from '../definition/types'
 
 
 
-export type PropType<T> = FhirPrimitiveName | FhirDatatypeName | FhirResourceName | Definition<T>
-export type NarrowableNames = FhirDatatypeName | FhirResourceName
 export function prop<T>(key: string,
-                        type: PropType<T>,
-                     typeNarrowing: NarrowableNames[] = [],
-                     cardinality: string = '1..1',
-                     bindings: string[] = [],
-                     bindingStrength: BindingStrength = Example,
+                        typeName: TypeName,
+                        typeNarrowing: NarrowableNames[] = [],
+                        cardinality: string = '1..1',
+                        bindings: string[] = [],
+                        bindingStrength: BindingStrength = Example,
                         constraints: DefConstraintAssertion<T>[] = [],
-                     mustSupport: boolean | undefined = undefined,
-                     isModifier: boolean | undefined = undefined,
-                        isSummary: boolean | undefined = undefined): DefProperty<T> {
+                        choice: string | undefined = undefined,
+                        subdefs: Map<string, PropertyDef<T>> | undefined = undefined,
+                        mustSupport: boolean | undefined = undefined,
+                        isModifier: boolean | undefined = undefined,
+                        isSummary: boolean | undefined = undefined
+): PropertyDef<T> {
+
   return {
     key,
-    type,
+    type: typeName,
     typeNarrowing,
     cardinality,
     bindings,
     bindingStrength,
     constraints,
+    choice,
     mustSupport,
     isModifier,
-    isSummary
+    isSummary,
+    subdefs
   }
+
 }

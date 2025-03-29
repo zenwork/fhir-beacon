@@ -5,7 +5,7 @@ import {FhirTypes}    from './code-systems'
 
 describe('FHIR Types', { skip: true }, () => {
   it('should generate primitive names', () => {
-    console.log('export type FhirPrimitiveName = \n')
+    console.log('export type PrimitiveName = \n')
     FhirTypes.sort((a, b) => a.code.localeCompare(b.code))
              .filter(t => !t.abstract && t.kind === 'primitive')
              .forEach(t => console.log('| \'' + t.code + '\'\n'))
@@ -13,7 +13,7 @@ describe('FHIR Types', { skip: true }, () => {
   })
 
   it('should generate datatype names', () => {
-    console.log('export type FhirDatatypeName = \n')
+    console.log('export type DatatypeName = \n')
     FhirTypes.sort((a, b) => a.code.localeCompare(b.code))
              .filter(t => !t.abstract && t.kind === 'datatype')
              .forEach(t => console.log('| \'' + t.code + '\'\n'))
@@ -21,7 +21,7 @@ describe('FHIR Types', { skip: true }, () => {
   })
 
   it('should generate resource', () => {
-    console.log('export type FhirResourceName = \n')
+    console.log('export type ResourceName = \n')
     FhirTypes.sort((a, b) => a.code.localeCompare(b.code))
              .filter(t => !t.abstract && t.kind === 'resource')
              .forEach(t => console.log('| \'' + t.code + '\'\n'))

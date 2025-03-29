@@ -1,4 +1,4 @@
-export type FhirResourceName =
+export type ResourceName =
   | 'Account'
   | 'ActivityDefinition'
   | 'ActorDefinition'
@@ -88,6 +88,7 @@ export type FhirResourceName =
   | 'ManufacturedItemDefinition'
   | 'Measure'
   | 'MeasureReport'
+  | 'Media'
   | 'Medication'
   | 'MedicationAdministration'
   | 'MedicationDispense'

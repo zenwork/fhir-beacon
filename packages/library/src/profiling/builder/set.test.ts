@@ -1,22 +1,22 @@
-import {beforeEach, describe, expect, it}          from 'vitest'
-import {Basic}                                     from '../../FhirResourceEnum'
-import {DomainResourceData}                        from '../../internal'
-import {Context, DefProperty, Definition, Example} from '../definition'
-import {InternalBuilder}                           from '../index'
-import {prop}                                      from './prop'
-import {set}                                       from './set'
+import {beforeEach, describe, expect, it}                   from 'vitest'
+import {Basic}                                              from '../../ResourceDef'
+import {DomainResourceData}                                 from '../../internal'
+import {Context, Example, PropertyDef, StructureDefinition} from '../definition'
+import {InternalBuilder}                                    from '../index'
+import {prop}                                               from './prop'
+import {set}                                                from './set'
 
 
 // Tests
 describe('actionWith', () => {
 
-  let def: Definition<DomainResourceData>
+  let def: StructureDefinition<DomainResourceData>
   let testContext: Context<DomainResourceData>
-  let kv: DefProperty<DomainResourceData>
+  let kv: PropertyDef<DomainResourceData>
 
   beforeEach(() => {
     // Reset the context and Prop object for each test
-    def = new Definition(Basic)
+    def = new StructureDefinition(Basic)
     testContext = new Context(Basic, def)
     kv = prop('test-key', 'code')
   })
@@ -123,7 +123,7 @@ describe('actionWith', () => {
   })
 
   it('should merge existing Prop from context', () => {
-    const existingProp: DefProperty<DomainResourceData> = {
+    const existingProp: PropertyDef<DomainResourceData> = {
       key: 'test-key',
       type: 'code',
       typeNarrowing: [],
@@ -131,9 +131,11 @@ describe('actionWith', () => {
       bindings: ['existing-binding'],
       bindingStrength: Example,
       constraints: [],
+      choice: undefined,
       mustSupport: false,
       isModifier: false,
-      isSummary: false
+      isSummary: false,
+      subdefs: undefined
     }
 
     testContext.def.set(existingProp)

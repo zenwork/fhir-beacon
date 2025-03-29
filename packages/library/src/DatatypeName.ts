@@ -1,4 +1,4 @@
-export type FhirDatatypeName =
+export type DatatypeName =
   | 'Address'
   | 'Age'
   | 'Annotation'
@@ -36,6 +36,7 @@ export type FhirDatatypeName =
   | 'Reference'
   | 'RelatedArtifact'
   | 'SampledData'
+  | 'SimpledQuantity'
   | 'Signature'
   | 'Timing'
   | 'TriggerDefinition'

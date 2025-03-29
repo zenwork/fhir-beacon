@@ -1,5 +1,5 @@
 import {DefineBuilderProps, InternalBuilder} from './define.types'
-import {Context, Definition}                 from './definition/definition'
+import {Context, StructureDefinition}        from './definition/StructureDefinition'
 
 
 
@@ -9,14 +9,14 @@ import {Context, Definition}                 from './definition/definition'
  * @template T - The type parameter for the resource definition
  * @param {Object} params - The configuration parameters
  * @param {FhirResourceEnum} params.name - The name of the FHIR resource
- * @param {Definition<T>} [params.base] - Base definition to extend from (defaults to new Definition)
+ * @param {StructureDefinition<T>} [params.base] - Base definition to extend from (defaults to new Definition)
  * @param {ConstraintAssertion<T>[]} [params.constraints=[]] - Array of constraint functions
  * @param {Builder<T>[]} [params.props=[]] - Array of property builders to configure the definition
- * @returns {Definition<T>} The configured FHIR resource definition
+ * @returns {StructureDefinition<T>} The configured FHIR resource definition
  *
  * @example
  * const patientDef = define({
- *   name: FhirResourceEnum.Patient,
+ *   name: ResourceDef.Patient,
  *   constraints: [],
  *   props: [
  *     add.oneOf('name', FhirDatatypeNameEnum.HumanName)
@@ -26,21 +26,21 @@ import {Context, Definition}                 from './definition/definition'
  * });
  */
 export function define<T>({
-                            name,
-                            base = new Definition<T>(name),
+                            type,
+                            base = new StructureDefinition<T>(type),
                             constraints = [],
                             props = []
-                          }: DefineBuilderProps<T>): Definition<T> {
+                          }: DefineBuilderProps<T>): StructureDefinition<T> {
 
-  if (base.name.value !== name.value) throw new Error(
-    `Base name ${base.name.value} does not match name ${name.value}`
+  if (base.type.value !== type.value) throw new Error(
+    `Base name ${base.type.value} does not match name ${type.value}`
   )
 
-  const def: Definition<T> = base.clone()
-  def.name = name
+  const def: StructureDefinition<T> = base.clone()
+  def.type = type
   def.constraints = constraints
 
-  const ctx: Context<T> = new Context<T>(def.name, def)
+  const ctx: Context<T> = new Context<T>(def.type, def)
 
   props.forEach(f => {
     const action: InternalBuilder<T> = f as InternalBuilder<T>

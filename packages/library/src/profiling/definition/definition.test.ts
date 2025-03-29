@@ -1,17 +1,17 @@
+import {DatatypeName}         from 'DatatypeName'
+import {PrimitiveName}        from 'PrimitiveName'
+import {ResourceName}         from 'ResourceName'
 import {DomainResourceData}   from 'internal'
-import {DefProperty}          from 'profiling/definition/types'
 import {describe, expect, it} from 'vitest'
-import {FhirDatatypeName}     from '../../FhirDatatypeName'
-import {FhirPrimitiveName}    from '../../FhirPrimitiveName'
-import {FhirResourceEnum}     from '../../FhirResourceEnum'
-import {FhirResourceName}     from '../../FhirResourceName'
+import {ResourceDef}          from '../../ResourceDef'
+import {PropertyDef}          from '../definition/types'
 import {Example}              from './BindingStrength'
-import {Definition}           from './definition'
+import {StructureDefinition}  from './StructureDefinition'
 
 
 // Sample constructor for mock props
 const createTestProp = <T>(key: string,
-                           type: FhirPrimitiveName | FhirDatatypeName | FhirResourceName | Definition<T>): DefProperty<T> => ({
+                           type: PrimitiveName | DatatypeName | ResourceName | `${DatatypeName}${string}` | `${ResourceName}${string}`): PropertyDef<T> => ({
   key,
   isSummary: false,
   cardinality: '1..1',
@@ -20,25 +20,27 @@ const createTestProp = <T>(key: string,
   type,
   typeNarrowing: [],
   constraints: [],
+  choice: undefined,
   isModifier: false,
-  mustSupport: false
+  mustSupport: false,
+  subdefs: undefined
 })
 
 describe('Definition Class', () => {
 
-  const name: FhirResourceEnum = new FhirResourceEnum('Basic')
+  const name: ResourceDef = new ResourceDef('Basic')
   it('should create a Definition instance with specified values', () => {
-    const def = new Definition(name.profile('testName'))
+    const def = new StructureDefinition(name.profile('testName'))
 
-    expect(def.name.value).toBe('Basic')
-    expect(def.name.profileName).toBe('testName')
+    expect(def.type.value).toBe('Basic')
+    expect(def.type.profileName).toBe('testName')
     expect(def.props.size).toBe(0)
   })
 
   it('should set and retrieve a property', () => {
-    const def = new Definition<DomainResourceData>(name)
-    const prop: DefProperty<DomainResourceData> = createTestProp<DomainResourceData>('testKey',
-                                                                                     'string') as DefProperty<DomainResourceData>
+    const def = new StructureDefinition<DomainResourceData>(name)
+    const prop: PropertyDef<DomainResourceData> = createTestProp<DomainResourceData>('testKey',
+                                                                                     'string') as PropertyDef<DomainResourceData>
 
     def.set(prop)
     expect(def.get('testKey')).toEqual(prop)
@@ -46,9 +48,9 @@ describe('Definition Class', () => {
   })
 
   it('should clone the Definition object', () => {
-    const def = new Definition<DomainResourceData>(name)
-    const prop1: DefProperty<DomainResourceData> = createTestProp('key1', 'string') as DefProperty<DomainResourceData>
-    const prop2: DefProperty<DomainResourceData> = createTestProp('key2', 'string') as DefProperty<DomainResourceData>
+    const def = new StructureDefinition<DomainResourceData>(name)
+    const prop1: PropertyDef<DomainResourceData> = createTestProp('key1', 'string') as PropertyDef<DomainResourceData>
+    const prop2: PropertyDef<DomainResourceData> = createTestProp('key2', 'string') as PropertyDef<DomainResourceData>
 
     def.set(prop1)
     def.set(prop2)
@@ -56,15 +58,15 @@ describe('Definition Class', () => {
     const clone = def.clone()
 
     expect(clone).not.toBe(def) // Different instance
-    expect(clone.name.value).toBe(def.name.value)
-    expect(clone.name.profileName).toBe(def.name.profileName)
+    expect(clone.type.value).toBe(def.type.value)
+    expect(clone.type.profileName).toBe(def.type.profileName)
     expect(clone.get('key1')).toEqual(def.get('key1'))
     expect(clone.get('key2')).toEqual(def.get('key2'))
   })
 
   it('should generate indented string representation with toString()', () => {
-    const def = new Definition<DomainResourceData>(name)
-    const prop: DefProperty<DomainResourceData> = createTestProp('testKey', 'string') as DefProperty<DomainResourceData>
+    const def = new StructureDefinition<DomainResourceData>(name)
+    const prop: PropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as PropertyDef<DomainResourceData>
 
     def.set(prop)
     const result = def.toString()
@@ -73,20 +75,39 @@ describe('Definition Class', () => {
   })
 
   it('should convert the Definition object to JSON', () => {
-    const def = new Definition<DomainResourceData>(name.profile('testProfile'))
-    const prop: DefProperty<DomainResourceData> = createTestProp('testKey', 'string') as DefProperty<DomainResourceData>
+    const def = new StructureDefinition<DomainResourceData>(name.profile('testProfile'))
+    const prop: PropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as PropertyDef<DomainResourceData>
 
     def.set(prop)
 
     const json = def.toJSON()
+
+
     expect(json).toEqual({
                            name: {
-                             profileName: 'testProfile',
-                             value: 'Basic'
+                             value: 'Basic',
+                             dataset: 'BasicData',
+                             profileName: 'testProfile'
                            },
                            props: {
-                             testKey: prop
+                             testKey: {
+                               key: 'testKey',
+                               isSummary: false,
+                               cardinality: '1..1',
+                               bindings: [],
+                               bindingStrength: {
+                                 value: 'example'
+                               },
+                               type: 'string',
+                               typeNarrowing: [],
+                               constraints: [],
+                               choice: undefined,
+                               isModifier: false,
+                               mustSupport: false,
+                               subdefs: undefined
+                             }
                            }
-                         })
+                         }
+    )
   })
 })
