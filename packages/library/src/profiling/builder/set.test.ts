@@ -1,10 +1,10 @@
-import {beforeEach, describe, expect, it}                   from 'vitest'
-import {Basic}                                              from '../../ResourceDef'
-import {DomainResourceData}                                 from '../../internal'
-import {Context, Example, PropertyDef, StructureDefinition} from '../definition'
-import {InternalBuilder}                                    from '../index'
-import {prop}                                               from './prop'
-import {set}                                                from './set'
+import {beforeEach, describe, expect, it}                      from 'vitest'
+import {DomainResourceData}                                    from '../../internal'
+import {Basic}                                                 from '../../ResourceDef'
+import {Context, Example, SetPropertyDef, StructureDefinition} from '../definition'
+import {InternalPropertyBuilder, PropertyBuilder}              from '../index'
+import {prop}                                                  from './prop'
+import {set}                                                   from './set'
 
 
 // Tests
@@ -12,7 +12,7 @@ describe('actionWith', () => {
 
   let def: StructureDefinition<DomainResourceData>
   let testContext: Context<DomainResourceData>
-  let kv: PropertyDef<DomainResourceData>
+  let kv: SetPropertyDef<DomainResourceData>
 
   beforeEach(() => {
     // Reset the context and Prop object for each test
@@ -37,14 +37,14 @@ describe('actionWith', () => {
   })
 
   it('should set context via setCtx()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as InternalPropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
 
-    expect(() => (action as InternalBuilder<DomainResourceData>).run()).not.toThrow()
+    expect(() => (action as InternalPropertyBuilder<DomainResourceData>).run()).not.toThrow()
   })
 
   it('should modify Prop based on "optional()"', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.optional()
     action.run()
@@ -52,7 +52,7 @@ describe('actionWith', () => {
   })
 
   it('should set "many" properly with hasMany()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.hasMany()
     action.run()
@@ -60,7 +60,7 @@ describe('actionWith', () => {
   })
 
   it('should adjust cardinality based on optional and hasMany', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.optional().hasMany()
     action.run()
@@ -68,7 +68,7 @@ describe('actionWith', () => {
   })
 
   it('should add bindings via boundBy()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     const bindings = ['binding1', 'binding2']
     action.setCtx(testContext)
     action.boundBy(bindings)
@@ -77,7 +77,7 @@ describe('actionWith', () => {
   })
 
   it('should add constraints via constrainedBy()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     const constraints = [
       () => ({ success: false, message: 'error1' }),
       () => ({ success: false, message: 'error2' })
@@ -89,7 +89,7 @@ describe('actionWith', () => {
   })
 
   it('should set "mustSupport" to true with mustSupport()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.mustSupport()
     action.run()
@@ -97,7 +97,7 @@ describe('actionWith', () => {
   })
 
   it('should set "isModifier" to true with isModifier()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.isModifier()
     action.run()
@@ -105,7 +105,7 @@ describe('actionWith', () => {
   })
 
   it('should set "isSummary" to true with isSummary()', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.isSummary()
     action.run()
@@ -113,7 +113,7 @@ describe('actionWith', () => {
   })
 
   it('should handle adding a new Prop to the context', () => {
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
     action.setCtx(testContext)
     action.run()
     expect(testContext.def.get(kv.key)).toMatchObject({
@@ -123,7 +123,7 @@ describe('actionWith', () => {
   })
 
   it('should merge existing Prop from context', () => {
-    const existingProp: PropertyDef<DomainResourceData> = {
+    const existingProp: SetPropertyDef<DomainResourceData> = {
       key: 'test-key',
       type: 'code',
       typeNarrowing: [],
@@ -140,7 +140,7 @@ describe('actionWith', () => {
 
     testContext.def.set(existingProp)
 
-    const action = set(kv) as InternalBuilder<DomainResourceData>
+    const action = set(kv) as PropertyBuilder<DomainResourceData>
 
     action.setCtx(testContext)
     action.boundBy(['new-binding']).hasMany()

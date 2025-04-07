@@ -1,9 +1,9 @@
-import {BindingStrength, Example}                                       from '../definition/BindingStrength'
-import {DefConstraintAssertion, NarrowableNames, PropertyDef, TypeName} from '../definition/types'
+import {BindingStrength, Example}                                          from '../definition/BindingStrength'
+import {DefConstraintAssertion, NarrowableNames, SetPropertyDef, TypeName} from '../definition/types'
 
 
 
-export function prop<T>(key: string,
+export function prop<T>(key: string | string[],
                         typeName: TypeName,
                         typeNarrowing: NarrowableNames[] = [],
                         cardinality: string = '1..1',
@@ -11,11 +11,14 @@ export function prop<T>(key: string,
                         bindingStrength: BindingStrength = Example,
                         constraints: DefConstraintAssertion<T>[] = [],
                         choice: string | undefined = undefined,
-                        subdefs: Map<string, PropertyDef<T>> | undefined = undefined,
+                        subdefs: Map<string, SetPropertyDef<T>> | undefined = undefined,
                         mustSupport: boolean | undefined = undefined,
                         isModifier: boolean | undefined = undefined,
                         isSummary: boolean | undefined = undefined
-): PropertyDef<T> {
+): SetPropertyDef<T> {
+
+  // @ts-ignore
+  constraints.forEach(c => c._constraintType = 'prop-constraint')
 
   return {
     key,

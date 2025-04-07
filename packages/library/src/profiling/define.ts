@@ -1,6 +1,16 @@
-import {DefineBuilderProps, InternalBuilder} from './define.types'
-import {Context, StructureDefinition}        from './definition/StructureDefinition'
+import {DefConstraintAssertion}       from 'profiling/definition/index'
+import {ResourceDef}                  from 'ResourceDef'
+import {InternalPropertyBuilder}      from './define.types'
+import {Context, StructureDefinition} from './definition/StructureDefinition'
 
+
+
+export type DefineArgs<T> = {
+  type: ResourceDef,
+  base?: StructureDefinition<T>,
+  constraints?: DefConstraintAssertion<T>[],
+  props?: InternalPropertyBuilder<T>[]
+}
 
 
 /**
@@ -30,7 +40,7 @@ export function define<T>({
                             base = new StructureDefinition<T>(type),
                             constraints = [],
                             props = []
-                          }: DefineBuilderProps<T>): StructureDefinition<T> {
+                          }: DefineArgs<T>): StructureDefinition<T> {
 
   if (base.type.value !== type.value) throw new Error(
     `Base name ${base.type.value} does not match name ${type.value}`
@@ -43,7 +53,7 @@ export function define<T>({
   const ctx: Context<T> = new Context<T>(def.type, def)
 
   props.forEach(f => {
-    const action: InternalBuilder<T> = f as InternalBuilder<T>
+    const action: InternalPropertyBuilder<T> = f as InternalPropertyBuilder<T>
     action.setCtx(ctx)
     action.run()
   })

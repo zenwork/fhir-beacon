@@ -4,6 +4,8 @@
 
 export * from './define'
 export * from './define.types'
+export * from './valuePresent'
 export * from './builder/index'
 export * from './definition/index'
+export * from './profile/index'
 export * from './util/index'

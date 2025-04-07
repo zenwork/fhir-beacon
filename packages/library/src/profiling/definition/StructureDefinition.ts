@@ -1,27 +1,35 @@
-import {ResourceDef}                         from 'ResourceDef'
-import {CodeIds}                             from '../../codes'
-import {DefConstraintAssertion, PropertyDef} from '../definition/types'
-import {alternatingColor}                    from '../util/AlternatingLogger'
+import {ResourceDef}                            from 'ResourceDef'
+import {CodeIds}                                from '../../codes'
+import {DefConstraintAssertion, SetPropertyDef} from '../definition/types'
+import {alternatingColor}                       from '../util/AlternatingLogger'
 
 
 
+/**
+ * StructureDefinition class serves as a blueprint for defining a resource structure.
+ * It provides functionality to set, retrieve, and manipulate properties and constraints
+ * for a given resource definition. The class also supports creating deep clones,
+ * serializing, and converting structure definitions into a JSON or string representation.
+ *
+ * @template T - The data type associated with the resource structure.
+ */
 export class StructureDefinition<T> {
 
   type: ResourceDef
-  props = new Map<string, PropertyDef<T>>()
+  props = new Map<string, SetPropertyDef<T>>()
   constraints: DefConstraintAssertion<T>[] = []
 
   constructor(name: ResourceDef) {
     this.type = name
   }
 
-  set(kv: PropertyDef<T>) {
-    if (kv.subdefs) console.log(kv.type)
-    this.props.set((kv.choice || '') + kv.key, kv)
+  set(prop: SetPropertyDef<T>) {
+    const key = flattenKey(prop.key, prop.choice)
+    this.props.set(key, prop)
   }
 
-  get(key: string): PropertyDef<T> | null {
-    return this.props.get(key) || null
+  get(key: string | string[], choicePrefix?: string): SetPropertyDef<T> | null {
+    return this.props.get(flattenKey(key)) || null
   }
 
   clone(): StructureDefinition<T> {
@@ -30,11 +38,12 @@ export class StructureDefinition<T> {
     return def
   }
 
-  toString(indent: string = '\t'): string {
+  toString(indent: string = '    '): string {
     return this.propToString(Array.from(this.props.values()), indent)
   }
+
   toJSON(): object {
-    const props: Record<string, PropertyDef<T>> = {}
+    const props: Record<string, SetPropertyDef<T>> = {}
 
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.props.forEach((v, k) => props[k] = toSerializable(v))
@@ -44,43 +53,64 @@ export class StructureDefinition<T> {
       props: props
     }
   }
-  private propToString(iterable: PropertyDef<T>[], indent: string): string {
+
+  private propToString(iterable: SetPropertyDef<T>[], indent: string): string {
     return `${iterable
-      .map((v: PropertyDef<T>) => {
+      .map((v: SetPropertyDef<T>) => {
+
+        // choice marker
         let marker = ''
         if (v.choice) marker = `[x] ${v.choice}`
-        const k: string = (indent + marker + v.key).padEnd(40, ' ')
-                     const s: string = v.isSummary ? '∑ ' : '  '
-                     const c: string = v.cardinality.padEnd(15, ' ')
-                     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                     let b: any = ''
-                     if (Array.isArray(v.bindings) && v.bindings.length > 0) {
-                       b = ` (bind: ${v.bindings.join(',')})`
-                     } else if (v.bindings && !Array.isArray(v.bindings)) {
-                       const code: CodeIds = v.bindings as CodeIds
-                       b = ` (bind: ${code} ${v.bindingStrength})`
-                     }
 
+        // key
+        const k: string = (indent + marker + (Array.isArray(v.key) ? v.key.join('.') : v.key)).padEnd(50, ' ')
+        // summary
+        const s: string = v.isSummary ? '∑' : '  '
+        // cardinality
+        const c: string = v.cardinality.padEnd(15, ' ')
 
+        // invarients (constraints)
+        let i: string = v.constraints.length > 0 ? 'I' : ''
+        // @ts-ignore
+        i = i + (v.constraints.some(c => c._constraintType === 'slice-constraint') ? 'π' : '')
+        // @ts-ignore
+        i = i + (v.constraints.some(c => c._constraintType === 'prop-constraint') ? 'ἱ' : '')
+
+        //bindings
+        let b: any = ''
+        if (Array.isArray(v.bindings) && v.bindings.length > 0) {
+          b = ` (bind: ${v.bindings.join(',')})`
+        } else if (v.bindings && !Array.isArray(v.bindings)) {
+          const code: CodeIds = v.bindings as CodeIds
+          b = ` (bind: ${code} ${v.bindingStrength})`
+        }
+
+        // backbone properties
         if (v.subdefs) {
-          const subs: string = this.propToString(Array.from(v.subdefs.values()), indent + '\t')
-          const desc: string = `${k}${s}${c}${v.type}(BACKBONE)${b}`
+          const subs: string = this.propToString(Array.from(v.subdefs.values()), indent + '    ')
+          const desc: string = `${k}${(i + s).padStart(8, ' ') + ' '}${c}${v.type}(BACKBONE)${b}`
           return alternatingColor(`${desc}\n${subs}`)
-                     }
+        }
 
-                     let t: string
-                     if (v.typeNarrowing.length > 0) {
-                       t = `${v.type}(${v.typeNarrowing.join('|')})`
-                     } else {
-                       t = `${v.type}`
-                     }
+        let t: string
+        if (v.typeNarrowing.length > 0) {
+          t = `${v.type}(${v.typeNarrowing.join('|')})`
+        } else {
+          t = `${v.type}`
+        }
 
         // @ts-ignore
-        return alternatingColor(`${k}${s}${c}${t}${b}`)
-                   }).join('\n')}`
+        return alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${t}${b}`)
+      }).join('\n')}`
   }
 
 
+}
+
+export function flattenKey<T>(key: string | string[], choicePrefix?: string): string {
+  const keyParts = Array.isArray(key) ? key.join('.') : key
+  const flattened: string = (choicePrefix ?? '') + keyParts
+  return flattened
 }
 
 export class Context<T> {

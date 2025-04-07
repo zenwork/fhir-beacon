@@ -1,10 +1,10 @@
-import {DatatypeDef}                                          from '../../DatatypeDef'
-import {PrimitiveDef}                                         from '../../PrimitiveDef'
-import {ResourceDef}                                          from '../../ResourceDef'
-import {Example}                                              from '../definition/BindingStrength'
-import {Builder, DefConstraintAssertion, StructureDefinition} from '../index'
-import {prop}                                                 from './prop'
-import {set}                                                  from './set'
+import {DatatypeDef}                                                  from '../../DatatypeDef'
+import {PrimitiveDef}                                                 from '../../PrimitiveDef'
+import {ResourceDef}                                                  from '../../ResourceDef'
+import {Example}                                                      from '../definition/BindingStrength'
+import {DefConstraintAssertion, PropertyBuilder, StructureDefinition} from '../index'
+import {prop}                                                         from './prop'
+import {set}                                                          from './set'
 
 
 
@@ -13,14 +13,14 @@ export type BackboneName = ResourceDef
 export type Narrowable = DatatypeDef | ResourceDef
 
 export interface Add {
-  oneOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  optionOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  choiceOf: <T>(choice: string, key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  minOneOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  listOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  optionalListOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => Builder<T>;
-  backboneOf: <T>(key: string, props: StructureDefinition<T>) => Builder<T>;
-  backboneListOf: <T>(key: string, props: StructureDefinition<T>) => Builder<T>;
+  oneOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  optionOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  choiceOf: <T>(choice: string, key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  minOneOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  listOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  optionalListOf: <T>(key: string, typeName: Name, narrowingTypes?: Narrowable[]) => PropertyBuilder<T>
+  backboneOf: <T>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
+  backboneListOf: <T>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
 }
 
 

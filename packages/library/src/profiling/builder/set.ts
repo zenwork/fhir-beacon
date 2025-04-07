@@ -1,12 +1,12 @@
-import {DefConstraintAssertion, PropertyDef} from 'profiling/definition/types'
-import {CodeIds}                             from '../../codes'
-import {Builder}                             from '../define.types'
-import {BindingStrength, Example}            from '../definition/BindingStrength'
-import {Context}                             from '../definition/StructureDefinition'
+import {DefConstraintAssertion, SetPropertyDef} from 'profiling/definition/types'
+import {CodeIds}                                from '../../codes'
+import {PropertyBuilder}                        from '../define.types'
+import {BindingStrength, Example}               from '../definition/BindingStrength'
+import {Context}                                from '../definition/StructureDefinition'
 
 
 
-export function set<T>(def: PropertyDef<T>): Builder<T> {
+export function set<T>(def: SetPropertyDef<T>): PropertyBuilder<T> {
 
   let context: Context<T> | null = null
   let optional = false
@@ -15,12 +15,11 @@ export function set<T>(def: PropertyDef<T>): Builder<T> {
   const action = {
     setCtx: (ctx: Context<T>) => {context = ctx},
     run: () => {
-      def.key = `${def.key}`
       let min = def.cardinality.split('..')[0]
       let max = def.cardinality.split('..')[1]
       if (optional) min = '0'
       if (many) max = '*'
-      const existing: PropertyDef<T> | null = context!.def.get(def.choice + def.key)
+      const existing: SetPropertyDef<T> | null = context!.def.get(def.key, def.choice)
       if (existing && context) {
         context.def.set({
                           key: def.key,
@@ -44,40 +43,42 @@ export function set<T>(def: PropertyDef<T>): Builder<T> {
         context.def.set({ ...def, cardinality: min + '..' + max })
       }
     },
-    optional: (): Builder<T> => {
+    optional: (): PropertyBuilder<T> => {
       optional = true
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    required: (): Builder<T> => {
+    required: (): PropertyBuilder<T> => {
       optional = false
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    hasMany: (): Builder<T> => {
+    hasMany: (): PropertyBuilder<T> => {
       many = true
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): Builder<T> => {
+    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): PropertyBuilder<T> => {
       def.bindings = binding
       def.bindingStrength = bindingStrength
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    constrainedBy: (constraints: DefConstraintAssertion<T>[]): Builder<T> => {
+    constrainedBy: (constraints: DefConstraintAssertion<T>[]): PropertyBuilder<T> => {
+      // @ts-ignore
+      constraints.forEach(c => c._constraintType = 'prop-constraint')
       def.constraints = constraints
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    mustSupport: (): Builder<T> => {
+    mustSupport: (): PropertyBuilder<T> => {
       def.mustSupport = true
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    isModifier: (): Builder<T> => {
+    isModifier: (): PropertyBuilder<T> => {
       def.isModifier = true
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     },
-    isSummary: (): Builder<T> => {
+    isSummary: (): PropertyBuilder<T> => {
       def.isSummary = true
-      return action as unknown as Builder<T>
+      return action as unknown as PropertyBuilder<T>
     }
   }
 
-  return action as unknown as Builder<T>
+  return action as unknown as PropertyBuilder<T>
 }

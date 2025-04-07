@@ -1,17 +1,17 @@
 import {DatatypeName}         from 'DatatypeName'
+import {DomainResourceData}   from 'internal'
 import {PrimitiveName}        from 'PrimitiveName'
 import {ResourceName}         from 'ResourceName'
-import {DomainResourceData}   from 'internal'
 import {describe, expect, it} from 'vitest'
 import {ResourceDef}          from '../../ResourceDef'
-import {PropertyDef}          from '../definition/types'
+import {SetPropertyDef}       from '../definition/types'
 import {Example}              from './BindingStrength'
 import {StructureDefinition}  from './StructureDefinition'
 
 
 // Sample constructor for mock props
 const createTestProp = <T>(key: string,
-                           type: PrimitiveName | DatatypeName | ResourceName | `${DatatypeName}${string}` | `${ResourceName}${string}`): PropertyDef<T> => ({
+                           type: PrimitiveName | DatatypeName | ResourceName | `${DatatypeName}${string}` | `${ResourceName}${string}`): SetPropertyDef<T> => ({
   key,
   isSummary: false,
   cardinality: '1..1',
@@ -39,8 +39,8 @@ describe('Definition Class', () => {
 
   it('should set and retrieve a property', () => {
     const def = new StructureDefinition<DomainResourceData>(name)
-    const prop: PropertyDef<DomainResourceData> = createTestProp<DomainResourceData>('testKey',
-                                                                                     'string') as PropertyDef<DomainResourceData>
+    const prop: SetPropertyDef<DomainResourceData> = createTestProp<DomainResourceData>('testKey',
+                                                                                        'string') as SetPropertyDef<DomainResourceData>
 
     def.set(prop)
     expect(def.get('testKey')).toEqual(prop)
@@ -49,8 +49,8 @@ describe('Definition Class', () => {
 
   it('should clone the Definition object', () => {
     const def = new StructureDefinition<DomainResourceData>(name)
-    const prop1: PropertyDef<DomainResourceData> = createTestProp('key1', 'string') as PropertyDef<DomainResourceData>
-    const prop2: PropertyDef<DomainResourceData> = createTestProp('key2', 'string') as PropertyDef<DomainResourceData>
+    const prop1: SetPropertyDef<DomainResourceData> = createTestProp('key1', 'string') as SetPropertyDef<DomainResourceData>
+    const prop2: SetPropertyDef<DomainResourceData> = createTestProp('key2', 'string') as SetPropertyDef<DomainResourceData>
 
     def.set(prop1)
     def.set(prop2)
@@ -66,7 +66,7 @@ describe('Definition Class', () => {
 
   it('should generate indented string representation with toString()', () => {
     const def = new StructureDefinition<DomainResourceData>(name)
-    const prop: PropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as PropertyDef<DomainResourceData>
+    const prop: SetPropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as SetPropertyDef<DomainResourceData>
 
     def.set(prop)
     const result = def.toString()
@@ -76,7 +76,7 @@ describe('Definition Class', () => {
 
   it('should convert the Definition object to JSON', () => {
     const def = new StructureDefinition<DomainResourceData>(name.profile('testProfile'))
-    const prop: PropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as PropertyDef<DomainResourceData>
+    const prop: SetPropertyDef<DomainResourceData> = createTestProp('testKey', 'string') as SetPropertyDef<DomainResourceData>
 
     def.set(prop)
 
