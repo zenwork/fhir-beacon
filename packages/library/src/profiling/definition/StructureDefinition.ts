@@ -70,7 +70,7 @@ export class StructureDefinition<T> {
         const c: string = v.cardinality.padEnd(15, ' ')
 
         // invarients (constraints)
-        let i: string = v.constraints.length > 0 ? 'I' : ''
+        let i: string = v.constraints.length > 0 ? 'C' : ''
         // @ts-ignore
         i = i + (v.constraints.some(c => c._constraintType === 'slice-constraint') ? 'π' : '')
         // @ts-ignore
@@ -87,9 +87,9 @@ export class StructureDefinition<T> {
 
         // backbone properties
         if (v.subdefs) {
+          const desc: string = alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${v.type}(BACKBONE)${b}`)
           const subs: string = this.propToString(Array.from(v.subdefs.values()), indent + '    ')
-          const desc: string = `${k}${(i + s).padStart(8, ' ') + ' '}${c}${v.type}(BACKBONE)${b}`
-          return alternatingColor(`${desc}\n${subs}`)
+          return `${desc}\n${subs}`
         }
 
         let t: string

@@ -8,6 +8,7 @@
  */
 function createAlternatingColorizer(): Function {
   let isDark = true
+  const width: number = 130
 
   /**
    * Returns a formatted string with alternating background color
@@ -22,7 +23,20 @@ function createAlternatingColorizer(): Function {
     const light: string = '#333333'
     const bgColor = isDark ? dark : light
 
-    message = message.padEnd(150, ' ')
+    message = message.padEnd(width, ' ')
+    if (message.length > width) {
+      const before: string = message.substring(0, width)
+      const lines: string[] = []
+      let after: string = ''.padEnd(78, ' ') + message.substring(width)
+      while (after.length > width) {
+        lines.push(after.substring(0, width))
+        after = ''.padEnd(78, ' ') + after.substring(width)
+      }
+      lines.push(after.padEnd(width, ' '))
+
+
+      message = before + '\n' + lines.join('\n').padEnd(width, ' ')
+    }
 
     // Create the formatted message with escape codes for terminal
     const formattedMessage = `\x1b[48;2;${bgColor === dark
