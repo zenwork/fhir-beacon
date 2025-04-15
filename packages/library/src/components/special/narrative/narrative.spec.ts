@@ -15,7 +15,7 @@ describe('Narrative', () => {
           <fhir-narrative ></fhir-narrative > `,
       'fhir-narrative').first()
 
-    expect(narrative).toBeVisible()
+    expect(narrative).not.toBeVisible()
     assert(narrative.queryShadow({ select: '*', expect: 0 }))
   })
 

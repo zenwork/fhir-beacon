@@ -11,6 +11,7 @@ import {Quantity}               from '../quantity'
 import {Ratio}                  from './ratio'
 
 
+
 describe('Ratio', () => {
 
   test('should return the ratio of two numbers', async () => {
@@ -57,7 +58,7 @@ describe('Ratio', () => {
 
     const elements = await findAllByShadowText(ratio, anyMatcher(
       '103.5', 'USD', '/', '1', 'day'
-    ))
+    ), { depth: 10 })
 
     expect(elements[1]).toHaveTextContent('103.5')
     expect(elements[0]).toHaveTextContent('USD')

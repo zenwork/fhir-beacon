@@ -1,8 +1,8 @@
 // TODO: loading everything for now... should not do this once proper separation of import trees
 import './index'
-import format                                from 'html-format'
 import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
 import {beforeAll}                           from 'vitest'
+import {formatHtml}                          from './tests/HtmlFormatter'
 import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
 import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
 import {Query}                               from './tests/types/global'
@@ -31,7 +31,7 @@ Element.prototype.queryShadow =
     let results: any[] = [this]
 
     if (typeof select === 'string') {
-      results = deepQuerySelectorAll(results[0], select)
+      results = deepQuerySelectorAll(results[0], select, { depth: 20 })
     }
 
     if (Array.isArray(select)) {
@@ -40,7 +40,7 @@ Element.prototype.queryShadow =
       let intermediateSet: any[] = results
 
       select.forEach((sel) => {
-        intermediateSet = intermediateSet.map((el) => deepQuerySelectorAll(el, sel)).flat()
+        intermediateSet = intermediateSet.map((el) => deepQuerySelectorAll(el, sel, { depth: 20 })).flat()
       })
 
       if (intermediateSet) {
@@ -80,23 +80,25 @@ Element.prototype.queryShadowNamedSlot = function (slotName: string): Element[] 
   return querySlot(this as HTMLElement, slotName)
 }
 const doubleSpace = / {2}/g
-const litComments = /<!--.*-->/gm
+const litComments = /<!--([\s\S]*?)-->/g
 const doubleSpaced = /\n\s+\n/gm
 
 Element.prototype.logShadow = function (): void {
   try {
     let shadow = ''
     if (this.shadowRoot) {
-      shadow = format(
-        this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n') ?? '',
-        ' '.repeat(4),
-        60
-      )
+
+      const shadowRootHTML: string | undefined = this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced,
+                                                                                                                                       '\n')
+
+      shadow = formatHtml(shadowRootHTML)
       shadow = shadow ?? this.shadowRoot.textContent
     }
-    const light = format(
-      this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n'), ' '.repeat(4), 60
-    )
+
+    const lightHTML: string = this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
+
+    const light = formatHtml(lightHTML)
+
     const tag = this.tagName.toLowerCase()
     const outerHTML = this.outerHTML
     const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
@@ -108,13 +110,17 @@ Element.prototype.logShadow = function (): void {
       // @ts-ignore
       data = pad(JSON.stringify(this.data, null, 2))
     }
-    console.log(`${tagAndAttributes}\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>`)
-  } catch (e) { console.log(e) }
+    console.log(`${tagAndAttributes}\n\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>\n`)
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log(e.stack)
+    }
+  }
 }
 
 
 Element.prototype.queryShadowByText = function <T extends Element>(text: string): T | null {
-  return shadowQueries.queryByShadowText(this as HTMLElement, text) as unknown as T | null
+  return shadowQueries.queryByShadowText(this as HTMLElement, text, { depth: 20 }) as unknown as T | null
 }
 
 
