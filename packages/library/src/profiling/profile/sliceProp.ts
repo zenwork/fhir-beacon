@@ -1,23 +1,25 @@
-import {DefConstraintAssertion, NarrowableNames, PropertySliceDef, TypeName} from '../index'
+import {DefConstraintAssertion, PropertySliceDef} from '../index'
 
 
 
 export function sliceProp<T>(key: string | string[],
                              choice: string | undefined,
-                             type: TypeName,
-                             typeNarrowing: NarrowableNames[] = [],
-                             constraints: DefConstraintAssertion<T>[]
+                             constraints: DefConstraintAssertion<T>[],
+                             fixedValues: unknown[]
 ): PropertySliceDef<T> {
 
-  // @ts-ignore
-  constraints.forEach(c => c._constraintType = 'slice-constraint')
+  constraints.forEach((c, i) => {
+    // @ts-ignore
+    c._constraintType = 'profile-constraint'
+    // @ts-ignore
+    if (fixedValues[i]) c._fixedValue = fixedValues[i]
+  })
 
   return {
     key,
     choice,
-    type,
-    typeNarrowing,
     constraints
+
   }
 
 }

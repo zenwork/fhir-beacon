@@ -15,7 +15,7 @@ export type TypeName =
 
 export type NarrowableNames = DatatypeName | ResourceName | `${DatatypeName}${string}` | `${ResourceName}${string}`
 
-export type DefConstraintAssertion<T> = (data: T) => ({ success: false, message?: string } | { success: true })
+export type DefConstraintAssertion<T> = (data: T, fixedValue?: any) => ({ success: false, message?: string } | { success: true })
 
 export type SetPropertyDef<T> = {
   choice: string | undefined,
@@ -35,8 +35,6 @@ export type SetPropertyDef<T> = {
 export type PropertySliceDef<T> = {
   choice: string | undefined,
   key: string | string[],
-  type: PrimitiveName | DatatypeName | ResourceName | `${DatatypeName}${string}` | `${ResourceName}${string}`,
-  typeNarrowing: NarrowableNames[],
-  constraints: DefConstraintAssertion<T>[],
+  constraints: DefConstraintAssertion<T>[]
 
 }

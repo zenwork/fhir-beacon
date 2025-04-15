@@ -1,21 +1,6 @@
-import {describe, it} from 'vitest'
-import {
-  ObservationData
-}                     from '../components'
-import {
-  Annotation,
-  CodeableConcept,
-  Coding,
-  Identifier,
-  Period,
-  Quantity,
-  Range,
-  Ratio,
-  Reference,
-  SampledData,
-  SimpleQuantity,
-  Timing
-}                     from '../DatatypeDef'
+import {describe, it}                                                                                                            from 'vitest'
+import {ObservationData}                                                                                                         from '../components'
+import {Annotation, CodeableConcept, Identifier, Period, Quantity, Range, Ratio, Reference, SampledData, SimpleQuantity, Timing} from '../DatatypeDef'
 
 import {boolean, dateTime, instant, integer, PrimitiveDef, string, time} from '../PrimitiveDef'
 import {
@@ -258,25 +243,19 @@ describe('profileDefinition', () => {
 
                                                                 add.backboneListOf<ObservationData>(
                                                                   'referenceRange',
-                                                                  define<ObservationData>({
-                                                                                            type: new ResourceDef(
-                                                                                              'ObservationComponentReferenceRange'),
-                                                                                            props: [
-                                                                                              add.optionOf<ObservationData>('low',
-                                                                                                                            SimpleQuantity),
-                                                                                              add.optionOf<ObservationData>('high',
-                                                                                                                            SimpleQuantity),
-                                                                                              add.optionOf<ObservationData>('type',
-                                                                                                                            CodeableConcept),
-                                                                                              add.optionalListOf<ObservationData>(
-                                                                                                'appliesTo',
-                                                                                                CodeableConcept),
-                                                                                              add.optionOf<ObservationData>('age',
-                                                                                                                            Range),
-                                                                                              add.optionOf<ObservationData>('text',
-                                                                                                                            string)
-                                                                                            ]
-                                                                                          })
+                                                                  define<ObservationData>(
+                                                                    {
+                                                                      type: new ResourceDef('ObservationComponentReferenceRange'),
+                                                                      props: [
+                                                                        add.optionOf<ObservationData>('low', SimpleQuantity),
+                                                                        add.optionOf<ObservationData>('high', SimpleQuantity),
+                                                                        add.optionOf<ObservationData>('type', CodeableConcept),
+                                                                        add.optionalListOf<ObservationData>('appliesTo',
+                                                                                                            CodeableConcept),
+                                                                        add.optionOf<ObservationData>('age', Range),
+                                                                        add.optionOf<ObservationData>('text', string)
+                                                                      ]
+                                                                    })
                                                                 ).optional()
                                                               ]
                                                             })
@@ -286,23 +265,80 @@ describe('profileDefinition', () => {
                               })
 
 
+
     const bp: StructureDefinition<ObservationData> =
       define<ObservationData>({
                                 type: Observation.profile('bp'),
                                 base: observation,
                                 props: [
+
                                   profile.slice(
-                                    ['code', 'coding'],
-                                    Coding,
+                                    // name:BPCode
+                                    ['code'],
                                     [
-                                      (data: ObservationData) => ({
-                                        success: data.code.coding[0].code === '85354-9',
-                                        message: 'bp: code.coding[0].code must be 85354-9'
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.code.coding?.filter(c => c.code === fixedValue).length === 1,
+                                        message: 'bp: code.coding[0].code must be ' + fixedValue
                                       }),
-                                      (data: ObservationData) => ({
-                                        success: data.code.coding[0].system === 'http://loinc.org',
-                                        message: 'bp: code.coding[0].system must be http://loinc.org'
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.code.coding?.filter(c => c.system === fixedValue).length === 1,
+                                        message: 'bp: code.coding[0].system must be ' + fixedValue
                                       })
+                                    ],
+                                    [
+                                      '85354-9',
+                                      'http://loinc.org'
+                                    ]),
+                                  profile.slice(
+                                    // name:SystolicBP
+                                    ['component'],
+                                    [
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.component?.filter(c => c.code.coding[0].code === fixedValue).length === 1,
+                                        message: 'bp: component[0].code.coding[0].code must be ' + fixedValue
+                                      }),
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.component![0].code.coding[0].system === fixedValue,
+                                        message: 'bp: component[0].code.coding[0].system must be ' + fixedValue
+                                      })
+                                    ],
+                                    [
+                                      '8480-6',
+                                      'http://loinc.org'
+                                    ]),
+                                  profile.slice(
+                                    // name:DiastolicBP
+                                    ['component'],
+                                    [
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.component?.filter(c => c.code.coding[0].code === fixedValue).length === 1,
+                                        message: 'bp: component[1].code.coding[0].code must be ' + fixedValue
+                                      }),
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.component![1].code.coding[0].system === fixedValue,
+                                        message: 'bp: component[1].code.coding[0].system must be' + fixedValue
+                                      })
+                                    ],
+                                    [
+                                      '8462-4',
+                                      'http://loinc.org'
+                                    ]),
+                                  // @ts-ignore
+                                  profile.constraint(
+                                    ['component'],
+                                    [
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: (!!data.dataAbsentReason || data.valueQuantity?.system === fixedValue),
+                                        message: 'bp: data.valueQuantity?.system must be ' + fixedValue
+                                      }),
+                                      (data: ObservationData, fixedValue: string) => ({
+                                        success: data.valueQuantity?.code === fixedValue,
+                                        message: 'bp: data.valueQuantity.code ' + fixedValue
+                                      })
+                                    ],
+                                    [
+                                      'http://unitsofmeasure.org',
+                                      'mm[Hg]'
                                     ])
                                 ]
                               })

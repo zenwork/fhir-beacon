@@ -29,7 +29,7 @@ export class StructureDefinition<T> {
   }
 
   get(key: string | string[], choicePrefix?: string): SetPropertyDef<T> | null {
-    return this.props.get(flattenKey(key)) || null
+    return this.props.get(flattenKey(key, choicePrefix)) || null
   }
 
   clone(): StructureDefinition<T> {
@@ -72,10 +72,10 @@ export class StructureDefinition<T> {
         // invarients (constraints)
         let i: string = v.constraints.length > 0 ? 'C' : ''
         // @ts-ignore
-        i = i + (v.constraints.some(c => c._constraintType === 'slice-constraint') ? 'π' : '')
+        i = i + (v.constraints.some(c => c._constraintType === 'profile-constraint') ? 'π' : '')
         // @ts-ignore
         i = i + (v.constraints.some(c => c._constraintType === 'prop-constraint') ? 'ἱ' : '')
-
+        i = i + ' '
         //bindings
         let b: any = ''
         if (Array.isArray(v.bindings) && v.bindings.length > 0) {
