@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {PropertyValues}                                                  from 'lit'
 import {property, state}                                                 from 'lit/decorators.js'
-import {DatatypeName}                                                    from '../../../DatatypeName'
-import {ResourceName}                                                    from '../../../ResourceName'
 import {PrimitiveInputEvent, PrimitiveInvalidEvent, PrimitiveValidEvent} from '../../../components/primitive'
+import {DatatypeName}                                                    from '../../../DatatypeName'
+import {StructureDefinition}                                             from '../../../profiling/index'
+import {ResourceName}                                                    from '../../../ResourceName'
 import {DataContextConsumerController, FhirDataContext}                  from '../../contexts'
 import {BeaconDataError}                                                 from '../../errors/beacon-data-error'
+import {ConfigurableElement}                                             from '../configurable/fhir-configurable-element'
 import {DataHandling}                                                    from '../DataHandling'
-import {NoDataObject, decorate }                                          from '../Decorate'
+import {decorate, NoDataObject}                                          from '../Decorate'
 import {Decorated}                                                       from '../Decorate.types'
 import {FqkMap}                                                          from '../DeepKeyMap'
 import {FhirElementData}                                                 from '../FhirElement.type'
 import {ValidationsImpl}                                                 from '../Validations.impl'
-import {FullyQualifiedKey, Validations}                                  from '../Validations.type'
-import {ConfigurableElement}                                             from '../configurable/fhir-configurable-element'
+import {FullyQualifiedKey, profile, Validations}                         from '../Validations.type'
 
 
 
@@ -78,6 +79,19 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
   @property({ reflect: false, attribute: false, type: FqkMap })
   public errors: FqkMap = new FqkMap()
 
+  /**
+   * Represents the structure definition of a generic type `T` or is undefined.
+   *
+   * This variable is used to define the structure of a type, allowing for type validation
+   * or enforcement. It may be undefined if no structure is provided or applicable.
+   *
+   * @typedef {StructureDefinition<T> | undefined} profile
+   *
+   * @template T
+   */
+  @property({ reflect: false, attribute: false, type: StructureDefinition<T> })
+  public profile: StructureDefinition<T> | undefined
+
   @state()
   public declare dataContext: FhirDataContext
 
@@ -128,7 +142,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
 
   public prepare() {
     this.invalids.clear()
-    return decorate(this.key, this.data, this.errors)
+    return decorate(this.key, this.data, this.errors, this.profile)
   }
 
   public shouldFetch(_changes: PropertyValues): boolean {
@@ -192,11 +206,15 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
       this.#fetched = true
     }
 
-
-    if (changes.has('data') && this.shouldPrepare()) {
+    if ((changes.has('data') || changes.has('profile')) && this.shouldPrepare()) {
       this.extendedData = this.prepare()
       const validations = new ValidationsImpl<T>(this.extendedData)
-      this.validate(this.extendedData, validations, this.#fetched)
+      if (this.extendedData[profile]) {
+        this.extendedData[profile].validate(this.extendedData, validations, this.#fetched)
+      } else {
+        //TODO: should be re-designed to create a default profile... maybe
+        this.validate(this.extendedData, validations, this.#fetched)
+      }
       if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>,
                                                     validations,
                                                     this.#fetched)

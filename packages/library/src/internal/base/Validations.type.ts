@@ -7,6 +7,7 @@ import {FqkMap}                    from './DeepKeyMap'
 
 export const errors = Symbol('errors')
 export const meta = Symbol('metadata')
+export const profile = Symbol('profile')
 
 export type KeyBase = string
 export type KeyIndex = number

@@ -1,11 +1,13 @@
 import {ArgTypes, Meta}       from '@storybook/web-components'
 import {html, TemplateResult} from 'lit'
 import {ifDefined}            from 'lit-html/directives/if-defined.js'
+import {StructureDefinition}  from '../src/profiling/index'
 
 
 
 export type ShellArgs = {
   data: object,
+  profile?: StructureDefinition<unknown>,
   mode?: string,
   verbose?: boolean,
   showerror?: boolean,

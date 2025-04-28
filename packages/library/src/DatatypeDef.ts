@@ -1,4 +1,4 @@
-import {DatatypeName} from 'DatatypeName'
+import {DatatypeName} from './DatatypeName'
 
 
 
@@ -53,10 +53,12 @@ export class DatatypeDef {
 
   readonly value: DatatypeName | `${DatatypeName}${string}`
   readonly dataset: `${DatatypeName | `${DatatypeName}${string}`}Data`
+  readonly profileName: string
 
-  constructor(value: DatatypeName | `${DatatypeName}${string}`) {
+  constructor(value: DatatypeName | `${DatatypeName}${string}`, profileName?: string) {
     this.value = value
     this.dataset = `${value}Data`
+    this.profileName = profileName ?? ''
   }
 
   /**

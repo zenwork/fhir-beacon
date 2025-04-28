@@ -1,12 +1,13 @@
-import {DefConstraintAssertion}       from 'profiling/definition/index'
-import {ResourceDef}                  from 'ResourceDef'
+import {DatatypeDef}                  from '../DatatypeDef'
+import {DefConstraintAssertion}       from '../profiling/definition/index'
+import {ResourceDef}                  from '../ResourceDef'
 import {InternalPropertyBuilder}      from './define.types'
 import {Context, StructureDefinition} from './definition/StructureDefinition'
 
 
 
 export type DefineArgs<T> = {
-  type: ResourceDef,
+  type: ResourceDef | DatatypeDef,
   base?: StructureDefinition<T>,
   constraints?: DefConstraintAssertion<T>[],
   props?: InternalPropertyBuilder<T>[]

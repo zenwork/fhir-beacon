@@ -1,9 +1,9 @@
-import {DatatypeName}         from 'DatatypeName'
-import {DomainResourceData}   from 'internal'
-import {PrimitiveName}        from 'PrimitiveName'
-import {ResourceName}         from 'ResourceName'
 import {describe, expect, it} from 'vitest'
+import {DatatypeName}         from '../../DatatypeName'
+import {DomainResourceData}   from '../../internal'
+import {PrimitiveName}        from '../../PrimitiveName'
 import {ResourceDef}          from '../../ResourceDef'
+import {ResourceName}         from '../../ResourceName'
 import {SetPropertyDef}       from '../definition/types'
 import {Example}              from './BindingStrength'
 import {StructureDefinition}  from './StructureDefinition'
@@ -33,7 +33,7 @@ describe('Definition Class', () => {
     const def = new StructureDefinition(name.profile('testName'))
 
     expect(def.type.value).toBe('Basic')
-    expect(def.type.profileName).toBe('testName')
+    expect(def.type instanceof ResourceDef ? def.type.profileName : null).toBe('testName')
     expect(def.props.size).toBe(0)
   })
 
@@ -59,7 +59,8 @@ describe('Definition Class', () => {
 
     expect(clone).not.toBe(def) // Different instance
     expect(clone.type.value).toBe(def.type.value)
-    expect(clone.type.profileName).toBe(def.type.profileName)
+    expect(clone.type instanceof ResourceDef ? clone.type.profileName : 'clone')
+      .toBe(def.type instanceof ResourceDef ? def.type.profileName : 'def')
     expect(clone.get('key1')).toEqual(def.get('key1'))
     expect(clone.get('key2')).toEqual(def.get('key2'))
   })

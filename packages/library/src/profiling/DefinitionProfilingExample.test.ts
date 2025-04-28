@@ -265,7 +265,6 @@ describe('profileDefinition', () => {
                               })
 
 
-
     const bp: StructureDefinition<ObservationData> =
       define<ObservationData>({
                                 type: Observation.profile('bp'),
@@ -343,12 +342,12 @@ describe('profileDefinition', () => {
                                 ]
                               })
 
-    console.log(observation.type.toString())
-    console.log(observation.toString())
+    // console.log(observation.type.toString())
+    // console.log(observation.toString())
     // console.log(JSON.stringify(observation.toJSON(), null, 2))
-    console.log()
-    console.log(bp.type.toString())
-    console.log(bp.toString())
+    // console.log()
+    // console.log(bp.type.toString())
+    // console.log(bp.toString())
 
     // expect(bp.type.toString()).toBe('Observation/bp')
     // expect(bp.props.get('identifier')?.cardinality).toBe('1..1')

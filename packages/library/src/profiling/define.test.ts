@@ -1,7 +1,7 @@
 import {describe, it}                                from 'vitest'
 import {Address, CodeableConcept, HumanName, Timing} from '../DatatypeDef'
-import {Observation, ResourceDef}                    from '../ResourceDef'
 import {DomainResourceData}                          from '../internal'
+import {Observation, ResourceDef}                    from '../ResourceDef'
 import {add}                                         from './builder/add'
 import {define}                                      from './define'
 import {StructureDefinition}                         from './definition/StructureDefinition'
@@ -62,11 +62,11 @@ describe('test', () => {
              })
 
 
-    console.log(base.type.toString())
-    console.log(base.toString())
-    console.log()
-    console.log(profile.type.toString())
-    console.log(profile.toString())
+    // console.log(base.type.toString())
+    // console.log(base.toString())
+    // console.log()
+    // console.log(profile.type.toString())
+    // console.log(profile.toString())
     // console.log(JSON.stringify(profile, null, 2))
 
   })

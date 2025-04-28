@@ -1,5 +1,7 @@
-import {ResourceDef}                            from 'ResourceDef'
+import {Validations}                            from 'internal/index'
 import {CodeIds}                                from '../../codes'
+import {DatatypeDef}                            from '../../DatatypeDef'
+import {ResourceDef}                            from '../../ResourceDef'
 import {DefConstraintAssertion, SetPropertyDef} from '../definition/types'
 import {alternatingColor}                       from '../util/AlternatingLogger'
 
@@ -15,11 +17,11 @@ import {alternatingColor}                       from '../util/AlternatingLogger'
  */
 export class StructureDefinition<T> {
 
-  type: ResourceDef
+  type: ResourceDef | DatatypeDef
   props = new Map<string, SetPropertyDef<T>>()
   constraints: DefConstraintAssertion<T>[] = []
 
-  constructor(name: ResourceDef) {
+  constructor(name: ResourceDef | DatatypeDef) {
     this.type = name
   }
 
@@ -52,6 +54,21 @@ export class StructureDefinition<T> {
       name: this.type,
       props: props
     }
+  }
+
+  validate(data: T, validations: Validations, fetched: boolean): void {
+    this.props.forEach((def: SetPropertyDef<T>, key: string) => {
+
+      def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
+        const result: { success: false; message?: string } | { success: true } = constraint(data)
+
+        if (!result.success) {
+          const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
+          validations.add({ fqk: { path: [{ node: key }] }, message })
+        }
+      })
+
+    })
   }
 
   private propToString(iterable: SetPropertyDef<T>[], indent: string): string {
@@ -114,7 +131,7 @@ export function flattenKey<T>(key: string | string[], choicePrefix?: string): st
 }
 
 export class Context<T> {
-  constructor(public name: ResourceDef, public def: StructureDefinition<T>) {}
+  constructor(public name: ResourceDef | DatatypeDef, public def: StructureDefinition<T>) {}
 }
 
 

@@ -101,25 +101,3 @@ export class BoundArray {
     return this.array.length
   }
 }
-
-// Example Usage
-try {
-  const mySet = new BoundArray(1, 5) // min 1, max 5
-  mySet.add(10)
-  console.log(mySet.getArray()) // [10]
-
-  mySet.add(20)
-  console.log(mySet.getArray()) // [10, 20]
-
-  // Attempting to remove below the minimum cardinality
-  mySet.remove(10)
-  console.log(mySet.getArray()) // [20]
-
-  mySet.remove(20) // Error: Cannot remove the element. Min cardinality of 1 would be violated.
-} catch (error) {
-  if (error instanceof Error) {
-    console.error(error.message)
-  } else {
-    console.error('An unknown error occurred:', error)
-  }
-}
