@@ -75,6 +75,11 @@ export class PrimitiveValidator {
 
     const value: string | undefined = this.value() as string | undefined
 
+    if(errormessageChanged && isBlank(this.#host.errormessage)){
+      this.#host.error = false
+      this.#host.presentableError = ''
+    }
+
     // override value with valuePath
     if (valuePathChanged && this.#host.contextData) {
       if (!isBlank(value) && valuePathChanged) {
@@ -140,7 +145,7 @@ export class PrimitiveValidator {
 
     if (errormessageChanged) {
 
-      if (!isBlank(this.#host.errormessage)) {
+      if (!isBlank(this.#host.errormessage) ) {
         this.#host.presentableError = this.#host.errormessage ?? 'unknown error'
         this.#host.error = true
         const event = new PrimitiveInvalidEvent({ path: [{ node: this.#host.key || 'unknown' }] },

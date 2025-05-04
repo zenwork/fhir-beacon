@@ -288,20 +288,19 @@ export class Primitive extends ConfigurableElement {
                     ></fhir-value>
                     ${this.context
                       ? html`
-                                <fhir-context .text="${this.context}"></fhir-context>
-                            `
-                      : nothing}
+                            <fhir-context .text="${this.context}"></fhir-context>`
+                      : nothing
+                    }
                     ${this.mode === DisplayMode.structure
                       ? html`
-                                <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
-                                ></fhir-badge-group>` : nothing}
+                            <fhir-badge-group ?required=${this.required} ?summary=${this.summary}></fhir-badge-group>`
+                      : nothing
+                    }
                     ${this.showerror
                       ? html`
-                                <fhir-error
-                                        text=${errors.join(
-                                                ' | ')}
-                                ></fhir-error>`
-                      : nothing}
+                            <fhir-error text=${errors.join(' | ')}></fhir-error>`
+                      : nothing
+                    }
                 </li>`
            : html``
   }

@@ -18,9 +18,12 @@ const meta = {
   ...renderTemplateInShell((args: ShellArgs) =>
                              html`
                                  <fhir-contact-point .data=${args.data}
-                                                     .profile=${args.profile}
+                                                     .profile=${args.useProfile?args.profile:undefined}
                                                      summary
                                                      ?headless=${args.headless}
+                                                     ?showerror=${args.showerror}
+                                                     ?verbose=${args.verbose}
+                                                     ?open=${args.open}
                                  ></fhir-contact-point>`
   )
 }
@@ -65,13 +68,20 @@ export const Profile: Story = {
                       props: [
                         profile.constraint(
                           ['system'],
-                          [(data: ContactPointData) => ({ success: data.system === 'email', message: 'Must be email' })]
+                          [
+                            (data: ContactPointData, fixedValue: string) => ({
+                              success: data.system === fixedValue,
+                              message: `Must be fixed value:${fixedValue}`
+                            })
+                          ],
+                          ['email']
                         )
                       ]
                     }),
     mode: 'structure',
     showerror: true,
     verbose: true,
-    open: true
+    open: true,
+    useProfile: true
   }
 }

@@ -142,5 +142,20 @@ describe('Primitive Validator', () => {
       expect(host.presentableValue).to.equal(value)
 
     })
+
+    test('should remove error when errormessage is blank', () => {
+      const { host } = createMockPrimitive()
+      host.type = PrimitiveType.fhir_string
+      host.errormessage = ''
+      host.presentableError = 'Some error message'
+      const validator: PrimitiveValidator = new PrimitiveValidator(host)
+
+      validator.validate({ errormessageChanged: true })
+
+      expect(host.error).to.be.false
+      expect(host.presentableError).to.be.empty
+      expect(host.presentableTypeError).to.be.empty
+
+    })
   })
 })

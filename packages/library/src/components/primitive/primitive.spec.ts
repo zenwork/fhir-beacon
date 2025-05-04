@@ -1,3 +1,4 @@
+import {aTimeout}                           from '../../../tests/aTimeout'
 import {html}                               from 'lit'
 import {assert, describe, expect, it, test} from 'vitest'
 import {emptyLitShadow, fixture}            from '../../../tests/lit/lit-vitest-fixture'
@@ -125,6 +126,29 @@ describe('fhir Primitive', () => {
       const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
       expect(div.textContent).to.equal('Input must be a non-negative integer within the range 1 to'
                                        + ' 2,147,483,647 | must be less than 10')
+
+    })
+
+    test('should remove an error when a validation error is passed and then removed', async () => {
+
+      const el:Primitive = await fixture<Primitive>(html`
+          <fhir-primitive label="code"
+                          value="11"
+                          type="integer"
+                          errormessage="must be less than 10"
+                          showerror
+          ></fhir-primitive>
+      `).first()
+
+      const div = el.queryShadow<HTMLSpanElement>({ select: ['fhir-error', 'div'] })
+      expect(div.textContent).to.equal('must be less than 10')
+
+      el.errormessage = ''
+
+      await aTimeout()
+
+      el.queryShadow<HTMLSpanElement>({ select: ['fhir-error'], expect:0 })
+
 
     })
 

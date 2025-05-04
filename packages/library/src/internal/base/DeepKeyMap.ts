@@ -89,6 +89,10 @@ export class DeepKeyMap<K, V> {
     return false
   }
 
+  public deleteAll(): void {
+    this.#entries = []
+  }
+
   /**
    * Checks if a deeply equal key exists.
    * @param {Object} key - The object key.

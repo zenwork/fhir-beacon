@@ -37,6 +37,6 @@ export function decorate<T extends (FhirElementData | Decorated<FhirElementData>
     [errors]: _errorMap ?? new FqkMap(),
     //TODO: hide is not the right metadata... it's the likely wanted behaviour
     [meta]: { hide: data === NoDataObject },
-    [profile]: _profile ?? undefined
+    [profile]: _profile
   } as Decorated<T>
 }

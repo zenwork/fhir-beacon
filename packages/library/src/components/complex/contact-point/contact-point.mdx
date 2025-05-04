@@ -1,4 +1,4 @@
-import {Canvas, Meta} from '@storybook/blocks'
+import {Canvas, Meta, Source} from '@storybook/blocks'
 
 import * as Stories from './contact-point.stories'
 
@@ -16,4 +16,14 @@ reference:
 
 <Canvas of={Stories.Structure}/>
 
-<Canvas of={Stories.Profile}/>
+## Profiling
+profile based on https://fhir.ch/ig/ch-core/StructureDefinition-ch-core-contactpoint-ech-46-email.html
+<Canvas of={Stories.Profile} sourceState={'none'}/>
+
+<Source code={`function(args) {
+return html\`
+    <fhir-contact-point .data=\${args.data}
+                        .profile=\${args.profile}
+                        summary
+    ></fhir-contact-point>\`} `}
+/>

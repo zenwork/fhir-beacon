@@ -60,8 +60,10 @@ export class StructureDefinition<T> {
     this.props.forEach((def: SetPropertyDef<T>, key: string) => {
 
       def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
-        const result: { success: false; message?: string } | { success: true } = constraint(data)
-
+        // @ts-ignore
+        const value: any = constraint._fixedValue
+        const result: { success: false; message?: string } | { success: true } = constraint(data, value)
+        // console.log(validations.all())
         if (!result.success) {
           const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
           validations.add({ fqk: { path: [{ node: key }] }, message })

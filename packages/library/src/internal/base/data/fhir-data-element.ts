@@ -14,7 +14,7 @@ import {Decorated}                                                       from '.
 import {FqkMap}                                                          from '../DeepKeyMap'
 import {FhirElementData}                                                 from '../FhirElement.type'
 import {ValidationsImpl}                                                 from '../Validations.impl'
-import {FullyQualifiedKey, profile, Validations}                         from '../Validations.type'
+import {FullyQualifiedKey, profile, errors, Validations}                         from '../Validations.type'
 
 
 
@@ -114,7 +114,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
     super()
     this.type = type
     this.data = NoDataObject as T
-    this.extendedData = decorate(this.key, this.data, this.errors)
+    this.extendedData = decorate(this.key, this.data, this.errors, this.profile)
     new DataContextConsumerController(this)
 
     this.addEventListener('bkn-input', (e) => {
@@ -207,14 +207,19 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
     }
 
     if ((changes.has('data') || changes.has('profile')) && this.shouldPrepare()) {
+      // console.log(this.profile, this.extendedData[profile])
       this.extendedData = this.prepare()
       const validations = new ValidationsImpl<T>(this.extendedData)
+
+      this.extendedData[errors].delete({path:[{node:'system'}]})
+      //TODO: should be re-designed to create a default profile... maybe
+      this.validate(this.extendedData, validations, this.#fetched)
+
       if (this.extendedData[profile]) {
+
         this.extendedData[profile].validate(this.extendedData, validations, this.#fetched)
-      } else {
-        //TODO: should be re-designed to create a default profile... maybe
-        this.validate(this.extendedData, validations, this.#fetched)
       }
+
       if (this.data !== NoDataObject) this.decorate(this.extendedData as Decorated<T>,
                                                     validations,
                                                     this.#fetched)

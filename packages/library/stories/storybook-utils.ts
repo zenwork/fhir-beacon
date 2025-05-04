@@ -15,6 +15,7 @@ export type ShellArgs = {
   summaryonly?: boolean
   headless?: boolean,
   input?: boolean,
+  useProfile?: boolean,
 }
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
