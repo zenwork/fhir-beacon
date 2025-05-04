@@ -1,6 +1,6 @@
-import {aTimeout}                           from '../../../tests/aTimeout'
 import {html}                               from 'lit'
 import {assert, describe, expect, it, test} from 'vitest'
+import {aTimeout}                           from '../../../tests/aTimeout'
 import {emptyLitShadow, fixture}            from '../../../tests/lit/lit-vitest-fixture'
 import {Primitive}                          from './primitive'
 import {PrimitiveLabel}                     from './primitive-label'
@@ -131,7 +131,7 @@ describe('fhir Primitive', () => {
 
     test('should remove an error when a validation error is passed and then removed', async () => {
 
-      const el:Primitive = await fixture<Primitive>(html`
+      const el: Primitive = await fixture<Primitive>(html`
           <fhir-primitive label="code"
                           value="11"
                           type="integer"
@@ -147,7 +147,7 @@ describe('fhir Primitive', () => {
 
       await aTimeout()
 
-      el.queryShadow<HTMLSpanElement>({ select: ['fhir-error'], expect:0 })
+      el.queryShadow<HTMLSpanElement>({ select: ['fhir-error'], expect: 0 })
 
 
     })

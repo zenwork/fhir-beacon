@@ -18,7 +18,7 @@ const meta = {
   ...renderTemplateInShell((args: ShellArgs) =>
                              html`
                                  <fhir-contact-point .data=${args.data}
-                                                     .profile=${args.useProfile?args.profile:undefined}
+                                                     .profile=${args.useProfile ? args.profile : undefined}
                                                      summary
                                                      ?headless=${args.headless}
                                                      ?showerror=${args.showerror}

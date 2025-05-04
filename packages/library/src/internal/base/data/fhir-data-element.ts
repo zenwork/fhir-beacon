@@ -14,7 +14,7 @@ import {Decorated}                                                       from '.
 import {FqkMap}                                                          from '../DeepKeyMap'
 import {FhirElementData}                                                 from '../FhirElement.type'
 import {ValidationsImpl}                                                 from '../Validations.impl'
-import {FullyQualifiedKey, profile, errors, Validations}                         from '../Validations.type'
+import {errors, FullyQualifiedKey, profile, Validations}                 from '../Validations.type'
 
 
 
@@ -211,7 +211,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
       this.extendedData = this.prepare()
       const validations = new ValidationsImpl<T>(this.extendedData)
 
-      this.extendedData[errors].delete({path:[{node:'system'}]})
+      this.extendedData[errors].delete({ path: [{ node: 'system' }] })
       //TODO: should be re-designed to create a default profile... maybe
       this.validate(this.extendedData, validations, this.#fetched)
 
