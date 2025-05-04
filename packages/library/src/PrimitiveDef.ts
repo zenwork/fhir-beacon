@@ -1,4 +1,4 @@
-import {PrimitiveName} from 'PrimitiveName'
+import {PrimitiveName} from './PrimitiveName'
 
 
 

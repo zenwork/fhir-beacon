@@ -1,6 +1,6 @@
-import {Validations}                            from 'internal/index'
 import {CodeIds}                                from '../../codes'
 import {DatatypeDef}                            from '../../DatatypeDef'
+import {Validations}                            from '../../internal/index'
 import {ResourceDef}                            from '../../ResourceDef'
 import {DefConstraintAssertion, SetPropertyDef} from '../definition/types'
 import {alternatingColor}                       from '../util/AlternatingLogger'
