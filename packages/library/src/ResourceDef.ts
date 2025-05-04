@@ -1,4 +1,4 @@
-import {ResourceName} from 'ResourceName'
+import {ResourceName} from './ResourceName'
 
 
 

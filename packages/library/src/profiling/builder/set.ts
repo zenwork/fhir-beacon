@@ -1,5 +1,5 @@
-import {DefConstraintAssertion, SetPropertyDef} from 'profiling/definition/types'
 import {CodeIds}                                from '../../codes'
+import {DefConstraintAssertion, SetPropertyDef} from '../../profiling/definition/types'
 import {PropertyBuilder}                        from '../define.types'
 import {BindingStrength, Example}               from '../definition/BindingStrength'
 import {Context}                                from '../definition/StructureDefinition'

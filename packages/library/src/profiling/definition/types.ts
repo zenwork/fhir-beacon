@@ -1,7 +1,7 @@
-import {CodeIds}         from 'codes'
-import {DatatypeName}    from 'DatatypeName'
-import {PrimitiveName}   from 'PrimitiveName'
-import {ResourceName}    from 'ResourceName'
+import {CodeIds}         from '../../codes'
+import {DatatypeName}    from '../../DatatypeName'
+import {PrimitiveName}   from '../../PrimitiveName'
+import {ResourceName}    from '../../ResourceName'
 import {BindingStrength} from '../definition/BindingStrength'
 
 

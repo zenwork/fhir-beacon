@@ -1,4 +1,4 @@
-import {StructureDefinition}   from 'profiling/index'
+import {StructureDefinition}   from '../../profiling/index'
 import {ResourceData}          from '../resource/domain-resource.data'
 import {Decorated}             from './Decorate.types'
 import {FqkMap}                from './DeepKeyMap'
