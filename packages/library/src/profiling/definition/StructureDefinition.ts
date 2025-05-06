@@ -1,9 +1,9 @@
-import {CodeIds}                                from '../../codes'
-import {DatatypeDef}                            from '../../DatatypeDef'
-import {Validations}                            from '../../internal/index'
-import {ResourceDef}                            from '../../ResourceDef'
-import {DefConstraintAssertion, SetPropertyDef} from '../definition/types'
-import {alternatingColor}                       from '../util/AlternatingLogger'
+import {CodeIds}                                                                         from '../../codes'
+import {DatatypeDef}                                                                     from '../../DatatypeDef'
+import {Validations}                                                                     from '../../internal/index'
+import {ResourceDef}                                                                     from '../../ResourceDef'
+import {alternatingColor}                                                                from '../util/AlternatingLogger'
+import {DefConstraintAssertion, Defs, isExtensionDef, isPropertyDef, isPropertySliceDef} from './definition.type'
 
 
 
@@ -18,19 +18,19 @@ import {alternatingColor}                       from '../util/AlternatingLogger'
 export class StructureDefinition<T> {
 
   type: ResourceDef | DatatypeDef
-  props = new Map<string, SetPropertyDef<T>>()
+  props = new Map<string, Defs<T>>()
   constraints: DefConstraintAssertion<T>[] = []
 
   constructor(name: ResourceDef | DatatypeDef) {
     this.type = name
   }
 
-  set(prop: SetPropertyDef<T>) {
+  set(prop: Defs<T>) {
     const key = flattenKey(prop.key, prop.choice)
     this.props.set(key, prop)
   }
 
-  get(key: string | string[], choicePrefix?: string): SetPropertyDef<T> | null {
+  get(key: string | string[], choicePrefix?: string): Defs<T> | null {
     return this.props.get(flattenKey(key, choicePrefix)) || null
   }
 
@@ -45,7 +45,7 @@ export class StructureDefinition<T> {
   }
 
   toJSON(): object {
-    const props: Record<string, SetPropertyDef<T>> = {}
+    const props: Record<string, Defs<T>> = {}
 
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.props.forEach((v, k) => props[k] = toSerializable(v))
@@ -57,69 +57,78 @@ export class StructureDefinition<T> {
   }
 
   validate(data: T, validations: Validations, fetched: boolean): void {
-    this.props.forEach((def: SetPropertyDef<T>, key: string) => {
-
-      def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
-        // @ts-ignore
-        const value: any = constraint._fixedValue
-        const result: { success: false; message?: string } | { success: true } = constraint(data, value)
-        // console.log(validations.all())
-        if (!result.success) {
-          const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
-          validations.add({ fqk: { path: [{ node: key }] }, message })
-        }
-      })
+    this.props.forEach((def: Defs<T>, key: string) => {
+      if (isPropertyDef(def)) {
+        def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
+          // @ts-ignore
+          const value: any = constraint._fixedValue
+          const result: { success: false; message?: string } | { success: true } = constraint(data, value)
+          // console.log(validations.all())
+          if (!result.success) {
+            const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
+            validations.add({ fqk: { path: [{ node: key }] }, message })
+          }
+        })
+      }
 
     })
   }
 
-  private propToString(iterable: SetPropertyDef<T>[], indent: string): string {
+  private propToString(iterable: Defs<T>[], indent: string): string {
     return `${iterable
-      .map((v: SetPropertyDef<T>) => {
+      .map((v: Defs<T>) => {
+        if (isPropertyDef(v)) {
 
-        // choice marker
-        let marker = ''
-        if (v.choice) marker = `[x] ${v.choice}`
+          // choice marker
+          let marker = ''
+          if (v.choice) marker = `[x] ${v.choice}`
 
-        // key
-        const k: string = (indent + marker + (Array.isArray(v.key) ? v.key.join('.') : v.key)).padEnd(50, ' ')
-        // summary
-        const s: string = v.isSummary ? '∑' : '  '
-        // cardinality
-        const c: string = v.cardinality.padEnd(15, ' ')
+          // key
+          const k: string = (indent + marker + (Array.isArray(v.key) ? v.key.join('.') : v.key)).padEnd(50, ' ')
+          // summary
+          const s: string = v.isSummary ? '∑' : '  '
+          // cardinality
+          const c: string = v.cardinality.padEnd(15, ' ')
 
-        // invarients (constraints)
-        let i: string = v.constraints.length > 0 ? 'C' : ''
-        // @ts-ignore
-        i = i + (v.constraints.some(c => c._constraintType === 'profile-constraint') ? 'π' : '')
-        // @ts-ignore
-        i = i + (v.constraints.some(c => c._constraintType === 'prop-constraint') ? 'ἱ' : '')
-        i = i + ' '
-        //bindings
-        let b: any = ''
-        if (Array.isArray(v.bindings) && v.bindings.length > 0) {
-          b = ` (bind: ${v.bindings.join(',')})`
-        } else if (v.bindings && !Array.isArray(v.bindings)) {
-          const code: CodeIds = v.bindings as CodeIds
-          b = ` (bind: ${code} ${v.bindingStrength})`
-        }
+          // invarients (constraints)
+          let i: string = v.constraints.length > 0 ? 'C' : ''
+          // @ts-ignore
+          i = i + (v.constraints.some(c => c._constraintType === 'profile-constraint') ? 'π' : '')
+          // @ts-ignore
+          i = i + (v.constraints.some(c => c._constraintType === 'prop-constraint') ? 'ἱ' : '')
+          i = i + ' '
+          //bindings
+          let b: any = ''
+          if (Array.isArray(v.bindings) && v.bindings.length > 0) {
+            b = ` (bind: ${v.bindings.join(',')})`
+          } else if (v.bindings && !Array.isArray(v.bindings)) {
+            const code: CodeIds = v.bindings as CodeIds
+            b = ` (bind: ${code} ${v.bindingStrength})`
+          }
 
-        // backbone properties
-        if (v.subdefs) {
-          const desc: string = alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${v.type}(BACKBONE)${b}`)
-          const subs: string = this.propToString(Array.from(v.subdefs.values()), indent + '    ')
-          return `${desc}\n${subs}`
-        }
+          // backbone properties
+          if (v.subdefs) {
+            const desc: string = alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${v.type}(BACKBONE)${b}`)
+            const subs: string = this.propToString(Array.from(v.subdefs.values()), indent + '    ')
+            return `${desc}\n${subs}`
+          }
 
-        let t: string
-        if (v.typeNarrowing.length > 0) {
-          t = `${v.type}(${v.typeNarrowing.join('|')})`
+          let t: string
+          if (v.typeNarrowing.length > 0) {
+            t = `${v.type}(${v.typeNarrowing.join('|')})`
+          } else {
+            t = `${v.type}`
+          }
+
+          return alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${t}${b}`)
+        } else if (isPropertySliceDef(v)) {
+          return alternatingColor(`slice`)
+        } else if (isExtensionDef(v)) {
+          return alternatingColor(`extension`)
         } else {
-          t = `${v.type}`
+          throw new Error(`Unknown property type:\n${JSON.stringify(v)}`)
         }
 
-        // @ts-ignore
-        return alternatingColor(`${k}${(i + s).padStart(8, ' ') + ' '}${c}${t}${b}`)
       }).join('\n')}`
   }
 

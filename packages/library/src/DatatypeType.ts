@@ -1,4 +1,5 @@
 import {FhirElementData} from 'internal/base/FhirElement.type'
+import {Uri}             from 'PrimitiveTypes'
 
 
 
@@ -134,7 +135,9 @@ export type ExtendedContactDetailData = FhirElementData & {}
  * @description Extension Type: Optional Extension Element - found in all resources.
  * - code: Extension
  */
-export type ExtensionData = FhirElementData & {}
+export type ExtensionData = FhirElementData & {
+  url: Uri
+}
 
 /**
  * @description HumanName Type: A name, normally of a human, that can be used for other living entities (e.g. animals

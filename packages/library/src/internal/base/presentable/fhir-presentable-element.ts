@@ -280,6 +280,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                   <fhir-wrapper variant="details"
                                 label=${this.getLabel()}
                                 badge-resource=${asReadable(this.type)}
+                                badge-profile=${this.profile?.type.profileName}
                                 ?open=${this.open}
                                 ?badge-summary=${this.summary}
                                 ?badge-required=${this.required}

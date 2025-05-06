@@ -3,4 +3,6 @@
  */
 
 export * from './AlternatingLogger'
+export * from './BindingStrength'
 export * from './BoundArray'
+export * from './valuePresent'

@@ -1,11 +1,16 @@
-import {StoryObj}                                  from '@storybook/web-components'
-import {html}                                      from 'lit'
-import {renderTemplateInShell, ShellArgs}          from '../../../../stories/storybook-utils'
-import {ContactPointData}                          from '../../../components/index'
-import {ContactPoint, DatatypeDef}                 from '../../../DatatypeDef'
-import {code}                                      from '../../../PrimitiveDef'
-import {add, define, profile, StructureDefinition} from '../../../profiling/index'
-import {data}                                      from './contact-point.story.data'
+import {StoryObj}                                    from '@storybook/web-components'
+import {getStorybookHelpers}                         from '@wc-toolkit/storybook-helpers'
+import {html}                                        from 'lit'
+import {renderTemplateInShell, ShellArgs}            from '../../../../stories/storybook-utils'
+import {ContactPointData}                            from '../../../components/index'
+import {ContactPoint, DatatypeDef}                   from '../../../DatatypeDef'
+import {code}                                        from '../../../PrimitiveDef'
+import {define, profile, slice, StructureDefinition} from '../../../profiling/index'
+import {data}                                        from './contact-point.story.data'
+
+
+
+const { events, args, argTypes, template } = getStorybookHelpers('fhir-contact-point')
 
 
 
@@ -52,21 +57,21 @@ export const Structure: Story = {
   }
 }
 
-const base: StructureDefinition<ContactPointData> = define({
+const base: StructureDefinition<ContactPointData> = profile({
                                                              type: ContactPoint,
                                                              props: [
-                                                               add.oneOf('system', code).optional()
+                                                               define.oneOf('system', code).optional()
                                                              ]
                                                            })
 
 export const Profile: Story = {
   args: {
     data,
-    profile: define({
+    profile: profile({
                       type: new DatatypeDef('ContactPoint', 'CHCoreContactPointECH46Email'),
                       base,
                       props: [
-                        profile.constraint(
+                        slice.constraint(
                           ['system'],
                           [
                             (data: ContactPointData, fixedValue: string) => ({
@@ -75,7 +80,25 @@ export const Profile: Story = {
                             })
                           ],
                           ['email']
-                        )
+                        ),
+                        /*extend.withSimple('use',
+                         profile(
+                         {
+                         type: Extension,
+                         props: [
+                         define.oneOf('valueCodeableConcept', CodeableConcept)
+                         .boundBy({
+                         system: 'http://fhir.ch/ig/ch-core/ValueSet/ech-46-emailcategory',
+                         id: 'ECH46EmailCategory',
+                         name: 'eCH-0046 Email Category',
+                         type: 'ValueSet',
+                         valid: true,
+                         choices: [{ value: '1', display: 'private' }, { value: '2', display: 'business' }]
+                         }, BindingStrength.Extensible)
+                         ]
+                         }
+                         )
+                         )*/
                       ]
                     }),
     mode: 'structure',

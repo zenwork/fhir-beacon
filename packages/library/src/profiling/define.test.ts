@@ -2,9 +2,9 @@ import {describe, it}                                from 'vitest'
 import {Address, CodeableConcept, HumanName, Timing} from '../DatatypeDef'
 import {DomainResourceData}                          from '../internal'
 import {Observation, ResourceDef}                    from '../ResourceDef'
-import {add}                                         from './builder/add'
-import {define}                                      from './define'
+import {define}                                      from './builder'
 import {StructureDefinition}                         from './definition/StructureDefinition'
+import {profile}                                     from './profile'
 
 
 
@@ -12,54 +12,54 @@ describe('test', () => {
   it('test', () => {
 
     const base: StructureDefinition<DomainResourceData> =
-      define({
-               type: Observation,
-               props: [
-                 add.oneOf('foo', HumanName)
-                    .optional()
-                    .boundBy(['baz', 'biff']),
-                 add.listOf('baz', Address)
-                    .optional(),
-                 add.oneOf('baz', CodeableConcept),
-                 add.backboneOf('backboneKey', define({
-                                                        type: new ResourceDef('ObservationFoo'),
-                                                        props: [
-                                                          add.oneOf('bkStuff', CodeableConcept)
-                                                             .optional()
-                                                             .isSummary(),
-                                                          add.oneOf('bkThing', Timing).optional()
-                                                        ]
-                                                      })).optional()
-               ]
-             })
-
-    const profile: StructureDefinition<DomainResourceData> =
-      define({
-               type: Observation.profile('profile'),
-               base: base,
-               props: [
-                 add.oneOf<DomainResourceData>('foo', HumanName)
-                    .required()
-                    .constrainedBy([
-                                     () => ({
-                                       success: false,
-                                       message: 'foo is required'
-                                     })
-                                   ]),
-                 add.oneOf<DomainResourceData>('baz', Address).isSummary(),
-                 add.backboneOf<DomainResourceData>('backboneKey', define({
-                                                                            type: new ResourceDef(
-                                                                              'ObservationFoo'),
+      profile({
+                type: Observation,
+                props: [
+                  define.oneOf('foo', HumanName)
+                        .optional()
+                        .boundBy([{ value: 'baz', display: 'baz' }, { value: 'biff', display: 'biff' }]),
+                  define.listOf('baz', Address)
+                        .optional(),
+                  define.oneOf('baz', CodeableConcept),
+                  define.backboneOf('backboneKey', profile({
+                                                             type: new ResourceDef('ObservationFoo'),
                                                              props: [
-                                                               add.oneOf('bkStuff',
-                                                                         CodeableConcept)
-                                                                  .isSummary(),
-                                                               add.oneOf('bkThing', Timing)
+                                                               define.oneOf('bkStuff', CodeableConcept)
+                                                                     .optional()
+                                                                     .isSummary(),
+                                                               define.oneOf('bkThing', Timing).optional()
                                                              ]
-                                                           }))
+                                                           })).optional()
+                ]
+              })
 
-               ]
-             })
+    const aProfile: StructureDefinition<DomainResourceData> =
+      profile({
+                type: Observation.profile('profile'),
+                base: base,
+                props: [
+                  define.oneOf<DomainResourceData>('foo', HumanName)
+                        .required()
+                        .constrainedBy([
+                                         () => ({
+                                           success: false,
+                                           message: 'foo is required'
+                                         })
+                                       ]),
+                  define.oneOf<DomainResourceData>('baz', Address).isSummary(),
+                  define.backboneOf<DomainResourceData>('backboneKey', profile({
+                                                                                 type: new ResourceDef(
+                                                                                   'ObservationFoo'),
+                                                                                 props: [
+                                                                                   define.oneOf('bkStuff',
+                                                                                                CodeableConcept)
+                                                                                         .isSummary(),
+                                                                                   define.oneOf('bkThing', Timing)
+                                                                                 ]
+                                                                               }))
+
+                ]
+              })
 
 
     // console.log(base.type.toString())

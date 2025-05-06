@@ -1,6 +1,8 @@
 import {StoryObj} from '@storybook/web-components'
 import {html}     from 'lit'
 
+
+
 const meta = {
   title: 'Toolkit/Layout/Badge Group'
 }
@@ -8,32 +10,38 @@ const meta = {
 export default meta
 type Story = StoryObj;
 
-export const BadgeGroup1: Story = {
+export const All: Story = {
   render: () => html`
-      <fhir-badge-group resource='Human Name' summary constraint required></fhir-badge-group>
+      <fhir-badge-group summary constraint required resource='Human Name' profile='Profile Name'></fhir-badge-group>
   `
 }
 
-export const BadgeGroup2: Story = {
+export const Resource: Story = {
   render: () => html`
       <fhir-badge-group resource='Human Name'></fhir-badge-group>
   `
 }
 
-export const BadgeGroup3: Story = {
+export const Summary: Story = {
   render: () => html`
       <fhir-badge-group summary></fhir-badge-group>
   `
 }
 
-export const BadgeGroup4: Story = {
+export const Constraint: Story = {
   render: () => html`
       <fhir-badge-group constraint></fhir-badge-group>
   `
 }
 
-export const BadgeGroup5: Story = {
+export const Required: Story = {
   render: () => html`
       <fhir-badge-group required></fhir-badge-group>
+  `
+}
+
+export const Profile: Story = {
+  render: () => html`
+      <fhir-badge-group profile="Profile Name"></fhir-badge-group>
   `
 }

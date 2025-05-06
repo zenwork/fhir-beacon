@@ -1,4 +1,13 @@
 import '../index'
+import {setCustomElementsManifest} from '@storybook/web-components'
+import {setStorybookHelpersConfig} from '@wc-toolkit/storybook-helpers'
+import manifest                    from '../build/custom-elements.json' with {type:'json'}
+
+const options = {}
+
+setStorybookHelpersConfig(options)
+
+setCustomElementsManifest(manifest)
 
 /** @type { import('@storybook/web-components').Preview } */
 const preview = {
@@ -18,6 +27,7 @@ const preview = {
         }
     },
     controls:{
+        expanded:true,
         matchers:{
             color:/(background|color)$/i,
             date:/Date$/i

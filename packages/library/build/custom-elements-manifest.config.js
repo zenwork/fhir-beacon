@@ -8,6 +8,7 @@ const options = {
 
 export default {
     globs:['src/**/*.ts'],
+    exclude:['node_modules/**/*','**/*.spec.ts','**/*.test.ts','**/*.stories.ts'],
     outdir:'build',
     dev:true,
     watch:false,

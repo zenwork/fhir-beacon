@@ -1,12 +1,13 @@
-import {CodeIds}                                from '../../codes'
-import {DefConstraintAssertion, SetPropertyDef} from '../../profiling/definition/types'
-import {PropertyBuilder}                        from '../define.types'
-import {BindingStrength, Example}               from '../definition/BindingStrength'
-import {Context}                                from '../definition/StructureDefinition'
+import {CodeIds}                                                 from '../../codes'
+import {Choice, Choices}                                         from '../../valuesets/index'
+import {Def, DefConstraintAssertion, isPropertyDef, PropertyDef} from '../definition/definition.type'
+import {Context}                                                 from '../definition/StructureDefinition'
+import {BindingStrength, Example}                                from '../util/BindingStrength'
+import {PropertyBuilder}                                         from './builder.type'
 
 
 
-export function set<T>(def: SetPropertyDef<T>): PropertyBuilder<T> {
+export function definitionBuilder<T>(def: PropertyDef<T>): PropertyBuilder<T> {
 
   let context: Context<T> | null = null
   let optional = false
@@ -14,14 +15,16 @@ export function set<T>(def: SetPropertyDef<T>): PropertyBuilder<T> {
 
   const action = {
     setCtx: (ctx: Context<T>) => {context = ctx},
-    run: () => {
+    build: () => {
       let min = def.cardinality.split('..')[0]
       let max = def.cardinality.split('..')[1]
       if (optional) min = '0'
       if (many) max = '*'
-      const existing: SetPropertyDef<T> | null = context!.def.get(def.key, def.choice)
-      if (existing && context) {
+      const existing: Def | null = context!.def.get(def.key, def.choice)
+
+      if (existing && context && isPropertyDef(existing)) {
         context.def.set({
+                          defType: 'property',
                           key: def.key,
                           type: def.type ? def.type : existing.type,
                           bindings: (def.bindings && Array.isArray(def.bindings) && def.bindings.length > 0)
@@ -55,7 +58,7 @@ export function set<T>(def: SetPropertyDef<T>): PropertyBuilder<T> {
       many = true
       return action as unknown as PropertyBuilder<T>
     },
-    boundBy: (binding: CodeIds | string[], bindingStrength: BindingStrength = Example): PropertyBuilder<T> => {
+    boundBy: (binding: CodeIds | Choice[] | Choices, bindingStrength: BindingStrength = Example): PropertyBuilder<T> => {
       def.bindings = binding
       def.bindingStrength = bindingStrength
       return action as unknown as PropertyBuilder<T>

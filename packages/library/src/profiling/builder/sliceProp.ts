@@ -2,6 +2,8 @@ import {DefConstraintAssertion, PropertySliceDef} from '../index'
 
 
 
+export type TypedConstraintAssertion<T> = DefConstraintAssertion<T> & { _constraintType?: string; _fixedValue?: unknown }
+
 export function sliceProp<T>(key: string | string[],
                              choice: string | undefined,
                              constraints: DefConstraintAssertion<T>[],
@@ -9,13 +11,15 @@ export function sliceProp<T>(key: string | string[],
 ): PropertySliceDef<T> {
 
   constraints.forEach((c, i) => {
-    // @ts-ignore
-    c._constraintType = 'profile-constraint'
-    // @ts-ignore
-    if (fixedValues[i]) c._fixedValue = fixedValues[i]
-  })
+    const constraint: TypedConstraintAssertion<T> = c as TypedConstraintAssertion<T>
+    constraint._constraintType = 'profile-constraint'
+    if (fixedValues[i]) {
+      constraint._fixedValue = fixedValues[i]
+    }
+  });
 
   return {
+    defType: 'property-slice',
     key,
     choice,
     constraints
