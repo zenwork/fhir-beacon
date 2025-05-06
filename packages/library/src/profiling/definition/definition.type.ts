@@ -34,6 +34,7 @@ export type Def = {
   defType: 'property' | 'extension' | 'property-slice'
   choice: string | undefined,
   key: string | string[],
+  subdefs: Map<string, Defs<any>> | undefined
 }
 
 export type ExtensionDef = Def & {
@@ -62,8 +63,7 @@ export type PropertyDef<T> = Def & {
   constraints: DefConstraintAssertion<T>[],
   mustSupport: boolean | undefined,
   isModifier: boolean | undefined,
-  isSummary: boolean | undefined,
-  subdefs: Map<string, PropertyDef<T>> | undefined
+  isSummary: boolean | undefined
 }
 
 // Type guard for PropertyDef<T>
@@ -79,4 +79,12 @@ export type PropertySliceDef<T> = Def & {
 // Type guard for PropertySliceDef<T>
 export function isPropertySliceDef<T>(def: unknown): def is PropertySliceDef<T> {
   return (def as PropertySliceDef<T>).defType === 'property-slice'
+}
+
+export function isDefWithChildren<T>(def: unknown): def is { subdefs: Map<string, PropertyDef<T>> } {
+  return !!(def as PropertySliceDef<T>).subdefs
+}
+
+export function isDefWithConstraints<T>(def: unknown): def is { constraints: DefConstraintAssertion<T>[] } {
+  return !!(def as PropertySliceDef<T>).constraints
 }

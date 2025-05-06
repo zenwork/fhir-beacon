@@ -1,7 +1,7 @@
-import {CodeIds}                                                        from '../../codes/index'
-import {Choice, Choices}                                                from '../../valuesets/index'
-import {DefConstraintAssertion, NarrowableNames, PropertyDef, TypeName} from '../definition/definition.type'
-import {BindingStrength, Example}                                       from '../util/BindingStrength'
+import {CodeIds}                                                              from '../../codes/index'
+import {Choice, Choices}                                                      from '../../valuesets/index'
+import {DefConstraintAssertion, Defs, NarrowableNames, PropertyDef, TypeName} from '../definition/definition.type'
+import {BindingStrength, Example}                                             from '../util/BindingStrength'
 
 
 
@@ -13,7 +13,7 @@ export function definitionProperty<T>(key: string | string[],
                                       bindingStrength: BindingStrength = Example,
                                       constraints: DefConstraintAssertion<T>[] = [],
                                       choice: string | undefined = undefined,
-                                      subdefs: Map<string, PropertyDef<T>> | undefined = undefined,
+                                      subdefs: Map<string, Defs<T>> | undefined = undefined,
                                       mustSupport: boolean | undefined = undefined,
                                       isModifier: boolean | undefined = undefined,
                                       isSummary: boolean | undefined = undefined

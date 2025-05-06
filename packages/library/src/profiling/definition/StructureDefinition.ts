@@ -1,9 +1,26 @@
-import {CodeIds}                                                                         from '../../codes'
-import {DatatypeDef}                                                                     from '../../DatatypeDef'
-import {Validations}                                                                     from '../../internal/index'
-import {ResourceDef}                                                                     from '../../ResourceDef'
-import {alternatingColor}                                                                from '../util/AlternatingLogger'
-import {DefConstraintAssertion, Defs, isExtensionDef, isPropertyDef, isPropertySliceDef} from './definition.type'
+import {CodeIds} from '../../codes'
+import {
+  DatatypeDef
+}                from '../../DatatypeDef'
+import {
+  Validations
+}                from '../../internal/index'
+import {
+  ResourceDef
+}                from '../../ResourceDef'
+import {
+  alternatingColor
+}                from '../util/AlternatingLogger'
+import {
+  DefConstraintAssertion,
+  Defs,
+  ExtensionDef,
+  isExtensionDef,
+  isPropertyDef,
+  isPropertySliceDef,
+  PropertyDef,
+  PropertySliceDef
+}                from './definition.type'
 
 
 
@@ -32,6 +49,33 @@ export class StructureDefinition<T> {
 
   get(key: string | string[], choicePrefix?: string): Defs<T> | null {
     return this.props.get(flattenKey(key, choicePrefix)) || null
+  }
+
+  getSlice(key: string | string[], choicePrefix?: string): PropertySliceDef<T> | null {
+    const value = this.get(key, choicePrefix) || null
+    if (value && isPropertySliceDef(value)) {
+      return value
+    } else {
+      return null
+    }
+  }
+
+  getProperty(key: string | string[], choicePrefix?: string): PropertyDef<T> | null {
+    const value = this.get(key, choicePrefix) || null
+    if (value && isPropertyDef(value)) {
+      return value
+    } else {
+      return null
+    }
+  }
+
+  getExtension(key: string | string[], choicePrefix?: string): ExtensionDef | null {
+    const value = this.get(key, choicePrefix) || null
+    if (value && isExtensionDef(value)) {
+      return value
+    } else {
+      return null
+    }
   }
 
   clone(): StructureDefinition<T> {

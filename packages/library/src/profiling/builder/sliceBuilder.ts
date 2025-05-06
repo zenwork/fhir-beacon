@@ -1,5 +1,5 @@
-import {Builder}                                            from '../builder/builder.type'
-import {Context, flattenKey, PropertyDef, PropertySliceDef} from '../index'
+import {Builder}                                                                              from '../builder/builder.type'
+import {Context, Defs, flattenKey, isDefWithChildren, isDefWithConstraints, PropertySliceDef} from '../index'
 
 
 
@@ -11,23 +11,29 @@ export function sliceBuilder<T>(def: PropertySliceDef<T>): Builder<T> {
     build: () => {
       if (context) {
 
-        let ref: PropertyDef<T> | null = null
+        let ref: Defs<T> | null = null
         if (Array.isArray(def.key)) {
           ref = def.key.reduce((prev, key, index) => {
-            let value: PropertyDef<T> | null = null
-            if (index === 0) {
-              value = prev && prev.subdefs ? prev.subdefs.get(flattenKey(key, def.choice)) || null : context!.def.get(key, def.choice)
-              if (!value) throw new Error(`No property ${key} found`)
-            } else {
-              value = prev && prev.subdefs ? prev.subdefs.get(flattenKey(key)) || null : context!.def.get(key)
+
+            if (isDefWithChildren(prev)) {
+
+              let value: Defs<T> | null = null
+
+              if (index === 0) {
+                value = prev && prev.subdefs ? prev.subdefs.get(flattenKey(key, def.choice)) || null : context!.def.get(key, def.choice)
+                if (!value) throw new Error(`No property ${key} found`)
+              } else {
+                value = prev && prev.subdefs ? prev.subdefs.get(flattenKey(key)) || null : context!.def.get(key)
+              }
+
+              if (value) return value
             }
 
-            if (value) return value
             return prev
-          }, null as unknown as PropertyDef<T>)
+          }, null as unknown as Defs<T>)
         }
 
-        if (ref) {
+        if (ref && isDefWithConstraints(ref) && isDefWithConstraints(def)) {
           ref.constraints = ref.constraints.concat(def.constraints)
           // context.def.set(ref)
         } else {

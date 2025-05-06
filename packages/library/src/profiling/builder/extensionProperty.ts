@@ -23,7 +23,8 @@ export function extensionProperty(
     valueTypeNarrowing,
     cardinality: '1..1',
     isModifier,
-    isSummary
+    isSummary,
+    subdefs: undefined
   }
 
 }

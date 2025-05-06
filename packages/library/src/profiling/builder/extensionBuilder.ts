@@ -12,7 +12,7 @@ export function extensionBuilder<T>(def: ExtensionDef): Builder<T> {
     build: () => {
       if (context) {
 
-        context.def.set()
+        // context.def.set()
 
       } else {
         throw new Error('Context not set')

@@ -47,7 +47,7 @@ describe('actionWith', () => {
     action.setCtx(testContext)
     action.optional()
     action.build()
-    expect(def.props.get('test-key')?.cardinality).toBe('0..1')
+    expect(def.getProperty('test-key')?.cardinality).toBe('0..1')
   })
 
   it('should set "many" properly with hasMany()', () => {
@@ -55,7 +55,7 @@ describe('actionWith', () => {
     action.setCtx(testContext)
     action.hasMany()
     action.build()
-    expect(def.props.get('test-key')?.cardinality).toBe('1..*')
+    expect(def.getProperty('test-key')?.cardinality).toBe('1..*')
   })
 
   it('should adjust cardinality based on optional and hasMany', () => {
@@ -63,7 +63,7 @@ describe('actionWith', () => {
     action.setCtx(testContext)
     action.optional().hasMany()
     action.build()
-    expect(def.props.get('test-key')?.cardinality).toBe('0..*')
+    expect(def.getProperty('test-key')?.cardinality).toBe('0..*')
   })
 
   it('should add bindings via boundBy()', () => {
@@ -72,7 +72,7 @@ describe('actionWith', () => {
     action.setCtx(testContext)
     action.boundBy(bindings)
     action.build()
-    expect(def.props.get('test-key')?.bindings).toEqual(bindings)
+    expect(def.getProperty('test-key')?.bindings).toEqual(bindings)
   })
 
   it('should add constraints via constrainedBy()', () => {
@@ -84,7 +84,7 @@ describe('actionWith', () => {
     action.setCtx(testContext)
     action.constrainedBy(constraints)
     action.build()
-    expect(def.props.get('test-key')?.constraints).toEqual(constraints)
+    expect(def.getProperty('test-key')?.constraints).toEqual(constraints)
   })
 
   it('should set "mustSupport" to true with mustSupport()', () => {

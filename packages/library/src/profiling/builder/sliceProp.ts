@@ -22,8 +22,8 @@ export function sliceProp<T>(key: string | string[],
     defType: 'property-slice',
     key,
     choice,
-    constraints
-
+    constraints,
+    subdefs: undefined
   }
 
 }
