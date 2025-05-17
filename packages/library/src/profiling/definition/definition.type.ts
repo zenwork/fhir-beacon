@@ -40,9 +40,11 @@ export type Def = {
 export type ExtensionDef = Def & {
   defType: 'extension',
   url: string | string[],
-  valueType: PrimitiveName | DatatypeName,
-  valueTypeNarrowing: NarrowableNames[]
+  valueType: PrimitiveName | DatatypeName | undefined,
+  valueTypeNarrowing: NarrowableNames[] | undefined,
   cardinality: string,
+  bindings: CodeIds | Choice[] | Choices,
+  bindingStrength: BindingStrength,
   isModifier: boolean | undefined,
   isSummary: boolean | undefined
 }

@@ -42,9 +42,9 @@ export class StructureDefinition<T> {
     this.type = name
   }
 
-  set(prop: Defs<T>) {
-    const key = flattenKey(prop.key, prop.choice)
-    this.props.set(key, prop)
+  set(prop: Defs<T>, key?: string) {
+    const k = key ?? flattenKey(prop.key, prop.choice)
+    this.props.set(k, prop)
   }
 
   get(key: string | string[], choicePrefix?: string): Defs<T> | null {
@@ -95,7 +95,7 @@ export class StructureDefinition<T> {
     this.props.forEach((v, k) => props[k] = toSerializable(v))
 
     return {
-      name: this.type,
+      name: { ...this.type },
       props: props
     }
   }

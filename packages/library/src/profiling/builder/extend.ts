@@ -1,20 +1,12 @@
-import {URI}                 from 'components'
-import {DatatypeName}        from 'DatatypeName'
-import {PrimitiveName}       from 'PrimitiveName'
-import {StructureDefinition} from '../definition'
-import {Extend}              from '../profile.type'
-import {Builder}             from './builder.type'
-import {extensionBuilder}    from './extensionBuilder'
-import {extensionProperty}   from './extensionProperty'
+import {Extend, Extension, Extensions}                                        from '../profile.type'
+import {Builder}                                                              from './builder.type'
+import {complexExtensionBuilder, extensionBuilder, primitiveExtensionBuilder} from './extensionBuilder'
 
 
 
 export const extend: Extend = {
+  withOne: <T>(key: string, extension: Extension): Builder<T> => extensionBuilder(key, extension),
+  withComplex: <T>(key: string, extensions: Extensions): Builder<T> => complexExtensionBuilder(key, extensions),
+  primitive: <T>(primtiveKey: string, url: string, extensions: Extension[]): Builder<T> => primitiveExtensionBuilder(primtiveKey, url, extensions)
 
-  withSimple: <T>(url: URI, valueType: PrimitiveName | DatatypeName): Builder<T> =>
-    extensionBuilder(extensionProperty('missing code', url, valueType))
-  ,
-  withComplex: function <T>(url: URI, extensions: StructureDefinition<T>): Builder<T> {
-    throw new Error('Function not implemented.')
-  }
 }

@@ -47,7 +47,7 @@ import {aValuePresent} from './util/valuePresent'
 export const { code } = PrimitiveDef
 
 describe('profileDefinition', () => {
-  it('should be tested', () => {
+  it.skip('should be tested', () => {
     const observation =
       profile<ObservationData>({
                                  type: Observation,

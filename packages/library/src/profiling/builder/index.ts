@@ -9,7 +9,6 @@ export * from './definitionProperty'
 
 export * from './extend'
 export * from './extensionBuilder'
-export * from './extensionProperty'
 export * from './slice'
 export * from './sliceBuilder'
 export * from './sliceProp'

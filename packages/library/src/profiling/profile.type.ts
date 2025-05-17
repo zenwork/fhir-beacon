@@ -1,9 +1,13 @@
-import {URI}                                         from '../components'
-import {DatatypeName}                                from '../DatatypeName'
-import {PrimitiveName}                               from '../PrimitiveName'
-import {Builder, PropertyBuilder}                    from './builder/builder.type'
-import {DefConstraintAssertion, Name, NarrowableDef} from './definition/definition.type'
-import {StructureDefinition}                         from './definition/StructureDefinition'
+import {CodeIds}                                                      from '../codes'
+import {URI}                                                          from '../components'
+import {DatatypeName}                                                 from '../DatatypeName'
+import {DomainResourceData}                                           from '../internal'
+import {PrimitiveName}                                                from '../PrimitiveName'
+import {Choice, Choices}                                              from '../valuesets'
+import {Builder, PropertyBuilder}                                     from './builder/builder.type'
+import {DefConstraintAssertion, Name, NarrowableDef, NarrowableNames} from './definition/definition.type'
+import {StructureDefinition}                                          from './definition/StructureDefinition'
+import {BindingStrength}                                              from './util'
 
 
 
@@ -18,14 +22,26 @@ export interface Define {
   backboneListOf: <T>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
 }
 
+export type Extension = {
+  url: URI,
+  valueType: PrimitiveName | DatatypeName,
+  valueTypeNarrowing?: NarrowableNames[],
+  bindings?: CodeIds | Choice[] | Choices,
+  bindingStrength?: BindingStrength,
+  constraints?: DefConstraintAssertion<DomainResourceData>[]
+}
+
+export type Extensions = { url: URI, extensions: Extension[] }
+
 export interface Extend {
-  withSimple: <T>(url: URI, valueType: PrimitiveName | DatatypeName) => Builder<T>
-  withComplex: <T>(url: URI, extensions: StructureDefinition<T>) => Builder<T>
+
+  withOne: <T>(key: string, extension: Extension) => Builder<T>
+  withComplex: <T>(key: string, extensions: Extensions) => Builder<T>
+  primitive: <T>(primtiveKey: string, url: string, extension: Extension[]) => Builder<T>
 }
 
 export interface Slice {
 
   oneFor: <T>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
-
   constraint: <T>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
 }
