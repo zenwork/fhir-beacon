@@ -1,12 +1,12 @@
-import {StoryObj}                                    from '@storybook/web-components'
-import {getStorybookHelpers}                         from '@wc-toolkit/storybook-helpers'
-import {html}                                        from 'lit'
-import {renderTemplateInShell, ShellArgs}            from '../../../../stories/storybook-utils'
-import {ContactPointData}                            from '../../../components/index'
-import {ContactPoint, DatatypeDef}                   from '../../../DatatypeDef'
-import {code}                                        from '../../../PrimitiveDef'
-import {define, profile, slice, StructureDefinition} from '../../../profiling/index'
-import {data}                                        from './contact-point.story.data'
+import {StoryObj}                                            from '@storybook/web-components'
+import {getStorybookHelpers}                                 from '@wc-toolkit/storybook-helpers'
+import {html}                                                from 'lit'
+import {renderTemplateInShell, ShellArgs}                    from '../../../../stories/storybook-utils'
+import {ContactPointData}                                    from '../../../components/index'
+import {ContactPoint, DatatypeDef}                           from '../../../DatatypeDef'
+import {code}                                                from '../../../PrimitiveDef'
+import {define, extend, profile, slice, StructureDefinition} from '../../../profiling/index'
+import {data}                                                from './contact-point.story.data'
 
 
 
@@ -66,9 +66,21 @@ const base: StructureDefinition<ContactPointData> = profile({
 
 export const Profile: Story = {
   args: {
-    data,
+    data: {
+      ...data,
+      '_use': {
+        extension: [
+          {
+            url: 'https://fhir.ch/ig/ch-core/StructureDefinition-ch-ext-ech-46-emailcategory.html',
+            valueCodeableConcept: {
+              coding: [{ code: 'email' }]
+            }
+          }
+        ]
+      }
+    },
     profile: profile({
-                      type: new DatatypeDef('ContactPoint', 'CHCoreContactPointECH46Email'),
+                       type: new DatatypeDef('ContactPoint', 'CHCoreContactPointECH46Phone'),
                       base,
                       props: [
                         slice.constraint(
@@ -79,26 +91,17 @@ export const Profile: Story = {
                               message: `Must be fixed value:${fixedValue}`
                             })
                           ],
-                          ['email']
+                          ['phone']
                         ),
-                        /*extend.withSimple('use',
-                         profile(
-                         {
-                         type: Extension,
-                         props: [
-                         define.oneOf('valueCodeableConcept', CodeableConcept)
-                         .boundBy({
-                         system: 'http://fhir.ch/ig/ch-core/ValueSet/ech-46-emailcategory',
-                         id: 'ECH46EmailCategory',
-                         name: 'eCH-0046 Email Category',
-                         type: 'ValueSet',
-                         valid: true,
-                         choices: [{ value: '1', display: 'private' }, { value: '2', display: 'business' }]
-                         }, BindingStrength.Extensible)
-                         ]
-                         }
-                         )
-                         )*/
+                        extend.primitive<ContactPointData>(
+                          'use',
+                          'https://fhir.ch/ig/ch-core/StructureDefinition-ch-ext-ech-46-emailcategory.html',
+                          [
+                            {
+                              url: 'https://fhir.ch/ig/ch-core/StructureDefinition-ch-ext-ech-46-emailcategory.html',
+                              valueType: 'CodeableConcept'
+                            }
+                          ])
                       ]
                     }),
     mode: 'structure',

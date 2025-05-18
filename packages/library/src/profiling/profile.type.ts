@@ -23,6 +23,7 @@ export interface Define {
 }
 
 export type Extension = {
+  key?: string,
   url: URI,
   valueType: PrimitiveName | DatatypeName,
   valueTypeNarrowing?: NarrowableNames[],

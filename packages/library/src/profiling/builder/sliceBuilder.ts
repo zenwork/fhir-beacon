@@ -14,8 +14,7 @@ export function sliceBuilder<T>(def: PropertySliceDef<T>): Builder<T> {
         let ref: Defs<T> | null = null
         if (Array.isArray(def.key)) {
           ref = def.key.reduce((prev, key, index) => {
-
-            if (isDefWithChildren(prev)) {
+            if (index == 0 || isDefWithChildren(prev)) {
 
               let value: Defs<T> | null = null
 
@@ -35,7 +34,7 @@ export function sliceBuilder<T>(def: PropertySliceDef<T>): Builder<T> {
 
         if (ref && isDefWithConstraints(ref) && isDefWithConstraints(def)) {
           ref.constraints = ref.constraints.concat(def.constraints)
-          // context.def.set(ref)
+
         } else {
           throw new Error(`slice must be set on existing property. None found for: ${def.choice}${def.key}`)
         }

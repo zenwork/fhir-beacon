@@ -39,7 +39,7 @@ export type Def = {
 
 export type ExtensionDef = Def & {
   defType: 'extension',
-  url: string | string[],
+  url: string,
   valueType: PrimitiveName | DatatypeName | undefined,
   valueTypeNarrowing: NarrowableNames[] | undefined,
   cardinality: string,
@@ -52,6 +52,13 @@ export type ExtensionDef = Def & {
 // Type guard for ExtensionDef
 export function isExtensionDef<T>(def: unknown): def is ExtensionDef {
   return (def as ExtensionDef).defType === 'extension'
+}
+
+// Type guard for ExtensionDef
+export function isPrimitiveExtensionDef<T>(def: unknown): def is ExtensionDef {
+  return (typeof (def as { key: string | string[] }).key === 'string')
+         && ((def as { key: string }).key.startsWith('_'))
+         && (def as ExtensionDef).defType === 'extension'
 }
 
 export type PropertyDef<T> = Def & {
@@ -80,13 +87,13 @@ export type PropertySliceDef<T> = Def & {
 
 // Type guard for PropertySliceDef<T>
 export function isPropertySliceDef<T>(def: unknown): def is PropertySliceDef<T> {
-  return (def as PropertySliceDef<T>).defType === 'property-slice'
+  return !!def && (def as PropertySliceDef<T>).defType === 'property-slice'
 }
 
 export function isDefWithChildren<T>(def: unknown): def is { subdefs: Map<string, PropertyDef<T>> } {
-  return !!(def as PropertySliceDef<T>).subdefs
+  return !!def && !!(def as PropertySliceDef<T>).subdefs
 }
 
 export function isDefWithConstraints<T>(def: unknown): def is { constraints: DefConstraintAssertion<T>[] } {
-  return !!(def as PropertySliceDef<T>).constraints
+  return !!def && !!(def as PropertySliceDef<T>).constraints
 }

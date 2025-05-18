@@ -10,7 +10,7 @@ import {URI} from '../../components/primitive/primitive.data'
  */
 export type FhirElementData = {
   id?: string | null,
-  extension?: [],
+  extension?: any[],
 }
 
 /**

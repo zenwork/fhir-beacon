@@ -1,26 +1,20 @@
-import {CodeIds} from '../../codes'
+import {CodeIds}          from '../../codes'
+import {DatatypeDef}      from '../../DatatypeDef'
+import {Validations}      from '../../internal/index'
+import {ResourceDef}      from '../../ResourceDef'
+import {alternatingColor} from '../util/AlternatingLogger'
 import {
-  DatatypeDef
-}                from '../../DatatypeDef'
-import {
-  Validations
-}                from '../../internal/index'
-import {
-  ResourceDef
-}                from '../../ResourceDef'
-import {
-  alternatingColor
-}                from '../util/AlternatingLogger'
-import {
+  Def,
   DefConstraintAssertion,
   Defs,
   ExtensionDef,
   isExtensionDef,
+  isPrimitiveExtensionDef,
   isPropertyDef,
   isPropertySliceDef,
   PropertyDef,
   PropertySliceDef
-}                from './definition.type'
+}                         from './definition.type'
 
 
 
@@ -101,19 +95,58 @@ export class StructureDefinition<T> {
   }
 
   validate(data: T, validations: Validations, fetched: boolean): void {
+
     this.props.forEach((def: Defs<T>, key: string) => {
+
       if (isPropertyDef(def)) {
         def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
           // @ts-ignore
           const value: any = constraint._fixedValue
           const result: { success: false; message?: string } | { success: true } = constraint(data, value)
-          // console.log(validations.all())
           if (!result.success) {
             const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
             validations.add({ fqk: { path: [{ node: key }] }, message })
           }
         })
       }
+
+      if (isPrimitiveExtensionDef(def)) {
+        const refKey: string = def.key.toString().substring(1)
+        // @ts-ignore
+        if (Object.keys(data).some(k => k === refKey)) {
+          // @ts-ignore
+          // console.log('found match for ', def.key, Object.keys(data).find(k => k === refKey))
+
+          if (def.subdefs) {
+            def.subdefs.forEach((subdef: Def, subkey: string) => {
+              const d = subdef as ExtensionDef
+
+              // @ts-ignore
+              data[def.key].extension
+                           .filter((ext: { url: string }) => ext.url === d.url)
+                           .forEach((e: any) => {
+                             // console.log(e)
+                             // console.log('\n')
+                             // console.log(subdef)
+
+                             validations.add({
+                                               fqk: {
+                                                 path: [
+                                                   { node: 'extension' },
+                                                   { node: 'https://fhir.ch/ig/ch-core/5.0.0/StructureDefinition-ch-ext-ech-46-phonecategory.html' },
+                                                   { node: 'valueCodeableConcept' },
+                                                   { node: 'coding' },
+                                                   { node: 'code' }
+                                                 ]
+                                               }, message: 'wrong binding value'
+                                             })
+                           })
+            })
+          }
+        }
+
+      }
+
 
     })
   }
