@@ -3,11 +3,11 @@ import {Choice, Choices}                                         from '../../val
 import {Def, DefConstraintAssertion, isPropertyDef, PropertyDef} from '../definition/definition.type'
 import {Context}                                                 from '../definition/StructureDefinition'
 import {BindingStrength, Example}                                from '../util/BindingStrength'
-import {PropertyBuilder}                                         from './builder.type'
+import {Decorateable, PropertyBuilder}                           from './builder.type'
 
 
 
-export function definitionBuilder<T>(def: PropertyDef<T>): PropertyBuilder<T> {
+export function definitionBuilder<T extends Decorateable>(def: PropertyDef<T>): PropertyBuilder<T> {
 
   let context: Context<T> | null = null
   let optional = false

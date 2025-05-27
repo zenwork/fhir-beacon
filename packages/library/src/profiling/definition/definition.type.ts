@@ -1,12 +1,14 @@
-import {CodeIds}         from '../../codes'
-import {DatatypeDef}     from '../../DatatypeDef'
-import {DatatypeName}    from '../../DatatypeName'
-import {PrimitiveDef}    from '../../PrimitiveDef'
-import {PrimitiveName}   from '../../PrimitiveName'
-import {ResourceDef}     from '../../ResourceDef'
-import {ResourceName}    from '../../ResourceName'
-import {Choice, Choices} from '../../valuesets'
-import {BindingStrength} from '../util'
+import {CodeIds}           from '../../codes'
+import {DatatypeDef}       from '../../DatatypeDef'
+import {DatatypeName}      from '../../DatatypeName'
+import {TemplateGenerator} from '../../internal'
+import {PrimitiveDef}      from '../../PrimitiveDef'
+import {PrimitiveName}     from '../../PrimitiveName'
+import {ResourceDef}       from '../../ResourceDef'
+import {ResourceName}      from '../../ResourceName'
+import {DisplayMode}       from '../../shell'
+import {Choice, Choices}   from '../../valuesets'
+import {BindingStrength}   from '../util'
 
 
 
@@ -46,7 +48,9 @@ export type ExtensionDef = Def & {
   bindings: CodeIds | Choice[] | Choices,
   bindingStrength: BindingStrength,
   isModifier: boolean | undefined,
-  isSummary: boolean | undefined
+  isSummary: boolean | undefined,
+  extendRender: Map<DisplayMode, TemplateGenerator<any>> | undefined,
+  overrideRender: Map<DisplayMode, TemplateGenerator<any>> | undefined
 }
 
 // Type guard for ExtensionDef

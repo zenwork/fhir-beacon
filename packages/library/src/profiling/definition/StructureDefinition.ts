@@ -1,8 +1,10 @@
-import {CodeIds}          from '../../codes'
-import {DatatypeDef}      from '../../DatatypeDef'
-import {Validations}      from '../../internal/index'
-import {ResourceDef}      from '../../ResourceDef'
-import {alternatingColor} from '../util/AlternatingLogger'
+import {CodeIds}                        from '../../codes'
+import {DatatypeDef}                    from '../../DatatypeDef'
+import {TemplateGenerator, Validations} from '../../internal/index'
+import {ResourceDef}                    from '../../ResourceDef'
+import {DisplayMode}                    from '../../shell'
+import {Decorateable}                   from '../builder'
+import {alternatingColor}               from '../util/AlternatingLogger'
 import {
   Def,
   DefConstraintAssertion,
@@ -14,7 +16,7 @@ import {
   isPropertySliceDef,
   PropertyDef,
   PropertySliceDef
-}                         from './definition.type'
+}                                       from './definition.type'
 
 
 
@@ -26,11 +28,13 @@ import {
  *
  * @template T - The data type associated with the resource structure.
  */
-export class StructureDefinition<T> {
+export class StructureDefinition<T extends Decorateable> {
 
   type: ResourceDef | DatatypeDef
   props = new Map<string, Defs<T>>()
   constraints: DefConstraintAssertion<T>[] = []
+  extendRender: Map<DisplayMode, TemplateGenerator<T>> = new Map<DisplayMode, TemplateGenerator<T>>()
+  overrideRender: Map<DisplayMode, TemplateGenerator<T>> = new Map<DisplayMode, TemplateGenerator<T>>()
 
   constructor(name: ResourceDef | DatatypeDef) {
     this.type = name
@@ -212,13 +216,13 @@ export class StructureDefinition<T> {
 
 }
 
-export function flattenKey<T>(key: string | string[], choicePrefix?: string): string {
+export function flattenKey(key: string | string[], choicePrefix?: string): string {
   const keyParts = Array.isArray(key) ? key.join('.') : key
   const flattened: string = (choicePrefix ?? '') + keyParts
   return flattened
 }
 
-export class Context<T> {
+export class Context<T extends Decorateable> {
   constructor(public name: ResourceDef | DatatypeDef, public def: StructureDefinition<T>) {}
 }
 

@@ -1,12 +1,12 @@
 import {DatatypeDef}                  from '../DatatypeDef'
 import {ResourceDef}                  from '../ResourceDef'
-import {Builder}                      from './builder/builder.type'
+import {Builder, Decorateable}        from './builder/builder.type'
 import {DefConstraintAssertion}       from './definition/definition.type'
 import {Context, StructureDefinition} from './definition/StructureDefinition'
 
 
 
-export type ProfileArgs<T> = {
+export type ProfileArgs<T extends Decorateable> = {
   type: ResourceDef | DatatypeDef,
   base?: StructureDefinition<T>,
   constraints?: DefConstraintAssertion<T>[],
@@ -17,7 +17,7 @@ export type ProfileArgs<T> = {
 /**
  * DSL for creating FHIR profiles
  */
-export function profile<T>({
+export function profile<T extends Decorateable>({
                             type,
                             base = new StructureDefinition<T>(type),
                             constraints = [],

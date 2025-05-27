@@ -15,19 +15,20 @@ describe('test', () => {
       profile({
                 type: Observation,
                 props: [
-                  define.oneOf('foo', HumanName)
+                  define.oneOf<DomainResourceData>('foo', HumanName)
                         .optional()
                         .boundBy([{ value: 'baz', display: 'baz' }, { value: 'biff', display: 'biff' }]),
-                  define.listOf('baz', Address)
+                  define.listOf<DomainResourceData>('baz', Address)
                         .optional(),
-                  define.oneOf('baz', CodeableConcept),
-                  define.backboneOf('backboneKey', profile({
+                  define.oneOf<DomainResourceData>('baz', CodeableConcept),
+                  define.backboneOf<DomainResourceData>('backboneKey',
+                                                        profile<DomainResourceData>({
                                                              type: new ResourceDef('ObservationFoo'),
                                                              props: [
-                                                               define.oneOf('bkStuff', CodeableConcept)
+                                                               define.oneOf<DomainResourceData>('bkStuff', CodeableConcept)
                                                                      .optional()
                                                                      .isSummary(),
-                                                               define.oneOf('bkThing', Timing).optional()
+                                                               define.oneOf<DomainResourceData>('bkThing', Timing).optional()
                                                              ]
                                                            })).optional()
                 ]
@@ -47,14 +48,12 @@ describe('test', () => {
                                          })
                                        ]),
                   define.oneOf<DomainResourceData>('baz', Address).isSummary(),
-                  define.backboneOf<DomainResourceData>('backboneKey', profile({
-                                                                                 type: new ResourceDef(
-                                                                                   'ObservationFoo'),
+                  define.backboneOf<DomainResourceData>('backboneKey', profile<DomainResourceData>({
+                                                                                                     type: new ResourceDef('ObservationFoo'),
                                                                                  props: [
-                                                                                   define.oneOf('bkStuff',
-                                                                                                CodeableConcept)
+                                                                                   define.oneOf<DomainResourceData>('bkStuff', CodeableConcept)
                                                                                          .isSummary(),
-                                                                                   define.oneOf('bkThing', Timing)
+                                                                                   define.oneOf<DomainResourceData>('bkThing', Timing)
                                                                                  ]
                                                                                }))
 

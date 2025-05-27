@@ -24,6 +24,7 @@ export class ContactPoint extends BaseElement<ContactPointData> {
                           .errormessage=${validations.msgFor('system')}
                           summary
           ></fhir-primitive>
+          <fhir-primitive label="use" .value=${data.use} .type=${PrimitiveType.code} summary></fhir-primitive>
           <fhir-primitive label="rank" .value=${data.rank} .type=${PrimitiveType.positiveInt} summary></fhir-primitive>
           <fhir-period label="period" .data=${data.period} summary></fhir-period>
       `

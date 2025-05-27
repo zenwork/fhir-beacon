@@ -356,11 +356,11 @@ export class Primitive extends ConfigurableElement {
    * @function
    * @returns {string} A readable string representation of the label in lowercase format.
    */
-  private getLabel = () => {
-    let label = this.key
+  private getLabel = (): string => {
+    let label = ''
     if (this.label) label = this.label
-
-    return asReadable(label, 'lower')
+    else label = asReadable(this.key, 'lower')
+    return label
   }
 
 

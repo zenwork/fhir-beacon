@@ -13,7 +13,7 @@ export abstract class ConfigurableElement extends LitElement {
   @state()
   private declare displayConfig: DisplayConfig
 
-  constructor() {
+  protected constructor() {
     super()
     new ContextConsumer(this,
                         {

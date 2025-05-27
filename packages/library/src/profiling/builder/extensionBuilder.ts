@@ -1,16 +1,20 @@
+import {TemplateGenerator}                          from '../../internal'
 import {Basic}                                      from '../../ResourceDef'
+import {DisplayMode}                                from '../../shell'
 import {Context, ExtensionDef, StructureDefinition} from '../definition'
 import {Extension, Extensions}                      from '../profile.type'
 import {BindingStrength}                            from '../util'
-import {Builder}                                    from './builder.type'
+import {Builder, Decorateable, RenderBuilder}       from './builder.type'
 
 
 
-export function extensionBuilder<T>(key: string, def: Extension): Builder<T> {
+export function extensionBuilder<T extends Decorateable>(key: string, def: Extension): RenderBuilder<T> {
 
   let context: Context<T> | null = null
+  const extendRender = new Map<DisplayMode, TemplateGenerator<T>>()
+  const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>()
 
-  const action = {
+  const action: RenderBuilder<T> = {
     setCtx: (ctx: Context<T>) => {context = ctx},
     build: () => {
       if (context) {
@@ -27,7 +31,9 @@ export function extensionBuilder<T>(key: string, def: Extension): Builder<T> {
           bindings: def.bindings ?? [],
           bindingStrength: def.bindingStrength ?? BindingStrength.Example,
           choice: undefined,
-          subdefs: undefined
+          subdefs: undefined,
+          extendRender: extendRender,
+          overrideRender: overrideRender
         }
 
         context.def.set(extensionDef, key)
@@ -35,26 +41,38 @@ export function extensionBuilder<T>(key: string, def: Extension): Builder<T> {
       } else {
         throw new Error('Context not set')
       }
+    },
+    extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+
+      extendRender.set(forMode, fn)
+      return action
+    },
+    overrideRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+      overrideRender.set(forMode, fn)
+      return action
     }
 
   }
 
-  return action as unknown as Builder<T>
+  return action as unknown as RenderBuilder<T>
 }
 
-export function complexExtensionBuilder<T>(key: string, def: Extensions): Builder<T> {
+export function complexExtensionBuilder<T extends Decorateable>(key: string, def: Extensions): RenderBuilder<T> {
 
   let context: Context<T> | null = null
+  const extendRender = new Map<DisplayMode, TemplateGenerator<T>>()
+  const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>()
 
-  const action = {
+
+  const action: RenderBuilder<T> = {
     setCtx: (ctx: Context<T>) => {context = ctx},
     build: () => {
       if (context) {
 
-        const ctx: Context<unknown> = new Context(Basic, new StructureDefinition(Basic))
+        const ctx: Context<any> = new Context(Basic, new StructureDefinition(Basic))
         def.extensions.map(ext => {
 
-          const builder: Builder<unknown> = extensionBuilder(ext.url, ext)
+          const builder: Builder<any> = extensionBuilder(ext.url, ext)
           builder.setCtx(ctx)
           builder.build()
         })
@@ -71,35 +89,49 @@ export function complexExtensionBuilder<T>(key: string, def: Extensions): Builde
           bindings: [],
           bindingStrength: BindingStrength.Example,
           choice: undefined,
-          subdefs: ctx.def.props
+          subdefs: ctx.def.props,
+          extendRender,
+          overrideRender
         }
         context.def.set(extensionDef)
 
       } else {
         throw new Error('Context not set')
       }
+    },
+    extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+      extendRender.set(forMode, fn)
+      return action
+    },
+    overrideRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+      overrideRender.set(forMode, fn)
+      return action
     }
 
   }
 
-  return action as unknown as Builder<T>
+  return action
 }
 
-export function primitiveExtensionBuilder<T>(primitiveKey: string, url: string, def: Extension[]): Builder<T> {
+export function primitiveExtensionBuilder<T extends Decorateable>(primitiveKey: string, url: string, def: Extension[]): RenderBuilder<T> {
   let context: Context<T> | null = null
+  const extendRender = new Map<DisplayMode, TemplateGenerator<T>>()
+  const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>()
 
-  const action = {
+  const action: RenderBuilder<T> = {
     setCtx: (ctx: Context<T>) => {context = ctx},
     build: () => {
       if (context) {
 
-        const ctx: Context<unknown> = new Context(Basic, new StructureDefinition(Basic))
+        const ctx: Context<any> = new Context(Basic, new StructureDefinition(Basic))
         def.map(ext => {
 
-          const builder: Builder<unknown> = extensionBuilder(toFixedKey(ext.valueType), ext)
+          const builder: Builder<any> = extensionBuilder(toFixedKey(ext.valueType), ext)
           builder.setCtx(ctx)
           builder.build()
         })
+
+        console.log(primitiveKey, extendRender)
 
         const extensionDef: ExtensionDef = {
           defType: 'extension',
@@ -113,17 +145,29 @@ export function primitiveExtensionBuilder<T>(primitiveKey: string, url: string, 
           bindings: [],
           bindingStrength: BindingStrength.Example,
           choice: undefined,
-          subdefs: ctx.def.props
+          subdefs: ctx.def.props,
+          extendRender,
+          overrideRender
         }
         context.def.set(extensionDef)
 
       } else {
         throw new Error('Context not set')
       }
+    },
+
+    extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+      extendRender.set(forMode, fn)
+      return action
+    },
+
+    overrideRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
+      overrideRender.set(forMode, fn)
+      return action
     }
   }
 
-  return action as unknown as Builder<T>
+  return action
 
 }
 

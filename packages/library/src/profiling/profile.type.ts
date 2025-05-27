@@ -4,7 +4,7 @@ import {DatatypeName}                                                 from '../D
 import {DomainResourceData}                                           from '../internal'
 import {PrimitiveName}                                                from '../PrimitiveName'
 import {Choice, Choices}                                              from '../valuesets'
-import {Builder, PropertyBuilder}                                     from './builder/builder.type'
+import {Builder, Decorateable, PropertyBuilder, RenderBuilder}        from './builder/builder.type'
 import {DefConstraintAssertion, Name, NarrowableDef, NarrowableNames} from './definition/definition.type'
 import {StructureDefinition}                                          from './definition/StructureDefinition'
 import {BindingStrength}                                              from './util'
@@ -12,14 +12,14 @@ import {BindingStrength}                                              from './ut
 
 
 export interface Define {
-  oneOf: <T>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  optionOf: <T>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  choiceOf: <T>(choice: string, key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  minOneOf: <T>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  listOf: <T>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  optionalListOf: <T>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
-  backboneOf: <T>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
-  backboneListOf: <T>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
+  oneOf: <T extends Decorateable>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  optionOf: <T extends Decorateable>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  choiceOf: <T extends Decorateable>(choice: string, key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  minOneOf: <T extends Decorateable>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  listOf: <T extends Decorateable>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  optionalListOf: <T extends Decorateable>(key: string, typeName: Name, narrowingTypes?: NarrowableDef[]) => PropertyBuilder<T>
+  backboneOf: <T extends Decorateable>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
+  backboneListOf: <T extends Decorateable>(key: string, props: StructureDefinition<T>) => PropertyBuilder<T>
 }
 
 export type Extension = {
@@ -36,13 +36,15 @@ export type Extensions = { url: URI, extensions: Extension[] }
 
 export interface Extend {
 
-  withOne: <T>(key: string, extension: Extension) => Builder<T>
-  withComplex: <T>(key: string, extensions: Extensions) => Builder<T>
-  primitive: <T>(primtiveKey: string, url: string, extension: Extension[]) => Builder<T>
+  withOne: <T extends Decorateable>(key: string, extension: Extension) => RenderBuilder<T>
+  withComplex: <T extends Decorateable>(key: string, extensions: Extensions) => RenderBuilder<T>
+  primitive: <T extends Decorateable>(primtiveKey: string, url: string, extension: Extension[]) => RenderBuilder<T>
+
 }
 
 export interface Slice {
 
-  oneFor: <T>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
-  constraint: <T>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
+  oneFor: <T extends Decorateable>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
+  constraint: <T extends Decorateable>(key: string[], constraints: DefConstraintAssertion<T>[], fixedValue?: unknown[], choice?: string) => Builder<T>
+
 }

@@ -1,5 +1,7 @@
-import {Extension, FhirElementData} from '../base'
+import {FhirElementData, FhirExtensionData} from '../base'
+
+
 
 export type BackboneElementData = FhirElementData & {
-  modifierExtension: Extension[]
+  modifierExtension: FhirExtensionData[]
 }

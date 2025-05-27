@@ -7,7 +7,7 @@ import {StructureDefinition}  from '../src/profiling/index'
 
 export type ShellArgs = {
   data: object,
-  profile?: StructureDefinition<unknown>,
+  profile?: StructureDefinition<any>,
   mode?: string,
   verbose?: boolean,
   showerror?: boolean,

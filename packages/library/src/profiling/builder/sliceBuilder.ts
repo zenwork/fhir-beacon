@@ -1,9 +1,9 @@
-import {Builder}                                                                              from '../builder/builder.type'
+import {Builder, Decorateable}                                                                from '../builder/builder.type'
 import {Context, Defs, flattenKey, isDefWithChildren, isDefWithConstraints, PropertySliceDef} from '../index'
 
 
 
-export function sliceBuilder<T>(def: PropertySliceDef<T>): Builder<T> {
+export function sliceBuilder<T extends Decorateable>(def: PropertySliceDef<T>): Builder<T> {
   let context: Context<T> | null = null
 
   const action = {
