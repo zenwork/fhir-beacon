@@ -108,7 +108,8 @@ export class StructureDefinition<T extends Decorateable> {
           const value: any = constraint._fixedValue
           const result: { success: false; message?: string } | { success: true } = constraint(data, value)
           if (!result.success) {
-            const message: string = (result.message ?? `Constraint ${constraint.name} failed for ${key}`) + ` (${this.type.profileName})`
+            const message: string = ((result as { success: false; message?: string }).message ?? `Constraint ${constraint.name} failed for ${key}`)
+                                    + ` (${this.type.profileName})`
             validations.add({ fqk: { path: [{ node: key }] }, message })
           }
         })
