@@ -6,7 +6,6 @@ export * from './builder.type'
 export * from './define'
 export * from './definitionBuilder'
 export * from './definitionProperty'
-
 export * from './extend'
 export * from './extensionBuilder'
 export * from './slice'

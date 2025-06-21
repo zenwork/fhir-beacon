@@ -39,6 +39,7 @@ export enum PrimitiveType {
   uri = 'uri',
   uri_type = 'uri_type', //TODO: not 100% this belongs here
   url = 'url',
+  uuid = 'uuid'
 }
 
 export type Type = string

@@ -1,6 +1,7 @@
 import {Id, Language, URI} from '../../components/primitive/primitive.data'
 import {MetaData}          from '../../components/special/meta/meta.data'
 import {NarrativeData}     from '../../components/special/narrative/narrative.data'
+import {OpenType}          from '../../OpenType'
 import {FhirExtensionData} from '../base'
 
 
@@ -16,6 +17,6 @@ export type ResourceData = {
 export type DomainResourceData = ResourceData & {
   text?: NarrativeData
   contained: ResourceData[]
-  extension: FhirExtensionData[]
-  modifierExtension: FhirExtensionData[]
+  extension: FhirExtensionData<OpenType>[]
+  modifierExtension: FhirExtensionData<OpenType>[]
 }

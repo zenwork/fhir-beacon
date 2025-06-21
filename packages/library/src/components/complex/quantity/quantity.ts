@@ -167,7 +167,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   public validate(data: QuantityData | SimpleQuantityData, validations: Validations, _fetched: boolean) {
     if (this.simple && !isSimpleQuantity(data)) {
       validations.add({

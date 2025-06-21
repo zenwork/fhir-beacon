@@ -28,6 +28,7 @@ import {
   toUrl,
   valueOrError
 }                              from './type-converters'
+import {toUuid}                from './type-converters/toUuid'
 
 
 
@@ -127,7 +128,8 @@ export class PrimitiveValidator {
           [PrimitiveType.time, () => this.validOrError(toTime, value!)],
           [PrimitiveType.uri, () => this.validOrError(toUri, value!)],
           [PrimitiveType.uri_type, () => this.validOrError(toType, value!)],
-          [PrimitiveType.url, () => this.validOrError(toUrl, value!)]
+          [PrimitiveType.url, () => this.validOrError(toUrl, value!)],
+          [PrimitiveType.uuid, () => this.validOrError(toUuid, value!)]
         ])
       }
     }

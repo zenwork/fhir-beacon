@@ -49,3 +49,5 @@ export type FhirString = string
 export type Base64Binary = string
 
 export type Ref = string
+
+export type Uuid = string

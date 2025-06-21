@@ -5,6 +5,7 @@ import {property}                                      from 'lit/decorators.js'
 import {mustRender}                                                 from '../../../components/mustRender'
 import {asReadable}                                                 from '../../../components/primitive/./type-formatters/asReadable'
 import {PrimitiveType}                                              from '../../../components/primitive/type-converters/type-converters'
+import {OpenType}                                                   from '../../../OpenType'
 import {Defs, ExtensionDef}                                         from '../../../profiling'
 import {wrap}                                                       from '../../../shell'
 import {DisplayMode}                                                from '../../../shell/displayMode'
@@ -338,10 +339,10 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
             ${hasSome(data.extension)
               ? html`
-                    ${wrap<FhirExtensionData>(
+                    ${wrap<FhirExtensionData<OpenType>>(
                         {
                             key: 'extension',
-                            collection: (data.extension ?? []) as FhirExtensionData[],
+                          collection: (data.extension ?? []) as FhirExtensionData<OpenType>[],
                             generator: (d, l, k, i) =>
                                 html`
                                     <fhir-extension key=${k}

@@ -21,6 +21,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
       _validations.add({ fqk: { path: [{ node: '_root' }] }, message: 'validation error' })
     }
   }
+
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<CodeableConceptData>,
                        validations: Validations): TemplateResult[] {

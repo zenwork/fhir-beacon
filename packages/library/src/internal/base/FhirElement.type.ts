@@ -14,11 +14,11 @@ export type ValuePrefixKey = `value${OpenTypeName}`;
  */
 export type FhirElementData = {
   id?: string | null,
-  extension?: FhirExtensionData[]
+  extension?: FhirExtensionData<OpenType>[]
 }
 
 /**
- * Represents an extension in FHIR (Fast Healthcare Interoperability Resources).
+ * Represents an extension in FHIR.
  *
  * An extension extends the functionality of a resource or datatype by adding additional data elements.
  *
@@ -30,4 +30,7 @@ export type FhirElementData = {
  * @see {@link http://hl7.org/fhir/R5/extensibility.html#Extension|FHIR R5 Extensibility}
  * @see {@link http://hl7.org/fhir/R5/datatypes.html#open|FHIR R5 DataTypes}
  */
-export type FhirExtensionData = FhirElementData & { url: Uri } & { [K in ValuePrefixKey]?: OpenType }
+export type FhirExtensionData<T extends OpenType> =
+  FhirElementData
+  & { url: Uri }
+  & { [K in ValuePrefixKey]?: T }

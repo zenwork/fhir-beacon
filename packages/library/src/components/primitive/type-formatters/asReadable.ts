@@ -6,9 +6,12 @@ const removeExtraSpacesPattern = /([A-Z0-9])(?![a-z])( )(?![A-Z][a-z])/g
 const dollarSignPattern = /(\$)([A-Z0-9])/g
 const leadingUnderscorePattern = /^_/g
 const underscoresPattern = /_/g
+const kebabCasePattern = /-/g
 
-function splitCamelCase(str: string): string {
+
+function splitAllSpecialCase(str: string): string {
   return str.replace(camelCasePattern, '$1 $2')
+            .replace(kebabCasePattern, ' ')
 }
 
 function splitAllCapsToCamelCase(str: string): string {
@@ -28,7 +31,7 @@ function cleanUpString(str: string): string {
 export function asReadable(text: string, to: 'none' | 'lower' | 'upper' = 'none'): string {
   if (!text) return text
 
-  const readable = cleanUpString(splitAlphaNumeric(splitAllCapsToCamelCase(splitCamelCase(text))))
+  const readable = cleanUpString(splitAlphaNumeric(splitAllCapsToCamelCase(splitAllSpecialCase(text))))
 
   switch (to) {
     case 'none':

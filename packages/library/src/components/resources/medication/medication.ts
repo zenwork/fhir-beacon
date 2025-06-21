@@ -1,18 +1,16 @@
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement}                 from 'lit/decorators.js'
-import {Decorated, DomainResource}     from '../../../internal'
-import {strap, wrap}                   from '../../../shell'
-import {DisplayConfig}                 from '../../../shell/types'
-import {PrimitiveType}                 from '../../primitive'
-import {MedicationData}                from './medication.data'
+import {html, TemplateResult}      from 'lit'
+import {customElement}             from 'lit/decorators.js'
+import {Decorated, DomainResource} from '../../../internal'
+import {strap, wrap}               from '../../../shell'
+import {DisplayConfig}             from '../../../shell/types'
+import {PrimitiveType}             from '../../primitive'
+import {MedicationData}            from './medication.data'
 
 
 
 @customElement('fhir-medication')
 export class Medication extends DomainResource<MedicationData> {
-  constructor() {
-    super('Medication')
-  }
+  constructor() {super('Medication')}
 
   public renderDisplay(config: DisplayConfig, data: Decorated<MedicationData>): TemplateResult[] {
     return [
@@ -20,36 +18,31 @@ export class Medication extends DomainResource<MedicationData> {
           <fhir-identifier key="identifier" .data=${data.identifier} summary></fhir-identifier>
           <fhir-codeable-concept key="code" .data=${data.code} summary></fhir-codeable-concept>
           <fhir-primitive key="status" .type=${PrimitiveType.code} .value=${data.status} summary></fhir-primitive>
-          <fhir-reference key="marketingAuthorizationHolder"
-                          label="marketing authorization holder"
-                          .data=${data.marketingAuthorizationHolder}
-                          summary
-          ></fhir-reference>
-          <fhir-codeable-concept key="doseForm"
-                                 label="dose form"
-                                 .data=${data.doseForm}
-          ></fhir-codeable-concept>
+          <fhir-reference key="marketingAuthorizationHolder" label="marketing authorization holder" .data=${data.marketingAuthorizationHolder} summary></fhir-reference>
+          <fhir-codeable-concept key="doseForm" label="dose form" .data=${data.doseForm}></fhir-codeable-concept>
           <fhir-quantity key="totalVolume" label="total volume" .data=${data.totalVolume} summary></fhir-quantity>
 
-          ${data.ingredient
-            ? wrap({
+          ${wrap({
                        key: 'ingredient',
-                       pluralBase: 'ingredient',
-                       collection: data.ingredient,
-                       generator: (d, label, key) => html`
-                           <fhir-medication-ingredient key="${key}"
-                                                       .data=${d}
-                                                       label=${label}
-                           ></fhir-medication-ingredient>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       collection: data.ingredient
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   || [],
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       generator: (d,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   l,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   k) => html`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <fhir-medication-ingredient
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               key="${k}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               .data=${d}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               label=${l}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ></fhir-medication-ingredient>
                        `,
                        summary: false,
                        config
                    }
                   )
-            : nothing}
+      }
 
           <fhir-medication-batch key="batch" .data=${data.batch}></fhir-medication-batch>
-          <fhir-reference label="definition" .data=${data.definition}></fhir-reference>
+          <fhir-reference key="definition" .data=${data.definition}></fhir-reference>
       `
     ]
   }

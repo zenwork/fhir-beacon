@@ -20,24 +20,26 @@ import {
   SignatureData,
   TimingData,
   UsageContextData
-}                             from './components'
-import {FhirDate, FhirString} from './components/primitive/primitive.data'
-
+} from './components'
 import {
   Base64Binary,
   Code,
   DateTime,
   Decimal,
+  FhirDate,
+  FhirString,
   Id,
   Instant,
   Integer,
   Markdown,
-  Oid,
   PositiveInt,
   Time,
   UnsignedInt,
+  Url
+} from './components/primitive/primitive.data'
+import {
+  Oid,
   Uri,
-  Url,
   Uuid
 } from './PrimitiveTypes'
 
@@ -163,3 +165,4 @@ export type OpenType =
   // special
   // | DosageData
   | MetaData
+  | never

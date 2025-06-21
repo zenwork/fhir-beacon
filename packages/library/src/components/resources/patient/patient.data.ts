@@ -43,8 +43,8 @@ export type PatientData = DomainResourceData & {
   telecom: ContactPointData[]
   gender?: Code
   birthDate?: FhirDate
-  deceasedBoolean?: DeceasedBoolean
-  deceasedDateTime?: DeceasedDateTime
+  deceasedBoolean?: boolean
+  deceasedDateTime?: DateTime
   address: AddressData[]
   maritalStatus?: CodeableConceptData
   multipleBirthBoolean?: boolean
