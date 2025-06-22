@@ -5,6 +5,7 @@ import {data_310, data_319, frontPageData, synthiaData} from './medication.story
 
 
 
+
 const meta: Meta<ShellArgs> = {
   title: 'Components/Resources/Medication/Medication',
   component: 'fhir-medication',
@@ -14,7 +15,7 @@ const meta: Meta<ShellArgs> = {
 }
 
 export default meta
-type Story = StoryObj<ShellArgs>;
+type Story = StoryObj<ShellArgs>
 
 export const Med0310Display: Story = {
   args: {

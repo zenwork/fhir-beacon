@@ -39,6 +39,7 @@ import {ReferenceData}     from '../reference'
 
 
 
+
 export const stringExtension: FhirExtensionData<FhirString> = {
   url: 'treatment-description',
   valueString: 'This is a string value'
@@ -61,7 +62,7 @@ export const datetimeExtension: FhirExtensionData<DateTime> = {
 
 export const decimalExtension: FhirExtensionData<Decimal> = {
   url: 'https://example.org/fhir/StructureDefinition/price',
-  valueDecimal: '123.45'
+  valueDecimal: 123.45
 }
 
 export const codeableConceptExtension: FhirExtensionData<CodeableConceptData> = {
@@ -212,7 +213,7 @@ export const markdownExtension: FhirExtensionData<Markdown> = {
 export const moneyExtension: FhirExtensionData<MoneyData> = {
   url: 'https://example.org/fhir/StructureDefinition/procedure-cost',
   valueMoney: {
-    value: '299.99',
+    value: 299.99,
     currency: 'USD'
   }
 }
@@ -228,7 +229,7 @@ export const periodExtension: FhirExtensionData<PeriodData> = {
 export const quantityExtension: FhirExtensionData<QuantityData> = {
   url: 'https://example.org/fhir/StructureDefinition/weight',
   valueQuantity: {
-    value: '75.5',
+    value: 75.5,
     unit: 'kg',
     system: 'http://unitsofmeasure.org',
     code: 'kg'
@@ -239,13 +240,13 @@ export const rangeExtension: FhirExtensionData<RangeData> = {
   url: 'https://example.org/fhir/StructureDefinition/normal-range',
   valueRange: {
     low: {
-      value: '60',
+      value: 60,
       unit: 'bpm',
       system: 'http://unitsofmeasure.org',
       code: '/min'
     },
     high: {
-      value: '100',
+      value: 100,
       unit: 'bpm',
       system: 'http://unitsofmeasure.org',
       code: '/min'
@@ -257,13 +258,13 @@ export const ratioExtension: FhirExtensionData<RatioData> = {
   url: 'https://example.org/fhir/StructureDefinition/medication-dilution',
   valueRatio: {
     numerator: {
-      value: '1',
+      value: 1,
       unit: 'mg',
       system: 'http://unitsofmeasure.org',
       code: 'mg'
     },
     denominator: {
-      value: '10',
+      value: 10,
       unit: 'mL',
       system: 'http://unitsofmeasure.org',
       code: 'mL'
@@ -284,15 +285,15 @@ export const sampledDataExtension: FhirExtensionData<SampledDataData> = {
   url: 'https://example.org/fhir/StructureDefinition/ecg-data',
   valueSampledData: {
     origin: {
-      value: '0',
+      value: 0,
       unit: 'mV',
       system: 'http://unitsofmeasure.org',
       code: 'mV'
     },
     intervalUnit: 'g/(kg.min)',
-    factor: '1.0',
-    lowerLimit: '-10.0',
-    upperLimit: '10.0',
+    factor: 1.0,
+    lowerLimit: -10.0,
+    upperLimit: 10.0,
     dimensions: 1,
     data: '2 2 1.5 2 2 2 1.5 2 2 2.5 2.5 2.5 3 3 3.5 3.5 3 3 2.5 2 2 1.5 1 1 1.5 2 2'
   }
@@ -330,10 +331,10 @@ export const timingExtension: FhirExtensionData<TimingData> = {
     event: ['2025-05-28T08:00:00Z', '2025-05-28T20:00:00Z'],
     repeat: {
       frequency: 2,
-      period: '1',
+      period: 1,
       periodUnit: 'd',
       boundsDuration: {
-        value: '14',
+        value: 14,
         unit: 'days',
         system: 'http://unitsofmeasure.org',
         code: 'd'

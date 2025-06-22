@@ -1,0 +1,33 @@
+import {Meta, Source}       from '@storybook/blocks'
+import {primitiveExtension} from '../extension-reference.story.data.js'
+
+
+<Meta title="Components/Datatypes/Special Type/Extension/Reference/Primitive/Doc" component={primitiveExtension}/>
+
+
+# Extension
+
+documentation:
+* [FHIR Extensibility](http://hl7.org/fhir/extensibility.html)
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+
+## Data
+<Source code={JSON.stringify(primitiveExtension, null, 2)} language="typescript"></Source>
+
+## Template
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-primitive
+          key="birthDate"
+          label="birth date"
+          .value=${data.birthDate}
+          .extension=${data._birthDate}
+      ></fhir-primitive>
+    `
+}
+```

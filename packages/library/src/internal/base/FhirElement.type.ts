@@ -3,8 +3,30 @@ import {Uri}                    from '../../PrimitiveTypes'
 
 
 
+
 export type ValuePrefixKey = `value${OpenTypeName}`;
 
+export type ExtensionUnderscore<V = unknown> = {
+  [K in `_${string}`]?:
+  { id?: string | null, extension: FhirExtensionData<OpenType>[] }
+  | ({ id?: string | null, extension: FhirExtensionData<OpenType>[] } | null)[]
+}
+
+// TODO: requires refactoring of all data object to split into private base and exportable type
+/**
+ * must be used with this approach:
+ * ```
+ * type MyData = {
+ *   family: string;
+ *   given: string[];
+ * };
+ *
+ * type MyDataWithMeta = MyData & ConstrainedExtensionUnderscore<MyData>;
+ * ```
+ */
+export type ConstrainedExtensionUnderscore<T> = {
+  [K in keyof T & string as `_${K}`]?: FhirExtensionData<OpenType>[]
+}
 
 /**
  * Represents a data structure that holds the information of a FHIR element.
@@ -15,7 +37,7 @@ export type ValuePrefixKey = `value${OpenTypeName}`;
 export type FhirElementData = {
   id?: string | null,
   extension?: FhirExtensionData<OpenType>[]
-}
+} & ExtensionUnderscore
 
 /**
  * Represents an extension in FHIR.

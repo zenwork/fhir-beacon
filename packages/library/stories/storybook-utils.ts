@@ -5,8 +5,9 @@ import {StructureDefinition}  from '../src/profiling/index'
 
 
 
-export type ShellArgs = {
-  data: object,
+
+export type ShellArgs<T = object> = {
+  data: T,
   profile?: StructureDefinition<any>,
   mode?: string,
   verbose?: boolean,
@@ -19,7 +20,7 @@ export type ShellArgs = {
 }
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-const argTypes: Partial<ArgTypes<ShellArgs>> = {
+export const argTypes: Partial<ArgTypes<ShellArgs>> = {
   data: {
     table: {
       disable: true
