@@ -10,6 +10,7 @@ import {AddressData}                         from './address.data'
 
 
 
+
 const address_use = useSystem('http://hl7.org/fhir/address-use')
 const address_type = useSystem('http://hl7.org/fhir/address-type')
 
@@ -34,12 +35,14 @@ export class Address extends BaseElement<AddressData> {
           <fhir-primitive
                   key="use"
                   .value=${address_use.choices.filter(c => c.value === data.use)[0]?.display ?? data.use}
+                  .extension=${data._use}
                   .errormessage=${vldtns.msgFor('use')}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   key="type"
                   .value=${address_type.choices.filter(c => c.value === data.type)[0]?.display ?? data.type}
+                  .extension=${data._type}
                   .errormessage=${vldtns.msgFor('type')}
                   summary
           ></fhir-primitive >
@@ -55,12 +58,12 @@ export class Address extends BaseElement<AddressData> {
                         `
                   )
             : nothing}
-          <fhir-primitive label="city" .value=${data.city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="district" .value=${data.district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="state" .value=${data.state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="country" .value=${data.country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-period label="period" .data=${data.period} summary></fhir-period >
+          <fhir-primitive key="city" .value=${data.city} .type=${PrimitiveType.fhir_string} .extension=${data._city} summary></fhir-primitive >
+          <fhir-primitive key="district" .value=${data.district} .type=${PrimitiveType.fhir_string} .extension=${data._district} summary></fhir-primitive >
+          <fhir-primitive key="state" .value=${data.state} .type=${PrimitiveType.fhir_string} .extension=${data._state} summary></fhir-primitive >
+          <fhir-primitive key="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} .extension=${data._postalCode} summary></fhir-primitive >
+          <fhir-primitive key="country" .value=${data.country} .type=${PrimitiveType.fhir_string} .extension=${data._country} summary></fhir-primitive >
+          <fhir-period key="period" .data=${data.period} summary></fhir-period >
       `
     ]
   }
@@ -71,6 +74,7 @@ export class Address extends BaseElement<AddressData> {
           <fhir-primitive
                   label="use"
                   .value=${data.use}
+                  .extension=${data._use}
                   .type=${PrimitiveType.code}
                   errormessage=${vldtns.msgFor('use')}
                   summary
@@ -78,12 +82,14 @@ export class Address extends BaseElement<AddressData> {
           <fhir-primitive
                   label="type"
                   .value=${data.type}
+                  .extension=${data._type}
                   .type=${PrimitiveType.code}
                   errormessage=${vldtns.msgFor('type')}
                   summary
           ></fhir-primitive >
           <fhir-primitive label="text"
                   .value=${data.text}
+                  .extension=${data._text}
                   .type=${PrimitiveType.fhir_string}
                   summary
           ></fhir-primitive >
@@ -101,11 +107,11 @@ export class Address extends BaseElement<AddressData> {
                              ></fhir-primitive > `
                   )
             : nothing}
-          <fhir-primitive label="city" .value=${data.city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="district" .value=${data.district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="state" .value=${data.state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="country" .value=${data.country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="city" .value=${data.city} .extension=${data._city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="district" .value=${data.district} .extension=${data._district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="state" .value=${data.state} .extension=${data._state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="postalCode" .value=${data.postalCode} .extension=${data._postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="country" .value=${data.country} .extension=${data._country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
           <fhir-period label="period" .data=${data.period} summary></fhir-period >
       `
     ]

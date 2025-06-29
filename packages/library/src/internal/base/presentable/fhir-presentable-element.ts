@@ -2,25 +2,27 @@
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {property}                                      from 'lit/decorators.js'
 
-
-import {mustRender}                              from '../../../components/mustRender'
-import {asReadable}                              from '../../../components/primitive/./type-formatters/asReadable'
-import {PrimitiveType}                           from '../../../components/primitive/type-converters/type-converters'
-import {DisplayMode}                             from '../../../shell/displayMode'
-import {hasSome}                                 from '../../../shell/layout/directives'
-import {DisplayConfig}                           from '../../../shell/types'
-import {hostStyles}                              from '../../../styles'
-import {hasSameAncestor, isBlank}                from '../../../utilities'
-import {FhirDataElement}                         from '../data/fhir-data-element'
-import {NoDataObject}                            from '../Decorate'
-import {Decorated}                               from '../Decorate.types'
-import {FhirElementData}                         from '../FhirElement.type'
-import {Rendering}                               from '../Rendering'
-import {Templating}                              from '../Templating'
-import {ValidationsImpl}                         from '../Validations.impl'
-import {meta, Validations}                       from '../Validations.type'
-import {EmptyResult, Generators, NullGenerators} from './fhir-presentable-element.data'
-import {componentStyles}                         from './fhir-presentable-element.styles'
+import {mustRender}                                                 from '../../../components/mustRender'
+import {asReadable}                                                 from '../../../components/primitive/./type-formatters/asReadable'
+import {PrimitiveType}                                              from '../../../components/primitive/type-converters/type-converters'
+import {OpenType}                                                   from '../../../OpenType'
+import {Defs, ExtensionDef}                                         from '../../../profiling'
+import {wrap}                                                       from '../../../shell'
+import {DisplayMode}                                                from '../../../shell/displayMode'
+import {hasSome}                                                    from '../../../shell/layout/directives'
+import {DisplayConfig}                                              from '../../../shell/types'
+import {hostStyles}                                                 from '../../../styles'
+import {hasSameAncestor, isBlank}                                   from '../../../utilities'
+import {FhirDataElement}                                            from '../data/fhir-data-element'
+import {NoDataObject}                                               from '../Decorate'
+import {Decorated}                                                  from '../Decorate.types'
+import {FhirElementData, FhirExtensionData}                         from '../FhirElement.type'
+import {Rendering}                                                  from '../Rendering'
+import {Templating}                                                 from '../Templating'
+import {ValidationsImpl}                                            from '../Validations.impl'
+import {meta, Validations}                                          from '../Validations.type'
+import {EmptyResult, Generators, NullGenerators, TemplateGenerator} from './fhir-presentable-element.data'
+import {componentStyles}                                            from './fhir-presentable-element.styles'
 
 
 
@@ -101,13 +103,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       if (this.mustRender()) {
         this.willRender(this.config(), this.extendedData, changes)
         this.templateGenerators = NullGenerators()
-        // const val: ValidationsImpl<D> = new ValidationsImpl(this.extendedData)
-        // const rootErr: FullyQualifiedKey = {path:[{node: '_root'}]}
-        // if(val.has(rootErr) && this.showerror) {
-        //   this.templateGenerators.structure.header.push(()=>[html`<fhir-error
-        // text="${val.messageFor(rootErr)}"></fhir-error>`])
-        // this.templateGenerators.display.header.push(()=>[html`<fhir-error
-        // text="${val.messageFor(rootErr)}"></fhir-error>`]) }
         this.templateGenerators.structure.header.push(this.renderBaseElement)
         if (this.override()) {
           this.templateGenerators.override.body.push(this.renderOverride)
@@ -123,6 +118,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                   this.templateGenerators.display.body.push(this.renderEditableDisplay)
                 } else {
                   this.templateGenerators.display.body.push(this.renderDisplay)
+                  this.templateGenerators.display.footer.push(this.renderExtensionElement)
                 }
                 break
               case DisplayMode.narrative:
@@ -145,6 +141,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                   ])
                 } else {
                   this.templateGenerators.structure.body.push(this.renderStructure)
+
+                  const extendedRender: TemplateGenerator<D> | undefined = this.profile?.extendRender?.get(DisplayMode.structure)
+                  if (extendedRender) this.templateGenerators.structure.body.push(extendedRender)
                 }
                 break
               default:
@@ -153,6 +152,22 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                       <fhir-error text="Unable to render the element ${this.type} ${JSON.stringify(this.config())}"></fhir-error>`
                 ])
             }
+            if (this.profile?.props) {
+              Array.from(this.profile.props.entries())
+                   .forEach((prop: [string, Defs<D>]) => {
+                     const key = prop[0]
+                     const def = prop[1] as ExtensionDef
+                     console.log(key, this.mode)
+                     if (key.startsWith('_')) {
+                       const generator: TemplateGenerator<any> | undefined = def.extendRender?.get(this.mode)
+                       if (generator) {
+                         // @ts-ignore
+                         this.templateGenerators[this.mode].body.push(generator)
+                       }
+                     }
+                   })
+            }
+
           }
         }
       }
@@ -160,19 +175,20 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   }
 
   protected getLabel() {
-    let label = this.type
-
-    if (this.key && !this.label && this.key !== 'nokey') {
-      label = this.key
-    } else if (this.label) {
-      label = this.label
+    if (this.label) {
+      return this.label
     }
 
-    if (this.mode != DisplayMode.display) {
-      label = asReadable(label, 'lower')
+    if (this.key && this.key !== 'nokey') {
+      if (this.mode != DisplayMode.display) {
+        return asReadable(this.key, 'lower')
+      } else {
+        return this.key
+      }
     }
 
-    return label
+
+    return this.type
   }
 
   protected render(): TemplateResult | TemplateResult[] {
@@ -231,6 +247,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                                 this.config(),
                                                 this.extendedData,
                                                 new ValidationsImpl(this.extendedData))).flat()}
+                    
+                    ${this.templateGenerators
+                          .display.footer
+                          .map(g => g.call(this, this.config(),
+                                           this.extendedData,
+                                           new ValidationsImpl(this.extendedData))).flat()}
                 </fhir-wrapper>
             `)
           }
@@ -280,6 +302,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                   <fhir-wrapper variant="details"
                                 label=${this.getLabel()}
                                 badge-resource=${asReadable(this.type)}
+                                badge-profile=${this.profile?.type.profileName}
                                 ?open=${this.open}
                                 ?badge-summary=${this.summary}
                                 ?badge-required=${this.required}
@@ -316,17 +339,44 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
     }
   }
 
-  private renderBaseElement(_: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+  private renderBaseElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
     if (data) {
       return [
         html`
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
+            ${this.renderExtensionElement(config, data)}
+        `
+      ]
+    }
+
+    return EmptyResult
+  }
+
+
+  private renderExtensionElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+    if (data) {
+      return [
+        html`
             ${hasSome(data.extension)
               ? html`
-                        <fhir-primitive label="extension"
-                                        context="not implemented"
-                                        .type=${PrimitiveType.none}
-                        ></fhir-primitive>`
+                    ${wrap<FhirExtensionData<OpenType>>(
+            {
+              key: 'extension',
+              collection: (data.extension ?? []) as FhirExtensionData<OpenType>[],
+              generator: (d, l, k, i) =>
+                html`
+                                    <fhir-extension key=${k}
+                                                    .label=${l}
+                                                    .data=${d}
+                                                    summary
+                                                    headless
+                                    ></fhir-extension>`,
+              config
+
+
+            })}
+
+                `
               : nothing}
         `
       ]

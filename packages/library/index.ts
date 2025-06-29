@@ -26,3 +26,6 @@ export *               from './src/components/resources'
 export {systemChoices} from './src/codes/use-system'
 export {useSystem}     from './src/codes/use-system'
 export {DisplayMode} from './src/shell'
+
+/* Utils */
+export * from './src/utilities/fhir-beacon-demo'

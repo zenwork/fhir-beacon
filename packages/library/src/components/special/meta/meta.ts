@@ -9,6 +9,7 @@ import {MetaData}                      from './meta.data'
 
 
 
+
 @customElement('fhir-meta')
 export class Meta extends BaseElement<MetaData> {
 
@@ -28,7 +29,8 @@ export class Meta extends BaseElement<MetaData> {
           ${wrap({
                      key: 'profile',
                      pluralBase: 'profile',
-                     collection: data.profile,
+                                                                                                                                                                                                                                                                                                                              collection: data.profile
+                                                                                                                                                                                                                                                                                                                                          || [],
                      generator: (d, l, k) => html`
                          <fhir-primitive key=${k}
                                          label=${l}
@@ -43,7 +45,7 @@ export class Meta extends BaseElement<MetaData> {
           ${wrap({
                      key: 'security',
                      pluralBase: 'security',
-                     collection: data.security,
+                                       collection: data.security || [],
                      generator: (d, l, k) => html`
                          <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
                      summary: this.summary,
@@ -53,13 +55,13 @@ export class Meta extends BaseElement<MetaData> {
           ${wrap({
                      key: 'tag',
                      pluralBase: 'tag',
-                     collection: data.tag,
+                                       collection: data.tag || [],
                      generator: (d, l, k) => html`
                          <fhir-coding key=${k}
                                       label=${l}
                                       .data=${d}
                                       summary
-                                      ?headless=${data.tag.length === 1}
+                                      ?headless=${data.tag && data.tag.length === 1}
                          ></fhir-coding> `,
                      summary: this.summary,
                      config
@@ -110,7 +112,8 @@ export class Meta extends BaseElement<MetaData> {
           ${strap({
                       key: 'tag',
                       pluralBase: 'tag',
-                      collection: data.tag,
+                                                                                                                                                                                                                                                                                                                                                                                               collection: data.tag
+                                                                                                                                                                                                                                                                                                                                                                                                           || [],
                       generator: (d, l, k) => html`
                           <fhir-coding key=${k} label=${l} .data=${d} summary></fhir-coding> `,
                       summary: this.summary,

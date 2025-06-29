@@ -2,19 +2,23 @@ import {consume}                                       from '@lit/context'
 import {SlInput, SlSwitch}                             from '@shoelace-style/shoelace'
 import {html, nothing, PropertyValues, TemplateResult} from 'lit'
 import {customElement, property, state}                from 'lit/decorators.js'
-import {ConfigurableElement}                           from '../../internal/base/configurable/fhir-configurable-element'
-import {dataContext, FhirDataContext}                  from '../../internal/contexts'
-import {DisplayMode}                                   from '../../shell/displayMode'
-import {textHostStyles}                                from '../../styles'
-import {isBlank}                                       from '../../utilities'
-import {Choice}                                        from '../../valuesets/ValueSet.data'
-import {mustRender}                                    from '../mustRender'
-import {PrimitiveValidator}                            from './primitive.validator'
-import {PrimitiveInputEvent}                           from './primitiveInputEvent'
-import {componentStyles}                               from './primitve.styles'
-import {convertToPrimitiveType, PrimitiveType}         from './type-converters'
-import {asReadable}                                    from './type-formatters'
-import {format}                                        from './type-formatters/format'
+import {FhirExtensionData}                             from '../../internal'
+
+import {ConfigurableElement}                    from '../../internal/base/configurable/fhir-configurable-element'
+import {dataContext, FhirDataContext}           from '../../internal/contexts'
+import {OpenType}                               from '../../OpenType'
+import {DisplayMode}                            from '../../shell/displayMode'
+import {textHostStyles}                         from '../../styles'
+import {isBlank}                                from '../../utilities'
+import {Choice}                                 from '../../valuesets/ValueSet.data'
+import {mustRender}                             from '../mustRender'
+import {PrimitiveValidator, PrimitiveValueHost} from './primitive.validator'
+import {PrimitiveInputEvent}                    from './primitiveInputEvent'
+import {componentStyles}                        from './primitve.styles'
+import {convertToPrimitiveType, PrimitiveType}  from './type-converters'
+import {asReadable}                             from './type-formatters'
+import {format}                                 from './type-formatters/format'
+
 
 
 
@@ -30,8 +34,8 @@ export class Primitive extends ConfigurableElement {
 
   static styles = [textHostStyles, componentStyles]
 
-  @consume({ context: dataContext, subscribe: true })
-  declare contextData: FhirDataContext
+  @property({ type: Object })
+  public extension: FhirExtensionData<OpenType> | null = null
 
   @property()
   declare key: string
@@ -80,24 +84,28 @@ export class Primitive extends ConfigurableElement {
 
   @property({ type: Boolean })
   public required: boolean = false
+  @consume({ context: dataContext, subscribe: true })
+  protected declare contextData: FhirDataContext
+  @state()
+  private error: boolean = false
 
   @state()
-  public error: boolean = false
+  private presentableValue: unknown = ''
 
   @state()
-  public presentableValue: unknown = ''
+  private presentableError: string = ''
 
   @state()
-  public presentableError: string = ''
+  private presentableTypeError: string = ''
 
   @state()
-  public presentableTypeError: string = ''
+  private hasExtension: boolean = false
 
   private validator: PrimitiveValidator
 
   constructor() {
     super()
-    this.validator = new PrimitiveValidator(this)
+    this.validator = new PrimitiveValidator(this as unknown as PrimitiveValueHost)
   }
 
   /**
@@ -136,9 +144,13 @@ export class Primitive extends ConfigurableElement {
 
     return this.input
            ? this.renderInput()
-           : this.error
-             ? this.renderError()
-             : this.renderValid()
+           : this.hasExtension
+             ? this.error
+               ? this.renderErrorWithExtension()
+               : this.renderValidWithExtension()
+             : this.error
+               ? this.renderError()
+               : this.renderValid()
   }
 
 
@@ -182,8 +194,7 @@ export class Primitive extends ConfigurableElement {
     if (this.mode === DisplayMode.structure) elements.push(html`
         <fhir-badge-group ?required=${this.required} ?summary=${this.summary}></fhir-badge-group>`)
 
-    return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`
-        <li> ${elements}</li>` : html``
+    return (elements.length > 1 || !isBlank(this.value) || this.verbose) ? html`<li> ${elements}</li>` : html``
   }
 
   /**
@@ -288,20 +299,19 @@ export class Primitive extends ConfigurableElement {
                     ></fhir-value>
                     ${this.context
                       ? html`
-                                <fhir-context .text="${this.context}"></fhir-context>
-                            `
-                      : nothing}
+                            <fhir-context .text="${this.context}"></fhir-context>`
+                      : nothing
+                    }
                     ${this.mode === DisplayMode.structure
                       ? html`
-                                <fhir-badge-group ?required=${this.required} ?summary=${this.summary}
-                                ></fhir-badge-group>` : nothing}
+                            <fhir-badge-group ?required=${this.required} ?summary=${this.summary}></fhir-badge-group>`
+                      : nothing
+                    }
                     ${this.showerror
                       ? html`
-                                <fhir-error
-                                        text=${errors.join(
-                                                ' | ')}
-                                ></fhir-error>`
-                      : nothing}
+                            <fhir-error text=${errors.join(' | ')}></fhir-error>`
+                      : nothing
+                    }
                 </li>`
            : html``
   }
@@ -357,12 +367,25 @@ export class Primitive extends ConfigurableElement {
    * @function
    * @returns {string} A readable string representation of the label in lowercase format.
    */
-  private getLabel = () => {
-    let label = this.key
+  private getLabel = (): string => {
+    let label = ''
     if (this.label) label = this.label
-
-    return asReadable(label, 'lower')
+    else label = asReadable(this.key, 'lower')
+    return label
   }
 
 
+  private renderErrorWithExtension(): TemplateResult {
+    return html`error with ext`
+  }
+
+
+  private renderValidWithExtension(): TemplateResult {
+    return html`
+    <fhir-wrapper label=${this.getLabel()}>
+    ${this.renderValid()}
+    <fhir-extension .data=${this.extension} headless></fhir-extension>
+    </fhir-wrapper>
+    `
+  }
 }

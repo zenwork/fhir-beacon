@@ -1004,3 +1004,1060 @@ export const data3 = {
     }
   ]
 }
+
+export const masterDetail = {
+  resourceType: 'Bundle',
+  id: 'b1e4aca6-8695-4f22-84e1-7b7ac22242e5',
+  meta: {
+    lastUpdated: '2025-02-21T17:08:35.396+00:00'
+  },
+  type: 'searchset',
+  link: [
+    {
+      relation: 'self',
+      url: 'https://hapi.fhir.org/baseR5/Patient/silth-practice-2/$everything'
+    },
+    {
+      relation: 'next',
+      url: 'https://hapi.fhir.org/baseR5?_getpages=b1e4aca6-8695-4f22-84e1-7b7ac22242e5&_getpagesoffset=20&_count=20&_pretty=true&_bundletype=searchset'
+
+    }
+  ],
+  entry: [
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Patient/silth-practice-2',
+      resource: {
+        resourceType: 'Patient',
+        id: 'silth-practice-2',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        text: {
+          status: 'generated',
+          div: '<div xmlns="http://www.w3.org/1999/xhtml"><div class="hapiHeaderText">Mr. Josh <b>JAIDEE </b></div><table class="hapiPropertyTable"><tbody><tr><td>Identifier</td><td>8-4027-26620-53-3</td></tr><tr><td>Date of birth</td><td><span>03 April 1967</span></td></tr></tbody></table></div>'
+
+        },
+        identifier: [
+          {
+            type: {
+              coding: [
+                {
+                  system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+                  code: 'NI'
+                }
+              ]
+            },
+            system: 'http://thailand.com/citizenid',
+            value: '8-4027-26620-53-3'
+          },
+          {
+            type: {
+              coding: [
+                {
+                  system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+                  code: 'MR'
+                }
+              ]
+            },
+            system: 'http://fhirhealthhospital.com/mrn',
+            value: '64-52323'
+          }
+        ],
+        active: true,
+        name: [
+          {
+            family: 'Jaidee',
+            given: [
+              'Josh'
+            ],
+            prefix: [
+              'Mr.'
+            ]
+          }
+        ],
+        gender: 'male',
+        birthDate: '1967-04-03'
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Condition/81973',
+      resource: {
+        resourceType: 'Condition',
+        id: '81973',
+        meta: {
+          versionId: '2',
+          lastUpdated: '2023-09-10T09:45:22.044+00:00',
+          source: '#y1csxzmLCMKFr88n'
+        },
+        clinicalStatus: {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/condition-clinical',
+              code: 'resolved'
+            }
+          ]
+        },
+        code: {
+          coding: [
+            {
+              system: 'http://hl7.org/fhir/sid/icd-10',
+              code: 'K35.8',
+              display: 'Acute appendicitis, other and unspecified'
+            }
+          ],
+          text: 'Acute appendicitis, other and unspecified'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        }
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/DiagnosticReport/81974',
+      resource: {
+        resourceType: 'DiagnosticReport',
+        id: '81974',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        text: {
+          status: 'generated',
+          div: '<div xmlns="http://www.w3.org/1999/xhtml"><div class="hapiHeaderText"> Complete Blood Count </div><table class="hapiPropertyTable"><tbody><tr><td>Status</td><td>FINAL</td></tr></tbody></table><table class="hapiTableOfValues"><thead><tr><td>Name</td><td>Value</td><td>Interpretation</td><td>Reference Range</td><td>Status</td></tr></thead><tbody><tr class="hapiTableOfValuesRowOdd"><td> Haemoglobin </td><td>13.1 g/dL </td><td/><td> 12 g/dL - 16 g/dL </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowEven"><td> Hematocrit, Blood </td><td>40.1 % </td><td/><td> 36 % - 46 % </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowOdd"><td> White blood cell (WBC) count, Blood </td><td>12.7 10*3/uL </td><td/><td> 4.5 10*3/uL - 11 10*3/uL </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowEven"><td> Neutrophils per 100 white blood cells, Blood </td><td>70 % </td><td/><td> 54 % - 62 % </td><td>FINAL</td></tr></tbody></table></div>'
+
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '57021-8',
+              display: 'CBC W Auto Differential panel - Blood'
+            }
+          ],
+          text: 'Complete Blood Count'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        encounter: {
+          reference: 'Encounter/81975'
+        },
+        result: [
+          {
+            reference: 'Observation/81977'
+          },
+          {
+            reference: 'Observation/81978'
+          },
+          {
+            reference: 'Observation/81979'
+          },
+          {
+            reference: 'Observation/81980'
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Encounter/81975',
+      resource: {
+        resourceType: 'Encounter',
+        id: '81975',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        identifier: [
+          {
+            system: 'http://fhirhealthhospital.com/vn',
+            value: '123'
+          }
+        ],
+        status: 'completed',
+        'class': [
+          {
+            coding: [
+              {
+                system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+                code: 'AMB',
+                display: 'ambulatory'
+              }
+            ]
+          }
+        ],
+        subject: {
+          reference: 'Patient/silth-practice-2',
+          display: 'Mr. Josh Jaidee'
+        },
+        serviceProvider: {
+          reference: 'Organization/81981',
+          display: 'FHIRHealth Hospital'
+        },
+        participant: [
+          {
+            actor: {
+              reference: 'Practitioner/81982',
+              display: 'Dr. Sumit Jingjai'
+            }
+          }
+        ],
+        actualPeriod: {
+          start: '2023-04-01T09:00:00+07:00',
+          end: '2023-04-01T12:00:00+07:00'
+        },
+        location: [
+          {
+            location: {
+              display: 'OPD 1'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/MedicationRequest/81976',
+      resource: {
+        resourceType: 'MedicationRequest',
+        id: '81976',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'completed',
+        intent: 'order',
+        medication: {
+          concept: {
+            coding: [
+              {
+                system: 'http://tmt.this.or.th',
+                code: '694553',
+                display: 'ceftriaxone 2 g powder for solution for injection/infusion, 1 vial'
+              }
+            ]
+          }
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2',
+          display: 'Mr. Josh Jaidee'
+        },
+        encounter: {
+          reference: 'Encounter/81975',
+          display: 'VN 123'
+        },
+        authoredOn: '2023-04-01',
+        requester: {
+          reference: 'Practitioner/81982',
+          display: 'Dr. Sumit Jingjai'
+        },
+        dosageInstruction: [
+          {
+            sequence: 1,
+            text: '2 gm intravenous daily for 3 days',
+            timing: {
+              repeat: {
+                boundsDuration: {
+                  value: 3,
+                  unit: 'd'
+                },
+                frequency: 1,
+                period: 1,
+                periodUnit: 'd'
+              }
+            },
+            route: {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '255560000',
+                  display: 'Intravenous'
+                }
+              ]
+            },
+            doseAndRate: [
+              {
+                doseQuantity: {
+                  value: 2,
+                  unit: 'g',
+                  system: 'http://unitsofmeasure.org',
+                  code: 'g'
+                }
+              }
+            ]
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81977',
+      resource: {
+        resourceType: 'Observation',
+        id: '81977',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '718-7',
+              display: 'Hemoglobin [Mass/volume] in Blood'
+            }
+          ],
+          text: 'Haemoglobin'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 13.1,
+          unit: 'g/dL',
+          system: 'http://unitsofmeasure.org',
+          code: 'g/dL'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 12,
+              unit: 'g/dL',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/dL'
+            },
+            high: {
+              value: 16,
+              unit: 'g/dL',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/dL'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81978',
+      resource: {
+        resourceType: 'Observation',
+        id: '81978',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '4544-3',
+              display: 'Hematocrit [Volume Fraction] of Blood by Automated count'
+            }
+          ],
+          text: 'Hematocrit, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 40.1,
+          unit: '%',
+          system: 'http://unitsofmeasure.org',
+          code: '%'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 36,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            },
+            high: {
+              value: 46,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81979',
+      resource: {
+        resourceType: 'Observation',
+        id: '81979',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '6690-2',
+              display: 'Leukocytes [#/volume] in Blood by Automated count'
+            }
+          ],
+          text: 'White blood cell (WBC) count, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 12.7,
+          unit: '10*3/uL',
+          system: 'http://unitsofmeasure.org',
+          code: '10*3/uL'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 4.5,
+              unit: '10*3/uL',
+              system: 'http://unitsofmeasure.org',
+              code: '10*3/uL'
+            },
+            high: {
+              value: 11,
+              unit: '10*3/uL',
+              system: 'http://unitsofmeasure.org',
+              code: '10*3/uL'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81980',
+      resource: {
+        resourceType: 'Observation',
+        id: '81980',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '770-8',
+              display: 'Neutrophils/100 leukocytes in Blood by Automated count'
+            }
+          ],
+          text: 'Neutrophils per 100 white blood cells, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 70,
+          unit: '%',
+          system: 'http://unitsofmeasure.org',
+          code: '%'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 54,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            },
+            high: {
+              value: 62,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/L'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Procedure/81983',
+      resource: {
+        resourceType: 'Procedure',
+        id: '81983',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:36.982+00:00',
+          source: '#NUpi2aO4BEPJGGQg'
+        },
+        status: 'completed',
+        code: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '6025007',
+              display: 'Laparoscopic appendectomy (procedure)'
+            }
+          ],
+          text: 'Laparoscopic appendectomy'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        outcome: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '385669000',
+              display: 'Successful (qualifier value)'
+            }
+          ],
+          text: 'Successful'
+        }
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Condition/81985',
+      resource: {
+        resourceType: 'Condition',
+        id: '81985',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        clinicalStatus: {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/condition-clinical',
+              code: 'resolved'
+            }
+          ]
+        },
+        code: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '72048003',
+              display: 'Acute appendicitis without peritonitis'
+            },
+            {
+              system: 'http://hl7.org/fhir/sid/icd-10',
+              code: 'K35.8',
+              display: 'Acute appendicitis, other and unspecified'
+            }
+          ],
+          text: 'Acute appendicitis without peritonitis'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        }
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/DiagnosticReport/81986',
+      resource: {
+        resourceType: 'DiagnosticReport',
+        id: '81986',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        text: {
+          status: 'generated',
+          div: '<div xmlns="http://www.w3.org/1999/xhtml"><div class="hapiHeaderText"> Complete Blood Count </div><table class="hapiPropertyTable"><tbody><tr><td>Status</td><td>FINAL</td></tr></tbody></table><table class="hapiTableOfValues"><thead><tr><td>Name</td><td>Value</td><td>Interpretation</td><td>Reference Range</td><td>Status</td></tr></thead><tbody><tr class="hapiTableOfValuesRowOdd"><td> Haemoglobin </td><td>13.1 g/dL </td><td/><td> 12 g/dL - 16 g/dL </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowEven"><td> Hematocrit, Blood </td><td>40.1 % </td><td/><td> 36 % - 46 % </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowOdd"><td> White blood cell (WBC) count, Blood </td><td>12.7 10*3/uL </td><td/><td> 4.5 10*3/uL - 11 10*3/uL </td><td>FINAL</td></tr><tr class="hapiTableOfValuesRowEven"><td> Neutrophils per 100 white blood cells, Blood </td><td>70 % </td><td/><td> 54 % - 62 % </td><td>FINAL</td></tr></tbody></table></div>'
+
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '57021-8',
+              display: 'CBC W Auto Differential panel - Blood'
+            }
+          ],
+          text: 'Complete Blood Count'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        encounter: {
+          reference: 'Encounter/81987'
+        },
+        result: [
+          {
+            reference: 'Observation/81989'
+          },
+          {
+            reference: 'Observation/81990'
+          },
+          {
+            reference: 'Observation/81991'
+          },
+          {
+            reference: 'Observation/81992'
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Encounter/81987',
+      resource: {
+        resourceType: 'Encounter',
+        id: '81987',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        identifier: [
+          {
+            system: 'http://fhirhealthhospital.com/vn',
+            value: '123'
+          }
+        ],
+        status: 'completed',
+        'class': [
+          {
+            coding: [
+              {
+                system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+                code: 'AMB',
+                display: 'ambulatory'
+              }
+            ]
+          }
+        ],
+        subject: {
+          reference: 'Patient/silth-practice-2',
+          display: 'Mr. Josh Jaidee'
+        },
+        serviceProvider: {
+          reference: 'Organization/81993',
+          display: 'FHIRHealth Hospital'
+        },
+        participant: [
+          {
+            actor: {
+              reference: 'Practitioner/81994',
+              display: 'Dr. Sumit Jingjai'
+            }
+          }
+        ],
+        actualPeriod: {
+          start: '2023-04-01T09:00:00+07:00',
+          end: '2023-04-01T12:00:00+07:00'
+        },
+        location: [
+          {
+            location: {
+              display: 'OPD 1'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/MedicationRequest/81988',
+      resource: {
+        resourceType: 'MedicationRequest',
+        id: '81988',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'completed',
+        intent: 'order',
+        medication: {
+          concept: {
+            coding: [
+              {
+                system: 'http://tmt.this.or.th',
+                code: '694553',
+                display: 'ceftriaxone 2 g powder for solution for injection/infusion, 1 vial'
+              }
+            ]
+          }
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2',
+          display: 'Mr. Josh Jaidee'
+        },
+        encounter: {
+          reference: 'Encounter/81987',
+          display: 'VN 123'
+        },
+        authoredOn: '2023-04-01',
+        requester: {
+          reference: 'Practitioner/81994',
+          display: 'Dr. Sumit Jingjai'
+        },
+        dosageInstruction: [
+          {
+            sequence: 1,
+            text: '2 gm intravenous daily for 3 days',
+            timing: {
+              repeat: {
+                boundsDuration: {
+                  value: 3,
+                  unit: 'd'
+                },
+                frequency: 1,
+                period: 1,
+                periodUnit: 'd'
+              }
+            },
+            route: {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '255560000',
+                  display: 'Intravenous'
+                }
+              ]
+            },
+            doseAndRate: [
+              {
+                doseQuantity: {
+                  value: 2,
+                  unit: 'g',
+                  system: 'http://unitsofmeasure.org',
+                  code: 'g'
+                }
+              }
+            ]
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81989',
+      resource: {
+        resourceType: 'Observation',
+        id: '81989',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '718-7',
+              display: 'Hemoglobin [Mass/volume] in Blood'
+            }
+          ],
+          text: 'Haemoglobin'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 13.1,
+          unit: 'g/dL',
+          system: 'http://unitsofmeasure.org',
+          code: 'g/dL'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 12,
+              unit: 'g/dL',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/dL'
+            },
+            high: {
+              value: 16,
+              unit: 'g/dL',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/dL'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81990',
+      resource: {
+        resourceType: 'Observation',
+        id: '81990',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '4544-3',
+              display: 'Hematocrit [Volume Fraction] of Blood by Automated count'
+            }
+          ],
+          text: 'Hematocrit, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 40.1,
+          unit: '%',
+          system: 'http://unitsofmeasure.org',
+          code: '%'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 36,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            },
+            high: {
+              value: 46,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81991',
+      resource: {
+        resourceType: 'Observation',
+        id: '81991',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '6690-2',
+              display: 'Leukocytes [#/volume] in Blood by Automated count'
+            }
+          ],
+          text: 'White blood cell (WBC) count, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 12.7,
+          unit: '10*3/uL',
+          system: 'http://unitsofmeasure.org',
+          code: '10*3/uL'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 4.5,
+              unit: '10*3/uL',
+              system: 'http://unitsofmeasure.org',
+              code: '10*3/uL'
+            },
+            high: {
+              value: 11,
+              unit: '10*3/uL',
+              system: 'http://unitsofmeasure.org',
+              code: '10*3/uL'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Observation/81992',
+      resource: {
+        resourceType: 'Observation',
+        id: '81992',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'final',
+        code: {
+          coding: [
+            {
+              system: 'http://loinc.org',
+              code: '770-8',
+              display: 'Neutrophils/100 leukocytes in Blood by Automated count'
+            }
+          ],
+          text: 'Neutrophils per 100 white blood cells, Blood'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        valueQuantity: {
+          value: 70,
+          unit: '%',
+          system: 'http://unitsofmeasure.org',
+          code: '%'
+        },
+        referenceRange: [
+          {
+            low: {
+              value: 54,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: '%'
+            },
+            high: {
+              value: 62,
+              unit: '%',
+              system: 'http://unitsofmeasure.org',
+              code: 'g/L'
+            }
+          }
+        ]
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Procedure/81995',
+      resource: {
+        resourceType: 'Procedure',
+        id: '81995',
+        meta: {
+          versionId: '1',
+          lastUpdated: '2023-07-02T19:34:42.256+00:00',
+          source: '#v5vnpLpRn1XxmM9I'
+        },
+        status: 'completed',
+        code: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '6025007',
+              display: 'Laparoscopic appendectomy (procedure)'
+            }
+          ],
+          text: 'Laparoscopic appendectomy'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        },
+        outcome: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '385669000',
+              display: 'Successful (qualifier value)'
+            }
+          ],
+          text: 'Successful'
+        }
+      },
+      search: {
+        mode: 'match'
+      }
+    },
+    {
+      fullUrl: 'https://hapi.fhir.org/baseR5/Condition/82010',
+      resource: {
+        resourceType: 'Condition',
+        id: '82010',
+        meta: {
+          versionId: '3',
+          lastUpdated: '2023-09-10T09:50:11.731+00:00',
+          source: '#24Vx6GrMz5ttlC2B'
+        },
+        clinicalStatus: {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/condition-clinical',
+              code: 'resolved'
+            }
+          ]
+        },
+        code: {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '72048003',
+              display: 'Acute appendicitis without peritonitis'
+            }
+          ],
+          text: 'Acute appendicitis without peritonitis'
+        },
+        subject: {
+          reference: 'Patient/silth-practice-2'
+        }
+      },
+      search: {
+        mode: 'match'
+      }
+    }
+  ]
+}

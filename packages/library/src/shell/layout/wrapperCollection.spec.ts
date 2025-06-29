@@ -8,7 +8,7 @@ import {wrap}                 from './wrapper/wrap'
 
 
 describe('wrapperCollection', () => {
-  it.skip('renders correctly', async () => {
+  it('renders correctly', async () => {
     const el = await fixture<Wrapper>(html`
 
         <h1>multiple</h1>
@@ -16,9 +16,10 @@ describe('wrapperCollection', () => {
         ${wrap(
                 {
                     key: 'characterSet',
-                    pluralBase: 'letter',
+                    pluralBase: 'thing',
                     collection: ['a', 'b', 'c'],
-                    generator: (data, label, key) => html`${label}: ${data} (${key})`,
+                    generator: (data, label, key) => html`
+                        <li>${label}: ${data} (${key})</li>`,
                     config: {
                         source: 'unknown',
                         mode: DisplayMode.display,
@@ -36,7 +37,8 @@ describe('wrapperCollection', () => {
                     key: 'characterSet',
                     pluralBase: 'letter',
                     collection: ['a', 'b', 'c'],
-                    generator: (data, label, key) => html`${label}: ${data} (${key})`,
+                    generator: (data, label, key) => html`
+                        <li>${label}: ${data} (${key})</li>`,
                     config: {
                         source: 'unknown',
                         mode: DisplayMode.display,
@@ -89,14 +91,17 @@ describe('wrapperCollection', () => {
                 }
         )}
 
-    `, 'fhir-wrapper').first()
+    `).all()
 
-    expect(el.queryShadowByText('letters')).toContainHTML('label')
 
-    const elements: Wrapper[] = el.queryShadow<Wrapper[]>({ select: 'fhir-wrapper', expect: 3 })
-    expect(elements[0].queryShadowByText('1')).toContainHTML('label')
-    expect(elements[1].queryShadowByText('2')).toContainHTML('label')
-    expect(elements[2].queryShadowByText('3')).toContainHTML('label')
+    expect(el[0].queryShadowByText('things')).toContainHTML('label')
+
+    const elements: HTMLElement[] = el[0].queryShadow<Wrapper[]>({ select: 'li', expect: 3 })
+
+    expect(elements[0]).toHaveTextContent('1: a (characterSet)')
+    expect(elements[1]).toHaveTextContent('2: b (characterSet)')
+    expect(elements[2]).toHaveTextContent('3: c (characterSet)')
+
 
   })
 

@@ -1,0 +1,77 @@
+import {Meta}                                                      from '@storybook/blocks'
+import {Primitive}                                                 from '../../../primitive/'
+import {addressWithExtension as data2, primitiveExtension as data} from './extension-reference-primitive.story.data'
+
+
+<Meta title="Components/Datatypes/Special Type/Extension/2. with primitive types" component={Primitive}/>
+
+
+# Primitive-element wrappers (`_<name>`)
+
+## references:
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+* [FHIR Extensibility][1]
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+Primitives can’t have child nodes, so FHIR creates a parallel sibling whose name is prefixed with an underscore. That sibling is of type **Element**, giving it `id`, `extension`, and `modifierExtension`. If the primitive is mandatory you may send *only* the wrapper (no value) to explain why data is absent (`data-absent-reason`, etc.).
+
+
+
+## Support in FHIR-PRIMITIVE custom element
+
+`<fhir-primitive>` supports this by expanding as necessary when the `extension` property is provided with a valid extension. Internally the `<fhir-extension>` element is used.
+
+
+### Standalone Primitive
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-primitive key="birthDate" label="birth date"
+          .value=${data.birthDate} .extension=${data._birthDate}
+      ></fhir-primitive>
+    `
+}
+```
+
+#### Rendering
+<fhir-beacon-demo>
+    <fhir-primitive slot="display"
+                    key="birthDate"
+                    label="birth date"
+                    value={data.birthDate}
+                    extension={data._birthDate}
+    ></fhir-primitive>
+    <fhir-primitive slot="structure"
+                    key="birthDate"
+                    label="birth date"
+                    value={data.birthDate}
+                    extension={data._birthDate}
+    ></fhir-primitive>
+    <fhir-debug slot="debug" data={data}></fhir-debug>
+</fhir-beacon-demo>
+
+
+### Primitive extensions part of an element
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-address key="address" .data=${data}></fhir-address>
+    `
+}
+```
+#### Rendering
+<fhir-beacon-demo>
+    <fhir-address slot="display" key="address" data={data2}></fhir-address>
+    <fhir-address slot="structure" key="address" data={data2}></fhir-address>
+    <fhir-address slot="debug" key="address" data={data2}></fhir-address>
+
+</fhir-beacon-demo>

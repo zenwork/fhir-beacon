@@ -3,6 +3,7 @@ import {asReadable}           from './asReadable'
 
 
 
+
 describe('asReadable', () => {
   it('should split simple camelcase', () => {
     expect(asReadable('HelloWorld')).to.equal('Hello World')
@@ -40,5 +41,9 @@ describe('asReadable', () => {
     expect(asReadable('I Like Pink Lemonade')).to.equal('I Like Pink Lemonade')
     expect(asReadable('C4 Explosive')).to.equal('C4 Explosive')
     expect(asReadable('B2B Business Case')).to.equal('B2B Business Case')
+  })
+  it('should work with mixed cases', () => {
+    expect(asReadable('iso21090-codedString')).to.equal('iso 21090 coded String')
+
   })
 })

@@ -2,7 +2,7 @@ import {html, TemplateResult} from 'lit'
 
 
 
-export enum BadgeType {resource, summary, constraint, required}
+export enum BadgeType {resource, summary, constraint, required, profile}
 
 export function badgeTemplates(badges: { type: BadgeType, label: string }[]): TemplateResult[] {
   if (badges) {
@@ -18,14 +18,17 @@ export function badgeTemplates(badges: { type: BadgeType, label: string }[]): Te
               </sl-badge>`
         case BadgeType.required:
           return html`
-              <sl-badge pill
-                        style="--badge-border:var(--sl-color-fuchsia-200);--badge-color:var(--sl-color-fuchsia-300)"
-              >
+              <sl-badge pill style="--badge-border:var(--sl-color-fuchsia-200);--badge-color:var(--sl-color-fuchsia-300)">
                   ${b.label}
               </sl-badge>`
         case BadgeType.constraint:
           return html`
               <sl-badge pill style="--badge-border:var(--sl-color-red-200);--badge-color:var(--sl-color-red-300)">
+                  ${b.label}
+              </sl-badge>`
+        case BadgeType.profile:
+          return html`
+              <sl-badge pill style="--badge-border:var(--sl-color-orange-200);--badge-color:var(--sl-color-orange-400)">
                   ${b.label}
               </sl-badge>`
         default:

@@ -60,7 +60,6 @@ export abstract class DomainResource<T extends DomainResourceData> extends Resou
               </fhir-wrapper>` : nothing}
       `,
       html`
-          <fhir-primitive label="extension" value="not implemented" .type=${PrimitiveType.none}></fhir-primitive >
           <fhir-primitive label="modifierExtension"
                           value="not implemented"
                           .type=${PrimitiveType.none}

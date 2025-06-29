@@ -3,3 +3,4 @@
  */
 
 export * from './debug'
+export {stringify} from './stringify'

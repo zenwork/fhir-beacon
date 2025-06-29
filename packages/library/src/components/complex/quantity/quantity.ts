@@ -14,6 +14,7 @@ import {isQuantity, isSimpleQuantity}                         from './quantity.t
 
 
 
+
 @customElement('fhir-quantity')
 export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
@@ -167,7 +168,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   public validate(data: QuantityData | SimpleQuantityData, validations: Validations, _fetched: boolean) {
     if (this.simple && !isSimpleQuantity(data)) {
       validations.add({
@@ -236,7 +237,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 
     // rule: age-1
     const ageUnits: Choices = useSystem('http://hl7.org/fhir/ValueSet/age-units')
-    if (data.value && Number.parseFloat(data.value) > 0
+    if (data.value && data.value > 0
         && ageUnits.choices.find(a => data.code === a.value && data.system === ageUnits.system)) {
       this.variation = QuantityVariations.age
     }

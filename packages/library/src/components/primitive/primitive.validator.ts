@@ -1,9 +1,11 @@
-import {choose}                from 'lit-html/directives/choose.js'
-import {FhirDataContext}       from '../../internal/contexts/FhirContextData'
-import {isBlank}               from '../../utilities'
-import {Choice}                from '../../valuesets/ValueSet.data'
-import {PrimitiveInvalidEvent} from './primitiveInvalidEvent'
-import {PrimitiveValidEvent}   from './primitiveValidEvent'
+import {choose}                                      from 'lit-html/directives/choose.js'
+import {FhirExtensionData, isPrimitiveExtensionData} from '../../internal'
+import {FhirDataContext}                             from '../../internal/contexts/FhirContextData'
+import {OpenType}                                    from '../../OpenType'
+import {isBlank}                                     from '../../utilities'
+import {Choice}                                      from '../../valuesets/ValueSet.data'
+import {PrimitiveInvalidEvent}                       from './primitiveInvalidEvent'
+import {PrimitiveValidEvent}                         from './primitiveValidEvent'
 import {
   PrimitiveType,
   toBase64,
@@ -27,7 +29,9 @@ import {
   toUri,
   toUrl,
   valueOrError
-}                              from './type-converters'
+}                                                    from './type-converters'
+import {toUuid}                                      from './type-converters/toUuid'
+
 
 
 
@@ -46,6 +50,9 @@ export type PrimitiveValueHost = {
   showerror?: boolean,
   required: boolean,
   errormessage?: string,
+  extension?: FhirExtensionData<OpenType>,
+  hasExtension: boolean
+  invalidExtension: boolean
 }
 
 type changedProperties = {
@@ -74,6 +81,22 @@ export class PrimitiveValidator {
            }: changedProperties): void {
 
     const value: string | undefined = this.value() as string | undefined
+
+    if (this.#host.extension) {
+      if (isPrimitiveExtensionData(this.#host.extension)) {
+        this.#host.hasExtension = true
+        this.#host.invalidExtension = false
+      } else {
+        this.#host.invalidExtension = true
+      }
+    } else {
+      this.#host.hasExtension = false
+    }
+
+    if (errormessageChanged && isBlank(this.#host.errormessage)) {
+      this.#host.error = false
+      this.#host.presentableError = ''
+    }
 
     // override value with valuePath
     if (valuePathChanged && this.#host.contextData) {
@@ -122,7 +145,8 @@ export class PrimitiveValidator {
           [PrimitiveType.time, () => this.validOrError(toTime, value!)],
           [PrimitiveType.uri, () => this.validOrError(toUri, value!)],
           [PrimitiveType.uri_type, () => this.validOrError(toType, value!)],
-          [PrimitiveType.url, () => this.validOrError(toUrl, value!)]
+          [PrimitiveType.url, () => this.validOrError(toUrl, value!)],
+          [PrimitiveType.uuid, () => this.validOrError(toUuid, value!)]
         ])
       }
     }

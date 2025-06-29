@@ -8,11 +8,12 @@ export const componentStyles = css`
   }
 
   ul {
+    width: 100%;
     display: inline-block;
-    background-color: var(--sl-color-blue-200);
+    background-color: var(--sl-color-blue-100);
     color: #0c2d6b;
     border-radius: 0.5rem;
-    border: solid 0.1rem var(--sl-color-blue-400);
+    border: solid 0.1rem var(--sl-color-blue-200);
     margin: 0.5rem;
     padding: 0.5rem 1rem;
   }
@@ -26,14 +27,14 @@ export const componentStyles = css`
   }
 
   pre {
-    max-width: 40rem;
+    /*max-width: 40rem;*/
     word-wrap: anywhere;
     white-space: pre-wrap;
     margin: 0rem;
     padding: 0.3rem;
     color: var(--sl-color-blue-800);
     border-radius: 0.5rem;
-    background-color: var(--sl-color-blue-300);
+    background-color: var(--sl-color-blue-200);
   }
 
   .key {

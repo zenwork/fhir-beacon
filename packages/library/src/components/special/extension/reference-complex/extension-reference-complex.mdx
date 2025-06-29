@@ -1,0 +1,52 @@
+import {Meta}             from '@storybook/blocks'
+import {Patient}          from '../../../resources/index'
+import {address, patient} from './extension-reference-complex.story.data'
+
+
+
+<Meta title="Components/Datatypes/Special Type/Extension/3. with fhir elements" component={Patient}/>
+
+
+# Extension (regular, non-modifying)
+
+## references:
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+* [FHIR Extensibility][1]
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+Extensions can be imbedded in complex types, resources, and domain resources. They then present themselves in two distinct forms:
+
+| Kind        | JSON shape                                          | When to use                                                                                   |
+|-------------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Simple**  | `{ "url":"...", "valueCode":"abc" }`                | The extension instance has a single `value[x]` and **no** nested `extension`.                 |
+| **Complex** | `{ "url":"...", "extension":[ …sub-extensions… ] }` | The extension instance contains multiple properties. These can be sliced into logical groups. |
+
+The spec forbids mixing `value[x]` with child `extension` in the same instance. ([hl7.org][1]).
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+
+
+
+## Support in `BaseElement`
+
+All custom element that extends `BaseElement` supports extensions. Below are a some of examples
+
+
+### In a complex type
+
+<fhir-beacon-demo>
+    <fhir-address slot="display" label="address with extension" data={address}></fhir-address>
+    <fhir-address slot="structure" label="address with extension" data={address}></fhir-address>
+    <fhir-address slot="debug" label="address with extension" data={address}></fhir-address>
+</fhir-beacon-demo>
+
+
+### In a resource
+
+<fhir-beacon-demo>
+    <fhir-patient slot="display" label="patient with extension" data={patient}></fhir-patient>
+    <fhir-patient slot="structure" label="patient with extension" data={patient}></fhir-patient>
+    <fhir-patient slot="debug" label="patient with extension" data={patient}></fhir-patient>
+</fhir-beacon-demo>

@@ -6,6 +6,8 @@ import {hostStyles}                                from '../../../styles'
 import {isDefined}                                 from '../directives'
 import {componentStyles}                           from './wrapper-styles'
 
+
+
 export {SlDetails} from '@shoelace-style/shoelace'
 
 
@@ -37,6 +39,9 @@ export class Wrapper extends LitElement {
 
   @property({ type: Boolean, attribute: 'badge-required' })
   public badgeRequired: boolean = false
+
+  @property({ type: String, attribute: 'badge-profile' })
+  public badgeProfile: string = ''
 
   @property({ type: Boolean })
   public open: boolean = false
@@ -79,6 +84,7 @@ export class Wrapper extends LitElement {
                                     ?summary=${this.badgeSummary}
                                     ?constraint=${this.badgeConstraint}
                                     ?required=${this.badgeRequired}
+                                    profile=${this.badgeProfile}
                   ></fhir-badge-group>
               </div>
               <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>

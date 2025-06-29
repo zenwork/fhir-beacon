@@ -5,6 +5,9 @@ import {map}                     from 'lit/directives/map.js'
 import {when}                    from 'lit/directives/when.js'
 import {hostStyles}              from '../../styles/hostStyles'
 import {componentStyles}         from './debug.styles'
+import {stringify}               from './stringify'
+
+
 
 
 export function debug(debug: boolean, data: object) {
@@ -26,22 +29,6 @@ export class Debug extends LitElement {
 
   static styles = [hostStyles, componentStyles]
 
-  private static stringify = (i: unknown) => {
-    let value = JSON.stringify(
-      i, null, 4
-    )
-    if (value.charAt(0) === '"') {
-      value = value.substring(1)
-      if (value.charAt(value.length - 1) === '"') {value = value.substring(0, value.length - 1)}
-    } else {
-
-      // value = value.replace(/[{}\[\]]/g, '')
-      // value = value.replace(/\n\s+\n/g, '')
-      // value = value.replace(/:\s+/g, ': ')
-    }
-    return value
-  }
-
   protected willUpdate(_changedProperties: PropertyValues) {
     super.willUpdate(_changedProperties)
     if (_changedProperties.has('data')) {
@@ -60,7 +47,7 @@ export class Debug extends LitElement {
           <ul >${map(Object.entries(this.data),
                     (i) => html`
                       <li ><span class="key">${i[0]}</span > :
-                            <pre>${(Debug.stringify(i[1]))}</pre>
+                            <pre>${(stringify(i[1]))}</pre>
                         </li>`)}
           </ul >
         </div>

@@ -37,9 +37,6 @@ export class SampledData extends BaseElement<SampledDataData> {
         <fhir-primitive key="codeMap" .value=${data.codeMap} .type=${PrimitiveType.canonical}></fhir-primitive>
         <fhir-primitive key="offset" .value=${data.offset} .type=${PrimitiveType.fhir_string}></fhir-primitive>
         <fhir-primitive key="data" .value=${data.data} .type=${PrimitiveType.fhir_string}></fhir-primitive>
-        
-        
-        
     `]
   }
 }

@@ -1,4 +1,5 @@
-import {defineConfig} from 'vite'
+import {defineConfig}                   from 'vite'
+import VitePluginCustomElementsManifest from 'vite-plugin-cem'
 
 export default defineConfig(({mode}) => ({
     build:{
@@ -44,8 +45,14 @@ export default defineConfig(({mode}) => ({
         }
         ,
         emptyOutDir:true
+
     },
     define:{
         'process.env.NODE_ENV':JSON.stringify(mode)
-    }
+    },
+    plugins:[
+        VitePluginCustomElementsManifest({
+                                             config:'./build/custom-elements-manifest.config.mjs'
+                                         })
+    ]
 }))

@@ -7,20 +7,23 @@
         "emitDeclarationOnly": true,
         "skipLibCheck": true,
         "outDir": "./types",
-        "strict": true,
+        "strict": false,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": false,
-        "moduleResolution": "bundler",
+        "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "useDefineForClassFields": false,
         "isolatedModules": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
         "types": [
             "vite-plugin-pwa/client",
-            "vite/client"
+            "vite/client",
+            "node"
         ]
     },
     "include": ["src/**/*.ts", "router.d.ts"],

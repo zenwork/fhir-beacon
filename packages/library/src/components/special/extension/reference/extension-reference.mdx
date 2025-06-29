@@ -1,0 +1,43 @@
+import {Meta}      from '@storybook/blocks'
+import {Extension} from '../../../special/extension/extension'
+import {data}      from './extension-reference.story.data.js'
+
+<Meta title="Components/Datatypes/Special Type/Extension/1. the element" component={Extension}/>
+
+
+# Extension Custom Element
+
+## references:
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+* [FHIR Extensibility][1]
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+The library defines extensions as a custom element called `<fhir-extensions>`. This tag is used in different contexts to cover the different use cases.
+
+* on primitives
+* on complex types
+
+This element can be used stand alone.
+
+### Markup
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-extension key="birthDate" label="birth date"
+          .value=${data.birthDate} .extension=${data._birthDate}
+      ></fhir-primitive>
+    `
+}
+```
+### Rendering
+
+<fhir-beacon-demo>
+    <fhir-extension slot="display" label="extension element" data={data}></fhir-extension>
+    <fhir-extension slot="structure" label="extension element" data={data}></fhir-extension>
+    <fhir-extension slot="debug" label="extension element" data={data}></fhir-extension>
+</fhir-beacon-demo>

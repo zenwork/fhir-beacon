@@ -7,6 +7,7 @@ describe('toInteger', () => {
 
   it('should convert valid numbers within range to Integer', () => {
     expect(toInteger(123)).toBe(123)
+    expect(toInteger('123')).toBe(123)
     expect(toInteger(1234)).toBe(1234)
     expect(toInteger(-123)).toBe(-123)
     expect(toInteger(0)).toBe(0)
@@ -22,7 +23,9 @@ describe('toInteger', () => {
   })
 
   it('should throw an error for non-number inputs', () => {
-    expect(() => toInteger('123')).toThrow('Input must be a non-negative integer within the range 1 to 2,147,483,647')
+    expect(() => toInteger(10.5)).toThrow('Input must be a non-negative integer within the range 1 to 2,147,483,647')
+    expect(() => toInteger('10.5')).toThrow('Input must be a non-negative integer within the range 1 to 2,147,483,647')
+    expect(() => toInteger('abc')).toThrow('Input must be a non-negative integer within the range 1 to 2,147,483,647')
     expect(() => toInteger(null)).toThrow('Input must be a non-negative integer within the range 1 to 2,147,483,647')
     expect(() => toInteger(undefined)).toThrow(
       'Input must be a non-negative integer within the range 1 to 2,147,483,647')

@@ -1,0 +1,79 @@
+import {Meta} from '@storybook/blocks'
+
+
+<Meta title="Components/Datatypes/Special Type/Extension/4. with profiles"/>
+
+
+# Extension
+
+documentation:
+* [FHIR Extensibility](http://hl7.org/fhir/extensibility.html)
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+
+## Simple Extension
+
+Complex types are extended by adding an extension to the complex type.
+
+```json5
+{
+  "resourceType" : "Patient",
+  "extension" : [{
+    "url" : "http://example.org/fhir/StructureDefinition/participation-agreement",
+    "valueUri" : "http://example.org/phr/documents/patient/general/v1"
+  }]
+  // ...
+}
+```
+
+Primitive types are extended by wrapping the extension in an underscored property with the same name as the primitive type.
+
+```json5
+{
+    // ...
+    "name": {
+        "use": "official",
+        "given": "Östlund",
+        "_given": {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+                    "valueCode": "MID"
+                }
+            ]
+        }
+    }
+}
+```
+
+## Complex Extension
+
+Complex extensions are groups of related extensions that are defined in a single structure definition.
+
+```json5
+{
+  "resourceType" : "Patient",
+  "extension" : [{
+    "url" : "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
+    "extension" : [{
+      "url" : "NCT",
+      "valueString" : "NCT00000419"
+    }, {
+      "url" : "period",
+      "valuePeriod" : {
+        "start" : "200140105",
+        "end" : "20120105"
+      }
+    }, {
+      "url" : "reason",
+      "valueCodeableConcept" : {
+        "text" : "healthy-volunteer"
+      }
+    }]
+  }]
+  // ...
+}
+```
+
+## Extension In Context
+
+## Extension with Custom UI

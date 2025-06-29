@@ -669,6 +669,7 @@ export type CodeIds =
   | 'vs-nutrition-product-category'
   | 'vs-nutrition-product-nutrient'
   | 'vs-object-role'
+  | 'vs-observation-codes'
   | 'vs-observation-category'
   | 'vs-observation-interpretation'
   | 'vs-observation-methods'

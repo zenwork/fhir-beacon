@@ -5,6 +5,8 @@ import {isBlank}                                    from '../../../utilities'
 import {componentStyles}                            from './badge-group-styles'
 import {badgeTemplates, BadgeType}                  from './badgeTemplates'
 
+
+
 @customElement('fhir-badge-group')
 export class BadgeGroup extends LitElement {
   static styles = [hostStyles, componentStyles]
@@ -18,9 +20,11 @@ export class BadgeGroup extends LitElement {
   @property({ type: Boolean })
   public constraint: boolean = false
 
-
   @property({ type: Boolean })
   public required: boolean = false
+
+  @property({ type: String })
+  public profile: string = ''
 
   @state()
   declare public badges: { label: string, type: BadgeType }[]
@@ -32,8 +36,9 @@ export class BadgeGroup extends LitElement {
     if (changes.has('resource')
         || changes.has('summary')
         || changes.has('constraint')
-        || changes.has(
-        'required')) {
+        || changes.has('required')
+        || changes.has('profile')
+    ) {
       this.badges = []
 
       if (this.summary) {
@@ -50,6 +55,10 @@ export class BadgeGroup extends LitElement {
 
       if (!isBlank(this.resource)) {
         this.badges.push({ label: this.resource, type: BadgeType.resource })
+      }
+
+      if (!isBlank(this.profile)) {
+        this.badges.push({ label: this.profile, type: BadgeType.profile })
       }
     }
   }

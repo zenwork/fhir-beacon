@@ -1,6 +1,6 @@
 import {html, TemplateResult} from 'lit'
 import {map}                  from 'lit/directives/map.js'
-import {asReadable}           from '../../../components'
+import {asReadable}           from '../../../components/primitive/type-formatters/asReadable'
 import {DisplayMode}          from '../../displayMode'
 import {DisplayConfig}        from '../../types'
 import {hasMany, hasOnlyOne}  from '../directives'

@@ -3,6 +3,7 @@ import {toPrimitive} from './type-converters'
 
 
 
+
 const regex = /^-?\d+(\.\d+)?([eE][+-]?\d+)?$/
 
 /**
@@ -12,11 +13,11 @@ const regex = /^-?\d+(\.\d+)?([eE][+-]?\d+)?$/
  * @throws TypeError If the decimal does not meet the specified criteria.
  * @returns Decimal The converted decimal value.
  */
-export const toDecimal: toPrimitive<string, Decimal> = function (decimal: string) {
+export const toDecimal: toPrimitive<unknown, Decimal> = function (decimal: unknown) {
 
   if (!decimal) throw new TypeError(`decimal must be a valid number: ${decimal}`)
-  if (!regex.test(decimal)) throw new TypeError(`decimal must be a valid number: ${decimal}`)
-  if (isNaN(Number.parseFloat(decimal))) throw new TypeError(`decimal must be a valid number: ${decimal}`)
+  if (!regex.test(decimal + '')) throw new TypeError(`decimal must be a valid number: ${decimal}`)
+  if (isNaN(Number.parseFloat(decimal + ''))) throw new TypeError(`decimal must be a valid number: ${decimal}`)
 
   // Split the number into base and exponent
   const parts = String(decimal).split(/[eE]/)

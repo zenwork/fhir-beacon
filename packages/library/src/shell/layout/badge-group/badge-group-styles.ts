@@ -1,9 +1,11 @@
 import {css} from 'lit'
 
+
+
 export const componentStyles = css`
 
   :host {
-    --badge-color: var(--sl-color-gray-400);
+    --badge-color: var(--sl-color-gray-500);
     --badge-background: var(--sl-color-gray-100);
     --badge-border: var(--sl-color-gray-300);
 
