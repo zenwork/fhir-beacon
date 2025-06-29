@@ -5,7 +5,7 @@ A FHIR data library for the frontend.
 * library docs: [library](./packages/library/README.md).
 * storybook: https://fhir-beacon.deno.dev
 * showcase: https://fhir-beacon-app.deno.dev
-* for details about the project read the [backround](./packages/library/docs/background.md)
+* for details about the project read the [background](./packages/library/docs/background.md)
     
 ## Usage example:
 ```typescript
