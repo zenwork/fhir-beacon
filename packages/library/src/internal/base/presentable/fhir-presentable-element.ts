@@ -118,6 +118,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                   this.templateGenerators.display.body.push(this.renderEditableDisplay)
                 } else {
                   this.templateGenerators.display.body.push(this.renderDisplay)
+                  this.templateGenerators.display.footer.push(this.renderExtensionElement)
                 }
                 break
               case DisplayMode.narrative:
@@ -174,20 +175,20 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
   }
 
   protected getLabel() {
-    let label = this.type
+    if (this.label) {
+      return this.label
+    }
 
-    if (this.key && !this.label && this.key !== 'nokey') {
+    if (this.key && this.key !== 'nokey') {
       if (this.mode != DisplayMode.display) {
-        label = asReadable(this.key, 'lower')
+        return asReadable(this.key, 'lower')
       } else {
-        label = this.key
+        return this.key
       }
-    } else if (this.label) {
-      label = this.label
     }
 
 
-    return label
+    return this.type
   }
 
   protected render(): TemplateResult | TemplateResult[] {
@@ -246,6 +247,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                                 this.config(),
                                                 this.extendedData,
                                                 new ValidationsImpl(this.extendedData))).flat()}
+                    
+                    ${this.templateGenerators
+                          .display.footer
+                          .map(g => g.call(this, this.config(),
+                                           this.extendedData,
+                                           new ValidationsImpl(this.extendedData))).flat()}
                 </fhir-wrapper>
             `)
           }
@@ -337,24 +344,37 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
       return [
         html`
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
+            ${this.renderExtensionElement(config, data)}
+        `
+      ]
+    }
+
+    return EmptyResult
+  }
+
+
+  private renderExtensionElement(config: DisplayConfig, data: Decorated<D>): TemplateResult[] {
+    if (data) {
+      return [
+        html`
             ${hasSome(data.extension)
               ? html`
                     ${wrap<FhirExtensionData<OpenType>>(
-                        {
-                            key: 'extension',
-                          collection: (data.extension ?? []) as FhirExtensionData<OpenType>[],
-                            generator: (d, l, k, i) =>
-                                html`
+            {
+              key: 'extension',
+              collection: (data.extension ?? []) as FhirExtensionData<OpenType>[],
+              generator: (d, l, k, i) =>
+                html`
                                     <fhir-extension key=${k}
                                                     .label=${l}
                                                     .data=${d}
                                                     summary
                                                     headless
                                     ></fhir-extension>`,
-                            config
+              config
 
 
-                        })}
+            })}
 
                 `
               : nothing}

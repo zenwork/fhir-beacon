@@ -8,7 +8,7 @@ import * as data                          from './extension-complex.story.data'
 customElements.get('fhir-extension') || customElements.define('fhir-extension', Extension)
 
 const meta = {
-  title: 'Components/Datatypes/Special Type/Extension/Complex Extension',
+  title: 'Components/Datatypes/Special Type/Extension/More Examples',
   component: 'fhir-extension',
   ...renderTemplateInShell(
     (args: ShellArgs) => html`

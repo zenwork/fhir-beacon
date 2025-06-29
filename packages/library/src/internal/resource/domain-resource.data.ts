@@ -17,7 +17,7 @@ export type ResourceData = {
 
 export type DomainResourceData = ResourceData & {
   text?: NarrativeData
-  contained: ResourceData[]
-  extension: FhirExtensionData<OpenType>[]
-  modifierExtension: FhirExtensionData<OpenType>[]
+  contained?: ResourceData[]
+  extension?: FhirExtensionData<OpenType>[]
+  modifierExtension?: FhirExtensionData<OpenType>[]
 }

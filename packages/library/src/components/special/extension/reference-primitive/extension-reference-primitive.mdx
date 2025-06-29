@@ -1,0 +1,73 @@
+import {Meta, Source}       from '@storybook/blocks'
+import {Primitive}                  from '../../../primitive/'
+import {primitiveExtension as data} from '../extension-reference.story.data'
+
+
+<Meta title="Components/Datatypes/Special Type/Extension/2. with primitive types" component={Primitive}/>
+
+
+# Primitive-element wrappers (`_<name>`)
+
+## references:
+* [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+* [FHIR Extensibility][1]
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+Primitives can’t have child nodes, so FHIR creates a parallel sibling whose name is prefixed with an underscore. That sibling is of type **Element**, giving it `id`, `extension`, and `modifierExtension`. If the primitive is mandatory you may send *only* the wrapper (no value) to explain why data is absent (`data-absent-reason`, etc.).
+
+
+
+## Support in FHIR-PRIMITIVE custom element
+
+`<fhir-primitive>` supports this by expanding as necessary when the `extension` property is provided with a valid extension. Internally the `<fhir-extension>` element is used.
+
+
+### Rendering
+
+<div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
+    <div>
+        <h4>display</h4>
+        <fhir-shell mode="display" open>
+            <fhir-primitive
+                key="birthDate"
+                label="birth date"
+                value={data.birthDate}
+                extension={data._birthDate}
+            ></fhir-primitive>
+        </fhir-shell>
+    </div>
+    <div>
+        <h4>structure</h4>
+        <fhir-shell mode="structure" open>
+            <fhir-primitive
+                key="birthDate"
+                label="birth date"
+                value={data.birthDate}
+                extension={data._birthDate}
+            ></fhir-primitive>
+        </fhir-shell>
+    </div>
+</div>
+
+### Example Data
+
+<Source code={JSON.stringify(data, null, 2)} language="typescript"></Source>
+
+### Example HTML
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-primitive
+          key="birthDate"
+          label="birth date"
+          .value=${data.birthDate}
+          .extension=${data._birthDate}
+      ></fhir-primitive>
+    `
+}
+```
