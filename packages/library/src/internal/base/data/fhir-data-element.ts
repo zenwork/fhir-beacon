@@ -18,6 +18,7 @@ import {errors, FullyQualifiedKey, profile, Validations}                 from '.
 
 
 
+
 /**
  * Abstract class representing a FHIR data element. It extends LitElement.
  *
@@ -54,7 +55,7 @@ export abstract class FhirDataElement<T extends FhirElementData> extends Configu
    * @type {T & {} | null}
    */
   @state()
-  public declare extendedData: Decorated<T>
+  protected declare extendedData: Decorated<T>
 
   //------------------------------------------------//
   /**

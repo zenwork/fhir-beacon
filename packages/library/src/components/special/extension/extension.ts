@@ -305,7 +305,7 @@ function findType(simpleExtensionName: string): OpenTypeNameEnum | null {
 
 
 function toLabel(data: FhirExtensionData<OpenType>): string {
-  return data.url ? asReadable(data.url.substring(data.url.lastIndexOf('/') + 1)) : 'no-url'
+  return data.url ? asReadable(data.url.substring(data.url.lastIndexOf('/') + 1)) : data.id ? data.id : 'n/a'
 }
 
 

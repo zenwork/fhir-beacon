@@ -1,3 +1,4 @@
+import {toUrl}                  from '../../components/primitive/type-converters/toUrl'
 import {OpenType, OpenTypeName} from '../../OpenType'
 import {Uri}                    from '../../PrimitiveTypes'
 
@@ -56,3 +57,26 @@ export type FhirExtensionData<T extends OpenType> =
   FhirElementData
   & { url: Uri }
   & { [K in ValuePrefixKey]?: T }
+
+
+export function isExtensionData(value: unknown): value is FhirExtensionData<OpenType> {
+  return typeof value === 'object'
+         && value !== null
+         && 'url' in value
+         && toUrl((value as FhirExtensionData<OpenType>).url)
+         && ('extension' in value || hasValuePrefixProperty(value)
+         )
+}
+
+
+export function isPrimitiveExtensionData(value: unknown): value is FhirExtensionData<OpenType> {
+  return typeof value === 'object'
+         && value !== null
+         && ('extension' in value || hasValuePrefixProperty(value)
+         )
+}
+
+
+function hasValuePrefixProperty(obj: object): boolean {
+  return Object.keys(obj).filter(key => key.startsWith('value')).length > 1
+}

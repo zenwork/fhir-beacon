@@ -8,13 +8,22 @@ import {primitiveExtension} from '../extension-reference.story.data.js'
 # Extension
 
 documentation:
-* [FHIR Extensibility](http://hl7.org/fhir/extensibility.html)
 * [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
+* [FHIR Extensibility][1]
 
-## Data
+Primitives can’t have child nodes, so FHIR creates a parallel sibling whose name is prefixed with an underscore. That sibling is of type **Element**, giving it `id`, `extension`, and `modifierExtension`. If the primitive is mandatory you may send *only* the wrapper (no value) to explain why data is absent (`data-absent-reason`, etc.).
+
+[1]  https://www.hl7.org/fhir/extensibility.html "Extensibility - FHIR v5.0.0"
+
+
+## Support in FHIR-PRIMITIVE custom element
+
+`<fhir-primitive>` supports this by expanding as necessary when the `extension` property is provided with a valid extension. Internally the `<fhir-extension>` element is used.
+
+### Example Data
 <Source code={JSON.stringify(primitiveExtension, null, 2)} language="typescript"></Source>
 
-## Template
+### Example HTML
 
 ```typescript
 import {html} from './lit-html'

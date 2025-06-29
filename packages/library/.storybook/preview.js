@@ -3,7 +3,7 @@ import {setCustomElementsManifest} from '@storybook/web-components'
 import {setStorybookHelpersConfig} from '@wc-toolkit/storybook-helpers'
 import manifest                    from '../build/custom-elements.json' with {type:'json'}
 
-const options = {}
+const options = {renderDefaultValues:true}
 
 setStorybookHelpersConfig(options)
 

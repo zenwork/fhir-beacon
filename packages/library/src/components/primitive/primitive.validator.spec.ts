@@ -6,6 +6,7 @@ import {PrimitiveType}                          from './type-converters'
 
 
 
+
 function createMockPrimitive(): { events: Event[], host: PrimitiveValueHost } {
   const events: Event[] = []
   return {
@@ -22,7 +23,10 @@ function createMockPrimitive(): { events: Event[], host: PrimitiveValueHost } {
       required: false,
       presentableError: '',
       presentableTypeError: '',
-      presentableValue: ''
+      presentableValue: '',
+      hasExtension: false,
+      extension: undefined,
+      invalidExtension: false
     }
   }
 }

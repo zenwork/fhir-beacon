@@ -8,6 +8,7 @@ import {displayConfigContext} from '../../contexts'
 
 
 
+
 export abstract class ConfigurableElement extends LitElement {
 
   @state()
@@ -104,7 +105,7 @@ export abstract class ConfigurableElement extends LitElement {
    * @deprecated don't use this directly. Prefer config provided by method
    * todo: make this method private
    */
-  public getDisplayConfig(): DisplayConfig {
+  protected getDisplayConfig(): DisplayConfig {
     return {
       source: 'resource',
       open: this.open,

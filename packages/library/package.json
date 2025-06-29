@@ -17,6 +17,7 @@
     "files": [
         "dist/**/*",
         "build/web-types.json",
+        "build/custom-elements.json",
         "README.md"
     ],
     "keywords": [
@@ -35,7 +36,7 @@
         
         "manifest::build": "cem analyze --config build/custom-elements-manifest.config.js ",
         "manifest::watch": "cem analyze --config build/custom-elements-manifest.config.js --watch",
-        "storybook": "storybook dev -p 9999",
+        "storybook": "storybook dev -p 9999 --no-open",
         "storybook::build": "storybook build",
         "storybook:clean": "rm -rf node_modules/.cache/storybook",
         "build-storybook": "storybook build",
