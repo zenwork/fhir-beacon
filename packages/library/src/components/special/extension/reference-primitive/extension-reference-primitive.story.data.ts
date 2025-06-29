@@ -16,3 +16,30 @@ export const primitiveExtension: FhirElementData & { birthDate: FhirDate } = {
     ]
   }
 }
+
+
+export const addressWithExtension = {
+  use: 'work',
+  text: '1050 W Wishard Blvd\nRG,\n5th floor\nIndianapolis, IN 46240',
+  line: ['1050 W Wishard Blvd', 'RG 5th floor'],
+  city: 'Indianapolis',
+  state: 'Indiana',
+  _state: {
+    extension: [
+      {
+        url: 'http://hl7.org/fhir/StructureDefinition/iso21090-codedString',
+        valueCoding: { code: 'IN' }
+      }
+    ]
+  },
+  postalCode: '46240',
+  country: 'United States',
+  _country: {
+    extension: [
+      {
+        url: 'http://hl7.org/fhir/StructureDefinition/iso21090-codedString',
+        valueCoding: { code: 'US' }
+      }
+    ]
+  }
+}

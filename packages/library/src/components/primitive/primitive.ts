@@ -382,8 +382,10 @@ export class Primitive extends ConfigurableElement {
 
   private renderValidWithExtension(): TemplateResult {
     return html`
+    <fhir-wrapper label=${this.getLabel()}>
     ${this.renderValid()}
     <fhir-extension .data=${this.extension} headless></fhir-extension>
+    </fhir-wrapper>
     `
   }
 }

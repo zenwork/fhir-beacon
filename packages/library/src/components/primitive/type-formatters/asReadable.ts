@@ -27,7 +27,7 @@ export function asReadable(text: string, to: 'none' | 'lower' | 'upper' = 'none'
 
 function splitAllSpecialCase(str: string): string {
   return str.replace(camelCasePattern, '$1 $2')
-            .replace(kebabCasePattern, ' ')
+            .replace(kebabCasePattern, '_')
 }
 
 
@@ -47,4 +47,5 @@ function cleanUpString(str: string): string {
             .replace(dollarSignPattern, '$1 $2')
             .replace(leadingUnderscorePattern, '')
             .replace(underscoresPattern, ' ')
+
 }

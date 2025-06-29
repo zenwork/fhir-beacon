@@ -21,7 +21,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 
 
   public renderStructure(_config: DisplayConfig, data: Decorated<FhirExtensionData<OpenType>>, _validations: Validations): TemplateResult[] {
-    console.log('s')
+
     let templates: TemplateResult[] = []
     templates = [
       html`<fhir-primitive key="url" type=${PrimitiveType.none} .value=${data.url}></fhir-primitive>`
@@ -30,7 +30,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
     this.addTemplate(templates, data, this.#valueType[0])
 
     return [
-      html`<fhir-wrapper label=${toStructureLabel(data)}>${templates}</fhir-wrapper>`
+      html`${templates}`
     ]
   }
 
@@ -38,7 +38,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
   public renderDisplay(config: DisplayConfig,
                        data: Decorated<FhirExtensionData<OpenType>>,
                        validations: Validations): TemplateResult[] {
-    console.log('d')
+
 
     let templates: TemplateResult[] = []
     if (this.mode !== DisplayMode.display) {
@@ -54,7 +54,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
     if (this.#extensionType === 'complex') {
       const subs: TemplateResult[] = []
       data.extension!.forEach((extension, index) => this.addTemplate(subs, extension, this.#valueType[index]))
-      templates.push(html`<fhir-wrapper label=${toLabel(data)}>${subs}</fhir-wrapper>`)
+      templates.push(html`${subs}`)
 
     }
 
@@ -74,7 +74,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
       data.extension.reduce(reduceValueType, this.#valueType)
     }
 
-    console.log(this.#extensionType, this.#valueType)
+
   }
 
 

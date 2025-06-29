@@ -1,6 +1,6 @@
-import {Meta, Source}       from '@storybook/blocks'
-import {Primitive}                  from '../../../primitive/'
-import {primitiveExtension as data} from '../extension-reference.story.data'
+import {Meta}                                                      from '@storybook/blocks'
+import {Primitive}                                                 from '../../../primitive/'
+import {addressWithExtension as data2, primitiveExtension as data} from './extension-reference-primitive.story.data'
 
 
 <Meta title="Components/Datatypes/Special Type/Extension/2. with primitive types" component={Primitive}/>
@@ -23,38 +23,7 @@ Primitives can’t have child nodes, so FHIR creates a parallel sibling whose na
 `<fhir-primitive>` supports this by expanding as necessary when the `extension` property is provided with a valid extension. Internally the `<fhir-extension>` element is used.
 
 
-### Rendering
-
-<div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
-    <div>
-        <h4>display</h4>
-        <fhir-shell mode="display" open>
-            <fhir-primitive
-                key="birthDate"
-                label="birth date"
-                value={data.birthDate}
-                extension={data._birthDate}
-            ></fhir-primitive>
-        </fhir-shell>
-    </div>
-    <div>
-        <h4>structure</h4>
-        <fhir-shell mode="structure" open>
-            <fhir-primitive
-                key="birthDate"
-                label="birth date"
-                value={data.birthDate}
-                extension={data._birthDate}
-            ></fhir-primitive>
-        </fhir-shell>
-    </div>
-</div>
-
-### Example Data
-
-<Source code={JSON.stringify(data, null, 2)} language="typescript"></Source>
-
-### Example HTML
+### Standalone Primitive
 
 ```typescript
 import {html} from './lit-html'
@@ -62,12 +31,47 @@ import {html} from './lit-html'
 function render(data){
 
     return html`
-      <fhir-primitive
-          key="birthDate"
-          label="birth date"
-          .value=${data.birthDate}
-          .extension=${data._birthDate}
+      <fhir-primitive key="birthDate" label="birth date"
+          .value=${data.birthDate} .extension=${data._birthDate}
       ></fhir-primitive>
     `
 }
 ```
+
+#### Rendering
+<fhir-beacon-demo>
+    <fhir-primitive slot="display"
+                    key="birthDate"
+                    label="birth date"
+                    value={data.birthDate}
+                    extension={data._birthDate}
+    ></fhir-primitive>
+    <fhir-primitive slot="structure"
+                    key="birthDate"
+                    label="birth date"
+                    value={data.birthDate}
+                    extension={data._birthDate}
+    ></fhir-primitive>
+    <fhir-debug slot="debug" data={data}></fhir-debug>
+</fhir-beacon-demo>
+
+
+### Primitive extensions part of an element
+
+```typescript
+import {html} from './lit-html'
+
+function render(data){
+
+    return html`
+      <fhir-address key="address" .data=${data}></fhir-address>
+    `
+}
+```
+#### Rendering
+<fhir-beacon-demo>
+    <fhir-address slot="display" key="address" data={data2}></fhir-address>
+    <fhir-address slot="structure" key="address" data={data2}></fhir-address>
+    <fhir-address slot="debug" key="address" data={data2}></fhir-address>
+
+</fhir-beacon-demo>

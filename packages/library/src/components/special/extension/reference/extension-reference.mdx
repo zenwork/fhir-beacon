@@ -1,6 +1,6 @@
-import {Canvas, Meta, Source} from '@storybook/blocks'
-import {data}                 from './extension-reference.story.data.js'
-import {Extension}            from '../../../special/extension/extension'
+import {Meta}      from '@storybook/blocks'
+import {Extension} from '../../../special/extension/extension'
+import {data}      from './extension-reference.story.data.js'
 
 <Meta title="Components/Datatypes/Special Type/Extension/1. the element" component={Extension}/>
 
@@ -20,26 +20,6 @@ The library defines extensions as a custom element called `<fhir-extensions>`. T
 
 This element can be used stand alone.
 
-### Rendering
-
-<div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
-    <div>
-        <h4>display</h4>
-        <fhir-shell mode="display" open>
-            <fhir-extension label="fragment" data={data}></fhir-extension>
-        </fhir-shell>
-    </div>
-    <div>
-        <h4>structure</h4>
-        <fhir-shell mode="structure" open>
-            <fhir-extension label="fragment" data={data}></fhir-extension>
-        </fhir-shell>
-    </div>
-</div>
-
-### Data
-<Source code={JSON.stringify(data, null, 2)} language="typescript"></Source>
-
 ### Markup
 
 ```typescript
@@ -48,12 +28,16 @@ import {html} from './lit-html'
 function render(data){
 
     return html`
-      <fhir-extension
-          key="birthDate"
-          label="birth date"
-          .value=${data.birthDate}
-          .extension=${data._birthDate}
+      <fhir-extension key="birthDate" label="birth date"
+          .value=${data.birthDate} .extension=${data._birthDate}
       ></fhir-primitive>
     `
 }
 ```
+### Rendering
+
+<fhir-beacon-demo>
+    <fhir-extension slot="display" label="extension element" data={data}></fhir-extension>
+    <fhir-extension slot="structure" label="extension element" data={data}></fhir-extension>
+    <fhir-extension slot="debug" label="extension element" data={data}></fhir-extension>
+</fhir-beacon-demo>

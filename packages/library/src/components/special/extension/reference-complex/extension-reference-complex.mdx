@@ -1,6 +1,6 @@
-import {Meta, Source}       from '@storybook/blocks'
+import {Meta}             from '@storybook/blocks'
 import {Patient}          from '../../../resources/index'
-import {patient, address} from './extension-reference-complex.story.data'
+import {address, patient} from './extension-reference-complex.story.data'
 
 
 
@@ -36,41 +36,17 @@ All custom element that extends `BaseElement` supports extensions. Below are a s
 
 ### In a complex type
 
+<fhir-beacon-demo>
+    <fhir-address slot="display" label="address with extension" data={address}></fhir-address>
+    <fhir-address slot="structure" label="address with extension" data={address}></fhir-address>
+    <fhir-address slot="debug" label="address with extension" data={address}></fhir-address>
+</fhir-beacon-demo>
 
-<div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
-
-    <div>
-        <h4>display</h4>
-        <fhir-shell mode="display" open>
-            <fhir-address label="address with extension" data={address}></fhir-address>
-        </fhir-shell>
-    </div>
-    <div>
-        <h4>structure</h4>
-        <fhir-shell mode="structure" open>
-            <fhir-address label="address with extension" data={address}></fhir-address>
-        </fhir-shell>
-    </div>
-    <div style={{gridColumn:"1 / span 2"}}>
-        <h4>data</h4>
-        <fhir-shell mode="debug" open>
-            <fhir-address label="address with extension" data={address}></fhir-address>
-        </fhir-shell>
-    </div>
-</div>
 
 ### In a resource
-<div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
-    <div>
-        <h4>display</h4>
-        <fhir-shell mode="display" open>
-            <fhir-patient label="patient with extension" data={patient}></fhir-patient>
-        </fhir-shell>
-    </div>
-    <div>
-        <h4>structure</h4>
-        <fhir-shell mode="structure" open>
-            <fhir-patient label="patient with extension" data={patient}></fhir-patient>
-        </fhir-shell>
-    </div>
-</div>
+
+<fhir-beacon-demo>
+    <fhir-patient slot="display" label="patient with extension" data={patient}></fhir-patient>
+    <fhir-patient slot="structure" label="patient with extension" data={patient}></fhir-patient>
+    <fhir-patient slot="debug" label="patient with extension" data={patient}></fhir-patient>
+</fhir-beacon-demo>

@@ -9,6 +9,7 @@ import {HumanNameData}          from './human-name.data'
 
 
 
+
 @customElement('fhir-human-name')
 export class HumanName extends BaseElement<HumanNameData> {
   constructor() {
@@ -38,7 +39,7 @@ export class HumanName extends BaseElement<HumanNameData> {
                     )
               : html`
                         <fhir-primitive label="given name"
-                                        .value=${data.given.join(' ')}
+                                        .value=${data.given ? data.given.join(' ') : null}
                                         .type=${PrimitiveType.fhir_string}
                                         summary
                         ></fhir-primitive>`}

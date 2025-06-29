@@ -6,6 +6,7 @@ import {CodingData}                          from './coding.data'
 
 
 
+
 @customElement('fhir-coding')
 export class Coding extends BaseElement<CodingData> {
 
@@ -32,7 +33,7 @@ export class Coding extends BaseElement<CodingData> {
     return [
       html`
           <fhir-primitive
-                  .label=${this.getLabel()}
+                  .label=${'coding'}
                   .value=${Coding.computeDisplay(data)}
                   .context=${(Coding.computeContext(data, validations))}
                   .errormessage=${validations.msgFor({ path: [{ node: 'code' }] })}
