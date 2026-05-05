@@ -34,8 +34,8 @@ export class Primitive extends ConfigurableElement {
 
   static styles = [textHostStyles, componentStyles]
 
-  @property({ type: Object })
-  public extension: FhirExtensionData<OpenType> | null = null
+  @property({ type: Array })
+  public extension: FhirExtensionData<OpenType>[] | null = null
 
   @property()
   declare key: string
@@ -376,15 +376,20 @@ export class Primitive extends ConfigurableElement {
 
 
   private renderErrorWithExtension(): TemplateResult {
-    return html`error with ext`
+    return html`
+    <fhir-wrapper label=${this.getLabel()}>
+      ${this.renderError()}
+      ${this.extension?.map(ext => html`<fhir-extension .data=${ext} headless></fhir-extension>`)}
+    </fhir-wrapper>
+    `
   }
 
 
   private renderValidWithExtension(): TemplateResult {
     return html`
     <fhir-wrapper label=${this.getLabel()}>
-    ${this.renderValid()}
-    <fhir-extension .data=${this.extension} headless></fhir-extension>
+      ${this.renderValid()}
+      ${this.extension?.map(ext => html`<fhir-extension .data=${ext} headless></fhir-extension>`)}
     </fhir-wrapper>
     `
   }

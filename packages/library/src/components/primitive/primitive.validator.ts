@@ -50,7 +50,7 @@ export type PrimitiveValueHost = {
   showerror?: boolean,
   required: boolean,
   errormessage?: string,
-  extension?: FhirExtensionData<OpenType>,
+  extension?: FhirExtensionData<OpenType>[] | null,
   hasExtension: boolean
   invalidExtension: boolean
 }
@@ -82,8 +82,8 @@ export class PrimitiveValidator {
 
     const value: string | undefined = this.value() as string | undefined
 
-    if (this.#host.extension) {
-      if (isPrimitiveExtensionData(this.#host.extension)) {
+    if (this.#host.extension && this.#host.extension.length > 0) {
+      if (this.#host.extension.every(ext => isPrimitiveExtensionData(ext))) {
         this.#host.hasExtension = true
         this.#host.invalidExtension = false
       } else {
