@@ -1,4 +1,4 @@
-import {Meta, StoryObj}      from '@storybook/web-components'
+import {Meta, StoryObj}      from '@storybook/web-components-vite'
 import './slot'
 import {argtypes, ShellArgs} from '../../../../stories/storybook-utils'
 import {data}                from './slot.story.data'

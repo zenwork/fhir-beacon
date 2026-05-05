@@ -1,4 +1,4 @@
-import {StoryObj}             from '@storybook/web-components'
+import {StoryObj}             from '@storybook/web-components-vite'
 import {argtypes}             from '../../../../stories/storybook-utils'
 import {data, synthiaPatient} from './patient.story.data'
 

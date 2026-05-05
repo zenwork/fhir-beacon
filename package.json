@@ -3,7 +3,9 @@
     "version": "0.1.1",
     "description": "a library of web components for working with FHIR",
     "private": true,
-    "workspaces": ["packages/*"],
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "changeset::check": "changeset status --since=main",
         "change": "npx changeset",

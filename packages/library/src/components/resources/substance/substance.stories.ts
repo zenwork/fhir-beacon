@@ -1,4 +1,4 @@
-import {Meta, StoryObj}                   from '@storybook/web-components'
+import {Meta, StoryObj}                   from '@storybook/web-components-vite'
 import {html}                             from 'lit'
 import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
 import {data, data_f204}                  from './substance.story.data'

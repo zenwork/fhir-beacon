@@ -1,5 +1,5 @@
 import '../index'
-import {setCustomElementsManifest} from '@storybook/web-components'
+import {setCustomElementsManifest} from '@storybook/web-components-vite'
 import {setStorybookHelpersConfig} from '@wc-toolkit/storybook-helpers'
 import manifest                    from '../build/custom-elements.json' with {type:'json'}
 
@@ -9,7 +9,7 @@ setStorybookHelpersConfig(options)
 
 setCustomElementsManifest(manifest)
 
-/** @type { import('@storybook/web-components').Preview } */
+/** @type { import('@storybook/web-components-vite').Preview } */
 const preview = {
     parameters:{
         layout:'centered',

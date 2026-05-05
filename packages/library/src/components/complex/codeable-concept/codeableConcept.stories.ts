@@ -1,4 +1,4 @@
-import {Meta, StoryObj}                       from '@storybook/web-components'
+import {Meta, StoryObj}                       from '@storybook/web-components-vite'
 import {html}                                 from 'lit'
 import {ifDefined}                            from 'lit-html/directives/if-defined.js'
 import {CodeIds}                              from '../../../../src/codes/types'

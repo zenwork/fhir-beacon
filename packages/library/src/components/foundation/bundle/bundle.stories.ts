@@ -1,4 +1,4 @@
-import {StoryObj}                        from '@storybook/web-components'
+import {StoryObj}                        from '@storybook/web-components-vite'
 import {html, TemplateResult}            from 'lit'
 import {argtypes, ShellArgs, wrapInShell} from '../../../../stories/storybook-utils'
 import {data, masterDetail}              from './bundle.story.data'

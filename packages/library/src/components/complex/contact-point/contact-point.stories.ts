@@ -1,4 +1,4 @@
-import {StoryObj}                                            from '@storybook/web-components'
+import {StoryObj}                                            from '@storybook/web-components-vite'
 import {getStorybookHelpers}                                 from '@wc-toolkit/storybook-helpers'
 import {html}                                                from 'lit'
 import {renderTemplateInShell, ShellArgs}                    from '../../../../stories/storybook-utils'
