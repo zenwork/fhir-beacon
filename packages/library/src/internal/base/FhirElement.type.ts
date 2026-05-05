@@ -78,5 +78,5 @@ export function isPrimitiveExtensionData(value: unknown): value is FhirExtension
 
 
 function hasValuePrefixProperty(obj: object): boolean {
-  return Object.keys(obj).filter(key => key.startsWith('value')).length > 1
+  return Object.keys(obj).filter(key => key.startsWith('value')).length > 0
 }

@@ -79,7 +79,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 
 
   public validate(data: FhirExtensionData<OpenType>, validations: Validations, _fetched: boolean): void {
-    if (!!data.url) {
+    if (!data.url) {
       validations.add({
                         fqk: { path: [{ node: 'url' }] },
                         message: 'url is required'
@@ -194,7 +194,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
         break
       case OpenTypeNameEnum.Money:
         templates.push(html`
-              <fhir-identifier key=${data.url} label=${toLabel(data)} .data=${data.valueMoney}></fhir-identifier>
+              <fhir-money key=${data.url} label=${toLabel(data)} .data=${data.valueMoney}></fhir-money>
           `)
         break
       case OpenTypeNameEnum.Oid:

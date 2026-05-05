@@ -38,7 +38,7 @@ export const componentStyles = css`
     width: 30rem; /* set the initial width */
       height: 2rem; /* set the initial height */
       overflow: hidden; /* hide the overflowed text */
-      transition: height 1s; /* animate height */
+      transition: height 0.2s; /* animate height */
       word-wrap: break-word;
   }
 

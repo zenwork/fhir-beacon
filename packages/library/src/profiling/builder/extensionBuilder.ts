@@ -1,4 +1,4 @@
-import {TemplateGenerator}                          from '../../internal'
+  import {TemplateGenerator}                          from '../../internal'
 import {Basic}                                      from '../../ResourceDef'
 import {DisplayMode}                                from '../../shell'
 import {Context, ExtensionDef, StructureDefinition} from '../definition'
@@ -130,8 +130,6 @@ export function primitiveExtensionBuilder<T extends Decorateable>(primitiveKey: 
           builder.setCtx(ctx)
           builder.build()
         })
-
-        console.log(primitiveKey, extendRender)
 
         const extensionDef: ExtensionDef = {
           defType: 'extension',

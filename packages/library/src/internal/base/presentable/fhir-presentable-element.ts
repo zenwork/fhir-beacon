@@ -157,7 +157,6 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                    .forEach((prop: [string, Defs<D>]) => {
                      const key = prop[0]
                      const def = prop[1] as ExtensionDef
-                     console.log(key, this.mode)
                      if (key.startsWith('_')) {
                        const generator: TemplateGenerator<any> | undefined = def.extendRender?.get(this.mode)
                        if (generator) {
