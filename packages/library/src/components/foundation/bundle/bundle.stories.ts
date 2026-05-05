@@ -1,7 +1,7 @@
-import {ArgTypes, StoryObj}   from '@storybook/web-components'
-import {html, TemplateResult} from 'lit'
-import {argtypes, ShellArgs}  from '../../../../stories/storybook-utils'
-import {data, masterDetail}   from './bundle.story.data'
+import {StoryObj}                        from '@storybook/web-components'
+import {html, TemplateResult}            from 'lit'
+import {argtypes, ShellArgs, wrapInShell} from '../../../../stories/storybook-utils'
+import {data, masterDetail}              from './bundle.story.data'
 
 
 
@@ -45,7 +45,6 @@ export const MasterDetail: Story = {
     verbose: false,
     open: false
   },
-  render: (args: Partial<ArgTypes<ShellArgs>>): TemplateResult => html`
-        <fhir-bundle-everything .data=${args.data} ></fhir-bundle-everything>`
-
+  render: wrapInShell((args: ShellArgs): TemplateResult => html`
+        <fhir-bundle-everything .data=${args.data}></fhir-bundle-everything>`)
 }

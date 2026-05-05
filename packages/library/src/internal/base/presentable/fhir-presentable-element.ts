@@ -123,6 +123,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                 break
               case DisplayMode.narrative:
                 this.templateGenerators.display.body.push(this.renderNarrative)
+                this.templateGenerators.display.footer.push(this.renderExtensionElement)
                 break
               case DisplayMode.override:
                 // do nothing
@@ -144,6 +145,8 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
 
                   const extendedRender: TemplateGenerator<D> | undefined = this.profile?.extendRender?.get(DisplayMode.structure)
                   if (extendedRender) this.templateGenerators.structure.body.push(extendedRender)
+
+                  this.templateGenerators.structure.footer.push(this.renderExtensionElement)
                 }
                 break
               default:
@@ -269,6 +272,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
             .map(g => g.call(this, this.config(),
                              this.extendedData,
                              new ValidationsImpl(this.extendedData))).flat())
+          templates.push(...this
+            .templateGenerators
+            .display.footer
+            .map(g => g.call(this, this.config(),
+                             this.extendedData,
+                             new ValidationsImpl(this.extendedData))).flat())
           break
         case DisplayMode.override:
           templates.push(...this
@@ -295,6 +304,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                               this.config(),
                                               this.extendedData,
                                               new ValidationsImpl(this.extendedData))).flat()}
+
+                  ${this.templateGenerators.structure
+                        .footer.map(g => g.call(this,
+                                                this.config(),
+                                                this.extendedData,
+                                                new ValidationsImpl(this.extendedData))).flat()}
               `)
             } else {
               templates.push(html`
@@ -320,6 +335,12 @@ export abstract class FhirPresentableElement<D extends FhirElementData> extends 
                                                   this.config(),
                                                   this.extendedData,
                                                   new ValidationsImpl(this.extendedData))).flat()}
+
+                      ${this.templateGenerators.structure
+                            .footer.map(g => g.call(this,
+                                                    this.config(),
+                                                    this.extendedData,
+                                                    new ValidationsImpl(this.extendedData))).flat()}
                   </fhir-wrapper>
               `)
             }
