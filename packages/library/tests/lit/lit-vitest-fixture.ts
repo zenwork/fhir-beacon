@@ -1,5 +1,5 @@
-import {html, LitElement, render, TemplateResult} from 'lit'
-import {aTimeout}                                 from '../aTimeout'
+import { LitElement, TemplateResult, html, render } from "lit";
+import { aTimeout } from "../aTimeout";
 
 /**
  * Represents an error that is thrown when the current state is invalid or unexpected.
@@ -10,52 +10,52 @@ import {aTimeout}                                 from '../aTimeout'
  * @param {string} message - The error message.
  */
 export class IllegalStateError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = 'IllegalStateError'
-  }
+	constructor(message: string) {
+		super(message);
+		this.name = "IllegalStateError";
+	}
 }
 
-export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/
-export const emptySlotLitShadow = /^<!---->\n\s+<slot><\/slot>$/
+export const emptyLitShadow = /^(?:<!--[\s\S]*?-->|\s)*$/;
+export const emptySlotLitShadow = /^<!---->\n\s+<slot><\/slot>$/;
 
-const elements: any[] = []
+const elements: Element[] = [];
 
 class FixtureResult<T extends HTMLElement> {
-  private readonly promises: Promise<boolean>[]
-  private readonly reactiveElements: T[] = []
+	private readonly promises: Promise<boolean>[];
+	private readonly reactiveElements: T[] = [];
 
-  constructor(promises: Promise<boolean>[], reactiveElements: T[]) {
-    this.promises = promises
-    this.reactiveElements = reactiveElements
-  }
+	constructor(promises: Promise<boolean>[], reactiveElements: T[]) {
+		this.promises = promises;
+		this.reactiveElements = reactiveElements;
+	}
 
-  /**
-   * @return all LitElements found
-   */
-  async all() {
-    await Promise.all(this.promises)
-    await aTimeout(100)
-    return this.reactiveElements
-  }
+	/**
+	 * @return all LitElements found
+	 */
+	async all() {
+		await Promise.all(this.promises);
+		await aTimeout(100);
+		return this.reactiveElements;
+	}
 
-  /**
-   * @return first LitElement found
-   */
-  async first() {
-    await Promise.all(this.promises)
-    await aTimeout(100)
-    return this.reactiveElements[0]
-  }
+	/**
+	 * @return first LitElement found
+	 */
+	async first() {
+		await Promise.all(this.promises);
+		await aTimeout(100);
+		return this.reactiveElements[0];
+	}
 
-  /**
-   * @return nth LitElement in list of found elements
-   */
-  async at(index: number) {
-    await Promise.all(this.promises)
-    await aTimeout(100)
-    return this.reactiveElements[index]
-  }
+	/**
+	 * @return nth LitElement in list of found elements
+	 */
+	async at(index: number) {
+		await Promise.all(this.promises);
+		await aTimeout(100);
+		return this.reactiveElements[index];
+	}
 }
 
 /**
@@ -68,24 +68,32 @@ class FixtureResult<T extends HTMLElement> {
  * @returns {Promise<T[]>} - A promise that resolves with an array of elements that extend LitElement.
  * @throws {IllegalStateError} - If the element with the generated id is not found.
  */
-export function fixture<T extends LitElement>(template: TemplateResult, tagname?: string): FixtureResult<T> {
-  const id = `test-${(Math.random() * 100000).toFixed(0)}`
-  const wrappedTemplate = html`
-      <div id="${id}">${template}</div >`
+export function fixture<T extends LitElement>(
+	template: TemplateResult,
+	tagname?: string,
+): FixtureResult<T> {
+	const id = `test-${(Math.random() * 100000).toFixed(0)}`;
+	const wrappedTemplate = html`
+      <div id="${id}">${template}</div >`;
 
-  render(wrappedTemplate, document.body)
-  const wrapper: Element | null = document.body.querySelector(`#${id}`)
+	render(wrappedTemplate, document.body);
+	const wrapper: Element | null = document.body.querySelector(`#${id}`);
 
-  if (wrapper) {
-    // store for eventual cleanup
-    elements.push(wrapper)
-    const reactiveElements: T[] = getDerivedChildren(wrapper.children, tagname?.toUpperCase())
+	if (wrapper) {
+		// store for eventual cleanup
+		elements.push(wrapper);
+		const reactiveElements: T[] = getDerivedChildren(
+			wrapper.children,
+			tagname?.toUpperCase(),
+		);
 
-    return new FixtureResult<T>(reactiveElements.map((e) => e.updateComplete),
-                                reactiveElements as unknown as T[])
-  }
+		return new FixtureResult<T>(
+			reactiveElements.map((e) => e.updateComplete),
+			reactiveElements as unknown as T[],
+		);
+	}
 
-  throw new IllegalStateError(`element with id=${id} not found`)
+	throw new IllegalStateError(`element with id=${id} not found`);
 }
 
 /**
@@ -95,24 +103,27 @@ export function fixture<T extends LitElement>(template: TemplateResult, tagname?
  * @param type
  * @returns An array of derived children as type T, which extends LitElement.
  */
-function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type?: string): T[] {
-  const derivedChildren: T[] = []
+function getDerivedChildren<T extends LitElement>(
+	elements: HTMLCollection,
+	type?: string,
+): T[] {
+	const derivedChildren: T[] = [];
 
-  Array.from(elements).forEach((element) => {
-    if (element instanceof HTMLElement) {
-      function search(node: Node) {
-        if (node instanceof LitElement && (!type || node.tagName === type)) {
-          derivedChildren.push(node as T)
-        }
+	Array.from(elements).forEach((element) => {
+		if (element instanceof HTMLElement) {
+			function search(node: Node) {
+				if (node instanceof LitElement && (!type || node.tagName === type)) {
+					derivedChildren.push(node as T);
+				}
 
-        node.childNodes.forEach(search)
-      }
+				node.childNodes.forEach(search);
+			}
 
-      search(element)
-    }
-  })
+			search(element);
+		}
+	});
 
-  return derivedChildren
+	return derivedChildren;
 }
 
 /**
@@ -121,5 +132,5 @@ function getDerivedChildren<T extends LitElement>(elements: HTMLCollection, type
  * @returns {void}
  */
 export function fixtureCleanUp() {
-  elements.forEach((element) => element.remove())
+	elements.forEach((element) => element.remove());
 }

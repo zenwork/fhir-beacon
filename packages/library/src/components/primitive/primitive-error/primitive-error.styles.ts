@@ -1,4 +1,4 @@
-import {css} from 'lit'
+import { css } from "lit";
 
 export const componentStyles = css`
   :host {
@@ -14,4 +14,4 @@ export const componentStyles = css`
     font-style: italic;
     border-radius: var(--sl-border-radius-small);
   }
-`
+`;

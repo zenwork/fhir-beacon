@@ -1,31 +1,31 @@
-export *             from './src/shell/types'
+export * from "./src/shell/types";
 
 /* Core Stuff */
-export * from './src/internal'
-export * from './src/internal/BaseElement'
-export { BaseElement  } from './src/internal'
-export type { Generators  } from './src/internal'
-export * from './src/codes'
-export * from './src/fhirtypes'
+export * from "./src/internal";
+export * from "./src/internal/BaseElement";
+export { BaseElement } from "./src/internal";
+export type { Generators } from "./src/internal";
+export * from "./src/codes";
+export * from "./src/fhirtypes";
 
 /* Customization API */
-export * from './src/internal/customization/fhir-context-element'
+export * from "./src/internal/customization/fhir-context-element";
 
 /* Layout and Presentation */
-export * from './src/shell'
-export * from './src/styles'
-export * from './src/utilities'
+export * from "./src/shell";
+export * from "./src/styles";
+export * from "./src/utilities";
 
 /* COMPONENTS */
-export * from './src/components/foundation'
-export * from './src/components/primitive'
-export * from './src/components/complex'
-export * from './src/components/metadata'
-export * from './src/components/special'
-export *               from './src/components/resources'
-export {systemChoices} from './src/codes/use-system'
-export {useSystem}     from './src/codes/use-system'
-export {DisplayMode} from './src/shell'
+export * from "./src/components/foundation";
+export * from "./src/components/primitive";
+export * from "./src/components/complex";
+export * from "./src/components/metadata";
+export * from "./src/components/special";
+export * from "./src/components/resources";
+export { systemChoices } from "./src/codes/use-system";
+export { useSystem } from "./src/codes/use-system";
+export { DisplayMode } from "./src/shell";
 
 /* Utils */
-export * from './src/utilities/fhir-beacon-demo'
+export * from "./src/utilities/fhir-beacon-demo";

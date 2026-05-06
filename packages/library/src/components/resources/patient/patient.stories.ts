@@ -1,35 +1,35 @@
-import {StoryObj}             from '@storybook/web-components-vite'
-import {argtypes}             from '../../../../stories/storybook-utils'
-import {data, synthiaPatient} from './patient.story.data'
+import { StoryObj } from "@storybook/web-components-vite";
+import { argtypes } from "../../../../stories/storybook-utils";
+import { data, synthiaPatient } from "./patient.story.data";
 
-const path = 'Components/Resources/Patient/Patient'
-const elementName = 'fhir-patient'
+const path = "Components/Resources/Patient/Patient";
+const elementName = "fhir-patient";
 
 const meta = {
-  title: path,
-  component: elementName,
-  ...argtypes()
-}
+	title: path,
+	component: elementName,
+	...argtypes(),
+};
 
-export default meta
+export default meta;
 type Story = StoryObj;
 
 export const Display: Story = {
-  args: {
-    data,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true
-  }
-}
+	args: {
+		data,
+		mode: "display",
+		showerror: false,
+		verbose: false,
+		open: true,
+	},
+};
 
 export const Structure: Story = {
-  args: {
-    data: synthiaPatient,
-    mode: 'structure',
-    showerror: true,
-    verbose: true,
-    open: true
-  }
-}
+	args: {
+		data: synthiaPatient,
+		mode: "structure",
+		showerror: true,
+		verbose: true,
+		open: true,
+	},
+};

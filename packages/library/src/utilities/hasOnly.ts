@@ -5,9 +5,9 @@
  * @param obj the object to inspect
  * @param prop the property to check for
  */
-export function hasOnly(obj: any, prop: string) {
-  const hasOneProperty = Object.keys(obj as Record<any, unknown>).length === 1
-  const hasThisProp = Object.prototype.hasOwnProperty.call(obj, prop)
-  const propDefined = obj[prop] !== undefined
-  return hasOneProperty && hasThisProp && propDefined
+export function hasOnly(obj: Record<string, unknown>, prop: string) {
+	const hasOneProperty = Object.keys(obj).length === 1;
+	const hasThisProp = Object.prototype.hasOwnProperty.call(obj, prop);
+	const propDefined = obj[prop] !== undefined;
+	return hasOneProperty && hasThisProp && propDefined;
 }

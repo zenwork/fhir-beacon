@@ -1,21 +1,28 @@
-import {html, TemplateResult} from 'lit'
-import {DisplayMode}          from '../../../shell/displayMode'
-import {isBlank}              from '../../../utilities'
-import {BaseElement}          from '../../BaseElement'
-
-
+import { TemplateResult, html } from "lit";
+import { DisplayMode } from "../../../shell/displayMode";
+import { isBlank } from "../../../utilities";
+import { BaseElement } from "../../BaseElement";
 
 type Choice<C, D> = {
-  data: D | undefined,
-  html: (data: D, name: string, error: string | undefined, context: C) => TemplateResult
-}
+	data: D | undefined;
+	html: (
+		data: D,
+		name: string,
+		error: string | undefined,
+		context: C,
+	) => TemplateResult;
+};
 
-export function choice<C extends BaseElement<any>, D>(data: D | undefined,
-                                                      html: (data: D,
-                                                             name: string,
-                                                             error: string | undefined,
-                                                             context: C) => TemplateResult): Choice<C, D> {
-  return { data, html }
+export function choice<C extends BaseElement<any>, D>(
+	data: D | undefined,
+	html: (
+		data: D,
+		name: string,
+		error: string | undefined,
+		context: C,
+	) => TemplateResult,
+): Choice<C, D> {
+	return { data, html };
 }
 /**
  * Renders values when only on-of the provided choices should be rendered
@@ -29,61 +36,64 @@ export function choice<C extends BaseElement<any>, D>(data: D | undefined,
  *   results.
  * @see http://hl7.org/fhir/formats.html#choice
  */
-export function oneOf<C extends BaseElement<any>, T extends Array<Choice<C, any>>>(contextElement: C,
-                                                                                   name: string,
-                                                                                   error: string | undefined,
-                                                                                   choices: [...T]): TemplateResult[] {
+export function oneOf<
+	C extends BaseElement<any>,
+	T extends Array<Choice<C, any>>,
+>(
+	contextElement: C,
+	name: string,
+	error: string | undefined,
+	choices: [...T],
+): TemplateResult[] {
+	let templateResults: TemplateResult[] = [];
+	let countPropsPresent = 0;
 
-  let templateResults: TemplateResult[] = []
-  let countPropsPresent = 0
-
-  if (contextElement.mode === DisplayMode.structure && contextElement.verbose) {
-    // add all templates
-    choices.forEach(choice => {
-      if (!isBlank(choice.data)) {
-        countPropsPresent++
-      }
-      templateResults.push(choice.html(choice.data, name, error, contextElement))
-    })
-    templateResults = [
-      html`
+	if (contextElement.mode === DisplayMode.structure && contextElement.verbose) {
+		// add all templates
+		choices.forEach((choice) => {
+			if (!isBlank(choice.data)) {
+				countPropsPresent++;
+			}
+			templateResults.push(
+				choice.html(choice.data, name, error, contextElement),
+			);
+		});
+		templateResults = [
+			html`
           <fhir-wrapper .label=${name}
                         ?summaryonly=${contextElement.summaryonly}
           >
               ${templateResults}
-          </fhir-wrapper>`
-    ]
+          </fhir-wrapper>`,
+		];
+	} else {
+		// add template if data is present
+		choices.forEach((choice) => {
+			if (!isBlank(choice.data)) {
+				countPropsPresent++;
+				templateResults.push(
+					choice.html(choice.data, name, error, contextElement),
+				);
+			}
+		});
+	}
 
-
-  } else {
-
-    // add template if data is present
-    choices.forEach(choice => {
-      if (!isBlank(choice.data)) {
-        countPropsPresent++
-        templateResults.push(choice.html(choice.data, name, error, contextElement))
-      }
-    })
-
-
-  }
-
-  // return all results and error messages if showerror is set
-  if (contextElement.showerror && countPropsPresent++ > 1) {
-    templateResults = [
-      html`
+	// return all results and error messages if showerror is set
+	if (contextElement.showerror && countPropsPresent++ > 1) {
+		templateResults = [
+			html`
           <fhir-wrapper .label=
-                        ${'too many values'}
+                        ${"too many values"}
                         variant='error'
                         ?summaryonly=${contextElement.summaryonly}
           >
               ${templateResults}
               ${html`
-                  <fhir-error text="${'only one of the above should be present'}"></fhir-error>`}
-          </fhir-wrapper>`
-    ]
-  }
+                  <fhir-error text="${"only one of the above should be present"}"></fhir-error>`}
+          </fhir-wrapper>`,
+		];
+	}
 
-  // otherwise return all results
-  return templateResults
+	// otherwise return all results
+	return templateResults;
 }

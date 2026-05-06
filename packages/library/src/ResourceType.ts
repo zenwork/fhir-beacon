@@ -1,34 +1,32 @@
-import {DomainResourceData} from 'internal'
-
-
+import { DomainResourceData } from "internal";
 
 /**
  * @description A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to
  *   track charges for a patient, cost centers, etc.
  * - code: Account
  */
-export type AccountData = DomainResourceData & {}
+export type AccountData = DomainResourceData & {};
 
 /**
  * @description This resource allows for the definition of some activity to be performed, independent of a particular
  *   patient, practitioner, or other performance context.
  * - code: ActivityDefinition
  */
-export type ActivityDefinitionData = DomainResourceData & {}
+export type ActivityDefinitionData = DomainResourceData & {};
 
 /**
  * @description The ActorDefinition resource is used to describe an actor - a human or an application that plays a role
  *   in data exchange, and that may have obligations associated with the role the actor plays.
  * - code: ActorDefinition
  */
-export type ActorDefinitionData = DomainResourceData & {}
+export type ActorDefinitionData = DomainResourceData & {};
 
 /**
  * @description A medicinal product in the final form which is suitable for administering to a patient (after any
  *   mixing of multiple components, dissolution etc. has been performed).
  * - code: AdministrableProductDefinition
  */
-export type AdministrableProductDefinitionData = DomainResourceData & {}
+export type AdministrableProductDefinitionData = DomainResourceData & {};
 
 /**
  * @description An event (i.e. any change to current patient status) that may be related to unintended effects on a
@@ -42,82 +40,82 @@ export type AdministrableProductDefinitionData = DomainResourceData & {}
  *   include specific extensions, value sets and constraints.
  * - code: AdverseEvent
  */
-export type AdverseEventData = DomainResourceData & {}
+export type AdverseEventData = DomainResourceData & {};
 
 /**
  * @description Risk of harmful or undesirable, physiological response which is unique to an individual and associated
  *   with exposure to a substance.
  * - code: AllergyIntolerance
  */
-export type AllergyIntoleranceData = DomainResourceData & {}
+export type AllergyIntoleranceData = DomainResourceData & {};
 
 /**
  * @description A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s)
  *   for a specific date/time. This may result in one or more Encounter(s).
  * - code: Appointment
  */
-export type AppointmentData = DomainResourceData & {}
+export type AppointmentData = DomainResourceData & {};
 
 /**
  * @description A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or
  *   rejection.
  * - code: AppointmentResponse
  */
-export type AppointmentResponseData = DomainResourceData & {}
+export type AppointmentResponseData = DomainResourceData & {};
 
 /**
  * @description This Resource provides one or more comments, classifiers or ratings about a Resource and supports
  *   attribution and rights management metadata for the added content.
  * - code: ArtifactAssessment
  */
-export type ArtifactAssessmentData = DomainResourceData & {}
+export type ArtifactAssessmentData = DomainResourceData & {};
 
 /**
  * @description A record of an event relevant for purposes such as operations, privacy, security, maintenance, and
  *   performance analysis.
  * - code: AuditEvent
  */
-export type AuditEventData = DomainResourceData & {}
+export type AuditEventData = DomainResourceData & {};
 
 /**
  * @description Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to
  *   an existing resource, and custom resources not appropriate for inclusion in the FHIR specification.
  * - code: Basic
  */
-export type BasicData = DomainResourceData & {}
+export type BasicData = DomainResourceData & {};
 
 /**
  * @description A resource that represents the data of a single raw artifact as digital content accessible in its
  *   native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
  * - code: Binary
  */
-export type BinaryData = DomainResourceData & {}
+export type BinaryData = DomainResourceData & {};
 
 /**
  * @description A biological material originating from a biological entity intended to be transplanted or infused into
  *   another (possibly the same) biological entity.
  * - code: BiologicallyDerivedProduct
  */
-export type BiologicallyDerivedProductData = DomainResourceData & {}
+export type BiologicallyDerivedProductData = DomainResourceData & {};
 
 /**
  * @description A record of dispensation of a biologically derived product.
  * - code: BiologicallyDerivedProductDispense
  */
-export type BiologicallyDerivedProductDispenseData = DomainResourceData & {}
+export type BiologicallyDerivedProductDispenseData = DomainResourceData & {};
 
 /**
  * @description Record details about an anatomical structure.  This resource may be used when a coded concept does not
  *   provide the necessary detail needed for the use case.
  * - code: BodyStructure
  */
-export type BodyStructureData = DomainResourceData & {}
+export type BodyStructureData = DomainResourceData & {};
 
 /**
  * @description A container for a collection of resources.
  * - code: Bundle
  */
-export type BundleData = DomainResourceData & {}
+export type BundleData = DomainResourceData & {};
 
 /**
  * @description A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server or Client for a
@@ -125,7 +123,7 @@ export type BundleData = DomainResourceData & {}
  *   required or desired server implementation.
  * - code: CapabilityStatement
  */
-export type CapabilityStatementData = DomainResourceData & {}
+export type CapabilityStatementData = DomainResourceData & {};
 
 /**
  * @description Describes the intention of how one or more practitioners intend to deliver care for a particular
@@ -133,14 +131,14 @@ export type CapabilityStatementData = DomainResourceData & {}
  *   conditions.
  * - code: CarePlan
  */
-export type CarePlanData = DomainResourceData & {}
+export type CarePlanData = DomainResourceData & {};
 
 /**
  * @description The Care Team includes all the people and organizations who plan to participate in the coordination and
  *   delivery of care.
  * - code: CareTeam
  */
-export type CareTeamData = DomainResourceData & {}
+export type CareTeamData = DomainResourceData & {};
 
 /**
  * @description The resource ChargeItem describes the provision of healthcare provider products for a certain patient,
@@ -149,7 +147,7 @@ export type CareTeamData = DomainResourceData & {}
  *   and internal cost allocation.
  * - code: ChargeItem
  */
-export type ChargeItemData = DomainResourceData & {}
+export type ChargeItemData = DomainResourceData & {};
 
 /**
  * @description The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary
@@ -157,7 +155,7 @@ export type ChargeItemData = DomainResourceData & {}
  *   resource gives only a rough structure and requires profiling for each type of billing code system.
  * - code: ChargeItemDefinition
  */
-export type ChargeItemDefinitionData = DomainResourceData & {}
+export type ChargeItemDefinitionData = DomainResourceData & {};
 
 /**
  * @description The Citation Resource enables reference to any knowledge artifact for purposes of identification and
@@ -165,20 +163,20 @@ export type ChargeItemDefinitionData = DomainResourceData & {}
  *   such as versioning, expressing complex contributorship roles, and referencing computable resources.
  * - code: Citation
  */
-export type CitationData = DomainResourceData & {}
+export type CitationData = DomainResourceData & {};
 
 /**
  * @description A provider issued list of professional services and products which have been provided, or are to be
  *   provided, to a patient which is sent to an insurer for reimbursement.
  * - code: Claim
  */
-export type ClaimData = DomainResourceData & {}
+export type ClaimData = DomainResourceData & {};
 
 /**
  * @description This resource provides the adjudication details from the processing of a Claim resource.
  * - code: ClaimResponse
  */
-export type ClaimResponseData = DomainResourceData & {}
+export type ClaimResponseData = DomainResourceData & {};
 
 /**
  * @description A record of a clinical assessment performed to determine what problem(s) may affect the patient and
@@ -188,21 +186,21 @@ export type ClaimResponseData = DomainResourceData & {}
  *   the recording of assessment tools such as Apgar score.
  * - code: ClinicalImpression
  */
-export type ClinicalImpressionData = DomainResourceData & {}
+export type ClinicalImpressionData = DomainResourceData & {};
 
 /**
  * @description A single issue - either an indication, contraindication, interaction or an undesirable effect for a
  *   medicinal product, medication, device or procedure.
  * - code: ClinicalUseDefinition
  */
-export type ClinicalUseDefinitionData = DomainResourceData & {}
+export type ClinicalUseDefinitionData = DomainResourceData & {};
 
 /**
  * @description The CodeSystem resource is used to declare the existence of and describe a code system or code system
  *   supplement and its key properties, and optionally define a part or all of its content.
  * - code: CodeSystem
  */
-export type CodeSystemData = DomainResourceData & {}
+export type CodeSystemData = DomainResourceData & {};
 
 /**
  * @description A clinical or business level record of information being transmitted or shared; e.g. an alert that was
@@ -210,20 +208,20 @@ export type CodeSystemData = DomainResourceData & {}
  *   report for a reportable condition.
  * - code: Communication
  */
-export type CommunicationData = DomainResourceData & {}
+export type CommunicationData = DomainResourceData & {};
 
 /**
  * @description A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible
  *   provider, the CDS system proposes that the public health agency be notified about a reportable condition.
  * - code: CommunicationRequest
  */
-export type CommunicationRequestData = DomainResourceData & {}
+export type CommunicationRequestData = DomainResourceData & {};
 
 /**
  * @description A compartment definition that defines how resources are accessed on a server.
  * - code: CompartmentDefinition
  */
-export type CompartmentDefinitionData = DomainResourceData & {}
+export type CompartmentDefinitionData = DomainResourceData & {};
 
 /**
  * @description A set of healthcare-related information that is assembled together into a single logical package that
@@ -234,27 +232,27 @@ export type CompartmentDefinitionData = DomainResourceData & {}
  *   included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).
  * - code: Composition
  */
-export type CompositionData = DomainResourceData & {}
+export type CompositionData = DomainResourceData & {};
 
 /**
  * @description A statement of relationships from one set of concepts to one or more other concepts - either concepts
  *   in code systems, or data element/data element concepts, or classes in class models.
  * - code: ConceptMap
  */
-export type ConceptMapData = DomainResourceData & {}
+export type ConceptMapData = DomainResourceData & {};
 
 /**
  * @description A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that
  *   has risen to a level of concern.
  * - code: Condition
  */
-export type ConditionData = DomainResourceData & {}
+export type ConditionData = DomainResourceData & {};
 
 /**
  * @description A definition of a condition and information relevant to managing it.
  * - code: ConditionDefinition
  */
-export type ConditionDefinitionData = DomainResourceData & {}
+export type ConditionDefinitionData = DomainResourceData & {};
 
 /**
  * @description A record of a healthcare consumer’s  choices  or choices made on their behalf by a third party, which
@@ -262,20 +260,20 @@ export type ConditionDefinitionData = DomainResourceData & {}
  *   policy context, for specific purposes and periods of time.
  * - code: Consent
  */
-export type ConsentData = DomainResourceData & {}
+export type ConsentData = DomainResourceData & {};
 
 /**
  * @description Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
  * - code: Contract
  */
-export type ContractData = DomainResourceData & {}
+export type ContractData = DomainResourceData & {};
 
 /**
  * @description Financial instrument which may be used to reimburse or pay for health care products and services.
  *   Includes both insurance and self-payment.
  * - code: Coverage
  */
-export type CoverageData = DomainResourceData & {}
+export type CoverageData = DomainResourceData & {};
 
 /**
  * @description The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for
@@ -283,14 +281,14 @@ export type CoverageData = DomainResourceData & {}
  *   coverage is valid and in-force and optionally to provide the insurance details of the policy.
  * - code: CoverageEligibilityRequest
  */
-export type CoverageEligibilityRequestData = DomainResourceData & {}
+export type CoverageEligibilityRequestData = DomainResourceData & {};
 
 /**
  * @description This resource provides eligibility and plan details from the processing of an
  *   CoverageEligibilityRequest resource.
  * - code: CoverageEligibilityResponse
  */
-export type CoverageEligibilityResponseData = DomainResourceData & {}
+export type CoverageEligibilityResponseData = DomainResourceData & {};
 
 /**
  * @description Indicates an actual or potential clinical issue with or between one or more active or proposed clinical
@@ -298,7 +296,7 @@ export type CoverageEligibilityResponseData = DomainResourceData & {}
  *   gaps in care, etc.
  * - code: DetectedIssue
  */
-export type DetectedIssueData = DomainResourceData & {}
+export type DetectedIssueData = DomainResourceData & {};
 
 /**
  * @description This resource describes the properties (regulated, has real time clock, etc.), adminstrative
@@ -308,33 +306,33 @@ export type DetectedIssueData = DomainResourceData & {}
  *   hierarchy and these are represented by multiple Device resources and bound through the 'parent' element.
  * - code: Device
  */
-export type DeviceData = DomainResourceData & {}
+export type DeviceData = DomainResourceData & {};
 
 /**
  * @description A record of association of a device.
  * - code: DeviceAssociation
  */
-export type DeviceAssociationData = DomainResourceData & {}
+export type DeviceAssociationData = DomainResourceData & {};
 
 /**
  * @description This is a specialized resource that defines the characteristics and capabilities of a device.
  * - code: DeviceDefinition
  */
-export type DeviceDefinitionData = DomainResourceData & {}
+export type DeviceDefinitionData = DomainResourceData & {};
 
 /**
  * @description Indicates that a device is to be or has been dispensed for a named person/patient.  This includes a
  *   description of the product (supply) provided and the instructions for using the device.
  * - code: DeviceDispense
  */
-export type DeviceDispenseData = DomainResourceData & {}
+export type DeviceDispenseData = DomainResourceData & {};
 
 /**
  * @description Describes a measurement, calculation or setting capability of a device.  The DeviceMetric resource is
  *   derived from the ISO/IEEE 11073-10201 Domain Information Model standard, but is more widely applicable.
  * - code: DeviceMetric
  */
-export type DeviceMetricData = DomainResourceData & {}
+export type DeviceMetricData = DomainResourceData & {};
 
 /**
  * @description Represents a request a device to be provided to a specific patient. The device may be an implantable
@@ -342,14 +340,14 @@ export type DeviceMetricData = DomainResourceData & {}
  *   subsequently be used.
  * - code: DeviceRequest
  */
-export type DeviceRequestData = DomainResourceData & {}
+export type DeviceRequestData = DomainResourceData & {};
 
 /**
  * @description A record of a device being used by a patient where the record is the result of a report from the
  *   patient or a clinician.
  * - code: DeviceUsage
  */
-export type DeviceUsageData = DomainResourceData & {}
+export type DeviceUsageData = DomainResourceData & {};
 
 /**
  * @description The findings and interpretation of diagnostic tests performed on patients, groups of patients,
@@ -359,7 +357,7 @@ export type DeviceUsageData = DomainResourceData & {}
  *   such as batch analysis and stability reporting of products and substances.
  * - code: DiagnosticReport
  */
-export type DiagnosticReportData = DomainResourceData & {}
+export type DiagnosticReportData = DomainResourceData & {};
 
 /**
  * @description A reference to a document of any kind for any purpose. While the term “document” implies a more narrow
@@ -370,20 +368,20 @@ export type DiagnosticReportData = DomainResourceData & {}
  *   be inline base64 encoded data or provided by direct reference.
  * - code: DocumentReference
  */
-export type DocumentReferenceData = DomainResourceData & {}
+export type DocumentReferenceData = DomainResourceData & {};
 
 /**
  * @description An interaction between healthcare provider(s), and/or patient(s) for the purpose of providing
  *   healthcare service(s) or assessing the health status of patient(s).
  * - code: Encounter
  */
-export type EncounterData = DomainResourceData & {}
+export type EncounterData = DomainResourceData & {};
 
 /**
  * @description A record of significant events/milestones key data throughout the history of an Encounter
  * - code: EncounterHistory
  */
-export type EncounterHistoryData = DomainResourceData & {}
+export type EncounterHistoryData = DomainResourceData & {};
 
 /**
  * @description The technical details of an endpoint that can be used for electronic services, such as for web services
@@ -391,19 +389,19 @@ export type EncounterHistoryData = DomainResourceData & {}
  *   context information.
  * - code: Endpoint
  */
-export type EndpointData = DomainResourceData & {}
+export type EndpointData = DomainResourceData & {};
 
 /**
  * @description This resource provides the insurance enrollment details to the insurer regarding a specified coverage.
  * - code: EnrollmentRequest
  */
-export type EnrollmentRequestData = DomainResourceData & {}
+export type EnrollmentRequestData = DomainResourceData & {};
 
 /**
  * @description This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
  * - code: EnrollmentResponse
  */
-export type EnrollmentResponseData = DomainResourceData & {}
+export type EnrollmentResponseData = DomainResourceData & {};
 
 /**
  * @description An association between a patient and an organization / healthcare provider(s) during which time
@@ -411,13 +409,13 @@ export type EnrollmentResponseData = DomainResourceData & {}
  *   time.
  * - code: EpisodeOfCare
  */
-export type EpisodeOfCareData = DomainResourceData & {}
+export type EpisodeOfCareData = DomainResourceData & {};
 
 /**
  * @description The EventDefinition resource provides a reusable description of when a particular event can occur.
  * - code: EventDefinition
  */
-export type EventDefinitionData = DomainResourceData & {}
+export type EventDefinitionData = DomainResourceData & {};
 
 /**
  * @description The Evidence Resource provides a machine-interpretable expression of an evidence concept including the
@@ -425,7 +423,7 @@ export type EventDefinitionData = DomainResourceData & {}
  *   confounding variables), the statistics, and the certainty of this evidence.
  * - code: Evidence
  */
-export type EvidenceData = DomainResourceData & {}
+export type EvidenceData = DomainResourceData & {};
 
 /**
  * @description The EvidenceReport Resource is a specialized container for a collection of resources and codeable
@@ -433,40 +431,40 @@ export type EvidenceData = DomainResourceData & {}
  *   concepts.
  * - code: EvidenceReport
  */
-export type EvidenceReportData = DomainResourceData & {}
+export type EvidenceReportData = DomainResourceData & {};
 
 /**
  * @description The EvidenceVariable resource describes an element that knowledge (Evidence) is about.
  * - code: EvidenceVariable
  */
-export type EvidenceVariableData = DomainResourceData & {}
+export type EvidenceVariableData = DomainResourceData & {};
 
 /**
  * @description A walkthrough of a workflow showing the interaction between systems and the instances shared, possibly
  *   including the evolution of instances over time.
  * - code: ExampleScenario
  */
-export type ExampleScenarioData = DomainResourceData & {}
+export type ExampleScenarioData = DomainResourceData & {};
 
 /**
  * @description This resource provides: the claim details; adjudication details from the processing of a Claim; and
  *   optionally account balance information, for informing the subscriber of the benefits provided.
  * - code: ExplanationOfBenefit
  */
-export type ExplanationOfBenefitData = DomainResourceData & {}
+export type ExplanationOfBenefitData = DomainResourceData & {};
 
 /**
  * @description Significant health conditions for a person related to the patient relevant in the context of care for
  *   the patient.
  * - code: FamilyMemberHistory
  */
-export type FamilyMemberHistoryData = DomainResourceData & {}
+export type FamilyMemberHistoryData = DomainResourceData & {};
 
 /**
  * @description Prospective warnings of potential issues when providing care to the patient.
  * - code: Flag
  */
-export type FlagData = DomainResourceData & {}
+export type FlagData = DomainResourceData & {};
 
 /**
  * @description This resource describes a product or service that is available through a program and includes the
@@ -474,13 +472,13 @@ export type FlagData = DomainResourceData & {}
  *   of the item in the formulary and is not inherent to the item itself.
  * - code: FormularyItem
  */
-export type FormularyItemData = DomainResourceData & {}
+export type FormularyItemData = DomainResourceData & {};
 
 /**
  * @description A set of analyses performed to analyze and generate genomic data.
  * - code: GenomicStudy
  */
-export type GenomicStudyData = DomainResourceData & {}
+export type GenomicStudyData = DomainResourceData & {};
 
 /**
  * @description Describes the intended objective(s) for a patient, group or organization care, for example, weight
@@ -488,14 +486,14 @@ export type GenomicStudyData = DomainResourceData & {}
  *   improvement objective, etc.
  * - code: Goal
  */
-export type GoalData = DomainResourceData & {}
+export type GoalData = DomainResourceData & {};
 
 /**
  * @description A formal computable definition of a graph of resources - that is, a coherent set of resources that form
  *   a graph by following references. The Graph Definition resource defines a set and makes rules about the set.
  * - code: GraphDefinition
  */
-export type GraphDefinitionData = DomainResourceData & {}
+export type GraphDefinitionData = DomainResourceData & {};
 
 /**
  * @description Represents a defined collection of entities that may be discussed or acted upon collectively but which
@@ -503,14 +501,14 @@ export type GraphDefinitionData = DomainResourceData & {}
  *   that isn't an Organization.
  * - code: Group
  */
-export type GroupData = DomainResourceData & {}
+export type GroupData = DomainResourceData & {};
 
 /**
  * @description A guidance response is the formal response to a guidance request, including any output parameters
  *   returned by the evaluation, as well as the description of any proposed actions to be taken.
  * - code: GuidanceResponse
  */
-export type GuidanceResponseData = DomainResourceData & {}
+export type GuidanceResponseData = DomainResourceData & {};
 
 /**
  * @description The details of a healthcare service available at a location or in a catalog.  In the case where there
@@ -518,7 +516,7 @@ export type GuidanceResponseData = DomainResourceData & {}
  *   of linked HealthcareServices.
  * - code: HealthcareService
  */
-export type HealthcareServiceData = DomainResourceData & {}
+export type HealthcareServiceData = DomainResourceData & {};
 
 /**
  * @description A selection of DICOM SOP instances and/or frames within a single Study and Series. This might include
@@ -526,7 +524,7 @@ export type HealthcareServiceData = DomainResourceData & {}
  *   Observation Resource or transferring this information along with the ImagingStudy Resource.
  * - code: ImagingSelection
  */
-export type ImagingSelectionData = DomainResourceData & {}
+export type ImagingSelectionData = DomainResourceData & {};
 
 /**
  * @description Representation of the content produced in a DICOM imaging study. A study comprises a set of series,
@@ -535,28 +533,28 @@ export type ImagingSelectionData = DomainResourceData & {}
  *   have multiple series of different modalities.
  * - code: ImagingStudy
  */
-export type ImagingStudyData = DomainResourceData & {}
+export type ImagingStudyData = DomainResourceData & {};
 
 /**
  * @description Describes the event of a patient being administered a vaccine or a record of an immunization as
  *   reported by a patient, a clinician or another party.
  * - code: Immunization
  */
-export type ImmunizationData = DomainResourceData & {}
+export type ImmunizationData = DomainResourceData & {};
 
 /**
  * @description Describes a comparison of an immunization event against published recommendations to determine if the
  *   administration is "valid" in relation to those  recommendations.
  * - code: ImmunizationEvaluation
  */
-export type ImmunizationEvaluationData = DomainResourceData & {}
+export type ImmunizationEvaluationData = DomainResourceData & {};
 
 /**
  * @description A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule
  *   with optional supporting justification.
  * - code: ImmunizationRecommendation
  */
-export type ImmunizationRecommendationData = DomainResourceData & {}
+export type ImmunizationRecommendationData = DomainResourceData & {};
 
 /**
  * @description A set of rules of how a particular interoperability or standards problem is solved - typically through
@@ -564,38 +562,38 @@ export type ImmunizationRecommendationData = DomainResourceData & {}
  *   whole and to publish a computable definition of all the parts.
  * - code: ImplementationGuide
  */
-export type ImplementationGuideData = DomainResourceData & {}
+export type ImplementationGuideData = DomainResourceData & {};
 
 /**
  * @description An ingredient of a manufactured item or pharmaceutical product.
  * - code: Ingredient
  */
-export type IngredientData = DomainResourceData & {}
+export type IngredientData = DomainResourceData & {};
 
 /**
  * @description Details of a Health Insurance product/plan provided by an organization.
  * - code: InsurancePlan
  */
-export type InsurancePlanData = DomainResourceData & {}
+export type InsurancePlanData = DomainResourceData & {};
 
 /**
  * @description functional description of an inventory item used in inventory and supply-related workflows.
  * - code: InventoryItem
  */
-export type InventoryItemData = DomainResourceData & {}
+export type InventoryItemData = DomainResourceData & {};
 
 /**
  * @description A report of inventory or stock items.
  * - code: InventoryReport
  */
-export type InventoryReportData = DomainResourceData & {}
+export type InventoryReportData = DomainResourceData & {};
 
 /**
  * @description Invoice containing collected ChargeItems from an Account with calculated individual and total price for
  *   Billing purpose.
  * - code: Invoice
  */
-export type InvoiceData = DomainResourceData & {}
+export type InvoiceData = DomainResourceData & {};
 
 /**
  * @description The Library resource is a general-purpose container for knowledge asset definitions. It can be used to
@@ -603,47 +601,47 @@ export type InvoiceData = DomainResourceData & {}
  *   as to describe a collection of knowledge assets.
  * - code: Library
  */
-export type LibraryData = DomainResourceData & {}
+export type LibraryData = DomainResourceData & {};
 
 /**
  * @description Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
  * - code: Linkage
  */
-export type LinkageData = DomainResourceData & {}
+export type LinkageData = DomainResourceData & {};
 
 /**
  * @description A List is a curated collection of resources, for things such as problem lists, allergy lists, facility
  *   list, organization list, etc.
  * - code: List
  */
-export type ListData = DomainResourceData & {}
+export type ListData = DomainResourceData & {};
 
 /**
  * @description Details and position information for a place where services are provided and resources and participants
  *   may be stored, found, contained, or accommodated.
  * - code: Location
  */
-export type LocationData = DomainResourceData & {}
+export type LocationData = DomainResourceData & {};
 
 /**
  * @description The definition and characteristics of a medicinal manufactured item, such as a tablet or capsule, as
  *   contained in a packaged medicinal product.
  * - code: ManufacturedItemDefinition
  */
-export type ManufacturedItemDefinitionData = DomainResourceData & {}
+export type ManufacturedItemDefinitionData = DomainResourceData & {};
 
 /**
  * @description The Measure resource provides the definition of a quality measure.
  * - code: Measure
  */
-export type MeasureData = DomainResourceData & {}
+export type MeasureData = DomainResourceData & {};
 
 /**
  * @description The MeasureReport resource contains the results of the calculation of a measure; and optionally a
  *   reference to the resources involved in that calculation.
  * - code: MeasureReport
  */
-export type MeasureReportData = DomainResourceData & {}
+export type MeasureReportData = DomainResourceData & {};
 
 /**
  * @description This resource is primarily used for the identification and definition of a medication, including
@@ -651,7 +649,7 @@ export type MeasureReportData = DomainResourceData & {}
  *   statements about medication use.
  * - code: Medication
  */
-export type MedicationData = DomainResourceData & {}
+export type MedicationData = DomainResourceData & {};
 
 /**
  * @description Describes the event of a patient consuming or otherwise being administered a medication.  This may be
@@ -660,7 +658,7 @@ export type MedicationData = DomainResourceData & {}
  *   also be used to record waste using a status of not-done and the appropriate statusReason.
  * - code: MedicationAdministration
  */
-export type MedicationAdministrationData = DomainResourceData & {}
+export type MedicationAdministrationData = DomainResourceData & {};
 
 /**
  * @description Indicates that a medication product is to be or has been dispensed for a named person/patient.  This
@@ -668,13 +666,13 @@ export type MedicationAdministrationData = DomainResourceData & {}
  *   medication.  The medication dispense is the result of a pharmacy system responding to a medication order.
  * - code: MedicationDispense
  */
-export type MedicationDispenseData = DomainResourceData & {}
+export type MedicationDispenseData = DomainResourceData & {};
 
 /**
  * @description Information about a medication that is used to support knowledge.
  * - code: MedicationKnowledge
  */
-export type MedicationKnowledgeData = DomainResourceData & {}
+export type MedicationKnowledgeData = DomainResourceData & {};
 
 /**
  * @description An order or request for both supply of the medication and the instructions for administration of the
@@ -683,7 +681,7 @@ export type MedicationKnowledgeData = DomainResourceData & {}
  *   to harmonize with workflow patterns.
  * - code: MedicationRequest
  */
-export type MedicationRequestData = DomainResourceData & {}
+export type MedicationRequestData = DomainResourceData & {};
 
 /**
  * @description A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that
@@ -696,21 +694,21 @@ export type MedicationRequestData = DomainResourceData & {}
  The primary difference between a medicationstatement and a medicationadministration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medicationstatement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the Medication Statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
  * - code: MedicationStatement
  */
-export type MedicationStatementData = DomainResourceData & {}
+export type MedicationStatementData = DomainResourceData & {};
 
 /**
  * @description Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g.
  *   regulatory use, drug catalogs, to support prescribing, adverse events management etc.).
  * - code: MedicinalProductDefinition
  */
-export type MedicinalProductDefinitionData = DomainResourceData & {}
+export type MedicinalProductDefinitionData = DomainResourceData & {};
 
 /**
  * @description Defines the characteristics of a message that can be shared between systems, including the type of
  *   event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
  * - code: MessageDefinition
  */
-export type MessageDefinitionData = DomainResourceData & {}
+export type MessageDefinitionData = DomainResourceData & {};
 
 /**
  * @description The header for a message exchange that is either requesting or responding to an action.  The
@@ -718,20 +716,20 @@ export type MessageDefinitionData = DomainResourceData & {}
  *   transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
  * - code: MessageHeader
  */
-export type MessageHeaderData = DomainResourceData & {}
+export type MessageHeaderData = DomainResourceData & {};
 
 /**
  * @description Representation of a molecular sequence.
  * - code: MolecularSequence
  */
-export type MolecularSequenceData = DomainResourceData & {}
+export type MolecularSequenceData = DomainResourceData & {};
 
 /**
  * @description A curated namespace that issues unique symbols within that namespace for the identification of
  *   concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
  * - code: NamingSystem
  */
-export type NamingSystemData = DomainResourceData & {}
+export type NamingSystemData = DomainResourceData & {};
 
 /**
  * @description A record of food or fluid that is being consumed by a patient.  A NutritionIntake may indicate that the
@@ -742,46 +740,46 @@ export type NamingSystemData = DomainResourceData & {}
  *   the patient's memory, from a nutrition label,  or from a clinician documenting observed intake.
  * - code: NutritionIntake
  */
-export type NutritionIntakeData = DomainResourceData & {}
+export type NutritionIntakeData = DomainResourceData & {};
 
 /**
  * @description A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a
  *   patient/resident.
  * - code: NutritionOrder
  */
-export type NutritionOrderData = DomainResourceData & {}
+export type NutritionOrderData = DomainResourceData & {};
 
 /**
  * @description A food or supplement that is consumed by patients.
  * - code: NutritionProduct
  */
-export type NutritionProductData = DomainResourceData & {}
+export type NutritionProductData = DomainResourceData & {};
 
 /**
  * @description Measurements and simple assertions made about a patient, device or other subject.
  * - code: Observation
  */
-export type ObservationData = DomainResourceData & {}
+export type ObservationData = DomainResourceData & {};
 
 /**
  * @description Set of definitional characteristics for a kind of observation or measurement produced or consumed by an
  *   orderable health care service.
  * - code: ObservationDefinition
  */
-export type ObservationDefinitionData = DomainResourceData & {}
+export type ObservationDefinitionData = DomainResourceData & {};
 
 /**
  * @description A formal computable definition of an operation (on the RESTful interface) or a named query (using the
  *   search interaction).
  * - code: OperationDefinition
  */
-export type OperationDefinitionData = DomainResourceData & {}
+export type OperationDefinitionData = DomainResourceData & {};
 
 /**
  * @description A collection of error, warning, or information messages that result from a system action.
  * - code: OperationOutcome
  */
-export type OperationOutcomeData = DomainResourceData & {}
+export type OperationOutcomeData = DomainResourceData & {};
 
 /**
  * @description A formally or informally recognized grouping of people or organizations formed for the purpose of
@@ -789,20 +787,20 @@ export type OperationOutcomeData = DomainResourceData & {}
  *   groups, healthcare practice groups, payer/insurer, etc.
  * - code: Organization
  */
-export type OrganizationData = DomainResourceData & {}
+export type OrganizationData = DomainResourceData & {};
 
 /**
  * @description Defines an affiliation/assotiation/relationship between 2 distinct organizations, that is not a part-of
  *   relationship/sub-division relationship.
  * - code: OrganizationAffiliation
  */
-export type OrganizationAffiliationData = DomainResourceData & {}
+export type OrganizationAffiliationData = DomainResourceData & {};
 
 /**
  * @description A medically related item or items, in a container or package.
  * - code: PackagedProductDefinition
  */
-export type PackagedProductDefinitionData = DomainResourceData & {}
+export type PackagedProductDefinitionData = DomainResourceData & {};
 
 /**
  * @description This resource is used to pass information into and back from an operation (whether invoked directly
@@ -810,41 +808,41 @@ export type PackagedProductDefinitionData = DomainResourceData & {}
  *   except as described in the definition of the Parameters resource.
  * - code: Parameters
  */
-export type ParametersData = DomainResourceData & {}
+export type ParametersData = DomainResourceData & {};
 
 /**
  * @description Demographics and other administrative information about an individual or animal receiving care or other
  *   health-related services.
  * - code: Patient
  */
-export type PatientData = DomainResourceData & {}
+export type PatientData = DomainResourceData & {};
 
 /**
  * @description This resource provides the status of the payment for goods and services rendered, and the request and
  *   response resource references.
  * - code: PaymentNotice
  */
-export type PaymentNoticeData = DomainResourceData & {}
+export type PaymentNoticeData = DomainResourceData & {};
 
 /**
  * @description This resource provides the details including amount of a payment and allocates the payment items being
  *   paid.
  * - code: PaymentReconciliation
  */
-export type PaymentReconciliationData = DomainResourceData & {}
+export type PaymentReconciliationData = DomainResourceData & {};
 
 /**
  * @description Permission resource holds access rules for a given data and context.
  * - code: Permission
  */
-export type PermissionData = DomainResourceData & {}
+export type PermissionData = DomainResourceData & {};
 
 /**
  * @description Demographics and administrative information about a person independent of a specific health-related
  *   context.
  * - code: Person
  */
-export type PersonData = DomainResourceData & {}
+export type PersonData = DomainResourceData & {};
 
 /**
  * @description This resource allows for the definition of various types of plans as a sharable, consumable, and
@@ -853,20 +851,20 @@ export type PersonData = DomainResourceData & {}
  *   specifications.
  * - code: PlanDefinition
  */
-export type PlanDefinitionData = DomainResourceData & {}
+export type PlanDefinitionData = DomainResourceData & {};
 
 /**
  * @description A person who is directly or indirectly involved in the provisioning of healthcare or related services.
  * - code: Practitioner
  */
-export type PractitionerData = DomainResourceData & {}
+export type PractitionerData = DomainResourceData & {};
 
 /**
  * @description A specific set of Roles/Locations/specialties/services that a practitioner may perform, or has
  *   performed at an organization during a period of time.
  * - code: PractitionerRole
  */
-export type PractitionerRoleData = DomainResourceData & {}
+export type PractitionerRoleData = DomainResourceData & {};
 
 /**
  * @description An action that is or was performed on or for a patient, practitioner, device, organization, or
@@ -875,7 +873,7 @@ export type PractitionerRoleData = DomainResourceData & {}
  *   organization, or device.  This can be an accreditation procedure on a practitioner for licensing.
  * - code: Procedure
  */
-export type ProcedureData = DomainResourceData & {}
+export type ProcedureData = DomainResourceData & {};
 
 /**
  * @description Provenance of a resource is a record that describes entities and processes involved in producing and
@@ -887,7 +885,7 @@ export type ProcedureData = DomainResourceData & {}
  *   impact security, privacy, and trust policies.
  * - code: Provenance
  */
-export type ProvenanceData = DomainResourceData & {}
+export type ProvenanceData = DomainResourceData & {};
 
 /**
  * @description A structured set of questions intended to guide the collection of answers from end-users.
@@ -895,14 +893,14 @@ export type ProvenanceData = DomainResourceData & {}
  *   consistent data collection.
  * - code: Questionnaire
  */
-export type QuestionnaireData = DomainResourceData & {}
+export type QuestionnaireData = DomainResourceData & {};
 
 /**
  * @description A structured set of questions and their answers. The questions are ordered and grouped into coherent
  *   subsets, corresponding to the structure of the grouping of the questionnaire being responded to.
  * - code: QuestionnaireResponse
  */
-export type QuestionnaireResponseData = DomainResourceData & {}
+export type QuestionnaireResponseData = DomainResourceData & {};
 
 /**
  * @description Regulatory approval, clearance or licencing related to a regulated product, treatment, facility or
@@ -910,28 +908,28 @@ export type QuestionnaireResponseData = DomainResourceData & {}
  *   relating to a Medicinal Product.
  * - code: RegulatedAuthorization
  */
-export type RegulatedAuthorizationData = DomainResourceData & {}
+export type RegulatedAuthorizationData = DomainResourceData & {};
 
 /**
  * @description Information about a person that is involved in a patient's health or the care for a patient, but who is
  *   not the target of healthcare, nor has a formal responsibility in the care process.
  * - code: RelatedPerson
  */
-export type RelatedPersonData = DomainResourceData & {}
+export type RelatedPersonData = DomainResourceData & {};
 
 /**
  * @description A set of related requests that can be used to capture intended activities that have inter-dependencies
  *   such as "give this medication after that one".
  * - code: RequestOrchestration
  */
-export type RequestOrchestrationData = DomainResourceData & {}
+export type RequestOrchestrationData = DomainResourceData & {};
 
 /**
  * @description The Requirements resource is used to describe an actor - a human or an application that plays a role in
  *   data exchange, and that may have obligations associated with the role the actor plays.
  * - code: Requirements
  */
-export type RequirementsData = DomainResourceData & {}
+export type RequirementsData = DomainResourceData & {};
 
 /**
  * @description A scientific study of nature that sometimes includes processes involved in health and disease. For
@@ -940,104 +938,104 @@ export type RequirementsData = DomainResourceData & {}
  *   looking at data collected in the past or future.
  * - code: ResearchStudy
  */
-export type ResearchStudyData = DomainResourceData & {}
+export type ResearchStudyData = DomainResourceData & {};
 
 /**
  * @description A ResearchSubject is a participant or object which is the recipient of investigative activities in a
  *   research study.
  * - code: ResearchSubject
  */
-export type ResearchSubjectData = DomainResourceData & {}
+export type ResearchSubjectData = DomainResourceData & {};
 
 /**
  * @description An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each
  *   outcome.
  * - code: RiskAssessment
  */
-export type RiskAssessmentData = DomainResourceData & {}
+export type RiskAssessmentData = DomainResourceData & {};
 
 /**
  * @description A container for slots of time that may be available for booking appointments.
  * - code: Schedule
  */
-export type ScheduleData = DomainResourceData & {}
+export type ScheduleData = DomainResourceData & {};
 
 /**
  * @description A search parameter that defines a named search item that can be used to search/filter on a resource.
  * - code: SearchParameter
  */
-export type SearchParameterData = DomainResourceData & {}
+export type SearchParameterData = DomainResourceData & {};
 
 /**
  * @description A record of a request for service such as diagnostic investigations, treatments, or operations to be
  *   performed.
  * - code: ServiceRequest
  */
-export type ServiceRequestData = DomainResourceData & {}
+export type ServiceRequestData = DomainResourceData & {};
 
 /**
  * @description A slot of time on a schedule that may be available for booking appointments.
  * - code: Slot
  */
-export type SlotData = DomainResourceData & {}
+export type SlotData = DomainResourceData & {};
 
 /**
  * @description A sample to be used for analysis.
  * - code: Specimen
  */
-export type SpecimenData = DomainResourceData & {}
+export type SpecimenData = DomainResourceData & {};
 
 /**
  * @description A kind of specimen with associated set of requirements.
  * - code: SpecimenDefinition
  */
-export type SpecimenDefinitionData = DomainResourceData & {}
+export type SpecimenDefinitionData = DomainResourceData & {};
 
 /**
  * @description A definition of a FHIR structure. This resource is used to describe the underlying resources, data
  *   types defined in FHIR, and also for describing extensions and constraints on resources and data types.
  * - code: StructureDefinition
  */
-export type StructureDefinitionData = DomainResourceData & {}
+export type StructureDefinitionData = DomainResourceData & {};
 
 /**
  * @description A Map of relationships between 2 structures that can be used to transform data.
  * - code: StructureMap
  */
-export type StructureMapData = DomainResourceData & {}
+export type StructureMapData = DomainResourceData & {};
 
 /**
  * @description The subscription resource describes a particular client's request to be notified about a
  *   SubscriptionTopic.
  * - code: Subscription
  */
-export type SubscriptionData = DomainResourceData & {}
+export type SubscriptionData = DomainResourceData & {};
 
 /**
  * @description The SubscriptionStatus resource describes the state of a Subscription during notifications. It is not
  *   persisted.
  * - code: SubscriptionStatus
  */
-export type SubscriptionStatusData = DomainResourceData & {}
+export type SubscriptionStatusData = DomainResourceData & {};
 
 /**
  * @description Describes a stream of resource state changes identified by trigger criteria and annotated with labels
  *   useful to filter projections from this topic.
  * - code: SubscriptionTopic
  */
-export type SubscriptionTopicData = DomainResourceData & {}
+export type SubscriptionTopicData = DomainResourceData & {};
 
 /**
  * @description A homogeneous material with a definite composition.
  * - code: Substance
  */
-export type SubstanceData = DomainResourceData & {}
+export type SubstanceData = DomainResourceData & {};
 
 /**
  * @description The detailed description of a substance, typically at a level beyond what is used for prescribing.
  * - code: SubstanceDefinition
  */
-export type SubstanceDefinitionData = DomainResourceData & {}
+export type SubstanceDefinitionData = DomainResourceData & {};
 
 /**
  * @description Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual
@@ -1045,13 +1043,13 @@ export type SubstanceDefinitionData = DomainResourceData & {}
  *   the 5’-3’ direction.
  * - code: SubstanceNucleicAcid
  */
-export type SubstanceNucleicAcidData = DomainResourceData & {}
+export type SubstanceNucleicAcidData = DomainResourceData & {};
 
 /**
  * @description Properties of a substance specific to it being a polymer.
  * - code: SubstancePolymer
  */
-export type SubstancePolymerData = DomainResourceData & {}
+export type SubstancePolymerData = DomainResourceData & {};
 
 /**
  * @description A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of
@@ -1061,13 +1059,13 @@ export type SubstancePolymerData = DomainResourceData & {}
  *   factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.
  * - code: SubstanceProtein
  */
-export type SubstanceProteinData = DomainResourceData & {}
+export type SubstanceProteinData = DomainResourceData & {};
 
 /**
  * @description Todo.
  * - code: SubstanceReferenceInformation
  */
-export type SubstanceReferenceInformationData = DomainResourceData & {}
+export type SubstanceReferenceInformationData = DomainResourceData & {};
 
 /**
  * @description Source material shall capture information on the taxonomic and anatomical origins as well as the
@@ -1081,26 +1079,26 @@ export type SubstanceReferenceInformationData = DomainResourceData & {}
  *   further explanation the Substance Class: Structurally Diverse and the herbal annex.
  * - code: SubstanceSourceMaterial
  */
-export type SubstanceSourceMaterialData = DomainResourceData & {}
+export type SubstanceSourceMaterialData = DomainResourceData & {};
 
 /**
  * @description Record of delivery of what is supplied.
  * - code: SupplyDelivery
  */
-export type SupplyDeliveryData = DomainResourceData & {}
+export type SupplyDeliveryData = DomainResourceData & {};
 
 /**
  * @description A record of a non-patient specific request for a medication, substance, device, certain types of
  *   biologically derived product, and nutrition product used in the healthcare setting.
  * - code: SupplyRequest
  */
-export type SupplyRequestData = DomainResourceData & {}
+export type SupplyRequestData = DomainResourceData & {};
 
 /**
  * @description A task to be performed.
  * - code: Task
  */
-export type TaskData = DomainResourceData & {}
+export type TaskData = DomainResourceData & {};
 
 /**
  * @description A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology
@@ -1108,32 +1106,32 @@ export type TaskData = DomainResourceData & {}
  *   implementation.
  * - code: TerminologyCapabilities
  */
-export type TerminologyCapabilitiesData = DomainResourceData & {}
+export type TerminologyCapabilitiesData = DomainResourceData & {};
 
 /**
  * @description A plan for executing testing on an artifact or specifications
  * - code: TestPlan
  */
-export type TestPlanData = DomainResourceData & {}
+export type TestPlanData = DomainResourceData & {};
 
 /**
  * @description A summary of information based on the results of executing a TestScript.
  * - code: TestReport
  */
-export type TestReportData = DomainResourceData & {}
+export type TestReportData = DomainResourceData & {};
 
 /**
  * @description A structured set of tests against a FHIR server or client implementation to determine compliance
  *   against the FHIR specification.
  * - code: TestScript
  */
-export type TestScriptData = DomainResourceData & {}
+export type TestScriptData = DomainResourceData & {};
 
 /**
  * @description Record of transport.
  * - code: Transport
  */
-export type TransportData = DomainResourceData & {}
+export type TransportData = DomainResourceData & {};
 
 /**
  * @description A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for
@@ -1141,16 +1139,16 @@ export type TransportData = DomainResourceData & {}
  *   elements](terminologies.html).
  * - code: ValueSet
  */
-export type ValueSetData = DomainResourceData & {}
+export type ValueSetData = DomainResourceData & {};
 
 /**
  * @description Describes validation requirements, source(s), status and dates for one or more elements.
  * - code: VerificationResult
  */
-export type VerificationResultData = DomainResourceData & {}
+export type VerificationResultData = DomainResourceData & {};
 
 /**
  * @description An authorization for the provision of glasses and/or contact lenses to a patient.
  * - code: VisionPrescription
  */
-export type VisionPrescriptionData = DomainResourceData & {}
+export type VisionPrescriptionData = DomainResourceData & {};

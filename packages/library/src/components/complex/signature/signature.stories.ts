@@ -1,41 +1,46 @@
-import {Meta, StoryObj}                   from '@storybook/web-components-vite'
-import {html}                             from 'lit'
-import {renderTemplateInShell, ShellArgs} from '../../../../stories/storybook-utils'
+import { Meta, StoryObj } from "@storybook/web-components-vite";
+import { html } from "lit";
+import {
+	ShellArgs,
+	renderTemplateInShell,
+} from "../../../../stories/storybook-utils";
 
-import {data} from './story.data'
+import { data } from "./story.data";
 
-const path = 'Components/Datatypes/Complex Type/Signature'
-const elementName = 'fhir-shell'
-const subcomponents = { signature: 'fhir-signature' }
+const path = "Components/Datatypes/Complex Type/Signature";
+const elementName = "fhir-shell";
+const subcomponents = { signature: "fhir-signature" };
 
 const meta: Meta<ShellArgs> = {
-  title: path,
-  component: elementName,
-  subcomponents,
-  ...renderTemplateInShell((args) => html`
-      <fhir-signature .data=${args.data} summary ?headless=${args.headless}></fhir-signature>`)
-}
+	title: path,
+	component: elementName,
+	subcomponents,
+	...renderTemplateInShell(
+		(args) => html`
+      <fhir-signature .data=${args.data} summary ?headless=${args.headless}></fhir-signature>`,
+	),
+};
 
-export default meta
+export default meta;
 type Story = StoryObj<ShellArgs>;
 
 export const Display: Story = {
-  args: {
-    data,
-    mode: 'display',
-    showerror: false,
-    verbose: false,
-    open: true,
-    headless: true
-  }
-}
+	args: {
+		data,
+		mode: "display",
+		showerror: false,
+		verbose: false,
+		open: true,
+		headless: true,
+	},
+};
 
 export const Structure: Story = {
-  args: {
-    data,
-    mode: 'structure',
-    showerror: true,
-    verbose: true,
-    open: true
-  }
-}
+	args: {
+		data,
+		mode: "structure",
+		showerror: true,
+		verbose: true,
+		open: true,
+	},
+};

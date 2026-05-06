@@ -1,110 +1,146 @@
-import {afterEach, describe, expect, it, vi}      from 'vitest'
-import {ValueSetData, ValueSetIncludeExcludeData} from '../ValueSet.data'
-import {createResponse}                           from './Fetch.test'
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { ValueSetData, ValueSetIncludeExcludeData } from "../ValueSet.data";
+import { createResponse } from "./Fetch.test";
 // directory
-import {resolveIncludesOrExclude}                 from './ResolveValueSet'
-
+import { resolveIncludesOrExclude } from "./ResolveValueSet";
 
 // Begin testing resolveIncludesOrExclude
-describe('ResolveValueSet', () => {
+describe("ResolveValueSet", () => {
+	describe("resolveIncludesOrExclude", () => {
+		afterEach(() => {
+			// Reset mocks after each test to ensure no spillover state
+			vi.clearAllMocks();
+		});
 
+		it("should resolve nothing when nothing passed", async () => {
+			const skipUrl = vi.fn().mockReturnValue(false);
+			const result = await resolveIncludesOrExclude(
+				"id",
+				[],
+				"include",
+				false,
+				skipUrl,
+			);
 
-  describe('resolveIncludesOrExclude', () => {
+			expect(result).toEqual([]);
+			expect(skipUrl).not.toHaveBeenCalled(); // skipUrl should not be called in this case
+		});
 
-    afterEach(() => {
-      // Reset mocks after each test to ensure no spillover state
-      vi.clearAllMocks()
-    })
+		it("should skip url when skip function passes", async () => {
+			const segment: ValueSetIncludeExcludeData[] = [
+				{
+					modifierExtension: [],
+					valueSet: ["http://example.com/valueset"],
+					concept: [],
+					filter: [],
+				},
+			];
+			global.fetch = vi.fn();
+			const skipUrl = vi
+				.fn()
+				.mockImplementation((id: string) => /example\.com/.test(id));
+			const result = await resolveIncludesOrExclude(
+				"id",
+				segment,
+				"include",
+				false,
+				skipUrl,
+			);
 
-    it('should resolve nothing when nothing passed', async () => {
+			expect(result).toEqual([[]]);
+			expect(skipUrl).toHaveBeenCalledTimes(1);
+			expect(fetch).toHaveBeenCalledTimes(0);
+		});
 
-      const skipUrl = vi.fn().mockReturnValue(false)
-      const result = await resolveIncludesOrExclude('id', [], 'include', false, skipUrl)
+		it(
+			"should not skip url when skip function fails",
+			{ timeout: 180_000 },
+			async () => {
+				const resp: object = createResponse(
+					200,
+					"https://example.com/valueset",
+					{
+						resourceType: "ValueSet",
+						id: "example",
+						name: "Example",
+						status: "active",
+						url: "http://example.com/valueset",
+						compose: { include: [], exclude: [] },
+						identifier: [],
+					} as unknown as ValueSetData,
+				);
 
-      expect(result).toEqual([])
-      expect(skipUrl).not.toHaveBeenCalled() // skipUrl should not be called in this case
-    })
+				global.fetch = vi.fn().mockResolvedValue(resp);
 
-    it('should skip url when skip function passes', async () => {
-      const segment: ValueSetIncludeExcludeData[] = [
-        {
-          modifierExtension: [],
-          valueSet: ['http://example.com/valueset'],
-          concept: [],
-          filter: []
-        }
-      ]
-      global.fetch = vi.fn()
-      const skipUrl = vi.fn().mockImplementation((id: string) => /example\.com/.test(id))
-      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
+				const segment: ValueSetIncludeExcludeData[] = [
+					{
+						modifierExtension: [],
+						valueSet: ["http://example.com"],
+						concept: [],
+						filter: [],
+					},
+				];
 
-      expect(result).toEqual([[]])
-      expect(skipUrl).toHaveBeenCalledTimes(1)
-      expect(fetch).toHaveBeenCalledTimes(0)
-    })
+				const skipUrl = vi
+					.fn()
+					.mockImplementation((id: string) => /foobar\.com/.test(id));
+				const result = await resolveIncludesOrExclude(
+					"id",
+					segment,
+					"include",
+					false,
+					skipUrl,
+				);
 
-    it('should not skip url when skip function fails', { timeout: 180_000 }, async () => {
+				expect(result).toEqual([[]]);
+				expect(skipUrl).toHaveBeenCalledTimes(1);
+				expect(fetch).toHaveBeenCalledTimes(1);
+			},
+		);
 
-      const resp: object = createResponse(
-        200,
-        'https://example.com/valueset',
-        {
-          resourceType: 'ValueSet',
-          id: 'example',
-          name: 'Example',
-          status: 'active',
-          url: 'http://example.com/valueset',
-          compose: { include: [], exclude: [] },
-          identifier: []
-        } as unknown as ValueSetData)
+		it("should locally found concept", async () => {
+			const segment: ValueSetIncludeExcludeData[] = [
+				{
+					modifierExtension: [],
+					system: "http://example.com/system",
+					concept: [
+						{
+							modifierExtension: [],
+							designation: [],
+							code: "001",
+							display: "Test Code 1",
+						},
+						{
+							modifierExtension: [],
+							designation: [],
+							code: "002",
+							display: "Test Code 2",
+						},
+					],
+					filter: [],
+				},
+			];
 
-      global.fetch = vi.fn().mockResolvedValue(resp)
+			const skipUrl = vi.fn().mockReturnValue(false);
+			const result = await resolveIncludesOrExclude(
+				"id",
+				segment,
+				"include",
+				false,
+				skipUrl,
+			);
 
-      const segment: ValueSetIncludeExcludeData[] = [
-        {
-          modifierExtension: [],
-          valueSet: ['http://example.com'],
-          concept: [],
-          filter: []
-        }
-      ]
+			expect(result).toEqual([
+				[
+					{ code: "001", display: "Test Code 1", definition: "n/a" },
+					{ code: "002", display: "Test Code 2", definition: "n/a" },
+				],
+			]);
 
-      const skipUrl = vi.fn().mockImplementation((id: string) => /foobar\.com/.test(id))
-      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
+			expect(skipUrl).not.toHaveBeenCalled();
+		});
 
-      expect(result).toEqual([[]])
-      expect(skipUrl).toHaveBeenCalledTimes(1)
-      expect(fetch).toHaveBeenCalledTimes(1)
-    })
-
-    it('should locally found concept', async () => {
-      const segment: ValueSetIncludeExcludeData[] = [
-        {
-          modifierExtension: [],
-          system: 'http://example.com/system',
-          concept: [
-
-            { modifierExtension: [], designation: [], code: '001', display: 'Test Code 1' },
-            { modifierExtension: [], designation: [], code: '002', display: 'Test Code 2' }
-          ],
-          filter: []
-        }
-      ]
-
-      const skipUrl = vi.fn().mockReturnValue(false)
-      const result = await resolveIncludesOrExclude('id', segment, 'include', false, skipUrl)
-
-      expect(result).toEqual([
-                               [
-                                 { code: '001', display: 'Test Code 1', definition: 'n/a' },
-                                 { code: '002', display: 'Test Code 2', definition: 'n/a' }
-                               ]
-                             ])
-
-      expect(skipUrl).not.toHaveBeenCalled()
-    })
-
-    /*  it('should fetch data when system URL is provided', async () => {
+		/*  it('should fetch data when system URL is provided', async () => {
 
 
      const mockFetchedData: ResolvedValue[][] = [
@@ -188,5 +224,5 @@ describe('ResolveValueSet', () => {
      await expect(resolveIncludesOrExclude(segment, 'include', false, skipUrl)).rejects.toThrow('Fetch error')
      expect(fetchWithRetry).toHaveBeenCalled()
      })*/
-  })
-})
+	});
+});

@@ -1,7 +1,7 @@
-import {FhirElementData} from '../../../internal'
-import {Code, Decimal}   from '../../primitive'
+import { FhirElementData } from "../../../internal";
+import { Code, Decimal } from "../../primitive";
 
 export type MoneyData = FhirElementData & {
-  value: Decimal
-  currency: Code
-}
+	value: Decimal;
+	currency: Code;
+};

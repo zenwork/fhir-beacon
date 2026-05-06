@@ -1,23 +1,24 @@
-import {html, nothing, TemplateResult} from 'lit'
-import {customElement}                 from 'lit/decorators.js'
-import {map}                           from 'lit/directives/map.js'
-import {DomainResource}                from '../../../internal/resource/DomainResource'
-import {wrap}                          from '../../../shell'
-import {DisplayConfig}                 from '../../../shell/types'
-import {PrimitiveType}                 from '../../primitive/type-converters/type-converters'
-import {SubstanceData}                 from './substance.data'
+import { TemplateResult, html, nothing } from "lit";
+import { customElement } from "lit/decorators.js";
+import { map } from "lit/directives/map.js";
+import { DomainResource } from "../../../internal/resource/DomainResource";
+import { wrap } from "../../../shell";
+import { DisplayConfig } from "../../../shell/types";
+import { PrimitiveType } from "../../primitive/type-converters/type-converters";
+import { SubstanceData } from "./substance.data";
 
-
-
-@customElement('fhir-substance')
+@customElement("fhir-substance")
 export class Substance extends DomainResource<SubstanceData> {
-  constructor() {
-    super('Substance')
-  }
+	constructor() {
+		super("Substance");
+	}
 
-  public renderDisplay(config: DisplayConfig, data: SubstanceData): TemplateResult[] {
-    return [
-      html`
+	public renderDisplay(
+		config: DisplayConfig,
+		data: SubstanceData,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive label="description"
                           .value=${data.description}
                           .context="id:${data.id}"
@@ -25,91 +26,105 @@ export class Substance extends DomainResource<SubstanceData> {
           ></fhir-primitive>
           <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier>
           <fhir-primitive label="instance or kind"
-                          value=${data.instance ? 'instance' : 'kind'}
+                          value=${data.instance ? "instance" : "kind"}
                           summary
           ></fhir-primitive>
           <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive>
           ${wrap({
-                     key: '',
-                     pluralBase: 'category',
-                     collection: data.category,
-                     generator: (c, idx, context) => html`
+						key: "",
+						pluralBase: "category",
+						collection: data.category,
+						generator: (c, _idx, context) => html`
                          <fhir-codeable-concept .context=${context}
                                                 label="substance"
                                                 .data=${c}
                                                 summary
                          ></fhir-codeable-concept> `,
-                     config
-                 })}
+						config,
+					})}
           <fhir-codeable-reference key="code" label="code" .data=${data.code} summary></fhir-codeable-reference>
           <fhir-primitive label="expiry" value=${data.expiry} summary></fhir-primitive>
           <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity>
           ${wrap({
-                     key: '',
-                     pluralBase: 'ingredient',
-                     collection: data.ingredient,
-                     generator: (ing, idx, ctx) => html`
+						key: "",
+						pluralBase: "ingredient",
+						collection: data.ingredient,
+						generator: (ing, idx, ctx) => html`
                          <fhir-substance-ingredient
                                  .key=${ctx}
-                                 .label=${'ingredient' + idx}
+                                 .label=${"ingredient" + idx}
                                  .data=${ing} summary
                          ></fhir-substance-ingredient> `,
-                     config
-                 })}
-      `
-    ]
-  }
+						config,
+					})}
+      `,
+		];
+	}
 
-  public renderStructure(config: DisplayConfig, data: SubstanceData): TemplateResult[] {
-    return [
-      html`
+	public renderStructure(
+		_config: DisplayConfig,
+		data: SubstanceData,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-identifier .label="identifier" .data=${data.identifier} summary></fhir-identifier>
           <fhir-primitive label="instance" value=${data.instance} summary></fhir-primitive>
           <fhir-primitive label="status" value=${data.status} .type=${PrimitiveType.code} summary></fhir-primitive>
-          ${data.category || this.verbose
-            ? html`
+          ${
+						data.category || this.verbose
+							? html`
                       <fhir-wrapper variant="details"
                                       label="categories"
                                       ?headless=${data.category?.length > 1}
                                       ?summaryonly=${this.getDisplayConfig().summaryonly}
                                       summary
                       >
-                          ${data.category
-                            ? map(data.category, (c) => {
-                                      return html`
+                          ${
+														data.category
+															? map(data.category, (c) => {
+																	return html`
                                           <fhir-codeable-concept label="category"
                                                                  .data=${c}
                                                                  summary
-                                          ></fhir-codeable-concept> `
-                                  })
-                            : html`
-                                      <fhir-empty-list></fhir-empty-list>`}
+                                          ></fhir-codeable-concept> `;
+																})
+															: html`
+                                      <fhir-empty-list></fhir-empty-list>`
+													}
                       </fhir-wrapper>
                   `
-            : nothing}
+							: nothing
+					}
           <fhir-codeable-reference label="code" .data=${data.code} summary></fhir-codeable-reference>
           <fhir-primitive label="description" .value=${data.description} summary></fhir-primitive>
           <fhir-primitive label="expiry" value=${data.expiry} summary></fhir-primitive>
           <fhir-quantity label="quantity" .data=${data.quantity} summary></fhir-quantity>
-          ${data.ingredient || this.verbose
-            ? html`
+          ${
+						data.ingredient || this.verbose
+							? html`
                       <fhir-wrapper label="ingredients"
                                       ?open=${this.open}
                                       summary
                                       ?summaryonly=${this.getDisplayConfig().summaryonly}
                       >
-                          ${data.ingredient
-                            ? map(data.ingredient, (ing) => html`
+                          ${
+														data.ingredient
+															? map(
+																	data.ingredient,
+																	(ing) => html`
                                       <fhir-substance-ingredient
                                               label="ingredient" .data=${ing}
                                               summary
-                                      ></fhir-substance-ingredient> `)
-                            : html`
-                                      <fhir-empty-list></fhir-empty-list>`}
+                                      ></fhir-substance-ingredient> `,
+																)
+															: html`
+                                      <fhir-empty-list></fhir-empty-list>`
+													}
                       </fhir-wrapper>
                   `
-            : nothing}
-      `
-    ]
-  }
+							: nothing
+					}
+      `,
+		];
+	}
 }

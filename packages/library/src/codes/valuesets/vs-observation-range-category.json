@@ -1,21 +1,21 @@
 {
-    "id": "observation-range-category",
-    "name": "ObservationRangeCategory",
-    "type": "ValueSet",
-    "system": "http://hl7.org/fhir/ValueSet/observation-range-category",
-    "valid": true,
-    "choices": [
-        {
-            "value": "reference",
-            "display": "reference range"
-        },
-        {
-            "value": "critical",
-            "display": "critical range"
-        },
-        {
-            "value": "absolute",
-            "display": "absolute range"
-        }
-    ]
+	"id": "observation-range-category",
+	"name": "ObservationRangeCategory",
+	"type": "ValueSet",
+	"system": "http://hl7.org/fhir/ValueSet/observation-range-category",
+	"valid": true,
+	"choices": [
+		{
+			"value": "reference",
+			"display": "reference range"
+		},
+		{
+			"value": "critical",
+			"display": "critical range"
+		},
+		{
+			"value": "absolute",
+			"display": "absolute range"
+		}
+	]
 }

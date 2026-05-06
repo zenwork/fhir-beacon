@@ -1,13 +1,14 @@
 // TODO: loading everything for now... should not do this once proper separation of import trees
-import './index'
-import {deepQuerySelectorAll, shadowQueries} from 'shadow-dom-testing-library'
-import {beforeAll}                           from 'vitest'
-import {formatHtml}                          from './tests/HtmlFormatter'
-import {queryDefaultSlot, querySlot}         from './tests/shadowDomUtils/query-slot'
-import {hostOf}                              from './tests/shadowDomUtils/shadowDomUtils'
-import {Query}                               from './tests/types/global'
-
-
+import "./index";
+import {
+	deepQuerySelectorAll,
+	shadowQueries,
+} from "shadow-dom-testing-library";
+import { beforeAll } from "vitest";
+import { formatHtml } from "./tests/HtmlFormatter";
+import { queryDefaultSlot, querySlot } from "./tests/shadowDomUtils/query-slot";
+import { hostOf } from "./tests/shadowDomUtils/shadowDomUtils";
+import { Query } from "./tests/types/global";
 
 /**
  * Represents an error that occurs during the execution of a Beacon Test.
@@ -18,125 +19,140 @@ import {Query}                               from './tests/types/global'
  * @param {string} message - The error message.
  */
 export class BeaconTestError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = 'BeaconTestError'
-  }
+	constructor(message: string) {
+		super(message);
+		this.name = "BeaconTestError";
+	}
 }
 
-Element.prototype.queryShadow =
-  function <T extends Element | Element[]>({ select, expect = 1 }: Query): T {
+Element.prototype.queryShadow = function <T extends Element | Element[]>({
+	select,
+	expect = 1,
+}: Query): T {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	let results: any[] = [this];
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    let results: any[] = [this]
+	if (typeof select === "string") {
+		results = deepQuerySelectorAll(results[0], select, { depth: 20 });
+	}
 
-    if (typeof select === 'string') {
-      results = deepQuerySelectorAll(results[0], select, { depth: 20 })
-    }
+	if (Array.isArray(select)) {
+		// search down stack of values
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		let intermediateSet: any[] = results;
 
-    if (Array.isArray(select)) {
-      // search down stack of values
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      let intermediateSet: any[] = results
+		select.forEach((sel) => {
+			intermediateSet = intermediateSet
+				.map((el) => deepQuerySelectorAll(el, sel, { depth: 20 }))
+				.flat();
+		});
 
-      select.forEach((sel) => {
-        intermediateSet = intermediateSet.map((el) => deepQuerySelectorAll(el, sel, { depth: 20 })).flat()
-      })
+		if (intermediateSet) {
+			results = intermediateSet;
+		} else {
+			throw new BeaconTestError("deepQuerySelector: element not found");
+		}
+	}
 
-      if (intermediateSet) {
-        results = intermediateSet
-      } else {
-        throw new BeaconTestError('deepQuerySelector: element not found')
-      }
-    }
+	if (results) {
+		if (results.length === expect) {
+			if (results.length === 1) {
+				return results[0] as T;
+			}
+			return results as T;
+		}
 
-    if (results) {
-      if (results.length === expect) {
-        if (results.length === 1) {
-          return results[0] as T
-        }
-        return results as T
-      }
+		const found = results ? results.length : "0";
+		const paths = results.map(hostOf).join("\n");
+		throw new BeaconTestError(
+			`deepQuerySelectorAll: unexpected number of elements found for: ${select}.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`,
+		);
+	}
 
-      const found = results ? results.length : '0'
-      const paths = results.map(hostOf).join('\n')
-      throw new BeaconTestError(`deepQuerySelectorAll: unexpected number of elements found for: ${select}.\nexpected: ${expect}\nfound: ${found}\nelements:\n${paths}`)
-    }
-
-    throw new BeaconTestError('deepQuerySelectorAll: selector must be a string or and array of strings')
-
-  }
-
+	throw new BeaconTestError(
+		"deepQuerySelectorAll: selector must be a string or and array of strings",
+	);
+};
 
 Element.prototype.shadowedChildren = function (): HTMLCollection {
-  return this.shadowRoot ? this.shadowRoot.children : new HTMLCollection()
-}
+	return this.shadowRoot ? this.shadowRoot.children : new HTMLCollection();
+};
 
 Element.prototype.queryShadowDefaultSlot = function (): Node[] {
-  return queryDefaultSlot(this as HTMLElement)
-}
+	return queryDefaultSlot(this as HTMLElement);
+};
 
-Element.prototype.queryShadowNamedSlot = function (slotName: string): Element[] {
-  return querySlot(this as HTMLElement, slotName)
-}
-const doubleSpace = / {2}/g
-const litComments = /<!--([\s\S]*?)-->/g
-const doubleSpaced = /\n\s+\n/gm
+Element.prototype.queryShadowNamedSlot = function (
+	slotName: string,
+): Element[] {
+	return querySlot(this as HTMLElement, slotName);
+};
+const doubleSpace = / {2}/g;
+const litComments = /<!--([\s\S]*?)-->/g;
+const doubleSpaced = /\n\s+\n/gm;
 
 Element.prototype.logShadow = function (): void {
-  try {
-    let shadow = ''
-    if (this.shadowRoot) {
+	try {
+		let shadow = "";
+		if (this.shadowRoot) {
+			const shadowRootHTML: string | undefined = this.shadowRoot.innerHTML
+				?.replace(litComments, "")
+				.replace(doubleSpace, " ")
+				.replace(doubleSpaced, "\n");
 
-      const shadowRootHTML: string | undefined = this.shadowRoot.innerHTML?.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced,
-                                                                                                                                       '\n')
+			shadow = formatHtml(shadowRootHTML);
+			shadow = shadow ?? this.shadowRoot.textContent;
+		}
 
-      shadow = formatHtml(shadowRootHTML)
-      shadow = shadow ?? this.shadowRoot.textContent
-    }
+		const lightHTML: string = this.innerHTML
+			.replace(litComments, "")
+			.replace(doubleSpace, " ")
+			.replace(doubleSpaced, "\n");
 
-    const lightHTML: string = this.innerHTML.replace(litComments, '').replace(doubleSpace, ' ').replace(doubleSpaced, '\n')
+		const light = formatHtml(lightHTML);
 
-    const light = formatHtml(lightHTML)
+		const tag = this.tagName.toLowerCase();
+		const outerHTML = this.outerHTML;
+		const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf(">") + 1);
+		let data: string = "";
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		if (this.data) {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			data = pad(JSON.stringify(this.data, null, 2));
+		}
+		console.log(
+			`${tagAndAttributes}\n\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>\n`,
+		);
+	} catch (e: unknown) {
+		if (e instanceof Error) {
+			console.log(e.stack);
+		}
+	}
+};
 
-    const tag = this.tagName.toLowerCase()
-    const outerHTML = this.outerHTML
-    const tagAndAttributes = outerHTML.substring(0, outerHTML.indexOf('>') + 1)
-    let data: string = ''
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if (this.data) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      data = pad(JSON.stringify(this.data, null, 2))
-    }
-    console.log(`${tagAndAttributes}\n\n  #shadow-dom\n${shadow}\n\n  #light-dom\n${light}\n\n  #data\n${data}\n\n</${tag}>\n`)
-  } catch (e: unknown) {
-    if (e instanceof Error) {
-      console.log(e.stack)
-    }
-  }
-}
-
-
-Element.prototype.queryShadowByText = function <T extends Element>(text: string): T | null {
-  return shadowQueries.queryByShadowText(this as HTMLElement, text, { depth: 20 }) as unknown as T | null
-}
-
+Element.prototype.queryShadowByText = function <T extends Element>(
+	text: string,
+): T | null {
+	return shadowQueries.queryByShadowText(this as HTMLElement, text, {
+		depth: 20,
+	}) as unknown as T | null;
+};
 
 function pad(input: string) {
-  // Split the input string into an array of lines
-  const lines = input.split('\n')
+	// Split the input string into an array of lines
+	const lines = input.split("\n");
 
-  // Pad each line with two spaces
-  const paddedLines = lines.map(line => '    ' + line)
+	// Pad each line with two spaces
+	const paddedLines = lines.map((line) => "    " + line);
 
-  // Join the padded lines back into a single string
-  return paddedLines.join('\n')
+	// Join the padded lines back into a single string
+	return paddedLines.join("\n");
 }
 
 beforeAll(() => {
-  document.head.innerHTML = `
+	document.head.innerHTML = `
   <!-- Loads a font from a CDN -->
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -248,5 +264,5 @@ beforeAll(() => {
 
   }
 </style>
-  `
-})
+  `;
+});

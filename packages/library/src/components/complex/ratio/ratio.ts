@@ -1,27 +1,22 @@
-import {html, TemplateResult} from 'lit'
-import {customElement}        from 'lit/decorators.js'
-import {BaseElement}          from '../../../internal'
-import {DisplayConfig}        from '../../../shell/types'
-import {hostStyles}           from '../../../styles'
+import { TemplateResult, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { BaseElement } from "../../../internal";
+import { DisplayConfig } from "../../../shell/types";
+import { hostStyles } from "../../../styles";
 
-import {RatioData} from './ratio.data'
+import { RatioData } from "./ratio.data";
 
-
-
-@customElement('fhir-ratio')
+@customElement("fhir-ratio")
 export class Ratio extends BaseElement<RatioData> {
+	static styles = [hostStyles];
 
-  static styles = [hostStyles]
+	constructor() {
+		super("Ratio");
+	}
 
-  constructor() {
-    super('Ratio')
-  }
-
-  public renderDisplay(_: DisplayConfig, data: RatioData): TemplateResult[] {
-
-    return [
-
-      html`
+	public renderDisplay(_: DisplayConfig, data: RatioData): TemplateResult[] {
+		return [
+			html`
 
           <div style=" display: flex; flex-direction: row; align-items: flex-start">
 
@@ -34,18 +29,18 @@ export class Ratio extends BaseElement<RatioData> {
               ></fhir-quantity>
           </div>
 
-      `
-    ]
-  }
+      `,
+		];
+	}
 
-  public renderStructure(_: DisplayConfig, data: RatioData): TemplateResult[] {
-    return [
-      html`
+	public renderStructure(_: DisplayConfig, data: RatioData): TemplateResult[] {
+		return [
+			html`
           <div style=" display: flex; flex-direction: column; flex: 1">
               <fhir-quantity key="numerator" label="numerator" .data=${data.numerator} summary></fhir-quantity>
               <fhir-quantity key="denominator" label="denominator" .data=${data.denominator} summary></fhir-quantity>
           </div>
-      `
-    ]
-  }
+      `,
+		];
+	}
 }

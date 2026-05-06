@@ -1,13 +1,11 @@
-import {SlDropdown}              from '@shoelace-style/shoelace'
-import {css, html, LitElement}   from 'lit'
-import {customElement, property} from 'lit/decorators.js'
+import { SlDropdown } from "@shoelace-style/shoelace";
+import { LitElement, css, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-
-
-@customElement('fhir-system-choice')
+@customElement("fhir-system-choice")
 export class SystemChoice extends LitElement {
-  static styles = [
-    css`
+	static styles = [
+		css`
       :host {
         display: flex;
         align-items: flex-end;
@@ -32,48 +30,56 @@ export class SystemChoice extends LitElement {
       sl-icon-button::part(base) {
         padding: 0;
       }
-    `
-  ]
+    `,
+	];
 
-  @property()
-  public value: string = ''
+	@property()
+	public value: string = "";
 
-  @property({ type: Boolean })
-  public overridable: boolean = false
+	@property({ type: Boolean })
+	public overridable: boolean = false;
 
-  @property()
-  declare valuesets: { value: string, label: string }[]
+	@property()
+	declare valuesets: { value: string; label: string }[];
 
-  @property()
-  public label: string = ''
+	@property()
+	public label: string = "";
 
-  @property()
-  public error: string = ''
+	@property()
+	public error: string = "";
 
-  constructor() {
-    super()
-    this.addEventListener('sl-select', (evt: CustomEvent) => {
-      this.value = this.valuesets.filter(v => v.value === evt.detail.item.value)[0].value
-      this.dispatchEvent(new CustomEvent('fhir-change',
-                                         { bubbles: true, composed: true, detail: { value: this.value } }))
-      evt.stopImmediatePropagation()
-    })
+	constructor() {
+		super();
+		this.addEventListener("sl-select", (evt: CustomEvent) => {
+			this.value = this.valuesets.filter(
+				(v) => v.value === evt.detail.item.value,
+			)[0].value;
+			this.dispatchEvent(
+				new CustomEvent("fhir-change", {
+					bubbles: true,
+					composed: true,
+					detail: { value: this.value },
+				}),
+			);
+			evt.stopImmediatePropagation();
+		});
 
-    // @ts-ignore
-    this.addEventListener('fhir-system-choice', async (evt: CustomEvent) => {
-      const dropdown = this.renderRoot.querySelector('#dd') as SlDropdown
-      if (dropdown) await dropdown.show()
-      evt.stopImmediatePropagation()
-    })
+		// @ts-ignore
+		this.addEventListener("fhir-system-choice", async (evt: CustomEvent) => {
+			const dropdown = this.renderRoot.querySelector("#dd") as SlDropdown;
+			if (dropdown) await dropdown.show();
+			evt.stopImmediatePropagation();
+		});
+	}
 
-  }
-
-  //TODO: using the sl-icon instead of a button
-  protected render(): unknown {
-    const mapping: { value: string; label: string }[] = this.valuesets.filter(v => v.value === this.value)
-    return html`
+	//TODO: using the sl-icon instead of a button
+	protected render(): unknown {
+		const mapping: { value: string; label: string }[] = this.valuesets.filter(
+			(v) => v.value === this.value,
+		);
+		return html`
         <sl-input name=${this.id}
-                  value=${mapping.length == 1 ? mapping[0].label : 'unknown'}
+                  value=${mapping.length == 1 ? mapping[0].label : "unknown"}
                   size="small"
                   .readonly=${!this.overridable}
         >
@@ -90,21 +96,26 @@ export class SystemChoice extends LitElement {
                                 label="Settings"
                                 slot="trigger"
                                 @click=${(evt: Event) => {
-                                    this.dispatchEvent(new CustomEvent('fhir-system-choice',
-                                                                       { bubbles: true, composed: true }))
-                                    evt.stopImmediatePropagation()
-
-                                }}
+																	this.dispatchEvent(
+																		new CustomEvent("fhir-system-choice", {
+																			bubbles: true,
+																			composed: true,
+																		}),
+																	);
+																	evt.stopImmediatePropagation();
+																}}
                 ></sl-icon-button>
                 <sl-menu>
-                    ${this.valuesets.map(set => html`
+                    ${this.valuesets.map(
+											(set) => html`
                         <sl-menu-item value=${set.value}>${set.label}</sl-menu-item>
-                    `)}
+                    `,
+										)}
                 </sl-menu>
             </sl-dropdown>
 
         </sl-input>
 
-    `
-  }
+    `;
+	}
 }

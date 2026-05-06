@@ -1,6 +1,4 @@
-import {css} from 'lit'
-
-
+import { css } from "lit";
 
 export const componentStyles = css`
   :host {
@@ -12,4 +10,4 @@ export const componentStyles = css`
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 0.3rem;
   }
-`
+`;

@@ -1,16 +1,16 @@
 {
-    "id": "group-membership-basis",
-    "name": "GroupMembershipBasis",
-    "type": "ValueSet",
-    "valid": true,
-    "choices": [
-        {
-            "value": "definitional",
-            "display": "Definitional"
-        },
-        {
-            "value": "enumerated",
-            "display": "Enumerated"
-        }
-    ]
+	"id": "group-membership-basis",
+	"name": "GroupMembershipBasis",
+	"type": "ValueSet",
+	"valid": true,
+	"choices": [
+		{
+			"value": "definitional",
+			"display": "Definitional"
+		},
+		{
+			"value": "enumerated",
+			"display": "Enumerated"
+		}
+	]
 }

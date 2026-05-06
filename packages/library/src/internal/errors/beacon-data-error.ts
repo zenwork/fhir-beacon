@@ -1,12 +1,11 @@
 export class BeaconDataError implements Error {
-  name: string = 'BeaconDataError'
+	name: string = "BeaconDataError";
 
-  message: string
+	message: string;
 
-  stack?: string | undefined
+	stack?: string | undefined;
 
-  constructor(msg: string) {
-    this.message = msg
-  }
-
+	constructor(msg: string) {
+		this.message = msg;
+	}
 }

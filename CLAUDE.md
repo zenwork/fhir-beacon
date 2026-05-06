@@ -44,6 +44,45 @@ npm run vitest::debug -- --grep "should render"
 
 **Linting:** Biomejs (`@biomejs/biome`) — check `biome.json` for configuration.
 
+## Workflow Scripts (Local Verification)
+
+Before committing changes, verify that the following scripts (used in CI/CD workflows) pass locally.
+
+### Root Level
+```bash
+npm install                     # Verify dependencies install correctly
+npm run changeset::check        # Verify changesets are correctly defined (if on a branch)
+npm ci --workspaces             # Verify clean install for all workspaces
+npm run build --workspace=packages/library # Verify library build from root
+```
+
+### Library (`packages/library`)
+```bash
+npm ci                          # Clean install
+npm install full-icu            # Required for internationalization tests
+# Run tests with required environment variables
+export NODE_ICU_DATA=node_modules/full-icu
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export TZ=UTC
+npm run vitest
+
+npm run vite::build             # Verify library production build
+npm run storybook::build        # Verify Storybook build
+```
+
+### App (`packages/app`)
+```bash
+npm install                     # Install app dependencies
+npm run build                   # Verify app production build
+```
+
+### Publishing (Dry Run)
+To verify workspace publishing configuration:
+```bash
+npm publish --workspace=packages/library --dry-run
+```
+
 ## Key Technologies
 
 **Runtime dependencies:**

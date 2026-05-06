@@ -1,80 +1,91 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {html, nothing, PropertyValues, TemplateResult} from 'lit'
-import {PrimitiveType}                                 from '../../components/primitive/type-converters/type-converters'
-import {DisplayConfig}                                 from '../../shell/types'
-import {Decorated, meta, NoDataObject}                 from '../base'
-import {DomainResourceData, ResourceData}              from './domain-resource.data'
-import {renderResourceComponent}                       from './renderResourceComponent'
-import {Resource}                                      from './Resource'
+import { PropertyValues, TemplateResult, html, nothing } from "lit";
+import { PrimitiveType } from "../../components/primitive/type-converters/type-converters";
+import { DisplayConfig } from "../../shell/types";
+import { Decorated, NoDataObject, meta } from "../base";
+import { Resource } from "./Resource";
+import { DomainResourceData, ResourceData } from "./domain-resource.data";
+import { renderResourceComponent } from "./renderResourceComponent";
 
+class Validations {}
 
+export abstract class DomainResource<
+	T extends DomainResourceData,
+> extends Resource<T> {
+	protected constructor(name: string) {
+		super(name);
+	}
 
-class Validations {
-}
-
-export abstract class DomainResource<T extends DomainResourceData> extends Resource<T> {
-
-  protected constructor(name: string) {
-    super(name)
-  }
-
-  public renderNarrative(_config: DisplayConfig,
-                         data: Decorated<T>,
-                         _validations: Validations): TemplateResult[] {
-    if (data.text) {
-      return [
-        html`
+	public renderNarrative(
+		_config: DisplayConfig,
+		data: Decorated<T>,
+		_validations: Validations,
+	): TemplateResult[] {
+		if (data.text) {
+			return [
+				html`
             <fhir-wrapper label=${this.type} ?summaryonly=${this.summaryonly}>
                 <fhir-narrative .data=${data.text}></fhir-narrative >
-            </fhir-wrapper>`
-      ]
-    }
+            </fhir-wrapper>`,
+			];
+		}
 
-    return [html``]
-  }
+		return [html``];
+	}
 
+	protected willUpdate(changes: PropertyValues): void {
+		super.willUpdate(changes);
+		this.templateGenerators.structure.header.push(
+			this.renderDomainResourceStructure,
+		);
+		if (this.verbose && (!this.data || this.data === NoDataObject)) {
+			this.extendedData[meta].hide = false;
+		}
+	}
 
-  protected willUpdate(changes: PropertyValues): void {
-    super.willUpdate(changes)
-    this.templateGenerators.structure.header.push(this.renderDomainResourceStructure)
-    if (this.verbose && (!this.data || this.data === NoDataObject)) {
-      this.extendedData[meta].hide = false
-    }
-
-  }
-
-  protected renderDomainResourceStructure(_config: DisplayConfig, data: Decorated<T>): TemplateResult[] {
-    return [
-      html`
+	protected renderDomainResourceStructure(
+		_config: DisplayConfig,
+		data: Decorated<T>,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-narrative key="text" .data=${data.text} .open=${false}></fhir-narrative>
       `,
-      html`
-          ${(this.data.contained && !this.summaryonly) ? html`
+			html`
+          ${
+						this.data.contained && !this.summaryonly
+							? html`
               <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.summaryonly}>
                   ${this.renderStructureContained()}
               </fhir-wrapper>
-          ` : nothing}
-          ${(!this.data.contained && this.verbose && !this.summaryonly) ? html`
+          `
+							: nothing
+					}
+          ${
+						!this.data.contained && this.verbose && !this.summaryonly
+							? html`
               <fhir-wrapper label="contained" variant='details' ?summaryonly=${this.summaryonly}>
                   <fhir-empty-list ></fhir-empty-list >
-              </fhir-wrapper>` : nothing}
+              </fhir-wrapper>`
+							: nothing
+					}
       `,
-      html`
+			html`
           <fhir-primitive label="modifierExtension"
                           value="not implemented"
                           .type=${PrimitiveType.none}
                           summary
           ></fhir-primitive>
-      `
-    ]
-  }
+      `,
+		];
+	}
 
-  protected renderStructureContained(): TemplateResult[] {
-    if (this.data?.contained) {
-      return this.data.contained.map((c: ResourceData) => {
-        return renderResourceComponent(c, this.config(), this.summary)
-      })
-    }
-    return []
-  }
+	protected renderStructureContained(): TemplateResult[] {
+		if (this.data?.contained) {
+			return this.data.contained.map((c: ResourceData) => {
+				return renderResourceComponent(c, this.config(), this.summary);
+			});
+		}
+		return [];
+	}
 }

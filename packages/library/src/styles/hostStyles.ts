@@ -1,4 +1,4 @@
-import {css} from 'lit'
+import { css } from "lit";
 
 export const hostStyles = css`
   :host {
@@ -14,4 +14,4 @@ export const hostStyles = css`
   [hidden] {
     display: none !important;
   }
-`
+`;

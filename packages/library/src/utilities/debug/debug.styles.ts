@@ -1,4 +1,4 @@
-import {css} from 'lit'
+import { css } from "lit";
 
 export const componentStyles = css`
   div {
@@ -40,4 +40,4 @@ export const componentStyles = css`
   .key {
     font-weight: bold;
   }
-`
+`;

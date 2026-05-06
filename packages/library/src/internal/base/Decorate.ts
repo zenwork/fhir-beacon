@@ -1,11 +1,9 @@
-import {StructureDefinition}   from '../../profiling/index'
-import {ResourceData}          from '../resource/domain-resource.data'
-import {Decorated}             from './Decorate.types'
-import {FqkMap}                from './DeepKeyMap'
-import {FhirElementData}       from './FhirElement.type'
-import {errors, meta, profile} from './Validations.type'
-
-
+import { StructureDefinition } from "../../profiling/index";
+import { ResourceData } from "../resource/domain-resource.data";
+import { Decorated } from "./Decorate.types";
+import { FqkMap } from "./DeepKeyMap";
+import { FhirElementData } from "./FhirElement.type";
+import { errors, meta, profile } from "./Validations.type";
 
 /**
  * The NoDataSet variable is a constant value of type FhirElementData.
@@ -21,22 +19,25 @@ import {errors, meta, profile} from './Validations.type'
  * @type {FhirElementData}
  * @const
  */
-export const NoDataObject: FhirElementData | ResourceData = Object.freeze({ id: 'FHIR::BEACON::NO::DATA' })
+export const NoDataObject: FhirElementData | ResourceData = Object.freeze({
+	id: "FHIR::BEACON::NO::DATA",
+});
 
-export function decorate<T extends (FhirElementData | Decorated<FhirElementData>)>(
-  _key?: string,
-  data?: T,
-  _errorMap?: FqkMap,
-  _profile: StructureDefinition<T> | undefined = undefined
+export function decorate<
+	T extends FhirElementData | Decorated<FhirElementData>,
+>(
+	_key?: string,
+	data?: T,
+	_errorMap?: FqkMap,
+	_profile: StructureDefinition<T> | undefined = undefined,
 ): Decorated<T> {
+	const tempData: T | {} = data && data !== NoDataObject ? data : {};
 
-  const tempData: T | {} = (data && data !== NoDataObject) ? data : {}
-
-  return {
-    ...tempData,
-    [errors]: _errorMap ?? new FqkMap(),
-    //TODO: hide is not the right metadata... it's the likely wanted behaviour
-    [meta]: { hide: data === NoDataObject },
-    [profile]: _profile
-  } as Decorated<T>
+	return {
+		...tempData,
+		[errors]: _errorMap ?? new FqkMap(),
+		//TODO: hide is not the right metadata... it's the likely wanted behaviour
+		[meta]: { hide: data === NoDataObject },
+		[profile]: _profile,
+	} as Decorated<T>;
 }

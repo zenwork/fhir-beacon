@@ -1,9 +1,7 @@
-import {isBlank}            from '../../../utilities'
-import {DomainResourceData} from '../../resource'
+import { isBlank } from "../../../utilities";
+import { DomainResourceData } from "../../resource";
 
-import {Validations} from '../Validations.type'
-
-
+import { Validations } from "../Validations.type";
 
 /**
  * Validates that only one of the given keys in the data object is populated.
@@ -14,21 +12,21 @@ import {Validations} from '../Validations.type'
  * @param {string[]} keys - An array of keys representing the choices to check.
  * @return {void}
  */
-export function choiceValidate<DR extends DomainResourceData>(data: DR,
-                                                              validations: Validations,
-                                                              name: string,
-                                                              keys: string[]): void {
+export function choiceValidate<DR extends DomainResourceData>(
+	data: DR,
+	validations: Validations,
+	name: string,
+	keys: string[],
+): void {
+	let count = 0;
+	keys.forEach((key) => {
+		if (!isBlank(data[key as keyof typeof data])) count++;
+	});
 
-  let count = 0
-  keys.forEach(key => {
-    if (!isBlank(data[key as keyof typeof data])) count++
-  })
-
-  if (count > 1) {
-    validations.add({
-                      fqk: { path: [{ node: name }] },
-                      message: `Only one of the choices should be present for ${name}`
-                    })
-  }
-
+	if (count > 1) {
+		validations.add({
+			fqk: { path: [{ node: name }] },
+			message: `Only one of the choices should be present for ${name}`,
+		});
+	}
 }

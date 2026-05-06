@@ -1,6 +1,4 @@
-import {css} from 'lit'
-
-
+import { css } from "lit";
 
 export const componentStyles = css`
 
@@ -110,4 +108,4 @@ export const componentStyles = css`
   }
 
 
-`
+`;

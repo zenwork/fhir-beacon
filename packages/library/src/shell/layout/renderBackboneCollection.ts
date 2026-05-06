@@ -1,6 +1,6 @@
-import {html, TemplateResult} from 'lit'
-import {map}                  from 'lit/directives/map.js'
-import {hasSome}              from './directives'
+import { TemplateResult, html } from "lit";
+import { map } from "lit/directives/map.js";
+import { hasSome } from "./directives";
 
 /**
  *
@@ -10,17 +10,19 @@ import {hasSome}              from './directives'
  * @param template
  * @deprecated
  */
-export function renderSingleBackbone(itemLabel: null | string,
-                                     idx: number | null,
-                                     verbose: boolean,
-                                     template: TemplateResult) {
-  return html`
-      <fhir-wrapper label="${itemLabel} ${idx ? '[' + (idx + 1) + ']' : ''}"
+export function renderSingleBackbone(
+	itemLabel: null | string,
+	idx: number | null,
+	verbose: boolean,
+	template: TemplateResult,
+) {
+	return html`
+      <fhir-wrapper label="${itemLabel} ${idx ? "[" + (idx + 1) + "]" : ""}"
                       ?headless=${!itemLabel && !verbose}
       >
           ${template}
       </fhir-wrapper>
-  `
+  `;
 }
 
 /**
@@ -37,27 +39,31 @@ export function renderSingleBackbone(itemLabel: null | string,
  * @deprecated
  */
 export function renderBackboneCollection<T>(
-  groupLabel: string,
-  itemLabel: string | null,
-  collection: T[],
-  templateGenerator: (item: T, index: number) => TemplateResult,
-  verbose: boolean = false
+	groupLabel: string,
+	itemLabel: string | null,
+	collection: T[],
+	templateGenerator: (item: T, index: number) => TemplateResult,
+	verbose: boolean = false,
 ): TemplateResult {
-
-  if (collection || verbose) {
-    return html`
+	if (collection || verbose) {
+		return html`
         <fhir-wrapper label="${groupLabel}" ?headless=${!collection || collection.length <= 1}>
-            ${hasSome(collection)
-              ? map(collection, (i, idx) => renderSingleBackbone(
-                            itemLabel, idx, verbose, templateGenerator(i, idx)
-                    ))
-              : html`
+            ${
+							hasSome(collection)
+								? map(collection, (i, idx) =>
+										renderSingleBackbone(
+											itemLabel,
+											idx,
+											verbose,
+											templateGenerator(i, idx),
+										),
+									)
+								: html`
                         <fhir-empty-list></fhir-empty-list>`
-            }
+						}
         </fhir-wrapper>
-    `
-  }
+    `;
+	}
 
-  return html``
-
+	return html``;
 }

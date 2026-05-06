@@ -1,14 +1,10 @@
-import {html, LitElement, TemplateResult} from 'lit'
-import {customElement}                    from 'lit/decorators.js'
+import { LitElement, TemplateResult, html } from "lit";
+import { customElement } from "lit/decorators.js";
 
-
-
-
-@customElement('fhir-beacon-demo')
+@customElement("fhir-beacon-demo")
 export class FhirBeaconDemo extends LitElement {
-
-  public render(): TemplateResult {
-    return html`<div style="display:grid; grid-template-columns:1fr 1fr">
+	public render(): TemplateResult {
+		return html`<div style="display:grid; grid-template-columns:1fr 1fr">
     <div>
         <h4>display</h4>
         <fhir-shell mode="display" open>
@@ -31,8 +27,6 @@ export class FhirBeaconDemo extends LitElement {
         </fhir-shell>
     </div>
 </div>
-    `
-  }
-
-
+    `;
+	}
 }

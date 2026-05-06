@@ -4,6 +4,12 @@
  * @param obj the object to inspect
  * @param props the properties to check for
  */
-export function hasAll(obj: any, props: string[]) {
-  return props.reduce((acc, p) => Object.prototype.hasOwnProperty.call(obj, p) && obj[p] && acc, true)
+export function hasAll(obj: Record<string, unknown>, props: string[]) {
+	return props.reduce(
+		(acc, p) =>
+			Object.prototype.hasOwnProperty.call(obj, p) &&
+			obj[p] !== undefined &&
+			acc,
+		true,
+	);
 }

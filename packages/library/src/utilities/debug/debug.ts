@@ -1,58 +1,54 @@
-import {html, LitElement, nothing, PropertyValues} from 'lit'
+import { LitElement, PropertyValues, html, nothing } from "lit";
 
-import {customElement, property} from 'lit/decorators.js'
-import {map}                     from 'lit/directives/map.js'
-import {when}                    from 'lit/directives/when.js'
-import {hostStyles}              from '../../styles/hostStyles'
-import {componentStyles}         from './debug.styles'
-import {stringify}               from './stringify'
-
-
-
+import { customElement, property } from "lit/decorators.js";
+import { map } from "lit/directives/map.js";
+import { when } from "lit/directives/when.js";
+import { hostStyles } from "../../styles/hostStyles";
+import { componentStyles } from "./debug.styles";
+import { stringify } from "./stringify";
 
 export function debug(debug: boolean, data: object) {
-  return when(
-    debug,
-    () => html`
+	return when(
+		debug,
+		() => html`
       <fhir-debug .data=${data}></fhir-debug >`,
-    () => nothing
-  )
+		() => nothing,
+	);
 }
 
-@customElement('fhir-debug')
+@customElement("fhir-debug")
 export class Debug extends LitElement {
+	@property({ type: Object })
+	public data: object = {};
 
-  @property({type: Object})
-  public data: object = {}
+	private longest = 0;
 
-  private longest = 0
+	static styles = [hostStyles, componentStyles];
 
-  static styles = [hostStyles, componentStyles]
+	protected willUpdate(_changedProperties: PropertyValues) {
+		super.willUpdate(_changedProperties);
+		if (_changedProperties.has("data")) {
+			this.longest = 0;
+			Object.entries(this.data).forEach(([key]) => {
+				if (key.length > this.longest) {
+					this.longest = key.length;
+				}
+			});
+		}
+	}
 
-  protected willUpdate(_changedProperties: PropertyValues) {
-    super.willUpdate(_changedProperties)
-    if (_changedProperties.has('data')) {
-      this.longest = 0
-      Object
-        .entries(this.data)
-        .forEach(([key]) => {
-          if (key.length > this.longest) {this.longest = key.length}
-        })
-    }
-  }
-
-  protected render(): unknown {
-    return html`
+	protected render(): unknown {
+		return html`
         <div>
-          <ul >${map(Object.entries(this.data),
-                    (i) => html`
+          <ul >${map(
+						Object.entries(this.data),
+						(i) => html`
                       <li ><span class="key">${i[0]}</span > :
-                            <pre>${(stringify(i[1]))}</pre>
-                        </li>`)}
+                            <pre>${stringify(i[1])}</pre>
+                        </li>`,
+					)}
           </ul >
         </div>
-    `
-  }
-
-
+    `;
+	}
 }

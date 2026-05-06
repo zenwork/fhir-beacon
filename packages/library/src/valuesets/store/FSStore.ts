@@ -1,101 +1,99 @@
-import {mkdir, rm, writeFile}   from 'node:fs/promises'
-import {join}                   from 'node:path'
-import {Choices, ValueSetStore} from '../ValueSet.data'
+import { mkdir, rm, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { Choices, ValueSetStore } from "../ValueSet.data";
 
-
-
-let errCount = 0
+let errCount = 0;
 
 export class FSStore implements ValueSetStore {
+	#created: Promise<string | undefined>;
+	#choices: string;
 
+	constructor(target: string) {
+		this.#choices = join(target, "choice");
 
-  #created: Promise<string | undefined>
-  #choices: string
+		this.#created = rm(this.#choices, { recursive: true, force: true }).then(
+			() => mkdir(this.#choices, { recursive: true }),
+		);
+	}
 
-  constructor(target: string) {
+	write(choices: Choices): Promise<void> {
+		return this.#created.then(() => {
+			try {
+				const controller = new AbortController();
+				const { signal } = controller;
 
-    this.#choices = join(target, 'choice')
+				const encoder = new TextEncoder(); // Built-in API for text encoding
+				const uint8Array = encoder.encode(JSON.stringify(choices, null, 2));
 
-    this.#created = rm(this.#choices, { recursive: true, force: true }).then(() => mkdir(this.#choices,
-                                                                                         { recursive: true }))
+				let file: string;
+				if (choices.type === "CodeSystem") {
+					file = `${this.#choices}/cs-${choices.id}.json`;
+				} else if (choices.type === "ValueSet") {
+					file = `${this.#choices}/vs-${choices.id}.json`;
+				} else {
+					const name: string = choices.id
+						.replace(".json", "")
+						.replace("https", "")
+						.replace(/[:/.]/g, "_")
+						.replace(/_{2,}/g, "_");
+					file = `${this.#choices}/er-${String(errCount++).padStart(4, "0")}-${name}.json`;
+				}
 
-  }
+				const promise: Promise<void> = writeFile(file, uint8Array, {
+					signal,
+				}).then(() => console.log("wrote: ", file));
 
-  write(choices: Choices): Promise<void> {
-    return this.#created
-               .then(() => {
-                 try {
+				setTimeout(controller.abort, 5000);
 
-                   const controller = new AbortController()
-                   const { signal } = controller
+				return promise;
+			} catch (err) {
+				console.error(err);
+				return Promise.reject(err);
+			}
+		});
+	}
 
-                   const encoder = new TextEncoder() // Built-in API for text encoding
-                   const uint8Array = encoder.encode(JSON.stringify(choices, null, 2))
+	public writeMeta(sets: Choices[]): Promise<void> {
+		return this.#created.then(() => {
+			try {
+				const controller = new AbortController();
+				const { signal } = controller;
 
-                   let file: string
-                   if (choices.type === 'CodeSystem') {
-                     file = `${this.#choices}/cs-${choices.id}.json`
-                   } else if (choices.type === 'ValueSet') {
-                     file = `${this.#choices}/vs-${choices.id}.json`
-                   } else {
-                     const name: string = choices.id.replace('.json', '')
-                                                 .replace('https', '')
-                                                 .replace(/[:/.]/g, '_')
-                                                 .replace(/_{2,}/g, '_')
-                     file = `${this.#choices}/er-${String(errCount++).padStart(4, '0')}-${name}.json`
-                   }
+				const encoder = new TextEncoder();
 
-                   const promise: Promise<void> = writeFile(file, uint8Array, { signal })
-                     .then(() => console.log('wrote: ', file))
+				const ids: string[] = sets
+					.reduce((names: string[], choices: Choices) => {
+						if (choices.type === "ValueSet") {
+							names.push(`"vs-${choices.id}"`);
+						}
+						if (choices.type === "CodeSystem") {
+							names.push(`"cs-${choices.id}"`);
+						}
+						return names;
+					}, [])
+					.sort();
 
-                   setTimeout(controller.abort, 5000)
-
-                   return promise
-
-
-                 } catch (err) {
-                   console.error(err)
-                   return Promise.reject(err)
-                 }
-               })
-  }
-
-  public writeMeta(sets: Choices[]): Promise<void> {
-    return this.#created
-               .then(() => {
-                 try {
-
-                   const controller = new AbortController()
-                   const { signal } = controller
-
-                   const encoder = new TextEncoder()
-
-                   const ids: string[] = sets
-                     .reduce((names: string[], choices: Choices) => {
-                       if (choices.type === 'ValueSet') { names.push(`"vs-${choices.id}"`)}
-                       if (choices.type === 'CodeSystem') { names.push(`"cs-${choices.id}"`)}
-                       return names
-                     }, [])
-                     .sort()
-
-                   const uint8Array = encoder.encode(
-                     `
+				const uint8Array = encoder.encode(
+					`
 //generated by valuesets.processor.ts
             
-export type CodeIds = ${ids.join(' | ')}
+export type CodeIds = ${ids.join(" | ")}
 
-`)
+`,
+				);
 
-                   const promise: Promise<void> = writeFile(`${this.#choices}/types.ts`, uint8Array, { signal })
-                     .then(() => console.log('wrote: ', `${this.#choices}/types.ts`))
-                   setTimeout(controller.abort, 5000)
+				const promise: Promise<void> = writeFile(
+					`${this.#choices}/types.ts`,
+					uint8Array,
+					{ signal },
+				).then(() => console.log("wrote: ", `${this.#choices}/types.ts`));
+				setTimeout(controller.abort, 5000);
 
-                   return promise
-
-                 } catch (err) {
-                   console.error(err)
-                   return Promise.reject(err)
-                 }
-               })
-  }
+				return promise;
+			} catch (err) {
+				console.error(err);
+				return Promise.reject(err);
+			}
+		});
+	}
 }

@@ -1,16 +1,16 @@
 {
-    "id": "operation-parameter-use",
-    "name": "OperationParameterUse",
-    "type": "ValueSet",
-    "valid": true,
-    "choices": [
-        {
-            "value": "in",
-            "display": "In"
-        },
-        {
-            "value": "out",
-            "display": "Out"
-        }
-    ]
+	"id": "operation-parameter-use",
+	"name": "OperationParameterUse",
+	"type": "ValueSet",
+	"valid": true,
+	"choices": [
+		{
+			"value": "in",
+			"display": "In"
+		},
+		{
+			"value": "out",
+			"display": "Out"
+		}
+	]
 }
