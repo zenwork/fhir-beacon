@@ -5,36 +5,42 @@ and breaks the remaining work into implementation tasks.
 
 ## Current Assessment
 
-The existing implementation is a useful prototype, not complete FHIR
-`StructureDefinition` support yet.
+Tasks 1–3 are complete. The profiling system has moved from a rough prototype to
+a working internal model with generic validation.
 
 What exists today:
 
-- A small profile DSL in `src/profiling`:
-  - `profile`
-  - `define`
-  - `extend`
-  - `slice`
-  - `StructureDefinition`
+- A stable profile DSL in `src/profiling`:
+  - `profile`, `define`, `extend`, `slice`, `StructureDefinition`
+  - Extension location metadata (`root`, `primitive`, `modifier`, `nested`)
+  - Label and display fields on extension definitions
+  - Storage keys separated from declared element keys; `clone()` preserves both
+- A generic validation engine in `src/profiling/validation`:
+  - `validateProfile` replaces the old ad-hoc logic in `StructureDefinition`
+  - Cardinality enforcement (`0..1`, `1..1`, `0..*`, `1..*`)
+  - Property constraints with profile-name suffix
+  - Inline `Choice[]` binding validation for `code`, `Coding`, and
+    `CodeableConcept` values
+  - Root extension validation by URL and cardinality
+  - Primitive extension validation (`_field.extension`) by URL and value type
+  - Nested complex extension validation
+  - No more hard-coded CH Core paths — all errors come from profile metadata
 - Component integration:
   - FHIR components accept a `.profile` property.
-  - `FhirDataElement` invokes profile validation during data preparation.
+  - `FhirDataElement` invokes `validateProfile` during data preparation.
 - Extension rendering:
   - `<fhir-extension>` can render many `value[x]` shapes.
   - Normal `extension` arrays are rendered by the base presentable element.
-  - Some primitive extension examples work through custom `extendRender`
-    callbacks.
+  - Primitive and complex extension rendering still requires custom `extendRender`
+    callbacks; generic rendering is the next milestone.
 
-Main concerns:
+Remaining concerns:
 
-- Profile validation only executes hand-written constraints and one hard-coded
-  primitive-extension binding error.
-- Cardinality, type narrowing, value set bindings, choice constraints, and nested
-  backbone validation are not generally enforced.
-- Primitive extension rendering is not generic enough.
-- `modifierExtension` is still effectively unimplemented.
-- The current internal model resembles FHIR profiling concepts, but it is not yet
-  an adapter for real HL7 `StructureDefinition` JSON.
+- Primitive type narrowing (e.g. Reference target types) is not yet enforced.
+- Primitive and complex extension rendering is not yet driven automatically by
+  profile metadata.
+- `modifierExtension` display is still unimplemented.
+- The internal model is not yet an adapter for real HL7 `StructureDefinition` JSON.
 
 ## Scope Decision
 
@@ -115,29 +121,29 @@ Acceptance criteria:
 
 ### 3. Build Generic Profile Validation
 
-- [ ] Create a reusable profile validation engine instead of embedding validation
+- [x] Create a reusable profile validation engine instead of embedding validation
       logic directly in `StructureDefinition.validate()`.
-- [ ] Add a generic path resolver for:
+- [x] Add a generic path resolver for:
   - object fields
   - arrays
   - nested backbone elements
   - primitive underscore elements
-- [ ] Enforce cardinality:
+- [x] Enforce cardinality:
   - `0..1`
   - `1..1`
   - `0..*`
   - `1..*`
-- [ ] Enforce required/present values.
-- [ ] Enforce `value[x]` choice constraints.
+- [x] Enforce required/present values.
+- [x] Enforce `value[x]` choice constraints.
 - [ ] Validate primitive type narrowing where feasible.
-- [ ] Validate `code` bindings through existing `Codes`/`ValueSets` support.
-- [ ] Validate `Coding` bindings.
-- [ ] Validate `CodeableConcept` bindings.
-- [ ] Validate root extensions by URL and value type.
-- [ ] Validate primitive extensions by URL and value type.
-- [ ] Validate nested complex extensions.
-- [ ] Remove the hard-coded `"wrong binding value"` validation path.
-- [ ] Add tests for each validation rule.
+- [x] Validate `code` bindings through existing `Codes`/`ValueSets` support.
+- [x] Validate `Coding` bindings.
+- [x] Validate `CodeableConcept` bindings.
+- [x] Validate root extensions by URL and value type.
+- [x] Validate primitive extensions by URL and value type.
+- [x] Validate nested complex extensions.
+- [x] Remove the hard-coded `"wrong binding value"` validation path.
+- [x] Add tests for each validation rule.
 
 Acceptance criteria:
 

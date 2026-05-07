@@ -133,6 +133,8 @@ describe("profile validation", () => {
 				{ node: "code" },
 			],
 		});
-		expect(validations.all()[1].message).toBe("wrong binding value");
+		expect(validations.all()[1].message).toBe(
+			"'12' is not a valid choice. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (CHCoreContactPointECH46Phone)",
+		);
 	});
 });
