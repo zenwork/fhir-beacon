@@ -64,6 +64,9 @@ export interface Define {
 export type Extension = {
 	key?: string;
 	url: URI;
+	label?: string;
+	display?: string;
+	description?: string;
 	valueType: PrimitiveName | DatatypeName;
 	valueTypeNarrowing?: NarrowableNames[];
 	bindings?: CodeIds | Choice[] | Choices;
@@ -71,7 +74,13 @@ export type Extension = {
 	constraints?: DefConstraintAssertion<DomainResourceData>[];
 };
 
-export type Extensions = { url: URI; extensions: Extension[] };
+export type Extensions = {
+	url: URI;
+	label?: string;
+	display?: string;
+	description?: string;
+	extensions: Extension[];
+};
 
 export interface Extend {
 	withOne: <T extends Decorateable>(

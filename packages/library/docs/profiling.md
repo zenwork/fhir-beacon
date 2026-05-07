@@ -75,6 +75,12 @@ validation and rendering code where matching data should be found:
 - `{ kind: "modifier", path: "modifierExtension" }`
 - `{ kind: "nested", path: "extension.extension" }`
 
+Extension definitions can also carry display metadata:
+
+- `label`: short UI label for the extension.
+- `display`: concise display text for the extension definition.
+- `description`: longer explanatory text.
+
 ## Choice Elements
 
 FHIR `value[x]` fields are represented by storing the choice prefix separately
@@ -118,6 +124,9 @@ Use `extend` for FHIR extensions.
 ```ts
 extend.withOne("ParticipationAgreement", {
 	url: "http://example.org/fhir/StructureDefinition/participation-agreement",
+	label: "Participation agreement",
+	display: "Agreement URI",
+	description: "Agreement URI accepted by the participant.",
 	valueType: "uri",
 });
 ```

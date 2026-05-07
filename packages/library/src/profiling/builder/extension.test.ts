@@ -31,6 +31,9 @@ describe("profile extensions", () => {
 				}),
 				extend.withOne("ParticipationAgreement", {
 					url: "http://example.org/fhir/StructureDefinition/participation-agreement",
+					label: "Participation agreement",
+					display: "Agreement URI",
+					description: "Agreement URI accepted by the participant.",
 					valueType: "uri",
 				}),
 			],
@@ -62,6 +65,11 @@ describe("profile extensions", () => {
 		);
 		expect(extension.valueType).toEqual("uri");
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.label).toEqual("Participation agreement");
+		expect(extension.display).toEqual("Agreement URI");
+		expect(extension.description).toEqual(
+			"Agreement URI accepted by the participant.",
+		);
 		expect(extension.extensionLocation).toEqual({
 			kind: "root",
 			path: "extension",
@@ -95,9 +103,11 @@ describe("profile extensions", () => {
 			props: [
 				extend.withComplex("ClinicalTrialParticipation", {
 					url: "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
+					label: "Clinical trial participation",
 					extensions: [
 						{
 							url: "NCT",
+							label: "NCT number",
 							valueType: "string",
 						},
 						{
@@ -126,6 +136,7 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toBeUndefined();
 		expect(extension.valueTypeNarrowing).toBeUndefined();
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.label).toEqual("Clinical trial participation");
 		expect(extension.extensionLocation).toEqual({
 			kind: "root",
 			path: "extension",
@@ -137,6 +148,7 @@ describe("profile extensions", () => {
 		const nct = extension.subdefs!.get("NCT") as ExtensionDef;
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("NCT");
+		expect(nct!.label).toEqual("NCT number");
 		expect(nct!.valueType).toEqual("string");
 		expect(nct!.extensionLocation).toEqual({
 			kind: "nested",

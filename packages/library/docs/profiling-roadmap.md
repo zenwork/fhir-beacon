@@ -104,7 +104,7 @@ Acceptance criteria:
   - root `extension`
   - primitive `_field.extension`
   - `modifierExtension`
-- [ ] Add explicit fields for extension label/display metadata.
+- [x] Add explicit fields for extension label/display metadata.
 - [ ] Add unit tests for simple, primitive, and complex extension definitions.
 
 Acceptance criteria:

@@ -52,6 +52,9 @@ export type ExtensionDef = Def & {
 	defType: "extension";
 	url: string;
 	extensionLocation: ExtensionLocation;
+	label: string | undefined;
+	display: string | undefined;
+	description: string | undefined;
 	valueType: PrimitiveName | DatatypeName | undefined;
 	valueTypeNarrowing: NarrowableNames[] | undefined;
 	cardinality: string;
