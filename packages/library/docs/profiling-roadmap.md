@@ -74,7 +74,7 @@ Out of scope for the first milestone:
       `effectiveDateTime`.
 - [x] Verify the skipped extension story files still work.
 - [x] Rename working extension stories from `.stories.skip.ts` to `.stories.ts`.
-- [ ] Run targeted profiling and extension tests.
+- [x] Run targeted profiling and extension tests.
 
 Acceptance criteria:
 
