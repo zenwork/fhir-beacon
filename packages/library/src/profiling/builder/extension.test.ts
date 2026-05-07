@@ -43,6 +43,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("CRInitiatingLocation");
+		expect(extension.storageKey).toEqual("CRInitiatingLocation");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://hl7.org/fhir/StructureDefinition/communicationrequest-initiatingLocation",
@@ -59,6 +60,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("ParticipationAgreement");
+		expect(extension.storageKey).toEqual("ParticipationAgreement");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://example.org/fhir/StructureDefinition/participation-agreement",
@@ -129,6 +131,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("ClinicalTrialParticipation");
+		expect(extension.storageKey).toEqual("ClinicalTrialParticipation");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
@@ -148,6 +151,7 @@ describe("profile extensions", () => {
 		const nct = extension.subdefs!.get("NCT") as ExtensionDef;
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("NCT");
+		expect(nct!.storageKey).toEqual("NCT");
 		expect(nct!.label).toEqual("NCT number");
 		expect(nct!.valueType).toEqual("string");
 		expect(nct!.extensionLocation).toEqual({
@@ -158,11 +162,13 @@ describe("profile extensions", () => {
 		const period = extension.subdefs!.get("period") as ExtensionDef;
 		expect(period).toBeDefined();
 		expect(period!.key).toEqual("period");
+		expect(period!.storageKey).toEqual("period");
 		expect(period!.valueType).toEqual("Period");
 
 		const reason = extension.subdefs!.get("reason") as ExtensionDef;
 		expect(reason).toBeDefined();
 		expect(reason!.key).toEqual("reason");
+		expect(reason!.storageKey).toEqual("reason");
 		expect(reason!.valueType).toEqual("CodeableConcept");
 		expect(reason!.cardinality).toEqual("1..1");
 		expect(reason!.subdefs).toBeUndefined();
@@ -189,6 +195,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("_given");
+		expect(extension.storageKey).toEqual("_given");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
@@ -208,6 +215,7 @@ describe("profile extensions", () => {
 		const nct = extension.subdefs!.get("valueCode") as ExtensionDef;
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("valueCode");
+		expect(nct!.storageKey).toEqual("valueCode");
 		expect(nct!.valueType).toEqual("code");
 		expect(nct!.extensionLocation).toEqual({
 			kind: "nested",
