@@ -97,7 +97,7 @@ Acceptance criteria:
 ### 2. Formalize The Internal Profile Model
 
 - [x] Document the internal profile format as Beacon profile definitions.
-- [ ] Decide whether to rename the internal class or docs language to avoid
+- [x] Decide whether to rename the internal class or docs language to avoid
       implying full HL7 `StructureDefinition` support.
 - [ ] Separate map storage keys from declared profile element keys.
 - [ ] Add explicit extension location metadata:

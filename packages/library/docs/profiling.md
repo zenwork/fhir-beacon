@@ -5,6 +5,11 @@ constraints and extension metadata for components. This model is inspired by
 FHIR `StructureDefinition`, but it is not a full HL7 `StructureDefinition`
 implementation yet.
 
+The current TypeScript class is still named `StructureDefinition` because it
+represents the same kind of concept inside the library. In documentation, refer
+to these objects as **Beacon profile definitions** unless discussing the class
+name directly. Reserve **FHIR StructureDefinition** for real HL7 profile JSON.
+
 Use this internal model when you want to:
 
 - describe fields shown by a component;
