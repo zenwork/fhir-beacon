@@ -1,5 +1,23 @@
 # fhir-beacon
 
+## 0.2.0
+
+### Minor Changes
+
+- 0fccfee: - Implement comprehensive FHIR profiling support, including StructureDefinition builders and validation
+  - Add Master/Detail feature for Bundle resources to support navigational patterns
+  - Enhance FHIR Extension support:
+    - Complete type coverage for all OpenType values
+    - Fix primitive extension support for arrays
+    - Integrate extensions into structure and narrative views
+  - Upgrade Storybook from v8.6 to v10.3
+  - Add codebase guidance and developer documentation
+
+### Patch Changes
+
+- 45cf91a: Fix README background link text.
+- 25f044f: Treat falsy property values as defined in `hasAll`.
+
 ## 0.1.4
 
 ### Patch Changes
