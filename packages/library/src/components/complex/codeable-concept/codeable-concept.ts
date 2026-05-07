@@ -41,6 +41,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                                 .label=${l}
                                 .data=${d}
                                 .errors=${validations.sliceForFQK({ path: [{ node: "coding", index: i }] })}
+                                ?showerror=${this.showerror}
                                 summary
                                 headless
                    ></fhir-coding>`,
@@ -67,6 +68,7 @@ export class CodeableConcept extends BaseElement<CodeableConceptData> {
                               label=${l}
                               .errors=${validations.sliceForFQK({ path: [{ node: "coding", index: i }] })}
                               .data=${code}
+                              ?showerror=${this.showerror}
                               summary
                  ></fhir-coding>`,
 				config,

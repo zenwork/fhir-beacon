@@ -6,7 +6,7 @@ import { OpenType } from "../../../OpenType";
 import { mustRender } from "../../../components/mustRender";
 import { asReadable } from "../../../components/primitive/./type-formatters/asReadable";
 import { PrimitiveType } from "../../../components/primitive/type-converters/type-converters";
-import { Defs, ExtensionDef } from "../../../profiling";
+import { Defs, ExtensionDef, isExtensionDef } from "../../../profiling";
 import { wrap } from "../../../shell";
 import { DisplayMode } from "../../../shell/displayMode";
 import { hasSome } from "../../../shell/layout/directives";
@@ -508,12 +508,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 	private renderBaseElement(
 		config: DisplayConfig,
 		data: Decorated<D>,
+		validations: Validations,
 	): TemplateResult[] {
 		if (data) {
 			return [
 				html`
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
-            ${this.renderExtensionElement(config, data)}
+            ${this.renderExtensionElement(config, data, validations)}
         `,
 			];
 		}
@@ -524,25 +525,74 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 	private renderExtensionElement(
 		config: DisplayConfig,
 		data: Decorated<D>,
+		validations: Validations,
 	): TemplateResult[] {
 		if (data) {
+			const labelMap = this.profileExtensionLabels();
+			const rootExtensions = ((data.extension ??
+				[]) as FhirExtensionData<OpenType>[]).filter((extension) =>
+				this.shouldRenderGenericExtension(extension, "root"),
+			);
+			const modifierExtensions = (((data as Record<string, unknown>)
+				.modifierExtension ?? []) as FhirExtensionData<OpenType>[]).filter(
+				(extension) => this.shouldRenderGenericExtension(extension, "modifier"),
+			);
+
 			return [
 				html`
             ${
-							hasSome(data.extension)
+							hasSome(rootExtensions)
 								? html`
                     ${wrap<FhirExtensionData<OpenType>>({
 											key: "extension",
-											collection: (data.extension ??
-												[]) as FhirExtensionData<OpenType>[],
+											collection: rootExtensions,
 											generator: (d, l, k, _i) =>
 												html`
                                     <fhir-extension key=${k}
                                                     .label=${l}
                                                     .data=${d}
-                                                    .labelMap=${this.extensionLabels}
+                                                    .labelMap=${labelMap}
+                                                    .extensionLabels=${labelMap}
+                                                    .errors=${validations.sliceForFQK({
+																											path: [
+																												{ node: "extension" },
+																												{ node: d.url },
+																											],
+																										})}
                                                     summary
                                                     headless
+                                                    ?showerror=${this.showerror}
+                                    ></fhir-extension>`,
+											config,
+										})}
+
+                `
+								: nothing
+						}
+            ${this.renderProfilePrimitiveExtensions(data, validations, labelMap)}
+            ${
+							hasSome(modifierExtensions)
+								? html`
+                    ${wrap<FhirExtensionData<OpenType>>({
+											key: "modifierExtension",
+											collection: modifierExtensions,
+											generator: (d, l, k, _i) =>
+												html`
+                                    <fhir-extension key=${k}
+                                                    .label=${`modifier: ${l}`}
+                                                    .data=${d}
+                                                    .labelMap=${labelMap}
+                                                    .extensionLabels=${labelMap}
+                                                    .errors=${validations.sliceForFQK({
+																											path: [
+																												{ node: "extension" },
+																												{ node: d.url },
+																											],
+																										})}
+                                                    summary
+                                                    headless
+                                                    modifier
+                                                    ?showerror=${this.showerror}
                                     ></fhir-extension>`,
 											config,
 										})}
@@ -555,6 +605,91 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 		}
 
 		return EmptyResult;
+	}
+
+	private renderProfilePrimitiveExtensions(
+		data: Decorated<D>,
+		validations: Validations,
+		labelMap: Record<string, string>,
+	): TemplateResult[] {
+		const primitiveDefs = this.profileExtensionDefs("primitive").filter(
+			(def) => !def.extendRender?.get(this.mode),
+		);
+		if (primitiveDefs.length === 0) return EmptyResult;
+
+		return primitiveDefs.flatMap((def) => {
+			if (def.extensionLocation.kind !== "primitive") return EmptyResult;
+			const primitiveData = (data as Record<string, unknown>)[
+				`_${def.extensionLocation.primitiveKey}`
+			] as { extension?: FhirExtensionData<OpenType>[] } | undefined;
+			const extensions = (primitiveData?.extension ?? []).filter((extension) =>
+				this.extensionMatchesDef(extension, def),
+			);
+			if (extensions.length === 0) return EmptyResult;
+
+			return extensions.map(
+				(extension, index) => html`
+            <fhir-extension key=${`${def.key}-${index}`}
+                            .label=${labelMap[extension.url] ?? def.label ?? def.key}
+                            .data=${extension}
+                            .labelMap=${labelMap}
+                            .extensionLabels=${labelMap}
+                            .errors=${validations.sliceForFQK({
+															path: [
+																{ node: "extension" },
+																{ node: extension.url },
+															],
+														})}
+                            summary
+                            headless
+                            ?showerror=${this.showerror}
+            ></fhir-extension>`,
+			);
+		});
+	}
+
+	private shouldRenderGenericExtension(
+		extension: FhirExtensionData<OpenType>,
+		kind: "root" | "modifier",
+	): boolean {
+		const def = this.profileExtensionDefs(kind).find((candidate) =>
+			this.extensionMatchesDef(extension, candidate),
+		);
+		return !def?.extendRender?.get(this.mode);
+	}
+
+	private extensionMatchesDef(
+		extension: FhirExtensionData<OpenType>,
+		def: ExtensionDef,
+	): boolean {
+		if (extension.url === def.url) return true;
+		return Array.from(def.subdefs?.values() ?? []).some(
+			(subdef) => isExtensionDef(subdef) && subdef.url === extension.url,
+		);
+	}
+
+	private profileExtensionDefs(
+		kind: ExtensionDef["extensionLocation"]["kind"],
+	): ExtensionDef[] {
+		return Array.from(this.profile?.props.values() ?? []).filter(
+			(def): def is ExtensionDef =>
+				isExtensionDef(def) && def.extensionLocation.kind === kind,
+		);
+	}
+
+	private profileExtensionLabels(): Record<string, string> {
+		const labels: Record<string, string> = {};
+		const visit = (defs: Iterable<Defs<D>>) => {
+			for (const def of defs) {
+				if (!isExtensionDef(def)) continue;
+				const label = def.display ?? def.label;
+				if (label) labels[def.url] = label;
+				if (def.subdefs) visit(def.subdefs.values());
+			}
+		};
+
+		visit(this.profile?.props.values() ?? []);
+		return { ...labels, ...this.extensionLabels };
 	}
 
 	/**

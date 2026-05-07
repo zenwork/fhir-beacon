@@ -156,15 +156,15 @@ Acceptance criteria:
 
 ### 4. Finish Extension Rendering
 
-- [ ] Render profile-defined primitive extensions automatically.
-- [ ] Render profile-defined root extensions with profile labels where available.
-- [ ] Render nested complex extensions consistently in display and structure
+- [x] Render profile-defined primitive extensions automatically.
+- [x] Render profile-defined root extensions with profile labels where available.
+- [x] Render nested complex extensions consistently in display and structure
       modes.
-- [ ] Pass validation errors into nested extension components.
-- [ ] Render `modifierExtension` distinctly from normal `extension`.
-- [ ] Avoid requiring custom `extendRender` callbacks for ordinary profile
+- [x] Pass validation errors into nested extension components.
+- [x] Render `modifierExtension` distinctly from normal `extension`.
+- [x] Avoid requiring custom `extendRender` callbacks for ordinary profile
       extension display.
-- [ ] Keep custom `extendRender` and `overrideRender` as escape hatches.
+- [x] Keep custom `extendRender` and `overrideRender` as escape hatches.
 
 Acceptance criteria:
 
