@@ -1,4 +1,4 @@
-import {css} from 'lit'
+import { css } from "lit";
 
 export const componentStyles = css`
   li {
@@ -7,4 +7,4 @@ export const componentStyles = css`
     list-style-type: none;
     padding-left: 0.3rem;
   }
-`
+`;

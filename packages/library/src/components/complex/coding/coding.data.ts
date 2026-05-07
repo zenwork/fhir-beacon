@@ -1,8 +1,8 @@
-import {FhirElementData} from '../../../internal'
+import { FhirElementData } from "../../../internal";
 
 export type CodingData = FhirElementData & {
-  version?: string,
-  system?: string,
-  code?: string,
-  display?: string
-}
+	version?: string;
+	system?: string;
+	code?: string;
+	display?: string;
+};

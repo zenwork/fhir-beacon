@@ -1,128 +1,143 @@
-import {html, nothing, TemplateResult}       from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {useSystem}                           from '../../../codes/use-system'
-import {BaseElement, Decorated, Validations} from '../../../internal'
-import {hasSome, strapLines, wrapLines}      from '../../../shell'
-import {DisplayConfig}                       from '../../../shell/types'
-import {hasOnly}                             from '../../../utilities'
-import {PrimitiveType}                       from '../../primitive'
-import {AddressData}                         from './address.data'
+import { TemplateResult, html, nothing } from "lit";
+import { customElement } from "lit/decorators.js";
+import { useSystem } from "../../../codes/use-system";
+import { BaseElement, Decorated, Validations } from "../../../internal";
+import { hasSome, strapLines, wrapLines } from "../../../shell";
+import { DisplayConfig } from "../../../shell/types";
+import { hasOnly } from "../../../utilities";
+import { PrimitiveType } from "../../primitive";
+import { AddressData } from "./address.data";
 
+const address_use = useSystem("http://hl7.org/fhir/address-use");
+const address_type = useSystem("http://hl7.org/fhir/address-type");
 
-
-const address_use = useSystem('http://hl7.org/fhir/address-use')
-const address_type = useSystem('http://hl7.org/fhir/address-type')
-
-@customElement('fhir-address')
+@customElement("fhir-address")
 export class Address extends BaseElement<AddressData> {
-  constructor() {
-    super('Address')
-  }
+	constructor() {
+		super("Address");
+	}
 
-  public renderDisplay(config: DisplayConfig,
-                       data: Decorated<AddressData>,
-                       vldtns: Validations): TemplateResult[] {
-    if (hasOnly(data, 'text')) {
-      return [
-        html`
-            <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive > `
-      ]
-    }
+	public renderDisplay(
+		config: DisplayConfig,
+		data: Decorated<AddressData>,
+		vldtns: Validations,
+	): TemplateResult[] {
+		if (hasOnly(data, "text")) {
+			return [
+				html`
+            <fhir-primitive label="text" .value=${data.text} .type=${PrimitiveType.fhir_string} summary></fhir-primitive > `,
+			];
+		}
 
-    return [
-      html`
+		return [
+			html`
           <fhir-primitive
                   key="use"
-                  .value=${address_use.choices.filter(c => c.value === data.use)[0]?.display ?? data.use}
-                  .errormessage=${vldtns.msgFor('use')}
+                  .value=${address_use.choices.filter((c) => c.value === data.use)[0]?.display ?? data.use}
+                  .extension=${data._use}
+                  .errormessage=${vldtns.msgFor("use")}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   key="type"
-                  .value=${address_type.choices.filter(c => c.value === data.type)[0]?.display ?? data.type}
-                  .errormessage=${vldtns.msgFor('type')}
+                  .value=${address_type.choices.filter((c) => c.value === data.type)[0]?.display ?? data.type}
+                  .extension=${data._type}
+                  .errormessage=${vldtns.msgFor("type")}
                   summary
           ></fhir-primitive >
-          ${hasSome(data.line, this.verbose)
-            ? wrapLines('',
-                        'line',
-                        data.line,
-                        config.verbose,
-                        (d, l, k) => html`
+          ${
+						hasSome(data.line, this.verbose)
+							? wrapLines(
+									"",
+									"line",
+									data.line,
+									config.verbose,
+									(d, l, k) => html`
                             <fhir-primitive key=${k} label=${l} .value=${d} .type=${PrimitiveType.fhir_string} summary>
                                 <span slot="after">,</span >
                             </fhir-primitive >
-                        `
-                  )
-            : nothing}
-          <fhir-primitive label="city" .value=${data.city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="district" .value=${data.district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="state" .value=${data.state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="country" .value=${data.country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-period label="period" .data=${data.period} summary></fhir-period >
-      `
-    ]
-  }
+                        `,
+								)
+							: nothing
+					}
+          <fhir-primitive key="city" .value=${data.city} .type=${PrimitiveType.fhir_string} .extension=${data._city} summary></fhir-primitive >
+          <fhir-primitive key="district" .value=${data.district} .type=${PrimitiveType.fhir_string} .extension=${data._district} summary></fhir-primitive >
+          <fhir-primitive key="state" .value=${data.state} .type=${PrimitiveType.fhir_string} .extension=${data._state} summary></fhir-primitive >
+          <fhir-primitive key="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} .extension=${data._postalCode} summary></fhir-primitive >
+          <fhir-primitive key="country" .value=${data.country} .type=${PrimitiveType.fhir_string} .extension=${data._country} summary></fhir-primitive >
+          <fhir-period key="period" .data=${data.period} summary></fhir-period >
+      `,
+		];
+	}
 
-  public renderStructure(config: DisplayConfig, data: Decorated<AddressData>, vldtns: Validations): TemplateResult[] {
-    return [
-      html`
+	public renderStructure(
+		config: DisplayConfig,
+		data: Decorated<AddressData>,
+		vldtns: Validations,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive
                   label="use"
                   .value=${data.use}
+                  .extension=${data._use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.msgFor('use')}
+                  errormessage=${vldtns.msgFor("use")}
                   summary
           ></fhir-primitive >
           <fhir-primitive
                   label="type"
                   .value=${data.type}
+                  .extension=${data._type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.msgFor('type')}
+                  errormessage=${vldtns.msgFor("type")}
                   summary
           ></fhir-primitive >
           <fhir-primitive label="text"
                   .value=${data.text}
+                  .extension=${data._text}
                   .type=${PrimitiveType.fhir_string}
                   summary
           ></fhir-primitive >
-          ${hasSome(data.line, this.verbose)
-            ? strapLines('',
-                         'line',
-                         data.line,
-                         config.verbose,
-                         (l, i) => html`
+          ${
+						hasSome(data.line, this.verbose)
+							? strapLines(
+									"",
+									"line",
+									data.line,
+									config.verbose,
+									(l, i) => html`
                              <fhir-primitive
                                      label="${i}"
                                      .value=${l}
                                      .type=${PrimitiveType.fhir_string}
                                      summary
-                             ></fhir-primitive > `
-                  )
-            : nothing}
-          <fhir-primitive label="city" .value=${data.city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="district" .value=${data.district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="state" .value=${data.state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="postalCode" .value=${data.postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
-          <fhir-primitive label="country" .value=${data.country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+                             ></fhir-primitive > `,
+								)
+							: nothing
+					}
+          <fhir-primitive label="city" .value=${data.city} .extension=${data._city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="district" .value=${data.district} .extension=${data._district} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="state" .value=${data.state} .extension=${data._state} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="postalCode" .value=${data.postalCode} .extension=${data._postalCode} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
+          <fhir-primitive label="country" .value=${data.country} .extension=${data._country} .type=${PrimitiveType.fhir_string} summary></fhir-primitive >
           <fhir-period label="period" .data=${data.period} summary></fhir-period >
-      `
-    ]
-  }
+      `,
+		];
+	}
 
-
-  public renderEditableDisplay(config: DisplayConfig,
-                               data: Decorated<AddressData>,
-                               vldtns: Validations): TemplateResult[] {
-
-    return [
-      html`
+	public renderEditableDisplay(
+		config: DisplayConfig,
+		data: Decorated<AddressData>,
+		vldtns: Validations,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive
                   key="use"
                   .value=${data.use}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.msgFor('use')}
+                  errormessage=${vldtns.msgFor("use")}
                   .choices=${address_use.choices}
                   summary
           ></fhir-primitive>
@@ -130,7 +145,7 @@ export class Address extends BaseElement<AddressData> {
                   key="type"
                   .value=${data.type}
                   .type=${PrimitiveType.code}
-                  errormessage=${vldtns.msgFor('type')}
+                  errormessage=${vldtns.msgFor("type")}
                   .choices=${address_type.choices}
                   summary
           ></fhir-primitive>
@@ -139,18 +154,21 @@ export class Address extends BaseElement<AddressData> {
                           .type=${PrimitiveType.fhir_string}
                           summary
           ></fhir-primitive>
-          ${hasSome(data.line, this.verbose)
-            ? wrapLines('',
-                        'line',
-                        data.line,
-                        config.verbose,
-                        (d, l, k) => html`
+          ${
+						hasSome(data.line, this.verbose)
+							? wrapLines(
+									"",
+									"line",
+									data.line,
+									config.verbose,
+									(d, l, k) => html`
                             <fhir-primitive key=${k} label=${l} .value=${d} .type=${PrimitiveType.fhir_string} summary>
                                 <span slot="after">,</span>
                             </fhir-primitive>
-                        `
-                  )
-            : nothing}
+                        `,
+								)
+							: nothing
+					}
           <fhir-primitive label="city" .value=${data.city} .type=${PrimitiveType.fhir_string} summary></fhir-primitive>
           <fhir-primitive label="district"
                           .value=${data.district}
@@ -173,33 +191,40 @@ export class Address extends BaseElement<AddressData> {
                           summary
           ></fhir-primitive>
           <fhir-period label="period" .data=${data.period} summary></fhir-period>
-      `
-    ]
-  }
+      `,
+		];
+	}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(data: AddressData, validations: Validations, _fetched: boolean): void {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public validate(
+		data: AddressData,
+		validations: Validations,
+		_fetched: boolean,
+	): void {
+		if (data.use) {
+			if (!address_use.choices.some((c) => c.value == data.use)) {
+				validations.add({
+					fqk: { path: [{ node: "use" }] },
+					message:
+						"address use is not one of accepted: " +
+						useSystem("http://hl7.org/fhir/address-type")
+							.choices.map((c) => c.value)
+							.join(", "),
+				});
+			}
+		}
 
-
-    if (data.use) {
-      if (!address_use.choices.some(c => c.value == data.use)) {
-        validations.add({
-                          fqk: { path: [{ node: 'use' }] },
-                          message: 'address use is not one of accepted: '
-                                   + useSystem('http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
-                    })
-      }
-    }
-
-    if (data.type) {
-      if (!address_type.choices.some(c => c.value == data.type)) {
-        validations.add({
-                          fqk: { path: [{ node: 'type' }] },
-                          message: 'address type is not one of accepted: ' + useSystem(
-                            'http://hl7.org/fhir/address-type').choices.map(c => c.value).join(', ')
-                    })
-      }
-    }
-
-  }
+		if (data.type) {
+			if (!address_type.choices.some((c) => c.value == data.type)) {
+				validations.add({
+					fqk: { path: [{ node: "type" }] },
+					message:
+						"address type is not one of accepted: " +
+						useSystem("http://hl7.org/fhir/address-type")
+							.choices.map((c) => c.value)
+							.join(", "),
+				});
+			}
+		}
+	}
 }

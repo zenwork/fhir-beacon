@@ -1,15 +1,15 @@
-import {Meta, StoryObj} from '@storybook/web-components'
-import {html}           from 'lit'
+import { Meta, StoryObj } from "@storybook/web-components-vite";
+import { html } from "lit";
 
 const meta = {
-  title: 'Toolkit/Primitive Elements/Value Element'
-} satisfies Meta
+	title: "Toolkit/Primitive Elements/Value Element",
+} satisfies Meta;
 
-export default meta
+export default meta;
 type Story = StoryObj;
 
 export const ValueElement: Story = {
-  render: () => html`
+	render: () => html`
     <h2 >Value</h2 >
     <fhir-wrapper>
       <h3 >simple value</h3 >
@@ -30,5 +30,5 @@ export const ValueElement: Story = {
       <h3 ><code >fixed-width</code > variant on long value</h3 >
       <fhir-value text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Amet luctus venenatis lectus magna fringilla urna porttitor. Dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida." variant="fixed-width"></fhir-value >
     </fhir-wrapper>
-  `
-}
+  `,
+};

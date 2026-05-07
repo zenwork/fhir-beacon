@@ -1,35 +1,41 @@
-import {html, nothing, TemplateResult}       from 'lit'
-import {customElement}                       from 'lit/decorators.js'
-import {BaseElement, Decorated, EmptyResult} from '../../../internal'
-import {DisplayConfig}                       from '../../../shell/types'
-import {PrimitiveType}                       from '../../primitive/type-converters/type-converters'
-import {PeriodData}                          from './period.data'
+import { TemplateResult, html, nothing } from "lit";
+import { customElement } from "lit/decorators.js";
+import { BaseElement, Decorated, EmptyResult } from "../../../internal";
+import { DisplayConfig } from "../../../shell/types";
+import { PrimitiveType } from "../../primitive/type-converters/type-converters";
+import { PeriodData } from "./period.data";
 
-
-
-@customElement('fhir-period')
+@customElement("fhir-period")
 export class Period extends BaseElement<PeriodData> {
+	constructor() {
+		super("Period");
+	}
 
-  constructor() {super('Period')}
-
-  // TODO: there is no good way to hide output without the conditional handling in renderDisplay
-  public renderDisplay(_config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
-
-    return (data.start || data.end) ? [
-      html`
+	// TODO: there is no good way to hide output without the conditional handling in renderDisplay
+	public renderDisplay(
+		_config: DisplayConfig,
+		data: Decorated<PeriodData>,
+	): TemplateResult[] {
+		return data.start || data.end
+			? [
+					html`
           <fhir-primitive-wrapper>
               <fhir-label>period:</fhir-label>
               <fhir-primitive type=${PrimitiveType.datetime} .value=${data.start} summary></fhir-primitive>
-              <fhir-label>&nbsp;${data.start ? nothing : '...'}&#x21E2;${data.end ? nothing : '...'}</fhir-label>
+              <fhir-label>&nbsp;${data.start ? nothing : "..."}&#x21E2;${data.end ? nothing : "..."}</fhir-label>
               <fhir-primitive type=${PrimitiveType.datetime} .value=${data.end} summary></fhir-primitive>
           </fhir-primitive-wrapper>
-      `
-    ] : EmptyResult
-  }
+      `,
+				]
+			: EmptyResult;
+	}
 
-  public renderStructure(_config: DisplayConfig, data: Decorated<PeriodData>): TemplateResult[] {
-    return [
-      html`
+	public renderStructure(
+		_config: DisplayConfig,
+		data: Decorated<PeriodData>,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive
                   label="start"
                   type=${PrimitiveType.datetime}
@@ -41,7 +47,7 @@ export class Period extends BaseElement<PeriodData> {
                   type=${PrimitiveType.datetime}
                   .value=${data.end}
                   summary
-          ></fhir-primitive>`
-    ]
-  }
+          ></fhir-primitive>`,
+		];
+	}
 }

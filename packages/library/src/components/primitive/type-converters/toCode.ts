@@ -1,5 +1,5 @@
-import {Code}        from '../primitive.data'
-import {toPrimitive} from './type-converters'
+import { Code } from "../primitive.data";
+import { toPrimitive } from "./type-converters";
 
 /**
  * Regular expression pattern for matching a FHIR code.
@@ -17,9 +17,10 @@ import {toPrimitive} from './type-converters'
  *   $           - Matches the end of the input.
  *
  * Codes can only contain one space but not in the leading or trailing position.
+ * Actually, FHIR spec allows multiple single spaces.
  *
  */
-const codeRegex = /^(\S+\s)?\S+$/
+const codeRegex = /^\S+( \S+)*$/;
 
 /**
  * Converts and validates a string to a FHIR code.
@@ -30,9 +31,9 @@ const codeRegex = /^(\S+\s)?\S+$/
  * @returns {T} - The converted code.
  */
 export const toCode: toPrimitive<string, Code> = (code: string): Code => {
-  const match = codeRegex.test(code)
-  if (match) {
-    return code as Code
-  }
-  throw new TypeError(`code must match [ ${codeRegex.toString()} ]`)
-}
+	const match = codeRegex.test(code);
+	if (match) {
+		return code as Code;
+	}
+	throw new TypeError(`code must match [ ${codeRegex.toString()} ]`);
+};

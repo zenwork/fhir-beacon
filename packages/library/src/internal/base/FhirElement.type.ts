@@ -1,6 +1,33 @@
-import {URI} from '../../components/primitive/primitive.data'
+import { OpenType, OpenTypeName } from "../../OpenType";
+import { Uri } from "../../PrimitiveTypes";
+import { toUrl } from "../../components/primitive/type-converters/toUrl";
 
+export type ValuePrefixKey = `value${OpenTypeName}`;
 
+export type ExtensionUnderscore<_V = unknown> = {
+	[K in `_${string}`]?:
+		| { id?: string | null; extension: FhirExtensionData<OpenType>[] }
+		| ({
+				id?: string | null;
+				extension: FhirExtensionData<OpenType>[];
+		  } | null)[];
+};
+
+// TODO: requires refactoring of all data object to split into private base and exportable type
+/**
+ * must be used with this approach:
+ * ```
+ * type MyData = {
+ *   family: string;
+ *   given: string[];
+ * };
+ *
+ * type MyDataWithMeta = MyData & ConstrainedExtensionUnderscore<MyData>;
+ * ```
+ */
+export type ConstrainedExtensionUnderscore<T> = {
+	[K in keyof T & string as `_${K}`]?: FhirExtensionData<OpenType>[];
+};
 
 /**
  * Represents a data structure that holds the information of a FHIR element.
@@ -9,12 +36,12 @@ import {URI} from '../../components/primitive/primitive.data'
  * @property {Array} extension - An array to store any extensions related to the FHIR element.
  */
 export type FhirElementData = {
-  id?: string | null,
-  extension?: [],
-}
+	id?: string | null;
+	extension?: FhirExtensionData<OpenType>[];
+} & ExtensionUnderscore;
 
 /**
- * Represents an extension in FHIR (Fast Healthcare Interoperability Resources).
+ * Represents an extension in FHIR.
  *
  * An extension extends the functionality of a resource or datatype by adding additional data elements.
  *
@@ -26,9 +53,32 @@ export type FhirElementData = {
  * @see {@link http://hl7.org/fhir/R5/extensibility.html#Extension|FHIR R5 Extensibility}
  * @see {@link http://hl7.org/fhir/R5/datatypes.html#open|FHIR R5 DataTypes}
  */
-export type Extension = FhirElementData & {
-  url: URI
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  value: any //should be like what I did in Ingredient. see: http://hl7.org/fhir/R5/extensibility.html#Extension and
-             // http://hl7.org/fhir/R5/datatypes.html#open
+export type FhirExtensionData<T extends OpenType> = FhirElementData & {
+	url: Uri;
+} & { [K in ValuePrefixKey]?: T };
+
+export function isExtensionData(
+	value: unknown,
+): value is FhirExtensionData<OpenType> {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		"url" in value &&
+		toUrl((value as FhirExtensionData<OpenType>).url) &&
+		("extension" in value || hasValuePrefixProperty(value))
+	);
+}
+
+export function isPrimitiveExtensionData(
+	value: unknown,
+): value is FhirExtensionData<OpenType> {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		("extension" in value || hasValuePrefixProperty(value))
+	);
+}
+
+function hasValuePrefixProperty(obj: object): boolean {
+	return Object.keys(obj).filter((key) => key.startsWith("value")).length > 0;
 }

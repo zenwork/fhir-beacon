@@ -1,8 +1,8 @@
-import {css}        from 'lit'
-import {hostStyles} from './hostStyles'
+import { css } from "lit";
+import { hostStyles } from "./hostStyles";
 
 export const textHostStyles = [
-  css`
+	css`
     :host {
       display: inline;
     }
@@ -10,5 +10,5 @@ export const textHostStyles = [
       user-select: text;
     }
   `,
-  hostStyles
-]
+	hostStyles,
+];

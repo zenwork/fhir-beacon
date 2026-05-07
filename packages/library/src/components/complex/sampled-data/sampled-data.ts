@@ -1,32 +1,36 @@
-import {html, TemplateResult}   from 'lit'
-import {customElement}          from 'lit/decorators.js'
-import {BaseElement, Decorated} from '../../../internal'
-import {DisplayConfig}          from '../../../shell/types'
-import {PrimitiveType}          from '../../primitive'
-import {SampledDataData}        from './sample-data.data'
+import { TemplateResult, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { BaseElement, Decorated } from "../../../internal";
+import { DisplayConfig } from "../../../shell/types";
+import { PrimitiveType } from "../../primitive";
+import { SampledDataData } from "./sample-data.data";
 
-
-
-@customElement('fhir-sampled-data')
+@customElement("fhir-sampled-data")
 export class SampledData extends BaseElement<SampledDataData> {
+	constructor() {
+		super("SampledData");
+	}
 
-  constructor() {
-    super('SampledData')
-  }
+	public renderDisplay(
+		config: DisplayConfig,
+		data: Decorated<SampledDataData>,
+	): TemplateResult[] {
+		return this.renderAny(config, data);
+	}
 
-  public renderDisplay(config: DisplayConfig,
-                       data: Decorated<SampledDataData>): TemplateResult[] {
-    return this.renderAny(config, data)
-  }
+	public renderStructure(
+		config: DisplayConfig,
+		data: Decorated<SampledDataData>,
+	): TemplateResult[] {
+		return this.renderAny(config, data);
+	}
 
-  public renderStructure(config: DisplayConfig,
-                         data: Decorated<SampledDataData>): TemplateResult[] {
-    return this.renderAny(config, data)
-  }
-
-  public renderAny(config: DisplayConfig,
-                   data: Decorated<SampledDataData>): TemplateResult[] {
-    return [html`
+	public renderAny(
+		_config: DisplayConfig,
+		data: Decorated<SampledDataData>,
+	): TemplateResult[] {
+		return [
+			html`
         <fhir-quantity key="origin" .data=${data.origin} simple summary required></fhir-quantity>
         <fhir-primitive key="interval" .value=${data.interval} .type=${PrimitiveType.decimal} summary></fhir-primitive>
         <fhir-primitive key="intervalUnit" .value=${data.intervalUnit} .type=${PrimitiveType.code} summary required></fhir-primitive>
@@ -37,9 +41,7 @@ export class SampledData extends BaseElement<SampledDataData> {
         <fhir-primitive key="codeMap" .value=${data.codeMap} .type=${PrimitiveType.canonical}></fhir-primitive>
         <fhir-primitive key="offset" .value=${data.offset} .type=${PrimitiveType.fhir_string}></fhir-primitive>
         <fhir-primitive key="data" .value=${data.data} .type=${PrimitiveType.fhir_string}></fhir-primitive>
-        
-        
-        
-    `]
-  }
+    `,
+		];
+	}
 }

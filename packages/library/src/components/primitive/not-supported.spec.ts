@@ -1,117 +1,124 @@
-import {html}                 from 'lit'
-import {describe, expect, it} from 'vitest'
-import {aTimeout}             from '../../../tests/aTimeout'
-import {fixture}              from '../../../tests/lit/lit-vitest-fixture'
-import {Shell}                from '../../shell'
-import {NotSupported}         from './not-supported'
-import {PrimitiveError}       from './primitive-error'
+import { html } from "lit";
+import { describe, expect, it } from "vitest";
+import { aTimeout } from "../../../tests/aTimeout";
+import { fixture } from "../../../tests/lit/lit-vitest-fixture";
+import { Shell } from "../../shell";
+import { NotSupported } from "./not-supported";
+import { PrimitiveError } from "./primitive-error";
 
-describe('fhir-not-supported', () => {
-
-  it('Should display default when no attributes are set', async () => {
-
-    const el = await fixture<NotSupported>(html`
+describe("fhir-not-supported", () => {
+	it("Should display default when no attributes are set", async () => {
+		const el = await fixture<NotSupported>(html`
       <fhir-not-supported ></fhir-not-supported >
-    `).first()
+    `).first();
 
-    await aTimeout(200)
+		await aTimeout(200);
 
-    expect(el).to.be.instanceof(NotSupported)
+		expect(el).to.be.instanceof(NotSupported);
 
-    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
-    expect(label).toHaveTextContent('error')
-    expect(getComputedStyle(label).fontStyle).to.eq('italic')
+		const label = el.queryShadow<HTMLLabelElement>({ select: "label" });
+		expect(label).toHaveTextContent("error");
+		expect(getComputedStyle(label).fontStyle).to.eq("italic");
 
-    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
-    expect(value).toHaveTextContent('Undefined reason')
-    expect(getComputedStyle(value).textDecorationStyle).toEqual('wavy')
+		const value = el.queryShadow<HTMLDivElement>({
+			select: ["fhir-value", "div"],
+		});
+		expect(value).toHaveTextContent("Undefined reason");
+		expect(getComputedStyle(value).textDecorationStyle).toEqual("wavy");
+	});
 
-  })
-
-  it('Should display custom label when all attributes are set without variant', async () => {
-
-    const el = await fixture<Shell>(html`
+	it("Should display custom label when all attributes are set without variant", async () => {
+		const el = await fixture<Shell>(html`
       <fhir-shell showerror>
         <fhir-not-supported label="check" description="desc" error="custom error"></fhir-not-supported >
       </fhir-shell >
-    `).first()
+    `).first();
 
-    expect(el).to.be.instanceof(Shell)
+		expect(el).to.be.instanceof(Shell);
 
-    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
-    expect(label).toHaveTextContent('check:')
+		const label = el.queryShadow<HTMLLabelElement>({ select: "label" });
+		expect(label).toHaveTextContent("check:");
 
-    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
-    expect(value).toHaveTextContent('desc')
+		const value = el.queryShadow<HTMLDivElement>({
+			select: ["fhir-value", "div"],
+		});
+		expect(value).toHaveTextContent("desc");
 
-    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
-    expect(err).toHaveTextContent('custom error')
-    const errCss = getComputedStyle(err)
-    expect(errCss.fontStyle).to.eq('italic')
-    expect(errCss.backgroundColor).to.eq('rgb(252, 165, 165)')
-  })
+		const err = el.queryShadow<PrimitiveError>({
+			select: ["fhir-error", "div"],
+		});
+		expect(err).toHaveTextContent("custom error");
+		const errCss = getComputedStyle(err);
+		expect(errCss.fontStyle).to.eq("italic");
+		expect(errCss.backgroundColor).to.eq("rgb(252, 165, 165)");
+	});
 
-  it('Should display not implemented variant', async () => {
-
-    const el = await fixture<Shell>(html`
+	it("Should display not implemented variant", async () => {
+		const el = await fixture<Shell>(html`
       <fhir-shell showerror>
         <fhir-not-supported description="desc" variant='no-impl'></fhir-not-supported >
       </fhir-shell >
-    `).first()
+    `).first();
 
-    expect(el).to.be.instanceof(Shell)
+		expect(el).to.be.instanceof(Shell);
 
-    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
-    expect(label).toHaveTextContent('')
+		const label = el.queryShadow<HTMLLabelElement>({ select: "label" });
+		expect(label).toHaveTextContent("");
 
-    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
-    expect(value).toHaveTextContent('desc')
+		const value = el.queryShadow<HTMLDivElement>({
+			select: ["fhir-value", "div"],
+		});
+		expect(value).toHaveTextContent("desc");
 
-    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
-    expect(err).toHaveTextContent('Not Implemented')
+		const err = el.queryShadow<PrimitiveError>({
+			select: ["fhir-error", "div"],
+		});
+		expect(err).toHaveTextContent("Not Implemented");
+	});
 
-  })
-
-  it('Should display no support variant', async () => {
-
-    const el = await fixture<Shell>(html`
+	it("Should display no support variant", async () => {
+		const el = await fixture<Shell>(html`
       <fhir-shell showerror>
         <fhir-not-supported description="desc" variant='no-sup'></fhir-not-supported >
       </fhir-shell >
-    `).first()
+    `).first();
 
-    expect(el).to.be.instanceof(Shell)
+		expect(el).to.be.instanceof(Shell);
 
-    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
-    expect(label).toHaveTextContent('')
+		const label = el.queryShadow<HTMLLabelElement>({ select: "label" });
+		expect(label).toHaveTextContent("");
 
-    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
-    expect(value).toHaveTextContent('desc')
+		const value = el.queryShadow<HTMLDivElement>({
+			select: ["fhir-value", "div"],
+		});
+		expect(value).toHaveTextContent("desc");
 
-    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
-    expect(err).toHaveTextContent('Not Supported')
+		const err = el.queryShadow<PrimitiveError>({
+			select: ["fhir-error", "div"],
+		});
+		expect(err).toHaveTextContent("Not Supported");
+	});
 
-  })
-
-  it('Should display stop variant', async () => {
-
-    const el = await fixture<Shell>(html`
+	it("Should display stop variant", async () => {
+		const el = await fixture<Shell>(html`
       <fhir-shell showerror>
         <fhir-not-supported label='foo' error="custom error desc" variant='stop'></fhir-not-supported >
       </fhir-shell >
-    `).first()
+    `).first();
 
-    expect(el).to.be.instanceof(Shell)
+		expect(el).to.be.instanceof(Shell);
 
-    const label = el.queryShadow<HTMLLabelElement>({ select: 'label' })
-    expect(label).toHaveTextContent('foo:')
+		const label = el.queryShadow<HTMLLabelElement>({ select: "label" });
+		expect(label).toHaveTextContent("foo:");
 
-    const value = el.queryShadow<HTMLDivElement>({ select: ['fhir-value', 'div'] })
-    expect(value).toHaveTextContent('Rendering Stopped')
+		const value = el.queryShadow<HTMLDivElement>({
+			select: ["fhir-value", "div"],
+		});
+		expect(value).toHaveTextContent("Rendering Stopped");
 
-    const err = el.queryShadow<PrimitiveError>({ select: ['fhir-error', 'div'] })
-    expect(err).toHaveTextContent('custom error desc')
-
-  })
-
-})
+		const err = el.queryShadow<PrimitiveError>({
+			select: ["fhir-error", "div"],
+		});
+		expect(err).toHaveTextContent("custom error desc");
+	});
+});

@@ -1,9 +1,7 @@
-import {NoDataObject} from '../internal/base/Decorate'
-import {meta}         from '../internal/base/Validations.type'
-import {DisplayMode}  from '../shell/displayMode'
-import {isBlank}      from '../utilities'
-
-
+import { NoDataObject } from "../internal/base/Decorate";
+import { meta } from "../internal/base/Validations.type";
+import { DisplayMode } from "../shell/displayMode";
+import { isBlank } from "../utilities";
 
 /**
  * Determines if a value should be rendered based on the provided context parameters.
@@ -16,53 +14,63 @@ import {isBlank}      from '../utilities'
  * @param required
  * @returns True if the value should be rendered, otherwise false.
  */
-export function mustRender(value: unknown | null | undefined,
-                           mode: DisplayMode = DisplayMode.display,
-                           verbose: boolean = false,
-                           summaryMode: boolean = false,
-                           summary: boolean = false,
-                           required: boolean = false): boolean {
+export function mustRender(
+	value: unknown | null | undefined,
+	mode: DisplayMode = DisplayMode.display,
+	verbose: boolean = false,
+	summaryMode: boolean = false,
+	summary: boolean = false,
+	required: boolean = false,
+): boolean {
+	if (required) return true;
 
-  if (required) return true
+	if (
+		isDisplay(mode) &&
+		isPresent(value) &&
+		shouldRender(summary, summaryMode)
+	) {
+		return true;
+	}
 
-  if (isDisplay(mode) && isPresent(value) && shouldRender(summary, summaryMode)) {
-    return true
-  }
+	if (isStructure(mode)) {
+		if (isPresent(value) && shouldRender(summary, summaryMode)) {
+			return true;
+		}
 
-  if (isStructure(mode)) {
-    if (isPresent(value) && shouldRender(summary, summaryMode)) {
-      return true
-    }
+		if (verbose) {
+			return true;
+		}
+	}
 
-    if (verbose) {
-      return true
-    }
-
-  }
-
-  return false
+	return false;
 }
 
 function isDisplay(mode: DisplayMode) {
-  return mode == DisplayMode.display
-         || mode == DisplayMode.narrative
-         || mode == DisplayMode.debug
+	return (
+		mode == DisplayMode.display ||
+		mode == DisplayMode.narrative ||
+		mode == DisplayMode.debug
+	);
 }
 
 function isStructure(mode: DisplayMode) {
-  return mode == DisplayMode.structure
+	return mode == DisplayMode.structure;
 }
 
 function shouldRender(summaryTaggedValue: boolean, summaryMode: boolean) {
-  return (summaryTaggedValue && summaryMode) || !summaryMode
+	return (summaryTaggedValue && summaryMode) || !summaryMode;
 }
 
-function isPresent(value: any) {
-  if (value === NoDataObject) return false
+function isPresent(value: unknown) {
+	if (value === NoDataObject) return false;
 
-  if (value && value[meta] && value[meta].hide) {
-    return value[meta].hide !== true
-  }
+	if (
+		value &&
+		typeof value === "object" &&
+		(value as Record<symbol, { hide?: boolean }>)[meta]?.hide
+	) {
+		return (value as Record<symbol, { hide?: boolean }>)[meta].hide !== true;
+	}
 
-  return !isBlank(value)
+	return !isBlank(value);
 }

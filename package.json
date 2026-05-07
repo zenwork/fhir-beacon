@@ -3,7 +3,9 @@
     "version": "0.1.1",
     "description": "a library of web components for working with FHIR",
     "private": true,
-    "workspaces": ["packages/*"],
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "changeset::check": "changeset status --since=main",
         "change": "npx changeset",
@@ -21,6 +23,6 @@
     "author": "Florian Hehlen",
     "license": "MIT",
     "devDependencies": {
-        "@changesets/cli": "^2.27.12"
+        "@changesets/cli": "^2.29.1"
     }
 }

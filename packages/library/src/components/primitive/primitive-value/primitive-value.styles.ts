@@ -1,6 +1,4 @@
-import {css} from 'lit'
-
-
+import { css } from "lit";
 
 export const componentStyles = css`
   :host {
@@ -38,7 +36,7 @@ export const componentStyles = css`
     width: 30rem; /* set the initial width */
       height: 2rem; /* set the initial height */
       overflow: hidden; /* hide the overflowed text */
-      transition: height 1s; /* animate height */
+      transition: height 0.2s; /* animate height */
       word-wrap: break-word;
   }
 
@@ -48,4 +46,4 @@ export const componentStyles = css`
       overflow-x: hidden
 
   }
-`
+`;

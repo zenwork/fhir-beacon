@@ -1,44 +1,47 @@
-import {html, TemplateResult} from 'lit'
-import {DisplayConfig}        from '../../../shell/types'
-import {Decorated}            from '../Decorate.types'
-import {FhirElementData}      from '../FhirElement.type'
+import { TemplateResult, html } from "lit";
+import { Decorateable } from "../../../profiling";
+import { DisplayConfig } from "../../../shell/types";
+import { Decorated } from "../Decorate.types";
+import { FhirElementData } from "../FhirElement.type";
 
-import {Validations} from '../Validations.type'
+import { Validations } from "../Validations.type";
 
+export type GenKey = "header" | "body" | "footer";
 
+export type TemplateGenerator<T extends Decorateable> = (
+	config: DisplayConfig,
+	data: Decorated<T>,
+	errors: Validations,
+) => TemplateResult[];
 
-export type GenKey = 'header' | 'body' | 'footer'
+export type GeneratorGroup<T extends Decorateable> = {
+	[key in GenKey]: TemplateGenerator<T>[];
+};
 
-export type TemplateGenerator<T extends FhirElementData> = (config: DisplayConfig,
-                                                            data: Decorated<T>,
-                                                            errors: Validations) => TemplateResult[]
+export type Generators<T extends Decorateable> = {
+	structure: GeneratorGroup<T>;
+	display: GeneratorGroup<T>;
+	override: GeneratorGroup<T>;
+	debug: GeneratorGroup<T>;
+	error: GeneratorGroup<T>;
+};
 
-export type GeneratorGroup<T extends FhirElementData> = { [key in GenKey]: TemplateGenerator<T>[] }
-
-export type Generators<T extends FhirElementData> = {
-  structure: GeneratorGroup<T>,
-  display: GeneratorGroup<T>,
-  override: GeneratorGroup<T>,
-  debug: GeneratorGroup<T>,
-  error: GeneratorGroup<T>,
-}
-
-export const EmptyResult = [html``] as TemplateResult<any>[]
+export const EmptyResult = [html``] as TemplateResult<1>[];
 
 export function NullGeneratorGroup() {
-  return {
-    header: [],
-    body: [],
-    footer: []
-  }
+	return {
+		header: [],
+		body: [],
+		footer: [],
+	};
 }
 
 export function NullGenerators<T extends FhirElementData>(): Generators<T> {
-  return {
-    structure: NullGeneratorGroup(),
-    display: NullGeneratorGroup(),
-    override: NullGeneratorGroup(),
-    debug: NullGeneratorGroup(),
-    error: NullGeneratorGroup()
-  }
+	return {
+		structure: NullGeneratorGroup(),
+		display: NullGeneratorGroup(),
+		override: NullGeneratorGroup(),
+		debug: NullGeneratorGroup(),
+		error: NullGeneratorGroup(),
+	};
 }

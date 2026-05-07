@@ -5,5 +5,8 @@
  * @param props the properties to check for
  */
 export function hasNone(obj: unknown, props: string[]) {
-  return props.reduce((acc, p) => !Object.prototype.hasOwnProperty.call(obj, p) && acc, true)
+	return props.reduce(
+		(acc, p) => !Object.prototype.hasOwnProperty.call(obj, p) && acc,
+		true,
+	);
 }

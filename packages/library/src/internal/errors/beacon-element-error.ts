@@ -1,14 +1,14 @@
 export class BeaconElementError implements Error {
-  name: string = 'BeaconStateError'
+	name: string = "BeaconStateError";
 
-  stack?: string | undefined
+	stack?: string | undefined;
 
-  message: string
+	message: string;
 
-  private element: string
+	private element: string;
 
-  constructor(element: string, msg: string) {
-    this.element = element
-    this.message = msg
-  }
+	constructor(element: string, msg: string) {
+		this.element = element;
+		this.message = msg;
+	}
 }

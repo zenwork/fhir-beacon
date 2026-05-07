@@ -1,21 +1,21 @@
-import {html, TemplateResult}          from 'lit'
-import {map}                           from 'lit/directives/map.js'
-import {DisplayMode}                   from '../../displayMode'
-import {DisplayConfig}                 from '../../types'
-import {hasMany, hasOnlyOne}           from '../directives'
-import {pluralize}                     from '../pluralize'
-import {Generators, generators, strap} from './strap'
-
-
+import { TemplateResult, html } from "lit";
+import { map } from "lit/directives/map.js";
+import { DisplayMode } from "../../displayMode";
+import { DisplayConfig } from "../../types";
+import { hasMany, hasOnlyOne } from "../directives";
+import { pluralize } from "../pluralize";
+import { Generators, generators, strap } from "./strap";
 
 type WrapConfig<T> = {
-  key?: string,
-  pluralBase?: string,
-  collection: T[],
-  generator: { (data: T, label: string, key: string, index: number): TemplateResult } | Generators,
-  summary?: boolean,
-  config: DisplayConfig
-}
+	key?: string;
+	pluralBase?: string;
+	collection: T[];
+	generator:
+		| { (data: T, label: string, key: string, index: number): TemplateResult }
+		| Generators;
+	summary?: boolean;
+	config: DisplayConfig;
+};
 
 /**
  * Wraps a collection of items with a `<fhir-wrapper>` component.
@@ -29,73 +29,76 @@ type WrapConfig<T> = {
  * @returns The wrapped collection as a TemplateResult or any other value.
  */
 export function wrap<T>({
-                          key,
-                          pluralBase,
-                          collection,
-                          generator,
-                          summary = true,
-                          config
-                        }: WrapConfig<T>
-): TemplateResult {
+	key,
+	pluralBase,
+	collection,
+	generator,
+	summary = true,
+	config,
+}: WrapConfig<T>): TemplateResult {
+	if (config.mode === DisplayMode.structure) {
+		return strap({ key, pluralBase, collection, generator, summary, config });
+	}
 
+	if (!key && typeof generator === "string") {
+		key = generator.substring(5);
+	}
 
-  if(config.mode === DisplayMode.structure) {
-    return strap({key, pluralBase, collection, generator, summary, config})
-  }
+	if (typeof generator === "string")
+		generator = generators[generator] as {
+			(data: T, label: string, key: string): TemplateResult;
+		};
 
-  if (!key && typeof generator === 'string') {
-    key = generator.substring(5)
-  }
+	if (key && typeof generator === "function") {
+		if (!config.summaryonly || (config.summaryonly && summary)) {
+			const plural = pluralize(pluralBase || key);
 
-  if (typeof generator === 'string') generator
-    = generators[generator] as { (data: T, label: string, key: string): TemplateResult }
-
-  if (key && typeof generator === 'function') {
-
-    if (!config.summaryonly || config.summaryonly && summary) {
-      const plural = pluralize(pluralBase || key)
-
-      if (hasMany(collection)) {
-        if (config.verbose) {
-          return html`
+			if (hasMany(collection)) {
+				if (config.verbose) {
+					return html`
               <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
-                  ${map(collection,
-                        (data: T, idx) => html`
+                  ${map(
+										collection,
+										(data: T, idx) => html`
                             ${generator(data, `${pluralBase || key} ${idx + 1}`, key, idx)}
-                        `)}
+                        `,
+									)}
               </fhir-wrapper>
-          `
-        }
+          `;
+				}
 
-        return html`
+				return html`
             <fhir-wrapper label="${plural}" ?summary=${summary} ?summaryonly=${config.summaryonly}>
-                ${map(collection,
-                      (data: T, idx) => html`
+                ${map(
+									collection,
+									(data: T, idx) => html`
                           ${generator(data, `${idx + 1}`, key, idx)}
-                      `)}
+                      `,
+								)}
             </fhir-wrapper>
-        `
-      }
+        `;
+			}
 
-      if (hasOnlyOne(collection)) {
-        if (config.verbose) {
-          return html` ${map(collection,
-                             (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)}`
-        }
+			if (hasOnlyOne(collection)) {
+				if (config.verbose) {
+					return html` ${map(
+						collection,
+						(data: T, index) =>
+							html` ${generator(data, pluralBase || key, key, index)} `,
+					)}`;
+				}
 
-        return html`${map(collection, (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)} `
-      }
+				return html`${map(collection, (data: T, index) => html` ${generator(data, pluralBase || key, key, index)} `)} `;
+			}
 
-      if (config.verbose && config.mode === DisplayMode.display) {
-        return html`
+			if (config.verbose && config.mode === DisplayMode.display) {
+				return html`
             <fhir-wrapper label="${pluralBase || key}" ?open=${config.open} ?summaryonly=${config.summaryonly}>
                 <fhir-empty-list></fhir-empty-list>
-            </fhir-wrapper>`
-      }
+            </fhir-wrapper>`;
+			}
+		}
+	}
 
-    }
-  }
-
-
-  return html``
+	return html``;
 }

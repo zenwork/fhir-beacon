@@ -1,22 +1,20 @@
-import {TemplateResult}            from 'lit'
-import {customElement}             from 'lit/decorators.js'
-import {EmptyResult}               from '../../../internal'
-import {DomainResource}            from '../../../internal/resource/DomainResource'
-import {ObservationDefinitionData} from './observation-definition.data'
+import { TemplateResult } from "lit";
+import { customElement } from "lit/decorators.js";
+import { EmptyResult } from "../../../internal";
+import { DomainResource } from "../../../internal/resource/DomainResource";
+import { ObservationDefinitionData } from "./observation-definition.data";
 
-@customElement('fhir-observation-definition')
+@customElement("fhir-observation-definition")
 export class ObservationDefinition extends DomainResource<ObservationDefinitionData> {
+	constructor() {
+		super("ObservationDefinition");
+	}
 
-  constructor() {
-    super('ObservationDefinition')
-  }
+	public renderDisplay(): TemplateResult[] {
+		return EmptyResult;
+	}
 
-  public renderDisplay(): TemplateResult[] {
-    return EmptyResult
-  }
-
-  public renderStructure(): TemplateResult[] {
-    return EmptyResult
-  }
-
+	public renderStructure(): TemplateResult[] {
+		return EmptyResult;
+	}
 }

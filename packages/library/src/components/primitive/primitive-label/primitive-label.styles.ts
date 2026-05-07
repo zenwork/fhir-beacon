@@ -1,6 +1,4 @@
-import {css} from 'lit'
-
-
+import { css } from "lit";
 
 export const componentStyles = css`
   :host {
@@ -21,4 +19,4 @@ export const componentStyles = css`
     text-decoration: underline wavy var(--sl-color-danger-600);
   }
 
-`
+`;

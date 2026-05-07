@@ -1,8 +1,8 @@
 {
-    "id": "procedure-reason",
-    "name": "ProcedureReasonCodes",
-    "type": "ValueSet",
-    "system": "http://hl7.org/fhir/ValueSet/procedure-reason",
-    "valid": true,
-    "choices": []
+	"id": "procedure-reason",
+	"name": "ProcedureReasonCodes",
+	"type": "ValueSet",
+	"system": "http://hl7.org/fhir/ValueSet/procedure-reason",
+	"valid": true,
+	"choices": []
 }

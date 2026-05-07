@@ -1,31 +1,36 @@
-import {html, TemplateResult}   from 'lit'
-import {customElement}          from 'lit/decorators.js'
-import {BaseElement, Decorated} from '../../../internal'
-import {DisplayConfig}          from '../../../shell/types'
-import {PrimitiveType}          from '../../primitive'
-import {AttachmentData}         from './attachment.data'
+import { TemplateResult, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { BaseElement, Decorated } from "../../../internal";
+import { DisplayConfig } from "../../../shell/types";
+import { PrimitiveType } from "../../primitive";
+import { AttachmentData } from "./attachment.data";
 
+const { decimal, datetime, positiveInt, integer64, url, base64, code, none } =
+	PrimitiveType;
 
-
-const { decimal, datetime, positiveInt, integer64, url, base64, code, none } = PrimitiveType
-
-@customElement('fhir-attachment')
+@customElement("fhir-attachment")
 export class Attachment extends BaseElement<AttachmentData> {
-  constructor() {super('Attachment')}
+	constructor() {
+		super("Attachment");
+	}
 
-  public renderDisplay(config: DisplayConfig,
-                       data: Decorated<AttachmentData>): TemplateResult[] {
-    return this.generate(data)
-  }
+	public renderDisplay(
+		_config: DisplayConfig,
+		data: Decorated<AttachmentData>,
+	): TemplateResult[] {
+		return this.generate(data);
+	}
 
-  public renderStructure(config: DisplayConfig,
-                         data: Decorated<AttachmentData>): TemplateResult[] {
-    return this.generate(data)
-  }
+	public renderStructure(
+		_config: DisplayConfig,
+		data: Decorated<AttachmentData>,
+	): TemplateResult[] {
+		return this.generate(data);
+	}
 
-  private generate(data: Decorated<AttachmentData>) {
-    return [
-      html`
+	private generate(data: Decorated<AttachmentData>) {
+		return [
+			html`
           <fhir-primitive key="contentType"
                           label="content type"
                           .value=${data.contentType}
@@ -95,7 +100,7 @@ export class Attachment extends BaseElement<AttachmentData> {
                           trialuse
           ></fhir-primitive>
 
-      `
-    ]
-  }
+      `,
+		];
+	}
 }

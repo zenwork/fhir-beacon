@@ -1,9 +1,9 @@
-import {css} from 'lit'
+import { css } from "lit";
 
 export const componentStyles = css`
 
   :host {
-    --badge-color: var(--sl-color-gray-400);
+    --badge-color: var(--sl-color-gray-500);
     --badge-background: var(--sl-color-gray-100);
     --badge-border: var(--sl-color-gray-300);
 
@@ -23,4 +23,4 @@ export const componentStyles = css`
     font-weight: var(--sl-font-weight-normal);
     font-style: italic;
   }
-`
+`;

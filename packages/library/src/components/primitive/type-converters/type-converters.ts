@@ -10,8 +10,8 @@ export type ValOrErr<O, V> = { type: 'ValOrErr', val: V, err: null } | { type: '
 export const valueOrError = <O, V>(fn: toPrimitive<O, V>, originalVal: O): ValOrErr<O, V> => {
   try {
     return { type: 'ValOrErr', val: fn(originalVal), err: null }
-  } catch (e: Error | any) {
-    return { type: 'ValOrErr', val: originalVal, err: e.message }
+  } catch (e) {
+    return { type: 'ValOrErr', val: originalVal, err: (e as Error).message }
   }
 }
 
@@ -39,6 +39,7 @@ export enum PrimitiveType {
   uri = 'uri',
   uri_type = 'uri_type', //TODO: not 100% this belongs here
   url = 'url',
+  uuid = 'uuid'
 }
 
 export type Type = string

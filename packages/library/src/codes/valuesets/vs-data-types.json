@@ -1,12 +1,12 @@
 {
-    "id": "data-types",
-    "name": "FHIRTypes",
-    "type": "ValueSet",
-    "valid": true,
-    "choices": [
-        {
-            "value": "Base",
-            "display": "Base"
-        }
-    ]
+	"id": "data-types",
+	"name": "FHIRTypes",
+	"type": "ValueSet",
+	"valid": true,
+	"choices": [
+		{
+			"value": "Base",
+			"display": "Base"
+		}
+	]
 }

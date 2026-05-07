@@ -1,21 +1,22 @@
-import {html, TemplateResult}          from 'lit'
-import {customElement}                 from 'lit/decorators.js'
-import {Backbone, Decorated}           from '../../../internal'
-import {DisplayConfig}                 from '../../../shell/types'
-import {PrimitiveType}                 from '../../primitive'
-import {AppointmentWeeklyTemplateData} from './appointment.data'
+import { TemplateResult, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { Backbone, Decorated } from "../../../internal";
+import { DisplayConfig } from "../../../shell/types";
+import { PrimitiveType } from "../../primitive";
+import { AppointmentWeeklyTemplateData } from "./appointment.data";
 
-
-
-@customElement('fhir-weekly-template')
+@customElement("fhir-weekly-template")
 export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplateData> {
-  constructor() {super('WeeklyTemplate') }
+	constructor() {
+		super("WeeklyTemplate");
+	}
 
-
-  public renderDisplay(config: DisplayConfig,
-                       data: Decorated<AppointmentWeeklyTemplateData>): TemplateResult[] {
-    return [
-      html`
+	public renderDisplay(
+		_config: DisplayConfig,
+		data: Decorated<AppointmentWeeklyTemplateData>,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive key="monday" .value=${data.monday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="tuesday" .value=${data.tuesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="wednesday" .value=${data.wednesday} .type=${PrimitiveType.boolean}></fhir-primitive>
@@ -27,14 +28,16 @@ export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplat
                           .value=${data.weekInterval}
                           .type=${PrimitiveType.positiveInt}
           ></fhir-primitive>
-      `
-    ]
-  }
+      `,
+		];
+	}
 
-  public renderStructure(config: DisplayConfig,
-                         data: Decorated<AppointmentWeeklyTemplateData>): TemplateResult[] {
-    return [
-      html`
+	public renderStructure(
+		_config: DisplayConfig,
+		data: Decorated<AppointmentWeeklyTemplateData>,
+	): TemplateResult[] {
+		return [
+			html`
           <fhir-primitive key="monday" .value=${data.monday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="tuesday" .value=${data.tuesday} .type=${PrimitiveType.boolean}></fhir-primitive>
           <fhir-primitive key="wednesday" .value=${data.wednesday} .type=${PrimitiveType.boolean}></fhir-primitive>
@@ -46,7 +49,7 @@ export class AppointmentWeeklyTemplate extends Backbone<AppointmentWeeklyTemplat
                           .value=${data.weekInterval}
                           .type=${PrimitiveType.positiveInt}
           ></fhir-primitive>
-      `
-    ]
-  }
+      `,
+		];
+	}
 }

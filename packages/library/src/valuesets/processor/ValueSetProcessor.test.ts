@@ -1,65 +1,70 @@
-import {describe, test}               from 'vitest'
-import {Criteria, FSSource, matchAll} from '../source/FSSource'
-import {Choices, LoadableStore}       from '../ValueSet.data'
-import {ValueSetProcessor}            from './ValueSetProcessor'
+import { describe, test } from "vitest";
+import { Choices, LoadableStore } from "../ValueSet.data";
+import { Criteria, FSSource, matchAll } from "../source/FSSource";
+import { ValueSetProcessor } from "./ValueSetProcessor";
 
+describe("ValueSetProcessor", () => {
+	const exampleData: string = `${process.cwd()}/../data/r5/examples-json`;
+	const maxLoad = 2000;
+	let countLoad = 0;
 
+	test.runIf(process.env.EXPENSIVE)(
+		"should load all valuesets",
+		{ timeout: 180_000 },
+		async () => {
+			const processor: ValueSetProcessor = new ValueSetProcessor(
+				new FSSource(
+					exampleData,
+					(id: string) => {
+						if (matchAll(id)) {
+							countLoad++;
+							return countLoad <= maxLoad;
+						}
+						return false;
+					},
+					() => false,
+				),
+			);
 
-describe('ValueSetProcessor', () => {
+			const valueSetChoices: Choices[] = await processor.processAll(false);
 
-  const exampleData: string = `${process.cwd()}/../data/r5/examples-json`
-  const maxLoad = 2000
-  let countLoad = 0
+			const count: number = valueSetChoices.reduce((prev, valueSet) => {
+				if (valueSet.valid) {
+					return prev;
+				} else {
+					//console.log(`Invalid valueset:`,valueSet)
+					return prev + 1;
+				}
+			}, 0);
 
-  test.runIf(process.env.EXPENSIVE)('should load all valuesets', { timeout: 180_000 }, async () => {
-    const processor: ValueSetProcessor = new ValueSetProcessor(new FSSource(exampleData, (id: string) => {
-      if (matchAll(id)) {
-        countLoad++
-        return countLoad <= maxLoad
-      }
-      return false
-    }, () => false))
+			console.log(
+				`Loaded ${valueSetChoices.length} valuesets, ${count} invalid`,
+			);
+		},
+	);
 
-    const valueSetChoices: Choices[] = await processor.processAll(false)
+	test.runIf(process.env.EXPENSIVE)(
+		"should process one",
+		{ timeout: 180_000 },
+		async () => {
+			const criteria: Criteria = (id: string) => {
+				return id === "valueset-week-of-month.json";
+			};
 
-    const count: number = valueSetChoices
-      .reduce(
-        (prev, valueSet) => {
-          if (valueSet.valid) {
-            return prev
-          } else {
-            //console.log(`Invalid valueset:`,valueSet)
-            return prev + 1
-          }
-        },
-        0
-      )
+			const source: LoadableStore = new FSSource(
+				exampleData,
+				criteria,
+				() => false,
+			);
 
-    console.log(
-      `Loaded ${valueSetChoices.length} valuesets, ${count} invalid`)
+			const processor: ValueSetProcessor = new ValueSetProcessor(source);
 
+			// const resolved: ResolvedValueSet = await source.resolve('valueset-week-of-month.json')
 
-  })
+			await processor.process("valueset-week-of-month.json");
 
-  test.runIf(process.env.EXPENSIVE)('should process one', { timeout: 180_000 }, async () => {
-
-    const criteria: Criteria = (id: string) => {
-      return id === 'valueset-week-of-month.json'
-    }
-
-    const source: LoadableStore = new FSSource(exampleData, criteria, () => false)
-
-
-    const processor: ValueSetProcessor = new ValueSetProcessor(source)
-
-
-    // const resolved: ResolvedValueSet = await source.resolve('valueset-week-of-month.json')
-
-    await processor.process('valueset-week-of-month.json')
-
-    // console.log(resolved)
-    // console.log(choices)
-
-
-  })
-})
+			// console.log(resolved)
+			// console.log(choices)
+		},
+	);
+});

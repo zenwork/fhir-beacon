@@ -1,118 +1,123 @@
-import {html, LitElement, nothing, TemplateResult} from 'lit'
-import {customElement, property, query}            from 'lit/decorators.js'
-import {classMap}                                  from 'lit/directives/class-map.js'
-import {EmptyResult}                               from '../../../internal'
-import {hostStyles}                                from '../../../styles'
-import {isDefined}                                 from '../directives'
-import {componentStyles}                           from './wrapper-styles'
+import { LitElement, TemplateResult, html, nothing } from "lit";
+import { customElement, property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { EmptyResult } from "../../../internal";
+import { hostStyles } from "../../../styles";
+import { isDefined } from "../directives";
+import { componentStyles } from "./wrapper-styles";
 
-export {SlDetails} from '@shoelace-style/shoelace'
+export { SlDetails } from "@shoelace-style/shoelace";
 
-
-@customElement('fhir-wrapper')
+@customElement("fhir-wrapper")
 export class Wrapper extends LitElement {
+	static styles = [hostStyles, componentStyles];
 
-  static styles = [hostStyles, componentStyles]
+	@property({ type: String })
+	public variant: "none" | "details" | "error" = "none";
 
-  @property({ type: String })
-  public variant: 'none' | 'details' | 'error' = 'none'
+	@property({ type: String })
+	public key: string = "items";
 
-  @property({ type: String })
-  public key: string = 'items'
+	@property({ type: String })
+	public label: string = "";
 
-  @property({ type: String })
-  public label: string = ''
+	@property({ type: Boolean })
+	public headless: boolean = false;
 
-  @property({ type: Boolean })
-  public headless: boolean = false
+	@property({ type: String, attribute: "badge-resource" })
+	public badgeResource: string = "";
 
-  @property({ type: String, attribute: 'badge-resource' })
-  public badgeResource: string = ''
+	@property({ type: Boolean, attribute: "badge-summary" })
+	public badgeSummary: boolean = false;
 
-  @property({ type: Boolean, attribute: 'badge-summary' })
-  public badgeSummary: boolean = false
+	@property({ type: Boolean, attribute: "badge-constraint" })
+	public badgeConstraint: boolean = false;
 
-  @property({ type: Boolean, attribute: 'badge-constraint' })
-  public badgeConstraint: boolean = false
+	@property({ type: Boolean, attribute: "badge-required" })
+	public badgeRequired: boolean = false;
 
-  @property({ type: Boolean, attribute: 'badge-required' })
-  public badgeRequired: boolean = false
+	@property({ type: String, attribute: "badge-profile" })
+	public badgeProfile: string = "";
 
-  @property({ type: Boolean })
-  public open: boolean = false
+	@property({ type: Boolean })
+	public open: boolean = false;
 
-  @property({ type: Boolean, reflect: true })
-  public summary: boolean = false
+	@property({ type: Boolean, reflect: true })
+	public summary: boolean = false;
 
-  @property({ type: Boolean, reflect: true })
-  public summaryonly: boolean = false
+	@property({ type: Boolean, reflect: true })
+	public summaryonly: boolean = false;
 
-  @query('key')
-  declare private content
+	@query("key")
+	private declare content;
 
+	protected render(): TemplateResult | TemplateResult[] {
+		if (!this.summaryonly || (this.summary && this.summaryonly)) {
+			let content: TemplateResult;
 
-  protected render(): TemplateResult | TemplateResult[] {
-    if (!this.summaryonly || (this.summary && this.summaryonly)) {
-      let content: TemplateResult
-
-      const arrow = this.variant === 'details' ? nothing : html`<span id="arrow">&#x21B4;</span>`
-      const label = (this.label && !this.headless)
-                    ? html`<label for="${this.key}"
-                                  class=${classMap({ 'variant-error-label': (this.variant === 'error') })}
+			const arrow =
+				this.variant === "details"
+					? nothing
+					: html`<span id="arrow">&#x21B4;</span>`;
+			const label =
+				this.label && !this.headless
+					? html`<label for="${this.key}"
+                                  class=${classMap({ "variant-error-label": this.variant === "error" })}
               >${this.label}${arrow}</label>`
-                    : nothing
+					: nothing;
 
-      switch (this.variant) {
-        case 'none':
-          content = html`
+			switch (this.variant) {
+				case "none":
+					content = html`
               ${label}
               <ol id=${this.key} class="items">
                   <slot id="${this.key}"></slot>
               </ol>
-          `
-          break
-        case 'details': {
-          const summary = html`
+          `;
+					break;
+				case "details": {
+					const summary = html`
               <div slot="summary">
                   ${label}
                   <fhir-badge-group resource=${isDefined(this.badgeResource)}
                                     ?summary=${this.badgeSummary}
                                     ?constraint=${this.badgeConstraint}
                                     ?required=${this.badgeRequired}
+                                    profile=${this.badgeProfile}
                   ></fhir-badge-group>
               </div>
               <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
               <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
-          `
-          content = html`
+          `;
+					content = html`
               <sl-details class="custom-icons" ?open=${this.open}>
                   ${summary}
                   <ol id=${this.key} class="details_items">
                       <slot></slot>
                   </ol>
               </sl-details>
-          `
-          break
-        }
-        case 'error':
-          content = html`
+          `;
+					break;
+				}
+				case "error":
+					content = html`
               <div class="variant-error">
                   ${label}
                   <div id='error' class="items">
                       <slot id="${this.key}"></slot>
                   </div>
               </div>
-          `
-          break
-      }
+          `;
+					break;
+			}
 
-      return html`
+			return html`
           <section id="wrapped" part="wrapped">
               ${content}
           </section>
-      `
-    }
+      `;
+		}
 
-    return EmptyResult
-  }
+		return EmptyResult;
+	}
 }

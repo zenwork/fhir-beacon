@@ -1,39 +1,35 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "declaration": true,
-        "declarationDir": "./dist/types",
-        "declarationMap": true,
-        "emitDeclarationOnly": false,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "incremental": true,
-        "inlineSources": true,
-        "lib": ["es2017", "dom"],
-        "module": "esnext",
-        "moduleResolution": "node",
-        "noEmitOnError": true,
-        "outDir": "dist",
-        "paths": {"*": ["./src/*", "./tests/*", "./stories/*"]},
-        "resolveJsonModule": true,
-        "rootDir": "./",
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "strict": true,
-        "target": "es2021",
-        "types": [
-            "@vitest/browser/providers/playwright"
-        ]
-    },
-    "include": [
-        "**/*.ts"
-    ],
-    "exclude": ["node_modules", "dist"],
-    "plugins": [
-        {
-            "name": "ts-lit-plugin",
-            "strict": true
-        }
-    ]
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"declarationDir": "./dist/types",
+		"declarationMap": true,
+		"emitDeclarationOnly": false,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"incremental": true,
+		"inlineSources": true,
+		"lib": ["es2017", "dom"],
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"noEmitOnError": true,
+		"outDir": "dist",
+		"paths": { "*": ["./src/*", "./tests/*", "./stories/*"] },
+		"resolveJsonModule": true,
+		"rootDir": "./",
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es2021",
+		"types": ["@vitest/browser/providers/playwright"]
+	},
+	"include": ["**/*.ts"],
+	"exclude": ["node_modules", "dist"],
+	"plugins": [
+		{
+			"name": "ts-lit-plugin",
+			"strict": true
+		}
+	]
 }
