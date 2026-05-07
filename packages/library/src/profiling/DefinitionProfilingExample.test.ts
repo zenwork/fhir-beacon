@@ -484,13 +484,16 @@ describe("profileDefinition", () => {
 			],
 		});
 
-		console.log(observation.type.toString());
-		console.log(observation.toString());
-		console.log(JSON.stringify(observation.toJSON(), null, 2));
-		console.log();
-		console.log(_bp.type.toString());
-		console.log(_bp.toString());
-		//
+		expect(observation.type.toString()).toBe("Observation");
+		expect(observation.toString()).toContain("identifier");
+		expect(observation.toJSON()).toMatchObject({
+			name: {
+				value: "Observation",
+				dataset: "ObservationData",
+				profileName: "",
+			},
+		});
+
 		const identifierDef = _bp.getProperty("identifier");
 		if (!identifierDef) {
 			throw new Error("identifier definition must have cardinality");
