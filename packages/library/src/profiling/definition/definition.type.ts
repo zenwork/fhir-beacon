@@ -51,6 +51,7 @@ export type Def = {
 export type ExtensionDef = Def & {
 	defType: "extension";
 	url: string;
+	extensionLocation: ExtensionLocation;
 	valueType: PrimitiveName | DatatypeName | undefined;
 	valueTypeNarrowing: NarrowableNames[] | undefined;
 	cardinality: string;
@@ -63,6 +64,25 @@ export type ExtensionDef = Def & {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	overrideRender: Map<DisplayMode, TemplateGenerator<any>> | undefined;
 };
+
+export type ExtensionLocation =
+	| {
+			kind: "root";
+			path: "extension";
+	  }
+	| {
+			kind: "primitive";
+			path: `_${string}.extension`;
+			primitiveKey: string;
+	  }
+	| {
+			kind: "modifier";
+			path: "modifierExtension";
+	  }
+	| {
+			kind: "nested";
+			path: "extension.extension";
+	  };
 
 // Type guard for ExtensionDef
 export function isExtensionDef<_T>(def: unknown): def is ExtensionDef {

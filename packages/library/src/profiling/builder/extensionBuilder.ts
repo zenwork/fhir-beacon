@@ -1,7 +1,12 @@
 import { Basic } from "../../ResourceDef";
 import { TemplateGenerator } from "../../internal";
 import { DisplayMode } from "../../shell";
-import { Context, ExtensionDef, StructureDefinition } from "../definition";
+import {
+	Context,
+	ExtensionDef,
+	ExtensionLocation,
+	StructureDefinition,
+} from "../definition";
 import { Extension, Extensions } from "../profile.type";
 import { BindingStrength } from "../util";
 import { Builder, Decorateable, RenderBuilder } from "./builder.type";
@@ -9,6 +14,7 @@ import { Builder, Decorateable, RenderBuilder } from "./builder.type";
 export function extensionBuilder<T extends Decorateable>(
 	key: string,
 	def: Extension,
+	extensionLocation: ExtensionLocation = { kind: "root", path: "extension" },
 ): RenderBuilder<T> {
 	let context: Context<T> | null = null;
 	const extendRender = new Map<DisplayMode, TemplateGenerator<T>>();
@@ -24,9 +30,10 @@ export function extensionBuilder<T extends Decorateable>(
 					defType: "extension",
 					key: key,
 					url: def.url,
+					extensionLocation,
 					valueType: def.valueType,
 					valueTypeNarrowing: def.valueTypeNarrowing || [],
-					isModifier: false,
+					isModifier: extensionLocation.kind === "modifier",
 					isSummary: false,
 					cardinality: "1..1",
 					bindings: def.bindings ?? [],
@@ -58,6 +65,7 @@ export function extensionBuilder<T extends Decorateable>(
 export function complexExtensionBuilder<T extends Decorateable>(
 	key: string,
 	def: Extensions,
+	extensionLocation: ExtensionLocation = { kind: "root", path: "extension" },
 ): RenderBuilder<T> {
 	let context: Context<T> | null = null;
 	const extendRender = new Map<DisplayMode, TemplateGenerator<T>>();
@@ -76,7 +84,10 @@ export function complexExtensionBuilder<T extends Decorateable>(
 				);
 				def.extensions.map((ext) => {
 					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-					const builder: Builder<any> = extensionBuilder(ext.url, ext);
+					const builder: Builder<any> = extensionBuilder(ext.url, ext, {
+						kind: "nested",
+						path: "extension.extension",
+					});
 					builder.setCtx(ctx);
 					builder.build();
 				});
@@ -85,9 +96,10 @@ export function complexExtensionBuilder<T extends Decorateable>(
 					defType: "extension",
 					key: key,
 					url: def.url,
+					extensionLocation,
 					valueType: undefined,
 					valueTypeNarrowing: undefined,
-					isModifier: false,
+					isModifier: extensionLocation.kind === "modifier",
 					isSummary: false,
 					cardinality: "1..1",
 					bindings: [],
@@ -140,6 +152,10 @@ export function primitiveExtensionBuilder<T extends Decorateable>(
 					const builder: Builder<any> = extensionBuilder(
 						toFixedKey(ext.valueType),
 						ext,
+						{
+							kind: "nested",
+							path: "extension.extension",
+						},
 					);
 					builder.setCtx(ctx);
 					builder.build();
@@ -149,6 +165,11 @@ export function primitiveExtensionBuilder<T extends Decorateable>(
 					defType: "extension",
 					key: `_${primitiveKey}`,
 					url: url,
+					extensionLocation: {
+						kind: "primitive",
+						path: `_${primitiveKey}.extension`,
+						primitiveKey,
+					},
 					valueType: "Extension",
 					valueTypeNarrowing: undefined,
 					isModifier: false,

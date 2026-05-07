@@ -47,6 +47,10 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toEqual("Reference");
 		expect(extension.valueTypeNarrowing).toEqual(["Location"]);
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
 
 		extension = def.getExtension("ParticipationAgreement")!;
 
@@ -58,6 +62,31 @@ describe("profile extensions", () => {
 		);
 		expect(extension.valueType).toEqual("uri");
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
+	});
+
+	it("should create a modifier extension", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend.withModifier("NegatedAgreement", {
+					url: "http://example.org/fhir/StructureDefinition/negated-agreement",
+					valueType: "boolean",
+				}),
+			],
+		});
+
+		const extension: ExtensionDef = def.getExtension("NegatedAgreement")!;
+
+		expect(extension).toBeDefined();
+		expect(extension.isModifier).toBe(true);
+		expect(extension.extensionLocation).toEqual({
+			kind: "modifier",
+			path: "modifierExtension",
+		});
 	});
 
 	it("should create a complex extension", () => {
@@ -97,6 +126,10 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toBeUndefined();
 		expect(extension.valueTypeNarrowing).toBeUndefined();
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
 
 		expect(extension.subdefs).toBeDefined();
 		expect(extension.subdefs!.size).toEqual(3);
@@ -105,6 +138,10 @@ describe("profile extensions", () => {
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("NCT");
 		expect(nct!.valueType).toEqual("string");
+		expect(nct!.extensionLocation).toEqual({
+			kind: "nested",
+			path: "extension.extension",
+		});
 
 		const period = extension.subdefs!.get("period") as ExtensionDef;
 		expect(period).toBeDefined();
@@ -147,6 +184,11 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toEqual("Extension");
 		expect(extension.valueTypeNarrowing).toBeUndefined();
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "primitive",
+			path: "_given.extension",
+			primitiveKey: "given",
+		});
 
 		expect(extension.subdefs).toBeDefined();
 		expect(extension.subdefs!.size).toEqual(1);
@@ -155,5 +197,9 @@ describe("profile extensions", () => {
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("valueCode");
 		expect(nct!.valueType).toEqual("code");
+		expect(nct!.extensionLocation).toEqual({
+			kind: "nested",
+			path: "extension.extension",
+		});
 	});
 });

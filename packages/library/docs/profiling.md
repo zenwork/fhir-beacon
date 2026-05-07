@@ -67,6 +67,14 @@ Current property fields include:
 - `constraints`: custom validation callbacks.
 - `subdefs`: nested definitions for backbone elements.
 
+Extension definitions also include `extensionLocation`, which tells later
+validation and rendering code where matching data should be found:
+
+- `{ kind: "root", path: "extension" }`
+- `{ kind: "primitive", path: "_field.extension", primitiveKey: "field" }`
+- `{ kind: "modifier", path: "modifierExtension" }`
+- `{ kind: "nested", path: "extension.extension" }`
+
 ## Choice Elements
 
 FHIR `value[x]` fields are represented by storing the choice prefix separately
@@ -111,6 +119,15 @@ Use `extend` for FHIR extensions.
 extend.withOne("ParticipationAgreement", {
 	url: "http://example.org/fhir/StructureDefinition/participation-agreement",
 	valueType: "uri",
+});
+```
+
+### Modifier Extensions
+
+```ts
+extend.withModifier("NegatedAgreement", {
+	url: "http://example.org/fhir/StructureDefinition/negated-agreement",
+	valueType: "boolean",
 });
 ```
 
