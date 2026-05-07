@@ -48,6 +48,30 @@ npm run vitest::debug -- --grep "should render"
 
 Before committing changes, verify that the following scripts (used in CI/CD workflows) pass locally.
 
+## Commit Messages
+
+Use Conventional Commits for all commits. Format commit messages as:
+
+```text
+<type>(optional-scope): <description>
+```
+
+Common types:
+- `feat`: user-facing feature
+- `fix`: bug fix
+- `docs`: documentation-only change
+- `test`: test-only change
+- `refactor`: code change that preserves behavior
+- `chore`: maintenance, tooling, or repository cleanup
+
+Examples:
+
+```text
+docs(profiling): add profiling roadmap
+fix(profiling): preserve choice keys when cloning definitions
+test(extension): cover primitive extension rendering
+```
+
 ### Root Level
 ```bash
 npm install                     # Verify dependencies install correctly
