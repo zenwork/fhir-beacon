@@ -18,8 +18,7 @@ jobs:
 
     permissions:
       contents: read
-      pages: write       # Gives access to publish to GitHub Pages
-      id-token: write    # Required for authenticating to GitHub Pages
+      id-token: write    # Required for authenticating to Deno Deploy (OIDC)
 
     steps:
       # Step 1: Download build artifacts from previous workflow
