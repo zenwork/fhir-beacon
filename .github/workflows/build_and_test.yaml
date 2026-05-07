@@ -9,9 +9,13 @@ on:
     branches:
       - '*'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
-  contents: read
-  pages: write
+  contents: write
+  pull-requests: write
   id-token: write
 
 
@@ -111,29 +115,6 @@ jobs:
             packages/app/dist
           retention-days: 5 # Keep artifacts for 5 days
 
-      - name: Verify Release Preparation
-        id: verify_changesets
-        run: |
-          git fetch origin main
-
-          # Initialize release_ready as true
-          echo "release_ready=true" >> $GITHUB_ENV
-
-          # Check for unprocessed changeset markdown files
-          if [ "$(find .changeset -name '*-*-*.md' | wc -l)" -ne "0" ]; then
-            echo "Unprocessed changeset files with multiple dashes detected in the .changeset directory."
-            echo "release_ready=false" >> $GITHUB_ENV
-          fi
-
-          echo "Release preparation check complete."
-
-      - name: Set release_ready Output
-        id: set_release_ready
-        run: echo "release-ready=${{ env.release_ready }}" >> $GITHUB_OUTPUT
-
-    outputs:
-      release-ready: ${{ steps.set_release_ready.outputs.release-ready }}
-
 
 
   deploy_docs:
@@ -173,12 +154,9 @@ jobs:
       artifact_name: build-app
 
   release_lib:
-    name: Prod Lib
-    permissions:
-      contents: write # Override permissions only for this job
-      id-token: write
-    needs: [ build ]
-    if: ${{ needs.build.outputs.release-ready == 'true' && needs.build.result  == 'success' && github.ref == 'refs/heads/main' }}
+    name: Release Library
+    needs: build
+    if: ${{ needs.build.result == 'success' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release_library.yaml
     secrets: inherit
     with:

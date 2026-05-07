@@ -1,82 +1,63 @@
-name: "[CD] - PUBLISH LIB"
+name: Release Library
 
 on:
   workflow_call:
     inputs:
       artifact_name:
-        description: 'build-library'
+        description: 'Optional name of the artifact to use'
         required: false
         type: string
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
 jobs:
   release:
+    name: Release Library
     runs-on: ubuntu-latest
-
-    # Grant write permissions
-    permissions:
-      contents: write
-      id-token: write
-
-    if: ${{ github.ref == 'refs/heads/main' }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: true # Use credentials for git push
+          fetch-depth: 0
 
-      - name: Setup Node.js and Registry
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 22.14.0
+          cache: 'npm'
 
-      - name: Verify Release Preparation
-        id: verify_changesets
-        run: |
-          git fetch origin main
-
-          # Initialize release_ready as true
-          echo "release_ready=true" >> $GITHUB_ENV
-
-          # Check for unprocessed changeset markdown files
-          if [ "$(find .changeset -name '*-*-*.md' | wc -l)" -ne "0" ]; then
-            echo "Unprocessed changeset files with multiple dashes detected in the .changeset directory."
-            echo "release_ready=false" >> $GITHUB_ENV
-          fi
-
-          echo "Release preparation check complete."
+      - name: Ensure latest npm
+        run: npm install -g npm@latest
 
       - name: Install Dependencies
-        if: ${{ env.release_ready == 'true' }}
-        run: npm ci --workspaces && npm run build --workspace=packages/library
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
 
-      - name: Create GitHub Release with Changesets
-        if: ${{ env.release_ready == 'true' }}
+      - name: Changeset Check
+        run: npm run changeset::check
+
+      - name: Build Library
+        run: npm run build --workspace=packages/library
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        working-directory: packages/library
+
+      - name: Run Tests
+        run: |
+          export NODE_ICU_DATA=$PWD/node_modules/full-icu
+          export LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          export TZ=UTC
+          npm run test --workspace=packages/library
+
+      - name: Create Release PR or Publish
+        id: changesets
         uses: changesets/action@v1
         with:
-          publish: npm publish --workspace=packages/library
+          publish: npm publish --workspace=packages/library --access public
+          version: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Debug Changesets Output
-        if: ${{ env.release_ready == 'true' }}
-        run: |
-          echo "Changeset Output:"
-          ls -la .changeset
-
-      - name: Push Tags
-        if: ${{ env.release_ready == 'true' }}
-        run: |
-          git push origin --tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Exit Early If Not Ready
-        if: ${{ env.release_ready != 'true' }}
-        run: |
-          echo "Release preparation failed. Either no version bump or unprocessed changeset files were detected."
-          exit 0
