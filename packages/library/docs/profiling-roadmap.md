@@ -175,12 +175,12 @@ Acceptance criteria:
 
 ### 5. Add Representative Fixtures
 
-- [ ] Simple Patient extension fixture.
-- [ ] Complex Patient extension fixture.
-- [ ] Primitive extension fixture such as `_birthDate` or `_use`.
-- [ ] CH Core ContactPoint fixture.
-- [ ] Blood pressure Observation profile fixture.
-- [ ] Invalid variants for each fixture to exercise validation errors.
+- [x] Simple Patient extension fixture.
+- [x] Complex Patient extension fixture.
+- [x] Primitive extension fixture such as `_birthDate` or `_use`.
+- [x] CH Core ContactPoint fixture.
+- [x] Blood pressure Observation profile fixture.
+- [x] Invalid variants for each fixture to exercise validation errors.
 
 Acceptance criteria:
 
