@@ -9,7 +9,7 @@
         "dev-task": "vite",
         "_deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
         "tsc": "tsc",
-        "build": "tsc && vite build",
+        "build": "npm --prefix ../library run vite::build && tsc && vite build",
         "start": "deno run dev",
         "start-remote": "vite --host"
     },

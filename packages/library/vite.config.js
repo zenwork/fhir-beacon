@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import VitePluginCustomElementsManifest from "vite-plugin-cem";
+import {defineConfig}                   from 'vite'
+import VitePluginCustomElementsManifest from 'vite-plugin-cem'
 
 export default defineConfig(({ mode }) => ({
 	build: {
@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => ({
 		lib: {
 			name: "fhir-beacon",
 			entry: [
+				"./index.ts",
 				"./src/codes",
 				"./src/internal",
 				"./src/utilities",
@@ -15,7 +16,6 @@ export default defineConfig(({ mode }) => ({
 				"./src/styles",
 				"./src/components",
 				"./src/utilities",
-				"./index.ts",
 			],
 			fileName: "fhir-beacon",
 			manifest: true,
