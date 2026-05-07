@@ -72,7 +72,7 @@ Out of scope for the first milestone:
       original property key and choice metadata.
 - [x] Add regression tests for choice keys such as `valueQuantity` and
       `effectiveDateTime`.
-- [ ] Verify the skipped extension story files still work.
+- [x] Verify the skipped extension story files still work.
 - [ ] Rename working extension stories from `.stories.skip.ts` to `.stories.ts`.
 - [ ] Run targeted profiling and extension tests.
 
