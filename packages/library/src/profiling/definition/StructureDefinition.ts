@@ -115,7 +115,8 @@ export class StructureDefinition<T extends Decorateable> {
 			if (isPropertyDef(def)) {
 				def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
 					// @ts-ignore
-					const value: any = constraint._fixedValue;
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+          const value: any = constraint._fixedValue;
 					const result:
 						| { success: false; message?: string }
 						| { success: true } = constraint(data, value);
@@ -143,6 +144,7 @@ export class StructureDefinition<T extends Decorateable> {
 							// @ts-ignore
 							data[def.key].extension
 								.filter((ext: { url: string }) => ext.url === d.url)
+								// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 								.forEach((_e: any) => {
 									// console.log(e)
 									// console.log('\n')
@@ -189,7 +191,7 @@ export class StructureDefinition<T extends Decorateable> {
 					// cardinality
 					const c: string = v.cardinality.padEnd(15, " ");
 
-					// invarients (constraints)
+					// invariants (constraints)
 					let i: string = v.constraints.length > 0 ? "C" : "";
 					// @ts-ignore
 					i =
@@ -207,6 +209,7 @@ export class StructureDefinition<T extends Decorateable> {
 							: "");
 					i = i + " ";
 					//bindings
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					let b: any = "";
 					if (Array.isArray(v.bindings) && v.bindings.length > 0) {
 						b = ` (bind: ${v.bindings.join(",")})`;

@@ -6,7 +6,11 @@ import { ResourceName } from "../../ResourceName";
 import { DomainResourceData } from "../../internal";
 import { Example } from "../util/BindingStrength";
 import { StructureDefinition } from "./StructureDefinition";
-import { PropertyDef } from "./definition.type";
+import {
+	PropertyDef,
+	isDefWithCardinality,
+	isPropertySliceDef,
+} from "./definition.type";
 
 // Sample constructor for mock props
 const createTestProp = <T>(
@@ -135,5 +139,20 @@ describe("Definition Class", () => {
 				},
 			},
 		});
+	});
+
+	it("should narrow defs that expose cardinality", () => {
+		const property = createTestProp<DomainResourceData>("testKey", "string");
+		const slice = {
+			defType: "property-slice" as const,
+			key: "testKey",
+			choice: undefined,
+			subdefs: undefined,
+			constraints: [],
+		};
+
+		expect(isDefWithCardinality(property)).toBe(true);
+		expect(isDefWithCardinality(slice)).toBe(false);
+		expect(isPropertySliceDef(slice)).toBe(true);
 	});
 });

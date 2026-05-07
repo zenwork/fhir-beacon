@@ -27,6 +27,7 @@ export type NarrowableNames =
 
 export type DefConstraintAssertion<T> = ((
 	data: T,
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	fixedValue?: any,
 ) => { success: false; message?: string } | { success: true }) & {
 	_constraintType?: string;
@@ -42,6 +43,7 @@ export type Def = {
 	defType: "property" | "extension" | "property-slice";
 	choice: string | undefined;
 	key: string | string[];
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	subdefs: Map<string, Defs<any>> | undefined;
 };
 
@@ -55,7 +57,9 @@ export type ExtensionDef = Def & {
 	bindingStrength: BindingStrength;
 	isModifier: boolean | undefined;
 	isSummary: boolean | undefined;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	extendRender: Map<DisplayMode, TemplateGenerator<any>> | undefined;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	overrideRender: Map<DisplayMode, TemplateGenerator<any>> | undefined;
 };
 
@@ -92,9 +96,17 @@ export type PropertyDef<T> = Def & {
 	isSummary: boolean | undefined;
 };
 
+export type DefWithCardinality<T> = PropertyDef<T> | ExtensionDef;
+
 // Type guard for PropertyDef<T>
 export function isPropertyDef<T>(def: unknown): def is PropertyDef<T> {
 	return (def as PropertyDef<T>).defType === "property";
+}
+
+export function isDefWithCardinality<T>(
+	def: unknown,
+): def is DefWithCardinality<T> {
+	return isPropertyDef(def) || isExtensionDef(def);
 }
 
 export type PropertySliceDef<T> = Def & {
