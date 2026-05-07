@@ -23,6 +23,7 @@
     "author": "Florian Hehlen",
     "license": "MIT",
     "devDependencies": {
-        "@changesets/cli": "^2.29.1"
+        "@changesets/cli": "^2.29.1",
+        "vite": "^8.0.11"
     }
 }

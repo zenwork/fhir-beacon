@@ -231,3 +231,5 @@ results/
 
 generation/
 .vite/
+
+**/.DS_Store
