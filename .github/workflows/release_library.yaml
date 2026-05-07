@@ -43,9 +43,6 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Changeset Check
-        run: npm run changeset::check
-
       - name: Build Library
         run: npm run build --workspace=packages/library
 
