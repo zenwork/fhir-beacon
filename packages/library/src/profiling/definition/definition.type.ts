@@ -43,6 +43,7 @@ export type Def = {
 	defType: "property" | "extension" | "property-slice";
 	choice: string | undefined;
 	key: string | string[];
+	storageKey?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	subdefs: Map<string, Defs<any>> | undefined;
 };

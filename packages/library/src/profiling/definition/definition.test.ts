@@ -58,8 +58,24 @@ describe("Definition Class", () => {
 			) as PropertyDef<DomainResourceData>;
 
 		def.set(prop);
-		expect(def.get("testKey")).toEqual(prop);
+		expect(def.get("testKey")).toEqual({ ...prop, storageKey: "testKey" });
 		expect(def.get("otherKey")).toBeNull();
+	});
+
+	it("should keep storage keys separate from declared keys", () => {
+		const def = new StructureDefinition<DomainResourceData>(name);
+		const prop = {
+			...createTestProp<DomainResourceData>("Quantity", "Quantity"),
+			choice: "value",
+		};
+
+		def.set(prop);
+
+		expect(def.get("Quantity", "value")).toMatchObject({
+			key: "Quantity",
+			choice: "value",
+			storageKey: "valueQuantity",
+		});
 	});
 
 	it("should clone the Definition object", () => {
@@ -106,10 +122,12 @@ describe("Definition Class", () => {
 		expect(clone.get("Quantity", "value")).toMatchObject({
 			key: "Quantity",
 			choice: "value",
+			storageKey: "valueQuantity",
 		});
 		expect(clone.get("DateTime", "effective")).toMatchObject({
 			key: "DateTime",
 			choice: "effective",
+			storageKey: "effectiveDateTime",
 		});
 		expect(clone.toString()).toContain("valueQuantity");
 		expect(clone.toString()).toContain("effectiveDateTime");
@@ -153,6 +171,7 @@ describe("Definition Class", () => {
 				testKey: {
 					defType: "property",
 					key: "testKey",
+					storageKey: "testKey",
 					isSummary: false,
 					cardinality: "1..1",
 					bindings: [],

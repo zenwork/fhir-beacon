@@ -99,7 +99,7 @@ Acceptance criteria:
 - [x] Document the internal profile format as Beacon profile definitions.
 - [x] Decide whether to rename the internal class or docs language to avoid
       implying full HL7 `StructureDefinition` support.
-- [ ] Separate map storage keys from declared profile element keys.
+- [x] Separate map storage keys from declared profile element keys.
 - [ ] Add explicit extension location metadata:
   - root `extension`
   - primitive `_field.extension`

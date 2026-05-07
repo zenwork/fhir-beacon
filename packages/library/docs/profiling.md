@@ -39,7 +39,10 @@ const contactPointBase = profile<ContactPointData>({
 
 The resulting object stores definition entries in `props`, a map keyed by the
 flattened element path. The definition entry itself keeps the declared key,
-choice metadata, type, cardinality, bindings, and render metadata.
+choice metadata, type, cardinality, bindings, and render metadata. Stored
+entries also include `storageKey`, which is the flattened key used by the map.
+For example, a `value[x]` entry can have `key: "Quantity"`,
+`choice: "value"`, and `storageKey: "valueQuantity"`.
 
 ## Properties
 
@@ -54,6 +57,7 @@ define.optionalListOf("identifier", Identifier);
 Current property fields include:
 
 - `key`: declared data key, or choice suffix for `value[x]` style elements.
+- `storageKey`: flattened map key used for internal lookup.
 - `choice`: optional choice prefix such as `value` or `effective`.
 - `type`: primitive, datatype, or resource name.
 - `typeNarrowing`: allowed target types for references and similar fields.

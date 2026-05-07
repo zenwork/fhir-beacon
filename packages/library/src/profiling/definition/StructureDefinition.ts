@@ -45,7 +45,7 @@ export class StructureDefinition<T extends Decorateable> {
 
 	set(prop: Defs<T>, key?: string) {
 		const k = key ?? flattenKey(prop.key, prop.choice);
-		this.props.set(k, prop);
+		this.props.set(k, { ...prop, storageKey: k });
 	}
 
 	get(key: string | string[], choicePrefix?: string): Defs<T> | null {
