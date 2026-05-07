@@ -1,4 +1,4 @@
-name: "[CI/CD] - Build - Test - Deploy - Publish - Release"
+name: CI Build Test Deploy Publish Release
 
 on:
   workflow_dispatch: # Allows manual triggers

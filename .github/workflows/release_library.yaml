@@ -3,7 +3,7 @@ name: Release Library
 on:
   workflow_run:
     workflows:
-      - "[CI/CD] - Build - Test - Deploy - Publish - Release"
+      - CI Build Test Deploy Publish Release
     types:
       - completed
     branches:
