@@ -79,6 +79,7 @@ Out of scope for the first milestone:
 Acceptance criteria:
 
 - `npm test -- src/profiling src/components/special/extension` passes.
+- `npm run build` passes from `packages/library`.
 - Profile string output no longer contains duplicated choice prefixes such as
   `valuevalueQuantity` or `effectiveeffectiveDateTime`.
 - Storybook discovers the extension stories without manual file renames.
