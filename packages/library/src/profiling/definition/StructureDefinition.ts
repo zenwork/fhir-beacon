@@ -90,7 +90,10 @@ export class StructureDefinition<T extends Decorateable> {
 
 	clone(): StructureDefinition<T> {
 		const def = new StructureDefinition<T>(this.type);
-		this.props.forEach((v, k) => def.set({ ...v, key: k }));
+		def.constraints = [...this.constraints];
+		def.extendRender = new Map(this.extendRender);
+		def.overrideRender = new Map(this.overrideRender);
+		this.props.forEach((v, k) => def.set(cloneDef(v), k));
 		return def;
 	}
 
@@ -307,4 +310,17 @@ function toSerializable(obj: any): any {
 
 	// Return primitive values as is
 	return obj;
+}
+
+function cloneDef<T>(def: Defs<T>): Defs<T> {
+	return {
+		...def,
+		subdefs: def.subdefs ? cloneDefs(def.subdefs) : undefined,
+	};
+}
+
+function cloneDefs<T>(defs: Map<string, Defs<T>>): Map<string, Defs<T>> {
+	return new Map(
+		Array.from(defs.entries()).map(([key, def]) => [key, cloneDef(def)]),
+	);
 }
