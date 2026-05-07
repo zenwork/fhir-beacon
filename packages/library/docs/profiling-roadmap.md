@@ -62,6 +62,16 @@ Out of scope for the first milestone:
 - Full HL7 `StructureDefinition.snapshot.element[]` import.
 - Terminology expansion beyond the existing local value set support.
 
+## Standard Verification Criteria
+
+Unless a task is documentation-only or explicitly marked otherwise, completed
+work should pass both:
+
+- `npm test -- src/profiling src/components/special/extension`
+- `npm run build`
+
+Run both commands from `packages/library`.
+
 ## Tasks
 
 ### 1. Stabilize The Baseline
