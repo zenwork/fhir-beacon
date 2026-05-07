@@ -31,6 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.14.0
+          registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
       - name: Ensure latest npm
@@ -64,4 +65,4 @@ jobs:
           publish: npm publish --workspace=packages/library --access public
           version: npm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
