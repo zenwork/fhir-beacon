@@ -66,7 +66,7 @@ Out of scope for the first milestone:
 
 ### 1. Stabilize The Baseline
 
-- [ ] Remove accidental `.DS_Store` files from the working tree.
+- [x] Remove accidental `.DS_Store` files from the working tree.
 - [ ] Remove or replace noisy `console.log` calls in profiling tests.
 - [ ] Fix `StructureDefinition.clone()` so cloned definitions preserve the
       original property key and choice metadata.
