@@ -1,3 +1,149 @@
+// Simple valueCode extension
+export const glossyPatient = {
+	resourceType: "Patient",
+	id: "glossy",
+	extension: [
+		{
+			url: "http://example.org/StructureDefinition/trials",
+			valueCode: "renal",
+		},
+	],
+	identifier: [
+		{
+			use: "usual",
+			type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "MR" }] },
+			system: "http://www.goodhealth.org/identifiers/mrn",
+			value: "123456",
+		},
+	],
+	active: true,
+	name: [{ family: "Levin", given: ["Henry"], suffix: ["The 7th"] }],
+	gender: "male",
+	birthDate: "1932-09-24",
+};
+
+// valueQuantity extensions + primitive _gender extension
+export const dicomPatient = {
+	resourceType: "Patient",
+	id: "dicom",
+	extension: [
+		{ url: "http://nema.org/fhir/extensions#0010:1010", valueQuantity: { value: 56, unit: "Y" } },
+		{ url: "http://nema.org/fhir/extensions#0010:1020", valueQuantity: { value: 1.83, unit: "m" } },
+		{ url: "http://nema.org/fhir/extensions#0010:1030", valueQuantity: { value: 72.58, unit: "kg" } },
+	],
+	identifier: [{ system: "http://nema.org/examples/patients", value: "MINT1234" }],
+	active: true,
+	name: [{ family: "MINT_TEST" }],
+	gender: "male",
+	_gender: {
+		extension: [
+			{
+				url: "http://nema.org/examples/extensions#gender",
+				valueCoding: { system: "http://nema.org/examples/gender", code: "M" },
+			},
+		],
+	},
+};
+
+// Complex nested extensions (gender identity, pronouns, recorded sex/gender)
+export const sexAndGenderPatient = {
+	resourceType: "Patient",
+	id: "patient-example-sex-and-gender",
+	extension: [
+		{
+			url: "http://hl7.org/fhir/StructureDefinition/individual-genderIdentity",
+			extension: [
+				{
+					url: "value",
+					valueCodeableConcept: {
+						coding: [{ system: "http://snomed.info/sct", code: "446141000124107", display: "Identifies as female gender (finding)" }],
+					},
+				},
+				{ url: "period", valuePeriod: { start: "2001-05-06" } },
+				{ url: "comment", valueString: "Patient transitioned from male to female in 2001." },
+			],
+		},
+		{
+			url: "http://hl7.org/fhir/StructureDefinition/individual-pronouns",
+			extension: [
+				{
+					url: "value",
+					valueCodeableConcept: {
+						coding: [{ system: "http://loinc.org", code: "LA29519-8", display: "she/her/her/hers/herself" }],
+					},
+				},
+				{ url: "period", valuePeriod: { start: "2001-05-06" } },
+				{ url: "comment", valueString: "Patient transitioned from male to female in 2001." },
+			],
+		},
+		{
+			url: "http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender",
+			extension: [
+				{
+					url: "value",
+					valueCodeableConcept: {
+						coding: [{ system: "http://hl7.org/fhir/administrative-gender", code: "male", display: "Male" }],
+					},
+				},
+				{
+					url: "type",
+					valueCodeableConcept: {
+						coding: [{ system: "http://loinc.org", code: "76689-9", display: "Sex Assigned At Birth" }],
+					},
+				},
+				{ url: "effectivePeriod", valuePeriod: { start: "1974-12-25" } },
+				{ url: "acquisitionDate", valueDateTime: "2005-12-06" },
+				{ url: "sourceField", valueString: "SEX" },
+				{
+					url: "jurisdiction",
+					valueCodeableConcept: {
+						coding: [{ system: "https://www.usps.com/", code: "OH", display: "Ohio" }],
+					},
+				},
+				{ url: "comment", valueString: "Patient transitioned from male to female in 2001, but their birth certificate still indicates male." },
+			],
+		},
+	],
+	identifier: [
+		{
+			use: "usual",
+			type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "MR" }] },
+			system: "urn:oid:1.2.36.146.595.217.0.1",
+			value: "12345",
+		},
+	],
+	active: true,
+	name: [
+		{ use: "official", family: "Roth", given: ["Patrick"] },
+		{ use: "usual", family: "Roth", given: ["Patricia"] },
+		{ use: "nickname", given: ["Pat"] },
+	],
+	gender: "male",
+	birthDate: "1974-12-25",
+};
+
+export const newbornPatient = {
+	resourceType: "Patient",
+	id: "newborn",
+	extension: [
+		{
+			url: "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
+			valueString: "Everywoman",
+		},
+	],
+	gender: "male",
+	birthDate: "2017-09-05",
+	_birthDate: {
+		extension: [
+			{
+				url: "http://hl7.org/fhir/StructureDefinition/patient-birthTime",
+				valueDateTime: "2017-05-09T17:11:00+01:00",
+			},
+		],
+	},
+	multipleBirthInteger: 2,
+};
+
 export const data = {
 	resourceType: "Patient",
 	id: "f201",

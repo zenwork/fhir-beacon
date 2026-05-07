@@ -17,9 +17,10 @@ import { toPrimitive } from "./type-converters";
  *   $           - Matches the end of the input.
  *
  * Codes can only contain one space but not in the leading or trailing position.
+ * Actually, FHIR spec allows multiple single spaces.
  *
  */
-const codeRegex = /^(\S+\s)?\S+$/;
+const codeRegex = /^\S+( \S+)*$/;
 
 /**
  * Converts and validates a string to a FHIR code.

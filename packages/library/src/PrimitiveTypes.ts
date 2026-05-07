@@ -8,7 +8,7 @@ export type Base64Binary = string;
  * @description boolean Type: Value of "true" or "false"
  * - code: boolean
  */
-export type Boolean = string;
+export type Boolean = boolean;
 
 /**
  * @description canonical type: A URI that is a reference to a canonical URL on a FHIR resource
@@ -43,7 +43,7 @@ export type DateTime = string;
  * @description decimal Type: A rational number with implicit precision
  * - code: decimal
  */
-export type Decimal = string;
+export type Decimal = number;
 
 /**
  * @description id type: Any combination of letters, numerals, "-" and ".", with a length limit of 64 characters.
@@ -63,7 +63,7 @@ export type Instant = string;
  * @description integer Type: A whole number
  * - code: integer
  */
-export type Integer = string;
+export type Integer = number;
 
 /**
  * @description integer64 Type: A very large whole number
@@ -88,7 +88,7 @@ export type Oid = string;
  * @description positiveInt type: An integer with a value that is positive (e.g. >0)
  * - code: positiveInt
  */
-export type PositiveInt = string;
+export type PositiveInt = number;
 
 /**
  * @description string Type: A sequence of Unicode characters
@@ -106,7 +106,7 @@ export type Time = string;
  * @description unsignedInt type: An integer with a value that is not negative (e.g. >= 0)
  * - code: unsignedInt
  */
-export type UnsignedInt = string;
+export type UnsignedInt = number;
 
 /**
  * @description uri Type: String of characters used to identify a name or a resource

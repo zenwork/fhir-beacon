@@ -12,6 +12,9 @@ describe("toCode function", () => {
 
 		code = toCode("A-B-C D");
 		expect(code).to.equal("A-B-C D");
+
+		code = toCode("renal insufficiency treatment");
+		expect(code).to.equal("renal insufficiency treatment");
 	});
 
 	test("should fail to parse invalid Code", () => {

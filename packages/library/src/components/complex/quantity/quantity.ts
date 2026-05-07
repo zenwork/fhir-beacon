@@ -37,7 +37,7 @@ export class Quantity extends BaseElement<QuantityData | SimpleQuantityData> {
 		const type: string = "decimal";
 		const after = config.verbose
 			? data.unit + "(" + data.code + ")"
-			: data.code;
+			: data.code ?? data.unit;
 		if (isQuantity(data) && !this.simple) {
 			return [
 				html`

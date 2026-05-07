@@ -1,6 +1,7 @@
+import { OpenType } from "../../../OpenType";
 import { FhirExtensionData } from "../../../internal";
 
-export const complexExtension: FhirExtensionData<never> = {
+export const complexExtension: FhirExtensionData<OpenType> = {
 	url: "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
 	extension: [
 		{

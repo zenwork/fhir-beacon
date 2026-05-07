@@ -44,7 +44,7 @@ export const stringExtension: FhirExtensionData<FhirString> = {
 
 export const booleanExtension: FhirExtensionData<FhirBoolean> = {
 	url: "https://example.org/fhir/StructureDefinition/appointment-confirmed",
-	valueBoolean: "true",
+	valueBoolean: true,
 };
 
 export const dateExtension: FhirExtensionData<FhirDate> = {

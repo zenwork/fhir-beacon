@@ -47,6 +47,9 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 	@property({ type: Boolean })
 	public headless: boolean = false;
 
+	@property({ type: Object, attribute: false })
+	public extensionLabels: Record<string, string> = {};
+
 	protected templateGenerators: Generators<D> = NullGenerators();
 
 	public mustRender(): boolean {
@@ -199,6 +202,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 									const key = prop[0];
 									const def = prop[1] as ExtensionDef;
 									if (key.startsWith("_")) {
+										// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 										const generator: TemplateGenerator<any> | undefined =
 											def.extendRender?.get(this.mode);
 										if (generator) {
@@ -283,6 +287,18 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 								)
 								.flat(),
 						);
+						templates.push(
+							...this.templateGenerators.display.footer
+								.map((g) =>
+									g.call(
+										this,
+										this.config(),
+										this.extendedData,
+										new ValidationsImpl(this.extendedData),
+									),
+								)
+								.flat(),
+						);
 					} else {
 						templates.push(html`
                 <fhir-wrapper
@@ -312,7 +328,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 												),
 											)
 											.flat()}
-                    
+
                     ${this.templateGenerators.display.footer
 											.map((g) =>
 												g.call(
@@ -524,6 +540,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
                                     <fhir-extension key=${k}
                                                     .label=${l}
                                                     .data=${d}
+                                                    .labelMap=${this.extensionLabels}
                                                     summary
                                                     headless
                                     ></fhir-extension>`,
