@@ -1,4 +1,4 @@
-import { css } from "lit";
+import {css} from 'lit'
 
 export const componentStyles = css`
   :host {
@@ -19,14 +19,14 @@ export const componentStyles = css`
   }
 
   .error {
-    text-decoration: underline wavy var(--sl-color-danger-600);
+    text-decoration: underline wavy var(--sl-color-danger-600, rgb(220, 38, 38));
   }
 
-  
+
   .variant-checkbox {
-    
+
   }
-  
+
   .variant-fixed-width {
     max-width: 40rem;
     word-wrap: break-word;

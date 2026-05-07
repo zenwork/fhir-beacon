@@ -1,4 +1,4 @@
-import { css } from "lit";
+import {css} from 'lit'
 
 export const componentStyles = css`
   :host {
@@ -16,7 +16,7 @@ export const componentStyles = css`
   /* TODO: variants should be formalised */
   .error {
     font-style: italic;
-    text-decoration: underline wavy var(--sl-color-danger-600);
+    text-decoration: underline wavy var(--sl-color-danger-600, rgb(220, 38, 38));
   }
 
 `;
