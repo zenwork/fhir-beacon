@@ -70,7 +70,7 @@ Out of scope for the first milestone:
 - [x] Remove or replace noisy `console.log` calls in profiling tests.
 - [x] Fix `StructureDefinition.clone()` so cloned definitions preserve the
       original property key and choice metadata.
-- [ ] Add regression tests for choice keys such as `valueQuantity` and
+- [x] Add regression tests for choice keys such as `valueQuantity` and
       `effectiveDateTime`.
 - [ ] Verify the skipped extension story files still work.
 - [ ] Rename working extension stories from `.stories.skip.ts` to `.stories.ts`.

@@ -87,6 +87,36 @@ describe("Definition Class", () => {
 		expect(clone.get("key2")).toEqual(def.get("key2"));
 	});
 
+	it("should preserve choice keys when cloning", () => {
+		const def = new StructureDefinition<DomainResourceData>(name);
+		const valueQuantity = {
+			...createTestProp<DomainResourceData>("Quantity", "Quantity"),
+			choice: "value",
+		};
+		const effectiveDateTime = {
+			...createTestProp<DomainResourceData>("DateTime", "dateTime"),
+			choice: "effective",
+		};
+
+		def.set(valueQuantity);
+		def.set(effectiveDateTime);
+
+		const clone = def.clone();
+
+		expect(clone.get("Quantity", "value")).toMatchObject({
+			key: "Quantity",
+			choice: "value",
+		});
+		expect(clone.get("DateTime", "effective")).toMatchObject({
+			key: "DateTime",
+			choice: "effective",
+		});
+		expect(clone.toString()).toContain("valueQuantity");
+		expect(clone.toString()).toContain("effectiveDateTime");
+		expect(clone.toString()).not.toContain("valuevalueQuantity");
+		expect(clone.toString()).not.toContain("effectiveeffectiveDateTime");
+	});
+
 	it("should generate indented string representation with toString()", () => {
 		const def = new StructureDefinition<DomainResourceData>(name);
 		const prop: PropertyDef<DomainResourceData> = createTestProp(
