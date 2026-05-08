@@ -189,17 +189,17 @@ Acceptance criteria:
 
 ### 6. Documentation And Examples
 
-- [ ] Replace the stub `docs/profiling.md` with actual usage docs.
-- [ ] Document the difference between Beacon profile definitions and full FHIR
+- [x] Replace the stub `docs/profiling.md` with actual usage docs.
+- [x] Document the difference between Beacon profile definitions and full FHIR
       `StructureDefinition` JSON.
-- [ ] Add examples for:
+- [x] Add examples for:
   - defining a base profile
   - constraining a field
   - binding a code
   - defining a root extension
   - defining a primitive extension
   - defining a complex extension
-- [ ] Add a short "known limitations" section.
+- [x] Add a short "known limitations" section.
 
 Acceptance criteria:
 

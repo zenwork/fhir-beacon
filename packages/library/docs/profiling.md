@@ -1,201 +1,369 @@
 # Beacon Profile Definitions
 
-FHIR Beacon currently uses an internal profile model to describe extra
-constraints and extension metadata for components. This model is inspired by
-FHIR `StructureDefinition`, but it is not a full HL7 `StructureDefinition`
-implementation yet.
+FHIR Beacon uses an internal TypeScript profile model to describe constraints,
+bindings, and extension metadata for components. The model is inspired by FHIR
+`StructureDefinition`, but it is not a full HL7 `StructureDefinition`
+implementation.
 
-The current TypeScript class is still named `StructureDefinition` because it
-represents the same kind of concept inside the library. In documentation, refer
-to these objects as **Beacon profile definitions** unless discussing the class
-name directly. Reserve **FHIR StructureDefinition** for real HL7 profile JSON.
+Use Beacon profile definitions when you want to:
 
-Use this internal model when you want to:
+- require or relax fields;
+- constrain a field with a callback;
+- bind a `code`, `Coding`, or `CodeableConcept` to known choices;
+- define root, primitive, modifier, or complex extensions;
+- render profile-defined extensions without writing custom component code.
 
-- describe fields shown by a component;
-- constrain cardinality;
-- attach value set bindings;
-- define profile-specific extensions;
-- add custom render callbacks as an escape hatch.
+The examples below use the public DSL from `src/profiling`.
 
-## Core Concepts
+## Minimal Profile
 
-A Beacon profile is a `StructureDefinition<T>` built with the `profile()` DSL:
+A profile is created with `profile<T>()`. The `type` is the FHIR resource or
+datatype being profiled, and `props` is a list of definition builders.
 
 ```ts
 import { ContactPoint } from "../src/DatatypeDef";
-import { code } from "../src/PrimitiveDef";
+import { code, string as fhirString } from "../src/PrimitiveDef";
+import type { ContactPointData } from "../src/components/complex/contact-point/contact-point.data";
 import { define, profile } from "../src/profiling";
-import type { ContactPointData } from "../src/components";
 
-const contactPointBase = profile<ContactPointData>({
+export const contactPointProfile = profile<ContactPointData>({
 	type: ContactPoint,
 	props: [
-		define.oneOf("system", code).optional(),
-		define.oneOf("value", code).optional(),
+		define.oneOf("system", code),
+		define.optionOf("value", fhirString),
 	],
 });
 ```
 
-The resulting object stores definition entries in `props`, a map keyed by the
-flattened element path. The definition entry itself keeps the declared key,
-choice metadata, type, cardinality, bindings, and render metadata. Stored
-entries also include `storageKey`, which is the flattened key used by the map.
-For example, a `value[x]` entry can have `key: "Quantity"`,
-`choice: "value"`, and `storageKey: "valueQuantity"`.
-
-## Properties
-
-Use `define` for normal resource or datatype properties.
+Common property builders:
 
 ```ts
-define.oneOf("status", code);
-define.optionOf("issued", instant);
-define.optionalListOf("identifier", Identifier);
+define.oneOf("status", code); // 1..1
+define.optionOf("value", fhirString); // 0..1
+define.listOf("telecom", ContactPoint); // 1..*
+define.optionalListOf("telecom", ContactPoint); // 0..*
 ```
 
-Current property fields include:
-
-- `key`: declared data key, or choice suffix for `value[x]` style elements.
-- `storageKey`: flattened map key used for internal lookup.
-- `choice`: optional choice prefix such as `value` or `effective`.
-- `type`: primitive, datatype, or resource name.
-- `typeNarrowing`: allowed target types for references and similar fields.
-- `cardinality`: string such as `0..1`, `1..1`, `0..*`, or `1..*`.
-- `bindings`: local value set id or inline choices.
-- `bindingStrength`: FHIR-like binding strength metadata.
-- `constraints`: custom validation callbacks.
-- `subdefs`: nested definitions for backbone elements.
-
-Extension definitions also include `extensionLocation`, which tells later
-validation and rendering code where matching data should be found:
-
-- `{ kind: "root", path: "extension" }`
-- `{ kind: "primitive", path: "_field.extension", primitiveKey: "field" }`
-- `{ kind: "modifier", path: "modifierExtension" }`
-- `{ kind: "nested", path: "extension.extension" }`
-
-Extension definitions can also carry display metadata:
-
-- `label`: short UI label for the extension.
-- `display`: concise display text for the extension definition.
-- `description`: longer explanatory text.
-
-## Choice Elements
-
-FHIR `value[x]` fields are represented by storing the choice prefix separately
-from the concrete type suffix.
+Profiles can be passed directly to components:
 
 ```ts
-define.choiceOf("value", "Quantity", Quantity).optional();
-define.choiceOf("value", "CodeableConcept", CodeableConcept).optional();
-define.choiceOf("effective", "DateTime", dateTime).optional();
+html`
+	<fhir-contact-point
+		.data=${contactPoint}
+		.profile=${contactPointProfile}
+		showerror
+	></fhir-contact-point>
+`;
 ```
 
-These produce flattened map keys like `valueQuantity` and
-`effectiveDateTime`, while preserving the declared key and `choice` metadata on
-the definition entry.
+During data preparation, Beacon runs the component's normal validation and then
+the active profile validation. Errors flow through the same `FqkMap` mechanism
+used by components.
 
-## Backbone Elements
+## Field Constraints
 
-Use a nested profile to describe backbone properties.
-
-```ts
-define.backboneListOf(
-	"component",
-	profile<ObservationData>({
-		type: new ResourceDef("ObservationComponent"),
-		props: [
-			define.oneOf("code", CodeableConcept),
-			define.choiceOf("value", "Quantity", Quantity).optional(),
-		],
-	}),
-);
-```
-
-Backbone definitions are stored in the parent property's `subdefs` map.
-
-## Extensions
-
-Use `extend` for FHIR extensions.
-
-### Root Extensions
+Use `slice.constraint()` to attach a constraint to an existing property
+definition. The property must already exist in the base or current profile.
 
 ```ts
-extend.withOne("ParticipationAgreement", {
-	url: "http://example.org/fhir/StructureDefinition/participation-agreement",
-	label: "Participation agreement",
-	display: "Agreement URI",
-	description: "Agreement URI accepted by the participant.",
-	valueType: "uri",
+import { ContactPoint, DatatypeDef } from "../src/DatatypeDef";
+import { code } from "../src/PrimitiveDef";
+import type { ContactPointData } from "../src/components/complex/contact-point/contact-point.data";
+import { define, profile, slice } from "../src/profiling";
+
+const base = profile<ContactPointData>({
+	type: ContactPoint,
+	props: [define.oneOf("system", code).optional()],
+});
+
+export const phoneOnly = profile<ContactPointData>({
+	type: new DatatypeDef("ContactPoint", "PhoneOnly"),
+	base,
+	props: [
+		slice.constraint(
+			["system"],
+			[
+				(data: ContactPointData, fixedValue: string) => ({
+					success: data.system === fixedValue,
+					message: `Must be fixed value:${fixedValue}`,
+				}),
+			],
+			["phone"],
+		),
+	],
 });
 ```
 
-### Modifier Extensions
+The third argument is optional fixed-value metadata. The constraint receives it
+as its second parameter.
+
+## Code Bindings
+
+Inline choices can bind primitive `code` values:
 
 ```ts
-extend.withModifier("NegatedAgreement", {
-	url: "http://example.org/fhir/StructureDefinition/negated-agreement",
+import { Observation } from "../src/ResourceDef";
+import { code } from "../src/PrimitiveDef";
+import type { ObservationData } from "../src/components/resources/observation/observation.data";
+import { define, profile } from "../src/profiling";
+
+export const observationStatusProfile = profile<ObservationData>({
+	type: Observation.profile("ObservationStatusExample"),
+	props: [
+		define.oneOf<ObservationData>("status", code).boundBy([
+			{ value: "final", display: "Final" },
+			{ value: "amended", display: "Amended" },
+		]),
+	],
+});
+```
+
+The same inline choices are also enforced for extension values whose
+`valueType` is `code`, `Coding`, or `CodeableConcept`.
+
+## Value Choices
+
+FHIR choice fields such as `value[x]` keep the choice prefix separate from the
+concrete type suffix:
+
+```ts
+import { CodeableConcept, Quantity } from "../src/DatatypeDef";
+import { define } from "../src/profiling";
+
+define.choiceOf("value", "Quantity", Quantity).optional();
+define.choiceOf("value", "CodeableConcept", CodeableConcept).optional();
+```
+
+These entries are stored under flattened keys such as `valueQuantity` and
+`valueCodeableConcept`, while still preserving the declared choice metadata.
+Profile validation reports an error if more than one option from the same
+choice group is present.
+
+## Root Extensions
+
+Root extensions live in `data.extension`.
+
+```ts
+import { Patient } from "../src/ResourceDef";
+import type { PatientData } from "../src/components/resources/patient/patient.data";
+import { extend, profile } from "../src/profiling";
+
+const patientNoteUrl =
+	"http://example.org/fhir/StructureDefinition/patient-note";
+
+export const patientNoteProfile = profile<PatientData>({
+	type: Patient.profile("PatientNoteExample"),
+	props: [
+		extend.withOne("patientNote", {
+			url: patientNoteUrl,
+			label: "Patient note",
+			valueType: "string",
+		}),
+	],
+});
+
+export const patientWithNote: PatientData = {
+	resourceType: "Patient",
+	name: [{ family: "Fixture", given: ["Pat"], prefix: [], suffix: [] }],
+	telecom: [],
+	address: [],
+	contact: [],
+	communication: [],
+	generalPractitioner: [],
+	link: [],
+	extension: [{ url: patientNoteUrl, valueString: "Needs interpreter" }],
+};
+```
+
+When rendered with `patientNoteProfile`, Beacon displays the extension using the
+profile label if one is available.
+
+## Primitive Extensions
+
+Primitive extensions live on underscore siblings such as `_birthDate.extension`
+or `_use.extension`. Define them with `extend.primitive()`.
+
+```ts
+import { Patient } from "../src/ResourceDef";
+import type { PatientData } from "../src/components/resources/patient/patient.data";
+import { extend, profile } from "../src/profiling";
+
+const birthDateAccuracyUrl =
+	"http://example.org/fhir/StructureDefinition/birthdate-accuracy";
+
+export const birthDateAccuracyProfile = profile<PatientData>({
+	type: Patient.profile("BirthDateAccuracyExample"),
+	props: [
+		extend.primitive("birthDate", birthDateAccuracyUrl, [
+			{
+				key: "birthDateAccuracy",
+				url: birthDateAccuracyUrl,
+				label: "Birth date accuracy",
+				valueType: "code",
+				bindings: [
+					{ value: "day", display: "Day known" },
+					{ value: "month", display: "Month known" },
+					{ value: "year", display: "Year known" },
+				],
+			},
+		]),
+	],
+});
+
+export const patientWithBirthDateAccuracy: PatientData = {
+	resourceType: "Patient",
+	name: [{ family: "Fixture", given: ["Pat"], prefix: [], suffix: [] }],
+	telecom: [],
+	address: [],
+	contact: [],
+	communication: [],
+	generalPractitioner: [],
+	link: [],
+	birthDate: "1970-01-01",
+	_birthDate: {
+		extension: [{ url: birthDateAccuracyUrl, valueCode: "day" }],
+	},
+};
+```
+
+With an active profile, primitive extension data is rendered automatically. No
+ordinary `extendRender()` callback is required.
+
+## Complex Extensions
+
+Complex extensions contain nested `extension` entries.
+
+```ts
+import { Patient } from "../src/ResourceDef";
+import type { PatientData } from "../src/components/resources/patient/patient.data";
+import { extend, profile } from "../src/profiling";
+
+const clinicalTrialUrl =
+	"http://example.org/fhir/StructureDefinition/patient-clinical-trial";
+
+export const clinicalTrialProfile = profile<PatientData>({
+	type: Patient.profile("ClinicalTrialExample"),
+	props: [
+		extend.withComplex("clinicalTrial", {
+			url: clinicalTrialUrl,
+			label: "Clinical trial",
+			extensions: [
+				{ url: "nct", label: "NCT number", valueType: "string" },
+				{
+					url: "enrollmentStatus",
+					label: "Enrollment status",
+					valueType: "code",
+				},
+			],
+		}),
+	],
+});
+```
+
+Valid data:
+
+```ts
+const patientInTrial: PatientData = {
+	resourceType: "Patient",
+	name: [{ family: "Fixture", given: ["Pat"], prefix: [], suffix: [] }],
+	telecom: [],
+	address: [],
+	contact: [],
+	communication: [],
+	generalPractitioner: [],
+	link: [],
+	extension: [
+		{
+			url: clinicalTrialUrl,
+			extension: [
+				{ url: "nct", valueString: "NCT-0001" },
+				{ url: "enrollmentStatus", valueCode: "active" },
+			],
+		},
+	],
+};
+```
+
+Nested extension labels are used during display and structure rendering.
+
+## Modifier Extensions
+
+Modifier extensions are defined separately and render with a distinct modifier
+label.
+
+```ts
+extend.withModifier("doNotCall", {
+	url: "http://example.org/fhir/StructureDefinition/do-not-call",
+	label: "Do not call",
 	valueType: "boolean",
 });
 ```
 
-### Primitive Extensions
+The data is stored in `modifierExtension` rather than `extension`.
 
-Primitive extensions describe data stored on underscore siblings such as
-`_use.extension`.
+## Custom Rendering Escape Hatches
 
-```ts
-extend.primitive("use", "http://example.org/fhir/StructureDefinition/use-extra", [
-	{
-		url: "http://example.org/fhir/StructureDefinition/use-extra",
-		valueType: "CodeableConcept",
-	},
-]);
-```
-
-### Complex Extensions
+Most profile-defined extensions should render generically. For unusual cases,
+the DSL still supports custom rendering callbacks:
 
 ```ts
-extend.withComplex("ClinicalTrialParticipation", {
-	url: "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
-	extensions: [
-		{ url: "NCT", valueType: "string" },
-		{ url: "period", valueType: "Period" },
-		{ url: "reason", valueType: "CodeableConcept" },
-	],
-});
+import { html } from "lit";
+import { DisplayMode } from "../src/shell";
+
+extend
+	.withOne("patientNote", {
+		url: patientNoteUrl,
+		label: "Patient note",
+		valueType: "string",
+	})
+	.extendRender(DisplayMode.display, (_config, data) => [
+		html`<strong>${data.extension?.[0]?.valueString}</strong>`,
+	]);
 ```
 
-## Validation Status
+Use custom rendering only when the generic extension display cannot represent
+the intended UI.
 
-Profile validation is currently incomplete. The model can store cardinality,
-binding, extension, and constraint metadata, but generic enforcement is still
-being implemented.
-
-Current reliable behavior:
-
-- custom constraints attached through the DSL can run;
-- component-level validation still runs normally;
-- profile validation errors flow through the same `FqkMap` error map.
-
-Planned behavior:
-
-- generic cardinality enforcement;
-- generic binding enforcement;
-- choice validation;
-- extension validation by URL and value type;
-- nested backbone and complex extension validation.
-
-## Relationship To FHIR StructureDefinition
+## Relationship To HL7 StructureDefinition
 
 Beacon profile definitions are an internal representation. They are not yet a
-loader or validator for real FHIR `StructureDefinition.snapshot.element[]`
-profiles.
+loader, serializer, or validator for real HL7
+`StructureDefinition.snapshot.element[]` JSON.
 
-The intended path is:
+The class is currently named `StructureDefinition` because it fills a similar
+role inside Beacon, but the semantics are narrower:
 
-1. make the internal Beacon profile model reliable;
-2. build generic validation and rendering against that model;
-3. later add an adapter from real FHIR `StructureDefinition` JSON into the
-   internal model.
+- Beacon profiles are authored in TypeScript with `profile()`, `define()`,
+  `slice()`, and `extend()`.
+- Real HL7 `StructureDefinition` JSON cannot be imported directly yet.
+- Unsupported FHIR profile features are not silently interpreted.
+
+An adapter from HL7 `StructureDefinition` JSON to Beacon profile definitions is
+a later milestone.
+
+## Known Limitations
+
+Current profiling support intentionally does not implement the full FHIR
+profiling specification.
+
+Not currently supported:
+
+- full FHIRPath evaluation;
+- full slicing and discriminator semantics;
+- IG package loading;
+- direct import of HL7 `StructureDefinition.snapshot.element[]`;
+- terminology expansion beyond local `CodeIds` and inline choices;
+- complete primitive type narrowing, such as all `Reference` target checks.
+
+Supported today:
+
+- cardinality checks for profile-defined properties and extensions;
+- required value checks;
+- `value[x]` choice exclusivity checks;
+- inline `Choice[]` binding checks for `code`, `Coding`, and
+  `CodeableConcept`;
+- root, primitive, nested complex, and modifier extension validation/rendering;
+- profile validation errors flowing into component error rendering.
+
+See `src/profiling/fixtures/profileFixtures.ts` for compact complete examples
+with valid and invalid data variants.
