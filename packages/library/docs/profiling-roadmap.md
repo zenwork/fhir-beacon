@@ -208,12 +208,12 @@ Acceptance criteria:
 
 ### 7. Optional Later Milestone: FHIR StructureDefinition Import
 
-- [ ] Add an adapter from FHIR R5 `StructureDefinition.snapshot.element[]` to the
+- [x] Add an adapter from FHIR R5 `StructureDefinition.snapshot.element[]` to the
       internal Beacon profile model.
-- [ ] Support basic cardinality, type, binding, and fixed value metadata from
+- [x] Support basic cardinality, type, binding, and fixed value metadata from
       real FHIR definitions.
-- [ ] Add importer tests using small checked-in FHIR profile fixtures.
-- [ ] Defer full slicing/discriminator support until the basic importer is
+- [x] Add importer tests using small checked-in FHIR profile fixtures.
+- [x] Defer full slicing/discriminator support until the basic importer is
       stable.
 
 Acceptance criteria:
