@@ -324,22 +324,77 @@ extend
 Use custom rendering only when the generic extension display cannot represent
 the intended UI.
 
+## FHIR StructureDefinition Importer
+
+Beacon can import a small, direct subset of real FHIR R5
+`StructureDefinition.snapshot.element[]` JSON into the internal profile model.
+Use `importFhirStructureDefinition()` when you already have profile JSON and
+want Beacon to enforce basic constraints without hand-authoring the same
+profile with the TypeScript DSL.
+
+```ts
+import type { ObservationData } from "../src/components/resources/observation/observation.data";
+import { importFhirStructureDefinition } from "../src/profiling";
+
+const result = importFhirStructureDefinition<ObservationData>(
+	observationStructureDefinitionJson,
+);
+
+const observationProfile = result.profile;
+
+for (const diagnostic of result.diagnostics) {
+	console.warn(diagnostic.message);
+}
+```
+
+The returned `profile` is a normal Beacon profile definition and can be passed
+to components:
+
+```ts
+html`
+	<fhir-observation
+		.data=${observation}
+		.profile=${observationProfile}
+		showerror
+	></fhir-observation>
+`;
+```
+
+Imported today:
+
+- root resource or datatype profile identity;
+- direct, top-level element definitions from `snapshot.element[]`;
+- basic cardinality from `min` and `max`;
+- primitive, datatype, and resource type names;
+- `value[x]` choice entries;
+- `binding.strength` and `binding.valueSet` metadata;
+- `fixed[x]` values as validation constraints;
+- `profile` and `targetProfile` type narrowing when the target type is known.
+
+The importer returns diagnostics for FHIR features it sees but does not import,
+such as slicing, named slices, nested backbone paths, FHIRPath constraints,
+conditions, and `pattern[x]` metadata. Treat non-empty diagnostics as a prompt
+to review the imported profile before using it as a faithful representation of
+an implementation guide.
+
+Storybook includes a runnable demo under `Toolkit/Profile Importer`.
+
 ## Relationship To HL7 StructureDefinition
 
-Beacon profile definitions are an internal representation. They are not yet a
-loader, serializer, or validator for real HL7
-`StructureDefinition.snapshot.element[]` JSON.
+Beacon profile definitions are an internal representation. They are not a full
+loader, serializer, or validator for real HL7 `StructureDefinition` JSON.
 
 The class is currently named `StructureDefinition` because it fills a similar
 role inside Beacon, but the semantics are narrower:
 
 - Beacon profiles are authored in TypeScript with `profile()`, `define()`,
   `slice()`, and `extend()`.
-- Real HL7 `StructureDefinition` JSON cannot be imported directly yet.
-- Unsupported FHIR profile features are not silently interpreted.
+- Real HL7 `StructureDefinition.snapshot.element[]` JSON can be imported only
+  for the basic feature subset listed above.
+- Unsupported FHIR profile features are reported as importer diagnostics instead
+  of being silently interpreted.
 
-An adapter from HL7 `StructureDefinition` JSON to Beacon profile definitions is
-a later milestone.
+Complete FHIR `StructureDefinition` parity remains a later milestone.
 
 ## Known Limitations
 
@@ -351,7 +406,7 @@ Not currently supported:
 - full FHIRPath evaluation;
 - full slicing and discriminator semantics;
 - IG package loading;
-- direct import of HL7 `StructureDefinition.snapshot.element[]`;
+- complete import of HL7 `StructureDefinition.snapshot.element[]`;
 - terminology expansion beyond local `CodeIds` and inline choices;
 - complete primitive type narrowing, such as all `Reference` target checks.
 
@@ -363,6 +418,8 @@ Supported today:
 - inline `Choice[]` binding checks for `code`, `Coding`, and
   `CodeableConcept`;
 - root, primitive, nested complex, and modifier extension validation/rendering;
+- basic HL7 `StructureDefinition.snapshot.element[]` import for direct
+  properties;
 - profile validation errors flowing into component error rendering.
 
 See `src/profiling/fixtures/profileFixtures.ts` for compact complete examples
