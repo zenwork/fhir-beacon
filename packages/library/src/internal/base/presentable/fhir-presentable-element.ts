@@ -506,15 +506,14 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 	}
 
 	private renderBaseElement(
-		config: DisplayConfig,
+		_config: DisplayConfig,
 		data: Decorated<D>,
-		validations: Validations,
+		_validations: Validations,
 	): TemplateResult[] {
 		if (data) {
 			return [
 				html`
             <fhir-primitive label="id" .value=${data.id} .type=${PrimitiveType.id}></fhir-primitive>
-            ${this.renderExtensionElement(config, data, validations)}
         `,
 			];
 		}
