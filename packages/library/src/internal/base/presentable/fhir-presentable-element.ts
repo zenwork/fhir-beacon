@@ -637,7 +637,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 			return html`
           <fhir-wrapper label=${label} ?summary=${true} ?summaryonly=${config.summaryonly}>
               ${groupedExtensions.map((extension, index) => {
-								const instanceLabel = `${label} ${index + 1}`;
+								const instanceLabel = `${index + 1}`;
 								return html`
                     <fhir-wrapper label=${instanceLabel} ?summary=${true} ?summaryonly=${config.summaryonly}>
                         ${this.renderExtension(

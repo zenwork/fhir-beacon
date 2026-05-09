@@ -209,8 +209,10 @@ describe("profile extension rendering", () => {
 		).map((wrapper) => wrapper.getAttribute("label"));
 
 		expect(wrapperLabels).toContain("individual recorded Sex Or Gender");
-		expect(wrapperLabels).toContain("individual recorded Sex Or Gender 1");
-		expect(wrapperLabels).toContain("individual recorded Sex Or Gender 2");
+		expect(wrapperLabels).toContain("1");
+		expect(wrapperLabels).toContain("2");
+		expect(wrapperLabels).not.toContain("individual recorded Sex Or Gender 1");
+		expect(wrapperLabels).not.toContain("individual recorded Sex Or Gender 2");
 		expect(wrapperLabels).not.toContain("extensions");
 
 		const primitiveLabels = (
@@ -257,8 +259,10 @@ describe("profile extension rendering", () => {
 
 		expect(wrapperLabels).toContain("Parent note");
 		expect(wrapperLabels).toContain("Nested note");
-		expect(wrapperLabels).toContain("Nested note 1");
-		expect(wrapperLabels).toContain("Nested note 2");
+		expect(wrapperLabels).toContain("1");
+		expect(wrapperLabels).toContain("2");
+		expect(wrapperLabels).not.toContain("Nested note 1");
+		expect(wrapperLabels).not.toContain("Nested note 2");
 		expect(wrapperLabels).not.toContain("extensions");
 	});
 
@@ -299,8 +303,10 @@ describe("profile extension rendering", () => {
 			deepQuerySelectorAll(el, "fhir-wrapper", { depth: 20 }) as HTMLElement[]
 		).map((wrapper) => wrapper.getAttribute("label"));
 		expect(wrapperLabels).toContain("supporting Info");
-		expect(wrapperLabels).toContain("supporting Info 1");
-		expect(wrapperLabels).toContain("supporting Info 2");
+		expect(wrapperLabels).toContain("1");
+		expect(wrapperLabels).toContain("2");
+		expect(wrapperLabels).not.toContain("supporting Info 1");
+		expect(wrapperLabels).not.toContain("supporting Info 2");
 
 		const primitiveValues = (
 			deepQuerySelectorAll(el, "fhir-primitive", { depth: 20 }) as Array<
