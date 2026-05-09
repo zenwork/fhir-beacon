@@ -114,6 +114,239 @@ describe("profile extension rendering", () => {
 		expect(primitiveHost).toHaveAttribute("label", "Contact note");
 	});
 
+	it("groups display-mode extensions by mapped or derived extension labels", async () => {
+		const mappedUrl = "http://example.org/fhir/StructureDefinition/preferred-note";
+		const derivedUrl = "http://example.org/fhir/StructureDefinition/contact-window";
+
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point
+        .extensionLabels=${{ [mappedUrl]: "Preferred note" }}
+        .data=${{
+					system: "phone",
+					value: "+15551234567",
+					extension: [
+						{ url: mappedUrl, valueString: "Call after 5pm" },
+						{ url: derivedUrl, valueString: "Weekdays" },
+					],
+				}}
+      ></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const extensionHosts = deepQuerySelectorAll(el, "fhir-extension", {
+			depth: 20,
+		}) as Array<HTMLElement & { label?: string }>;
+		const labels = extensionHosts.map((host) => host.label);
+		expect(labels).toContain("Preferred note");
+		expect(labels).toContain("contact window");
+		expect(labels).not.toContain("1");
+
+		const wrappers = deepQuerySelectorAll(el, "fhir-wrapper", {
+			depth: 20,
+		}) as HTMLElement[];
+		expect(wrappers.map((wrapper) => wrapper.getAttribute("label"))).not.toContain(
+			"extensions",
+		);
+	});
+
+	it("separates repeated display-mode complex extension instances", async () => {
+		const repeatedUrl =
+			"http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender";
+		const data = {
+			system: "phone",
+			value: "+15551234567",
+			extension: [
+				{
+					url: repeatedUrl,
+					extension: [
+						{
+							url: "value",
+							valueCodeableConcept: {
+								coding: [{ code: "male", display: "Male" }],
+							},
+						},
+						{
+							url: "type",
+							valueCodeableConcept: {
+								coding: [
+									{ code: "birth-certificate", display: "Birth certificate" },
+								],
+							},
+						},
+						{ url: "sourceField", valueString: "SEX" },
+					],
+				},
+				{
+					url: repeatedUrl,
+					extension: [
+						{
+							url: "value",
+							valueCodeableConcept: {
+								coding: [{ code: "male", display: "Male" }],
+							},
+						},
+						{
+							url: "type",
+							valueCodeableConcept: {
+								coding: [{ code: "insurance-card", display: "Insurance card" }],
+							},
+						},
+						{ url: "sourceField", valueString: "SEX" },
+					],
+				},
+			],
+		};
+
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point .data=${data}></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const wrapperLabels = (
+			deepQuerySelectorAll(el, "fhir-wrapper", { depth: 20 }) as HTMLElement[]
+		).map((wrapper) => wrapper.getAttribute("label"));
+
+		expect(wrapperLabels).toContain("individual recorded Sex Or Gender");
+		expect(wrapperLabels).toContain("individual recorded Sex Or Gender 1");
+		expect(wrapperLabels).toContain("individual recorded Sex Or Gender 2");
+		expect(wrapperLabels).not.toContain("extensions");
+
+		const primitiveLabels = (
+			deepQuerySelectorAll(el, "fhir-primitive", { depth: 20 }) as HTMLElement[]
+		).map((primitive) => primitive.getAttribute("label"));
+		expect(primitiveLabels).toContain("value");
+		expect(primitiveLabels).toContain("type");
+		expect(primitiveLabels).toContain("source Field");
+		expect(primitiveLabels).not.toContain("coding");
+	});
+
+	it("recursively groups repeated nested extensions by mapped labels", async () => {
+		const parentUrl = "http://example.org/fhir/StructureDefinition/parent-note";
+		const nestedUrl = "http://example.org/fhir/StructureDefinition/nested-note";
+		const data = {
+			system: "phone",
+			value: "+15551234567",
+			extension: [
+				{
+					url: parentUrl,
+					extension: [
+						{ url: nestedUrl, valueString: "first nested value" },
+						{ url: nestedUrl, valueString: "second nested value" },
+					],
+				},
+			],
+		};
+
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point
+        .extensionLabels=${{
+					[parentUrl]: "Parent note",
+					[nestedUrl]: "Nested note",
+				}}
+        .data=${data}
+      ></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const wrapperLabels = (
+			deepQuerySelectorAll(el, "fhir-wrapper", { depth: 20 }) as HTMLElement[]
+		).map((wrapper) => wrapper.getAttribute("label"));
+
+		expect(wrapperLabels).toContain("Parent note");
+		expect(wrapperLabels).toContain("Nested note");
+		expect(wrapperLabels).toContain("Nested note 1");
+		expect(wrapperLabels).toContain("Nested note 2");
+		expect(wrapperLabels).not.toContain("extensions");
+	});
+
+	it("renders repeated CodeableReference extension values", async () => {
+		const parentUrl =
+			"http://hl7.org/fhir/StructureDefinition/patient-sexParameterForClinicalUse";
+		const data = {
+			system: "phone",
+			value: "+15551234567",
+			extension: [
+				{
+					url: parentUrl,
+					extension: [
+						{
+							url: "supportingInfo",
+							valueCodeableReference: {
+								reference: { reference: "Observation/1" },
+							},
+						},
+						{
+							url: "supportingInfo",
+							valueCodeableReference: {
+								reference: { reference: "MedicationStatement/2" },
+							},
+						},
+					],
+				},
+			],
+		};
+
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point .data=${data}></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const wrapperLabels = (
+			deepQuerySelectorAll(el, "fhir-wrapper", { depth: 20 }) as HTMLElement[]
+		).map((wrapper) => wrapper.getAttribute("label"));
+		expect(wrapperLabels).toContain("supporting Info");
+		expect(wrapperLabels).toContain("supporting Info 1");
+		expect(wrapperLabels).toContain("supporting Info 2");
+
+		const primitiveValues = (
+			deepQuerySelectorAll(el, "fhir-primitive", { depth: 20 }) as Array<
+				HTMLElement & { value?: string }
+			>
+		).map((primitive) => primitive.value);
+		expect(primitiveValues).toContain("Observation/1");
+		expect(primitiveValues).toContain("MedicationStatement/2");
+	});
+
+	it("displays an error for unsupported extension value rendering", async () => {
+		const unsupportedUrl = "http://example.org/fhir/StructureDefinition/address-note";
+		const unknownUrl = "http://example.org/fhir/StructureDefinition/meta-note";
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point
+        .data=${{
+					system: "phone",
+					value: "+15551234567",
+					extension: [
+						{
+							url: unsupportedUrl,
+							valueAddress: { city: "Toronto" },
+						},
+						{
+							url: unknownUrl,
+							valueMeta: { source: "example" },
+						},
+					],
+				}}
+      ></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const unsupported = deepQuerySelectorAll(el, "fhir-not-supported", {
+			depth: 20,
+		}) as HTMLElement[];
+		expect(unsupported).toHaveLength(2);
+		expect(
+			unsupported.map((element) => element.getAttribute("description")),
+		).toContain("Extension value valueAddress cannot be rendered.");
+		expect(
+			unsupported.map((element) => element.getAttribute("description")),
+		).toContain("Extension value valueMeta cannot be rendered.");
+	});
+
 	it("renders nested complex extensions in display and structure modes", async () => {
 		const contactPointProfile = profile<ContactPointData>({
 			type: new DatatypeDef("ContactPoint", "ProfiledContactPoint"),
@@ -168,6 +401,16 @@ describe("profile extension rendering", () => {
 				),
 			).toBe(true);
 		}
+
+		const displayWrappers = deepQuerySelectorAll(display, "fhir-wrapper", {
+			depth: 20,
+		}) as HTMLElement[];
+		const displayWrapperLabels = displayWrappers.map((wrapper) =>
+			wrapper.getAttribute("label"),
+		);
+		expect(displayWrapperLabels).toContain("Contact trial");
+		expect(displayWrapperLabels).not.toContain("Contact trial 1");
+		expect(displayWrapperLabels).not.toContain("extensions");
 	});
 
 	it("renders modifier extensions distinctly", async () => {

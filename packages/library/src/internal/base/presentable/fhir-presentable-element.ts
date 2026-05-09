@@ -542,28 +542,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
             ${
 							hasSome(rootExtensions)
 								? html`
-                    ${wrap<FhirExtensionData<OpenType>>({
-											key: "extension",
-											collection: rootExtensions,
-											generator: (d, l, k, _i) =>
-												html`
-                                    <fhir-extension key=${k}
-                                                    .label=${l}
-                                                    .data=${d}
-                                                    .labelMap=${labelMap}
-                                                    .extensionLabels=${labelMap}
-                                                    .errors=${validations.sliceForFQK({
-																											path: [
-																												{ node: "extension" },
-																												{ node: d.url },
-																											],
-																										})}
-                                                    summary
-                                                    headless
-                                                    ?showerror=${this.showerror}
-                                    ></fhir-extension>`,
+                    ${this.renderExtensionGroups(
 											config,
-										})}
+											rootExtensions,
+											labelMap,
+											validations,
+											"root",
+										)}
 
                 `
 								: nothing
@@ -572,29 +557,13 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
             ${
 							hasSome(modifierExtensions)
 								? html`
-                    ${wrap<FhirExtensionData<OpenType>>({
-											key: "modifierExtension",
-											collection: modifierExtensions,
-											generator: (d, l, k, _i) =>
-												html`
-                                    <fhir-extension key=${k}
-                                                    .label=${`modifier: ${l}`}
-                                                    .data=${d}
-                                                    .labelMap=${labelMap}
-                                                    .extensionLabels=${labelMap}
-                                                    .errors=${validations.sliceForFQK({
-																											path: [
-																												{ node: "extension" },
-																												{ node: d.url },
-																											],
-																										})}
-                                                    summary
-                                                    headless
-                                                    modifier
-                                                    ?showerror=${this.showerror}
-                                    ></fhir-extension>`,
+                    ${this.renderExtensionGroups(
 											config,
-										})}
+											modifierExtensions,
+											labelMap,
+											validations,
+											"modifier",
+										)}
 
                 `
 								: nothing
@@ -604,6 +573,132 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 		}
 
 		return EmptyResult;
+	}
+
+	private renderExtensionGroups(
+		config: DisplayConfig,
+		extensions: FhirExtensionData<OpenType>[],
+		labelMap: Record<string, string>,
+		validations: Validations,
+		kind: "root" | "modifier",
+	): TemplateResult[] {
+		if (config.mode !== DisplayMode.display) {
+			return [
+				wrap<FhirExtensionData<OpenType>>({
+					key: kind === "modifier" ? "modifierExtension" : "extension",
+					collection: extensions,
+					generator: (d, l, k, _i) =>
+						this.renderExtension(
+							d,
+							kind === "modifier" ? `modifier: ${l}` : l,
+							k,
+							labelMap,
+							validations,
+							kind,
+						),
+					config,
+				}),
+			];
+		}
+
+		const groups = new Map<string, FhirExtensionData<OpenType>[]>();
+		for (const extension of extensions) {
+			const label = this.extensionLabel(extension, labelMap, kind);
+			groups.set(label, [...(groups.get(label) ?? []), extension]);
+		}
+
+		return Array.from(groups.entries()).map(([label, groupedExtensions]) => {
+			if (groupedExtensions.length === 1) {
+				if (hasNestedExtensions(groupedExtensions[0])) {
+					return html`
+              <fhir-wrapper label=${label} ?summary=${true} ?summaryonly=${config.summaryonly}>
+                  ${this.renderExtension(
+										groupedExtensions[0],
+										label,
+										extensionKey(groupedExtensions[0], 0),
+										labelMap,
+										validations,
+										kind,
+									)}
+              </fhir-wrapper>
+          `;
+				}
+
+				return this.renderExtension(
+					groupedExtensions[0],
+					label,
+					extensionKey(groupedExtensions[0], 0),
+					labelMap,
+					validations,
+					kind,
+				);
+			}
+
+			return html`
+          <fhir-wrapper label=${label} ?summary=${true} ?summaryonly=${config.summaryonly}>
+              ${groupedExtensions.map((extension, index) => {
+								const instanceLabel = `${label} ${index + 1}`;
+								return html`
+                    <fhir-wrapper label=${instanceLabel} ?summary=${true} ?summaryonly=${config.summaryonly}>
+                        ${this.renderExtension(
+													extension,
+													instanceLabel,
+													extensionKey(extension, index),
+													labelMap,
+													validations,
+													kind,
+												)}
+                    </fhir-wrapper>
+                `;
+							})}
+          </fhir-wrapper>
+      `;
+		});
+	}
+
+	private renderExtension(
+		extension: FhirExtensionData<OpenType>,
+		label: string,
+		key: string,
+		labelMap: Record<string, string>,
+		validations: Validations,
+		kind: "root" | "modifier",
+	): TemplateResult {
+		return html`
+        <fhir-extension key=${key}
+                        .label=${label}
+                        .data=${extension}
+                        .labelMap=${labelMap}
+                        .extensionLabels=${labelMap}
+                        .errors=${validations.sliceForFQK({
+													path: [
+														{ node: kind === "modifier" ? "modifierExtension" : "extension" },
+														{ node: extension.url },
+													],
+												})}
+                        summary
+                        headless
+                        ?modifier=${kind === "modifier"}
+                        ?showerror=${this.showerror}
+        ></fhir-extension>`;
+	}
+
+	private extensionLabel(
+		extension: FhirExtensionData<OpenType>,
+		labelMap: Record<string, string>,
+		kind: "root" | "modifier",
+	): string {
+		const prefix = kind === "modifier" ? "Modifier: " : "";
+		if (extension.url && labelMap[extension.url]) {
+			return `${prefix}${labelMap[extension.url]}`;
+		}
+
+		if (!extension.url) return `${prefix}${extension.id ?? "n/a"}`;
+		const separatorIdx = Math.max(
+			extension.url.lastIndexOf("#"),
+			extension.url.lastIndexOf("/"),
+		);
+		return `${prefix}${asReadable(extension.url.substring(separatorIdx + 1))}`;
 	}
 
 	private renderProfilePrimitiveExtensions(
@@ -728,4 +823,15 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 	private hasIdenticalAncestor(child: HTMLElement | null) {
 		return hasSameAncestor(child);
 	}
+}
+
+function hasNestedExtensions(extension: FhirExtensionData<OpenType>): boolean {
+	return (extension.extension?.length ?? 0) > 0;
+}
+
+function extensionKey(
+	extension: FhirExtensionData<OpenType>,
+	index: number,
+): string {
+	return `${extension.url ?? extension.id ?? "extension"}-${index}`;
 }
