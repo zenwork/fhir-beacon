@@ -74,7 +74,7 @@ export type FhirStructureDefinitionImportResult<T extends Decorateable> = {
 	diagnostics: FhirStructureDefinitionImportDiagnostic[];
 };
 
-type FixedValue = {
+type FhirElementValueConstraint = {
 	key: string;
 	value: unknown;
 };
@@ -185,9 +185,11 @@ function importElement<T extends Decorateable>(
 		const key = choicePrefix ? choiceKey(typeName) : relativePath;
 		const storageKey = flattenImportedKey(key, choicePrefix);
 		const fixedValue = fixedValueFor(element);
-		const constraints = fixedValue
-			? [fixedValueConstraint<T>(storageKey, fixedValue.value)]
-			: [];
+		const patternValue = patternValueFor(element);
+		const constraints = [
+			...(fixedValue ? [fixedValueConstraint<T>(storageKey, fixedValue.value)] : []),
+			...(patternValue ? [patternConstraint<T>(storageKey, patternValue.value)] : []),
+		];
 		const property = definitionProperty<T>(
 			key,
 			typeName,
@@ -318,13 +320,25 @@ function profileName(profileUrl: string): string {
 
 function fixedValueFor(
 	element: FhirElementDefinition,
-): FixedValue | undefined {
+): FhirElementValueConstraint | undefined {
 	const record = element as Record<string, unknown>;
 	const fixedKeys = Object.keys(element).filter(
 		(key) => key.startsWith("fixed") && record[key] !== undefined,
 	);
 	if (fixedKeys.length === 0) return undefined;
 	const key = fixedKeys[0];
+	return { key, value: record[key] };
+}
+
+function patternValueFor(
+	element: FhirElementDefinition,
+): FhirElementValueConstraint | undefined {
+	const record = element as Record<string, unknown>;
+	const patternKeys = Object.keys(element).filter(
+		(key) => key.startsWith("pattern") && record[key] !== undefined,
+	);
+	if (patternKeys.length === 0) return undefined;
+	const key = patternKeys[0];
 	return { key, value: record[key] };
 }
 
@@ -342,6 +356,46 @@ function fixedValueConstraint<T extends Decorateable>(
 
 	constraint._fixedValue = fixedValue;
 	return constraint;
+}
+
+function patternConstraint<T extends Decorateable>(
+	storageKey: string,
+	patternValue: unknown,
+): DefConstraintAssertion<T> {
+	const constraint = ((data: T) => {
+		const actual = resolveValue(data, storageKey);
+		return {
+			success: structurallyContains(actual, patternValue),
+			message: `${storageKey} must match pattern ${JSON.stringify(patternValue)}`,
+		};
+	}) as DefConstraintAssertion<T>;
+
+	constraint._constraintType = "pattern";
+	return constraint;
+}
+
+function structurallyContains(actual: unknown, pattern: unknown): boolean {
+	if (pattern == null || actual == null) return Object.is(actual, pattern);
+
+	if (Array.isArray(pattern)) {
+		// MVP behavior: array pattern matching is exact JSON equality, not full FHIR pattern[x] semantics.
+		return deepEqual(actual, pattern);
+	}
+
+	if (typeof pattern !== "object") {
+		return Object.is(actual, pattern) || deepEqual(actual, pattern);
+	}
+
+	if (typeof actual !== "object" || Array.isArray(actual)) return false;
+
+	const actualRecord = actual as Record<string, unknown>;
+	const patternRecord = pattern as Record<string, unknown>;
+
+	return Object.keys(patternRecord).every(
+		(key) =>
+			Object.prototype.hasOwnProperty.call(actualRecord, key) &&
+			structurallyContains(actualRecord[key], patternRecord[key]),
+	);
 }
 
 function deepEqual(actual: unknown, expected: unknown): boolean {
@@ -379,14 +433,4 @@ function reportUnsupportedElementMetadata(
 		});
 	}
 
-	for (const key of Object.keys(element)) {
-		if (key.startsWith("pattern")) {
-			diagnostics.push({
-				severity: "warning",
-				code: "unsupported-feature",
-				path: element.path,
-				message: `FHIR ${key} metadata is not imported yet`,
-			});
-		}
-	}
 }

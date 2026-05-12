@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { ContactPoint } from "../../DatatypeDef";
+import { ContactPoint, Reference } from "../../DatatypeDef";
 import { code } from "../../PrimitiveDef";
+import { Observation, Patient } from "../../ResourceDef";
 import type { CodeIds } from "../../codes";
 import type { FhirElementData } from "../../internal/base/FhirElement.type";
 import type {
@@ -14,6 +15,8 @@ import { validateProfile } from "./profileValidator";
 type TestData = FhirElementData & {
 	value?: string;
 	status?: string;
+	subject?: { reference?: string; identifier?: unknown };
+	performer?: Array<{ reference?: string; identifier?: unknown }>;
 	// biome-ignore lint/suspicious/noExplicitAny: test data
 	items?: any[];
 };
@@ -254,6 +257,138 @@ describe("validateProfile", () => {
 			});
 
 			validateProfile(def, { status: "active" } as TestData, validations);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+	});
+
+	describe("Reference type narrowing", () => {
+		it("reports an error for a wrong relative reference target type", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { reference: "Observation/123" } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(1);
+			expect(validations.all()[0].fqk).toEqual({
+				path: [{ node: "subject" }, { node: "reference" }],
+			});
+			expect(validations.all()[0].message).toContain(
+				"reference target must be one of: Patient; found Observation",
+			);
+		});
+
+		it("does not report an error for a correct relative reference target type", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { reference: "Patient/123" } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report an error for a correct absolute URL reference target type", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { reference: "https://example.org/fhir/Patient/123" } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report an error for a correct versioned relative reference target type", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { reference: "Patient/123/_history/4" } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report an error for identifier-only Reference objects", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { identifier: { value: "abc" } } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("reports indexed errors for invalid items in repeated References", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionalListOf("performer", Reference, [Patient])],
+			});
+
+			validateProfile(
+				def,
+				{
+					performer: [
+						{ reference: "Patient/123" },
+						{ reference: "Observation/456" },
+					],
+				} as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(1);
+			expect(validations.all()[0].fqk).toEqual({
+				path: [{ node: "performer", index: 1 }, { node: "reference" }],
+			});
+		});
+
+		it("does not report an error when type narrowing is empty", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("subject", Reference)],
+			});
+
+			validateProfile(
+				def,
+				{ subject: { reference: "Observation/123" } } as TestData,
+				validations,
+			);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report an error for non-Reference properties with type narrowing metadata", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [define.optionOf("status", code, [Observation])],
+			});
+
+			validateProfile(def, { status: "Observation/123" } as TestData, validations);
 
 			expect(validations.all()).toHaveLength(0);
 		});

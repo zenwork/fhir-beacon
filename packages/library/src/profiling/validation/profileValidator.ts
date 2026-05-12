@@ -86,6 +86,16 @@ function validatePropertyDef<T extends Decorateable>(
 		});
 	}
 
+	if (def.type === "Reference" && def.typeNarrowing.length > 0 && value != null) {
+		validateReferenceTypeNarrowing(
+			def.typeNarrowing,
+			value,
+			validations,
+			profileName,
+			storageKey,
+		);
+	}
+
 	def.constraints.forEach((constraint) => {
 		const fixedValue = (constraint as { _fixedValue?: unknown })._fixedValue;
 		const result = constraint(data, fixedValue);
@@ -319,4 +329,82 @@ function resolveExtensionArray(
 		case "nested":
 			return null;
 	}
+}
+
+function validateReferenceTypeNarrowing(
+	allowedTypes: readonly string[],
+	value: unknown,
+	validations: Validations,
+	profileName: string,
+	storageKey: string,
+): void {
+	const entries = Array.isArray(value) ? value : [value];
+
+	entries.forEach((item, index) => {
+		if (!item || typeof item !== "object") return;
+
+		const reference = (item as Record<string, unknown>).reference;
+		if (typeof reference !== "string") return;
+
+		const targetType = extractReferenceTargetType(reference, allowedTypes);
+		if (!targetType || allowedTypes.includes(targetType)) return;
+
+		const storageNode: ErrorNodeKey = Array.isArray(value)
+			? { node: storageKey, index }
+			: { node: storageKey };
+
+		validations.add({
+			fqk: { path: [storageNode, { node: "reference" }] },
+			message: `${storageKey} reference target must be one of: ${allowedTypes.join(", ")}; found ${targetType} (${profileName})`,
+		});
+	});
+}
+
+function extractReferenceTargetType(
+	reference: string,
+	allowedTypes: readonly string[],
+): string | null {
+	const segments = referenceSegments(reference);
+	if (segments.length === 0) return null;
+
+	const allowedSegment = segments.find((segment) => allowedTypes.includes(segment));
+	if (allowedSegment) return allowedSegment;
+
+	if (!isAbsoluteReference(reference)) {
+		return segments[0] ?? null;
+	}
+
+	const resourceLikeSegment = segments.find((segment, index) => {
+		const nextSegment = segments[index + 1];
+		return (
+			/^[A-Z][A-Za-z]+$/.test(segment) &&
+			nextSegment !== undefined &&
+			nextSegment !== "_history"
+		);
+	});
+
+	return resourceLikeSegment ?? null;
+}
+
+function referenceSegments(reference: string): string[] {
+	const path = isAbsoluteReference(reference)
+		? parseAbsoluteReferencePath(reference)
+		: reference;
+
+	return path
+		.split("/")
+		.map((segment) => segment.trim())
+		.filter((segment) => segment.length > 0);
+}
+
+function parseAbsoluteReferencePath(reference: string): string {
+	try {
+		return new URL(reference).pathname;
+	} catch {
+		return reference;
+	}
+}
+
+function isAbsoluteReference(reference: string): boolean {
+	return /^[a-z][a-z0-9+.-]*:\/\//i.test(reference);
 }

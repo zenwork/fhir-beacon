@@ -8,6 +8,7 @@ import type {
 import type { Choices } from "../../valuesets";
 import {
 	observationStructureDefinitionFixture,
+	patternStructureDefinitionFixture,
 	unsupportedStructureDefinitionFixture,
 } from "../fixtures/fhirStructureDefinitionFixtures";
 import { Required } from "../util";
@@ -18,8 +19,30 @@ type ObservationFixtureData = FhirElementData & {
 	status?: string;
 	valueString?: string;
 	valueQuantity?: unknown;
+	code?: unknown;
+	category?: unknown[];
 	subject?: unknown;
 };
+
+const patternCode = {
+	coding: [
+		{
+			system: "http://loinc.org",
+			code: "85354-9",
+		},
+	],
+};
+
+const patternCategory = [
+	{
+		coding: [
+			{
+				system: "http://terminology.hl7.org/CodeSystem/observation-category",
+				code: "vital-signs",
+			},
+		],
+	},
+];
 
 class StubValidations implements Validations {
 	private _errors: KeyErrorPair[] = [];
@@ -169,11 +192,130 @@ describe("importFhirStructureDefinition", () => {
 				expect.stringContaining("FHIR slicing and named slices"),
 				expect.stringContaining("Nested backbone and nested extension"),
 				expect.stringContaining("FHIRPath constraints are not imported yet"),
-				expect.stringContaining("FHIR patternCode metadata"),
 			]),
+		);
+		expect(messages).not.toEqual(
+			expect.arrayContaining([expect.stringContaining("FHIR pattern")]),
 		);
 		expect(result.diagnostics.every((diagnostic) => diagnostic.severity)).toBe(
 			true,
 		);
+	});
+
+	it("imports scalar pattern values as profile validation constraints", () => {
+		const result = importFhirStructureDefinition<ObservationFixtureData>(
+			patternStructureDefinitionFixture,
+		);
+		const status = result.profile.getProperty("status");
+
+		expect(result.diagnostics).toEqual([]);
+		expect(status?.constraints).toHaveLength(1);
+
+		const passingValidations = new StubValidations();
+		validateProfile(
+			result.profile,
+			{ status: "final", code: patternCode, category: patternCategory },
+			passingValidations,
+		);
+		expect(passingValidations.all()).toHaveLength(0);
+
+		const failingValidations = new StubValidations();
+		validateProfile(
+			result.profile,
+			{
+				status: "preliminary",
+				code: patternCode,
+				category: patternCategory,
+			},
+			failingValidations,
+		);
+		expect(failingValidations.all()).toEqual([
+			expect.objectContaining({
+				fqk: { path: [{ node: "status" }] },
+				message: expect.stringContaining(
+					'status must match pattern "final"',
+				),
+			}),
+		]);
+	});
+
+	it("imports object pattern values as partial structural constraints", () => {
+		const { profile } = importFhirStructureDefinition<ObservationFixtureData>(
+			patternStructureDefinitionFixture,
+		);
+		const matchingCode = {
+			coding: [
+				{
+					system: "http://loinc.org",
+					code: "85354-9",
+				},
+			],
+			text: "Blood pressure",
+		};
+
+		const passingValidations = new StubValidations();
+		validateProfile(
+			profile,
+			{ status: "final", code: matchingCode, category: patternCategory },
+			passingValidations,
+		);
+		expect(passingValidations.all()).toHaveLength(0);
+
+		const missingKeyValidations = new StubValidations();
+		validateProfile(
+			profile,
+			{
+				status: "final",
+				code: { coding: [{}] },
+				category: patternCategory,
+			},
+			missingKeyValidations,
+		);
+		expect(missingKeyValidations.all()).toHaveLength(1);
+
+		const wrongNestedScalarValidations = new StubValidations();
+		validateProfile(
+			profile,
+			{
+				status: "final",
+				code: {
+					coding: [{ system: "http://loinc.org", code: "wrong" }],
+				},
+				category: patternCategory,
+			},
+			wrongNestedScalarValidations,
+		);
+		expect(wrongNestedScalarValidations.all()).toHaveLength(1);
+	});
+
+	it("uses exact-match MVP behavior for array-shaped pattern values", () => {
+		const { profile } = importFhirStructureDefinition<ObservationFixtureData>(
+			patternStructureDefinitionFixture,
+		);
+
+		const passingValidations = new StubValidations();
+		validateProfile(
+			profile,
+			{ status: "final", code: patternCode, category: patternCategory },
+			passingValidations,
+		);
+		expect(passingValidations.all()).toHaveLength(0);
+
+		const extraKeyValidations = new StubValidations();
+		validateProfile(
+			profile,
+			{
+				status: "final",
+				code: patternCode,
+				category: [{ ...patternCategory[0], text: "Vital Signs" }],
+			},
+			extraKeyValidations,
+		);
+		expect(extraKeyValidations.all()).toEqual([
+			expect.objectContaining({
+				fqk: { path: [{ node: "category" }] },
+				message: expect.stringContaining("category must match pattern"),
+			}),
+		]);
 	});
 });

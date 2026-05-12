@@ -99,7 +99,63 @@ export const unsupportedStructureDefinitionFixture = {
 				max: "1",
 				type: [{ code: "code" }],
 				constraint: [{ key: "obs-1", expression: "status.exists()" }],
+			},
+		],
+	},
+} satisfies FhirStructureDefinition;
+
+export const patternStructureDefinitionFixture = {
+	resourceType: "StructureDefinition",
+	id: "pattern-observation",
+	name: "PatternObservation",
+	type: "Observation",
+	snapshot: {
+		element: [
+			{
+				id: "Observation",
+				path: "Observation",
+				min: 0,
+				max: "*",
+			},
+			{
+				id: "Observation.status",
+				path: "Observation.status",
+				min: 0,
+				max: "1",
+				type: [{ code: "code" }],
 				patternCode: "final",
+			},
+			{
+				id: "Observation.code",
+				path: "Observation.code",
+				min: 0,
+				max: "1",
+				type: [{ code: "CodeableConcept" }],
+				patternCodeableConcept: {
+					coding: [
+						{
+							system: "http://loinc.org",
+							code: "85354-9",
+						},
+					],
+				},
+			},
+			{
+				id: "Observation.category",
+				path: "Observation.category",
+				min: 0,
+				max: "*",
+				type: [{ code: "CodeableConcept" }],
+				patternCodeableConcept: [
+					{
+						coding: [
+							{
+								system: "http://terminology.hl7.org/CodeSystem/observation-category",
+								code: "vital-signs",
+							},
+						],
+					},
+				],
 			},
 		],
 	},
