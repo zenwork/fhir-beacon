@@ -11,4 +11,8 @@ dist/
 build/
 out/
 
+packages/data
+packages/library/assets
+.idea/
+.git/
 

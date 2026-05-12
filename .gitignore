@@ -234,3 +234,4 @@ generation/
 .vite/
 
 **/.DS_Store
+/.output.txt
