@@ -12,10 +12,11 @@ import { StructureDefinition } from "../definition/StructureDefinition";
 import type {
 	DefConstraintAssertion,
 	NarrowableNames,
+	PropertyDef,
 	TypeName,
 } from "../definition/definition.type";
 import { BindingStrength, Example } from "../util";
-import { resolveValue } from "../validation";
+import { checkCardinality, resolveValue } from "../validation";
 
 export type FhirStructureDefinition = {
 	resourceType: string;
@@ -107,8 +108,17 @@ export function importFhirStructureDefinition<
 		return { profile, diagnostics };
 	}
 
+	const backboneRegistry = new Map<string, PropertyDef<T>>();
+	const sliceChildrenByRootPath = buildSliceChildrenByRootPath(elements);
 	for (const element of elements) {
-		importElement(profile, rootPath, element, diagnostics);
+		importElement(
+			profile,
+			rootPath,
+			element,
+			diagnostics,
+			backboneRegistry,
+			sliceChildrenByRootPath,
+		);
 	}
 
 	return { profile, diagnostics };
@@ -119,6 +129,8 @@ function importElement<T extends Decorateable>(
 	rootPath: string,
 	element: FhirElementDefinition,
 	diagnostics: FhirStructureDefinitionImportDiagnostic[],
+	backboneRegistry: Map<string, PropertyDef<T>>,
+	sliceChildrenByRootPath: Map<string, FhirElementDefinition[]>,
 ): void {
 	if (element.path === rootPath) {
 		reportUnsupportedElementMetadata(element, diagnostics);
@@ -139,21 +151,32 @@ function importElement<T extends Decorateable>(
 
 	const relativePath = element.path.slice(rootPath.length + 1);
 	if (relativePath.includes(".")) {
-		diagnostics.push({
-			severity: "warning",
-			code: "unsupported-feature",
-			path: element.path,
-			message: "Nested backbone and nested extension import is not supported yet",
-		});
+		if (isSliceChildElement(element, rootPath, sliceChildrenByRootPath)) {
+			return;
+		}
+		importNestedElement(rootPath, element, diagnostics, backboneRegistry);
 		return;
 	}
 
-	if (element.sliceName || relativePath.includes(":")) {
+	const identityRelativePath = elementIdentityPath(element).slice(rootPath.length + 1);
+	if (element.sliceName) {
+		importNamedSlice(
+			profile,
+			rootPath,
+			element,
+			diagnostics,
+			sliceChildrenByRootPath,
+		);
+		return;
+	}
+
+	if (relativePath.includes(":") || identityRelativePath.includes(":")) {
 		diagnostics.push({
 			severity: "warning",
 			code: "unsupported-feature",
 			path: element.path,
-			message: "FHIR slicing and named slices are not imported yet",
+			message:
+				"FHIR slice child element is not imported outside named slice processing",
 		});
 		return;
 	}
@@ -171,7 +194,7 @@ function importElement<T extends Decorateable>(
 
 	const choicePrefix = choicePrefixFor(relativePath);
 	for (const typeRef of typeRefs) {
-		const typeName = toBeaconTypeName(typeRef.code);
+		const typeName = toImportedTypeName(typeRef.code, rootPath, relativePath);
 		if (!typeName) {
 			diagnostics.push({
 				severity: "warning",
@@ -206,6 +229,254 @@ function importElement<T extends Decorateable>(
 		);
 
 		profile.set(property);
+		if (typeRef.code === "BackboneElement") {
+			const storedProperty = profile.getProperty(storageKey);
+			if (storedProperty) {
+				backboneRegistry.set(element.path, storedProperty);
+			}
+		}
+	}
+}
+
+function importNamedSlice<T extends Decorateable>(
+	profile: StructureDefinition<T>,
+	rootPath: string,
+	element: FhirElementDefinition,
+	diagnostics: FhirStructureDefinitionImportDiagnostic[],
+	sliceChildrenByRootPath: Map<string, FhirElementDefinition[]>,
+): void {
+	const sliceRootPath = elementIdentityPath(element);
+	const sliceRelativePath = sliceRootPath.slice(rootPath.length + 1);
+	if (!sliceRelativePath.includes(":") || sliceRelativePath.includes(":.")) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: element.path,
+			message: "FHIR named slice is missing a supported slice path",
+		});
+		return;
+	}
+
+	const parentRelativePath = sliceRelativePath.split(":")[0];
+	const parent = profile.getProperty(parentRelativePath);
+	if (!parent) {
+		diagnostics.push({
+			severity: "warning",
+			code: "skipped-element",
+			path: element.path,
+			message: `Skipped named slice without imported parent ${rootPath}.${parentRelativePath}`,
+		});
+		return;
+	}
+
+	const discriminator = sliceDiscriminatorFor(
+		sliceRootPath,
+		sliceChildrenByRootPath.get(sliceRootPath) ?? [],
+	);
+	if (!discriminator) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: element.path,
+			message:
+				"FHIR named slice is not imported because no simple fixed or pattern discriminator child was found",
+		});
+		return;
+	}
+
+	const parentStorageKey = parent.storageKey ?? parentRelativePath;
+	parent.constraints = parent.constraints.concat([
+		namedSliceCardinalityConstraint<T>(
+			parentStorageKey,
+			discriminator.childPath,
+			discriminator.value,
+			cardinalityFor(element),
+			element.sliceName,
+		),
+	]);
+	diagnostics.push({
+		severity: "warning",
+		code: "unsupported-feature",
+		path: element.path,
+		message:
+			"Imported named slice as a simplified discriminator-filtered cardinality constraint; full FHIR slicing semantics, ordering, open/closed rules, and reslicing are not enforced.",
+	});
+}
+
+function buildSliceChildrenByRootPath(
+	elements: FhirElementDefinition[],
+): Map<string, FhirElementDefinition[]> {
+	const childrenByRootPath = new Map<string, FhirElementDefinition[]>();
+
+	for (const element of elements) {
+		const identityPath = elementIdentityPath(element);
+		if (!identityPath.includes(":")) continue;
+
+		const lastDotIndex = identityPath.lastIndexOf(".");
+		if (lastDotIndex < 0) continue;
+
+		const rootPath = identityPath.slice(0, lastDotIndex);
+		if (!rootPath.includes(":")) continue;
+
+		const children = childrenByRootPath.get(rootPath) ?? [];
+		childrenByRootPath.set(rootPath, [...children, element]);
+	}
+
+	return childrenByRootPath;
+}
+
+function isSliceChildElement(
+	element: FhirElementDefinition,
+	rootPath: string,
+	sliceChildrenByRootPath: Map<string, FhirElementDefinition[]>,
+): boolean {
+	const identityPath = elementIdentityPath(element);
+	if (!identityPath.slice(rootPath.length + 1).includes(":")) return false;
+
+	const lastDotIndex = identityPath.lastIndexOf(".");
+	if (lastDotIndex < 0) return false;
+
+	return sliceChildrenByRootPath.has(identityPath.slice(0, lastDotIndex));
+}
+
+function elementIdentityPath(element: FhirElementDefinition): string {
+	return element.id ?? element.path;
+}
+
+function sliceDiscriminatorFor(
+	sliceRootPath: string,
+	children: FhirElementDefinition[],
+): { childPath: string; value: unknown } | null {
+	for (const child of children) {
+		const childPath = elementIdentityPath(child).slice(sliceRootPath.length + 1);
+		if (!childPath || childPath.includes(".")) continue;
+
+		const fixedValue = fixedValueFor(child);
+		if (fixedValue) {
+			return { childPath, value: fixedValue.value };
+		}
+
+		const patternValue = patternValueFor(child);
+		if (patternValue) {
+			return { childPath, value: patternValue.value };
+		}
+	}
+
+	return null;
+}
+
+function namedSliceCardinalityConstraint<T extends Decorateable>(
+	parentStorageKey: string,
+	discriminatorChildPath: string,
+	discriminatorValue: unknown,
+	sliceCardinality: string,
+	sliceName: string | undefined,
+): DefConstraintAssertion<T> {
+	const constraint = ((data: T) => {
+		const parentValue = resolveValue(data, parentStorageKey);
+		if (!Array.isArray(parentValue)) return { success: true };
+
+		const matchingItems = parentValue.filter((item) =>
+			structurallyContains(
+				resolveValue(item, discriminatorChildPath),
+				discriminatorValue,
+			),
+		);
+		const cardResult = checkCardinality(matchingItems, sliceCardinality);
+		return {
+			success: cardResult === "ok",
+			message: `${parentStorageKey} slice${sliceName ? ` ${sliceName}` : ""} requires ${sliceCardinality} entries matching ${discriminatorChildPath} ${JSON.stringify(discriminatorValue)}`,
+		};
+	}) as DefConstraintAssertion<T>;
+
+	constraint._constraintType = "slice-cardinality";
+	return constraint;
+}
+
+function importNestedElement<T extends Decorateable>(
+	rootPath: string,
+	element: FhirElementDefinition,
+	diagnostics: FhirStructureDefinitionImportDiagnostic[],
+	backboneRegistry: Map<string, PropertyDef<T>>,
+): void {
+	const relativePath = element.path.slice(rootPath.length + 1);
+	const firstDotIndex = relativePath.indexOf(".");
+	const parentRelPath = relativePath.slice(0, firstDotIndex);
+	const childRelPath = relativePath.slice(firstDotIndex + 1);
+
+	if (childRelPath.includes(".")) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: element.path,
+			message: "Nested backbone import supports one child level only",
+		});
+		return;
+	}
+
+	const parent = backboneRegistry.get(`${rootPath}.${parentRelPath}`);
+	if (!parent) {
+		diagnostics.push({
+			severity: "warning",
+			code: "skipped-element",
+			path: element.path,
+			message: `Skipped nested element without imported backbone parent ${rootPath}.${parentRelPath}`,
+		});
+		return;
+	}
+
+	const typeRefs = element.type ?? [];
+	if (typeRefs.length === 0) {
+		diagnostics.push({
+			severity: "warning",
+			code: "skipped-element",
+			path: element.path,
+			message: "Skipped nested element without a type",
+		});
+		return;
+	}
+
+	parent.subdefs ??= new Map();
+	const choicePrefix = choicePrefixFor(childRelPath);
+	for (const typeRef of typeRefs) {
+		const typeName = toImportedTypeName(typeRef.code, rootPath, relativePath);
+		if (!typeName) {
+			diagnostics.push({
+				severity: "warning",
+				code: "unsupported-type",
+				path: element.path,
+				message: `Unsupported FHIR element type ${typeRef.code ?? "(missing)"}`,
+			});
+			continue;
+		}
+
+		const key = choicePrefix ? choiceKey(typeName) : childRelPath;
+		const storageKey = flattenImportedKey(key, choicePrefix);
+		const fixedValue = fixedValueFor(element);
+		const patternValue = patternValueFor(element);
+		const constraints = [
+			...(fixedValue ? [fixedValueConstraint<T>(storageKey, fixedValue.value)] : []),
+			...(patternValue ? [patternConstraint<T>(storageKey, patternValue.value)] : []),
+		];
+		const childProperty = definitionProperty<T>(
+			key,
+			typeName,
+			typeNarrowingFor(typeRef, diagnostics, element.path),
+			cardinalityFor(element),
+			bindingFor(element),
+			bindingStrengthFor(element, diagnostics),
+			constraints,
+			choicePrefix,
+			undefined,
+			element.mustSupport,
+			element.isModifier,
+			element.isSummary,
+		);
+
+		parent.subdefs.set(storageKey, childProperty);
+		if (typeRef.code === "BackboneElement") {
+			backboneRegistry.set(element.path, childProperty);
+		}
 	}
 }
 
@@ -237,6 +508,30 @@ function toBeaconTypeName(typeCode: string | undefined): TypeName | null {
 	if (DatatypeDef.isValid(typeCode)) return typeCode as TypeName;
 	if (ResourceDef.isValid(typeCode)) return typeCode as TypeName;
 	return null;
+}
+
+function toImportedTypeName(
+	typeCode: string | undefined,
+	rootPath: string,
+	relativePath: string,
+): TypeName | null {
+	if (typeCode === "BackboneElement") {
+		return backboneTypeNameFor(rootPath, relativePath);
+	}
+	return toBeaconTypeName(typeCode);
+}
+
+function backboneTypeNameFor(rootPath: string, relativePath: string): TypeName {
+	return `${rootPath}${capitalizePath(relativePath)}` as TypeName;
+}
+
+function capitalizePath(path: string): string {
+	return path
+		.split(".")
+		.map((segment) => segment.replace(/:.+$/, ""))
+		.filter(Boolean)
+		.map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`)
+		.join("");
 }
 
 function cardinalityFor(element: FhirElementDefinition): string {

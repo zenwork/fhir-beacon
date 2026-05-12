@@ -36,17 +36,21 @@ What exists today:
 
 Remaining concerns:
 
-- Primitive type narrowing (e.g. Reference target types) is not yet enforced.
+- Reference target type narrowing is enforced where a concrete `reference`
+  string is available. Identifier-only references remain unvalidated without
+  terminology/server resolution.
 - Primitive and complex extension rendering is not yet driven automatically by
   profile metadata.
 - `modifierExtension` display is still unimplemented.
-- The internal model is not yet an adapter for real HL7 `StructureDefinition` JSON.
+- The importer is a deliberately partial adapter for real HL7
+  `StructureDefinition` JSON, not a complete implementation of all snapshot
+  semantics.
 
 ## Scope Decision
 
 The next milestone should be an internal Beacon profile system with FHIR-inspired
-semantics. Full HL7 `StructureDefinition` import should come after the internal
-profile model and validator are reliable.
+semantics. Complete HL7 `StructureDefinition` semantics should come after the
+internal profile model and validator are reliable.
 
 The supported first milestone should cover:
 
@@ -63,10 +67,16 @@ The supported first milestone should cover:
 Out of scope for the first milestone:
 
 - Full FHIRPath evaluation.
-- Full slicing/discriminator semantics.
+- FHIR element condition evaluation.
+- Full discriminator-based slicing semantics.
+- Slice ordering enforcement.
+- Open/closed slicing rule enforcement.
+- Reslicing.
 - Complete IG package loading.
-- Full HL7 `StructureDefinition.snapshot.element[]` import.
+- Complete HL7 `StructureDefinition.snapshot.element[]` semantics.
 - Terminology expansion beyond the existing local value set support.
+- Generic validator-side validation of normal property subdefs/backbone subdefs.
+- Complete FHIR `pattern[x]` array semantics.
 
 ## Standard Verification Criteria
 
@@ -135,7 +145,7 @@ Acceptance criteria:
   - `1..*`
 - [x] Enforce required/present values.
 - [x] Enforce `value[x]` choice constraints.
-- [ ] Validate primitive type narrowing where feasible.
+- [x] Validate Reference target type narrowing where feasible.
 - [x] Validate `code` bindings through existing `Codes`/`ValueSets` support.
 - [x] Validate `Coding` bindings.
 - [x] Validate `CodeableConcept` bindings.
@@ -220,6 +230,23 @@ Acceptance criteria:
 
 - A small real FHIR profile can be imported into the internal model.
 - Unsupported features are reported clearly instead of silently ignored.
+
+### 8. Complete Importer Coverage (MVP Closure)
+
+- [x] Import supported `pattern[x]` constraints as scalar/object partial-match
+      constraints.
+- [x] Validate Reference target type narrowing where feasible.
+- [x] Import one-level backbone element metadata into parent `subdefs`.
+- [x] Import simple named slices as discriminator-filtered cardinality
+      constraints.
+
+Acceptance criteria:
+
+- MVP importer behavior is explicit and covered by tests.
+- Supported FHIR metadata imports into Beacon profile definitions without
+  implying complete FHIR profiling support.
+- Unsupported FHIRPath, condition, slicing, and nested validation semantics
+  remain documented as out of scope.
 
 ## Suggested Implementation Order
 

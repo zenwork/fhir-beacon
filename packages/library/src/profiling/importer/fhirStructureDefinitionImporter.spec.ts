@@ -7,10 +7,14 @@ import type {
 } from "../../internal/base/Validations.type";
 import type { Choices } from "../../valuesets";
 import {
+	contactBackboneStructureDefinitionFixture,
+	identifierSliceStructureDefinitionFixture,
 	observationStructureDefinitionFixture,
 	patternStructureDefinitionFixture,
+	unsupportedSliceStructureDefinitionFixture,
 	unsupportedStructureDefinitionFixture,
 } from "../fixtures/fhirStructureDefinitionFixtures";
+import type { PropertyDef } from "../definition";
 import { Required } from "../util";
 import { validateProfile } from "../validation";
 import { importFhirStructureDefinition } from "./fhirStructureDefinitionImporter";
@@ -22,6 +26,10 @@ type ObservationFixtureData = FhirElementData & {
 	code?: unknown;
 	category?: unknown[];
 	subject?: unknown;
+};
+
+type PatientFixtureData = FhirElementData & {
+	identifier?: Array<{ system?: string; value?: string }>;
 };
 
 const patternCode = {
@@ -189,8 +197,10 @@ describe("importFhirStructureDefinition", () => {
 		expect(messages).toEqual(
 			expect.arrayContaining([
 				expect.stringContaining("FHIR slicing metadata is not imported yet"),
-				expect.stringContaining("FHIR slicing and named slices"),
-				expect.stringContaining("Nested backbone and nested extension"),
+				expect.stringContaining(
+					"no simple fixed or pattern discriminator child was found",
+				),
+				expect.stringContaining("supports one child level only"),
 				expect.stringContaining("FHIRPath constraints are not imported yet"),
 			]),
 		);
@@ -199,6 +209,106 @@ describe("importFhirStructureDefinition", () => {
 		);
 		expect(result.diagnostics.every((diagnostic) => diagnostic.severity)).toBe(
 			true,
+		);
+	});
+
+	it("imports one-level nested backbone elements into parent subdefs", () => {
+		const result = importFhirStructureDefinition(
+			contactBackboneStructureDefinitionFixture,
+		);
+
+		expect(result.diagnostics).toEqual([]);
+
+		const contact = result.profile.getProperty("contact");
+		expect(contact).toMatchObject({
+			key: "contact",
+			type: "PatientContact",
+			cardinality: "0..*",
+		});
+		expect(contact?.subdefs).toBeDefined();
+
+		const name = contact?.subdefs?.get("name") as
+			| PropertyDef<ObservationFixtureData>
+			| undefined;
+		expect(name).toMatchObject({
+			key: "name",
+			type: "HumanName",
+			cardinality: "0..1",
+		});
+	});
+
+	it("imports simple named slices as discriminator-filtered cardinality constraints", () => {
+		const result = importFhirStructureDefinition<PatientFixtureData>(
+			identifierSliceStructureDefinitionFixture,
+		);
+		const identifier = result.profile.getProperty("identifier");
+
+		expect(identifier?.constraints).toHaveLength(1);
+		expect(result.diagnostics.map((diagnostic) => diagnostic.message)).toEqual(
+			expect.arrayContaining([
+				expect.stringContaining(
+					"Imported named slice as a simplified discriminator-filtered cardinality constraint",
+				),
+			]),
+		);
+
+		const missingValidations = new StubValidations();
+		validateProfile(result.profile, { identifier: [] }, missingValidations);
+		expect(missingValidations.all()).toEqual([
+			expect.objectContaining({
+				fqk: { path: [{ node: "identifier" }] },
+				message: expect.stringContaining("identifier slice mr requires 1..1"),
+			}),
+		]);
+
+		const unrelatedValidations = new StubValidations();
+		validateProfile(
+			result.profile,
+			{ identifier: [{ system: "urn:other", value: "123" }] },
+			unrelatedValidations,
+		);
+		expect(unrelatedValidations.all()).toHaveLength(1);
+
+		const passingValidations = new StubValidations();
+		validateProfile(
+			result.profile,
+			{ identifier: [{ system: "urn:mr", value: "123" }] },
+			passingValidations,
+		);
+		expect(passingValidations.all()).toHaveLength(0);
+
+		const tooManyValidations = new StubValidations();
+		validateProfile(
+			result.profile,
+			{
+				identifier: [
+					{ system: "urn:mr", value: "123" },
+					{ system: "urn:mr", value: "456" },
+				],
+			},
+			tooManyValidations,
+		);
+		expect(tooManyValidations.all()).toEqual([
+			expect.objectContaining({
+				fqk: { path: [{ node: "identifier" }] },
+				message: expect.stringContaining("identifier slice mr requires 1..1"),
+			}),
+		]);
+	});
+
+	it("skips named slices without a simple discriminator", () => {
+		const result = importFhirStructureDefinition<PatientFixtureData>(
+			unsupportedSliceStructureDefinitionFixture,
+		);
+		const identifier = result.profile.getProperty("identifier");
+
+		expect(identifier?.constraints).toHaveLength(0);
+		expect(result.diagnostics.map((diagnostic) => diagnostic.message)).toEqual(
+			expect.arrayContaining([
+				expect.stringContaining(
+					"no simple fixed or pattern discriminator child was found",
+				),
+			]),
 		);
 	});
 

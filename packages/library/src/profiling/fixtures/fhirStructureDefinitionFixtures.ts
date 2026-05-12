@@ -93,12 +93,122 @@ export const unsupportedStructureDefinitionFixture = {
 				type: [{ code: "CodeableConcept" }],
 			},
 			{
+				id: "Observation.component.code.coding",
+				path: "Observation.component.code.coding",
+				min: 0,
+				max: "*",
+				type: [{ code: "Coding" }],
+			},
+			{
 				id: "Observation.status",
 				path: "Observation.status",
 				min: 1,
 				max: "1",
 				type: [{ code: "code" }],
 				constraint: [{ key: "obs-1", expression: "status.exists()" }],
+			},
+		],
+	},
+} satisfies FhirStructureDefinition;
+
+export const contactBackboneStructureDefinitionFixture = {
+	resourceType: "StructureDefinition",
+	id: "contact-backbone-patient",
+	name: "ContactBackbonePatient",
+	type: "Patient",
+	snapshot: {
+		element: [
+			{
+				id: "Patient",
+				path: "Patient",
+				min: 0,
+				max: "*",
+			},
+			{
+				id: "Patient.contact",
+				path: "Patient.contact",
+				min: 0,
+				max: "*",
+				type: [{ code: "BackboneElement" }],
+			},
+			{
+				id: "Patient.contact.name",
+				path: "Patient.contact.name",
+				min: 0,
+				max: "1",
+				type: [{ code: "HumanName" }],
+			},
+		],
+	},
+} satisfies FhirStructureDefinition;
+
+export const identifierSliceStructureDefinitionFixture = {
+	resourceType: "StructureDefinition",
+	id: "identifier-slice-patient",
+	name: "IdentifierSlicePatient",
+	type: "Patient",
+	snapshot: {
+		element: [
+			{
+				id: "Patient",
+				path: "Patient",
+				min: 0,
+				max: "*",
+			},
+			{
+				id: "Patient.identifier",
+				path: "Patient.identifier",
+				min: 0,
+				max: "*",
+				type: [{ code: "Identifier" }],
+			},
+			{
+				id: "Patient.identifier:mr",
+				path: "Patient.identifier",
+				sliceName: "mr",
+				min: 1,
+				max: "1",
+				type: [{ code: "Identifier" }],
+			},
+			{
+				id: "Patient.identifier:mr.system",
+				path: "Patient.identifier.system",
+				min: 1,
+				max: "1",
+				type: [{ code: "uri" }],
+				fixedUri: "urn:mr",
+			},
+		],
+	},
+} satisfies FhirStructureDefinition;
+
+export const unsupportedSliceStructureDefinitionFixture = {
+	resourceType: "StructureDefinition",
+	id: "unsupported-slice-patient",
+	name: "UnsupportedSlicePatient",
+	type: "Patient",
+	snapshot: {
+		element: [
+			{
+				id: "Patient",
+				path: "Patient",
+				min: 0,
+				max: "*",
+			},
+			{
+				id: "Patient.identifier",
+				path: "Patient.identifier",
+				min: 0,
+				max: "*",
+				type: [{ code: "Identifier" }],
+			},
+			{
+				id: "Patient.identifier:local",
+				path: "Patient.identifier",
+				sliceName: "local",
+				min: 1,
+				max: "1",
+				type: [{ code: "Identifier" }],
 			},
 		],
 	},
