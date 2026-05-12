@@ -723,23 +723,39 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 
 			return extensions.map(
 				(extension, index) => html`
-            <fhir-extension key=${`${def.key}-${index}`}
-                            .label=${labelMap[extension.url] ?? def.label ?? def.key}
-                            .data=${extension}
-                            .labelMap=${labelMap}
-                            .extensionLabels=${labelMap}
-                            .errors=${validations.sliceForFQK({
-															path: [
-																{ node: "extension" },
-																{ node: extension.url },
-															],
-														})}
-                            summary
-                            headless
-                            ?showerror=${this.showerror}
-            ></fhir-extension>`,
+            ${this.renderPrimitiveExtension(
+							extension,
+							`${def.key}-${index}`,
+							labelMap,
+							validations,
+						)}
+        `,
 			);
 		});
+	}
+
+	private renderPrimitiveExtension(
+		extension: FhirExtensionData<OpenType>,
+		key: string,
+		labelMap: Record<string, string>,
+		validations: Validations,
+	): TemplateResult {
+		return html`
+        <fhir-extension key=${key}
+                        .label=${this.extensionLabel(extension, labelMap, "root")}
+                        .data=${extension}
+                        .labelMap=${labelMap}
+                        .extensionLabels=${labelMap}
+                        .errors=${validations.sliceForFQK({
+													path: [
+														{ node: "extension" },
+														{ node: extension.url },
+													],
+												})}
+                        summary
+                        headless
+                        ?showerror=${this.showerror}
+        ></fhir-extension>`;
 	}
 
 	private shouldRenderGenericExtension(

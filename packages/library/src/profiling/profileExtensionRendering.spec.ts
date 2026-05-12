@@ -218,10 +218,8 @@ describe("profile extension rendering", () => {
 		const primitiveLabels = (
 			deepQuerySelectorAll(el, "fhir-primitive", { depth: 20 }) as HTMLElement[]
 		).map((primitive) => primitive.getAttribute("label"));
-		expect(primitiveLabels).toContain("value");
-		expect(primitiveLabels).toContain("type");
 		expect(primitiveLabels).toContain("source Field");
-		expect(primitiveLabels).not.toContain("coding");
+		expect(primitiveLabels).toContain("coding");
 	});
 
 	it("recursively groups repeated nested extensions by mapped labels", async () => {

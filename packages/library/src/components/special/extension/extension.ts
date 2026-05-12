@@ -29,13 +29,13 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 	}
 
 	public renderStructure(
-		_config: DisplayConfig,
+		config: DisplayConfig,
 		data: Decorated<FhirExtensionData<OpenType>>,
 		validations: Validations,
 	): TemplateResult[] {
 		let templates: TemplateResult[] = [];
 		templates = [
-			html`<fhir-primitive key="url" label=${this.modifier ? "modifierExtension url" : "url"} type=${PrimitiveType.none} .value=${data.url}></fhir-primitive>`,
+			html`<fhir-primitive key="url" label=${this.modifier ? "modifierExtension url" : "url"} type=${PrimitiveType.none} .value=${data.url} .errormessage=${extensionErrorMessage(validations, data)} ?showerror=${this.showerror}></fhir-primitive>`,
 		];
 
 		if (this.#extensionType === "simple" && this.#valueType) {
@@ -44,22 +44,33 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 			this.addUnsupportedValueTemplate(templates, data);
 		}
 
-		return [html`${templates}`];
+		return [
+			html`
+          <fhir-wrapper
+                  label=${toLabel(data, this.labelMap, this.modifier)}
+                  variant="details"
+                  ?open=${config.open}
+                  ?summaryonly=${config.summaryonly}
+          >
+              ${templates}
+          </fhir-wrapper>
+      `,
+		];
 	}
 
 	public renderDisplay(
 		_config: DisplayConfig,
 		data: Decorated<FhirExtensionData<OpenType>>,
-		_validations: Validations,
+		validations: Validations,
 	): TemplateResult[] {
 		let templates: TemplateResult[] = [];
 		if (this.mode !== DisplayMode.display) {
 			templates = [
-				html`<fhir-primitive key="url" label=${this.modifier ? "modifierExtension url" : "url"} type=${PrimitiveType.uri} .value=${data.url}></fhir-primitive>`,
+				html`<fhir-primitive key="url" label=${this.modifier ? "modifierExtension url" : "url"} type=${PrimitiveType.uri} .value=${data.url} .errormessage=${extensionErrorMessage(validations, data)} ?showerror=${this.showerror}></fhir-primitive>`,
 			];
 		}
 		if (this.#extensionType === "simple" && this.#valueType) {
-			this.addTemplate(templates, data, this.#valueType[0], _validations);
+			this.addTemplate(templates, data, this.#valueType[0], validations);
 		} else if (hasValueKey(data)) {
 			this.addUnsupportedValueTemplate(templates, data);
 		}
@@ -102,7 +113,7 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 		valueType: OpenTypeNameEnum,
 		validations: Validations,
 	): void {
-		const headless = this.mode === DisplayMode.display;
+		const headless = false;
 		const label = toLabel(data, this.labelMap, this.modifier);
 		const valueKey = `value${valueType}` as ValuePrefixKey;
 		const valueErrors = valueErrorSlice(validations, data, valueKey);
@@ -156,55 +167,16 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 				);
 				break;
 			case OpenTypeNameEnum.CodeableConcept:
-				if (this.mode === DisplayMode.display && valueErrors.entries().length === 0) {
-					templates.push(html`
-              <fhir-primitive key=${data.url}
-                              label=${label}
-                              context=${data.url}
-                              type=${PrimitiveType.fhir_string}
-                              .value=${codeableConceptDisplay(data.valueCodeableConcept)}
-                              ?showerror=${this.showerror}
-              ></fhir-primitive>
-          `);
-					break;
-				}
-
 				templates.push(html`
               <fhir-codeable-concept key=${data.url} label=${label} ?headless=${headless} .data=${data.valueCodeableConcept} .errors=${valueErrors}></fhir-codeable-concept>
           `);
 				break;
 			case OpenTypeNameEnum.Coding:
-				if (this.mode === DisplayMode.display && valueErrors.entries().length === 0) {
-					templates.push(html`
-              <fhir-primitive key=${data.url}
-                              label=${label}
-                              context=${data.url}
-                              type=${PrimitiveType.fhir_string}
-                              .value=${codingDisplay(data.valueCoding)}
-                              ?showerror=${this.showerror}
-              ></fhir-primitive>
-          `);
-					break;
-				}
-
 				templates.push(html`
               <fhir-coding key=${data.url} label=${label} ?headless=${headless} .data=${data.valueCoding} .errors=${valueErrors}></fhir-coding>
           `);
 				break;
 			case OpenTypeNameEnum.CodeableReference:
-				if (this.mode === DisplayMode.display && valueErrors.entries().length === 0) {
-					templates.push(html`
-              <fhir-primitive key=${data.url}
-                              label=${label}
-                              context=${data.url}
-                              type=${PrimitiveType.fhir_string}
-                              .value=${codeableReferenceDisplay(data.valueCodeableReference)}
-                              ?showerror=${this.showerror}
-              ></fhir-primitive>
-          `);
-					break;
-				}
-
 				templates.push(html`
               <fhir-codeable-reference key=${data.url} label=${label} ?headless=${headless} .data=${data.valueCodeableReference} .errors=${valueErrors}></fhir-codeable-reference>
           `);
@@ -219,12 +191,17 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 			case OpenTypeNameEnum.UsageContext:
 				templates.push(html`
               <fhir-primitive key=${data.url}
-                              label=${label}
-                              type=${PrimitiveType.fhir_string}
-                              .value=${JSON.stringify(data[valueKey as keyof FhirExtensionData<OpenType>])}
-                              .errormessage=${valueErrorMessage(validations, data, valueKey)}
-                              ?showerror=${this.showerror}
-              ></fhir-primitive>
+	                              label=${label}
+	                              type=${PrimitiveType.fhir_string}
+	                              .value=${JSON.stringify(data[valueKey as keyof FhirExtensionData<OpenType>])}
+	                              .errormessage=${valueErrorMessage(
+																	validations,
+																	data,
+																	valueKey,
+																	this.mode === DisplayMode.display,
+																)}
+	                              ?showerror=${this.showerror}
+	              ></fhir-primitive>
           `);
 				break;
 			case OpenTypeNameEnum.ContactPoint:
@@ -448,42 +425,6 @@ function findType(simpleExtensionName: string): OpenTypeNameEnum | null {
 	return type;
 }
 
-function codeableConceptDisplay(value: unknown): string | undefined {
-	const concept = value as
-		| { text?: string; coding?: Array<{ display?: string; code?: string }> }
-		| undefined;
-	return (
-		concept?.text ??
-		concept?.coding?.find((coding) => coding.display || coding.code)?.display ??
-		concept?.coding?.find((coding) => coding.display || coding.code)?.code
-	);
-}
-
-function codingDisplay(value: unknown): string | undefined {
-	const coding = value as { display?: string; code?: string } | undefined;
-	return coding?.display ?? coding?.code;
-}
-
-function codeableReferenceDisplay(value: unknown): string | undefined {
-	const codeableReference = value as
-		| {
-				concept?: {
-					text?: string;
-					coding?: Array<{ display?: string; code?: string }>;
-				};
-				reference?: { display?: string; reference?: string };
-		  }
-		| undefined;
-
-	return (
-		codeableReference?.concept?.text ??
-		codeableReference?.concept?.coding?.find((coding) => coding.display || coding.code)?.display ??
-		codeableReference?.concept?.coding?.find((coding) => coding.display || coding.code)?.code ??
-		codeableReference?.reference?.display ??
-		codeableReference?.reference?.reference
-	);
-}
-
 function toLabel(data: FhirExtensionData<OpenType>, labelMap?: Record<string, string>, modifier = false): string {
 	const prefix = modifier ? "Modifier: " : "";
 	if (labelMap && data.url && labelMap[data.url]) return `${prefix}${labelMap[data.url]}`;
@@ -510,7 +451,12 @@ function valueTemplate(
                         context=${data.url}
                         type=${type}
                         .value=${data[valueKey as keyof FhirExtensionData<OpenType>]}
-                        .errormessage=${valueErrorMessage(validations, data, valueKey)}
+                        .errormessage=${valueErrorMessage(
+													validations,
+													data,
+													valueKey,
+													true,
+												)}
                         ?showerror=${showerror}
         ></fhir-primitive> `;
 	} else {
@@ -519,7 +465,12 @@ function valueTemplate(
                       label=${label}
                       type=${type}
                         .value=${data[valueKey as keyof FhirExtensionData<OpenType>]}
-                        .errormessage=${valueErrorMessage(validations, data, valueKey)}
+                        .errormessage=${valueErrorMessage(
+													validations,
+													data,
+													valueKey,
+													false,
+												)}
                         ?showerror=${showerror}
       ></fhir-primitive> `;
 	}
@@ -558,9 +509,19 @@ function valueErrorMessage(
 	validations: Validations,
 	data: FhirExtensionData<OpenType>,
 	valueKey: ValuePrefixKey,
+	includeExtensionError: boolean,
 ): string | undefined {
 	return (
 		validations.msgFor(valueKey) ??
-		validations.msgFor({ path: [{ node: data.url }, { node: valueKey }] })
+		validations.msgFor({ path: [{ node: data.url }, { node: valueKey }] }) ??
+		(includeExtensionError ? extensionErrorMessage(validations, data) : undefined)
 	);
+}
+
+function extensionErrorMessage(
+	validations: Validations,
+	data: FhirExtensionData<OpenType>,
+): string | undefined {
+	if (!data.url) return undefined;
+	return validations.msgFor(data.url);
 }
