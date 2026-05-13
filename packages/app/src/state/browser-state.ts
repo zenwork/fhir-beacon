@@ -166,26 +166,27 @@ export class BrowserState {
         for await (const entry of handle.entries()) {
           const h: PonyfillDirectoryHandle | FileSystemHandle = entry[1]
           if (isFileHandle(h)) {
-
-            h.getFile()
-             .then(async (f) => {
-               const text = await f.text()
-               let parsed: unknown = null
-               try {
-                 parsed = JSON.parse(text)
-               } catch {
-                 parsed = null
-               }
-               return {
-                 name: f.name,
-                 type: (parsed && typeof parsed === 'object' && 'resourceType' in (parsed as Record<string, unknown>))
-                         ? String((parsed as Record<string, unknown>).resourceType)
-                         : getValueFromJsonKey('resourceType', text),
-                 isMetaData: f.name.indexOf('example') === -1,
-                 data: f,
-                 searchText: parsed ? buildSearchTextFromJson(parsed) : text.toLowerCase()
-               }
-             })
+            promises.push(
+              h.getFile()
+               .then(async (f) => {
+                 const text = await f.text()
+                 let parsed: unknown = null
+                 try {
+                   parsed = JSON.parse(text)
+                 } catch {
+                   parsed = null
+                 }
+                 return {
+                   name: f.name,
+                   type: (parsed && typeof parsed === 'object' && 'resourceType' in (parsed as Record<string, unknown>))
+                           ? String((parsed as Record<string, unknown>).resourceType)
+                           : getValueFromJsonKey('resourceType', text),
+                   isMetaData: f.name.indexOf('example') === -1,
+                   data: f,
+                   searchText: parsed ? buildSearchTextFromJson(parsed) : text.toLowerCase()
+                 }
+               })
+            )
           }
         }
       }
