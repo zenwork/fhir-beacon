@@ -31,6 +31,9 @@ describe("profile extensions", () => {
 				}),
 				extend.withOne("ParticipationAgreement", {
 					url: "http://example.org/fhir/StructureDefinition/participation-agreement",
+					label: "Participation agreement",
+					display: "Agreement URI",
+					description: "Agreement URI accepted by the participant.",
 					valueType: "uri",
 				}),
 			],
@@ -40,6 +43,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("CRInitiatingLocation");
+		expect(extension.storageKey).toEqual("CRInitiatingLocation");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://hl7.org/fhir/StructureDefinition/communicationrequest-initiatingLocation",
@@ -47,17 +51,52 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toEqual("Reference");
 		expect(extension.valueTypeNarrowing).toEqual(["Location"]);
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
 
 		extension = def.getExtension("ParticipationAgreement")!;
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("ParticipationAgreement");
+		expect(extension.storageKey).toEqual("ParticipationAgreement");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://example.org/fhir/StructureDefinition/participation-agreement",
 		);
 		expect(extension.valueType).toEqual("uri");
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.label).toEqual("Participation agreement");
+		expect(extension.display).toEqual("Agreement URI");
+		expect(extension.description).toEqual(
+			"Agreement URI accepted by the participant.",
+		);
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
+	});
+
+	it("should create a modifier extension", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend.withModifier("NegatedAgreement", {
+					url: "http://example.org/fhir/StructureDefinition/negated-agreement",
+					valueType: "boolean",
+				}),
+			],
+		});
+
+		const extension: ExtensionDef = def.getExtension("NegatedAgreement")!;
+
+		expect(extension).toBeDefined();
+		expect(extension.isModifier).toBe(true);
+		expect(extension.extensionLocation).toEqual({
+			kind: "modifier",
+			path: "modifierExtension",
+		});
 	});
 
 	it("should create a complex extension", () => {
@@ -66,9 +105,11 @@ describe("profile extensions", () => {
 			props: [
 				extend.withComplex("ClinicalTrialParticipation", {
 					url: "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
+					label: "Clinical trial participation",
 					extensions: [
 						{
 							url: "NCT",
+							label: "NCT number",
 							valueType: "string",
 						},
 						{
@@ -90,6 +131,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("ClinicalTrialParticipation");
+		expect(extension.storageKey).toEqual("ClinicalTrialParticipation");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
@@ -97,6 +139,11 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toBeUndefined();
 		expect(extension.valueTypeNarrowing).toBeUndefined();
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.label).toEqual("Clinical trial participation");
+		expect(extension.extensionLocation).toEqual({
+			kind: "root",
+			path: "extension",
+		});
 
 		expect(extension.subdefs).toBeDefined();
 		expect(extension.subdefs!.size).toEqual(3);
@@ -104,19 +151,89 @@ describe("profile extensions", () => {
 		const nct = extension.subdefs!.get("NCT") as ExtensionDef;
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("NCT");
+		expect(nct!.storageKey).toEqual("NCT");
+		expect(nct!.label).toEqual("NCT number");
 		expect(nct!.valueType).toEqual("string");
+		expect(nct!.extensionLocation).toEqual({
+			kind: "nested",
+			path: "extension.extension",
+		});
 
 		const period = extension.subdefs!.get("period") as ExtensionDef;
 		expect(period).toBeDefined();
 		expect(period!.key).toEqual("period");
+		expect(period!.storageKey).toEqual("period");
 		expect(period!.valueType).toEqual("Period");
 
 		const reason = extension.subdefs!.get("reason") as ExtensionDef;
 		expect(reason).toBeDefined();
 		expect(reason!.key).toEqual("reason");
+		expect(reason!.storageKey).toEqual("reason");
 		expect(reason!.valueType).toEqual("CodeableConcept");
 		expect(reason!.cardinality).toEqual("1..1");
 		expect(reason!.subdefs).toBeUndefined();
+	});
+
+	it("should create a complex modifier extension", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend.withModifierComplex("RecordedSexOrGender", {
+					url: "http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender",
+					label: "Recorded sex or gender",
+					extensions: [
+						{
+							url: "sourceField",
+							label: "Source field",
+							valueType: "string",
+						},
+					],
+				}),
+			],
+		});
+
+		const extension: ExtensionDef = def.getExtension("RecordedSexOrGender")!;
+
+		expect(extension).toBeDefined();
+		expect(extension.isModifier).toBe(true);
+		expect(extension.extensionLocation).toEqual({
+			kind: "modifier",
+			path: "modifierExtension",
+		});
+		expect(extension.subdefs).toBeDefined();
+		expect(extension.subdefs!.size).toBe(1);
+	});
+
+	it("should support cardinality modifiers on extension builders", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend
+					.withModifier("OptionalModifier", {
+						url: "http://example.org/fhir/StructureDefinition/optional-modifier",
+						valueType: "boolean",
+					})
+					.optional(),
+				extend
+					.withModifierComplex("ManyModifier", {
+						url: "http://example.org/fhir/StructureDefinition/many-modifier",
+						label: "Many modifier",
+						extensions: [{ url: "detail", valueType: "string" }],
+					})
+					.hasMany(),
+				extend
+					.withOne("ManyOptionalRoot", {
+						url: "http://example.org/fhir/StructureDefinition/many-optional-root",
+						valueType: "string",
+					})
+					.optional()
+					.hasMany(),
+			],
+		});
+
+		expect(def.getExtension("OptionalModifier")?.cardinality).toBe("0..1");
+		expect(def.getExtension("ManyModifier")?.cardinality).toBe("1..*");
+		expect(def.getExtension("ManyOptionalRoot")?.cardinality).toBe("0..*");
 	});
 
 	it("should set an extension", () => {
@@ -140,6 +257,7 @@ describe("profile extensions", () => {
 
 		expect(extension).toBeDefined();
 		expect(extension.key).toEqual("_given");
+		expect(extension.storageKey).toEqual("_given");
 		expect(extension.defType).toEqual("extension");
 		expect(extension.url).toEqual(
 			"http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
@@ -147,6 +265,11 @@ describe("profile extensions", () => {
 		expect(extension.valueType).toEqual("Extension");
 		expect(extension.valueTypeNarrowing).toBeUndefined();
 		expect(extension.cardinality).toEqual("1..1");
+		expect(extension.extensionLocation).toEqual({
+			kind: "primitive",
+			path: "_given.extension",
+			primitiveKey: "given",
+		});
 
 		expect(extension.subdefs).toBeDefined();
 		expect(extension.subdefs!.size).toEqual(1);
@@ -154,6 +277,11 @@ describe("profile extensions", () => {
 		const nct = extension.subdefs!.get("valueCode") as ExtensionDef;
 		expect(nct).toBeDefined();
 		expect(nct!.key).toEqual("valueCode");
+		expect(nct!.storageKey).toEqual("valueCode");
 		expect(nct!.valueType).toEqual("code");
+		expect(nct!.extensionLocation).toEqual({
+			kind: "nested",
+			path: "extension.extension",
+		});
 	});
 });

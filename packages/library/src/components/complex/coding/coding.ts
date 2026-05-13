@@ -36,6 +36,7 @@ export class Coding extends BaseElement<CodingData> {
                   .value=${Coding.computeDisplay(data)}
                   .context=${Coding.computeContext(data, validations)}
                   .errormessage=${validations.msgFor({ path: [{ node: "code" }] })}
+                  ?showerror=${this.showerror}
                   summary
           ></fhir-primitive >
       `,
@@ -55,12 +56,14 @@ export class Coding extends BaseElement<CodingData> {
                           .value=${data.system}
                           type="url"
                           .errormessage=${validations.msgFor({ path: [{ node: "system" }] })}
+                          ?showerror=${this.showerror}
                           summary
           ></fhir-primitive>
           <fhir-primitive label="code"
                           .value=${data.code}
                           type="code"
                           .errormessage=${validations.msgFor({ path: [{ node: "code" }] })}
+                          ?showerror=${this.showerror}
                           summary
           ></fhir-primitive>
           <fhir-primitive label="display" .value=${data.display} summary></fhir-primitive>

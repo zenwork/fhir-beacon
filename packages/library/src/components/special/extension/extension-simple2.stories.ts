@@ -67,6 +67,13 @@ export const ContactPointExtension: Story = {
 	},
 };
 
+export const AddressExtension: Story = {
+	name: "Address Extension",
+	args: {
+		data: data.addressExtension,
+	},
+};
+
 export const HumanNameExtension: Story = {
 	name: "HumanName Extension",
 	args: {
@@ -78,6 +85,13 @@ export const IdentifierExtension: Story = {
 	name: "Identifier Extension",
 	args: {
 		data: data.identifierExtension,
+	},
+};
+
+export const MetaExtension: Story = {
+	name: "Meta Extension",
+	args: {
+		data: data.metaExtension,
 	},
 };
 

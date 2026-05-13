@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PropertyValues, TemplateResult, html, nothing } from "lit";
-import { PrimitiveType } from "../../components/primitive/type-converters/type-converters";
 import { DisplayConfig } from "../../shell/types";
 import { Decorated, NoDataObject, meta } from "../base";
 import { Resource } from "./Resource";
@@ -69,13 +68,6 @@ export abstract class DomainResource<
               </fhir-wrapper>`
 							: nothing
 					}
-      `,
-			html`
-          <fhir-primitive label="modifierExtension"
-                          value="not implemented"
-                          .type=${PrimitiveType.none}
-                          summary
-          ></fhir-primitive>
       `,
 		];
 	}

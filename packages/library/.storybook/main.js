@@ -14,10 +14,10 @@ const config = {
 	staticDirs: ["../assets"],
 
 	addons: [
-		getAbsolutePath("@storybook/addon-links"),
-		getAbsolutePath("@chromatic-com/storybook"),
-		getAbsolutePath("@whitespace/storybook-addon-html"),
-		{
+        getAbsolutePath("@storybook/addon-links"),
+        getAbsolutePath("@chromatic-com/storybook"),
+        getAbsolutePath("@whitespace/storybook-addon-html"),
+        {
 			name: getAbsolutePath("@storybook/addon-docs"),
 			options: {
 				mdxPluginOptions: {
@@ -27,7 +27,8 @@ const config = {
 				},
 			},
 		},
-	],
+        getAbsolutePath("@storybook/addon-vitest")
+    ],
 
 	framework: {
 		name: getAbsolutePath("@storybook/web-components-vite"),

@@ -6,6 +6,7 @@ import {customElement, property, state}                                         
 import {showDirectoryPicker}                                                    from 'native-file-system-adapter'
 
 import '@shoelace-style/shoelace/dist/components/button/button.js'
+import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
 import {BrowserState, FhirFile, FhirFiles, promptAndLoadDirectoryIntoIndexedDB} from '../../state/browser-state'
 import {isFileSystemAPISupported}                                               from '../util'
@@ -47,17 +48,26 @@ export class LocalChooser extends SignalWatcher(LitElement) {
   @state()
   private page: number = 0
 
+  @state()
+  private searchQuery: string = ''
+
+  private searchDebounceId: number | null = null
+
   render() {
-    const filteredFiles: FhirFiles = this.state.files.get()
-                                         .filter((f: any) => this.selectedType ? f.type === this.selectedType : true)
-                                         .slice(this.page * 100, (this.page * 100) + 100)
-    const fileTotal: number = this.selectedType ? filteredFiles.length : this.state.files.get().length
-    const maxPages: number = Math.ceil(fileTotal / 100)
+    const typeFiltered: FhirFiles = this.state.files.get()
+                                        .filter((f: FhirFile) => this.selectedType ? f.type === this.selectedType : true)
+    const query = this.searchQuery.trim().toLowerCase()
+    const searched: FhirFiles = query
+                                ? typeFiltered.filter((f: FhirFile) => f.searchText.includes(query))
+                                : typeFiltered
+    const filteredFiles: FhirFiles = searched.slice(this.page * 100, (this.page * 100) + 100)
+    const fileTotal: number = searched.length
+    const maxPages: number = fileTotal > 0 ? Math.ceil(fileTotal / 100) : 0
     const prefTypes: string[] = this.state.preferredTypes.get()
     const types: string[] = this.state.types.get()
 
     return html`
-        <div style="display:flex; align-items:center">
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:0.5rem;">
             <sl-button-group>
                 <sl-button @click=${this.openDir} variant="text" style="min-width:6rem;">
                     ${fileTotal ? fileTotal : 'Select Dir'}
@@ -93,11 +103,18 @@ export class LocalChooser extends SignalWatcher(LitElement) {
                   ? html`
                             <sl-button loading variant="text" style="width:3rem;"></sl-button>`
                   : html`
-                            <sl-button variant="text" disabled style="width:3rem">${this.page + 1}/${maxPages}
+                            <sl-button variant="text" disabled style="width:3rem">${maxPages === 0 ? '0/0' : `${this.page + 1}/${maxPages}`}
                             </sl-button>`
                 }
             </sl-button-group>
-
+            <sl-input
+                    size="small"
+                    placeholder="Search JSON key or value"
+                    clearable
+                    value=${this.searchQuery}
+                    @sl-input=${this.onSearchInput}
+                    style="width:96%;"
+            ></sl-input>
         </div>
         <sl-menu @sl-select=${this.selectFile}>
             ${filteredFiles ? filteredFiles.map(b => html`
@@ -105,6 +122,9 @@ export class LocalChooser extends SignalWatcher(LitElement) {
                     ${b.name}
                 </sl-menu-item>`) : ''}
         </sl-menu>
+        ${!this.isLoading() && fileTotal === 0
+          ? html`<div style="padding:0.5rem; font-size:var(--sl-font-size-small);">No matching files.</div>`
+          : nothing}
 
     `
   }
@@ -120,6 +140,18 @@ export class LocalChooser extends SignalWatcher(LitElement) {
   private selectType(e: CustomEvent) {
     this.selectedType = (e.detail.item as SlMenuItem).value
     this.page = 0
+  }
+
+  private onSearchInput(e: CustomEvent) {
+    const input = (e.target as HTMLInputElement).value ?? ''
+    if (this.searchDebounceId !== null) {
+      window.clearTimeout(this.searchDebounceId)
+    }
+    this.searchDebounceId = window.setTimeout(() => {
+      this.searchQuery = input
+      this.page = 0
+      this.requestUpdate()
+    }, 250)
   }
 
   private async selectFile(e: CustomEvent) {
@@ -151,7 +183,13 @@ export class LocalChooser extends SignalWatcher(LitElement) {
   }
 
   private next() {
-    if (this.state.files.get().length > (this.page + 1) * 100) this.page++
+    const typeFiltered: FhirFiles = this.state.files.get()
+                                        .filter((f: FhirFile) => this.selectedType ? f.type === this.selectedType : true)
+    const query = this.searchQuery.trim().toLowerCase()
+    const fileTotal = query
+                      ? typeFiltered.filter((f: FhirFile) => f.searchText.includes(query)).length
+                      : typeFiltered.length
+    if (fileTotal > (this.page + 1) * 100) this.page++
   }
 
   private async openDir() {

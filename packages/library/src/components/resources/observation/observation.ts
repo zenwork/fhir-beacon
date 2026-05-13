@@ -158,7 +158,11 @@ export class Observation extends DomainResource<ObservationData> {
 						config,
 					})}
           <fhir-codeable-concept key="code" .data=${data.code} required></fhir-codeable-concept>
-          <fhir-reference key='subject' .data=${data.subject}></fhir-reference>
+          <fhir-reference
+                  key='subject'
+                  .data=${data.subject}
+                  .errors=${validations.sliceForFQK({ path: [{ node: "subject" }] })}
+          ></fhir-reference>
           ${wrap({
 						key: "focus",
 						collection: data.focus ?? [],

@@ -286,7 +286,7 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
 
   private async execute(query: FhirQuery): Promise<FhirElementData> {
     return fetch(
-      query.query,
+      this.normalizeFetchUrl(query.query),
       {
         method: 'GET',
         headers: {
@@ -304,6 +304,14 @@ export class RemoteChooser extends SignalWatcher(LitElement) {
         return data as FhirElementData
       })
 
+  }
+
+  private normalizeFetchUrl(queryUrl: string): string {
+    const url = new URL(queryUrl, window.location.href)
+    if (window.location.protocol === 'https:' && url.protocol === 'http:') {
+      url.protocol = 'https:'
+    }
+    return url.toString()
   }
 
 }

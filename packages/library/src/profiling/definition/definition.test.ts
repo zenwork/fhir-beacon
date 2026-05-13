@@ -6,7 +6,11 @@ import { ResourceName } from "../../ResourceName";
 import { DomainResourceData } from "../../internal";
 import { Example } from "../util/BindingStrength";
 import { StructureDefinition } from "./StructureDefinition";
-import { PropertyDef } from "./definition.type";
+import {
+	PropertyDef,
+	isDefWithCardinality,
+	isPropertySliceDef,
+} from "./definition.type";
 
 // Sample constructor for mock props
 const createTestProp = <T>(
@@ -54,8 +58,24 @@ describe("Definition Class", () => {
 			) as PropertyDef<DomainResourceData>;
 
 		def.set(prop);
-		expect(def.get("testKey")).toEqual(prop);
+		expect(def.get("testKey")).toEqual({ ...prop, storageKey: "testKey" });
 		expect(def.get("otherKey")).toBeNull();
+	});
+
+	it("should keep storage keys separate from declared keys", () => {
+		const def = new StructureDefinition<DomainResourceData>(name);
+		const prop = {
+			...createTestProp<DomainResourceData>("Quantity", "Quantity"),
+			choice: "value",
+		};
+
+		def.set(prop);
+
+		expect(def.get("Quantity", "value")).toMatchObject({
+			key: "Quantity",
+			choice: "value",
+			storageKey: "valueQuantity",
+		});
 	});
 
 	it("should clone the Definition object", () => {
@@ -81,6 +101,38 @@ describe("Definition Class", () => {
 		).toBe(def.type instanceof ResourceDef ? def.type.profileName : "def");
 		expect(clone.get("key1")).toEqual(def.get("key1"));
 		expect(clone.get("key2")).toEqual(def.get("key2"));
+	});
+
+	it("should preserve choice keys when cloning", () => {
+		const def = new StructureDefinition<DomainResourceData>(name);
+		const valueQuantity = {
+			...createTestProp<DomainResourceData>("Quantity", "Quantity"),
+			choice: "value",
+		};
+		const effectiveDateTime = {
+			...createTestProp<DomainResourceData>("DateTime", "dateTime"),
+			choice: "effective",
+		};
+
+		def.set(valueQuantity);
+		def.set(effectiveDateTime);
+
+		const clone = def.clone();
+
+		expect(clone.get("Quantity", "value")).toMatchObject({
+			key: "Quantity",
+			choice: "value",
+			storageKey: "valueQuantity",
+		});
+		expect(clone.get("DateTime", "effective")).toMatchObject({
+			key: "DateTime",
+			choice: "effective",
+			storageKey: "effectiveDateTime",
+		});
+		expect(clone.toString()).toContain("valueQuantity");
+		expect(clone.toString()).toContain("effectiveDateTime");
+		expect(clone.toString()).not.toContain("valuevalueQuantity");
+		expect(clone.toString()).not.toContain("effectiveeffectiveDateTime");
 	});
 
 	it("should generate indented string representation with toString()", () => {
@@ -119,6 +171,7 @@ describe("Definition Class", () => {
 				testKey: {
 					defType: "property",
 					key: "testKey",
+					storageKey: "testKey",
 					isSummary: false,
 					cardinality: "1..1",
 					bindings: [],
@@ -135,5 +188,20 @@ describe("Definition Class", () => {
 				},
 			},
 		});
+	});
+
+	it("should narrow defs that expose cardinality", () => {
+		const property = createTestProp<DomainResourceData>("testKey", "string");
+		const slice = {
+			defType: "property-slice" as const,
+			key: "testKey",
+			choice: undefined,
+			subdefs: undefined,
+			constraints: [],
+		};
+
+		expect(isDefWithCardinality(property)).toBe(true);
+		expect(isDefWithCardinality(slice)).toBe(false);
+		expect(isPropertySliceDef(slice)).toBe(true);
 	});
 });

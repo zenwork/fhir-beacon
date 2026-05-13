@@ -5,15 +5,14 @@ import { TemplateGenerator, Validations } from "../../internal/index";
 import { DisplayMode } from "../../shell";
 import { Decorateable } from "../builder";
 import { alternatingColor } from "../util/AlternatingLogger";
+import { validateProfile } from "../validation/profileValidator";
 import {
-	Def,
 	DefConstraintAssertion,
 	Defs,
 	ExtensionDef,
 	PropertyDef,
 	PropertySliceDef,
 	isExtensionDef,
-	isPrimitiveExtensionDef,
 	isPropertyDef,
 	isPropertySliceDef,
 } from "./definition.type";
@@ -45,7 +44,7 @@ export class StructureDefinition<T extends Decorateable> {
 
 	set(prop: Defs<T>, key?: string) {
 		const k = key ?? flattenKey(prop.key, prop.choice);
-		this.props.set(k, prop);
+		this.props.set(k, { ...prop, storageKey: k });
 	}
 
 	get(key: string | string[], choicePrefix?: string): Defs<T> | null {
@@ -90,7 +89,10 @@ export class StructureDefinition<T extends Decorateable> {
 
 	clone(): StructureDefinition<T> {
 		const def = new StructureDefinition<T>(this.type);
-		this.props.forEach((v, k) => def.set({ ...v, key: k }));
+		def.constraints = [...this.constraints];
+		def.extendRender = new Map(this.extendRender);
+		def.overrideRender = new Map(this.overrideRender);
+		this.props.forEach((v, k) => def.set(cloneDef(v), k));
 		return def;
 	}
 
@@ -111,63 +113,7 @@ export class StructureDefinition<T extends Decorateable> {
 	}
 
 	validate(data: T, validations: Validations, _fetched: boolean): void {
-		this.props.forEach((def: Defs<T>, key: string) => {
-			if (isPropertyDef(def)) {
-				def.constraints.forEach((constraint: DefConstraintAssertion<T>) => {
-					// @ts-ignore
-					const value: any = constraint._fixedValue;
-					const result:
-						| { success: false; message?: string }
-						| { success: true } = constraint(data, value);
-					if (!result.success) {
-						const message: string =
-							((result as { success: false; message?: string }).message ??
-								`Constraint ${constraint.name} failed for ${key}`) +
-							` (${this.type.profileName})`;
-						validations.add({ fqk: { path: [{ node: key }] }, message });
-					}
-				});
-			}
-
-			if (isPrimitiveExtensionDef(def)) {
-				const refKey: string = def.key.toString().substring(1);
-				// @ts-ignore
-				if (Object.keys(data).some((k) => k === refKey)) {
-					// @ts-ignore
-					// console.log('found match for ', def.key, Object.keys(data).find(k => k === refKey))
-
-					if (def.subdefs) {
-						def.subdefs.forEach((subdef: Def, _subkey: string) => {
-							const d = subdef as ExtensionDef;
-
-							// @ts-ignore
-							data[def.key].extension
-								.filter((ext: { url: string }) => ext.url === d.url)
-								.forEach((_e: any) => {
-									// console.log(e)
-									// console.log('\n')
-									// console.log(subdef)
-
-									validations.add({
-										fqk: {
-											path: [
-												{ node: "extension" },
-												{
-													node: "https://fhir.ch/ig/ch-core/5.0.0/StructureDefinition-ch-ext-ech-46-phonecategory.html",
-												},
-												{ node: "valueCodeableConcept" },
-												{ node: "coding" },
-												{ node: "code" },
-											],
-										},
-										message: "wrong binding value",
-									});
-								});
-						});
-					}
-				}
-			}
-		});
+		validateProfile(this, data, validations);
 	}
 
 	private propToString(iterable: Defs<T>[], indent: string): string {
@@ -189,7 +135,7 @@ export class StructureDefinition<T extends Decorateable> {
 					// cardinality
 					const c: string = v.cardinality.padEnd(15, " ");
 
-					// invarients (constraints)
+					// invariants (constraints)
 					let i: string = v.constraints.length > 0 ? "C" : "";
 					// @ts-ignore
 					i =
@@ -207,6 +153,7 @@ export class StructureDefinition<T extends Decorateable> {
 							: "");
 					i = i + " ";
 					//bindings
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					let b: any = "";
 					if (Array.isArray(v.bindings) && v.bindings.length > 0) {
 						b = ` (bind: ${v.bindings.join(",")})`;
@@ -304,4 +251,17 @@ function toSerializable(obj: any): any {
 
 	// Return primitive values as is
 	return obj;
+}
+
+function cloneDef<T>(def: Defs<T>): Defs<T> {
+	return {
+		...def,
+		subdefs: def.subdefs ? cloneDefs(def.subdefs) : undefined,
+	};
+}
+
+function cloneDefs<T>(defs: Map<string, Defs<T>>): Map<string, Defs<T>> {
+	return new Map(
+		Array.from(defs.entries()).map(([key, def]) => [key, cloneDef(def)]),
+	);
 }

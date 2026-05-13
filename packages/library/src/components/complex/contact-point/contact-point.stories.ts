@@ -131,14 +131,14 @@ export const Profile: Story = {
 						html`
                                                     <fhir-extension key="_use"
                                                                     label="_use"
-                                                                    .data=${(data as Record<string, Record<string, unknown[]>>)._use.extension[0]}
+                                                                    .data=${(data as unknown as Record<string, Record<string, unknown[]>>)._use.extension[0]}
                                                     ></fhir-extension>`,
 					])
 					.extendRender(DisplayMode.structure, (_config, data) => [
 						html`
                                                     <fhir-extension key="_use"
                                                                     label="_use"
-                                                                    .data=${(data as Record<string, Record<string, unknown[]>>)._use.extension[0]}
+                                                                    .data=${(data as unknown as Record<string, Record<string, unknown[]>>)._use.extension[0]}
                                                     ></fhir-extension>`,
 					]),
 			],

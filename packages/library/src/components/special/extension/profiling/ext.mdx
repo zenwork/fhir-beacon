@@ -1,79 +1,128 @@
 import {Meta} from '@storybook/addon-docs/blocks'
 
-
 <Meta title="Components/Datatypes/Special Type/Extension/4. with profiles"/>
 
+# Extension With Profiles
 
-# Extension
-
-documentation:
+references:
 * [FHIR Extensibility](http://hl7.org/fhir/extensibility.html)
 * [JSON Representation](http://hl7.org/fhir/R5/json.html#primitive)
 
-## Simple Extension
+This page describes how extension rendering behaves when extension definitions come from a profile.
 
-Complex types are extended by adding an extension to the complex type.
+## Label Rules
+
+When an extension has a `url`, a label is always resolved:
+* first from a profile label map (or explicit `extensionLabels` override)
+* otherwise derived from the last URL token
+
+How that label is applied:
+* primitive extension (`value[x]`): label is applied to the rendered value element
+* complex extension (`extension: [...]`): label is applied to the complex extension container
+* nested extensions: the same URL-to-label rule is applied recursively
+
+## JSON Shapes
+
+Simple extension on a resource:
 
 ```json5
 {
-  "resourceType" : "Patient",
-  "extension" : [{
-    "url" : "http://example.org/fhir/StructureDefinition/participation-agreement",
-    "valueUri" : "http://example.org/phr/documents/patient/general/v1"
-  }]
-  // ...
-}
-```
-
-Primitive types are extended by wrapping the extension in an underscored property with the same name as the primitive type.
-
-```json5
-{
-    // ...
-    "name": {
-        "use": "official",
-        "given": "Östlund",
-        "_given": {
-            "extension": [
-                {
-                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
-                    "valueCode": "MID"
-                }
-            ]
-        }
+  "resourceType": "Patient",
+  "extension": [
+    {
+      "url": "http://example.org/fhir/StructureDefinition/participation-agreement",
+      "valueUri": "http://example.org/phr/documents/patient/general/v1"
     }
+  ]
 }
 ```
 
-## Complex Extension
-
-Complex extensions are groups of related extensions that are defined in a single structure definition.
+Primitive extension on a primitive element:
 
 ```json5
 {
-  "resourceType" : "Patient",
-  "extension" : [{
-    "url" : "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
-    "extension" : [{
-      "url" : "NCT",
-      "valueString" : "NCT00000419"
-    }, {
-      "url" : "period",
-      "valuePeriod" : {
-        "start" : "200140105",
-        "end" : "20120105"
-      }
-    }, {
-      "url" : "reason",
-      "valueCodeableConcept" : {
-        "text" : "healthy-volunteer"
-      }
-    }]
-  }]
-  // ...
+  "name": [
+    {
+      "use": "official",
+      "given": [
+        "Ostlund"
+      ],
+      "_given": [
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+              "valueCode": "MID"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
-## Extension In Context
+Complex extension with nested parts:
 
-## Extension with Custom UI
+```json5
+{
+  "resourceType": "Patient",
+  "extension": [
+    {
+      "url": "http://example.org/fhir/StructureDefinition/patient-clinicalTrial",
+      "extension": [
+        { "url": "trialNumber", "valueString": "NCT00000419" },
+        {
+          "url": "period",
+          "valuePeriod": {
+            "start": "2014-01-05",
+            "end": "2016-01-05"
+          }
+        },
+        {
+          "url": "reason",
+          "valueCodeableConcept": {
+            "text": "healthy-volunteer"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Profile DSL (Typical Setup)
+
+```typescript
+import { DatatypeDef } from '../../../DatatypeDef'
+import { ContactPointData } from '../../complex'
+import { extend, profile } from '../../../profiling'
+
+const primitiveUrl = 'http://example.org/fhir/StructureDefinition/use-category'
+const complexUrl = 'http://example.org/fhir/StructureDefinition/contact-trial'
+
+const contactPointProfile = profile<ContactPointData>({
+  type: new DatatypeDef('ContactPoint', 'ProfiledContactPoint'),
+  props: [
+    extend.primitive('use', primitiveUrl, [{
+      key: 'useCategory',
+      url: primitiveUrl,
+      label: 'Use category',
+      valueType: 'CodeableConcept'
+    }]),
+    extend.withComplex('contactTrial', {
+      url: complexUrl,
+      label: 'Contact trial',
+      extensions: [
+        { url: 'trialNumber', label: 'Trial number', valueType: 'string' }
+      ]
+    })
+  ]
+})
+```
+
+## Notes
+
+* `modifierExtension` uses the same resolution rules with a `Modifier:` label prefix.
+* If a URL has no explicit mapped label, derivation from URL keeps rendering deterministic.
+* Repeated extensions are grouped in display mode by resolved label, with instance wrappers (`1`, `2`, ...).

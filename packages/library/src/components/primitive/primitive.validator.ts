@@ -219,9 +219,11 @@ export class PrimitiveValidator {
 		let validEvent: PrimitiveValidEvent | undefined = undefined;
 		if (!isBlank(parsedValue.val)) {
 			if (this.#host.choices && this.#host.choices.length > 0) {
-				this.#host.presentableValue = this.#host.choices.find(
+				const matchedChoice = this.#host.choices.find(
 					(choice) => choice.value === parsedValue.val,
-				)!.display;
+				);
+				this.#host.presentableValue =
+					matchedChoice?.display ?? parsedValue.val;
 			} else {
 				this.#host.presentableValue = parsedValue.val;
 			}

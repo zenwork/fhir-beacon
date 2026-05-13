@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
 	Annotation,
 	CodeableConcept,
@@ -70,7 +70,7 @@ import { aValuePresent } from "./util/valuePresent";
 export const { code } = PrimitiveDef;
 
 describe("profileDefinition", () => {
-	it.skip("should be tested", () => {
+	it("should be tested", () => {
 		const observation = profile<ObservationData>({
 			type: Observation,
 			constraints: [
@@ -484,14 +484,22 @@ describe("profileDefinition", () => {
 			],
 		});
 
-		// console.log(observation.type.toString())
-		// console.log(observation.toString())
-		// console.log(JSON.stringify(observation.toJSON(), null, 2))
-		// console.log()
-		// console.log(bp.type.toString())
-		// console.log(bp.toString())
+		expect(observation.type.toString()).toBe("Observation");
+		expect(observation.toString()).toContain("identifier");
+		expect(observation.toJSON()).toMatchObject({
+			name: {
+				value: "Observation",
+				dataset: "ObservationData",
+				profileName: "",
+			},
+		});
 
-		// expect(bp.type.toString()).toBe('Observation/bp')
-		// expect(bp.props.get('identifier')?.cardinality).toBe('1..1')
+		const identifierDef = _bp.getProperty("identifier");
+		if (!identifierDef) {
+			throw new Error("identifier definition must have cardinality");
+		}
+
+		expect(_bp.type.toString()).toBe("Observation/bp");
+		expect(identifierDef.cardinality).toBe("0..*");
 	});
 });

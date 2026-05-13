@@ -12,6 +12,41 @@ export function getValueFromJsonKey(key: string, jsonText: string): string | nul
 }
 
 /**
+ * Builds a lowercase searchable index string from JSON keys and primitive values.
+ */
+export function buildSearchTextFromJson(value: unknown): string {
+  const terms: string[] = []
+
+  const walk = (input: unknown): void => {
+    if (input === null || input === undefined) return
+    if (Array.isArray(input)) {
+      for (const item of input) walk(item)
+      return
+    }
+    if (typeof input === 'object') {
+      for (const [key, val] of Object.entries(input as Record<string, unknown>)) {
+        terms.push(key)
+        walk(val)
+      }
+      return
+    }
+    terms.push(String(input))
+  }
+
+  walk(value)
+  return terms.join(' ').toLowerCase()
+}
+
+/**
+ * Case-insensitive contains search over JSON keys and primitive values.
+ */
+export function jsonContainsKeyOrValue(value: unknown, query: string): boolean {
+  const trimmed = query.trim().toLowerCase()
+  if (!trimmed) return true
+  return buildSearchTextFromJson(value).includes(trimmed)
+}
+
+/**
  * Checks if the File System Access API is available in the browser.
  * @returns A boolean indicating the availability of the API.
  */
