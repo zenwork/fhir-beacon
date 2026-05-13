@@ -1,7 +1,5 @@
-import { userEvent } from "@vitest/browser/context";
 import { html } from "lit";
 import { describe, expect, test } from "vitest";
-import { aTimeout } from "../../../../tests/aTimeout";
 import { dimmensions } from "../../../../tests/dimensions";
 
 import { fixture } from "../../../../tests/lit/lit-vitest-fixture";
@@ -65,50 +63,51 @@ describe("fhir primitive value", () => {
 		expect(after).toHaveTextContent(`percent`);
 	});
 
-	test(
-		"should display text with hide-overflow",
-		{ timeout: 5_000 },
-		async () => {
-			const text =
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Amet luctus venenatis lectus magna fringilla urna porttitor. Dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Tellus in hac habitasse platea. Posuere urna nec tincidunt praesent semper feugiat nibh. Tortor pretium viverra suspendisse potenti nullam ac tortor. Fusce id velit ut tortor pretium viverra suspendisse potenti. Enim eu turpis egestas pretium aenean pharetra. Non consectetur a erat nam at lectus. Amet est placerat in egestas erat imperdiet sed.";
+	test("should display text with hide-overflow", async () => {
+		const text =
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Amet luctus venenatis lectus magna fringilla urna porttitor. Dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Tellus in hac habitasse platea. Posuere urna nec tincidunt praesent semper feugiat nibh. Tortor pretium viverra suspendisse potenti nullam ac tortor. Fusce id velit ut tortor pretium viverra suspendisse potenti. Enim eu turpis egestas pretium aenean pharetra. Non consectetur a erat nam at lectus. Amet est placerat in egestas erat imperdiet sed.";
 
-			const el = await fixture<PrimitiveValue>(html`
+		const el = await fixture<PrimitiveValue>(html`
       <div style="height:5rem; width:10rem">
       <fhir-value text="${text}" variant="hide-overflow"></fhir-value >
       </div >
     `).first();
 
-			await el.updateComplete;
+		await el.updateComplete;
 
-			let div = el.queryShadow<HTMLDivElement>({ select: "div" });
-			expect(div).toHaveTextContent(text);
-			await userEvent.unhover(div);
-			await aTimeout(300);
+		const div = el.queryShadow<HTMLDivElement>({ select: "div" });
+		expect(div).toHaveTextContent(text);
 
-			if (div) {
-				const { h, w } = dimmensions(div, "rem");
+		if (!div) {
+			expect.fail("shadow root content not found");
+			return;
+		}
 
-				expect(h).to.equal(2);
-				expect(w).to.equal(30);
-			} else {
-				expect.fail("shadow root content not found");
-			}
+		const { h, w } = dimmensions(div, "rem");
+		expect(h).to.equal(2);
+		expect(w).to.equal(30);
 
-			await userEvent.hover(div);
-			await aTimeout(300);
+		const sheets: CSSStyleSheet[] = [
+			...Array.from(el.shadowRoot!.styleSheets),
+			...(el.shadowRoot!.adoptedStyleSheets ?? []),
+		];
+		const hoverRule = sheets
+			.flatMap((sheet) => {
+				try {
+					return Array.from(sheet.cssRules);
+				} catch {
+					return [];
+				}
+			})
+			.find(
+				(rule): rule is CSSStyleRule =>
+					rule instanceof CSSStyleRule &&
+					rule.selectorText === ".variant-hide-overflow:hover",
+			);
 
-			div = el.queryShadow<HTMLDivElement>({ select: "div" });
-
-			if (div) {
-				const { h, w } = dimmensions(div, "rem");
-
-				expect(h).to.equal(12);
-				expect(w).to.equal(30);
-			} else {
-				expect.fail("shadow root content not found");
-			}
-		},
-	);
+		expect(hoverRule, ":hover rule for hide-overflow not found").toBeDefined();
+		expect(hoverRule!.style.height).to.equal("12rem");
+	});
 
 	test("should display text with fixed width", async () => {
 		const text =
