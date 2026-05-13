@@ -9,6 +9,7 @@ import type { Choices } from "../../valuesets";
 import {
 	contactBackboneStructureDefinitionFixture,
 	identifierSliceStructureDefinitionFixture,
+	modifierExtensionStructureDefinitionFixture,
 	observationStructureDefinitionFixture,
 	patternStructureDefinitionFixture,
 	unsupportedSliceStructureDefinitionFixture,
@@ -427,5 +428,39 @@ describe("importFhirStructureDefinition", () => {
 				message: expect.stringContaining("category must match pattern"),
 			}),
 		]);
+	});
+
+	it("imports modifier extension named slices as profiled modifier extension defs", () => {
+		const result = importFhirStructureDefinition<PatientFixtureData>(
+			modifierExtensionStructureDefinitionFixture,
+		);
+
+		const modifier = result.profile.getExtension("recordStatus");
+		expect(modifier).toMatchObject({
+			defType: "extension",
+			url: "http://example.org/fhir/StructureDefinition/record-status",
+			extensionLocation: { kind: "modifier", path: "modifierExtension" },
+			cardinality: "1..1",
+			valueType: "code",
+			isModifier: true,
+			bindings: "vs-record-status",
+			bindingStrength: Required,
+		});
+
+		const validations = new StubValidations();
+		validateProfile(result.profile, { identifier: [] }, validations);
+		expect(validations.all()).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					fqk: {
+						path: [
+							{ node: "modifierExtension" },
+							{ node: "http://example.org/fhir/StructureDefinition/record-status" },
+						],
+					},
+					message: expect.stringContaining("is required"),
+				}),
+			]),
+		);
 	});
 });

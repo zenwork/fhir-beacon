@@ -446,6 +446,97 @@ describe("validateProfile", () => {
 		});
 	});
 
+	describe("modifier extension validation", () => {
+		const url = "http://example.org/fhir/StructureDefinition/pi";
+
+		it("reports error when required modifier extension is absent", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [
+					extend.withModifier("pi", {
+						url,
+						label: "Pi",
+						valueType: "decimal",
+					}),
+				],
+			});
+
+			validateProfile(def, {} as TestData, validations);
+
+			expect(validations.all()).toHaveLength(1);
+			expect(validations.all()[0].fqk).toEqual({
+				path: [{ node: "modifierExtension" }, { node: url }],
+			});
+			expect(validations.all()[0].message).toContain("is required");
+		});
+
+		it("does not report error when required modifier extension is present", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [
+					extend.withModifier("pi", {
+						url,
+						label: "Pi",
+						valueType: "decimal",
+					}),
+				],
+			});
+
+			const data = {
+				modifierExtension: [{ url, valueDecimal: 3.141592653589793 }],
+			} as TestData;
+
+			validateProfile(def, data, validations);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report error when optional modifier extension is absent", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [
+					extend
+						.withModifier("pi", {
+							url,
+							label: "Pi",
+							valueType: "decimal",
+						})
+						.optional(),
+				],
+			});
+
+			validateProfile(def, {} as TestData, validations);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+
+		it("does not report max-cardinality error when modifier extension allows many", () => {
+			const def = profile<TestData>({
+				type: ContactPoint,
+				props: [
+					extend
+						.withModifier("pi", {
+							url,
+							label: "Pi",
+							valueType: "decimal",
+						})
+						.hasMany(),
+				],
+			});
+
+			const data = {
+				modifierExtension: [
+					{ url, valueDecimal: 3.141592653589793 },
+					{ url, valueDecimal: 1.00065022141624642 },
+				],
+			} as TestData;
+
+			validateProfile(def, data, validations);
+
+			expect(validations.all()).toHaveLength(0);
+		});
+	});
+
 	describe("primitive extension validation", () => {
 		const url = "http://example.com/ext/cat";
 		const choices = [

@@ -17,6 +17,8 @@ export function extensionBuilder<T extends Decorateable>(
 	extensionLocation: ExtensionLocation = { kind: "root", path: "extension" },
 ): RenderBuilder<T> {
 	let context: Context<T> | null = null;
+	let optional = false;
+	let many = false;
 	const extendRender = new Map<DisplayMode, TemplateGenerator<T>>();
 	const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>();
 
@@ -38,7 +40,7 @@ export function extensionBuilder<T extends Decorateable>(
 					valueTypeNarrowing: def.valueTypeNarrowing || [],
 					isModifier: extensionLocation.kind === "modifier",
 					isSummary: false,
-					cardinality: "1..1",
+					cardinality: extensionCardinality(optional, many),
 					bindings: def.bindings ?? [],
 					bindingStrength: def.bindingStrength ?? BindingStrength.Example,
 					choice: undefined,
@@ -51,6 +53,18 @@ export function extensionBuilder<T extends Decorateable>(
 			} else {
 				throw new Error("Context not set");
 			}
+		},
+		optional: (): RenderBuilder<T> => {
+			optional = true;
+			return action;
+		},
+		required: (): RenderBuilder<T> => {
+			optional = false;
+			return action;
+		},
+		hasMany: (): RenderBuilder<T> => {
+			many = true;
+			return action;
 		},
 		extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
 			extendRender.set(forMode, fn);
@@ -71,6 +85,8 @@ export function complexExtensionBuilder<T extends Decorateable>(
 	extensionLocation: ExtensionLocation = { kind: "root", path: "extension" },
 ): RenderBuilder<T> {
 	let context: Context<T> | null = null;
+	let optional = false;
+	let many = false;
 	const extendRender = new Map<DisplayMode, TemplateGenerator<T>>();
 	const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>();
 
@@ -107,7 +123,7 @@ export function complexExtensionBuilder<T extends Decorateable>(
 					valueTypeNarrowing: undefined,
 					isModifier: extensionLocation.kind === "modifier",
 					isSummary: false,
-					cardinality: "1..1",
+					cardinality: extensionCardinality(optional, many),
 					bindings: [],
 					bindingStrength: BindingStrength.Example,
 					choice: undefined,
@@ -119,6 +135,18 @@ export function complexExtensionBuilder<T extends Decorateable>(
 			} else {
 				throw new Error("Context not set");
 			}
+		},
+		optional: (): RenderBuilder<T> => {
+			optional = true;
+			return action;
+		},
+		required: (): RenderBuilder<T> => {
+			optional = false;
+			return action;
+		},
+		hasMany: (): RenderBuilder<T> => {
+			many = true;
+			return action;
 		},
 		extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
 			extendRender.set(forMode, fn);
@@ -139,6 +167,8 @@ export function primitiveExtensionBuilder<T extends Decorateable>(
 	def: Extension[],
 ): RenderBuilder<T> {
 	let context: Context<T> | null = null;
+	let optional = false;
+	let many = false;
 	const extendRender = new Map<DisplayMode, TemplateGenerator<T>>();
 	const overrideRender = new Map<DisplayMode, TemplateGenerator<T>>();
 
@@ -183,7 +213,7 @@ export function primitiveExtensionBuilder<T extends Decorateable>(
 					valueTypeNarrowing: undefined,
 					isModifier: false,
 					isSummary: false,
-					cardinality: "1..1",
+					cardinality: extensionCardinality(optional, many),
 					bindings: [],
 					bindingStrength: BindingStrength.Example,
 					choice: undefined,
@@ -195,6 +225,20 @@ export function primitiveExtensionBuilder<T extends Decorateable>(
 			} else {
 				throw new Error("Context not set");
 			}
+		},
+		optional: (): RenderBuilder<T> => {
+			optional = true;
+			return action;
+		},
+
+		required: (): RenderBuilder<T> => {
+			optional = false;
+			return action;
+		},
+
+		hasMany: (): RenderBuilder<T> => {
+			many = true;
+			return action;
 		},
 
 		extendRender: (forMode: DisplayMode, fn: TemplateGenerator<T>) => {
@@ -216,4 +260,10 @@ function toFixedKey(type: string): string {
 		type.charAt(0).toUpperCase() + type.slice(1);
 	const propKey: string = "value" + capitaliseFirstType;
 	return propKey;
+}
+
+function extensionCardinality(optional: boolean, many: boolean): string {
+	const min = optional ? "0" : "1";
+	const max = many ? "*" : "1";
+	return `${min}..${max}`;
 }

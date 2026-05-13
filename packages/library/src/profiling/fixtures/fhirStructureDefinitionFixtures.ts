@@ -270,3 +270,54 @@ export const patternStructureDefinitionFixture = {
 		],
 	},
 } satisfies FhirStructureDefinition;
+
+export const modifierExtensionStructureDefinitionFixture = {
+	resourceType: "StructureDefinition",
+	id: "modifier-extension-patient",
+	name: "ModifierExtensionPatient",
+	type: "Patient",
+	snapshot: {
+		element: [
+			{
+				id: "Patient",
+				path: "Patient",
+				min: 0,
+				max: "*",
+			},
+			{
+				id: "Patient.modifierExtension",
+				path: "Patient.modifierExtension",
+				min: 0,
+				max: "*",
+				type: [{ code: "Extension" }],
+			},
+			{
+				id: "Patient.modifierExtension:recordStatus",
+				path: "Patient.modifierExtension",
+				sliceName: "recordStatus",
+				min: 1,
+				max: "1",
+				type: [{ code: "Extension" }],
+			},
+			{
+				id: "Patient.modifierExtension:recordStatus.url",
+				path: "Patient.modifierExtension.url",
+				min: 1,
+				max: "1",
+				type: [{ code: "uri" }],
+				fixedUri: "http://example.org/fhir/StructureDefinition/record-status",
+			},
+			{
+				id: "Patient.modifierExtension:recordStatus.valueCode",
+				path: "Patient.modifierExtension.valueCode",
+				min: 1,
+				max: "1",
+				type: [{ code: "code" }],
+				binding: {
+					strength: "required",
+					valueSet: "http://example.org/fhir/ValueSet/record-status",
+				},
+			},
+		],
+	},
+} satisfies FhirStructureDefinition;

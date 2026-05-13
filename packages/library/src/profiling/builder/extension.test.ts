@@ -174,6 +174,68 @@ describe("profile extensions", () => {
 		expect(reason!.subdefs).toBeUndefined();
 	});
 
+	it("should create a complex modifier extension", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend.withModifierComplex("RecordedSexOrGender", {
+					url: "http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender",
+					label: "Recorded sex or gender",
+					extensions: [
+						{
+							url: "sourceField",
+							label: "Source field",
+							valueType: "string",
+						},
+					],
+				}),
+			],
+		});
+
+		const extension: ExtensionDef = def.getExtension("RecordedSexOrGender")!;
+
+		expect(extension).toBeDefined();
+		expect(extension.isModifier).toBe(true);
+		expect(extension.extensionLocation).toEqual({
+			kind: "modifier",
+			path: "modifierExtension",
+		});
+		expect(extension.subdefs).toBeDefined();
+		expect(extension.subdefs!.size).toBe(1);
+	});
+
+	it("should support cardinality modifiers on extension builders", () => {
+		def = profile<DomainResourceData>({
+			type: Extension,
+			props: [
+				extend
+					.withModifier("OptionalModifier", {
+						url: "http://example.org/fhir/StructureDefinition/optional-modifier",
+						valueType: "boolean",
+					})
+					.optional(),
+				extend
+					.withModifierComplex("ManyModifier", {
+						url: "http://example.org/fhir/StructureDefinition/many-modifier",
+						label: "Many modifier",
+						extensions: [{ url: "detail", valueType: "string" }],
+					})
+					.hasMany(),
+				extend
+					.withOne("ManyOptionalRoot", {
+						url: "http://example.org/fhir/StructureDefinition/many-optional-root",
+						valueType: "string",
+					})
+					.optional()
+					.hasMany(),
+			],
+		});
+
+		expect(def.getExtension("OptionalModifier")?.cardinality).toBe("0..1");
+		expect(def.getExtension("ManyModifier")?.cardinality).toBe("1..*");
+		expect(def.getExtension("ManyOptionalRoot")?.cardinality).toBe("0..*");
+	});
+
 	it("should set an extension", () => {
 		def = profile<DomainResourceData>({
 			type: Extension,

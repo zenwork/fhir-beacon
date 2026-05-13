@@ -19,6 +19,14 @@ export const extend: Extend = {
 			kind: "modifier",
 			path: "modifierExtension",
 		}),
+	withModifierComplex: <T extends Decorateable>(
+		key: string,
+		extensions: Extensions,
+	): RenderBuilder<T> =>
+		complexExtensionBuilder(key, extensions, {
+			kind: "modifier",
+			path: "modifierExtension",
+		}),
 	withComplex: <T extends Decorateable>(
 		key: string,
 		extensions: Extensions,

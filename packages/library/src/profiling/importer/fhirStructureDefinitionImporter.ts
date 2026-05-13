@@ -1,6 +1,7 @@
 import { DatatypeDef } from "../../DatatypeDef";
 import type { DatatypeName } from "../../DatatypeName";
 import { PrimitiveDef } from "../../PrimitiveDef";
+import type { PrimitiveName } from "../../PrimitiveName";
 import { ResourceDef } from "../../ResourceDef";
 import type { ResourceName } from "../../ResourceName";
 import type { CodeIds } from "../../codes";
@@ -11,6 +12,7 @@ import { definitionProperty } from "../builder/definitionProperty";
 import { StructureDefinition } from "../definition/StructureDefinition";
 import type {
 	DefConstraintAssertion,
+	ExtensionDef,
 	NarrowableNames,
 	PropertyDef,
 	TypeName,
@@ -79,6 +81,8 @@ type FhirElementValueConstraint = {
 	key: string;
 	value: unknown;
 };
+
+type ImportedExtensionValueTypeName = DatatypeName | PrimitiveName;
 
 export function importFhirStructureDefinition<
 	T extends Decorateable = DomainResourceData,
@@ -269,6 +273,19 @@ function importNamedSlice<T extends Decorateable>(
 		return;
 	}
 
+	if (
+		parentRelativePath === "modifierExtension" &&
+		importModifierExtensionSlice(
+			profile,
+			rootPath,
+			element,
+			diagnostics,
+			sliceChildrenByRootPath,
+		)
+	) {
+		return;
+	}
+
 	const discriminator = sliceDiscriminatorFor(
 		sliceRootPath,
 		sliceChildrenByRootPath.get(sliceRootPath) ?? [],
@@ -301,6 +318,111 @@ function importNamedSlice<T extends Decorateable>(
 		message:
 			"Imported named slice as a simplified discriminator-filtered cardinality constraint; full FHIR slicing semantics, ordering, open/closed rules, and reslicing are not enforced.",
 	});
+}
+
+function importModifierExtensionSlice<T extends Decorateable>(
+	profile: StructureDefinition<T>,
+	rootPath: string,
+	element: FhirElementDefinition,
+	diagnostics: FhirStructureDefinitionImportDiagnostic[],
+	sliceChildrenByRootPath: Map<string, FhirElementDefinition[]>,
+): boolean {
+	const sliceRootPath = elementIdentityPath(element);
+	const children = sliceChildrenByRootPath.get(sliceRootPath) ?? [];
+	const discriminator = sliceDiscriminatorFor(sliceRootPath, children);
+
+	if (
+		!discriminator ||
+		discriminator.childPath !== "url" ||
+		typeof discriminator.value !== "string"
+	) {
+		return false;
+	}
+
+	const valueChildren = children.filter((child) => {
+		const childPath = elementIdentityPath(child).slice(sliceRootPath.length + 1);
+		return childPath.startsWith("value");
+	});
+
+	if (valueChildren.length === 0) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: element.path,
+			message:
+				"Modifier extension slice was imported for cardinality only; value[x] constraints were not found",
+		});
+		return false;
+	}
+
+	if (valueChildren.length > 1) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: element.path,
+			message:
+				"Modifier extension slice contains multiple value[x] children; imported using the first value definition only",
+		});
+	}
+
+	const valueChild = valueChildren[0];
+	const valueTypes = valueChild.type ?? [];
+	if (valueTypes.length === 0) {
+		return false;
+	}
+	if (valueTypes.length > 1) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-feature",
+			path: valueChild.path,
+			message:
+				"Modifier extension value[x] has multiple type options; imported using the first type only",
+		});
+	}
+
+	const typeCode = valueTypes[0]?.code;
+	const importedType = toImportedTypeName(
+		typeCode,
+		rootPath,
+		valueChild.path.slice(rootPath.length + 1),
+	);
+	if (!importedType || !isExtensionValueTypeName(importedType)) {
+		diagnostics.push({
+			severity: "warning",
+			code: "unsupported-type",
+			path: valueChild.path,
+			message: `Unsupported modifier extension value type ${typeCode ?? "(missing)"}`,
+		});
+		return false;
+	}
+
+	const extensionDef: ExtensionDef = {
+		defType: "extension",
+		choice: undefined,
+		key: element.sliceName ?? profileName(discriminator.value),
+		url: discriminator.value,
+		extensionLocation: { kind: "modifier", path: "modifierExtension" },
+		label: element.sliceName ?? profileName(discriminator.value),
+		display: undefined,
+		description: undefined,
+		valueType: importedType,
+		valueTypeNarrowing: typeNarrowingFor(
+			valueTypes[0]!,
+			diagnostics,
+			valueChild.path,
+		),
+		cardinality: cardinalityFor(element),
+		bindings: bindingFor(valueChild),
+		bindingStrength: bindingStrengthFor(valueChild, diagnostics),
+		isModifier: true,
+		isSummary: element.isSummary,
+		subdefs: undefined,
+		extendRender: new Map(),
+		overrideRender: new Map(),
+	};
+
+	profile.set(extensionDef);
+	return true;
 }
 
 function buildSliceChildrenByRootPath(
@@ -508,6 +630,12 @@ function toBeaconTypeName(typeCode: string | undefined): TypeName | null {
 	if (DatatypeDef.isValid(typeCode)) return typeCode as TypeName;
 	if (ResourceDef.isValid(typeCode)) return typeCode as TypeName;
 	return null;
+}
+
+function isExtensionValueTypeName(
+	typeName: TypeName,
+): typeName is ImportedExtensionValueTypeName {
+	return PrimitiveDef.isValid(typeName) || DatatypeDef.isValid(typeName);
 }
 
 function toImportedTypeName(

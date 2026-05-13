@@ -18,6 +18,9 @@ export type Builder<T extends Decorateable> = {
 };
 
 export type RenderBuilder<T extends Decorateable> = Builder<T> & {
+	optional: () => RenderBuilder<T>;
+	required: () => RenderBuilder<T>;
+	hasMany: () => RenderBuilder<T>;
 	extendRender: (
 		forMode: DisplayMode,
 		fn: TemplateGenerator<T>,

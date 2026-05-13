@@ -91,6 +91,10 @@ export interface Extend {
 		key: string,
 		extension: Extension,
 	) => RenderBuilder<T>;
+	withModifierComplex: <T extends Decorateable>(
+		key: string,
+		extensions: Extensions,
+	) => RenderBuilder<T>;
 	withComplex: <T extends Decorateable>(
 		key: string,
 		extensions: Extensions,

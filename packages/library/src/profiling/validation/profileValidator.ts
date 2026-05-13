@@ -172,8 +172,12 @@ function validateExtensionDef(
 	validations: Validations,
 	profileName: string,
 ): void {
+	const extensionPathRoot =
+		def.extensionLocation.kind === "modifier"
+			? "modifierExtension"
+			: "extension";
 	const pathPrefix: ErrorNodeKey[] = [
-		{ node: "extension" },
+		{ node: extensionPathRoot },
 		{ node: def.url },
 	];
 
