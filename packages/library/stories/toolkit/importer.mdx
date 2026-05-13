@@ -8,7 +8,7 @@ import * as Stories from './importer.stories'
 
 The profile importer converts a basic subset of FHIR R5 `StructureDefinition.snapshot.element[]` into a Beacon profile definition.
 
-The toolkit story shows the imported profile metadata next to a `fhir-observation` component using that profile. Switch the source fixture to compare a small supported profile with one that contains unsupported FHIR profiling features.
+The profiling story shows a three-step flow: original FHIR R5 JSON, importer output, then a `fhir-observation` rendered in display mode with the imported profile applied. Switch the source fixture to compare a small supported profile with one that contains unsupported FHIR profiling features.
 
 The importer currently handles direct top-level elements, cardinality, type names, `value[x]` choices, binding metadata, fixed values, and basic reference target narrowing. It reports unsupported features, such as slicing and nested backbone paths, as diagnostics.
 

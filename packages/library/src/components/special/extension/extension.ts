@@ -28,6 +28,14 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 		super("Extension");
 	}
 
+	protected getLabel(): string {
+		if (this.label) return this.label;
+		if (this.extendedData?.url) {
+			return toLabel(this.extendedData, this.labelMap, this.modifier);
+		}
+		return super.getLabel();
+	}
+
 	public renderStructure(
 		config: DisplayConfig,
 		data: Decorated<FhirExtensionData<OpenType>>,

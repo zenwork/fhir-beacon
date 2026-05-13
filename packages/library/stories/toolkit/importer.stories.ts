@@ -8,6 +8,7 @@ import {
 } from "../../src/profiling/fixtures/fhirStructureDefinitionFixtures";
 import {
 	type FhirStructureDefinition,
+	type FhirStructureDefinitionImportResult,
 	importFhirStructureDefinition,
 } from "../../src/profiling";
 import { ShellArgs } from "../storybook-utils";
@@ -15,7 +16,6 @@ import { ShellArgs } from "../storybook-utils";
 type ImporterStoryArgs = ShellArgs<ObservationData> & {
 	source: "supported" | "unsupported";
 	invalidStatus: boolean;
-	showDefinition: boolean;
 };
 
 const supportedImport = importFhirStructureDefinition<ObservationData>(
@@ -50,7 +50,7 @@ const invalidObservation: ObservationData = {
 };
 
 const meta: Meta<ImporterStoryArgs> = {
-	title: "Toolkit/Profile Importer",
+	title: "Profiling/Profile Importer",
 	component: "fhir-observation",
 	argTypes: {
 		source: {
@@ -60,27 +60,21 @@ const meta: Meta<ImporterStoryArgs> = {
 		invalidStatus: {
 			control: { type: "boolean" },
 		},
-		showDefinition: {
-			control: { type: "boolean" },
-		},
-		mode: {
-			control: { type: "inline-radio" },
-			options: ["display", "structure"],
-		},
 	},
 	render: (args) => {
 		const result = imports[args.source];
 		const data = args.invalidStatus ? invalidObservation : profiledObservation;
-		const props = Array.from(result.profile.props.values());
+		const output = importOutput(result);
+		const source = sourceDefinitions[args.source];
+		const unsupportedProfileMessage = unsupportedProfileError(result);
 
 		return html`
 			<style>
 				.importer-demo {
-					display: grid;
-					grid-template-columns: minmax(20rem, 0.9fr) minmax(28rem, 1.2fr);
-					gap: 1rem;
+					display: flex;
+					flex-direction: column;
+					gap: 1.25rem;
 					width: min(1180px, calc(100vw - 3rem));
-					align-items: start;
 				}
 
 				.importer-panel {
@@ -90,139 +84,100 @@ const meta: Meta<ImporterStoryArgs> = {
 					background: var(--sl-color-neutral-0);
 				}
 
-				.importer-panel h2,
-				.importer-panel h3 {
+				.importer-panel h2 {
 					margin: 0 0 0.75rem;
 					font-size: 1rem;
 					line-height: 1.25;
 				}
 
-				.importer-panel dl {
-					display: grid;
-					grid-template-columns: max-content 1fr;
-					gap: 0.35rem 0.75rem;
-					margin: 0 0 1rem;
+				.importer-step {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					width: 1.5rem;
+					height: 1.5rem;
+					margin-right: 0.5rem;
+					border-radius: 999px;
+					background: var(--sl-color-primary-100);
+					color: var(--sl-color-primary-700);
+					font-size: 0.8rem;
+					font-weight: 700;
 				}
 
-				.importer-panel dt {
-					color: var(--sl-color-neutral-600);
+				.importer-heading {
+					display: flex;
+					align-items: center;
 				}
 
-				.importer-panel dd {
+				.importer-panel p {
+					color: var(--sl-color-neutral-700);
 					margin: 0;
-				}
-
-				.importer-panel ul {
-					margin: 0 0 1rem;
-					padding-left: 1.1rem;
-				}
-
-				.importer-panel li {
-					margin: 0.25rem 0;
 				}
 
 				.importer-panel code {
 					font-size: 0.875rem;
 				}
 
-				.importer-diagnostics {
-					border-top: 1px solid var(--sl-color-neutral-200);
-					padding-top: 0.85rem;
-				}
-
-				.importer-definition {
+				.importer-json {
 					max-height: 22rem;
 					overflow: auto;
-					margin: 0;
+					margin: 0.75rem 0 0;
 					padding: 0.75rem;
 					background: var(--sl-color-neutral-100);
 					border-radius: 4px;
 					font-size: 0.75rem;
 					line-height: 1.45;
 				}
-
-				@media (max-width: 860px) {
-					.importer-demo {
-						grid-template-columns: 1fr;
-						width: calc(100vw - 2rem);
-					}
-				}
 			</style>
 
 			<div class="importer-demo">
 				<section class="importer-panel">
-					<h2>Imported Profile</h2>
-					<dl>
-						<dt>Source</dt>
-						<dd>${args.source}</dd>
-						<dt>Type</dt>
-						<dd>${result.profile.type.toString()}</dd>
-						<dt>Properties</dt>
-						<dd>${props.length}</dd>
-						<dt>Diagnostics</dt>
-						<dd>${result.diagnostics.length}</dd>
-					</dl>
-
-					<h3>Imported Properties</h3>
-					<ul>
-						${props.map(
-							(prop) => html`
-								<li>
-									<code>${prop.storageKey}</code>
-									${"cardinality" in prop ? html`${prop.cardinality}` : ""}
-									${"type" in prop ? html`${prop.type}` : ""}
-								</li>
-							`,
-						)}
-					</ul>
-
-					<div class="importer-diagnostics">
-						<h3>Diagnostics</h3>
-						${result.diagnostics.length === 0
-							? html`<p>No importer diagnostics for this source.</p>`
-							: html`
-									<ul>
-										${result.diagnostics.map(
-											(diagnostic) => html`
-												<li>
-													<strong>${diagnostic.severity}</strong>
-													${diagnostic.path
-														? html`<code>${diagnostic.path}</code>`
-														: ""}
-													${diagnostic.message}
-												</li>
-											`,
-										)}
-									</ul>
-								`}
-					</div>
-
-					${args.showDefinition
-						? html`
-								<h3>Source Snapshot</h3>
-								<pre class="importer-definition">${JSON.stringify(
-									sourceDefinitions[args.source],
-									null,
-									2,
-								)}</pre>
-							`
-						: ""}
+					<h2 class="importer-heading">
+						<span class="importer-step">1</span>
+						Original FHIR R5 JSON
+					</h2>
+					<p>Input <code>StructureDefinition</code> used by the importer.</p>
+					<pre class="importer-json">${JSON.stringify(source, null, 2)}</pre>
 				</section>
 
 				<section class="importer-panel">
-					<h2>Component Using Imported Profile</h2>
+					<h2 class="importer-heading">
+						<span class="importer-step">2</span>
+						Importer Output
+					</h2>
+					<p>
+						Normalized Beacon import result with generated profile JSON and
+						diagnostics.
+					</p>
+					<pre class="importer-json">${JSON.stringify(output, null, 2)}</pre>
+				</section>
+
+				<section class="importer-panel">
+					<h2 class="importer-heading">
+						<span class="importer-step">3</span>
+						Profile Applied To Component (Display Mode)
+					</h2>
+					<p>
+						<code>fhir-observation</code> rendered in display mode with the
+						imported profile applied.
+					</p>
+					${unsupportedProfileMessage
+						? html`
+								<fhir-wrapper variant="error" label="Profile Importer Error">
+									<fhir-error text=${unsupportedProfileMessage}></fhir-error>
+								</fhir-wrapper>
+							`
+						: ""}
 					<fhir-shell
-						.mode=${args.mode}
+						mode="display"
 						?showerror=${args.showerror}
 						?verbose=${args.verbose}
-						?open=${args.open}
 					>
 						<fhir-observation
 							.data=${data}
 							.profile=${result.profile}
 							?showerror=${args.showerror}
 							?verbose=${args.verbose}
-							?open=${args.open}
 						></fhir-observation>
 					</fhir-shell>
 				</section>
@@ -238,11 +193,8 @@ export const ImportedObservation: Story = {
 	args: {
 		source: "supported",
 		invalidStatus: false,
-		showDefinition: false,
-		mode: "structure",
 		showerror: true,
-		verbose: true,
-		open: true,
+		verbose: false,
 	},
 };
 
@@ -257,6 +209,26 @@ export const UnsupportedDiagnostics: Story = {
 	args: {
 		...ImportedObservation.args,
 		source: "unsupported",
-		showDefinition: true,
 	},
 };
+
+function importOutput(result: FhirStructureDefinitionImportResult<ObservationData>) {
+	return {
+		profileType: result.profile.type.toString(),
+		profile: result.profile.toJSON(),
+		diagnostics: result.diagnostics,
+	};
+}
+
+function unsupportedProfileError(
+	result: FhirStructureDefinitionImportResult<ObservationData>,
+): string | undefined {
+	const unsupported = result.diagnostics.filter(
+		(diagnostic) =>
+			diagnostic.code === "unsupported-feature" ||
+			diagnostic.code === "unsupported-type",
+	);
+	if (unsupported.length === 0) return undefined;
+	const details = unsupported.map((diagnostic) => diagnostic.message).join(" | ");
+	return `Unsupported FHIR profile features were detected during import. The generated profile may be incomplete. ${details}`;
+}
