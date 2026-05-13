@@ -235,3 +235,4 @@ generation/
 
 **/.DS_Store
 /.output.txt
+/packages/library/.vitest-attachments/**/*

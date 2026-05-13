@@ -14,7 +14,7 @@ import {
 
 import {SignalArray}              from 'signal-utils/array'
 import {drop, getDB, read, store} from '../indexeddb'
-import {getValueFromJsonKey}      from '../pages/util'
+import {buildSearchTextFromJson, getValueFromJsonKey} from '../pages/util'
 
 
 
@@ -45,7 +45,8 @@ export type FhirFile = {
   name: string,
   type: string | null,
   isMetaData:boolean,
-  data: FileWithDirectoryAndFileHandle
+  data: FileWithDirectoryAndFileHandle,
+  searchText: string
 }
 
 export type FhirFiles = FhirFile[]
@@ -140,13 +141,24 @@ export class BrowserState {
           promises
             .push(entry
                     .getFile()
-                    .then(async (f) => ({
-                      name: f.name,
-                      //TODO: very expensive. find some other way
-                      type: getValueFromJsonKey('resourceType', await f.text()),
-                      isMetaData: f.name.indexOf('example') === -1,
-                      data: f
-                    })))
+                    .then(async (f) => {
+                      const text = await f.text()
+                      let parsed: unknown = null
+                      try {
+                        parsed = JSON.parse(text)
+                      } catch {
+                        parsed = null
+                      }
+                      return {
+                        name: f.name,
+                        type: (parsed && typeof parsed === 'object' && 'resourceType' in (parsed as Record<string, unknown>))
+                                ? String((parsed as Record<string, unknown>).resourceType)
+                                : getValueFromJsonKey('resourceType', text),
+                        isMetaData: f.name.indexOf('example') === -1,
+                        data: f,
+                        searchText: parsed ? buildSearchTextFromJson(parsed) : text.toLowerCase()
+                      }
+                    }))
 
         }
       } else {
@@ -156,13 +168,24 @@ export class BrowserState {
           if (isFileHandle(h)) {
 
             h.getFile()
-             .then(async (f) => ({
-               name: f.name,
-               //TODO: very expensive. find some other way
-               type: getValueFromJsonKey('resourceType', await f.text()),
-               isMetaData: f.name.indexOf('example') === -1,
-               data: f
-             }))
+             .then(async (f) => {
+               const text = await f.text()
+               let parsed: unknown = null
+               try {
+                 parsed = JSON.parse(text)
+               } catch {
+                 parsed = null
+               }
+               return {
+                 name: f.name,
+                 type: (parsed && typeof parsed === 'object' && 'resourceType' in (parsed as Record<string, unknown>))
+                         ? String((parsed as Record<string, unknown>).resourceType)
+                         : getValueFromJsonKey('resourceType', text),
+                 isMetaData: f.name.indexOf('example') === -1,
+                 data: f,
+                 searchText: parsed ? buildSearchTextFromJson(parsed) : text.toLowerCase()
+               }
+             })
           }
         }
       }
