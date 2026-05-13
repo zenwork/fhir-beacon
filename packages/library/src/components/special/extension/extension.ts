@@ -126,6 +126,11 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 		const valueKey = `value${valueType}` as ValuePrefixKey;
 		const valueErrors = valueErrorSlice(validations, data, valueKey);
 		switch (valueType) {
+			case OpenTypeNameEnum.Address:
+				templates.push(html`
+              <fhir-address key=${data.url} label=${label} ?headless=${headless} .data=${data.valueAddress} .errors=${valueErrors}></fhir-address>
+          `);
+				break;
 			case OpenTypeNameEnum.Age:
 			case OpenTypeNameEnum.Count:
 			case OpenTypeNameEnum.Distance:
@@ -190,10 +195,13 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
           `);
 				break;
 			case OpenTypeNameEnum.ContactDetail:
+			case OpenTypeNameEnum.Availability:
 			case OpenTypeNameEnum.DataRequirement:
 			case OpenTypeNameEnum.Dosage:
+			case OpenTypeNameEnum.ExtendedContactDetail:
 			case OpenTypeNameEnum.Expression:
 			case OpenTypeNameEnum.ParameterDefinition:
+			case OpenTypeNameEnum.RatioRange:
 			case OpenTypeNameEnum.RelatedArtifact:
 			case OpenTypeNameEnum.TriggerDefinition:
 			case OpenTypeNameEnum.UsageContext:
@@ -262,6 +270,16 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 					valueTemplate(data, "valueInteger", PrimitiveType.integer, this.mode, label, validations, this.showerror),
 				);
 				break;
+			case OpenTypeNameEnum.Integer64:
+				templates.push(
+					valueTemplate(
+						data,
+						"valueInteger64",
+						PrimitiveType.integer64,
+						this.mode, label, validations, this.showerror,
+					),
+				);
+				break;
 			case OpenTypeNameEnum.Markdown:
 				templates.push(
 					valueTemplate(
@@ -275,6 +293,11 @@ export class Extension extends BaseElement<FhirExtensionData<OpenType>> {
 			case OpenTypeNameEnum.Money:
 				templates.push(html`
               <fhir-money key=${data.url} label=${label} ?headless=${headless} .data=${data.valueMoney} .errors=${valueErrors}></fhir-money>
+          `);
+				break;
+			case OpenTypeNameEnum.Meta:
+				templates.push(html`
+              <fhir-meta key=${data.url} label=${label} ?headless=${headless} .data=${data.valueMeta} .errors=${valueErrors}></fhir-meta>
           `);
 				break;
 			case OpenTypeNameEnum.Oid:

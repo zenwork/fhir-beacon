@@ -7,6 +7,8 @@ import { DatatypeDef, ContactPoint as ContactPointDef } from "../DatatypeDef";
 import { code } from "../PrimitiveDef";
 import { ContactPointData } from "../components";
 import { ContactPoint } from "../components/complex/contact-point/contact-point";
+import { Patient } from "../components/resources/patient/patient";
+import type { PatientData } from "../components/resources/patient/patient.data";
 import { Shell } from "../shell";
 import { define, extend, profile } from "./index";
 
@@ -15,6 +17,8 @@ describe("profile extension rendering", () => {
 	const rootUrl = "http://example.org/fhir/StructureDefinition/contact-note";
 	const complexUrl = "http://example.org/fhir/StructureDefinition/contact-trial";
 	const modifierUrl = "http://example.org/fhir/StructureDefinition/do-not-call";
+	const complexModifierUrl =
+		"http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender";
 
 	it("renders profile-defined primitive extensions without custom render callbacks", async () => {
 		const contactPointProfile = profile<ContactPointData>({
@@ -316,8 +320,10 @@ describe("profile extension rendering", () => {
 	});
 
 	it("displays an error for unsupported extension value rendering", async () => {
-		const unsupportedUrl = "http://example.org/fhir/StructureDefinition/address-note";
-		const unknownUrl = "http://example.org/fhir/StructureDefinition/meta-note";
+		const unsupportedUrl =
+			"http://example.org/fhir/StructureDefinition/availability-note";
+		const unknownUrl =
+			"http://example.org/fhir/StructureDefinition/extended-contact-note";
 		const el = await fixture<ContactPoint>(html`
       <fhir-contact-point
         .data=${{
@@ -326,11 +332,11 @@ describe("profile extension rendering", () => {
 					extension: [
 						{
 							url: unsupportedUrl,
-							valueAddress: { city: "Toronto" },
+							valueTotallyUnknown: { availableTime: [] },
 						},
 						{
 							url: unknownUrl,
-							valueMeta: { source: "example" },
+							valueNotRealType: { purpose: "home" },
 						},
 					],
 				}}
@@ -345,10 +351,45 @@ describe("profile extension rendering", () => {
 		expect(unsupported).toHaveLength(2);
 		expect(
 			unsupported.map((element) => element.getAttribute("description")),
-		).toContain("Extension value valueAddress cannot be rendered.");
+		).toContain("Extension value valueTotallyUnknown cannot be rendered.");
 		expect(
 			unsupported.map((element) => element.getAttribute("description")),
-		).toContain("Extension value valueMeta cannot be rendered.");
+		).toContain("Extension value valueNotRealType cannot be rendered.");
+	});
+
+	it("renders address and meta extension value types", async () => {
+		const addressUrl = "http://example.org/fhir/StructureDefinition/address-note";
+		const metaUrl = "http://example.org/fhir/StructureDefinition/meta-note";
+		const el = await fixture<ContactPoint>(html`
+      <fhir-contact-point
+        .data=${{
+					system: "phone",
+					value: "+15551234567",
+					extension: [
+						{
+							url: addressUrl,
+							valueAddress: { city: "Toronto" },
+						},
+						{
+							url: metaUrl,
+							valueMeta: { source: "example" },
+						},
+					],
+				}}
+      ></fhir-contact-point>
+    `).first();
+
+		await aTimeout(200);
+
+		const address = deepQuerySelectorAll(el, "fhir-address", {
+			depth: 20,
+		}) as HTMLElement[];
+		const meta = deepQuerySelectorAll(el, "fhir-meta", {
+			depth: 20,
+		}) as HTMLElement[];
+
+		expect(address.length).toBeGreaterThan(0);
+		expect(meta.length).toBeGreaterThan(0);
 	});
 
 	it("renders nested complex extensions in display and structure modes", async () => {
@@ -452,5 +493,113 @@ describe("profile extension rendering", () => {
 			select: ["fhir-extension", "fhir-primitive"],
 		});
 		expect(primitiveHost).toHaveAttribute("label", "Modifier: Do not call");
+	});
+
+	it("renders profiled complex modifier extensions with group labels", async () => {
+		const contactPointProfile = profile<ContactPointData>({
+			type: new DatatypeDef("ContactPoint", "ProfiledContactPoint"),
+			props: [
+				extend.withModifierComplex("recordedSexOrGender", {
+					url: complexModifierUrl,
+					label: "Recorded sex or gender",
+					extensions: [
+						{
+							url: "sourceField",
+							label: "Source field",
+							valueType: "string",
+						},
+					],
+				}),
+			],
+		});
+
+		const data = {
+			system: "phone",
+			value: "+15551234567",
+			modifierExtension: [
+				{
+					url: complexModifierUrl,
+					extension: [{ url: "sourceField", valueString: "SEX" }],
+				},
+			],
+		};
+
+		const display = await fixture<ContactPoint>(html`
+      <fhir-contact-point .profile=${contactPointProfile} .data=${data}></fhir-contact-point>
+    `).first();
+
+		const structure = await fixture<ContactPoint>(html`
+      <fhir-shell mode="structure" open>
+        <fhir-contact-point .profile=${contactPointProfile} .data=${data}></fhir-contact-point>
+      </fhir-shell>
+    `, "fhir-contact-point").first();
+
+		await aTimeout(300);
+
+		for (const el of [display, structure]) {
+			const primitiveLabels = (
+				deepQuerySelectorAll(el, "fhir-primitive", {
+					depth: 20,
+				}) as HTMLElement[]
+			).map((primitive) => primitive.getAttribute("label"));
+			expect(primitiveLabels).toContain("Source field");
+
+			const primitiveValues = (
+				deepQuerySelectorAll(el, "fhir-primitive", {
+					depth: 20,
+				}) as Array<HTMLElement & { value?: string }>
+			).map((primitive) => primitive.value);
+			expect(primitiveValues).toContain("SEX");
+		}
+
+		const wrapperLabels = (
+			deepQuerySelectorAll(display, "fhir-wrapper", {
+				depth: 20,
+			}) as HTMLElement[]
+		).map((wrapper) => wrapper.getAttribute("label"));
+		expect(wrapperLabels).toContain("Modifier: Recorded sex or gender");
+		expect(wrapperLabels).not.toContain("extensions");
+	});
+
+	it("does not render legacy backbone modifier-extension header placeholders", async () => {
+		const data: PatientData = {
+			resourceType: "Patient",
+			name: [],
+			telecom: [],
+			address: [],
+			communication: [],
+			generalPractitioner: [],
+			link: [],
+			contact: [
+				{
+					modifierExtension: [
+						{
+							url: "http://example.org/fhir/StructureDefinition/contact-flag",
+							valueString: "primary",
+						},
+					],
+				},
+			],
+		};
+
+		const el = await fixture<Patient>(html`
+      <fhir-shell mode="structure" open>
+        <fhir-patient .data=${data}></fhir-patient>
+      </fhir-shell>
+    `, "fhir-patient").first();
+
+		await aTimeout(300);
+
+		const notSupported = deepQuerySelectorAll(el, "fhir-not-supported", {
+			depth: 20,
+		}) as HTMLElement[];
+
+		expect(
+			notSupported.some(
+				(node) =>
+					node.getAttribute("label") === "modifier extensions" &&
+					node.getAttribute("description") === "not implemented",
+			),
+		).toBe(false);
 	});
 });

@@ -590,7 +590,7 @@ export abstract class FhirPresentableElement<D extends FhirElementData>
 					generator: (d, l, k, _i) =>
 						this.renderExtension(
 							d,
-							kind === "modifier" ? `modifier: ${l}` : l,
+							kind === "modifier" ? `Modifier: ${l}` : l,
 							k,
 							labelMap,
 							validations,
