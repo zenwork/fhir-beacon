@@ -122,6 +122,13 @@ export const UnsignedIntExtension: Story = {
 	},
 };
 
+export const Integer64Extension: Story = {
+	name: "Integer64 Extension",
+	args: {
+		data: data.integer64Extension,
+	},
+};
+
 export const UrlExtension: Story = {
 	name: "Url Extension",
 	args: {

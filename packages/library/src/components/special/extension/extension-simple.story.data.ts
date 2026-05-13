@@ -1,7 +1,9 @@
 import { SignatureData } from "components";
+import { OpenType } from "../../../OpenType";
 import { Boolean as FhirBoolean, Uuid } from "../../../PrimitiveTypes";
 import { FhirExtensionData } from "../../../internal";
 import {
+	AddressData,
 	AnnotationData,
 	AttachmentData,
 	CodeableConceptData,
@@ -36,6 +38,7 @@ import {
 	Url,
 } from "../../primitive";
 import { ReferenceData } from "../reference";
+import type { MetaData } from "../meta";
 
 export const stringExtension: FhirExtensionData<FhirString> = {
 	url: "treatment-description",
@@ -202,6 +205,11 @@ export const integerExtension: FhirExtensionData<Integer> = {
 	valueInteger: 256,
 };
 
+export const integer64Extension: FhirExtensionData<OpenType> = {
+	url: "https://example.org/fhir/StructureDefinition/large-count-value",
+	valueInteger64: 9223372036854775807n as unknown as OpenType,
+};
+
 export const markdownExtension: FhirExtensionData<Markdown> = {
 	url: "https://example.org/fhir/StructureDefinition/formatted-notes",
 	valueMarkdown:
@@ -231,6 +239,25 @@ export const quantityExtension: FhirExtensionData<QuantityData> = {
 		unit: "kg",
 		system: "http://unitsofmeasure.org",
 		code: "kg",
+	},
+};
+
+export const addressExtension: FhirExtensionData<AddressData> = {
+	url: "https://example.org/fhir/StructureDefinition/temporary-address",
+	valueAddress: {
+		line: ["12 Beacon Lane"],
+		city: "Toronto",
+		state: "ON",
+		postalCode: "M5V 2T6",
+		country: "CA",
+	},
+};
+
+export const metaExtension: FhirExtensionData<MetaData> = {
+	url: "https://example.org/fhir/StructureDefinition/source-meta",
+	valueMeta: {
+		source: "https://example.org/source-system",
+		profile: ["http://hl7.org/fhir/StructureDefinition/Patient"],
 	},
 };
 
