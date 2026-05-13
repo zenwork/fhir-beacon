@@ -1,6 +1,6 @@
 {
     "name": "app",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "A starter kit for building PWAs!",
     "main": "index.js",
     "scripts": {
@@ -21,7 +21,7 @@
         "@shoelace-style/shoelace": "^2.20.1",
         "browser-fs-access": "^0.38.0",
         "events": "^3.3.0",
-        "fhir-beacon": "0.2.0",
+        "fhir-beacon": "0.3.0",
         "lit": "^3.3.0",
         "native-file-system-adapter": "^3.0.1",
         "signal-utils": "^0.21.1",

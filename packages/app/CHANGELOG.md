@@ -1,5 +1,13 @@
 # app
 
+## 0.0.19
+
+### Patch Changes
+
+- Updated dependencies [19453bb]
+- Updated dependencies [51b9f84]
+  - fhir-beacon@0.3.0
+
 ## 0.0.18
 
 ### Patch Changes
